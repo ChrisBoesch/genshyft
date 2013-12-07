@@ -1,0 +1,193 @@
+<style>
+    #edit_profile {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: black;
+    }
+    .table td, .table th {
+        border: none;
+    }
+    .table tbody tr:hover td,
+    .table tbody tr:hover th {
+        background-color: #DCD9CD;
+    }
+    
+    .tabspacing{
+        width:25%;
+	}
+
+    
+    .tab-content {
+      clear: none;
+      margin-bottom:0px;
+    }
+
+    tbody{
+        overflow:auto;  
+    }
+	
+	
+	<!--All Challenges : Open Challenge-->
+	th.OpenC_Type, td.OpenC_Type							{width:20%;}
+    th.OpenC_Name, td.OpenC_Name							{width:20%;}
+    th.OpenC_Location, td.OpenC_Location					{width:20%;}
+    th.OpenC_StartDate, td.OpenC_StartDate					{width:15%;}
+    th.OpenC_EndDate, td.OpenC_EndDate						{width:15%;}
+    th.OpenC_Register, td.OpenC_Register					{width:10%;}
+	
+	<!--All Challenges : Registered Challenge-->
+    th.AcceptedC_Type, td.AcceptedC_Type					{width:10%;}
+    th.AcceptedC_Name, td.AcceptedC_Name					{width:20%;}
+	th.AcceptedC_Location, td.AcceptedC_Location			{width:10%;}
+    th.AcceptedC_StartDate, td.AcceptedC_StartDate			{width:10%;}
+    th.AcceptedC_EndDate, td.AcceptedC_EndDate				{width:10%;}	
+	th.AcceptedC_Status, td.AcceptedC_Status				{width:10%;}
+	th.AcceptedC_Msg, td.AcceptedC_Msg						{width:30%;}	
+
+	<!--My Creations : Challenges I've Made -->
+	th.ChallengesIMade_Type, td.ChallengesIMade_Type			{width:10%;}
+	th.ChallengesIMade_Name, td.ChallengesIMade_Name			{width:25%;}
+	th.ChallengesIMade_Location,td.ChallengesIMade_Location		{width:10%;}
+	th.ChallengesIMade_StartDate,td.ChallengesIMade_StartDate 	{width:15%;}
+	th.ChallengesIMade_EndDate,td.ChallengesIMade_EndDate		{width:15%;}
+	th.ChallengesIMade_Review,td.ChallengesIMade_Review			{width:15%;}	
+	th.ChallengesIMade_Remove,td.ChallengesIMade_Remove			{width:10%;}
+	
+   
+ 
+</style>
+<br>
+
+<div class="container"  style="position:relative;">
+    
+    <div class="row-fluid">
+        <div class="span12" ng-controller="ChallengeController">
+            
+			<div class="tabbable well" align="center">				
+				<!--Top Tabs : All Challenges & My Creations-->
+				<ul class="nav nav-tabs">
+					<li class="tabspacing active">
+					  <a data-target="#Open" data-toggle="tab">Open Challenges</a>
+					</li>
+					<li class="tabspacing">
+					  <a data-target="#Accepted" data-toggle="tab">Accepted Challenges</a>
+					</li> 					
+					<li class="tabspacing">
+					  <a data-target="#Mine" data-toggle="tab">Challenges I've Made</a>
+					</li> 
+					 
+					 <button type="button" class="btn btn-primary" id="createChallenge" ng-click="goToChallengeCreator()">Create a Challenge!</button></a>
+				
+					
+				</ul>
+				<div class="tab-content" id="top-content">				
+					<div class="tab-pane active" align="left" id="Open">
+					Search: <input ng-model="searchText" placeholder = "Challenge Type/Name/Keywords">
+						<div style="width:99.8%; height:{{window_Height_challenge}}px;overflow-y:auto;overflow-x:hidden">									
+							<table class="table table-hover" ng-init="list_challenges();">	
+								<tr>
+									<th class="OpenC_Type">Type</th>
+									<th class="OpenC_Name">Name</th>
+									<th class="OpenC_Location">Location</th>										
+									<th class="OpenC_StartDate">Start Date</th>
+									<th class="OpenC_EndDate">End Date</th>
+									<th class="OpenC_Register">Register</th>
+								</tr>  							
+								<tr ng-repeat="challenge in ListAllChallenges | filter:searchText" ng-hide = "challenge.description=='archived'" ng-show ="!challenge._playerUnlocked">
+									<td class="OpenC_Type">{{challenge.challengeType}}</th>
+									<td class="OpenC_Name">{{challenge.name}}</td>
+									<td class="OpenC_Location" ng-show="challenge.worldwide==1">Worldwide</td>	
+									<td class="OpenC_Location" ng-show="challenge.worldwide==0">{{player.country}}</td>									
+									<td class="OpenC_StartDate">{{challenge.startDate}}</td>
+									<td class="OpenC_EndDate">{{challenge.endDate}}</td>
+									<td class="OpenC_Register" ng-show="challenge._playerRegistered==false" ><button class="btn btn-danger" style="width: 100px" ng-click="goToRegistration(challenge.challenge_id)"> Register</button></td>
+									<td class="OpenC_Register"  ng-show = "challenge._playerRegistered">
+										<button ng-controller = "PathController" id="resume" ng-click="goToRegistration(challenge.challenge_id)" style="width: 100px" class="btn btn-info">Resume!</button>
+									</td>
+								</tr>           
+							</table>																	
+						</div>
+						
+					</div>
+					
+					<div class="tab-pane" align="left" id="Accepted">
+						<div  style="width:99.8%; height:{{window_Height_challenge}}px;overflow-y:auto;overflow-x:hidden" >
+								Search: <input ng-model="searchText" placeholder = "Challenge Type/Name/Keywords">
+								<table class="table table-hover" ng-init="registered_challenges()">
+									<tr>
+										<th class="AcceptedC_Type">Type</th>
+										<th class="AcceptedC_Name">Name</th>
+										<th class="AcceptedC_Location">Location</th>
+										<th class="AcceptedC_StartDate">StartDate</th>
+										<th class="AcceptedC_EndDate">EndDate</th>										
+										<th class="AcceptedC_Status">Status</th>
+										<th class="AcceptedC_Msg">Submitted Message</th>
+
+									</tr> 
+									<tr ng-repeat="Acceptedchallenge in playerRegisteredChallenges | filter:searchText" ng-hide = "Acceptedchallenge.description=='archived'">
+										<td class="AcceptedC_Type">{{Acceptedchallenge.challengeType}}</td>
+										<td class="AcceptedC_Name">{{Acceptedchallenge.name}}</td>	
+										<td class="AcceptedC_Location" ng-show="Acceptedchallenge.worldwide==1">Worldwide</td>	
+										<td class="AcceptedC_Location" ng-show="Acceptedchallenge.worldwide==0">{{player.country}}</td>									
+										<td class="AcceptedC_StartDate">{{Acceptedchallenge.startDate}}</td>
+										<td class="AcceptedC_EndDate">{{Acceptedchallenge.endDate}}</td>										
+										<td class="AcceptedC_Status" ng-show ="Acceptedchallenge._playerUnlocked"><input type="image" ng-click="goToRegistration(Acceptedchallenge.challenge_id)"  ng-src="img/challenge/privateButtonUnlocked_on.png"/></td>
+											<td class="AcceptedC_Status"  ng-show = "!Acceptedchallenge._playerUnlocked">
+												<button ng-controller = "PathController" id="resume" ng-click="goToRegistration(Acceptedchallenge.challenge_id)" class="btn btn-info">Resume!</button>
+											</td>
+										<td class="AcceptedC_Msg" ng-show ="Acceptedchallenge._playerSubmitted">{{Acceptedchallenge.playerFeedback}}</td>
+										<td class="AcceptedC_Msg" ng-hide ="Acceptedchallenge._playerSubmitted">You have not submitted any messages!</td>
+
+									</tr>  
+								</table>
+						</div>
+						
+					</div>
+					
+					<div class="tab-pane" align="left" id="Mine">
+								Search: <input ng-model="searchText" placeholder = "Challenge Type/Name/Keywords">
+							<div style="height:{{window_Height_challenge}}px;overflow-y:auto;overflow-x:hidden" >																					
+							<table class="table table-condensed"  ng-init="list_challenges_I_created(); get_badge();">
+								<tr>
+									<th class="ChallengesIMade_Type">Type</th>
+									<th class="ChallengesIMade_Name">Name</th>
+									<th class="ChallengesIMade_Location">Location</th> 
+									<th class="ChallengesIMade_StartDate">Start Date</th>
+									<th class="ChallengesIMade_EndDate">End Date</th>									
+									<th class="ChallengesIMade_Review">Review</th>
+									<th class="ChallengesIMade_Remove">Share</th>
+								</tr>  
+								<tr ng-repeat="myChallenge in ListMyChallenges | filter:searchText" ng-hide = "myChallenge.description=='archived'";>
+									<td class="ChallengesIMade_Type">{{myChallenge.challengeType}}</td>
+									<td class="ChallengesIMade_Name">{{myChallenge.name}}</td>
+									<td class="ChallengesIMade_Location" ng-show="myChallenge.worldwide==1">World Wide</td>	
+									<td class="ChallengesIMade_Location" ng-show="myChallenge.worldwide==0">{{player.country}}</td>									
+									<td class="ChallengesIMade_StartDate">{{myChallenge.startDate}}</td>
+									<td class="ChallengesIMade_EndDate">{{myChallenge.endDate}}</td>									
+									<td class="ChallengesIMade_Review">
+										<div class="btn-group">																			
+											<button class="btn btn-warning" a data-target="#statsModal" role="button" data-toggle="modal" ng-click="goToChallengeStats(myChallenge.challenge_id)">Stats</button>
+											<button class="btn btn-danger" a data-target="#tab2create" ng-click="goToChallengeEdit(myChallenge.challenge_id)">Edit</button>
+										</div>																	
+									</td>
+									<td  class="ChallengesIMade_Remove"><button class="btn btn-info" ng-click="shareURL(myChallenge)">Share</button></td>  									
+								</tr>                                                                
+							</table>							  
+						</div>
+						
+					</div>
+				</div>
+			</div>
+				<div class="modal fade" id="shareChallenge" style="display:none">         
+					<div class="modal-body" style="color:black">
+						<h3>Share the Challenge Link:</h3>
+						<p>
+						{{challengeURL}}
+						</p>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary">Ok</button></a>
+					</div>
+				</div>
+        </div>
+    </div>
+</div>

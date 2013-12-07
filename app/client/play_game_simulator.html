@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<title>Controller Usage Examples</title>
+
+</head>
+
+<body>
+  <h3>This page will simulate all the different ways to start games.</h3>
+  Todo:
+  <ul>
+    <li>Select difficulty - Default Easy - <b>done</b></li>
+    <li>Select path - Default Python - <b>done</b></li>
+    <li>Play path game - <b>Done</b></li>
+    <li>Select level - <b>Done</b></li>
+    <li>Play level game - <b>Done</b></li>
+    <li>Select Story - <b>Done</b></li>
+    <li>Create Quest - <b>Done</b></li>
+    <li>Play Quest Game - <b>Done</b></li>
+    <li>Get Mobile Paths - <b>Done</b></li>
+    <li>Type permutation in box to solve mobile problems. - <b>Done</b> </li>
+    <li>When beginner mode only show the mobile paths - <b>Done</b></li>
+    <li>Check all in integration-test - TBD</li>
+  </ul>
+
+  <div ng-controller="GameController" ng-init="difficulty='Beginner';storyID=1;">
+    Difficulty <select ng-model="difficulty" ng-options="item.id as item.name for item in [{'name':'Beginner', 'id':'Beginner'},{'name':'Easy','id':'Easy'},{'name':'Medium', 'id':'Medium'},{'name':'Hard','id':'Hard'}]"></select>
+    Difficulty : {{difficulty}}<br>
+
+    <div ng-controller="PathController" ng-init="pathID=10030;mobilePathID=6920762;get_mobile_paths();">
+      <div ng-show="difficulty!='Beginner'">
+        Path <select ng-model="pathID" ng-options="item.id as item.name for item in paths.paths"></select>
+        PathID: {{pathID}} 
+        <input type="submit" value="Play game on path" ng-click="create_path_game(pathID,3)">    
+      </div>
+      <div ng-show="difficulty=='Beginner'">
+        Path <select ng-model="mobilePathID" ng-options="item.path_id as item.name for item in mobile_paths"></select>
+        PathID: {{mobilePathID}} 
+        <input type="submit" value="Play game on mobile path" ng-click="create_path_game(mobilePathID,3)">    
+      </div>
+      <br>
+      
+      Hardcoded Stories <select ng-model="storyID" ng-options="item.id as item.name for item in [{'name':'The Spy', 'id':1},{'name':'Texas','id':2}]"></select>
+      StoryID: {{storyID}} <br>
+      <div ng-controller="QuestController" ng-init="list()">
+        <input type="submit" value="Create Quest" ng-click="create_quest($parent.storyID,$parent.pathID,$parent.difficulty)">
+        <div ng-show="quest.id">QuestID {{quest.id}}<br>
+          {{quests}}<br>
+          <input type="submit" value="Play Game for Quest {{quest.id}}" ng-click="create_quest_game(quest.id)">
+
+        </div>
+        
+      </div>
+    
+    <div ng-controller="ProblemsetController" >
+      <input type="submit" value="Show Problemsets" ng-click="get_problemsets($parent.pathID);"><br>
+      <div ng-show="problemsets">
+        Problemsets for path {{$parent.pathID}}: <br>
+        Problemset <select ng-model="problemsetID" ng-options="item.id as item.name for item in problemsets.details"></select><br>
+        <div ng-show="problemsetID">
+          ProblemsetID: {{problemsetID}} 
+          <input type="submit" value="Play Game On Level" ng-click="create_problemset_game(problemsetID,3)">
+        </div>
+      </div>
+    </div>
+  
+
+
+    </div> <!-- Path Controller -->
+
+Current Problem: (index {{current_problem_index}})
+    ID: {{game.problems.problems[current_problem_index].id}} 
+    Name: {{game.problems.problems[current_problem_index].name}}<br>
+    Solved ({{game.solvedProblemIDs.length}}/{{game.numProblems}})<br>
+    <br>
+    {{game.problems.problems[current_problem_index].description}}
+    <pre> {{game.problems.problems[current_problem_index].examples}}</pre>
+    Solution: <br>
+    <textarea rows="7" cols="80" ng-model="solution">{{game.problems.problems[current_problem_index].skeleton}}</textarea><br>
+    
+    <div ng-show="game.problems.problems[current_problem_index].lines">
+      This is a Mobile Problem with lines:<br>
+      <ol>
+        <li ng-repeat="line in game.problems.problems[current_problem_index].lines">
+          {{line}}
+        </li>
+      </ol>
+      Enter line combination to check:
+      <input type="text" ng-model="permutation">
+      <input type="submit" value="Check With Permutation" ng-click="check_permutation()"><br>
+      Non-error Result={{ner}}
+    </div>
+
+    <input type="Submit" value="Check Solution For Game" ng-click="check_solution_for_game()">
+    <input type="Submit" value="Skip Problem" ng-click="skip_problem()"><br>
+
+    Solved: <b>{{solution_check_result.solved}}</b><br>
+    Last_Solved: <b>{{solution_check_result.last_solved}}</b><br>
+    {{solution_check_result}}
+    
+    <table border=1 bgcolor=#FFFFFF>
+      <tr>   
+        <th>Called</th>
+        <th>Expected</th>
+        <th>Recieved</th>
+        <th>Correct</th>    
+      </tr>
+      <tr ng-repeat="line in solution_check_result.results">
+        <td>{{line.call}}</td>
+        <td>{{line.expected}}</td>
+        <td>{{line.received}}</td>
+        <td ng-show="line.correct" bgcolor=#00FF00>{{line.correct}}</td>
+        <td ng-show="!line.correct" bgcolor=#FF0000>{{line.correct}}</td>     
+      </tr>
+    </table>
+
+
+
+
+
+  </div>
+
+  
+  <div ng-controller="QuestController">
+   Quest Controller
+   <ul>
+    <li name="questcount">Started Quests: {{quests.length}}</li>
+    <li name="currentquest">Current Quest: {{quest.name}}</li>
+   </ul>
+   <input type="Submit" value="Load First Quest" ng-click="fetch(1)">
+   <input type="Submit" value="Load Second Quest" ng-click="fetch(2)">
+   <input type="Submit" value="Add Quest" ng-click="add()">
+   <input type="Submit" value="Delete Quest" ng-click="delete(1)">
+  </div>
+ <br> 
+
+  <div ng-controller="PlayerController">
+   Player Controller
+   <ul>
+    <li>Player nickname: {{player.nickname}}</li>
+   </ul>
+  </div>
+
+
+  <div ng-controller="InterfaceController">
+   Interfaces Controller
+   <p>Interfaces Count = {{interfaces.interfaces.length}}</p>
+   Available Languages:
+    <ul>
+      <li ng-repeat="interface in interfaces.interfaces">
+          {{interface.name}}
+      </li>
+    </ul>
+  </div>
+
+  <div ng-controller="ProblemController" ng-init="problemsetID=11021;get_progress();get_problems();">
+    
+    Problems in problemset 11021 with progress ({{progress.currentPlayerProgress}}/{{progress.problemsInProblemset}})
+
+    <ol>
+      <li ng-repeat="problem in problems.problems">
+        {{problem.name}} ({{problem.id}}) <font color="green" ng-show="problem.solved">solved</font>
+      </li>
+    </ol>
+
+  </div>
+
+<!-- Nest the PathController DIV in the GameController DIV to lauch games -->
+<div ng-controller="GameController"> 
+  
+  <div ng-controller="PathController">
+   Path Controller
+   <p>Path Count = {{paths.paths.length}}</p>
+   Available Game Paths:
+  
+    <ul>
+      <li ng-repeat="path in paths.paths">
+          {{path.name}} ({{path.id}}) <input type="submit" value="Play Path Game" ng-click="create_path_game(path.id,3)"> 
+      </li>
+    </ul>
+    
+    Player Paths {{player_paths.paths.length}}
+    <ul>
+      <li ng-repeat="path in player_paths.paths">
+          {{path.name}} 
+      </li>
+    </ul>
+    Current Paths <span name="current_paths">{{current_paths.paths.length}}</span>
+    <ul>
+      <li ng-repeat="path in current_paths.paths">
+          {{path.name}} <input type="submit" value="Play Path Game" ng-click="create_path_game(path.id,3)"> 
+      </li>
+    </ul>
+    Other Paths {{other_paths.paths.length}} 
+    <ul>
+      <li ng-repeat="path in other_paths.paths">
+          {{path.name}} 
+      </li>
+    </ul>  
+    Player Path Progress
+    <ul name="playerpathprogress">
+      <li ng-repeat="(k,v) in path_progress">
+          {{v.path.name}} (id={{k}}) Progress {{v.currentPlayerProgress}}/{{v.problemsInPath}} 
+      </li>
+    </ul> 
+   
+    <input type="Submit" value="Update Path Details" ng-click="update_path_details()">
+    <input type="Submit" value="Update Progress 10030" ng-click="update_path_progress(10030)">    
+    <input type="Submit" value="Update Progress 2462233" ng-click="update_path_progress(2462233)">
+    <input type="Submit" value="Update Progress 6920762" ng-click="update_path_progress(6920762)"> 
+  </div>
+
+  <div ng-controller="ProblemsetController" ng-init="get_problemsets(10030);">
+    Problemsets for path 10030: 
+    <ul>
+      <li ng-repeat="level in problemsets.problemsets">
+        {{level.name}} ({{level.id}}) <input type="submit" value="Play Game On Level" ng-click="create_problemset_game(level.id,3)">
+      </li>
+    </ul>
+    
+  </div>
+  
+  <hr>
+    Game Controller
+    <ul>
+      <li>GameID = {{game.gameID}}</li>
+      <li>Game Player = {{game.player}}</li>
+      <li name="numberofproblems">Number of Problems = {{game.numProblems}}</li>
+      <li>Number Solved = {{game.solvedProblemIDs.length}}</li>
+      <li>All Solved = {{game.allSolved}}</li>
+      <li>Status = {{game.status}}</li>
+      <li>ProblemIDs = {{game.problemIDs}}</li>
+      <li>Solved ProblemIDs = {{game.solvedProblemIDs}}</li>
+      <li>Remaining problems to solve = {{remaining_problems}}</li>
+      <li name="currentproblem">Current problem = {{current_problem}}</li>
+      
+    </ul>
+    <input type="Submit" value="Load Game 0" ng-click="fetch(0)">
+    <input type="Submit" value="Load Game 2" ng-click="fetch(2)">
+    <input type="Submit" value="Load Game 3" ng-click="fetch(3)">
+    <input type="Submit" value="Load Mobile Game" ng-click="fetch(10)">
+    <input type="Submit" value="Create Practice Game" ng-click="create_practice_game()">
+    <input type="Submit" value="Create Tournament Game" ng-click="create_tournament_game()">
+    <input type="Submit" value="Create Quest Game" ng-click="create_quest_game()">
+    <br>
+    Current Problem: (index {{current_problem_index}})<br>
+    ID: {{game.problems.problems[current_problem_index].id}}<br>
+    Name: {{game.problems.problems[current_problem_index].name}}<br>
+    Description: {{game.problems.problems[current_problem_index].description}}<br>
+    Examples: {{game.problems.problems[current_problem_index].examples}}<br>
+    Skeleton: <br>
+    <textarea ng-model="solution">{{game.problems.problems[current_problem_index].skeleton}}</textarea><br>
+    codeHighlightKey: {{game.problems.problems[current_problem_index].interface.codeHighlightKey}}<br>
+
+    <div ng-show="game.problems.problems[current_problem_index].lines">
+      This is a Mobile Problem with lines:<br>
+      <ol>
+        <li ng-repeat="line in game.problems.problems[current_problem_index].lines">
+          {{line}}
+        </li>
+      </ol>
+      Enter line combination to check:
+      <input type="text" ng-model="permutation">
+      <input type="submit" value="Check With Permutation" ng-click="check_permutation()"><br>
+      Non-error Result={{ner}}
+    </div>
+
+    <input type="Submit" value="Check Solution For Game" ng-click="check_solution_for_game()">
+    <input type="Submit" value="Verify Solution" ng-click="verify_solution()">
+    <input type="Submit" value="Skip Problem" ng-click="skip_problem()"><br>
+
+    Solved: <b>{{solution_check_result.solved}}</b><br>
+    Last_Solved: <b>{{solution_check_result.last_solved}}</b><br>
+
+    <table border=1 bgcolor=#FFFFFF>
+      <tr>   
+        <th>Called</th>
+        <th>Expected</th>
+        <th>Recieved</th>
+        <th>Correct</th>    
+      </tr>
+      <tr ng-repeat="line in solution_check_result.results">
+        <td>{{line.call}}</td>
+        <td>{{line.expected}}</td>
+        <td>{{line.received}}</td>
+        <td ng-show="line.correct" bgcolor=#00FF00>{{line.correct}}</td>
+        <td ng-show="!line.correct" bgcolor=#FF0000>{{line.correct}}</td>     
+      </tr>
+    </table>
+  </div>
+
+<hr>
+<div ng-controller="TournamentController" ng-init="fetch_tournaments();tournamentID=12877002;fetch_heat(12883052);">
+    Tournament Controller<br>
+    Open Tournaments
+    <ol>
+      <li ng-repeat="entry in tournaments">
+        {{entry.description}}, {{entry.created}}
+      </li>
+    </ol>
+
+    Enter password for tournament {{tournamentID}}<br>
+    <input type="text" ng-model="tournamentPassword">
+    <input type="submit" value="Register" ng-click="register_for_tournament()"><br>
+    Registration Result: {{registration_response}}
+    <br>
+    <input type="submit" value="Play Tournament Game" ng-click="create_heat_game()">
+    <br>
+    Current tournament gameID = {{game.gameID}}<br>
+    Number of problems {{game.numProblems}}<br>
+    ProblemIDs {{game.problemIDs}}<br>
+    Number of solved problems {{game.numSolvedProblems}}<br>
+    <br>
+
+
+    Results for Heat 12883052
+    <ol>
+      <li ng-repeat="entry in heat.ranking">
+        {{entry.nickname}}, {{entry.solved_problems}}/{{entry.total_problems}}
+      </li>
+    </ol>
+
+  </div>
+
+
+<div ng-controller="GenericRestController" ng-init="model='Story';list();item.name='The Spy Who Coded';">
+   
+  Managing stories using the Generic Controller<br>
+  Stories: {{items}}<br>
+  Stories:    
+    <ol>
+      <li ng-repeat="entry in items">
+        {{entry}} 
+        <input type="submit" value="Edit" ng-click="load(entry.id)">
+        <input type="submit" value="Delete" ng-click="delete(entry.id)">
+      </li>
+    </ol>
+
+    <input type="submit" value="Add New Story" ng-click="item.videos = [];add();">
+    <input type="submit" value="Save Current Story" ng-click="update(item.id)">
+    <input type="submit" value="List" ng-click="list()"><br>
+    
+    Current Item: {{item}}<br>
+    Current Story: <br>  
+    <input type="text" ng-model="item.name"><br>
+    Videos: {{item.videos.length}}<br>
+    New Video:  <input type="text" ng-model="newVideo">
+    <input type="submit" value="Add Video" ng-click="item.videos.push(newVideo)"><br>
+    Videos:
+    <ol>
+      <li ng-repeat="video in item.videos">
+        {{video}}
+      </li>
+    </ol>
+  
+  </div>
+
+  <div ng-controller="GenericRestController" ng-init="model='Quest';list();">
+    Creating, retrieving, updating, and deleting Quests with the Generic Controler<br>
+
+    Saved Quests: {{items}}<br>
+    <ol>
+      <li ng-repeat="quest in items">
+        {{quest.name}}
+      </li>
+    </ol>
+    
+    Current Quest: {{item}}<br>
+    <!-- Could pull stories from story controller later on -->
+    <div ng-controller="StoryController" ng-init="list()">
+      {{stories}}<br>
+      Live Stories <select ng-model="item.storyID" ng-options="story.id as story.name for story in stories"></select>
+      <input type="submit" value="Fetch Latest Stories" ng-click="list()">
+      StoryID: {{item.storyID}} <br>  
+    </div>
+    <!-- -->
+    Hardcoded Stories <select ng-model="item.storyID" ng-options="item.id as item.name for item in [{'name':'The Spy', 'id':'1'},{'name':'Texas','id':'2'}]"></select>
+    StoryID: {{item.storyID}} <br> 
+    
+ 
+    <!-- Use the PathController to fill the Path dropdown box-->
+    <div ng-controller="PathController">
+      Path <select ng-model="item.pathID" ng-options="item.id as item.description for item in paths.paths"></select>
+      PathID: {{item.pathID}}<br>
+    </div>
+    Difficulty <select ng-model="item.difficulty" ng-options="item.id as item.name for item in [{'name':'Beginner', 'id':'Beginner'},{'name':'Easy','id':'Easy'},{'name':'Medium', 'id':'Medium'},{'name':'Hard','id':'Hard'}]"></select>
+    Difficulty : {{item.difficulty}}<br>
+
+    <input type="submit" value="Create New Quest" ng-click="item.name='New Quest';add()"><br>
+  
+  </div>
+
+
+<script src="../lib/angular/angular.min.js"></script>
+<script src="../lib/angular/angular-resource.min.js"></script>
+<script src="../js/controllers.js"></script>  
+<script src="../js/analytics.js"></script>
+<script src="../js/app-config.js"></script>          
+<script src="../js/app.js"></script>   
+<script src="../js/cookies.js"></script>  
+<script src="../../test/app-test.js"></script>    
+<script src="../../test/lib/angular/angular-mocks.js"></script>    
+
+</body>
+</html>

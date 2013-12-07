@@ -1,0 +1,298 @@
+<style>
+    #edit_profile {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: black;
+    }
+    
+    .table tbody tr:hover td,
+    .table tbody tr:hover th {
+        background-color: #DCD9CD;
+    }
+
+    .badgeChallenge::after
+    {
+        content: "Badge Challenge Description";
+        position: absolute;
+        top: 0px;
+        left: 1px;
+        padding: 3px 7px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #5D5E53;
+        border: 1px solid #000000;
+        color: white;
+        -webkit-border-radius: 4px 0 4px 0;
+        -moz-border-radius: 4px 0 4px 0;
+        border-radius: 4px 0 4px 0;
+    }
+    .questChallenge::after
+    {
+        content: "Quest Challenge Description";
+        position: absolute;
+        top: 0px;
+        left: 1px;
+        padding: 3px 7px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #5D5E53;
+        border: 1px solid #000000;
+        color: white;
+        -webkit-border-radius: 4px 0 4px 0;
+        -moz-border-radius: 4px 0 4px 0;
+        border-radius: 4px 0 4px 0;
+    }
+    .habitChallenge::after
+    {
+        content: "Habit Challenge Description";
+        position: absolute;
+        top: 0px;
+        left: 1px;
+        padding: 3px 7px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #5D5E53;
+        border: 1px solid #000000;
+        color: white;
+        -webkit-border-radius: 4px 0 4px 0;
+        -moz-border-radius: 4px 0 4px 0;
+        border-radius: 4px 0 4px 0;
+    }
+    
+    .badgeheight {
+        height:200px
+    }
+    .fRight{
+        float:right;
+    }
+
+    .tabspacing{
+        width:50%;
+    }
+
+    .tabspacing-inner{
+        width:33.33333%;
+    }
+
+    .addBorder{
+        border: 1px solid white;
+    }
+
+    #challengeHeading{
+        font-size:14pt;
+        font-family:times new roman;
+        font-weight:bold;
+        color:#23238e;
+    }
+
+    #msgBody{
+        font-size:14pt;
+        font-family:times new roman;
+        font-weight:bold;
+        color:#FFFFFF;
+    }
+    .tab-content {
+      clear: none;
+      margin-bottom:0px;
+    }
+
+    tbody{
+        overflow:auto;  
+    }
+
+
+
+</style>
+<br>
+<div class="container" id="largeProfile" style="position:relative;" ng-controller="ChallengeController" ng-init="loadEditChallenge();">
+    <div class="row-fluid">
+        <div ng-show="challengeToEdit.challenge.challengeType=='Badge'" class="span12 bootcamp-body badgeChallenge" id="challengeDescription">
+            <br>
+            You are able to create a Badge Challenge where the player has to earn certain level of proficiency in order to overcome that challenge. For instance, if you challenge a player to get Python Level 5 badge, he/she has to earn to complete that challenge.
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div ng-show="challengeToEdit.challenge.challengeType=='Quest'" class="span12 bootcamp-body questChallenge" id="challengeDescription">
+            <br>
+            You are able to create a Quest Challenge where the player has to play a specific story with a particular path and stated difficulty level. Hence the challenge will push the player level of proficieny beyond his/her boundary. Moreover, Story will aspire the player to spend more time in that specific path.  
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div ng-show="challengeToEdit.challenge.challengeType=='Habit'" class="span12 bootcamp-body habitChallenge" id="challengeDescription">
+            <br>
+            You are able to create a Habit Challenge where the player has to play keep playing specific language with given difficulty level. In addition. number of problems per day with given time frame will allow the player to get hooked.  
+        </div>
+    </div>
+    <br>
+    <div class="row-fluid">
+        <div class="span6" >
+            <div class="bootCamp">
+                <p>Challenge Details</p>
+            </div>
+            <div class="well well-small">
+                <table class="table-condensed">
+                    <tr>
+                        <th style="text-align:left;">Challenge Type:</th>
+                        <th>
+                            <select ng-model="challengeToEdit.challenge.challengeType" ng-options="chType.challengeType as chType.name for chType in challengeTypes" ng-init=""></select>
+                        </th>
+                        
+                    </tr>
+                    <tr>
+                        <th style="text-align:left;">Challenge Name:</th>
+                        <th><input type="text" ng-model="challengeToEdit.challenge.name"></th>
+                    </tr>
+                    <tr>
+                        <th style="text-align:left;">Challenge Description:</th>
+                        <th>
+                             <textarea rows="4" cols="120" placeholder="This is where you will add the description of your challenge. e.g. Pizza night this Friday for all those who unlock level 5 Python or a job description." ng-model="challengeToEdit.challenge.description">
+                            </textarea>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="text-align:left;">Public Message:</th>
+                        <th>
+                            <textarea rows="4" cols="80" placeholder = "This is where you will add a message for anyone who is eligible to look at your challenge to see a public message." ng-model = "challengeToEdit.challenge.publicMessage">
+                            </textarea>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="text-align:left;">Private Message:</th>
+                        <th>
+                            <textarea rows="4" cols="80" placeholder = "This is where you will add a message for anyone who is eligible to look at your challenge to see a public message." ng-model = "challengeToEdit.challenge.privateMessage[0]">
+                            </textarea>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="text-align:left;">Location</th>
+                        <th>
+                            <select ng-model="challengeToEdit.challenge.allowedCountries.length">
+                                <option value="0">World Wide</option>
+                                <option value="1">{{player.country}}</option>
+                            </select>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="span6" id="questChallenge" ng-show="challengeToEdit.challenge.challengeType=='Quest'">
+                <div class="bootCamp">
+                    <p>Level of Proficiency Needed</p>
+                </div> 
+                <div class="well well-small">
+                    <table>
+                        <tr>
+                            <th>Level</th>
+                            <th>
+                                <select ng-model="challengeToEdit.challenge.difficulty" ng-options="level.id as level.name for level in levels"></select>
+                            </th>
+                        </tr>
+                        <tr ng-show="challengeToEdit.challenge.difficulty!='Drag-n-Drop'">
+                            <th>Path</th>
+                            <th>
+                                <select ng-model="chaPathID" ng-options="path.id as path.name for path in paths.paths"></select>
+                            </th>
+                        </tr>
+                        <tr ng-show="challengeToEdit.challenge.difficulty=='Drag-n-Drop'">
+                            <th>Path</th>
+                            <th>
+                                <select ng-model="chaPathID" ng-options="path.path_id as path.name for path in mobilePaths"></select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Story Name</th>
+                            <th>
+                                <select ng-model="challengeToEdit.challenge.storyID" ng-options="story.id as story.name for story in pubStories"></select>          
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+        <div class="span6" id="habitChallenge" ng-show="challengeToEdit.challenge.challengeType=='Habit'">
+                <div class="bootCamp">
+                    <p>Level of Proficiency Needed</p>
+                </div>
+                <div class="well well-small">
+                    <table>
+                        <tr>
+                            <th>Difficulty</th>
+                            <th>
+                                <select ng-model="challengeToEdit.challenge.difficulty" ng-options="level.id as level.name for level in levels" ng-init="difficulty='Drag-n-Drop'"></select>
+                            </th>
+                        </tr>
+                        <tr ng-show="challengeToEdit.challenge.difficulty!='Drag-n-Drop'">
+                            <th>Language</th>
+                            <th>
+                                <select ng-model="chaPathID" ng-options="path.id as path.name for path in paths.paths"></select>
+                            </th>
+                        </tr>
+                        <tr ng-show="challengeToEdit.challenge.difficulty=='Drag-n-Drop'">
+                            <th>Language</th>
+                            <th>
+                                <select ng-model="chaPathID" ng-options="path.path_id as path.name for path in mobilePaths"></select>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Problems per day</th>
+                            <th>
+                                <select ng-model="challengeToEdit.challenge.problemsPerDay" ng-options="day.id as day.name for day in days"></select>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+        <div class="span6" id="badgeChallenge" ng-show="challengeToEdit.challenge.challengeType=='Badge'">
+                <div class="bootCamp">
+                    <p>Badges to Earn</p>
+                </div>
+                <div class="well well-small">
+                    <table>
+                        <tr ng-repeat="x in [0,1,2,3,4,5]">
+                            <th>
+                                <select ng-model="challengeToEdit.challenge.unlockRequiredPaths[x]" ng-options="path.id as path.name for path in paths.paths"></select>
+                            </th>
+                            <th>
+                                <select ng-model="challengeToEdit.challenge.unlockRequiredBadges[x]" ng-options="badge.id as badge.description for badge in theBadges[challengeToEdit.challenge.unlockRequiredPaths[x]]"></select>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+        </div>  
+        <br>
+        <br>
+        <div class="span6" id="challengeDate">
+            <div class="bootCamp">
+                <p>Dates</p>
+            </div>  
+            <div class="well well-small">
+                <table>
+                    <tr>
+                        <th>Start Date</th>
+                        <th><input type="text" name="startDate"  ng-model="challengeToEdit.challenge.startDate" datepicker readonly style="cursor:pointer"><i class="icon-calendar"></i></input></th>
+                    </tr>
+                    <tr>
+                        <th>End Date</th>
+                        <th><input type="text" name="endDate"  ng-model="challengeToEdit.challenge.endDate" datepicker readonly style="cursor:pointer"><i class="icon-calendar"></i></input></th>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+        <div class="span6 well" id="finish">
+            <button class="btn btn-primary" ng-click="editChallenge(challengeToEdit.challenge.challenge_id,challengeToEdit.challenge.startDate,challengeToEdit.challenge.endDate);">Save</button>
+        </div> 
+
+    </div>
+    <div class="modal fade" id="challengeEdited" style="display:none">         
+        <div class="modal-body" style="color:black">
+            You have successfully edited the challenge!
+        </div>
+        <div class="modal-footer">
+            <a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click="hideEditSuccessModal()">Ok</button></a>
+        </div>
+    </div>
+</div><!-- End of container which contains 'Challenge Edit' -->
+<br>
+<br>
+<div class="container" id="smallProfile" style="position:relative;">
+    
+</div><!-- End of container which contains 'smallProfile' -->

@@ -1,0 +1,17 @@
+</br>
+</br>
+<div ng-controller="SchoolController" ng-init="get_marker()"class="container" id="registration" style="position:relative;">
+	School type: <select ng-model="filter_schooltype" ng-change="get_marker()" ng-options="schooltype for schooltype in supported_schooltypes | orderBy:'schooltype'"></select>
+	<div class="google-map" 
+                center="position.coords"
+                zoom="zoomProperty" 
+                markers="markers"
+                latitude="clickedLatitudeProperty"
+                longitude="clickedLongitudeProperty"
+                mark-click="false"
+                draggable="true"
+                fit="false"
+                events="eventsProperty"
+                style="height: 700px; width: 100%">
+        </div>
+<div>

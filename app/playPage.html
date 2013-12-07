@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html ng-app="myApp" class="ng-scope">
+  <head>
+    <meta charset="utf-8">
+    <title>Drag and Drop Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.10.0/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <link href="./lib/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+    <script src="https://raw.github.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js"></script>
+    <script src="./js/fancybox-fire.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <style>
+    #loading {    
+      position: absolute;
+      z-index: 1000;
+      width: 160px;
+      height: 24px;
+      background: url(loading.gif) no-repeat;
+      cursor: wait;
+      left: 50%;
+      margin-left: -80px;                
+    }
+    .well{
+      background-color: transparent;
+    }
+    .nomargin {
+      margin-top: 0px; margin-bottom: 0px;
+    }
+    .minimalList {
+      min-height: 100px;
+    }
+    .fancybox-next {
+      display: none;
+    }
+    .fancybox-prev {
+      display: none;
+    }
+   /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+  html {-webkit-text-size-adjust: none;}
+    body{
+      background-image:url("assets/img/");
+      background-repeat:repeat;
+      background-attachment:fixed;
+      padding-bottom: 40px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: black;
+    }
+    /* to change tab hover and active color*/
+    .nav-tabs > .active > a,
+    .nav-tabs > .active > a:hover {
+      color: black;
+      cursor: default;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-bottom-color: transparent;
+    }
+    .nav-tabs > li > a:hover {
+        background-color: #DCD9CD;
+        border-color: #eeeeee #eeeeee #dddddd;
+    }
+
+    /* to change table background*/
+    .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 10px;
+        background-color: #ffffff;
+    }
+
+    .nav-tabs {
+        margin-bottom: 0;
+    }
+
+    .btn-primary:active,
+    .btn-primary.active {
+      color: #ffffff;
+      background-color: #000066;
+      *background-color: #003bb3;
+    }
+
+    .btn-primary:hover{
+      color: #ffffff;
+      background: #000066;
+      *background: #003bb3;
+    }
+
+    .progess-inner {
+      min-height: 25px;
+      vertical-align: middle;
+      padding-top: 15px;
+      padding-bottom: 2px;
+      margin-top: 17px;
+      margin-bottom: 10px;
+      background-color: #FCFAFA;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+           border-radius: 4px;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+    .ui-sortable{
+      padding-bottom: 50px;
+    }
+    .well{
+      /*background-color: #FCFAFA;*/
+      background-color: #F0EFEA;
+    }
+    #well-c{
+      /*background-color: #F2F2F2;*/
+      background-color: #DBDACB;
+    }
+    .img-polaroid{
+      height:215px;
+    }
+    .table td {
+     text-align: center;   
+    }
+    .table th {
+     text-align: center;   
+    }
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      position: absolute;
+      top: 17px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      margin-top: 30px;
+      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+    .navbar-wrapper .navbar {
+
+    }
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+              box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 15px 15px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    
+    h6 {
+      font-size: 120%;
+    }
+
+
+  /* RESPONSIVE CSS
+    -------------------------------------------------- */
+    @media (max-width: 1024px) {
+        .navbar-wrapper {
+            position: absolute;
+            top: 40px;
+        }
+        .container.navbar-wrapper {
+            margin-top: 30px;
+            margin-bottom: 0;
+            width: auto;
+        }
+        .navbar-inner {
+            border-radius: 0;
+            margin: -20px 0;
+        }
+        .carousel .item {
+            height: 100%;
+        }
+        .carousel img {
+            width: auto;
+            height: 100%;
+        }
+        .featurette {
+            height: auto;
+            padding: 0;
+        }
+        .featurette-image.pull-left, .featurette-image.pull-right {
+            display: block;
+            float: none;
+            max-width: 40%;
+            margin: 0 auto 20px;
+        }
+        #homevideo {
+            margin-top:10px;
+            height: 300px;
+            width: 90%;
+        }
+        .abc {
+            display:none;
+        }
+        .img-polaroid {
+            height:180px;
+        }
+        #smallProfile, #smallSelectPlay, #mediumComment {
+            display:none;
+        }
+        #largeProfile, #largeSelectPlay, #largeComment {
+            display:block;
+        }
+        h5 {
+            font-size: 120%;
+        }
+    }
+    @media (max-width: 800px) {
+        .navbar-inner {
+            margin: -20px;
+        }
+        .carousel {
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+        .carousel .container {
+        }
+        .carousel .item {
+            height: 100%;
+        }
+        .carousel img {
+            height: 100%;
+        }
+        .carousel-caption {
+            width: 65%;
+            padding: 0 70px;
+            margin-top: 100px;
+        }
+        .carousel-caption h1 {
+            font-size: 30px;
+        }
+        .carousel-caption .lead, .carousel-caption .btn {
+            font-size: 18px;
+        }
+        .marketing .span4 + .span4 {
+            margin-top: 40px;
+        }
+        .featurette-heading {
+            font-size: 30px;
+        }
+        .featurette .lead {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        #homevideo {
+            height: 90%px;
+            width: 90%;
+        }
+        .abc {
+            display:none;
+        }
+        #smallProfile, #smallSelectPlay, #mediumComment {
+            display:block;
+        }
+        #largeProfile, #largeSelectPlay, #largeComment {
+            display:none;
+        }
+    }
+    @media (max-width: 768px) {
+        #homevideo {
+            height: 80%px;
+            width: 80%;
+        }
+        .carousel {
+            position:relative;
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+        .img-polaroid {
+            height:80px;
+        }
+        #smallProfile, #smallSelectPlay, #mediumComment {
+            display:block;
+        }
+        #largeProfile, #largeSelectPlay, #largeComment {
+            display:none;
+        }
+    }
+    @media (max-width: 600px) {
+        #homevideo {
+            height: 80%px;
+            width: 80%;
+        }
+        .carousel {
+            position:relative;
+            margin-left: -20px;
+            margin-right: -20px;
+        }
+        .img-polaroid {
+            height:50px;
+        }
+        #smallProfile, #smallSelectPlay, #mediumComment {
+            display:block;
+        }
+        #largeProfile, #largeSelectPlay, #largeComment {
+            display:none;
+        }
+        @media (max-width: 320px) {
+            #activityTable {
+                width:30%;
+                font-size:80%
+            }
+        }
+    }
+    .fancybox-next {
+        display: none;
+    }
+    .fancybox-prev {
+        display: none;
+    }
+    #standardFrame {
+        height: 42px;
+        width: 42px;
+    }
+    .nomargin {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .minimalList {
+        min-height: 100px;
+    }
+    @media (max-width: 1024px) {
+        #questvideo {
+            margin-top:10px;
+            height: 300px;
+            width: 90%;
+        }
+        #gametable {
+            width: 930px;
+        }
+        #gameTable2 {
+            width: 465px;
+        }
+    }
+    @media (max-width: 800px) {
+        #questvideo {
+            margin-top:10px;
+            height: 200px;
+            width: 80%;
+        }
+        #standardFrame {
+            height: 20px;
+            width: 20px;
+            border:solid 2px black;
+        }
+        #gametable {
+            width: 720px;
+        }
+        #gameTable2 {
+            width: 360px;
+        }
+    }
+    ul {
+        list-style-type: none;
+    }
+
+    #pop_info_Pane {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: black;
+    }
+
+    #pop_info_Pane2 {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: black;
+    }
+
+      /* To insert background theme */
+    body{
+      color: black;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      background-color: #FCFAFA;
+      *background-color: #FCFAFA;
+      background-image: -moz-linear-gradient(top, #FCFAFA, #FCFAFA);
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FCFAFA), to(#FCFAFA));
+      background-image: -webkit-linear-gradient(top, #FCFAFA, #FCFAFA);
+      background-image: -o-linear-gradient(top, #FCFAFA, #FCFAFA);
+      background-image: linear-gradient(to bottom,#FCFAFA, #FCFAFA);
+      background-repeat: repeat-x;
+      border-color: #0044cc #0044cc #002a80;
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+      filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    }
+    
+    </style>
+
+    <!-- Fav and touch icons -->
+      <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    </head>
+
+    <body>
+      <div class="container" ng-controller="PlayerController" ng-init="list()">
+            <ul class="nav nav-pills pull-right" align="right">
+              <li ng-show="player.nickname"><a href="#profile"><input type="image" ng-src="{{player.gravatar}}"; width = 30px; height= 30px;/>&nbsp;&nbsp;</span><span ng-bind="player.nickname"></span><span ng-bind="secretAgent">!</span></a></li>
+              <li><a ng-show="!player.nickname" class="janrainEngage" href="#"><button class="btn btn-primary" ng-click='login()'>Login</button></a></li>    
+              <li><a ng-show="player.nickname" ng-click='logout()' href="#"><button class="btn btn-danger" ng-click='logout()'>Log Out</button></a></li>     
+            </ul>
+        </div>
+      <br>
+     </div>
+      <div class="container">
+        <div class="navbar-wrapper">      
+        <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->      
+        <div class="container">       
+    
+          <div class="navbar navbar-inverse">          
+            <div class="navbar-inner">            
+              <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->            
+              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">              
+                <span class="icon-bar">
+                </span>              
+                <span class="icon-bar">
+                </span>              
+                <span class="icon-bar">
+                </span>            
+              </a>            
+              <a class="brand" href="index.html#/home">SingPath</a>       
+              <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->            
+              <div class="nav-collapse collapse">              
+                <ul class="nav pull-right" id="myTab">   
+                  <li>
+                    <a href="index.html#/quests">Quests</a>
+                  </li>                
+                  <li>
+                    <a href="index.html#/practice">Practice</a>
+                  </li>
+                  <li>
+                    <a href="index.html#/challenges">Challenges</a>
+                  </li>                
+                  <li>
+                    <a href="index.html#/ranking">Rankings</a>
+                  </li>   
+                  <li>
+                     <a href="index.html#/feedback">Feedback</a>
+                  </li>
+                  <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->                 
+                  <li class="dropdown" id="menu">                  
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">More... 
+                      <b class="caret"></b></a>                  
+                    <ul class="dropdown-menu">                    
+                      <li>
+                        <a href="index.html#/tournaments">Tournaments</a>
+                      </li>       
+                      <li class="divider"></li>
+                      <li class="nav-header">Create</li>                    
+                      <li>
+                        <a href="index.html#/create">Path or Level</a>
+                      </li>   
+                      <li>
+                        <a href="index.html#/story">Story or Tutorial</a>
+                      </li>
+                      <li class="divider"></li>
+                      <li class="nav-header">Videos</li>                    
+                      <li>
+                        <a href="index.html#/videos">Learn about SingPath</a>
+                      </li>
+                    </ul>                
+                  </li>
+                  <li>
+                    <a href="index.html#/profile">Profile</a>
+                  </li>                           
+                </ul>            
+              </div>
+              <!--/.nav-collapse -->          
+            </div>
+            <!-- /.navbar-inner -->        
+          </div>
+          <!-- /.navbar -->      
+        </div> 
+        <!-- /.container -->    
+      </div>
+        <br>
+        <a id="video" class="fancybox fancybox.iframe" style="display:none" href=""></a>
+        <div ng-controller="GameController" id="dndGame">
+          <div class="row-fluid ">  
+            <div class="span12 well">
+              <div class="row-fluid">
+                <div class="span9">
+                  <div class="span3">
+                    Quest Progress:&nbsp;&nbsp;&nbsp; <span ng-bind="quest.numSolved"> </span>/<span ng-bind="quest.numProblems"></span>
+                  </div>
+                  <div align="left"> 
+                    <div class="progress progress-success" align="left">
+                      <div class="bar" style="width:{{count = (quest.numSolved/quest.numProblems)*100 |number:0}}%;"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="span3" align="left">
+                  <font>
+                    <p>
+                      Game progress 
+                      &nbsp; <span ng-bind="game.numSolvedProblems"></span> of <span ng-bind="game.numProblems"></span>
+                    </p>
+                  </font>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="span9" style="border: 1px solid #DBDACB;">
+                    <h5>Current Question</h5> 
+                  <font>
+                    &nbsp;Name: <span ng-bind="game.problems.problems[current_problem_index].name"></span>
+                    <br>&nbsp;Description: <span ng-bind="game.problems.problems[current_problem_index].description"></span>
+                  </font>
+                </div>
+                <div class="span3">
+                  <div class="span12" style="border: 1px solid #DBDACB;">
+                    <font> 
+                      &nbsp;&nbsp;Story Name:<span ng-bind="singleStoryDes"></span>
+                      <br>
+                      &nbsp;&nbsp;Difficulty: <span ng-bind="quest.difficulty"></span>
+                      <br>                                
+                      &nbsp;&nbsp;Language: <span ng-bind="singlePathName"></span>
+                    </font>
+                  </div>
+                  <div class="span12" align="center" style="padding-top: 5px">
+                    <p>       
+                      <button class="btn btn-primary" ng-click="skip_problem()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>&nbsp;&nbsp;
+                      <button class="btn btn-primary" ng-click="goStoryBoard()">StoryBoard</button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="loading" display="none">
+            <!-- this is the loading gif -->
+            <img src="img/loading.gif">
+          </div>
+
+          <div class="row-fluid" id="content">
+            <div class="span12" id="gametable">
+              <div class="span6 well">
+                  <!-- Tab for Choice-->
+                  <div id="tab1"class="tabbable">
+                    <ul class="nav nav-tabs" style="height:40px;">
+                      <li class="tabspacing active">
+                        <a href="#t1" data-toggle="tab">Options</a>
+                      </li>
+                      <button class="btn btn-primary pull-right" ng-click="check_permutation()" ng-hide="autoCheck">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                    </ul>
+                    <div  class="tab-content">
+                      <div class="tab-pane fade in active" id="t1" style="height:320px;">
+                        <div id="gameTable1">
+                          <table id="gameTable1" width=540px >
+                            <div class="ng-scope" id="list1">
+                              <ol style="list-style: none;" id="single" dnd-between-list="line_outcome.origional,target" ng-class="{&#39;minimalList&#39;:modelEmpty()}" class="ui-sortable">
+                                <li style="text-align: left; padding-left:5em" class="alert alert-info nomargin ng-scope ng-binding" ng-repeat="line in line_outcome.origional">
+                                  {{line.content}}
+                                </li>
+                              </ol>
+                            </div>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="span6 well">
+                  <!-- Tab for Solution-->
+                  <div id="tab2"class="tabbable">
+                    <ul class="nav nav-tabs" style="height:40px;">
+                      <li class="tabspacing active">
+                        <a href="#t3" data-toggle="tab">Solution</a>
+                      </li>
+                      <div align="right">
+                        <form class="form-inline" style="align:right">
+                          <span class="label label-warning" ng-show="notCompile"><h7>Not Compilable, Please Try Again!</h7></span>&nbsp;&nbsp;
+                          <label class="checkbox">
+                          <input type="checkbox" ng-model="autoCheck" ng-true-value="yes" ng-false-value="no">Auto Check</label>&nbsp;
+                        </form>
+                      </div>
+                    </ul>
+                    <div  class="tab-content">
+                      <div class="tab-pane fade in active" id="t3" style="height:320px;">
+                          <div id="gameTable2">
+                            <div class="ng-scope" id="list2">
+                              <ol style="list-style: none;" id="target" dnd-between-list="source,single"
+                                  ng-class="{&#39;minimalList&#39;:sourceEmpty()}" class="ui-sortable">
+                                   <li style="text-align: left; padding-left:5em" class="alert alert-info nomargin ng-scope ng-binding" ng-repeat="line in source">
+                                     {{line.content}}
+                                   </li>
+                              </ol>
+                            </div>         
+                          </div>   
+                      </div>
+                    </div>
+                  </div>
+              </div>
+             </div>
+          </div>   
+        
+          <div class="modal fade" id="pop_info_Pane" style="display:none">
+            <div class="modal-header">
+              <h3>Congratulations! You got the answer correct!</h3>
+            </div>
+            <div class="modal-body">
+              Number of Problems <b>{{game.numProblems}}</b><br>
+              Number Solved <b>{{game.solvedProblemIDs.length}}</b><br>
+              Solved: <b>{{solution_check_result.solved}}</b><br>
+              Last_Solved: <b>{{solution_check_result.last_solved}}</b><br>
+              <table border=1 bgcolor=#FFFFFF>
+                <tr>   
+                  <th>Called</th>
+                  <th>Expected</th>
+                  <th>Recieved</th>
+                  <th>Correct</th>    
+                </tr>
+                <tr ng-repeat="line in solution_check_result.results">
+                  <td>{{line.call}}</td>
+                  <td>{{line.expected}}</td>
+                  <td>{{line.received}}</td>
+                  <td ng-show="line.correct" bgcolor=#00FF00>{{line.correct}}</td>
+                  <td ng-show="!line.correct" bgcolor=#FF0000>{{line.correct}}</td>     
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button data-dismiss="modal" class="btn" ng-click="create_quest_game(qid);">Cancel</button>
+              <button type="button" ng-click="" data-dismiss="modal" class="btn btn-primary">Got it!</button>
+            </div>
+          </div>
+
+          <div class="modal fade" id="pop_info_Pane2" style="display:none">
+            <div class="modal-header">
+              <h3>Your answer is compilable, But it didn't pass the Test!<h3>
+            </div>
+            <div class="modal-body">
+              Number of Problems <b>{{game.numProblems}}</b><br>
+              Number Solved <b>{{solvedProblems}}</b><br>
+              Solved: <b>{{solution_check_result.solved}}</b><br>
+              Last_Solved: <b>{{solution_check_result.last_solved}}</b><br>
+              <table border=1 bgcolor=#FFFFFF>
+                <tr>   
+                  <th>Called</th>
+                  <th>Expected</th>
+                  <th>Recieved</th>
+                  <th>Correct</th>    
+                </tr>
+                <tr ng-repeat="line in solution_check_result.results">
+                  <td>{{line.call}}</td>
+                  <td>{{line.expected}}</td>
+                  <td>{{line.received}}</td>
+                  <td ng-show="line.correct" bgcolor=#00FF00>{{line.correct}}</td>
+                  <td ng-show="!line.correct" bgcolor=#FF0000>{{line.correct}}</td>     
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" ng-click="" data-dismiss="modal" class="btn btn-primary">Ok</button>
+            </div>
+          </div>
+        
+        </div>
+      </div> <!-- /container -->
+
+      <!-- Le javascript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="assets/js/bootstrap-dropdown.js"></script>  
+      <script src="http://www.youtube.com/player_api"></script>
+      <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+      <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+      <script src="https://raw.github.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js"></script>
+      <script src="./lib/angular/angular.js"></script>
+      <script src="js/analytics.js"></script>
+      <script src="http://angular-ui.github.io/ui-ace/build/ui-ace.js"></script>
+      <script src="./js/game-play-app.js"></script>
+      <script src="js/app-config.js"></script>
+      <script src="js/controllers.js"></script>
+      <script src="./js/dir-dnd.js"></script>
+      <script src="./js/cookies.js"></script> 
+      <script src="lib/angular/angular-resource.min.js"></script>
+      <script src="./js/jquery.fancybox.js"></script>
+      <script src="assets/js/bootstrap-modal.js"></script>
+      <script src="assets/js/bootstrap-tooltip.js"></script>
+      <script src="assets/js/bootstrap-popover.js"></script>
+      <script src="assets/js/bootstrap-collapse.js"></script>
+      <script type='text/javascript' src="http://twitter.github.com/bootstrap/assets/js/bootstrap-alert.js"></script>
+  </body>
+</html>

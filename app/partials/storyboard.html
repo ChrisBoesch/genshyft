@@ -1,0 +1,163 @@
+<style>
+  #standardFrame{
+    height: 100px;
+    width:  150px;
+  }
+  #padFrame{
+    margin-top:10px;
+    height: 200px;
+    width: 225px;
+  }
+  #leftIcon{
+    height: 300px;
+    width:  200px;
+  }
+
+  #largeSpace{
+    display:block;
+  }
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+  @media (max-width: 1366px) {
+
+  #smallSpace{
+      display:none;
+    }
+
+  #largeSpace{
+      display:none;
+    }
+  }
+
+  @media (max-width: 1024px) {
+
+    .container.navbar-wrapper {
+      margin-bottom: 0;
+      width: auto;
+    }
+    .navbar-inner {
+      border-radius: 0;
+      margin: -20px 0;
+    }
+    .featurette {
+      height: auto;
+      padding: 0;
+    }
+    .featurette-image.pull-left,
+    .featurette-image.pull-right {
+      display: block;
+      float: none;
+      max-width: 40%;
+      margin: 0 auto 20px;
+    }
+    iframe{
+      margin-top:10px;
+      height: 300px;
+      width: 90%;
+    }
+
+    #smallSpace{
+        display:none;
+      }
+
+    #largeSpace{
+       display:none;
+    }
+
+  }
+
+
+  @media (max-width: 800px) {
+
+    .navbar-inner {
+      margin: -20px;
+    }
+
+    .marketing .span4 + .span4 {
+      margin-top: 40px;
+    }
+
+    .featurette-heading {
+      font-size: 30px;
+    }
+    .featurette .lead {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    iframe{
+      height: 50%px;
+      width: 50%;
+    }
+
+    #leftIcon{
+      height: 300px;
+      width:  150px;
+    }
+
+    #smallSpace{
+      display:none;
+    }
+
+    #largeSpace{
+     display:none;
+    }
+
+  }
+
+</style>
+
+<!-- START THE FEATURETTES -->
+<br/><br>
+<!-- /END THE FEATURETTES -->
+<div class="container">
+  <div class="row-fluid" ng-controller="QuestController" ng-init="list()">
+  
+	<div class="span9 well" align="center" style="height:470px; overflow:auto">
+    <h4> Quest Name: {{name.name}}<br></h4>
+      <ul class="thumbnails row-fluid" >
+        <span ng-repeat="story in name.videos track by $id($index)" class="pull-left well">
+         <span class="badge badge-info">{{$index+1}}</span><p><p>
+         <div ng-show="story!='LOCKED'">
+            <a class="fancybox fancybox.iframe" rel="fancybox fancybox.iframe" ng-click="loadLinks($index)" ng-href="http://www.youtube.com/embed/{{story}}?enablejsapi=1&wmode=opaque" id="video"><img ng-src="http://img.youtube.com/vi/{{story}}/1.jpg" id="standardFrame"></a>
+         </div>
+         <div ng-show="story=='LOCKED'">
+            <a ng-click="loadLinks($index)" ng-href=""><img ng-src="http://img.youtube.com/vi/{{story}}/1.jpg" id="standardFrame"></a>
+         </div>
+        </span>
+      </ul>             
+  </div>
+  
+  <div class="span3">
+    <br>
+    <div id="leftIcon" class="span2" align="left" style= "vertical-align:middle" ><img class="img-rounded" src="img/newStory.png"></img>
+      <br/><br/>
+        {{route()}}
+        <form action={{changeRoute}}>
+        <button class="btn btn-large btn-block btn-primary" type="submit">Continue</button>
+        </form>
+        <form>
+        <button class="btn btn-large btn-block" type="submit" ng-click="playback()">Playback Videos</button>
+        </form>
+      </div>
+  </div>
+  
+
+  <div class="modal fade" id="warningBoard">
+    <div class="modal-body">
+      <h3><font color="blue">You need to solve more problems to unlock this video.</font><h3>
+    </div>
+    <a href="#" class="btn" data-dismiss="modal">Ok</a>
+  </div>  
+      
+</div>
+</div>
+
+<script>
+  function changeRoute()
+  {
+    document.getElementById("demo").innerHTML=Date();
+  }
+</script>

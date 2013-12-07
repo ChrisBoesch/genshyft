@@ -1,0 +1,237 @@
+
+<style>
+
+	/* To remove row line from the tables*/
+    table td {
+        border-top: none;
+    }
+
+    .table td, .table th {
+        border: none;
+		text-align:center;
+    }
+    .table tbody tr:hover td,
+    .table tbody tr:hover th {
+      background-color: #DCD9CD;
+    }
+    
+    
+    .fRight{
+        float:right;
+    }
+
+    .tabspacing{
+        width:50%;
+		text-align:center;
+    }
+
+    tbody{
+        overflow:auto;  
+    }
+	
+	td {
+		text-align: center;
+		vertical-align: center;
+	}
+	
+    th.c1, td.c1{width:20%;}
+    th.c2, td.c2{width:20%;}
+    th.c3, td.c3{width:20%;}
+    th.c4, td.c4{width:20%;}
+    th.c5, td.c5{width:20%;}
+    
+
+    th.d1, td.d1{width:40%;}
+    th.d2, td.d2{width:10%;}
+    th.d3, td.d3{width:10%;}
+    th.d4, td.d4{width:20%;}
+    th.d5, td.d5{width:20%;}
+	
+	th.v1, td.v1{width:10%; vertical-align:middle;}
+    th.v2, td.v2{width:35%; vertical-align:middle;}
+    th.v3, td.v3{width:20%; vertical-align:middle;} 
+    th.v4, td.v4{width:15%; vertical-align:middle;}
+    th.v5, td.v5{width:20%; vertical-align:middle;}
+</style>
+
+<div class="container" style="position:relative;" ng-controller = "StoryController" ng-init="list()">
+	<br>
+	<br>
+	<div class="row">
+		<div class="span12">
+			<div class="tabbable well">
+				<!--2 tabs-->
+			  <ul class="nav nav-tabs">
+				<li class="tabspacing active">
+				  <a data-target="#tab1current" data-toggle="tab">Current Stories</a>
+				</li>
+				<li class="tabspacing">
+				  <a data-target="#tab2create" type="button" data-toggle="tab" ng-click="changeToCreate()">Create Stories</a>
+				</li>	   
+			  </ul>
+			  <div class="tab-content">
+				<div class="tab-pane active" id="tab1current">
+				  <div style="overflow-x:hidden">
+						<table class="table table-condensed">
+								<tr style="border-top: solid white; border-bottom: solid white;">
+									<th class="c1">Name</th>
+									<th class="c2">Number of Videos</th>
+									<th class="c4">Status</th>
+									<th class="c5">Review</th> 
+									<th class="c6">Archive</th> 
+								</tr>  
+						</table> 
+						<div style="width:99.8%; max-height:200px;overflow-y:auto;overflow-x:hidden">
+							<table class="table table-hover" ng-init="myStorylist()" ng-hide="player.isAdmin">
+									<a ng-repeat="video in myVideos" id="video" class="fancybox fancybox.iframe" style="display:none" rel="fancybox fancybox.iframe" ng-href="http://www.youtube.com/embed/{{video}}?enablejsapi=1&wmode=opaque"></a>
+									<tr ng-repeat="story in myStories" ng-hide="story.archived">
+										<td class="c1">{{story.name}}</td>
+										<td class="c2">{{story.videos.length}}</td>
+										<td ng-show="story.published==false" class="c4"><span class="label label-info" >Saved</span></td>
+										<td ng-show="story.published==true" class="c4"><span class="label label-success" >Published</span></td>
+										<td class="c4"> 
+											<div class="btn-group">
+												<button class="btn btn-success" ng-click="playback($index,player.isAdmin)">Playback</button>												
+												<button class="btn btn-danger" a data-target="#tab2create" ng-click = "goToEditStory(story.id)">Edit</button>
+											</div>
+										</td>
+										<td class="c6"> 
+												<button class="btn btn-info" a ng-click = "deleteStory(story.id, story.name, story.description, story.videos, story.published)">Delete</button>
+										</td>
+									</tr>
+							</table>
+							<table class="table table-hover" ng-show="player.isAdmin">
+									<a ng-repeat="video in myVideos" id="video" class="fancybox fancybox.iframe" style="display:none" rel="fancybox fancybox.iframe" ng-href="http://www.youtube.com/embed/{{video}}?enablejsapi=1&wmode=opaque"></a>
+									<tr ng-repeat="story in stories" ng-hide="story.archived">
+										<td class="c1">{{story.name}}</td>
+										<td class="c2">{{story.videos.length}}</td>
+										<td ng-show="story.published==false" class="c4"><span class="label label-info" >Saved</span></td>
+										<td ng-show="story.published==true" class="c4"><span class="label label-success" >Published</span></td>
+										<td class="c4"> 
+											<div class="btn-group">
+												<button class="btn btn-success" ng-click="playback($index,player.isAdmin)">Playback</button>
+												<button class="btn btn-warning disabled" a data-target="#statsModal" role="button" data-toggle="modal" >Stats</button>
+												<button class="btn btn-danger" a data-target="#tab2create" ng-click = "goToEditStory(story.id)">Edit</button>
+											</div>
+										</td>
+										<td class="c6"> 
+												<button class="btn btn-info" a ng-click = "deleteStory(story.id, story.name, story.description, story.videos, story.published)">Delete</button>
+										</td>
+									</tr>
+							</table>
+						</div>
+				  </div>
+				</div>
+				<div class="tab-pane" id="tab2create">
+				<!--add story title & videos-->
+				<div class="row-fluid">
+					<div class="span12">
+					<!--Story Title-->
+						<div class="span2">
+								<p>Story Title :</p>
+						</div>
+						<div class="span10">
+							<input class="span8" type="text" ng-model="Title"></p> 	
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+					<!--Story Title-->
+						<div class="span2">
+								<p>Story Description :</p>												
+						</div>
+						<div class="span10">
+							 <textarea class="span8" rows="3" ng-model="description">{{description}}</textarea>
+						</div>				
+					</div>
+				</div>
+					<!--Videos-->
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="span2">
+								<p>Videos :</p>							
+							</div>
+							<div class="span10">															
+								<div class="input-append">
+									<input class="span8" id="appendedInputButtons" ng-model="videoURL" type="text"></input>
+									<button class="btn" type="button-primary" ng-click="addVideo(videoURL)">Add Video</button>									
+								</div>													
+							</div> 
+						</div>
+					</div>
+					</br>
+					<!--Restricted Paths-->
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="span2">
+								<p>Languages for which story can be used for in Quest :  </p>						
+							</div>
+							<div class="span10">
+								<div class="span5">Drag & Drop :
+									<div class="input-append ">									
+										<select ng-model="supportPath1" ng-options="path1.path_id as path1.name for path1 in mobile_paths"></select>
+										<button class="btn" type="button-primary" ng-click="addPath(supportPath1,'Beginner')">Add</button>
+									</div>
+								</div>
+								
+								<div class="span5">Normal :
+									<div class="input-append">									
+										<select ng-model="supportPath2" ng-options="path2.id as path2.name for path2 in paths_unfiltered.paths"></select>
+										<button class="btn" type="button-primary" ng-click="addPath(supportPath2, 'Normal')">Add</button>				
+									</div>	
+								</div>
+							</div> 
+						</div>
+					</div>
+					<div class="row-fluid" ng-init="list()">
+						<div class="span12">
+							<div class="span2">
+							</div>
+							<div class="span10">															
+								<span class="label label-info" ng-repeat="path in supportedPathNames">{{path}}</span>&nbsp;												
+							</div> 
+						</div>
+					</div>
+					</br>
+					<!--uploaded videos-->
+					<div class="row-fluid">
+						<div class="span12">
+							<table class="table table-condensed" align="center">
+								<tr style="border-top: solid white; border-bottom: solid white;">
+									<th class="v1">Video Order</th>
+									<th class="v2">Location</th>									
+									<th class="v3">Thumbnail</th>
+									<th class="v4">Delete</th>
+									<th class="v5">Resequence</th>
+								</tr>  
+							</table>
+							<table class="table table-hover" ng-repeat="item in Videos" align="center">
+									<tr>
+										<td class="v1">{{$index+1}}</td>
+										<td class="v2">http://www.youtube.com/watch?v={{item}}</td>									
+										<td class="v3"><img class="img-rounded" ng-src="http://img.youtube.com/vi/{{item}}/1.jpg" id="standardFrame"></a></td>
+										<td class="v4"> <a type="button" class="icon-remove" ng-click="deleteVideo($index)" style="cursor:pointer"></a></td>   
+										<td class="v5">
+											<div class="btn-group btn-group-vertical">
+											  <button class="btn" style="font-weight:bold;" ng-click="moveUp($index)">&#923;</button>
+											  <button class="btn" style="font-weight:bold" ng-click="moveDown($index)">V</button>
+											</div>
+										</td>
+									</tr>																
+							</table> 
+							<div align="right">
+							<button class="btn btn-primary" type="button" style="height: 30px;width: 100px;" ng-show="Title && description && Videos[0]" ng-click="create_story(Title,description)">Save</button>
+							<button class="btn btn-primary  disabled" type="button" style="height: 30px;width: 100px;" ng-show="!Title || !description || !Videos[0]">save</button>
+							<button class="btn btn-primary" type="button" style="height: 30px;width: 100px;" ng-show="player.isAdmin && publishStatus==false" ng-click="publish_story(Title,description)">Publish</button> 
+							<button class="btn btn-primary" type="button" style="height: 30px;width: 100px;" ng-show="player.isAdmin && publishStatus==true" ng-click="unpublish_story(Title,description)">unPublish</button> 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+

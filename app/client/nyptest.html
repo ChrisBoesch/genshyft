@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<title>NYP Controller Usage Examples</title>
+
+</head>
+
+<body>
+  <h3>Here is where we will load NYP controllers to do simple static and integration tests.</h3>
+
+  <div ng-controller="PlayerController" ng-init="list()">
+   Current player nickname: {{player.nickname}}
+  </div>
+
+  
+  <div ng-controller="InterfaceController">
+   Interfaces Controller
+   <p>Interfaces Count = {{interfaces.interfaces.length}}</p>
+   Available Languages:
+    <ul>
+      <li ng-repeat="interface in interfaces.interfaces">
+          {{interface.name}}
+      </li>
+    </ul>
+  </div>
+
+  <div ng-controller="ProblemController" ng-init="problemsetID=11021;get_progress();get_problems();">
+    
+    Problems in problemset 11021 with progress ({{progress.currentPlayerProgress}}/{{progress.problemsInProblemset}})
+
+    <ol>
+      <li ng-repeat="problem in problems.problems">
+        {{problem.name}} ({{problem.id}}) <font color="green" ng-show="problem.solved">solved</font>
+      </li>
+    </ol>
+
+  </div>
+
+<!-- Nest the PathController DIV in the GameController DIV to lauch games -->
+
+  
+  <div ng-controller="PathController" ng-init="update_path_details()">
+    
+    Player Paths {{player_paths.paths.length}}
+    <ul>
+      <li ng-repeat="path in player_paths.paths">
+          {{path.name}} 
+      </li>
+    </ul>
+    Current Paths <span name="current_paths">{{current_paths.paths.length}}</span>
+    <ul>
+      <li ng-repeat="path in current_paths.paths">
+          {{path.name}}
+      </li>
+    </ul>
+    Other Paths {{other_paths.paths.length}} 
+    <ul>
+      <li ng-repeat="path in other_paths.paths">
+          {{path.name}} 
+      </li>
+    </ul>  
+
+    Beginner Paths {{mobile_paths.length}} 
+    <ul>
+      <li ng-repeat="path in mobile_paths">
+          {{path.name}} 
+      </li>
+    </ul>
+
+  </div>
+
+  <div ng-controller="ProblemsetController" ng-init="get_problemsets(10030);">
+    Problemsets for path 10030: 
+    <ul>
+      <li ng-repeat="level in problemsets.problemsets">
+        {{level.name}} ({{level.id}}) 
+      </li>
+    </ul>
+    
+  </div>
+  
+
+<hr>
+
+
+<div ng-controller="TournamentController" ng-init="fetch_tournaments();tournamentID=14938747;fetch_heat(14922866);fetch_tournament(14938747)">
+    Tournament Controller<br>
+    Open Tournaments
+    <ol>
+      <li ng-repeat="entry in tournaments">
+        {{entry.description}}, {{entry.created}}
+      </li>
+    </ol>
+
+    Enter password for tournament {{tournamentID}}<br>
+    <input type="text" ng-model="tournamentPassword">
+    <input type="submit" value="Register" ng-click="register_for_tournament()"><br>
+    Registration Result: {{registration_response}}
+    <br>
+    TournamentID: {{tournamentID}}<br>
+    Tournament: <pre>{{tournament}}</pre><br>
+    <input type="submit" value="Fetch Tournament" ng-click="fetch_tournament(tournamentID)"><br>
+    TournamentID: {{tournament.tournamentID}}<br>
+    description: <input type="text" ng-model="tournament.description"><br>
+    smallPicture: <input type="text" ng-model="tournament.smallPicture"><br>
+    longTitle: <input type="text" ng-model="tournament.longTitle"><br>
+    shortTitle: <input type="text" ng-model="tournament.shortTitle"><br>
+    largePicture: <input type="text" ng-model="tournament.largePicture"><br>
+    tournamentType: <input type="text" ng-model="tournament.tournamentType"><br>
+    <br>
+    <input type="submit" value="Update Current Tournament" ng-click="update_tournament(tournamentID)"> 
+    or 
+    <input type="submit" value="Create New Tournament" ng-click="create_tournament()"><br>
+    Currnent Tournament Rounds
+
+    <ol>
+      <li ng-repeat="entry in tournament.rounds">
+         <b>{{entry.description}} </b>
+         NumProblems {{entry.problemIDs.length}} 
+         <input type="submit" value="Edit Round" ng-click="fetch_round(entry.roundID)"> 
+      <li>
+    </ol>
+    <br>
+    <div ng-show="round">
+      Current Round ID: {{round.roundID}}<br>
+      description: <input type="text" ng-model="round.description"><br>
+      ProblemIDs: {{round.problemIDs}}<br>
+      <input type="submit" value="Update Round" ng-click="update_round(round.roundID)"><br>
+
+  <div ng-controller="ProblemController">
+    
+    <div ng-controller="ProblemsetController">
+        
+      <div ng-controller="PathController" ng-init="fetch_game_paths()">
+        Select a Path
+         <select ng-model="problemPath" ng-options="item.id as item.description for item in game_paths.paths" ng-change="get_problemsets(problemPath)"></select> 
+         problemPath {{problemPath}}
+
+        <br>
+        Select a Level
+          <select ng-model="problemLevel" ng-options="level.id as level.description for level in problemsets.problemsets" ng-change="get_problems_for_problemset(problemLevel)"></select> 
+          problemLevel {{problemLevel}}
+         
+        <br>
+        Select a Problem
+          <select ng-model="problemID" ng-options="problem.id as problem.name for problem in problems.problems"></select> 
+          problemID {{problemID}}
+          <br>
+          <input type="submit" value="Add Problem" ng-click="add_problem_to_round(problemID)">
+         </div>
+      </div>
+    </div>
+
+      <ol>
+        <li ng-repeat="problemID in round.problemIDs">
+          {{round.problemDetails[problemID].name}} ({{problemID}})
+          <input type="submit" value="Remove Problem" ng-click="remove_problem_from_round(problemID)">
+          <input type="submit" value="Move Up" ng-click="move_problem_up_in_round(problemID)">
+          <input type="submit" value="Move Down" ng-click="move_problem_down_in_round(problemID)">
+          <br>
+          {{round.problemDetails[problemID].description}}<br>
+          
+        </li>
+      </ol>
+      
+    </div>
+    <input type="submit" value="Add New Round" ng-click="add_round(tournamentID)"><br>
+    <input type="submit" value="Set Round Countdown" ng-click="set_round_countdown(roundID,seconds)"><br>
+    <input type="submit" value="Reset Round" ng-click="reset_round(roundID)"><br>
+    
+    <br>
+    Get last results for Heat 14922866
+    <input type="submit" value="Update" ng-click="fetch_heat(14922866);"><br>
+    <br>
+    Results for Heat 14922866
+    <ol>
+      <li ng-repeat="entry in heat.ranking">
+        {{entry.nickname}}, {{entry.solved_problems}}/{{entry.total_problems}}, <a href="" ng-click="fetch_heat_with_time(14922866,entry.finished)">{{entry.finished}}</a>
+      </li>
+    </ol>
+    <br>
+
+    
+  </div>
+
+
+<script src="../lib/angular/angular.min.js"></script>
+<script src="../lib/angular/angular-resource.min.js"></script>
+<script src="../js/controllers.js"></script>  
+<script src="../js/admin-controllers.js"></script> 
+<script src="../js/analytics.js"></script>
+<script src="../js/ui-ace.js"></script>  
+<script src="../js/app-config.js"></script>  
+<script src="../js/app.js"></script> 
+
+
+<!-- For testing -->
+<script type="text/javascript">
+    console.log("Current location "+document.location.host);
+
+
+    if(document.location.search.indexOf("test_with=") !== -1) {
+      //Pull the name of the test config from teh url. test_with=test_module.js#
+      test_module = document.location.search.split('test_with=')[1].split('#')[0];
+      console.log("loading test data from "+test_module);
+      document.write('<script src="../../test/'+test_module+'"> </'+'script> ');
+      document.write('<script src="../../test/lib/angular/angular-mocks.js"> </'+'script>  ');
+    }
+
+</script> 
+
+<script src="../js/cookies.js"></script>   
+
+
+
+
+</body>
+</html>

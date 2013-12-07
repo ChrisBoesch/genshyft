@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>AngularJS Plunker</title>
+  <script>document.write('<base href="' + document.location + '" />');</script>
+  <script src="http://ajaxorg.github.io/ace-builds/src/ace.js"></script>
+  <script src="http://code.angularjs.org/1.1.4/angular.js"></script>
+  <script src="../js/ace-directive.js" type="text/javascript" charset="utf-8"></script>
+  <script src="ace-example.js"></script>
+
+<script language="javascript" type="text/javascript">
+    function MainCtrl($scope){ 
+      return $scope.document = "";
+    }
+</script>
+
+<style type='text/css'>
+ .ace-container {
+  width: 200px;
+  height: 100px;
+}
+</style>
+
+</head>
+<body ng-controller="MainCtrl">
+  <textarea ng-model="document"></textarea>
+  <ace-editor ng-model="document"></ace-editor><br>
+  
+  <textarea ng-model="document2"></textarea>
+  <ace-editor ng-model="document2"></ace-editor><br>
+  
+</body>
+</html>

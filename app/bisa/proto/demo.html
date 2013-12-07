@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="tournamentManager">
+<head>
+  <meta charset="utf-8">
+  <title>SingPath - Create Tournament</title>
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+	
+	<!-- JQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	
+	
+	<!-- JQuery UI -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+	
+	<!-- Twitter Bootstrap -->
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Others -->
+  <script src="app.js"></script>
+  <script src="controllers.js"></script>
+	<style>
+		.thumbnail { height: 150px; width: 150px; border-color: black;}
+		.btn-droppable { width: 130px; height: 130px; padding: 10px 30px 10px 30px; margin: 0px 20px 0px 20px}
+		.btn-draggable { width: 100px; }
+	</style>
+</head>
+<body ng-controller="TournamentCtrl">
+  <hr>
+	<h3 align="center">This is navigation bar</h3>
+  <hr>
+  <div ng-view></div>
+</body>
+</html>

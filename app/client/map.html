@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>angular-google-maps example page</title>
+	
+	<style>
+	/* uncomment this if you are using the <google-map> element instead of a div
+	.angular-google-map {
+		display: block;
+	}*/
+	</style>
+</head>
+
+<body>
+
+	<!--	You can use either a div having class 'google-map' or the '<google-map>' element; in 
+			the latter case, uncomment the style above to make sure the custom elements gets block display	-->
+	
+	<div ng-controller="IPAccessController" ng-init="">
+		IPUsers: {{items.length}}<br>
+		Points: {{point_list.length}}<br>
+		{{items[0].access_time}} ** Most Recent<br>
+		{{items[items.length -1].access_time}} ** Oldest <br>
+		
+		<input type="submit" value="Append List by Offset" ng-click=append_list()>	
+	  <div ng-controller="ExampleController" ng-init="plot_items()">
+
+	  	<input type="submit" value="Plot Points" ng-click=plot_items()>	
+		<div class="google-map" 
+			center="centerProperty"
+			zoom="zoomProperty" 
+			markers="markersProperty"
+			latitude="clickedLatitudeProperty"
+			longitude="clickedLongitudeProperty"
+			mark-click="false"
+			draggable="true"
+			style="height: 500px; width: 100%">
+		</div>
+
+	  </div>
+	</div>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+
+	<script src="../lib/angular/angular.min.js"></script>
+	<script src="../lib/angular/angular-resource.min.js"></script>
+	<script src="../js/controllers.js"></script>  
+	<script src="../js/analytics.js"></script>
+	<script src="../js/app-config.js"></script>          
+	<!--<script src="../js/app.js"></script> -->   
+
+	<script src="../../test/app-test.js"></script>    
+	<script src="../../test/lib/angular/angular-mocks.js"></script>    
+
+	<script src="angular-google-maps.js"></script>
+	<script src="example-controller.js"></script>
+
+
+</body>
+
+</html>

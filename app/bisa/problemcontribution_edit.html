@@ -1,0 +1,125 @@
+</br>
+<br>
+<br>
+<div class="container-fluid">
+  <div class="row-fluid">			
+<div class="span12" align="center">	
+<!--Accordion with Problem Details-->
+
+<div ng-controller="ProblemContributionEditController">
+  <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+    <accordion>
+    <accordion-group is-open="openStatus">
+    <accordion-heading>
+            <div align="left"><i class="icon-pencil"></i> Problem Details</div>
+        </accordion-heading>
+    <div align="left">
+       <table>
+          <tr><td>Language :</td><td> Python</td> </tr>
+      <tr><td><br></td></tr>
+          <tr><td>Path :</td><td> Unknown</td></tr>
+          <tr><td><br></td></tr>
+          <tr><td>Level :</td><td> 4</td></tr>
+          <tr><td><br></td></tr>
+          <tr><td>Name of Problem :</td><td> <input type="text" ng-model="problemName"></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td>Problem Description :</td><td> <textarea style="resize:none" ng-model="problemDescription" name="name" cols="6" rows="4"></textarea></td></tr>
+          <tr><td><br></td></tr>
+          <tr><td><button class="btn btn-success" type="button" ng-click="flipStatus()">Done <i class="icon-ok"></i></button></td></tr>
+        </table>
+        </div>  
+      </accordion-group>
+
+  </accordion>
+</div>
+		<hr>
+</div>
+</div>
+</div>
+<!--Boxes to write in solutions-->
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span5" align="right">
+
+		  <button class="btn btn-inverse" type="button"><i class="icon-refresh icon-white"></i> Run</button>
+
+		</div>
+		<div class="span7" align="left">
+		</div>
+</div>
+</div>
+<div class="container-fluid" align="left">
+	<div class="row-fluid">
+<!--Left box-->
+<div class="span5">
+	
+  <tabset>
+    <tab>
+      <tab-heading>
+        <i class="icon-upload"></i> Solution
+      </tab-heading>
+      <textarea  ng-model="solution" cols="200" rows="10"></textarea>
+    </tab>
+
+    <tab>
+      <tab-heading>
+        <i class="icon-align-justify"></i> Skeleton
+      </tab-heading>
+      <textarea  ng-model="skeleton" cols="200" rows="10"></textarea>
+    </tab>
+
+  </tabset>
+
+ 
+
+</div>
+<!--End of left box-->
+	
+<div class="span2">
+</div>
+
+<!--Right box-->
+<div class="span5">
+
+
+<tabset>
+    <tab>
+      <tab-heading>
+        <i class="icon-fullscreen"></i> Example
+      </tab-heading>
+      <textarea  ng-model="example" cols="200" rows="10"></textarea>
+    </tab>
+
+    <tab>
+      <tab-heading>
+        <i class="icon-volume-up"></i> Public Tests
+      </tab-heading>
+      <textarea  ng-model="publictests" cols="200" rows="10"></textarea>
+    </tab>
+
+    <tab>
+      <tab-heading>
+        <i class="icon-volume-down"></i> Private Tests
+      </tab-heading>
+      <textarea  ng-model="privatests" cols="200" rows="10"></textarea>
+    </tab>
+
+    <tab>
+      <tab-heading>
+        <i class="icon-warning-sign"></i> Error Messages
+      </tab-heading>
+      <textarea  ng-model="errormessages" cols="200" rows="10"></textarea>
+    </tab>
+
+  </tabset>
+
+
+ 
+
+
+</div>
+<!--End of right box-->
+
+</div>
+</div>
+

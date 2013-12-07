@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">  
+  <head>    
+    <meta charset="utf-8">    
+    <title>SingPath - The Most Fun Way to Practice Software
+    </title>      
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
+    <meta name="description" content="">    
+    <meta name="author" content="">    
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">    
+    <link href="assets/css/bootstrap-datepicker.css" rel="stylesheet">  
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">  
+    <link href="assets/css/jquery-ui.css" rel="stylesheet">
+    <link href="assets/css/ui-lightness_jquery-ui.css" rel="stylesheet">
+    <link href="./lib/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+    <script src="./js/jquery-1.7.2.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
+    <script src="./js/fancybox-fire.js"></script>
+    <style type="text/css">
+
+      #fancybox-left-ico {
+        left: 20px;
+      }
+
+      #fancybox-right-ico {
+        right: 20px;
+        left: auto;
+      }
+
+    </style>
+    
+    <style>    /* GLOBAL STYLES     -------------------------------------------------
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
+    html {-webkit-text-size-adjust: none;}
+    body{
+      background-image:url("assets/img/");
+      background-repeat:repeat;
+      background-attachment:fixed;
+      padding-bottom: 40px;
+      font-family: Helvetica Neue, Helvetica, Arial, "sans-serif";
+      color: black;
+    }
+
+    /* Theme for box heading */
+    .bootCamp{
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #000000;
+        background-image: -moz-linear-gradient(#5D5E53, #373835);
+        background-image: -webkit-linear-gradient(#5D5E53, #373835);
+        background-image: linear-gradient(#5D5E53, #373835);
+        background-image: -o-linear-gradient(top, #5D5E53, #373835);
+        background-image: -webkit-gradient(linear, 0 0, 0 80%, from(#5D5E53), to(#373835));
+        background-repeat: repeat-x;
+        border: 1px solid #677c89;
+        border-bottom-color: #6b808d;
+        border-radius: 6px 6px 0 0;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+        margin: 0;
+        padding: 2px 2px;
+        position: relative;
+        text-align: center;
+    }
+
+    /* Theme for box heading */
+    .bootCampSmall{
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #000000;
+        background-image: -moz-linear-gradient(#5D5E53, #373835);
+        background-image: -webkit-linear-gradient(#5D5E53, #373835);
+        background-image: linear-gradient(#5D5E53, #373835);
+        background-image: -o-linear-gradient(top, #5D5E53, #373835);
+        background-image: -webkit-gradient(linear, 0 0, 0 80%, from(#5D5E53), to(#373835));
+        background-repeat: repeat-x;
+        border: 1px solid #677c89;
+        border-bottom-color: #6b808d;
+        border-radius: 6px 6px 0 0;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+        margin: 0;
+        padding: 2px 2px;
+        position: relative;
+        text-align: center;
+    }
+
+    .bootcamp-body {
+        padding: 10px 10px 10px 10px;
+        background-color: #F9F9F9;
+        overflow: hidden;
+        border-style: solid;
+        border-width: 1px 1px 2px 2px;
+        border-color: #333333 #333333 #333333 #333333;
+        border-radius: 5px 5px 5px 5px;
+
+    }
+
+    /* to change tab hover and active color*/
+    .nav-tabs > .active > a,
+    .nav-tabs > .active > a:hover {
+      color: black;
+      cursor: default;
+      /*background-color: #AFA199;*/
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-bottom-color: transparent;
+    }
+    .nav-tabs > li > a:hover {
+        background-color: #DCD9CD;
+        border-color: #eeeeee #eeeeee #dddddd;
+    }
+
+    /* to change table background*/
+    .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 10px;
+        background-color: #ffffff;
+    }
+
+    .nav-tabs {
+        margin-bottom: 0;
+    }
+
+    .btn-primary:active,
+    .btn-primary.active {
+      color: #ffffff;
+      background-color: #000066;
+      *background-color: #003bb3;
+    }
+
+    .btn-primary:hover{
+      color: #ffffff;
+      background: #000066;
+      *background: #003bb3;
+    }
+    .img-polaroid{
+      height:215px;
+    }
+    .well{
+      /*background-color: #FCFAFA;*/
+      background-color: #F0EFEA;
+    }
+    #well-c{
+      /*background-color: #F2F2F2;*/
+      background-color: #DBDACB;
+    }
+    .table td {
+     text-align: center;   
+    }
+
+    .table th {
+     text-align: center;   
+    }
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+      position: absolute;
+      top: 17px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      margin-top: 30px;
+      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+    .navbar-wrapper .navbar {
+
+    }
+
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+      border: 0;
+      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
+              box-shadow: 0 2px 10px rgba(0,0,0,.25);
+    }
+
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+    .navbar .nav > li > a {
+      padding: 15px 15px;
+    }
+
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+      margin-top: 10px;
+    }
+
+    /* CUSTOMIZE THE NAVBAR
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 10px;
+    }
+
+    .carousel .container {
+      position: relative;
+      z-index: 5;
+    }
+
+    .carousel .item {
+      height: 100%;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 100%;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 100%;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+    .carousel-control {
+      position: absolute;
+      top: 40%;
+      left: 15px;
+      width: 40px;
+      height: 40px;
+      margin-top: -20px;
+      font-size: 60px;
+      font-weight: 100;
+      line-height: 30px;
+      color: #ffffff;
+      text-align: center;
+      background: gray0;
+      border: 3px solid black ;
+      -webkit-border-radius: 23px;
+         -moz-border-radius: 23px;
+              border-radius: 23px;
+      opacity: 0.5;
+      filter: alpha(opacity=50);
+    }
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+      
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    #smallProfile,#smallSelectPlay,#mediumComment{
+      display:none;
+    }
+
+    #largeProfile,#largeSelectPlay,#largeComment{
+      display:block;
+    }
+    h6 {
+      font-size: 120%;
+    }
+
+  /* RESPONSIVE CSS
+  -------------------------------------------------- */
+  @media (max-width: 1024px) {
+    
+    .navbar-wrapper {
+      position: absolute;
+      top: 40px;
+      }
+
+    .container.navbar-wrapper {
+      margin-top: 30px;
+      margin-bottom: 0;
+      width: auto;
+    }
+    .navbar-inner {
+      border-radius: 0;
+      margin: -20px 0;
+    }
+
+    .carousel .item {
+      height: 100%;
+    }
+    .carousel img {
+      width: auto;
+      height: 100%;
+    }
+
+    .featurette {
+      height: auto;
+      padding: 0;
+    }
+    .featurette-image.pull-left,
+    .featurette-image.pull-right {
+      display: block;
+      float: none;
+      max-width: 40%;
+      margin: 0 auto 20px;
+    }
+    #homevideo{
+      margin-top:10px;
+      height: 300px;
+      width: 90%;
+    }
+
+    .abc{
+      display:none;
+    }
+
+    .img-polaroid{
+      height:180px;
+    }
+
+    #smallProfile,#smallSelectPlay,#mediumComment{
+      display:none;
+    }
+
+    #largeProfile,#largeSelectPlay,#largeComment{
+      display:block;
+    }
+  
+    h5 {
+      font-size: 120%;
+    }
+  }
+
+
+  @media (max-width: 800px) {
+
+    .navbar-inner {
+      margin: -20px;
+    }
+
+    .carousel {
+      margin-left: -20px;
+      margin-right: -20px;
+    }
+    .carousel .container {
+
+    }
+    .carousel .item {
+      height: 100%;
+    }
+    .carousel img {
+      height: 100%;
+    }
+    .carousel-caption {
+      width: 65%;
+      padding: 0 70px;
+      margin-top: 100px;
+    }
+    .carousel-caption h1 {
+      font-size: 30px;
+    }
+    .carousel-caption .lead,
+    .carousel-caption .btn {
+      font-size: 18px;
+    }
+
+    .marketing .span4 + .span4 {
+      margin-top: 40px;
+    }
+
+    .featurette-heading {
+      font-size: 30px;
+    }
+    .featurette .lead {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    #homevideo{
+      height: 90%px;
+      width: 90%;
+    }
+
+    .abc{
+      display:none;
+    }
+
+    #smallProfile,#smallSelectPlay,#mediumComment{
+      display:block;
+    }
+
+    #largeProfile,#largeSelectPlay,#largeComment{
+      display:none;
+    }
+
+  }
+
+  @media (max-width: 768px) {
+    #homevideo{
+      height: 80%px;
+      width: 80%;
+    }
+
+    .carousel {
+      position:relative;
+      margin-left: -20px;
+      margin-right: -20px;
+    }
+
+    .img-polaroid{
+      height:80px;
+    }
+
+    #smallProfile,#smallSelectPlay,#mediumComment{
+      display:block;
+    }
+
+    #largeProfile,#largeSelectPlay,#largeComment{
+      display:none;
+    }
+
+  }
+
+  @media (max-width: 600px) {
+    #homevideo{
+      height: 80%px;
+      width: 80%;
+    }
+
+    .carousel {
+      position:relative;
+      margin-left: -20px;
+      margin-right: -20px;
+    }
+
+    .img-polaroid{
+      height:50px;
+    }
+
+    #smallProfile,#smallSelectPlay,#mediumComment{
+      display:block;
+    }
+
+    #largeProfile,#largeSelectPlay,#largeComment{
+      display:none;
+    }
+
+   @media (max-width: 320px) {
+      #activityTable{
+        width:30%;
+        font-size:80%
+      }
+    }
+  }
+
+
+
+
+    /* To insert background theme */
+   body{
+    color: black;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #FCFAFA;
+    *background-color: #FCFAFA;
+    background-image: -moz-linear-gradient(top, #FCFAFA, #FCFAFA);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FCFAFA), to(#FCFAFA));
+    background-image: -webkit-linear-gradient(top, #FCFAFA, #FCFAFA);
+    background-image: -o-linear-gradient(top, #FCFAFA, #FCFAFA);
+    background-image: linear-gradient(to bottom,#FCFAFA, #FCFAFA);
+    background-repeat: repeat-x;
+    border-color: #0044cc #0044cc #002a80;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  }
+
+
+
+    </style>
+    <!-- Fav and touch icons -->                                  
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">  
+  
+    <script type="text/javascript">
+    //Jainrain login code
+    (function() {
+        if (typeof window.janrain !== 'object') window.janrain = {};
+        if (typeof window.janrain.settings !== 'object') window.janrain.settings = {};
+        //This url has to be on app engine or localhost running SingPath
+        auth_url = "http://"+document.location.host+"/rpx.php";
+        //This is where you want the user redirected back to. 
+        console.log("Current location for login redirect "+document.location.href);
+        //Come back to the current page after login. 
+        //redirect_url = document.location.href;
+        redirect_url = "http://"+document.location.host+"/kat-gui/app/index.html#/profile";
+        
+        janrain.settings.tokenUrl = auth_url+'?target='+redirect_url;
+
+        //Original code example.
+        //janrain.settings.tokenUrl = 'http://www.singpath.com/rpx.php?target=http://www.singpath.com/fyp/app/play_game_demo.html';
+            
+        function isReady() { janrain.ready = true; };
+        if (document.addEventListener) {
+          document.addEventListener("DOMContentLoaded", isReady, false);
+        } else {
+          window.attachEvent('onload', isReady);
+        }
+
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.id = 'janrainAuthWidget';
+
+        if (document.location.protocol === 'https:') {
+          e.src = 'https://rpxnow.com/js/lib/singpath/engage.js';
+        } else {
+          e.src = 'http://widget-cdn.rpxnow.com/js/lib/singpath/engage.js';
+        }
+
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(e, s);
+    })();
+    </script>
+  
+  </head>  
+
+  <body ng-controller="PlayerController" ng-click="log_event($event)" ng-init="list()">    
+    <!-- NAVBAR
+        ================================================== --> 
+    <div class="container">
+      <ul class="nav nav-pills pull-right" align="right">
+        <li ng-show="player.nickname"><a href="#profile"><image ng-src="{{player.gravatar}}"; width = 30px; height= 30px;/>&nbsp;&nbsp;<span ng-bind="player.nickname"></span><span ng-bind="secretAgent"></span></a></li>
+        <li><a ng-show="!player.nickname" class="janrainEngage" href="#"><button class="btn btn-primary" ng-click='login()'>Login</button></a></li>    
+        <li><a ng-show="player.nickname" ng-click='logout()' href="#"><button class="btn btn-danger" ng-click='logout()'>Log Out</button></a></li>     
+      </ul>
+    </div>  
+    <br>
+    <div class="navbar-wrapper">      
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->      
+      <div class="container">       
+  
+        <div class="navbar navbar-inverse">          
+          <div class="navbar-inner">            
+            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->            
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">              
+              <span class="icon-bar">
+              </span>              
+              <span class="icon-bar">
+              </span>              
+              <span class="icon-bar">
+              </span>            
+            </a>            
+            <a class="brand" href="#home">SingPath</a>            
+            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->            
+            <div class="nav-collapse collapse">              
+              <ul class="nav pull-right" id="myTab">   
+                <li>
+                  <a type="button" ng-click="checkQuestLogin()">Quests</a>
+                </li>                
+                <li>
+                  <a type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice</a>
+                </li>
+                <li>
+                  <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
+                </li>                
+                <li>
+                  <a type="button" ng-click="checkRankingLogin()">Rankings</a>
+                </li>   
+                <li>
+                  <a type="button" ng-click="checkFeedbackLogin()">Feedback</a>
+                </li>
+                <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->                 
+                <li class="dropdown" id="menu">                  
+                  <a href="" class="dropdown-toggle" data-toggle="dropdown">More... 
+                    <b class="caret"></b></a>                  
+                  <ul class="dropdown-menu">                    
+                    <li>
+                      <a href="#tournaments">Tournaments</a>
+                    </li>                                                 
+                    <li class="divider"></li>                    
+                    <li class="nav-header">Create</li>
+                    <li>
+                      <a href="#create">Path or Level</a>
+                    </li>   
+                    <li>
+                      <a type="button" ng-click="checkStoryLogin()">Story or Tutorial</a>
+                    </li>
+                    <li class="divider"></li>                    
+                    <li class="nav-header">Videos</li>                    
+                    <li>
+                      <a href="#videos">Learn about SingPath</a>
+                    </li>                
+                  </ul>                
+                </li>
+                <li>
+                  <a type="button" ng-click="checkProfileLogin()">Profile</a>
+                </li>                           
+              </ul>            
+            </div>
+            <!--/.nav-collapse -->          
+          </div>
+          <!-- /.navbar-inner -->        
+        </div>
+        <!-- /.navbar -->      
+      </div> 
+      <!-- /.container -->    
+    </div>
+    <!-- /.navbar-wrapper -->    
+    <!-- Carousel
+        ================================================== --> 
+  <div ng-view></div>
+  <!--Notification to Anoynmous User- "Ques will not be saved!"-->
+  <div class="modal fade" id="loginAlert">
+    <div class="modal-header" style="color:black">
+      <a class="close"  href="#" data-dismiss="modal">&times;</a>
+        <h3>Dear Agent!</h3>
+    </div>
+    <div class="modal-body" style="color:black">
+      <p style="font-color:black">You are currently not logged in. Loggin to embark on Quest or Practice a Language!</p>
+    </div>
+    <div class="modal-footer">
+      <a ng-show="!player.nickname" class="janrainEngage" href="#"><button class="btn btn-primary" ng-click='dismissModal()'>Login</button></a>
+    <a ng-show="!player.nickname" href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click='dismissModal()'>Got it!</button></a>
+    </div>
+  </div>
+    <!-- /.carousel -->    
+    <!-- Marketing messaging and featurettes
+        ================================================== -->    
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+    <!-- /.container -->    
+    <!-- Le javascript
+        ================================================== -->    
+    <!-- Placed at the end of the document so the pages load faster -->  
+
+<script src="http://www.youtube.com/player_api"></script>
+<script src="js/jquery-1.7.2.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="lib/angular/angular.js"></script> 
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
+<script src="lib/angular/angular-resource.min.js"></script>
+<script src="js/controllers.js"></script> 
+<script src="js/analytics.js"></script> 
+<script src="js/ui-ace.js"></script>
+<script src="js/nyp-app-config.js"></script>
+<script src="js/app.js"></script> 
+
+<!-- For testing -->
+<script type="text/javascript">
+    console.log("Current location "+document.location.host);
+
+
+    if(document.location.search.indexOf("test_with=") !== -1) {
+      //Pull the name of the test config from teh url. test_with=test_module.js#
+      test_module = document.location.search.split('test_with=')[1].split('#')[0];
+      console.log("loading test data from "+test_module);
+      document.write('<script src="../test/'+test_module+'"> </'+'script> ');
+      document.write('<script src="../test/lib/angular/angular-mocks.js"> </'+'script>  ');
+    }
+
+</script>   
+<!-- End Deployment Comment -->
+<script src="js/services.js"></script>    
+<script src="js/filters.js"></script>    
+<script src="js/directives.js"></script>    
+<script src="js/cookies.js"></script>    
+<script src="assets/js/jquery.js"></script>    
+<script src="assets/js/bootstrap-transition.js"></script>    
+<script src="assets/js/bootstrap-alert.js"></script>    
+<script src="assets/js/bootstrap-modal.js"></script>    
+<script src="assets/js/bootstrap-dropdown.js"></script>    
+<script src="assets/js/bootstrap-scrollspy.js"></script>    
+<script src="assets/js/bootstrap-tab.js"></script>    
+<script src="assets/js/bootstrap-tooltip.js"></script>    
+<script src="assets/js/bootstrap-popover.js"></script>    
+<script src="assets/js/bootstrap-button.js"></script>    
+<script src="assets/js/bootstrap-collapse.js"></script>    
+<script src="assets/js/bootstrap-carousel.js"></script>    
+<script src="assets/js/bootstrap-typeahead.js"></script>  
+<script src="assets/js/bootstrap-datepicker.js"></script>  
+<script src="./js/jquery.fancybox.js"></script>
+<script>
+    !function ($) {
+      $(function(){
+        // carousel demo
+        $('#myCarousel').carousel('pause')
+      })
+    }
+</script>
+
+<script type='text/javascript'>
+  $(window).load(function(){
+  //$('#myCarousel input:radio').addClass('input_hidden');
+  $('#myCarousel input:image').click(function() {
+    $('#myCarousel input:image').removeClass('selected');   
+    $(this).addClass('selected');
+    
+  });
+  
+  $('#path input:image').click(function() {
+    $('#path input:image').removeClass('selected');   
+    $(this).addClass('selected');
+    
+  });
+  
+  $('#path1 input:image').click(function() {
+    $('#path1 input:image').removeClass('selected');   
+    $(this).addClass('selected');
+    
+  });
+  
+  $('#myTab a').click(function (e) {
+    $(this).tab('show');
+    if ($('.btn-navbar').is(":visible") && e.target.className != "dropdown-toggle")
+      $('.btn-navbar').click();
+  });
+
+  $(document).on("keydown", function (e) {
+    if (e.which === 8 && !$(e.target).is("input, textarea")) {
+        e.preventDefault();
+    }
+  });
+  
+});
+
+</script>
+</body>
+<footer>
+</footer>
+</html>

@@ -1,0 +1,128 @@
+<style>
+  #hot{
+    color:black;
+  }
+
+  .Msg{
+    width:33.33%;
+    text-align:center;
+  }
+</style>
+
+
+<div id="myCarousel" class="carousel slide">      
+  <div class="carousel-inner">       
+    <div class="item active">          
+      <div class="container">      
+        <!-- START THE FEATURETTES -->                    
+        <br>
+        <br>                  
+        <!-- /END THE FEATURETTES -->                    
+        <div>                                           
+          <p>                     
+            <div class="row">                      
+              <div class="span6" align = "center">
+                <br>
+                <a class="fancybox fancybox.iframe" href="http://www.youtube.com/embed/cQxOI3Bk7sc?enablejsapi=1&wmode=opaque">
+                  <input class="span6 well" height="320" type="image" ng-src="img/homePic.png">
+                </a>
+              </div>   
+              <div class="span1">&nbsp;</div>
+                <div class="span5">                                            
+                  <div><h3>What is SingPath?</h3>                                      
+                    <hr>                                    
+                  </div>                                    
+                  <p style="font-family:Sans-Serif">
+                    <h6>
+                      SingPath is the most FUN way to practice software languages! SingPath provides a platform to those that want to test their programming skills in a competitive and fun environment. There is a range of programming languages that you can test your skills with including Python, JavaScript, Ruby, Objective C and Java with many other languages to come. Specialize in one language or show your flexibility and skill by coding in multiple languages.What are you waiting for? Sign in today and follow your chosen Path!                                     
+                    </h6>
+                  </p>                                                     
+                  <br>
+                  <div class="row-fluid">
+                    <div class="span12" ng-controller="PlayerController">
+                      <a ng-show="player.nickname" class="btn btn-primary btn-large pull-right" href="#practice">Ready to Practice
+                      </a>
+                      <a ng-show="!player.nickname" class="btn btn-primary btn-large pull-right" type="button" data-target="#loginAlert" data-toggle="modal">
+                      Ready to Practice
+                      </a>
+                      <a ng-show="player.nickname" class="btn btn-primary btn-large pull-right" href="#quests" style="position:absolute; right:200px;">
+                      Gotta try a Quest!
+                      </a>
+                      <a ng-show="!player.nickname" class="btn btn-primary btn-large pull-right" type="button" data-target="#loginAlert" data-toggle="modal" style="position:absolute; right:200px;">
+                      Gotta try a Quest!
+                      </a>
+                    </div>
+                </div>                
+              </div>                         
+            </div>                                                                                                               
+            <div id="largeComment" class="row">                      
+              <div class="span4">                        
+                <h4>Danny Whittaker, Singapore</h4>                        
+                <p color = "white">
+                  SingPath is a great way to allow students to progress through the learning of programming at their own pace.  I love how it allows me to focus time on those that are struggling without leaving the rest of the class bored waiting for more to learn.
+                </p>                                             
+              </div>
+              <!-- /.span4 -->                      
+              <div class="span4">                        
+                <h4>Arathi, Singapore</h4>                        
+                <p>
+                  I came across SingPath while I was pursuing my undergraduate program. It gave me an opportunity to attain proficiency in a wide range of programming languages such as JavaScript, Ruby, and Python. It’s a way to practice coding at your convenient pace. Kudos to SingPath.com.
+                </p>                                           
+              </div>
+              <!-- /.span4 -->                      
+              <div class="span4">                        
+                <h4>Haja Hameed, Singapore</h4>                        
+                <p>
+                  I was introduced to SingPath during a JavaSript workshop. At first, I was reluctant to start since I didn’t like coding very much. However, I got hooked by the Quest Mode, and it kept me going the extra mile to solve problems. Thanks SingPath. 
+                </p>                                            
+              </div>
+            <!--  <div class="pull-right"> <button class="btn btn-info"> View All feedbacks </button> </div> -->
+              <!-- /.span4 -->                    
+            </div>
+            <div align="center">                      
+              <input class ="abc" align="center" type="image" src="img/planguage.png" name="image" width="1000" height="55">                  
+            </div> 
+            <!-- /.row -->                  
+        </div>                  
+        <div id = "mediumComment" class = "tabbable">                      
+          <ul class="nav nav-tabs">                        
+            <li class="Msg active">
+              <a data-target="#Msg1" data-toggle="tab">
+                Danny Whittaker, Singapore
+              </a>
+            </li>                        
+            <li class="Msg">
+              <a data-target="#Msg2" data-toggle="tab">
+                Arathi, Singapore
+              </a>
+            </li>                        
+            <li class="Msg">
+              <a data-target="#Msg3" data-toggle="tab">
+                Haja Hameed, Singapore
+              </a>
+            </li>                      
+          </ul>                      
+          <div class="tab-content" style="font-family:verdana">                          
+            <div class="tab-pane fade in active" id="Msg1">                                               
+              <p color = "white">
+                SingPath is a great way to allow students to progress through the learning of programming at their own pace.  I love how it allows me to focus time on those that are struggling without leaving the rest of the class bored waiting for more to learn.
+              </p>
+            </div>
+            <div class="tab-pane fade in " id="Msg2">
+              <p>
+                I came across SingPath while I was pursuing my undergraduate program. It gave me an opportunity to attain proficiency in wide range of programming languages such as JavaScript, Ruby, etc. In other words, it’s an avenue to self-practice coding at your convenient pace. Kudos to SinPath.com
+              </p>                        
+            </div>                          
+            <div class="tab-pane fade in " id="Msg3">
+              <p> 
+                I was introduced to SingPath during my JavaSript workshop by the lecturer. At first, I was reluctant to start since I didn’t like coding very much. However, I get hooked by the Quest Mode and it kept me going extra mile to solve problems. Thanks SingPath. 
+              </p>                        
+            </div>                      
+          </div>
+  <!--  <div class="pull-right"> <button class="btn"> View All feedbacks </button> </div>  -->   
+        </div>
+      </div>        
+    </div>      
+  </div>      
+
+</div>

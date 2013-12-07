@@ -1,0 +1,71 @@
+</br>
+</br>
+<div ng-controller="SchoolController" ng-init="get_school_registrations();get_schools();" class="container" id="registration" style="position:relative;">
+	
+	<div class="row-fluid">
+
+        <b>Total Registrations</b>: {{total_registrations}}<br>
+        <br>
+
+        <b>Filtering Table</b>:
+        <table>
+            <th>schooltype</th>
+            <th>subtype</th>
+            <th>year</th>
+            <th>school</th>
+            <th>total</th>
+            <tr>
+                <td>
+                    <select ng-model="filter_schooltype" ng-change="update_supported()" ng-options="schooltype for schooltype in supported_schooltypes | orderBy:'schooltype'"></select>
+                </td>
+                <td>
+                    <select ng-model="filter_subtype" ng-change="update_supported()" ng-options="subtype for subtype in supported_subtypes | orderBy:'subtype'"></select>
+                </td>
+                <td> 
+                    <select ng-model="filter_year" ng-change="update_supported()" ng-options="year for year in supported_years"></select>
+                </td>
+                
+                <td> <select ng-model="filter_school" ng-change="update_supported()" ng-options="school.id as school.name for school in supported_schools | orderBy:'name'"></select>
+                </td>
+                <td><b>{{filtered_total}}</b></td>
+            </tr>
+            <tr ng-repeat="entry in filtered_registrations | orderBy:'count':true">
+                
+                <td>{{entry.schooltype}}</td>
+                <td>{{entry.subtype}}</td>
+                <td>{{entry.year}}</td>
+                <td>{{school_lookup[entry.school].name}}</td>
+                <td>{{entry.count}}</td>
+                
+            </tr>
+        </table>
+        
+        <b>Registrations by JC or Poly</b>:
+        <table>
+            <tr ng-show="key=='JC' || key=='Poly'" ng-repeat="(key, value) in registrations_by_subtype track by $index">
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+            </tr>
+        </table>
+        <br>
+
+        <b>Registrations by school (all years)</b>:
+        <table>
+            <tr ng-repeat="(key, value) in registrations_by_school track by $index">
+                <!--<td>{{key}}</td>-->
+                <td>{{school_lookup[key].name}}</td>
+                <td>{{value}}</td>
+            </tr>
+        </table>
+        <br>
+
+        <b>Registrations by year (all schools)</b>:
+        <table>
+            <tr ng-repeat="(key, value) in registrations_by_year track by $index">
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+            </tr>
+        </table>
+
+	</div>
+<div>

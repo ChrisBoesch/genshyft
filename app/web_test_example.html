@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>End2end Test Runner</title>
+    <script src="../test/lib/angular/angular-scenario.js" ng-autotest></script>
+    <script src="../test/lib/angular/angular-mocks.js"></script>
+    <script language="javascript" type="text/javascript">
+
+describe('AJAX Mocking Test', function() {
+  var pauseAll = true;
+  pauseAll = window.location.search.replace( "?pauseAll=", "" );
+  
+  it('Should find ...', function() {
+    browser().navigateTo('solution.html');
+    expect(element('div').text()).toContain("AA");
+  });
+
+});
+    </script></head><body></body></html>

@@ -1,0 +1,11 @@
+<h3>Tournament List</h3>
+<p ng-show="tournaments.length == 0">There are no tournaments here!</p>
+<ul>
+  <li ng-repeat="(id, tournament) in tournaments">
+    <a href="#/info/{{id}}">{{tournament.name}}</a>
+    [<a href="#/edit/{{id}}">edit</a>]
+    [<a href="#/remove/{{id}}">remove</a>]
+  </li>
+</ul>
+<a href="#/add">Create New Tournament</a>
+

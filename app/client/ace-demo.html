@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+<title>ACE in Action</title>
+ 
+<style type='text/css'>
+ .ace-container {
+  width: 300px;
+  height: 150px;
+}
+</style>
+
+<!--<script src="http://ajaxorg.github.io/ace-builds/src/ace.js"></script>-->
+<!--<script src="http://code.angularjs.org/1.1.4/angular.js"></script>
+<script src="ace-example.js"></script>-->
+<script src="ace.js"></script>
+
+<script src="../lib/angular/angular.min.js"></script>
+<script src="../lib/angular/angular-resource.min.js"></script>
+<script src="../js/ace-directive.js" type="text/javascript" charset="utf-8"></script>
+  
+<script language="javascript" type="text/javascript">
+  var myApp = angular.module('myApp', ['ngResource','aceDirective']);
+
+    function FirstController($scope, $resource){ 
+        $scope.supported_langugages = [
+          {language : 'python', urlName : 'python' },       
+          {language : 'scipy', urlName : 'scipy' },
+          {language : 'java', urlName : 'java' },
+          {language : 'r', urlName : 'r' },
+          {language : 'oc', urlName : 'oc' },
+          {language : 'c', urlName : 'c' },
+          {language : 'ruby', urlName : 'ruby' },
+          {language : 'js', urlName : 'js' },
+          ];
+
+        $scope.language = 'python';
+
+        //Some example code for each language.
+        $scope.d = {"scipy":{"solution":"import scipy.interpolate\nx = numpy.arange(10,dtype='float32') * 0.3\ny = numpy.cos(x)\nrep = scipy.interpolate.splrep(x,y)\nsol =  scipy.interpolate.splev(0.5,rep)",
+                             "tests":">>> assert_almost_equal(sol, 0.87752449938946964)\nTrue"},
+                    "oc":{"solution":"int b=2;\nfloat f = 123.45;\ndouble inches = 3*2;\nNSString *string1 = @\"This string is immutable\";",
+                          "tests":"AssertEquals(2, b);\nint expected_b = 2;\nAssertEquals(expected_b, b);\nAssertEquals((float)123.45, f);\nAssertEquals([NSString stringWithString:@\"This string is immutable\"], string1);"},
+                    "c":{ "solution":"int sum(int a, int b){return a+b;}\nchar *message = \"Hello world!!!\";\nconst char *testStrings[] = { \"foo\", \"boo\", \"woo\", \"zoo\" };",
+                          "tests" :  "void test_sum(void){TEST_ASSERT(5==sum(2,3));}\nvoid test_hello_world(void){TEST_ASSERT_EQUAL_STRING(message, \"Hello world!!!\");}\nvoid testNotEqualStringArray1(void){ const char *expStrings[] = { \"foo\", \"boo\", \"woo\", \"zoo\" };\nTEST_ASSERT_EQUAL_STRING_ARRAY(expStrings, testStrings, 4);}" },      
+                     "r":{"solution":"factorial <- function(n){\n if (n == 0) {return(1)}\n else {  return(n * factorial(n - 1)) }\n}",
+                          "tests":">>> checkEquals(6, factorial(3))\nTrue"},
+                     "python":{"solution":"number = 2\nwizard = 'Oz'\ndef addOne(x):\n return x+1",
+                          "tests":">>> number\n 2\n>>> wizard\n 'Oz'\n>>> addOne(2)\n  3"},
+                     "java":{"solution":"int a = 2;\nint b = 5;\nint c=a+1;\na=8+b-c;",
+                          "tests":"assertEquals(10,a);\nassertEquals(3,c)"},
+                     "oldjsp":{"solution":"<%@ page import=\"java.util.*, java.text.*\" %><HTML><HEAD><TITLE>Hello Pineapples</TITLE></HEAD>\n<BODY><H1>Hello World</H1>\n<TABLE><TR><TD><P>This is an <B>embedded</B> table</P></TD></TR>\n<TR><TD>    The request parameter 'fruit' has a value of <%= request.getParameter(\"fruit\") %>\n</TD></TR></TABLE>\nToday is: <%= new SimpleDateFormat(\"dd/MM/yyyy\").format(new Date()) %>\n </BODY></HTML>",
+                          "tests":"String expectedDate = new SimpleDateFormat(\"dd/MM/yyyy\").format(new Date());\npage().shouldHaveTitle(\"Hello Pineapples\");\npage().shouldContain(\"Today is: \"+expectedDate);\nonRequest(\"fruit\", \"guava\").page().shouldContain(\"The request parameter 'fruit' has a value of guava\");\npage().shouldContainElement(\"//TABLE/TR/TD/P/B\");\nelement(\"//TABLE/TR/TD/P/B\").shouldContain(\"embedded\");"},
+                     "ruby":{"solution":"a = 1\nb = 2",
+                          "tests":"assert_equal(1,a)\nassert_equal(2,b)",
+                          "hosts":["parserplayground-staging.appspot.com/ruby?id=1","parserplayground-staging.appspot.com/ruby?id=2"]
+                          },
+                     "js":{"solution":"a=1;b=7;",
+                          "tests":"assert_equal(1,a);\nassert_equal(2,b);"},
+                    }
+
+
+        $scope.status = "Ready"
+        //Load some good code
+        $scope.load_example_code = function(){
+          $scope.problem = {};
+          $scope.problem.solution = $scope.d[$scope.language]["solution"];
+          $scope.problem.tests = $scope.d[$scope.language]["tests"];
+          $scope.problem.skeleton = "var temp = 5;";
+        };
+
+
+        //For the loadbalancer version with fewer options. 
+        $scope.VerifierModel = $resource('http://ec2-122-248-221-204.ap-southeast-1.compute.amazonaws.com/:language',
+                                {},{'get': {method: 'JSONP', isArray: false, params:{vcallback: 'JSON_CALLBACK'}}
+                                   }
+                            );
+       
+        $scope.verify = function(){
+          data = {solution: $scope.problem.solution, tests: $scope.problem.tests}
+          //jsonrequest = JSON.stringify(data) 
+          jsonrequest = btoa(JSON.stringify(data));
+
+          $scope.status = "Verifying"
+          //$scope.solution = "y=5"
+          $scope.VerifierModel.get({'language':$scope.language,
+                                    'jsonrequest':jsonrequest},
+                function(response) { 
+                  $scope.result = response;
+                   $scope.status = "Ready"
+                });  
+        };
+
+      }
+</script>
+
+</head>
+
+<body ng-controller="FirstController" ng-init="load_example_code()">
+<h2>This is an example of Ace working with real code and a verifier.</h2>
+<select ng-model="language" ng:change="load_example_code()" ng-options="item.language as item.urlName for item in supported_langugages"></select>
+<br>
+<input type="submit" value="verify {{language}} code" ng-click="verify()">
+<br>
+
+
+Status: {{status}}
+Result: <pre>{{result}}</pre><br>
+Is Solved: <b>{{result.solved}}</b><br>
+<table border=1 bgcolor=#FFFFFF>
+    <tr>   
+        <th>Called</th>
+        <th>Expected</th>
+        <th>Recieved</th>
+        <th>Correct</th>    
+    </tr>
+    <tr ng-repeat="line in result.results">
+        <td>{{line.call}}</td>
+        <td>{{line.expected}}</td>
+        <td>{{line.received}}</td>
+        <td ng-show="line.correct" bgcolor=#00FF00>{{line.correct}}</td>
+        <td ng-show="!line.correct" bgcolor=#FF0000>{{line.correct}}</td>      
+    </tr>
+</table>
+
+<ace-editor ng-model="problem.solution"></ace-editor><br>
+<textarea ng-model="problem.solution"></textarea>
+
+<ace-editor ng-model="problem.tests"></ace-editor><br>  
+<textarea ng-model="problem.tests"></textarea>
+
+</body>
+</html>

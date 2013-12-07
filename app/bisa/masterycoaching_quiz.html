@@ -1,0 +1,83 @@
+<br>
+<div ng-controller="MasteryCoachingQuizController">
+<div class="span12" align="center">
+<hr>
+<div class="container-fluid" style="background:;">
+	<div class="row-fluid">
+		<div class="span8" align="left">
+			<div class="well well-small">
+		<strong>Level Progress : {{currentLevel}}/15</strong>
+		<progress percent="percent" class="progress-striped active" animate="true"></progress>
+
+</div>
+		</div>
+		<div class="span4">
+			<div class="well well-small">
+				<span class="label label-success">Game Progress : {{currentLevel}} of 5</span><br>
+				{{countUpTimer}} seconds
+			</div>
+		</div>
+	</div>
+<hr>
+	<div class="row-fluid">
+		<div class="span8" align="left">
+		<div class="well well-small">
+		<h5>Current Practice Question</h5>
+		
+		Name : <u>{{problemName}}</u>
+		<br>
+		Description : <u>{{problemDescription}}</u>
+		<br>
+		</div>
+	</div>
+	<div class="span4">
+		<div class="well well-small" align="center">
+			<img src="http://1.bp.blogspot.com/-qgM3NDxgRRY/UHoNwyR39iI/AAAAAAAAA8k/zln9U5YtNYU/s1600/tkid5_render01_600px.jpg" width="100px" style="height:100px;" class="img-circle">
+			<br>
+			<textarea readonly="true" style="resize:none;">{{textcaptions}}</textarea>
+		</div>
+		<div align="center">
+			<audio id="speechAudio">
+	        <source src="{{selectedAudioFile}}"></source>
+	    	 </audio>
+			<button class="btn btn-success" type="button" ng-click="playAudio()">Start</button>
+			<button class="btn btn-danger" type="button" ng-click="stopAudio()">Stop</button>
+		</div>
+	</div>
+	</div>
+<hr>
+	<div class="row-fluid">
+		<div class="span8" align="left">
+			<div class="well well-small">
+				<div class="span6" align="left"><strong>Type in your solution</strong></div><div class="span6" align="right"><button class="btn btn-inverse" type="button">Run</button></div>
+				<div><br><br>
+				<textarea rows="10">!---Codes---!
+				</textarea>
+			</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="well well-small">
+				<tabset>
+    <tab>
+      <tab-heading>
+        <i class="icon-hdd"></i> Sample Answer
+      </tab-heading>Examples: <hr>
+      <textarea rows="10">{{sampleanswer}}</textarea>
+    </tab>
+
+    <tab>
+      <tab-heading>
+        <i class="icon-check"></i> Outcome
+      </tab-heading> Outcome : <hr>
+      <textarea rows="10">{{outcome}}</textarea>
+    </tab>
+
+  </tabset>
+			</div>	
+		</div>
+
+	</div>
+	<hr>
+</div>
+</div>

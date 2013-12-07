@@ -1,0 +1,47 @@
+</br>
+</br>
+<div ng-controller="TournamentController" ng-init="check_location()">
+<input type="submit" value="Refresh" ng-click="fetch_heat(heatID)">
+<input type="submit" value="Start updates" ng-click="start_heat_updates()">
+<input type="submit" value="Stop updates" ng-click="stop_heat_updates()"><br>
+<br>
+	<div class="row-fluid">
+
+            <table class="heatRankings">
+            	<thead>
+            		<tr class="heatHeader">
+            			<td class="heatRankingsRank" title="Ranking">#</td>
+            			<td class="heatRankingsGravatar"></td>
+            			<td class="heatRankingsNickname">Player</td>
+            			<td class="heatRankingsFlag">Country</td>
+            			<!--
+            			<td class="heatRankingsPreviousRank" title="Ranking in previous round">Last Round</td> 
+            			-->
+            			<td class="heatRankingsProfessional" title="Profession">Type</td>
+            			<td ng-repeat="i in my_range(heat.ranking[0].total_problems)" width="15">{{i}}</td>
+            			<td class="heatRankingsFinished">Last solve time</td>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<tr ng-repeat="player in heat.ranking">
+            			<td class="heatRankingsRank"><b>{{$index+1}}</b></td>
+            			<td class="heatRankingsGravatar"><img ng-src="{{player.gravatar}}/?default=&amp;s=30"></td>
+            			<td class="heatRankingsNickname">{{player.nickname}}</td>
+            			<td class="heatRankingsFlag"><img ng-src="http://www.singpath.com{{player.flagUrl}}"></td>
+            			<!--
+            			<td class="heatRankingsPreviousRank"></td>
+            			-->
+            			<td class="heatRankingsProfessional">
+            					<font ng-show="{{player.professional}}">Professional</font>
+            					<font ng-show="!{{player.professional}}">Student</font></td>
+            			<td ng-repeat="i in my_range(player.solved_problems)"><img src="http://www.singpath.com/ender/static/badges/ticks_on.png"></td>
+            			<td ng-repeat="i in my_range(player.total_problems - player.solved_problems)"><img src="http://www.singpath.com/ender/static/badges/ticks_off.png"></td>
+            			
+            			<td><font ng-click="fetch_heat_with_time(heatID, player.finished)">{{player.finished.split(":")[0]}} hour {{player.finished.split(":")[1]}} min {{player.finished.split(":")[2].split(".")[0]}} sec</font></td>
+            		</tr>
+            	</tbody>
+
+            </table>
+
+	</div>
+<div>

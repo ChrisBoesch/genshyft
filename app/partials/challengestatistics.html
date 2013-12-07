@@ -1,0 +1,209 @@
+</br>
+<style>
+    .table td, .table th {
+        border: none;
+		text-align:center;
+    }
+    .table tbody tr:hover td,
+    .table tbody tr:hover th {
+      background-color: #DCD9CD;
+    }
+    
+    
+    .fRight{
+        float:right;
+    }
+
+    .tabspacing{
+        width:25%;
+		text-align:center;
+    }
+
+    tbody{
+        overflow:auto;  
+    }
+	
+	td {
+		text-align: center;
+		vertical-align: center;
+	}
+	
+    th.AllPlayers_SN, td.AllPlayers_SN{width:15%;}
+    th.AllPlayers_Name, td.AllPlayers_Name{width:30%;}
+    th.AllPlayers_Location, td.AllPlayers_Location{width:25%;}
+    th.AllPlayers_RegDate, td.AllPlayers_RegDate{width:30%;}
+    
+
+    th.RegisteredPlayers_SN, td.RegisteredPlayers_SN{width:15%;}
+    th.RegisteredPlayers_Name, td.RegisteredPlayers_Name{width:30%;}
+    th.RegisteredPlayers_Location, td.RegisteredPlayers_Location{width:25%;}
+    th.RegisteredPlayers_RegDate, td.RegisteredPlayers_RegDate{width:30%;}    
+	
+    th.UnlockedPlayers_SN, td.UnlockedPlayers_SN{width:10%;}
+    th.UnlockedPlayers_Name, td.UnlockedPlayers_Name{width:25%;}
+    th.UnlockedPlayers_Location, td.UnlockedPlayers_Location{width:15%;}
+    th.UnlockedPlayers_RegDate, td.UnlockedPlayers_RegDate{width:25%;}
+	th.UnlockedPlayers_UnlockedDate, td.UnlockedPlayers_UnlockedDate{width:25%;}
+	
+	th.SubmittedPlayers_SN, td.SubmittedPlayers_SN{width:5%;}
+    th.SubmittedPlayers_Name, td.SubmittedPlayers_Name{width:15%;}
+    th.SubmittedPlayers_Location, td.SubmittedPlayers_Location{width:15%;}
+    th.SubmittedPlayers_RegDate, td.SubmittedPlayers_RegDate{width:17.5%;}
+	th.SubmittedPlayers_UnlockedDate, td.SubmittedPlayers_UnlockedDate{width:17.5%;}
+    th.SubmittedPlayers_Msg, td.SubmittedPlayers_Msg{width:30%;}
+
+
+</style>
+
+
+<div class ="container" id="challengeDetails" ng-controller="ChallengeController">
+	<div class="well well-small" align="center" style="font-size:14px;font-weight:bold;"> <span ng-bind="challenge_id_display"></span></div>
+	<div class="tabbable well"> 
+		<ul class="nav nav-tabs">
+			<li class="tabspacing active"><a data-target="#AllPlayers" data-toggle="tab">All Players</a></li>
+			<li class="tabspacing"><a data-target="#RegisteredPlayers" data-toggle="tab">Registered Players</a></li>
+			<li class="tabspacing"><a data-target="#UnlockedPlayers" data-toggle="tab">Unlocked Players</a></li>
+			<li class="tabspacing"><a data-target="#SubmittedPlayers" data-toggle="tab">Submitted Players</a></li>
+		</ul>
+	  
+		<div class="tab-content">
+		<div class="tab-pane active" id="AllPlayers">	
+			<div style="overflow-x:hidden" ng-show="challengePlayers.length>0">
+				<table class="table table-condensed">
+					<tr>
+						<th class="AllPlayers_SN">S/N</th>
+						<th class="AllPlayers_Name">Name</th>
+						<th class="AllPlayers_Location">Location</th>						
+						<th class="AllPlayers_RegDate">Registeration Date</th>
+					</tr>  
+				</table> 
+				<table class="table table-hover" ng-init="all_players()">
+					<tr ng-repeat="player in challengePlayers">
+						<td class="AllPlayers_SN">{{$index+1}}</td>
+						<td class="AllPlayers_Name">
+							<span align="left"><input type="image" ng-src="{{player.gravatar}}" height="35px"/ >
+							&nbsp&nbsp</span>
+							<span align="left">{{player.nickname}}</span>
+						</td>
+						<td class="AllPlayers_Location">
+							<span align="center"><input type="image" ng-src="{{player.countryFlagURL}}" height="35px"/ >
+							</span>
+						</td>						
+						<td class="AllPlayers_RegDate">{{player.playerRegisteredDate}}</td>
+					</tr>
+				</table>
+			</div>
+			<div ng-show="challengePlayers.length==0">	
+				<span align="center"> <h4> No player has registered for this challenge</h4></span>
+			</div> 
+		</div>		
+			
+		
+		<div class="tab-pane" id="RegisteredPlayers">
+			<div style="overflow-x:hidden" ng-show="registeredPlayers.length>0">
+				<table class="table table-condensed">
+					<tr>
+						<th class="RegisteredPlayers_SN">S/N</th>
+						<th class="RegisteredPlayers_Name">Name</th>
+						<th class="RegisteredPlayers_Location">Location</th>						
+						<th class="RegisteredPlayers_RegDate">Registeration Date</th>						
+					</tr>  
+				</table> 
+				<table class="table table-hover" ng-init="registered_players()";>
+					<tr ng-repeat="regPlayer in registeredPlayers">
+						<td class="RegisteredPlayers_SN">{{$index+1}}</td>
+						<td class="RegisteredPlayers_Name">
+							<span align="left"><input type="image" ng-src="{{regPlayer.gravatar}}" height="35px"/ >
+							&nbsp&nbsp</span>
+							<span align="left">{{regPlayer.nickname}}</span>
+						</td>
+						<td class="RegisteredPlayers_Location">
+							<span align="center"><input type="image" ng-src="{{regPlayer.countryFlagURL}}" height="35px"/ >
+							&nbsp&nbsp</span>
+						</td>
+						<td class="RegisteredPlayers_RegDate">{{regPlayer.playerRegisteredDate}}</td>	
+					</tr>
+				</table>
+			</div>
+			<div ng-show="registeredPlayers.length==0">	
+				<span align="center"> <h4> No player has registered for this challenge</h4></span>
+			</div>
+		</div>
+		
+		
+		<div class="tab-pane" id="UnlockedPlayers">
+			<div style="overflow-x:hidden" ng-show="unlockedPlayers.length>0">
+				<table class="table table-condensed">
+					<tr>
+						<th class="UnlockedPlayers_SN">S/N</th>
+						<th class="UnlockedPlayers_Name">Name</th>
+						<th class="UnlockedPlayers_Location">Location</th>						
+						<th class="UnlockedPlayers_RegDate">Registration Date</th>	
+						<th class="UnlockedPlayers_UnlockedDate">Challenge Unlocked Date</th>
+					</tr>  
+				</table> 
+				<table class="table table-hover" ng-init="unlocked_players()";>
+					<tr ng-repeat="unlockedPlayer in unlockedPlayers">
+						<td class="UnlockedPlayers_SN">{{$index+1}}</td>
+						<td class="UnlockedPlayers_Name">
+							<span align="left"><input type="image" ng-src="{{unlockedPlayer.gravatar}}" height="35px"/ >
+							&nbsp&nbsp</span>
+							<span align="left">{{unlockedPlayer.nickname}}</span>
+						</td>
+						<td class="UnlockedPlayers_Location">
+							<span align="center"><input type="image" ng-src="{{unlockedPlayer.countryFlagURL}}" height="35px"/ >
+							&nbsp&nbsp</span>
+						</td>
+						<td class="UnlockedPlayers_RegDate">{{unlockedPlayer.playerRegisteredDate}}</td>
+						<td class="UnlockedPlayers_UnlockedDate">{{unlockedPlayer.playerUnlockedDate}}</td>
+					</tr>
+				</table>
+			</div>
+			<div ng-show="unlockedPlayers.length==0">	
+				<span align="center"> <h4> No player has unlocked this challenge</h4></span>
+			</div>
+		</div>
+		
+		<div class="tab-pane" id="SubmittedPlayers">
+			<div style="overflow-x:hidden" ng-show="submittedPlayers.length>0">
+				<table class="table table-condensed">
+					<tr>
+						<th class="SubmittedPlayers_SN">S/N</th>
+						<th class="SubmittedPlayers_Name">Name</th>
+						<th class="SubmittedPlayers_Location">Location</th>						
+						<th class="SubmittedPlayers_RegDate">Registration Date</th>	
+						<th class="SubmittedPlayers_UnlockedDate">Challenge Unlocked Date</th>
+						<th class="SubmittedPlayers_Msg">Message</th>
+					</tr>  
+				</table> 
+				<table class="table table-hover" ng-init="submitted_players()";>
+					<tr ng-repeat="subPlayer in submittedPlayers">
+						<td class="SubmittedPlayers_SN">{{$index+1}}</td>
+						<td class="SubmittedPlayers_Name">
+							<span align="center"><input type="image" ng-src="{{subPlayer.gravatar}}" height="35px"/ >
+							&nbsp&nbsp</span>
+							<span align="center">{{subPlayer.nickname}}</span>
+						</td>
+						<td class="SubmittedPlayers_Location">
+							<span align="center"><input type="image" ng-src="{{subPlayer.countryFlagURL}}" height="35px"/ >
+							</span>
+						</td>
+						<td class="SubmittedPlayers_RegDate">{{subPlayer.playerRegisteredDate}}</td>
+						<td class="SubmittedPlayers_UnlockedDate">{{subPlayer.playerUnlockedDate}}</td>
+						<td class="SubmittedPlayers_Msg">{{subPlayer.playerFeedback}}</td>
+					</tr>
+				</table>
+			</div>
+			<div ng-show="submittedPlayers.length==0">	
+				<span align="center"> <h4> No player has submitted any messages!</h4></span>
+			</div>
+		</div>
+		</div>
+	</div>
+
+</div>
+    
+
+
+
+

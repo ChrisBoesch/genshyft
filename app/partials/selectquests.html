@@ -1,0 +1,349 @@
+<p><p>
+<style>
+
+/* Theme for box heading */
+.bootCamp{
+    color: #ffffff;
+    font-size: 16px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 20px;
+    padding: 8px 8px;
+}
+.bootCampSmall{
+    color: #ffffff;
+    font-size: 14px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 20px;
+    padding: 5px 5px;
+}
+
+.radio{
+	text-align: center;	
+}
+
+#gradient1{  
+	#gradient > .vertical(@black, @white);
+}
+
+.btn-primary{
+	margin-top: 10px;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+	color: #ffffff;
+	background-color: #000066;
+	*background-color: #003bb3;
+}
+
+.btn-primary:hover{
+	color: #ffffff;
+	background: #000066;
+	*background: #003bb3;
+}
+
+
+#radButton{
+	display:inline;
+}
+
+#pathImg label {
+	display: inline-block;
+	cursor: pointer;
+}
+
+#paths {
+    display: inline-block;
+    cursor: pointer;
+}
+
+#pathImg{
+	width:100px;
+	height:100px;
+}
+
+#pathImgSmall{
+	width:70px;
+	height:70px;
+
+}
+
+.selected {
+    background-color: #002369;
+}
+
+#paths input {
+    display: inline-block;
+    cursor: pointer;
+}
+
+input:hover{
+	background-color: #002369;
+}
+
+#paths input img {
+    padding: 3px;
+}
+
+<!--small-->
+
+#pathImgSmall{
+	width:50px;
+	height:50px;
+}
+
+
+#smallDifficulty{
+	height: 30px;
+	width: 100px;
+	border-radius: 3px;
+}
+
+#largeDifficulty{
+	height: 40px;
+	width: 170px;
+	border-radius: 3px;
+}
+
+</style>
+
+<div ng-controller="StoryController" ng-init="list();">
+	<div ng-controller="QuestController" ng-init="model='Quest';list();">
+		<div ng-controller="PathController" ng-init="list();get_player_progress();">
+			<div id="largeSelectPlay">
+				<div class="container" >
+					<h4 class="well well-small bootCamp">#1. Pick {{story_name}}!</h4>
+				</div>
+				<div>&nbsp;</div>	 
+			  
+				<div>
+					<div id="myCarousel" class="carousel slide" >
+					    <div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
+					        <div class="item" ng-repeat="storylist in questStoryList" ng-class="{active : $first}" >
+				                <!-- Three columns of text below the carousel -->
+								<div class="container">
+									<div class="row">	
+										<div class="span4" ng-repeat="story in storylist" ng-init="addQuestColor()">
+											<label class="radio">
+											<input type="radio" style="visibility:hidden" ng-click="updateURL(story.id,$parent.difficulty,$parent.$parent.$parent.path_ID)" name="optionsRadios" ng-model="$parent.$parent.$parent.$parent.storyid" id="{{story.id}}" value="{{story.id}}">
+											<input class="well"type="image" ng-src="{{story.image}}" alt="" id="pathImg" ng-click="update_story(story.id)"/>
+											<br>
+											<h4>{{story.name}}</h4>
+											</label>
+										</div>
+									</div>
+								</div>	
+							</div>
+					    </div>				
+						<a class="left carousel-control" data-target="#myCarousel" data-slide="prev">&lsaquo;</a>
+					    <a class="right carousel-control" data-target="#myCarousel" data-slide="next">&rsaquo;</a>
+					</div>
+				</div>
+				<!-- /.carousel -->
+				<div class="container marketing" style="position:relative;left:13px">
+				    <!-- Three columns of text below the carousel -->
+				    <div class="row-fluid">
+						<div class="span12">
+				            <div class="span4" align="center">
+								<div style="margin-bottom:-15px">
+									
+									<h4 class="well well-small bootCamp">#2 Select Difficulty</h4>
+								</div>
+								<div class="well well-small">
+									<div id="levels"  style="height:220px;" class="btn-group " data-toggle="buttons-radio" align="center" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop'},{'name':'Easy','id':'Easy'},{'name':'Medium', 'id':'Medium'},{'name':'Hard','id':'Hard'}]">					
+										<span ng-repeat="item in levels">
+											<label class="radio">
+											<input style="visibility:hidden" type="radio" ng-model="$parent.difficulty" name="difficultyLevel" value="{{item.name}}"/ >
+											<button type="button" class="btn btn-primary" style="height: 33px; width: 200px"  btn-radio="{{item.name}}" ng-click="update_difficulty(item.name)">{{item.name}}
+											</button>
+											</label>
+										</span>	
+									</div>
+								</div>
+				            </div>
+							    <!-- select path for non-drag n drop-game -->
+							<div class="span4" align="center" id="pathSel">
+								<div style="margin-bottom:-15px">
+									<h4 class="well well-small bootCamp">#3. Select {{path_name}}</h4>
+								</div>
+								<div class="well well-small">	
+									<div style="height:220px;overflow:auto;margin-top:5px" ng-hide="quest_difficulty=='Drag-n-Drop'">
+										<div ng-repeat="item in paths.paths" id="paths" ng-init="pathSelection()">
+											<label>
+												<input type="radio" style="visibility:hidden" ng-model="$parent.$parent.$parent.path_ID" name="is_private" value="{{item.id}}" id="path">
+												<input class="well" type="image" ng-src="img/language/{{item.description.split(' ').join('_')}}.png" id="pathImg" ng-click="update_quest_path(item.id, item.name)"/>
+												<h4>{{item.name}}</h4>
+											</label>		
+										</div>
+									</div>
+									<div style="height:220px;overflow:auto;margin-top:5px" ng-show="quest_difficulty=='Drag-n-Drop'">
+										<div  ng-repeat="item in mobile_paths" id="paths" ng-init="pathSelection()" >
+											<label>
+												<input type="radio" style="visibility:hidden" ng-model="$parent.$parent.$parent.path_ID" name="is_private" value="{{item.path_id}}" id="path">
+												<input class="well" type="image" ng-src="img/language/{{item.description.split(' ').join('_')}}.png" id="pathImg" ng-click="update_quest_path(item.path_id, item.name)"/>
+												<h4>{{item.name}}</h4>
+											</label>
+										</div>
+									</div>
+								</div>				
+							</div>
+							<div class="span2 container" style="position:relative;left:60px" align = "center">
+								<table align="center">
+									<tr>
+										<td align="center">
+											</br>
+											</br>
+											<div  ng-hide="storyid && quest_difficulty && quest_pathid && player.nickname">
+											<!-- <form action="#storyboard"> -->
+												<button class="btn disabled" style="width: 145px"><h1>Go!</h1></button>
+											<!-- </form> -->
+											</div>
+											<div ng-show="storyid && quest_difficulty && quest_pathid && player.nickname">
+											<!-- <form action="#storyboard"> -->
+												<button class="btn btn-primary" ng-click="item.name='New Quest';create_quest(storyid,quest_pathid,quest_difficulty)" style="width: 145px"><h1>Go!</h1></button>
+											<!-- </form> -->
+											</div>
+											<span class="label label-info" align="left">
+												<b><i>You are going to play</i></b>
+												</br></br>
+												Diffculty : {{quest_difficulty}}
+												</br>
+												Path Name : {{quest_path_name}}
+												</br>
+												Story Name : {{current_story_name}}
+											</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+				        <!-- /.span4 -->
+				        <!-- /.row -->
+					    </div>
+					</div>
+				</div>
+			</div>
+
+			<div id="smallSelectPlay">
+				
+				<div class="container" >
+					<h4 class="well well-small bootCampSmall">#1. Pick {{story_name}}!</h4>
+				</div>  
+
+				<div>
+					<div id="myCarouselSmall" class="carousel slide" >
+					    <div class="carousel-inner" style="position:relative; left:0px; z-index:0" class="ng-scope">
+					        <div class="item" ng-repeat="storylist in questStoryList" ng-class="{active : $first}">
+				                <!-- Three columns of text below the carousel -->
+								<div class="container">
+									<div class="row">
+										<div class="span4" ng-repeat="story in storylist" ng-init="addQuestColorSmall()">
+											<label class="radio">
+											<input type="radio" style="visibility:hidden" ng-click="updateURL(storyid,difficulty,$parent.$parent.$parent.path_ID)" name="optionsRadios" ng-model="$parent.$parent.$parent.$parent.storyid" id="{{story.id}}" value="{{story.id}}">
+											<input class="well well-small"type="image" ng-src="{{story.image}}" alt="" id="pathImg"/>
+											<br>
+											<h6>{{story.name}}</h6>
+											</label>
+										</div>
+									</div>
+								</div>	
+							</div>
+					    </div> 
+						<a class="left carousel-control" data-target="#myCarouselSmall" data-slide="prev">&lsaquo;</a>
+					    <a class="right carousel-control" data-target="#myCarouselSmall" data-slide="next">&rsaquo;</a>
+					</div>
+				</div>
+				<!-- /.carousel -->
+
+				<div class="container marketing" style="position:relative;left:13px">
+						<!-- Three columns of text below the carousel -->
+						<div class="row-fluid">
+							<div class="span12">
+								<div class="span4" align="center">
+									<div style="margin-bottom:-15px">
+										<h4 class="well well-small bootCampSmall" ng-show="currentURL.indexOf('storyID') > -1 && currentURL.indexOf('path_ID') > -1 && currentURL.indexOf('difficulty') > -1">#2 Select {{passed_in_difficulty}}!</h4>
+										 <h4 class="well well-small bootCampSmall"ng-show="currentURL.indexOf('storyID') == -1">#2 Select Difficulty!</h4>
+									 </div>
+									<div class="well well-small">
+										<div id="levelsmall" style="height:220px;" class="btn-group" data-toggle="buttons-radio" align="center" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop'},{'name':'Easy','id':'Easy'},{'name':'Medium', 'id':'Medium'},{'name':'Hard','id':'Hard'}]">					
+											<span ng-repeat="item in levels">
+												<label class="radio">
+												<input style="visibility:hidden" type="radio" ng-click="updateURL(storyid,difficulty,$parent.$parent.$parent.path_ID)" ng-model="$parent.difficulty" name="difficultyLevel" value="{{item.name}}"/ >
+												<button type="button" class="btn btn-primary" style="height: 33px; width: 150px"  btn-radio="{{item.name}}">{{item.name}}
+												</button>
+												</label>
+											</span>	
+										</div>
+									</div>
+								</div>
+									<!-- select path for quest game -->					
+								<div class="span6" align="center" id="small-pathSel">
+									<div style="margin-bottom:-15px">
+										<h4 class="well well-small bootCampSmall">#3. Select {{path_name}}</h4>
+									</div>
+									<div class="well well-small">
+										<div style="height:220px;overflow:auto" id="pathsSmall" ng-hide="difficulty=='Drag-n-Drop'">
+											<div  ng-repeat="item in paths.paths" ng-init="pathSelectionSmall()">
+												<label>
+													<input type="radio" style="visibility:hidden" ng-click="updateStroyList(storyid,difficulty,$parent.$parent.$parent.path_ID,paths.paths.length)" ng-model="$parent.$parent.$parent.path_ID" name="is_private" value="{{item.id}}" id="path">
+													<input class="well well-small" type="image" ng-src="img/language/{{item.description.split(' ').join('_')}}.png" id="pathImgSmall"/>
+													<h6>{{item.name}}</h6>
+												</label>		
+											</div>
+										</div>
+										<div style="height:220px;overflow:auto" id="pathsSmall" ng-show="difficulty=='Drag-n-Drop'">
+											<div  ng-repeat="item in mobile_paths" ng-init="pathSelectionSmall()" >
+												<label>
+													<input type="radio" style="visibility:hidden" ng-click="updateStroyList(storyid,difficulty,$parent.$parent.$parent.path_ID,paths.paths.length)" ng-model="$parent.$parent.$parent.path_ID" name="is_private" value="{{item.path_id}}" id="path">
+													<input class="well well-small" type="image" ng-src="img/language/{{item.description.split(' ').join('_')}}.png" id="pathImgSmall"/ >
+													<h6>{{item.name}}</h6>
+												</label>		
+											</div>
+										</div>									
+									</div>		
+								</div>
+								
+								<div class="span2 container" align = "center">
+																
+									<table align="center">
+									<tr><td align="center">
+									</br></br>
+									
+									<div  ng-show="!difficulty || !$parent.$parent.path_ID || !storyid || !player.nickname">
+									<!-- <form action="#storyboard"> -->
+										<button class="btn disabled" style="width: 100px"><h1>Go!</h1></button>
+									<!-- </form> -->
+									</div>
+									
+									<div  ng-show="difficulty && $parent.$parent.path_ID && storyid && player.nickname">
+									<!-- <form action="#storyboard"> -->
+										<button class="btn btn-primary" ng-click="item.name='New Quest';create_quest(storyid,$parent.$parent.path_ID,difficulty)" style="width: 100px"><h1>Go!</h1></button>
+									<!-- </form> -->
+									</div>
+
+									<span class="label label-info" align="left">
+										<b><i>You are going to play</i></b>
+										</br></br>
+										Diffculty : {{difficulty}}
+										</br>
+										Path Name : {{quest_path_name}}
+										</br>
+										Story Name : {{current_story_name}}
+									</span>
+									</td></tr>					
+									</table>
+								</div>
+							<!-- /.span4 -->
+							<!-- /.row -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

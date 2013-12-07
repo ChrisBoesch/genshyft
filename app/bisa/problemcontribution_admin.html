@@ -1,0 +1,60 @@
+</br>
+<div ng-controller="ProblemContributionAdminController">
+<div class="span12" align="center">
+  <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+
+ <accordion close-others="true">
+ 	<accordion-group ng-repeat="contribution in contributions">
+		 <accordion-heading>
+           <div align="left"><i class="icon-chevron-down"></i> {{contribution.name}}</div><div align="right">{{contribution.date}}</div>
+        </accordion-heading>
+      
+      	<div class="container-fluid">
+	<div class="row-fluid">
+        <div class="span6" align="left">
+        Language : {{contribution.language}}
+        <br>
+        Path : {{contribution.path}}
+        <br>
+        Level : {{contribution.level}}
+        <br>
+        Difficulty : {{contribution.difficulty}}
+        <br>
+        </div> 
+
+        <div class="span6" align="left">
+        	Problem Name : {{contribution.problemname}}
+        	<br>
+        	Problem Text : {{contribution.text}}
+
+        </div>
+
+</div>
+<hr>
+<br>
+   <div class="span12" align="center">
+   	<div class="btn-group">
+   	<button class="btn btn-info" type="button" ng-click="showSolution()">Solution</button> 
+   	<button class="btn btn-info" type="button" ng-click="showSkeleton()">Skeleton</button> 
+   	<button class="btn btn-info" type="button" ng-click="showExample()">Example</button> 
+   	<button class="btn btn-info" type="button" ng-click="showPublicTests()">Public Tests</button> 
+   	<button class="btn btn-info" type="button" ng-click="showPrivateTests()">Private Tests</button>
+   </div>
+   <br>
+   <hr>
+	<div collapse="contentShownCollapsed">
+		<div class="well well-large">{{contentShownValue}}</div> 
+	</div>
+   </div>
+<br>
+<br>
+<br><br><br>
+<button class="btn btn-success" type="button" ng-click="addAlert()">Accept</button> <button class="btn btn-danger" type="button" ng-click="rejectAlert()">Reject</button>
+</div>
+
+    </accordion-group>
+
+  </accordion>
+</div>
+
+</div>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html ng-app="dnd" class="ng-scope">
+  <head>
+    <meta charset="utf-8">
+    <title>View Quest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">    
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.8.21/themes/base/jquery-ui.css" rel="stylesheet">
+    <link href="http://code.jquery.com/ui/1.8.21/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <link href="./lib/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+    <script src="https://raw.github.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js"></script>
+    <script src="./js/fancybox-fire.js"></script>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <style>
+        .nomargin {
+            margin-top: 0px; margin-bottom: 0px;
+        }
+        .minimalList {
+            min-height: 100px;
+        }
+        .fancybox-next {
+            display: none;
+        }
+        .fancybox-prev {
+            display: none;
+        }
+    </style>
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    </head>
+
+  <body>
+
+    <div class="container">
+<!-- NAVBAR
+        ================================================== --> 
+          <div class="container">
+            <ul class="nav nav-pills pull-right" align="right">
+						<li><a>Welcome, Secret Agent!</a></li>
+              <li><a href="#">Login</a></li>     
+            </ul>
+          </div>  
+    <div class="navbar-wrapper">      
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->      
+      <div class="container">       
+  
+        <div class="navbar navbar-inverse">          
+          <div class="navbar-inner">            
+            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->            
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">              
+              <span class="icon-bar">
+              </span>              
+              <span class="icon-bar">
+              </span>              
+              <span class="icon-bar">
+              </span>            </a>            
+            <a class="brand" href="">SingPath</a>            
+            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->            
+            <div class="nav-collapse collapse">              
+              <ul class="nav pull-right">   
+                <li>
+                  <a href="#quests">Quests</a>
+                </li>                
+                <li>
+                <a href="#practice">Practice</a>
+                </li>                
+                <li>
+                <a href="#teach">Teaching</a>
+                </li>                
+                <li>
+                <a href="#create">Create</a>
+                </li>                                 
+                <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->                 
+                <li class="dropdown">                  
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown 
+                    <b class="caret"></b></a>                  
+                  <ul class="dropdown-menu">                    
+                    <li>
+                    <a href="#tournaments">Tournaments</a>
+                </li>                    
+                <li>
+                <a href="#trials">Trials</a>
+                </li>                    
+                <li>
+                <a href="#challenges">Challenges</a>
+                </li>                    
+                <li>
+                <a href="#rankings">Rankings</a>
+                </li>                    
+                <li class="divider">
+                </li>                    
+                <li class="nav-header">Tutorials
+                </li>                    
+                <li>
+                <a href="#">Creating Challenges</a>
+                </li>                    
+                <li>
+                <a href="#">Tournament-based Teaching</a>
+                </li>                    
+                <li>
+                <a href="#">Creating Stories</a>
+                </li>                    
+                <li>
+                <a href="#">Adaptive Gameplay</a>
+                </li>                  
+              </ul>                
+              </li>
+                <li>
+                  <a href="#profile"><i class="icon-home icon-white icon-large"></i></a>
+                </li>                           
+              </ul>            
+            </div>
+            <!--/.nav-collapse -->          
+          </div>
+          <!-- /.navbar-inner -->        
+        </div>
+        <!-- /.navbar -->      
+      </div> 
+      <!-- /.container -->    
+    </div>
+    <!-- /.navbar-wrapper -->   
+
+
+      <div ng-controller="GameController">
+	  <div class="container">
+                <div style="border: 3px solid black; border-radius: 2px; width: 1170px; height: 60px;overflow:auto">
+                    <table>
+                        <tr>
+                            <td ng-controller="progressCtrl" ng-repeat="slide in slides">
+                                <img class="standardFrame" ng-src="{{slide.image}}">
+                                <!--<image id="standardFrame" src="../assets/img/question.jpg" </image>	style="opacity:0.4; filter:alpha(opacity=40);"	-->
+                            </td>
+                        </tr>
+                    </table>
+	  </div>
+
+
+		        <p>
+                <p>
+                    <!--Question-->
+                    <div class="container">
+                        <table width=100%>
+                            <tr>
+                                <td width=94% style="text-align: left; border: 3px solid black; border-radius: 3px;">
+                                 <div>    <h4>Current Question</h4> </div>
+										<font face="verdana" size="3">
+            Current Problem: (index {{current_problem_index}})<br>ID: {{game.problems.problems[current_problem_index].id}}<br>Name: {{game.problems.problems[current_problem_index].name}}<br>Description: {{game.problems.problems[current_problem_index].description}}
+            <div class="pull-right"><a href="#" id="example" class="btn btn-info" rel="popover" data-content="{{game.problems.problems[current_problem_index].examples}}" data-original-title="Example for {{game.problems.problems[current_problem_index].name}}">see example</a></div>
+            
+          
+			     						</font>
+
+                                </td>
+                                <td width=3%></td>
+                                <td>
+									<p>
+										<button class="btn btn-primary" ng-click="fetch(10)">&nbsp;&nbsp;Load&nbsp;</button>
+									</p>
+                                    <p>
+                                        <button class="btn btn-primary">&nbsp;&nbsp;Skip&nbsp;&nbsp;</button>
+                                    </p>
+                                    <p>	<a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">Submit</a>
+
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+          <br>
+          Skeleton: <br>
+          <textarea ng-model="solution">{{game.problems.problems[current_problem_index].skeleton}}</textarea><br>
+          codeHighlightKey: {{game.problems.problems[current_problem_index].interface.codeHighlightKey}}<br>
+
+          <div ng-show="game.problems.problems[current_problem_index].lines">
+            This is a Mobile Problem with lines:<br>
+            <ol>
+              <li ng-repeat="line in game.problems.problems[current_problem_index].lines">
+                {{line}}
+              </li>
+            </ol>
+            Enter line combination to check:
+            <input type="text" ng-model="permutation">
+            <input type="submit" value="Check With Permutation" ng-click="check_permutation()"><br>
+            Non-error Result={{ner}}
+          </div>
+
+          <input type="Submit" value="Skip Problem" ng-click="skip_problem()"><br>
+
+
+
+          <div class="modal fade" id="pop_info_Pane">
+            <div class="modal-header">
+              <a href="#" class="close" data-dismiss="modal">&times;</a>
+              <h3>Congratulations! You got the answer correct!</h3>
+            </div>
+            <div class="modal-body">
+              Number of Problems <b>{{game.numProblems}}</b><br>
+              Number Solved <b>{{game.solvedProblemIDs.length}}</b><br>
+              Solved: <b>{{solution_check_result.solved}}</b><br>
+              Last_Solved: <b>{{solution_check_result.last_solved}}</b><br>
+              <table border=1 bgcolor=#FFFFFF>
+                <tr>   
+                  <th>Called</th>
+                  <th>Expected</th>
+                  <th>Recieved</th>
+                  <th>Correct</th>    
+                </tr>
+                <tr ng-repeat="line in solution_check_result.results">
+                  <td>{{line.call}}</td>
+                  <td>{{line.expected}}</td>
+                  <td>{{line.received}}</td>
+                  <td ng-show="line.correct" bgcolor=#00FF00>{{line.correct}}</td>
+                  <td ng-show="!line.correct" bgcolor=#FF0000>{{line.correct}}</td>     
+                </tr>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+              <button type="button" ng-click="skip_problem()" data-dismiss="modal" class="btn btn-primary">Go to Next Question</button>
+            </div>
+          </div>
+
+      </div>
+	  
+	  
+	                    <p>
+                        <p>
+                            <!-- Jumbotron -->
+                            <div class="container" border="3px">
+                                <div class="container ng-scope" id="main" ng-controller="dndCtrl">
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <div class="span10">
+                                                <table id="gametable" width=1180px height=350px>
+                                                    <tr>
+                                                        <th style="border: 3px solid black;" height="30">Choice</th>
+                                                        <th align="right">
+                                                            <form style="visibility:hidden;" class="form-inline">
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox">Auto Check</label>&nbsp;
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox">Auto Advance</label>&nbsp;</form>
+                                                        </th>
+                                                        <th style=" border: 3px solid black;" height="30">Answer</th>
+                                                        <th align="right">
+                                                            <form class="form-inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox">Auto Check</label>&nbsp;
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox">Auto Advance</label>&nbsp;	
+																	<span class="alert alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button>Not compilable! Try again!</span>
+
+                                                            </form>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" style="border: 3px solid black; border-radius: 3px;">
+                                                            <table id="gameTable2" width=580px>
+                                                                <tr>
+                                                                    <td>
+          <div class="ng-scope" id="list">
+            {{check_permutation()}}
+                  <ol style="list-style: none;" id="single" dnd-between-list="game.problems.problems[current_problem_index].lines,sourcelist">
+                      <li style="text-align: center;" class="alert alert-info nomargin ng-scope ng-binding" ng-repeat="line in game.problems.problems[current_problem_index].lines">{{line.content}}</li>
+                  </ol>
+              </div>
+            </div>    
+          </div>
+                                                                    </td>
+                                                                    <td>&nbsp;</td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td colspan="2" style="border: 3px solid black; border-radius: 3px;">
+                                                            <table id="gameTable2" width=580px>
+                                                                <tr>
+                                                                    <td>
+                                                                        <ol id="sourceList" dnd-between-list="source,single" ng-class="{&#39;minimalList&#39;:sourceEmpty()}"
+                                                                        class="ui-sortable">
+                                                                            <!-- ngRepeat: item in source -->
+                                                                            <li class="alert alert-error nomargin ng-scope ng-binding" ng-repeat="line in source">{{line.content}}</li>
+                                                                        </ol>
+                                                                    </td>
+                                                                    <td>&nbsp;</td>
+                                                            </table>
+                                                        </td>
+                                                        </tr>
+                                                </table>
+                                            </div>
+                                            <!-- Modal -->
+                                            <div id="myModal" class="modal fade">
+                                                <div class="modal-header">	<a class="close" data-dismiss="modal">&times;</a>
+
+                                                    	<h3>Outcome</h3>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <th>Called</th>
+                                                            <th>Expected</th>
+                                                            <th>Recieved</th>
+                                                            <th>Correct</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>X</td>
+                                                            <td>11</td>
+                                                            <td>13</td>
+                                                            <td bgcolor=#FF0000>{{line.correct}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Y</td>
+                                                            <td>22</td>
+                                                            <td>22</td>
+                                                            <td bgcolor=#00FF00>{{line.correct}}</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+   </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://www.youtube.com/player_api"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+    <script src="https://raw.github.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js"></script>
+    <script src="./lib/angular/angular.js"></script>
+    <script src="./djs/app.js"></script>
+    <script src="./js/dir-dnd.js"></script>
+    <script src="./js/ctrl-dnd.js"></script>
+    <script src="../test/app-test.js"></script>
+    <script src="../test/lib/angular/angular-mocks.js"></script>   
+    <script src="lib/angular/angular-resource.min.js"></script>
+    <script src="./js/jquery.fancybox.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+	
+	<script>
+	function progressCtrl($scope) {
+	  $scope.slides = [
+		{image: '../assets/img/examples/video.png',id:1,url:'http://www.youtube.com/embed/wkryri12lKw?enablejsapi=1&wmode=opaque'},
+		{image: '../assets/img/examples/q.png',id:2,url:''},
+		{image: '../assets/img/examples/q.png',id:3,url:''},
+		{image: '../assets/img/examples/q.png',id:4,url:''},
+		{image: '../assets/img/examples/q.png',id:5,url:''},
+		{image: '../assets/img/examples/q.png',id:6,url:''},
+		{image: '../assets/img/examples/video.png',id:7,url:'http://www.youtube.com/embed/qL0UlqpfuQc?enablejsapi=1&wmode=opaque'},
+		{image: '../assets/img/examples/q.png',id:8,url:''},
+		{image: '../assets/img/examples/q.png',id:8,url:''},
+		{image: '../assets/img/examples/q.png',id:9,url:''},
+		{image: '../assets/img/examples/q.png',id:10,url:''},
+		{image: '../assets/img/examples/q.png',id:11,url:''},
+		{image: '../assets/img/examples/video.png',id:12,url:''},
+		{image: '../assets/img/examples/q.png',id:13,url:''},
+		{image: '../assets/img/examples/q.png',id:14,url:''},
+		{image: '../assets/img/examples/q.png',id:15,url:''},
+		{image: '../assets/img/examples/q.png',id:16,url:''},
+		{image: '../assets/img/examples/q.png',id:17,url:''},
+		{image: '../assets/img/examples/video.png',id:19,url:''},
+		{image: '../assets/img/examples/q.png',id:20,url:''},
+		{image: '../assets/img/examples/q.png',id:21,url:''},
+		{image: '../assets/img/examples/q.png',id:22,url:''},
+		{image: '../assets/img/examples/q.png',id:22,url:''},
+		{image: '../assets/img/examples/q.png',id:23,url:''},
+		{image: '../assets/img/examples/video.png',id:24,url:''},
+	  ];
+	}
+	</script>
+  </body>
+</html>

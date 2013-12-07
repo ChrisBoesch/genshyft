@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="taskboard">
+  <head>
+    <link href="./css/dnd2_styles.css" rel="stylesheet">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
+    <script src="./lib/angular/angular.min.js"></script>
+    <script src="./js/angular-ui.js"></script>
+    <script src="./js/multiSortable.js"></script>
+  </head>
+
+  <body ng-controller="TaskController">
+    <div ui-multi-sortable ng-model="items" model-subset="todo" class="column">
+      <div class="item" ng-repeat="item in items.todo">{{ item.name }}</div>
+    </div>    
+    <div ui-multi-sortable ng-model="items" model-subset="done" class="column">
+      <div class="item" ng-repeat="item in items.done">{{ item.name }}</div>
+    </div>
+
+    <div style="clear: both"></div>
+    <span>Has underlying model changed? {{changed}}</span>
+    <div style="clear: both"></div>
+    <pre ng-bind="items | json"></pre>
+
+    <script type="text/javascript">
+      (function(){
+        
+        angular.module('ui.config', []).value('ui.config', {
+          sortable: {
+            connectWith: '.column', 
+            update: 'itemsChanged',
+          }
+        });
+
+        this.taskboard = angular.module('taskboard', ['ui']);
+
+        this.TaskController = function($scope) {
+          $scope.changed = 'Unfortunately not';
+
+          $scope.items = {
+            todo: [
+            ],
+            done: [
+              {name: 'x = 1'},
+              {name: 'x = 2'},
+              {name: 'x = 3'},
+              {name: 'x = 4'},
+              {name: 'x = 5'},
+              {name: 'x = 6'},
+              {name: 'x = 7'},
+            ],
+            onhold: []
+          };
+
+          $scope.itemsChanged = function() {
+            $scope.changed = 'Yes, of course :)';
+          }
+
+        };
+
+      }).call(this);
+    </script>
+  </body>
+</html>
