@@ -19,13 +19,16 @@ module.exports = function() {
       'app/scripts/lib/router.js',
 
       //App-specific Code
-      'app/scripts/config/config.js',
-      'app/scripts/services/**/*.js',
-      'app/scripts/directives/**/*.js',
-      'app/scripts/controllers/**/*.js',
-      'app/scripts/filters/**/*.js',
-      'app/scripts/config/routes.js',
-      'app/scripts/app.js',
+      //'app/scripts/config/config.js',
+      //'app/scripts/services/**/*.js',
+      //'app/scripts/directives/**/*.js',
+      //'app/scripts/controllers/**/*.js',
+      //'app/scripts/filters/**/*.js',
+      //'app/scripts/config/routes.js',
+      //'app/scripts/app.js',
+      //'app/js/**/*.js',
+      'app/js/controllers.js',
+      'app/js/app.js',
 
       //Test-Specific Code
       'node_modules/chai/chai.js',
