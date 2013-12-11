@@ -1,17 +1,20 @@
-module.exports = function() {
+module.exports = function () {
   return {
     basePath: '../',
-    frameworks: ['mocha'],
+    frameworks: ['jasmine', 'mocha'],
     reporters: ['progress'],
-    //browsers: ['Chrome'],
-    browsers: ['PhantomJS'],
+    browsers: [
+      'PhantomJS',
+      // 'Chrome',
+      // 'ChromeCanary'
+    ],
     autoWatch: true,
 
     // these are default values anyway
     singleRun: false,
     colors: true,
-    
-    files : [
+
+    files: [
       //3rd Party Code
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
@@ -31,9 +34,9 @@ module.exports = function() {
       'app/js/app.js',
 
       //Test-Specific Code
-      'node_modules/chai/chai.js',
-      'test/lib/chai-should.js',
-      'test/lib/chai-expect.js'
+      // 'node_modules/chai/chai.js',
+      // 'test/lib/chai-should.js',
+      // 'test/lib/chai-expect.js'
     ]
   }
 };
