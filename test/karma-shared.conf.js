@@ -3,9 +3,9 @@ module.exports = function() {
     basePath: '../',
     frameworks: ['jasmine'],
     reporters: ['progress'],
-    browsers: ['Chrome'],
-    //browsers: ['PhantomJS'],
-    autoWatch: true,
+    // browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
+    autoWatch: false,
 
     // these are default values anyway
     singleRun: false,

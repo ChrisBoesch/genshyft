@@ -8,7 +8,7 @@ module.exports = function(config) {
     'node_modules/ng-midway-tester/src/ngMidwayTester.js',
 
     //mocha stuff
-    'test/mocha.conf.js',
+    // 'test/mocha.conf.js',
 
     //test files
     'test/midway/appSpec.js',
