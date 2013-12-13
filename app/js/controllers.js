@@ -2216,7 +2216,7 @@ function GameController($scope,$resource,$cookieStore,$location){
     //To retrieve story information
     $scope.$watch('quest.name', function() {
 
-    	// to retrieve the story name 
+    	// to retrieve the story name
     	var sName = $scope.quest.story;
 		$scope.get_Story = $resource('/jsonapi/story/:sName');
 		$scope.get_Story.get({"sName":sName}, function(response){
@@ -2231,7 +2231,7 @@ function GameController($scope,$resource,$cookieStore,$location){
 			$scope.singlePath = response;
 			$scope.singlePathName = $scope.singlePath.path.name;
 		});
-    	 
+
     },true);
 
     $scope.create_problemset_game = function(problemsetID,numProblems){
