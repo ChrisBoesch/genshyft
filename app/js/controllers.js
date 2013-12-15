@@ -3879,7 +3879,26 @@ function RankController($scope,$resource,$cookieStore,$location,$filter){
 }
 
 function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filter){
-	$scope.feedback_sent = false;
+
+    $scope.categories = [{
+        category: 'Idea',
+        id: 'Idea',
+        icon: 'icon-exclamation-sign'
+    }, {
+        category: 'Question',
+        id: 'Question',
+        icon: 'icon-question-sign'
+    }, {
+        category: 'Problem',
+        id: 'Problem',
+        icon: 'icon-warning-sign'
+    }, {
+        category: 'Praise',
+        id: 'Praise',
+        icon: 'icon-star-empty'
+    }];
+
+    $scope.feedback_sent = false;
 	//$scope.title = "Some feedback on SingPath";
 	//$scope.description = "I just wanted to let you know that ..";	
 	$scope.hideModal = function(){
@@ -3887,7 +3906,7 @@ function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filte
 	  window.location.reload();
     };
 	$scope.create_feedback = function(title,des,type){
-		console.log(title+" "+des+" "+type);
+		// console.log(title+" "+des+" "+type);
 		$scope.newFeedback = {};
 		$scope.newFeedback.name = title;
 		$scope.newFeedback.description = des;		
