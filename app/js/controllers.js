@@ -3905,6 +3905,7 @@ function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filte
       $('#thanks').modal('hide');
 	  window.location.reload();
     };
+    $scope.modalMessage = 'We got your feedback! Thanks!';
 	$scope.create_feedback = function(title,des,type){
 		// console.log(title+" "+des+" "+type);
 		$scope.newFeedback = {};
@@ -3918,10 +3919,12 @@ function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filte
 			new_feedback.$save(function(response){
 				$scope.feedback = response;
 				//Hide the form
+                $scope.modalMessage = 'We got your feedback! Thanks!';
 				$('#thanks').modal('show');
-				//$('#thanks').modal('show');
-				//window.location.reload();				
-			});		
+			}, function(error){
+                $scope.modalMessage = 'Sorry, our feedback system is temporarily down. Please try again later.';
+                $('#thanks').modal('show');
+            });
 		}
 		else if (title == undefined && des != undefined && type != undefined){
 			alert("Please enter your feedback title!");
@@ -3941,9 +3944,9 @@ function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filte
 		else if(title != undefined && des == undefined && type == undefined){
 			alert("Please select a feedback category & enter your comment!");
 		}
-		else{		
-			alert("Please fill all options!");		
-		}				
+		else{
+			alert("Please fill all options!");
+		}
 	};
 }
 

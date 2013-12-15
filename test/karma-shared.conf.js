@@ -33,6 +33,7 @@ module.exports = function() {
       //'app/scripts/app.js',
       //'app/js/**/*.js',
       'app/js/controllers.js',
+      'app/js/directives.js',
       'app/js/app.js',
       'app/js/app-config.js'
 

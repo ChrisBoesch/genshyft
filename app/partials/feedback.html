@@ -1,15 +1,5 @@
 </br>
 
-<style>
-	.radio {
-		display: inline;
-		text-align: center;
-		margin-left: -0.7cm;
-	}
-
-
-</style>
-
 <div class="container" id="feedback" style="position:relative;" ng-controller="FeedbackController">
 	<div ng-show="!feedback_sent">
 		<div class="row-fluid">
@@ -85,15 +75,11 @@
 
 	<div>
 
-		<div class="modal fade" id="thanks" style="display:none">
-			<div class="modal-body" style="color:black">
-				We got your feedback! Thanks!
-			</div>
-			<div class="modal-footer">
-				<a href="#" data-dismiss="modal">
-					<button name="gotit" class="btn btn-primary" ng-click='hideModal()'>Back</button>
-				</a>
-			</div>
+	<div class="modal fade" id="thanks" style="display:none">
+		<div class="modal-body black">{{modalMessage}}</div>
+		<div class="modal-footer">
+			<a href="#" data-dismiss="modal">
+				<button name="gotit" class="btn btn-primary" ng-click='hideModal()'>Back</button>
+			</a>
 		</div>
-
-
+	</div>
