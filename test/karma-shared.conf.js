@@ -2,11 +2,11 @@ module.exports = function () {
   return {
     basePath: '../',
     frameworks: ['jasmine', 'mocha'],
-    reporters: ['progress'],
+    reporters: ['spec'],
     browsers: [
       'PhantomJS',
       // 'Chrome',
-      // 'ChromeCanary'
+      //'ChromeCanary'
     ],
     autoWatch: true,
 
