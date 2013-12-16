@@ -1,18 +1,21 @@
-module.exports = function() {
+module.exports = function () {
   return {
     basePath: '../',
-    frameworks: ['jasmine'],
-    reporters: ['progress'],
-    // browsers: ['Chrome'],
-    browsers: ['PhantomJS'],
+    frameworks: ['jasmine', 'mocha'],
+    reporters: ['spec'],
+    browsers: [
+      'PhantomJS',
+      // 'Chrome',
+      //'ChromeCanary'
+    ],
     autoWatch: false,
 
     // these are default values anyway
     singleRun: false,
     colors: true,
-    
-    files : [
-      // 3rd Party Code
+
+    files: [
+      //3rd Party Code
       'app/lib/angular/angular.js',
       'app/lib/angular/angular-resource.js',
       'app/js/cookies.js',
@@ -37,7 +40,7 @@ module.exports = function() {
       'app/js/app.js',
       'app/js/app-config.js'
 
-      // Test-Specific Code
+      //Test-Specific Code
       // 'node_modules/chai/chai.js',
       // 'test/lib/chai-should.js',
       // 'test/lib/chai-expect.js'

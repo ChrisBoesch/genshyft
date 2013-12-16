@@ -5,10 +5,7 @@
     "type": "git",
     "url": "https://github.com/matsko/YOM-AngularJS-Testing-Article"
   },
-  "scripts": {
-    "postinstall": "./node_modules/.bin/bower install",
-    "test": "grunt test"
-  },
+  "scripts": {},
   "homepage": "https://github.com/yearofmoo/YOM-AngularJS-Testing-Article",
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -35,6 +32,7 @@
     "grunt-karma": "~0.6.2",
     "grunt-open": "~0.2.2",
     "ng-midway-tester": "2.0.5",
-    "bower": "~1.2.7"
-  }
+    "bower": "~1.2.7",
+    "karma-spec-reporter": "0.0.6"
+  } 
 }
