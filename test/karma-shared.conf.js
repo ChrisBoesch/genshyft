@@ -8,7 +8,7 @@ module.exports = function () {
       // 'Chrome',
       //'ChromeCanary'
     ],
-    autoWatch: true,
+    autoWatch: false,
 
     // these are default values anyway
     singleRun: false,
@@ -16,10 +16,15 @@ module.exports = function () {
 
     files: [
       //3rd Party Code
-      'bower_components/angular/angular.js',
-      'bower_components/angular-route/angular-route.js',
-      'bower_components/angularjs-scope.safeapply/src/Scope.SafeApply.js',
-      'app/scripts/lib/router.js',
+      'app/lib/angular/angular.js',
+      'app/lib/angular/angular-resource.js',
+      'app/js/cookies.js',
+      'app/js/ui-ace.js',
+      'app/js/analytics.js',
+      'app/js/angular-google-maps.js',
+      // 'bower_components/angularjs-scope.safeapply/src/Scope.SafeApply.js',
+      // This file doesn't exist
+      // 'app/scripts/lib/router.js',
 
       //App-specific Code
       //'app/scripts/config/config.js',
@@ -31,7 +36,9 @@ module.exports = function () {
       //'app/scripts/app.js',
       //'app/js/**/*.js',
       'app/js/controllers.js',
+      'app/js/directives.js',
       'app/js/app.js',
+      'app/js/app-config.js'
 
       //Test-Specific Code
       // 'node_modules/chai/chai.js',

@@ -1,4 +1,4 @@
-var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'analytics','ui.ace']).config(['$routeProvider', function($routeProvider) {
+var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'analytics','ui.ace','myApp.directives']).config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('', {templateUrl: 'partials/home.html', controller: IndexController});
     $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: IndexController});
     $routeProvider.when('/quests', {templateUrl: 'partials/selectquests.html', controller: IndexController, reloadOnSearch:false});

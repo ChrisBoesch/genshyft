@@ -1,100 +1,85 @@
 </br>
 
-<style>
-.radio {
-	display: inline;
-	text-align: center;	
-	margin-left: -0.7cm;
-}
+<div class="container" id="feedback" style="position:relative;" ng-controller="FeedbackController">
+	<div ng-show="!feedback_sent">
+		<div class="row-fluid">
+			<div class="span12 well well-small">
 
+				Hi Agent {{player.nickname}}! <br>
+				Would you like to give us a feedback? <br>
+				Simply fill the options below & click 'Send it to us!'.<br>
+				If you would like to send any attachments (like a screenshot or something) kindly email us <font
+					color=blue><a href="mailto:pivotalexpert@gmail.com">pivotalexpert@gmail.com</a></font>.
+				<br>Thank you!
 
-</style>
-
-<div class="container" id="feedback" style="position:relative;" ng-controller = "FeedbackController">
-  <div ng-show="!feedback_sent">
-	<div class="row-fluid">		
-		<div class="span12 well well-small">	
-			
-			Hi Agent {{player.nickname}}! <br>
-			Would you like to give us a feedback? <br>
-			Simply fill the options below & click 'Send it to us!'.<br> 
-			If you would like to send any attachments (like a screenshot or something) kindly email us <font color=blue><a href="mailto:pivotalexpert@gmail.com">pivotalexpert@gmail.com</a></font>.
-			<br>Thank you!
-		
-		</div>
-	</div>
-
-
-	<div class="row-fluid">	
-		<div class="span12">		
-			<div class="span1"></div>
-			<div class="span2">
-				<p>Would like to give </p>
-			</div>
-			<div class="span9">		
-				&nbsp&nbsp
-				<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center" ng-init="categories = [{'category':'Idea', 'id':'Idea', 'icon':'icon-exclamation-sign'},{'category':'Question','id':'Question', 'icon':'icon-question-sign'},{'category':'Problem', 'id':'Problem', 'icon':'icon-warning-sign'},{'category':'Praise','id':'Praise', 'icon':'icon-star-empty'}]">				
-					<span ng-repeat="item in categories">
-						<label class="radio">
-						<input style="visibility:hidden" type="radio" ng-model="$parent.type" name="categoryName" value="{{item.category}}"/ >
-						<button type="button" class="btn btn-primary" style="height: 33px; width: 100px" btn-radio="{{item.category}}">{{item.category}} &nbsp <i class="{{item.icon}} icon-white"></i>
-						</button>
-						</label>
-					</span>	
-				</div>				
-				<br>
-				<br>
 			</div>
 		</div>
-	</div>
-	
-	<div class="row-fluid">	
-		<div class="span12">
-			<div class="span1"></div>
-			<div class="span2">
+
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="span1"></div>
+				<div class="span2">
+					<p>Would like to give </p>
+				</div>
+				<div class="span9">
+					<div id="categories" ng-model="type" class="btn-group" bs-buttons-radio>
+						<button class="btn btn-primary" ng-repeat="item in categories" value="{{item.id}}">{{item.category}} <i class="{{item.icon}} icon-white icon-left-space"></i></button>
+					</div>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="span1"></div>
+				<div class="span2">
 					<p>Title </p>
+				</div>
+				<div class="span9">
+					<input class="span8" type="text" ng-model="title" placeholder="Some feedback on SingPath"></input>
+				</div>
 			</div>
-			<div class="span9">
-				<input class="span8" type="text" ng-model="title" placeholder="Some feedback on SingPath" ></input>	
+
+		</div>
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="span1"></div>
+				<div class="span2">
+					<p>Comment</p>
+				</div>
+				<div class="span9">
+					<textarea class="span8" rows="3" ng-model="description"
+							  placeholder="I just wanted to let you know that ..."></textarea>
+				</div>
 			</div>
 		</div>
-		
-	</div>
-	
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="span1"></div>
-			<div class="span2">
-					<p>Comment</p>												
+		<br>
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="span8"></div>
+				<button class="btn btn-primary" type="button" ng-click="create_feedback(title,description,type)">Send it
+					to us!
+				</button>
 			</div>
-			<div class="span9">
-				 <textarea class="span8" rows="3" ng-model="description"  placeholder="I just wanted to let you know that ..."></textarea>
-			</div>				
-		</div>
-	</div>	
-	<br>
-	
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="span8"></div>		
-			<button class="btn btn-primary" type="button" ng-click="create_feedback(title,description,type)">Send it to us!</button>
 		</div>
 	</div>
-  </div>
-  
-  <div ng-show="feedback_sent">
-  	<h1>Thank you</h1>
-  </div>
 
-<div>
-
-<div class="modal fade" id="thanks" style="display:none">    		
-	<div class="modal-body" style="color:black">
-		We got your feedback! Thanks!
+	<div ng-show="feedback_sent">
+		<h1>Thank you</h1>
 	</div>
-	<div class="modal-footer">
-		<a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click='hideModal()'>Back</button></a>
-    </div>
-</div>
 
+	<div>
 
+	<div class="modal fade" id="thanks" style="display:none">
+		<div class="modal-body black">{{modalMessage}}</div>
+		<div class="modal-footer">
+			<a href="#" data-dismiss="modal">
+				<button name="gotit" class="btn btn-primary" ng-click='hideModal()'>Back</button>
+			</a>
+		</div>
+	</div>
