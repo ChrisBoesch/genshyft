@@ -3879,15 +3879,35 @@ function RankController($scope,$resource,$cookieStore,$location,$filter){
 }
 
 function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filter){
-	$scope.feedback_sent = false;
+
+    $scope.categories = [{
+        category: 'Idea',
+        id: 'Idea',
+        icon: 'icon-exclamation-sign'
+    }, {
+        category: 'Question',
+        id: 'Question',
+        icon: 'icon-question-sign'
+    }, {
+        category: 'Problem',
+        id: 'Problem',
+        icon: 'icon-warning-sign'
+    }, {
+        category: 'Praise',
+        id: 'Praise',
+        icon: 'icon-star-empty'
+    }];
+
+    $scope.feedback_sent = false;
 	//$scope.title = "Some feedback on SingPath";
 	//$scope.description = "I just wanted to let you know that ..";	
 	$scope.hideModal = function(){
       $('#thanks').modal('hide');
 	  window.location.reload();
     };
+    $scope.modalMessage = 'We got your feedback! Thanks!';
 	$scope.create_feedback = function(title,des,type){
-		console.log(title+" "+des+" "+type);
+		// console.log(title+" "+des+" "+type);
 		$scope.newFeedback = {};
 		$scope.newFeedback.name = title;
 		$scope.newFeedback.description = des;		
@@ -3899,10 +3919,12 @@ function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filte
 			new_feedback.$save(function(response){
 				$scope.feedback = response;
 				//Hide the form
+                $scope.modalMessage = 'We got your feedback! Thanks!';
 				$('#thanks').modal('show');
-				//$('#thanks').modal('show');
-				//window.location.reload();				
-			});		
+			}, function(error){
+                $scope.modalMessage = 'Sorry, our feedback system is temporarily down. Please try again later.';
+                $('#thanks').modal('show');
+            });
 		}
 		else if (title == undefined && des != undefined && type != undefined){
 			alert("Please enter your feedback title!");
@@ -3922,9 +3944,9 @@ function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filte
 		else if(title != undefined && des == undefined && type == undefined){
 			alert("Please select a feedback category & enter your comment!");
 		}
-		else{		
-			alert("Please fill all options!");		
-		}				
+		else{
+			alert("Please fill all options!");
+		}
 	};
 }
 

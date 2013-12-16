@@ -210,7 +210,8 @@ myApp.run(function($httpBackend) {
       //$httpBackend.whenJSONP(/^h/).passThrough();
       $httpBackend.whenPOST('/jsonapi/contribute_problem').passThrough();
       $httpBackend.whenPOST('/jsonapi/log_event').passThrough();
-      $httpBackend.whenPOST('/jsonapi/feedback').passThrough();  
+      $httpBackend.whenPOST('/jsonapi/feedback').respond({"category": "Idea", "archived": false, "name": "Testing", "created": "2013-12-15T16:50:39.733740", "id": 5896266865180672, "description": "It just might work this time."});
+//      $httpBackend.whenPOST('/jsonapi/feedback').respond(500, {"error": "No name passed"});
       //$httpBackend.whenPOST('/jsonapi/new_problem_contribution').passThrough();
 
       var submitted_problems = [];
