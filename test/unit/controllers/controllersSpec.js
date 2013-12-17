@@ -39,7 +39,7 @@ describe("Unit: Testing Controllers", function() {
     });
     */
   }));
-  describe.only('test PlayerController', function(){
+  describe('test PlayerController', function(){
     var app,
         controller,
         scope,
@@ -62,7 +62,7 @@ describe("Unit: Testing Controllers", function() {
                     key: '',
                   };
                 scope.cookieStore = {};
-                
+
 
                 controller = $controller('PlayerController',{
                   $scope:scope,
@@ -83,13 +83,7 @@ describe("Unit: Testing Controllers", function() {
                               }
                             }
                 });
-                // window = {
-                //   location:{
-                //             href: '',
-                //             reload: function(val){ this.rReload = val;},
-                //             rReload:''
-                //         }
-                // };
+
             });
     });
 

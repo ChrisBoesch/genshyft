@@ -10,14 +10,12 @@ module.exports = function(config) {
     // 'bower_components/angular-mocks/angular-mocks.js',
     'app/lib/angular/angular-mocks-1.1.5.js',
 
-    //mocha stuff
-    'test/mocha.conf.js',
+    // mocha stuff
+    // 'test/mocha.conf.js',
 
 
-
-
-    //test files
-    './test/unit/**/*.js',
+    // test files
+    './test/unit/**/*.js'
   ]);
 
   config.set(conf);

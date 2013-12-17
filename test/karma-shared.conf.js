@@ -1,11 +1,12 @@
 module.exports = function() {
   return {
     basePath: '../',
-    frameworks: ['mocha'],
+    frameworks: ['jasmine'],
     reporters: ['progress'],
     // browsers: ['Firefox'],
+    // browsers: ['Chrome'],
     browsers: ['PhantomJS'],
-    autoWatch: true,
+    autoWatch: false,
 
     // these are default values anyway
     singleRun: false,
@@ -21,6 +22,7 @@ module.exports = function() {
       // 'article-app/scripts/lib/router.js',
       // 'node_modules/karma-requirejs/lib/require.js',
       // 'node_modules/chai/lib/chai.js',
+
 
 
       //App-specific Code
@@ -42,12 +44,14 @@ module.exports = function() {
 
 
       'app/js/controllers.js',
+      'app/js/directives.js',
       'app/js/app.js',
+      'app/js/app-config.js'
 
-      //Test-Specific Code
-      'node_modules/chai/chai.js',
-      'test/lib/chai-should.js',
-      'test/lib/chai-expect.js'
+      // Test-Specific Code
+      // 'node_modules/chai/chai.js',
+      // 'test/lib/chai-should.js',
+      // 'test/lib/chai-expect.js'
     ]
   }
 };
