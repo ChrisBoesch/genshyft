@@ -1,0 +1,9 @@
+# Project Specific Settings
+/bower_components/
+/node_modules/
+
+# Files created by Grunt
+/app/font/
+
+# IDE Junks
+/.idea/
