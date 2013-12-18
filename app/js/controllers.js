@@ -39,6 +39,8 @@ function Ctrl($scope) {
 }
 
 function PlayerController($scope,$resource,$location,$cookieStore,$http){
+	$scope.player = {};
+	$scope.player.tags = [];
 	$scope.list=function(){
 		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
 	    $scope.player = $resource('/jsonapi/player').get();
@@ -179,7 +181,9 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http){
             }); 
             
         //$route.reload('profile');
+        // window.location.reload('profile')
         window.location.reload('profile')
+
     };
     
     $scope.log_event = function($event){  
@@ -203,6 +207,7 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http){
     };
     
     $scope.logout=function(){    
+            console.log('here');
         $resource('/sign_out').get({}, function(response){
             $scope.logoutresponse = response;
             $scope.player = $resource('/jsonapi/player').get();

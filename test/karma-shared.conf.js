@@ -3,6 +3,7 @@ module.exports = function() {
     basePath: '../',
     frameworks: ['jasmine'],
     reporters: ['progress'],
+    // browsers: ['Firefox'],
     // browsers: ['Chrome'],
     browsers: ['PhantomJS'],
     autoWatch: false,
@@ -10,18 +11,19 @@ module.exports = function() {
     // these are default values anyway
     singleRun: false,
     colors: true,
-    
+    // logLevel: LOG_DEBUG,
     files : [
-      // 3rd Party Code
+      //3rd Party Code
       'app/lib/angular/angular.js',
-      'app/lib/angular/angular-resource.js',
-      'app/js/cookies.js',
-      'app/js/ui-ace.js',
-      'app/js/analytics.js',
-      'app/js/angular-google-maps.js',
-      // 'bower_components/angularjs-scope.safeapply/src/Scope.SafeApply.js',
-      // This file doesn't exist
-      // 'app/scripts/lib/router.js',
+
+      // 'bower_components/angular/angular.js',
+      'bower_components/angular-route/angular-route.js',
+      'bower_components/angularjs-scope.safeapply/src/Scope.SafeApply.js',
+      // 'article-app/scripts/lib/router.js',
+      // 'node_modules/karma-requirejs/lib/require.js',
+      // 'node_modules/chai/lib/chai.js',
+
+
 
       //App-specific Code
       //'app/scripts/config/config.js',
@@ -32,6 +34,15 @@ module.exports = function() {
       //'app/scripts/config/routes.js',
       //'app/scripts/app.js',
       //'app/js/**/*.js',
+
+    "app/lib/angular/angular-resource.js",
+    "app/js/cookies.js",
+    "app/js/analytics.js",
+    "app/js/ui-ace.js",
+    'app/js/app-config.js',
+
+
+
       'app/js/controllers.js',
       'app/js/directives.js',
       'app/js/app.js',
