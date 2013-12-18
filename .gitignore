@@ -1,6 +1,9 @@
 # Project Specific Settings
 /bower_components/
+
+# NPM Related Files
 /node_modules/
+/npm-debug.log
 
 # Files created by Grunt
 /app/font/

@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         command: './node_modules/.bin/bower install'
       },
       font_awesome_fonts: {
-        command: 'cp -R bower_components/components-font-awesome/font app/font'
+        command: 'cp -R bower_components/components-font-awesome/font/ app/font'
       }
     },
 
