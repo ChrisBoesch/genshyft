@@ -13,15 +13,19 @@ Sign in to Nitrous.io
 Create a Node box
 From the command line at the bottom, clone YOUR fork from Github and enter these other lines at the command line as well: 
 
-1. git clone https://github.com/ChrisBoesch/genshyft.git
+```
+$ git clone https://github.com/ChrisBoesch/genshyft.git
 
-2. cd genshyft
+$ cd genshyft
 
-3. npm install
+$ npm install
 
-4. npm install -g grunt-cli 
+$ npm install -g grunt-cli 
 
-5. grunt test
+$ grunt install
+
+$ grunt test
+```
 
 You should see all the tests passing. 
 
