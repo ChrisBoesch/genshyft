@@ -1,13 +1,7 @@
 module.exports = function (grunt) {
 
-  grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-open');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-develop');
-  grunt.loadNpmTasks('grunt-verbosity');
+  require('time-grunt')(grunt);
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   grunt.initConfig({
     shell: {
@@ -146,15 +140,15 @@ module.exports = function (grunt) {
   grunt.registerTask('test:midway', ['verbosity', 'develop:server', 'karma:midway']);
   grunt.registerTask('test:e2e', ['verbosity', 'develop:server', 'karma:e2e']);
 
-  //installation-related
+  // installation-related
   grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install', 'shell:font_awesome_fonts']);
 
-  //defaults
+  // defaults
   grunt.registerTask('default', ['dev']);
 
-  //development
+  // development
   grunt.registerTask('dev', ['install', 'concat', 'connect:devserver', 'open:devserver', 'watch:assets']);
 
-  //server daemon
+  // server daemon
   grunt.registerTask('serve', ['connect:webserver']);
 };
