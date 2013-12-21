@@ -14,20 +14,10 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/challengeCreator', {templateUrl: 'partials/challengeCreator.html', controller: IndexController});
     $routeProvider.when('/challengeEdit', {templateUrl: 'partials/challengeEdit.html', controller: IndexController})
     $routeProvider.when('/tournaments', {templateUrl: 'partials/tournament.html', controller: IndexController});
-	$routeProvider.when('/roundranking', {templateUrl: 'partials/roundranking.html', controller: IndexController});
+	  $routeProvider.when('/roundranking', {templateUrl: 'partials/roundranking.html', controller: IndexController});
     $routeProvider.when('/create', {templateUrl: 'partials/create_paths_and_levels.html', controller: IndexController});
     $routeProvider.when('/videos', {templateUrl: 'partials/videos.html', controller: IndexController});
     $routeProvider.when('/feedback', {templateUrl: 'partials/feedback.html', controller: IndexController});
-    $routeProvider.when('/b1', {templateUrl: 'bisa/b1.html', controller: IndexController});
-    $routeProvider.when('/b2', {templateUrl: 'bisa/b2.html', controller: IndexController});
-    $routeProvider.when('/b3', {templateUrl: 'bisa/b3.html', controller: IndexController});
-    $routeProvider.when('/b4', {templateUrl: 'bisa/b4.html', controller: IndexController});
-    $routeProvider.when('/b5', {templateUrl: 'bisa/b5.html', controller: IndexController});
-    $routeProvider.when('/problemcontribution', {templateUrl: 'bisa/problemcontribution.html', controller: IndexController});
-    $routeProvider.when('/problemcontribution_edit', {templateUrl: 'bisa/problemcontribution_edit.html', controller: IndexController});
-    $routeProvider.when('/problemcontribution_admin', {templateUrl: 'bisa/problemcontribution_admin.html', controller: IndexController});
-    $routeProvider.when('/masterycoaching', {templateUrl: 'bisa/masterycoaching.html', controller: IndexController});
-    $routeProvider.when('/masterycoaching_quiz', {templateUrl: 'bisa/masterycoaching_quiz.html', controller: IndexController});
     $routeProvider.when('/schoolregistration', {templateUrl: 'partials/schoolregistration.html', controller: IndexController});
     $routeProvider.when('/schoolregistrationstats', {templateUrl: 'partials/schoolregistrationstats.html', controller: IndexController});
     $routeProvider.when('/schoolsmap', {templateUrl: 'partials/schoolsmap.html', controller: IndexController});
