@@ -25,6 +25,7 @@ module.exports = function () {
       //App-specific Code
       'app/js/controllers.js',
       'app/js/directives.js',
+      'app/js/services.js',
       'app/js/app.js',
       'app/js/app-config.js',
 

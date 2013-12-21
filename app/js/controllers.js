@@ -38,13 +38,14 @@ function Ctrl($scope) {
   $scope.color = 'blue';
 }
 
-function PlayerController($scope,$resource,$location,$cookieStore,$http){
+function PlayerController($scope,$resource,$location,$cookieStore,$http,currentUser){
 	$scope.list=function(){
 		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
-	    $scope.player = $resource('/jsonapi/player').get();
+	  $scope.player = $resource('/jsonapi/player').get();
 		$scope.tags = $resource('/jsonapi/tags').get();
 	    $scope.$watch('player', function() {
 	    	$scope.current_country = $scope.player.country;
+        currentUser.setUser($scope.player);
 	    },true);
 	};
 	
@@ -223,7 +224,7 @@ function InterfaceController($scope,$resource){
 function PathController($scope,$resource,$cookieStore,$location,$filter){
 	//Assuming this is what you wanted by calling list in ng-init
     $scope.fetch_game_paths = function(){
-		$scope.game_paths = $resource('/jsonapi/get_game_paths').get();		
+		$scope.game_paths = $resource('/jsonapi/get_game_paths').get();
     };
 	
 	$scope.resumeHabitChallengeGame = function(chPathID,numPerGame){
@@ -3762,7 +3763,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
 }
 
 
-function RankController($scope,$resource,$cookieStore,$location,$filter){
+function RankController($scope,$resource,$cookieStore,$location,$filter,currentUser){
 	$scope.selectedPlayer;
 	//fetch list of rankers based in the path selected by user
 	$scope.get_path_ranks = function(pathId){
@@ -3794,7 +3795,7 @@ function RankController($scope,$resource,$cookieStore,$location,$filter){
 			var data = {"countryCode":$scope.player.countryCode};
 			$scope.playerCountry = $resource('/jsonapi/player');
 			var nation = data.countryCode;
-			
+
 			$scope.pathRankModel1 = $resource('/jsonapi/worldwide_ranking?maxRank=25&path_id=:pathId&countryCode=:country');
 			
 			$scope.pathRankModel1.get({"pathId":pathId,"country":nation}, function(response){
@@ -3810,8 +3811,8 @@ function RankController($scope,$resource,$cookieStore,$location,$filter){
 		}	
 		$cookieStore.put("path_id", pathId);		
     };
-	
-	//fetch countries rank based	
+
+  //fetch countries rank based
 	$scope.get_country_ranks = function(){
 
         $scope.countryRank = $resource('/jsonapi/country_ranking?maxRank=300').get();
@@ -3875,7 +3876,12 @@ function RankController($scope,$resource,$cookieStore,$location,$filter){
     window.onresize = function(){
         $scope.$apply();
     }
-	
+
+    // Load default country on load
+    var user = currentUser.getUser();
+    if(angular.isDefined(user.country) && angular.isDefined(user.countryCode)) {
+      $scope.get_countrypath_ranks(user.countryCode, user.country);
+    }
 }
 
 function FeedbackController($scope,$resource,$cookieStore,$location,$http,$filter){
