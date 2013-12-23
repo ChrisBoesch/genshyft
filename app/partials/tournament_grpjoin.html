@@ -54,11 +54,13 @@
 				<div class="row-fluid" ng-controller="TournamentController" ng-init="get_registeredPlayers()">
 					<div class="row-fluid" ng-repeat="group in registeredPlayers.Groups track by $index">
 						<div class="span12 well well-small" >
-							Group {{registeredPlayers.Groups[$index].grpNum}}
+							<b>Group {{registeredPlayers.Groups[$index].grpNum}}</b>
 						</br>
-						<li ng-repeat="player in registeredPlayers.Groups track by $index">
-							{{registeredPlayers.Groups.Players}}
-						</li>
+						<table border="10" width="100%">
+							<tr>
+								<th ng-repeat="player in registeredPlayers.Groups[$index].Players">{{player.playerName}}</th>
+							</tr>
+						</table>
 						</div>
 					</div>				  
 				</div>

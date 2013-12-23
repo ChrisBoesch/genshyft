@@ -15,6 +15,7 @@ function TournamentController($scope,$resource){
 	$scope.tournaments = {};
 	$scope.unregisteredPlayers = {};
 	$scope.registeredPlayers = {};
+  $scope.players = {};
 
 	$scope.add_tournaments = function(){
 		$scope.tournament_title = {};
