@@ -1,0 +1,87 @@
+
+
+
+
+ 
+
+<br> <center> <h1> Purpose Driven Videos</h1> </center> 
+
+
+
+
+<div class="container" style="position:relative;">
+		<center> 
+			<table border = '1'  align = "center" >
+				<tr>
+					<th> 
+						<img  src = "img/purposedrivenPlaceholder/PurposeDriven.jpg" width = 50%</img> 
+					</th> 
+				</tr> 
+			</table> 
+		</center> 
+	</div>
+
+
+
+
+
+
+  	<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked()" > 
+
+  	
+  	<!-- <select ng-model="videoID" ng-options= "video.id as video.title for video in purposeVideos.Videos | orderBy:'title'"></select !-->
+			<center>
+			Select a video to view !
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container" style="position:relative;">
+	<div class="row-fluid">
+		<div class = "span12">
+
+				<table border = '1' class = "span12"> 
+					<tr>
+						<td  ng-repeat = "video in purposeVideos.Videos" class = "span2" >
+								 <IMG ng-src="{{ video.image }}" > 
+						</td>
+					</tr>			
+						<tr >
+							<td  ng-repeat = "video in purposeVideos.Videos" class = "span2" align = "middle">
+									 <br> {{ video.description }}
+							</td>
+							
+						</tr>
+
+						<tr >
+							<td  ng-repeat = "userVideo in purposeVideosUnlocked.Unlocked" >
+								<center> <div ng-show="{{ userVideo.s }}">  
+								<button class="btn btn-inverse"  ng-click = "get_test(purposeVideos.Videos[userVideo.no].vlink,userVideo.no)">  Play  <!-- {{ userVideo.no }} !-->	</button> 
+								 </div>
+								 <div ng-hide="{{ userVideo.s }}"> Lock </div>
+								<center>	 
+							</td>
+							
+						</tr>
+
+				</table>
+			</center>
+</div>
+		</div>
+	</div>
+<div>
+
+  	
+<script>
+
+
+
+</script>
