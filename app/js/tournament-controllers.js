@@ -32,6 +32,7 @@ function TournamentController($scope,$resource){
 		}	
 	}
 
+  //To implement for Create Tournaments
 	$scope.questions = function(){
 
        
@@ -59,6 +60,11 @@ function TournamentController($scope,$resource){
             $scope.registeredPlayers = response; // stores the Json files
             console.log($scope.registeredPlayers);
        	})
+    }
+
+    //list_rankings() method is for Group Rankings page. To implement method.
+    $scope.list_rankings = function(){
+
     }
   
 }

@@ -3,20 +3,25 @@
 	<center><h2>My Tournaments</h2></center>
 	</br>
 	<div class="row-fluid">
-		<div class="span12"><b>Tournament by you</b>
+		<div class="span12"><b>Tournaments by you:</b>
 			&nbsp;
 			<button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-create'">+ Create Tournament </button>
 		</div>
 	</div>
 	</br>
-	<div class="row-fluid" ng-repeat="tournament in tournaments.Tournaments track by $index">		
-		<div class="span12 well well-small" >
-			Tournament Title: {{tournaments.Tournaments[$index].title}}
-			</br>Tournament Type: {{tournaments.Tournaments[$index].type}}
-			</br>No. of Registered Users: {{tournaments.Tournaments[$index].noOfUsers}}
-			</br>Last Changes Made: {{tournaments.Tournaments[$index].lastChangesMade}}
-			</br>
-			</br><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-manage'">Manage </button>
+	<div ng-show="tournaments.Tournaments.length=x=0">
+		<center><b> You have not created any tournaments. Click on the button above to create one! </b></center>
+	</div>
+	<div ng-show="tournaments.Tournaments.length!=0">
+		<div class="row-fluid" ng-repeat="tournament in tournaments.Tournaments track by $index">		
+			<div class="span12 well well-small" >
+				Tournament Title: {{tournaments.Tournaments[$index].title}}
+				</br>Tournament Type: {{tournaments.Tournaments[$index].type}}
+				</br>No. of Registered Users: {{tournaments.Tournaments[$index].noOfUsers}}
+				</br>Last Changes Made: {{tournaments.Tournaments[$index].lastChangesMade}}
+				</br>
+				</br><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-manage'">Manage </button>
+			</div>
 		</div>
 	</div>
 </div>
