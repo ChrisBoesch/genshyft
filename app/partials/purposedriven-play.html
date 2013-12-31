@@ -1,0 +1,81 @@
+<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked()" > 
+
+<br><br>
+*{{youtube[0]}}*
+	
+<div class="container" style="position:relative;">
+	<div class="row-fluid">
+		<div class = "span12">
+				<table border = '1' align = 'center' width = 70%>
+
+					<tr>
+						<td colspan ='3'> <h2><center> {{purposeVideos.Videos[vno].title}} <center></h1>
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan ='3'> <b><center> {{purposeVideos.Videos[vno].description}} <center></b>
+						</td>
+					</tr>
+
+
+					<tr>
+						<td colspan = '3'>
+							
+						<center> <iframe width= 80% height= '420px' src="//www.youtube.com/embed/{{youtube[0]}}?rel=0" frameborder="0" allowfullscreen></iframe> </center>
+							
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan = '3'> How much can you appreciate from this video " 
+						</td>
+					</tr>
+
+					<tr>
+						<td> Alot
+						</td>
+						<td>
+							<center>
+								<input type="range" 
+									   min="0"
+									   max="6"
+									   step="1"
+									   value="3"
+									   onclick="enableButton2()" >
+							<center>
+						</td>
+					
+						<td>
+						  none
+						</td>	
+					</tr>
+					<tr>
+						<td colspan ='3'>
+							<center> <button id="nextVideo" disabled ng-click = "nextVideo(vno,purposeVideos.Videos,purposeVideosUnlocked.Unlocked)"> Next  </button>  </center>
+					</tr>
+					
+					
+				</table>
+
+				</div>
+
+				<button ng-click =""> {{ url }} </button> 
+
+			</div>
+		</div>
+	</div>
+
+<script>
+        function enableButton2() {
+            document.getElementById("nextVideo").disabled = false;
+        }
+
+        function getParam(){
+        var myParam = location.search.split('xyz=')[1]
+        	alert(myParam);
+        }
+
+        
+</script>
+

@@ -14,13 +14,25 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/challengeCreator', {templateUrl: 'partials/challengeCreator.html', controller: IndexController});
     $routeProvider.when('/challengeEdit', {templateUrl: 'partials/challengeEdit.html', controller: IndexController})
     $routeProvider.when('/tournaments', {templateUrl: 'partials/tournament.html', controller: IndexController});
-	  $routeProvider.when('/roundranking', {templateUrl: 'partials/roundranking.html', controller: IndexController});
+	$routeProvider.when('/roundranking', {templateUrl: 'partials/roundranking.html', controller: IndexController});
     $routeProvider.when('/create', {templateUrl: 'partials/create_paths_and_levels.html', controller: IndexController});
     $routeProvider.when('/videos', {templateUrl: 'partials/videos.html', controller: IndexController});
     $routeProvider.when('/feedback', {templateUrl: 'partials/feedback.html', controller: IndexController});
     $routeProvider.when('/schoolregistration', {templateUrl: 'partials/schoolregistration.html', controller: IndexController});
     $routeProvider.when('/schoolregistrationstats', {templateUrl: 'partials/schoolregistrationstats.html', controller: IndexController});
     $routeProvider.when('/schoolsmap', {templateUrl: 'partials/schoolsmap.html', controller: IndexController});
+    $routeProvider.when('/mytournaments', {templateUrl: 'partials/mytournaments.html', controller: IndexController});
+    $routeProvider.when('/mytournaments-create', {templateUrl: 'partials/mytournaments_create.html', controller: IndexController});
+    $routeProvider.when('/mytournaments-manage', {templateUrl: 'partials/mytournaments_manage.html', controller: IndexController});
+    $routeProvider.when('/tournament-grpjoin', {templateUrl: 'partials/tournament_grpjoin.html', controller: IndexController});
+    $routeProvider.when('/tournament-grpplay', {templateUrl: 'partials/tournament_grpplay.html', controller: IndexController});
+    $routeProvider.when('/tournament-ranking', {templateUrl: 'partials/tournament_ranking.html', controller: IndexController});
+    $routeProvider.when('/mbcoaching', {templateUrl: 'partials/mbcoaching.html', controller: IndexController});
+    $routeProvider.when('/mbcoaching-play', {templateUrl: 'partials/mbcoaching_play.html', controller: IndexController});
+    $routeProvider.when('/purposedriven', {templateUrl: 'partials/purposedriven.html', controller: IndexController});
+    $routeProvider.when('/purposedriven-play', {templateUrl: 'partials/purposedriven-play.html', controller: IndexController});
+    $routeProvider.when('/ymbcoaching', {templateUrl: 'partials/ymbcoaching.html', controller: IndexController});
+    $routeProvider.when('/ymbcoaching-play', {templateUrl: 'partials/ymbcoaching_play.html', controller: IndexController});
     $routeProvider.otherwise({redirectTo: '/home'});
 }]);
 

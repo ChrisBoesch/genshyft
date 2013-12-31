@@ -38,14 +38,14 @@ function Ctrl($scope) {
   $scope.color = 'blue';
 }
 
-function PlayerController($scope,$resource,$location,$cookieStore,$http,currentUser){
+function PlayerController($scope,$resource,$location,$cookieStore,$http,currentUserService){
 	$scope.list=function(){
 		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
 	  $scope.player = $resource('/jsonapi/player').get();
 		$scope.tags = $resource('/jsonapi/tags').get();
 	    $scope.$watch('player', function() {
 	    	$scope.current_country = $scope.player.country;
-        currentUser.setUser($scope.player);
+        currentUserService.setUser($scope.player);
 	    },true);
 	};
 	
@@ -159,7 +159,26 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 			alert("Please login with FaceBook or Google Account first!");
 		}
 	};
+
+	/*GENShyFT Methods*/
 	
+	$scope.checkCreateTournLogin = function(){
+		if($scope.player.nickname){
+			$location.path("mytournaments");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkJoinTournLogin = function(){
+		if($scope.player.nickname){
+			$location.path("tournament-grpjoin");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};// GENShYFT Methods End
 	
     $scope.update_player_profile = function($event){  
   
@@ -221,7 +240,7 @@ function InterfaceController($scope,$resource){
     $scope.interfaces = $resource('/jsonapi/interfaces').get();
 }
 
-function PathController($scope,$resource,$cookieStore,$location,$filter){
+function PathController($scope,$resource,$cookieStore,$location,$filter,gameService,$q){
 	//Assuming this is what you wanted by calling list in ng-init
     $scope.fetch_game_paths = function(){
 		$scope.game_paths = $resource('/jsonapi/get_game_paths').get();
@@ -294,29 +313,37 @@ function PathController($scope,$resource,$cookieStore,$location,$filter){
 	};
 	
     $scope.list = function(){
-    	$scope.paths_unfiltered = $resource('/jsonapi/get_game_paths').get();
-		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
-		$scope.abc = $cookieStore.get("pid");
-		$scope.lvlName = 1;
-		$scope.player_progress = "";
-		$scope.difficulty = "";
-		$scope.path_ID = "";
-		$scope.path_name = "a Language";
-		$scope.practice_path_name = "";
-		$scope.currentURL = location.href;
-		
-		setTimeout(function () {
-			$scope.paths = $scope.paths_unfiltered;
-			$scope.paths_grouped = $filter('groupBy')($scope.paths.paths, 3);
-			$scope.mobile_paths_grouped = $filter('groupBy')($scope.mobile_paths, 3);
-			$scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
+        $scope.abc = $cookieStore.get("pid");
+        $scope.lvlName = 1;
+        $scope.player_progress = "";
+        $scope.difficulty = "";
+        $scope.path_ID = "";
+        $scope.path_name = "a Language";
+        $scope.practice_path_name = "";
+        $scope.currentURL = location.href;
+        $scope.paths_unfiltered = null;
+        $scope.mobile_paths = null;
 
-		    //Including details=1 returns the nested problemset progress.
-		    $scope.PathModel.get({"pathID":$scope.abc,"details":1}, function(response){
-		        $scope.path_progress = response;
-		    });
-		    $('#largeSelectPlay').click();
-		}, 1500);
+        $q.all([
+            gameService.getGamePaths(),
+            gameService.getMobilePaths()
+        ])
+        .then(function (responseArray) {
+            $scope.paths_unfiltered = responseArray[0];
+            $scope.mobile_paths = responseArray[1];
+            $scope.paths = $scope.paths_unfiltered;
+            $scope.paths_grouped = $filter('groupBy')($scope.paths.paths, 3);
+            $scope.mobile_paths_grouped = $filter('groupBy')($scope.mobile_paths, 3);
+            $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
+
+            // Including details=1 returns the nested problemset progress.
+            $scope.PathModel.get({"pathID":$scope.abc,"details":1}, function(response){
+                $scope.path_progress = response;
+            });
+
+            // Todo: I don't really know what it was doing!
+            // $('#largeSelectPlay').click();
+        });
     };
 
 	//Try to only fetch what you need in the init of the controller.
@@ -3763,7 +3790,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
 }
 
 
-function RankController($scope,$resource,$cookieStore,$location,$filter,currentUser){
+function RankController($scope,$resource,$cookieStore,$location,$filter,currentUserService){
 	$scope.selectedPlayer;
 	//fetch list of rankers based in the path selected by user
 	$scope.get_path_ranks = function(pathId){
@@ -3878,7 +3905,7 @@ function RankController($scope,$resource,$cookieStore,$location,$filter,currentU
     }
 
     // Load default country on load
-    var user = currentUser.getUser();
+    var user = currentUserService.getUser();
     if(angular.isDefined(user.country) && angular.isDefined(user.countryCode)) {
       $scope.get_countrypath_ranks(user.countryCode, user.country);
     }

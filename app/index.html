@@ -110,15 +110,22 @@
                 <li class="dropdown" id="menu">                  
                   <a href="" class="dropdown-toggle" data-toggle="dropdown">More... 
                     <b class="caret"></b></a>                  
-                  <ul class="dropdown-menu">                    
-                    <li>
-                      <a href="#tournaments">Tournaments</a>
-                    </li> 
+                  <ul class="dropdown-menu"> 
+                    
+                    
                     <li>
                       <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
                     </li> 
                     <li>
                       <a type="button" ng-click="checkRankingLogin()">Rankings</a>
+                    </li>
+                    <li class="divider"></li> 
+                    <li class="nav-header">Tournaments</li>                  
+                    <li>
+                      <a type="button" ng-click="checkCreateTournLogin()" >Create Tournaments</a>
+                    </li>
+                    <li>
+                      <a type="button" ng-click="checkJoinTournLogin()">Join Tournaments</a>
                     </li>                                                 
                     <li class="divider"></li>                    
                     <li class="nav-header">Create</li>
@@ -133,6 +140,7 @@
                     <li>
                       <a href="#videos">Learn about SingPath</a>
                     </li> 
+                    <li class="divider"></li>
                     <li ng-show="player.countryCode=='SG'" class="nav-header">Singapore Schools</li>                    
                     
                     <li ng-show="player.countryCode=='SG'">
@@ -197,6 +205,10 @@
 <script src="js/app.js"></script> 
 <!-- Genshyft -->
 <script src="js/school-controllers.js"></script> 
+<script src="js/tournament-controllers.js"></script>
+<script src="js/PurposeDrivenController.js"> </script>
+<script src="js/mbcoaching-controllers.js"> </script>
+<script src="js/ymbcoaching-controllers.js"> </script>
 
 <!-- For testing -->
 <script type="text/javascript">
