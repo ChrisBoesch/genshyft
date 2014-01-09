@@ -8,8 +8,7 @@ $('#myTab a').click(function (e) {
 })
 
 /*TournamentController*/
-
-function GrpTournamentController($scope,$resource){
+function GenshyftTournamentController($scope,$resource){
 
 	$scope.rounds = [1];
 	$scope.tournaments = {};

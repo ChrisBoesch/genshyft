@@ -1,9 +1,8 @@
-# The SingPath Genshyft GUI based on AngularJS and Karma with a quick start setup for Nitrous.io
-This is the GUI for SingPath.com - the most fun way to practice software. 
+[![Build Status](https://travis-ci.org/ChrisBoesch/genshyft.png?branch=master)](https://travis-ci.org/ChrisBoesch/genshyft)
 
-## Original Testing Blog Article
-If you are interested in the testing, check out the the link below to view the blog article which explains exactly what and how this application is used.
-http://www.yearofmoo.com/2013/01/full-spectrum-testing-with-angularjs-and-karma.html
+## Genshyft - Angularjs GUI for SingPath.com
+
+SingPath.com is the most fun way to practice software. 
 
 ## Setup on Nitrous.io
 If you've ever had trouble setting up angular testing on your own machine, then this is a quick way to start. 
