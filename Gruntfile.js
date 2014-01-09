@@ -1,8 +1,7 @@
-'use strict';
 module.exports = function (grunt) {
   require('time-grunt')(grunt);
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  // grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   // grunt.loadNpmTasks('grunt-contrib-jshint');
     // "grunt-template-jasmine-istanbul": "~0.2.5",
 
@@ -22,13 +21,15 @@ module.exports = function (grunt) {
       }
     },
     jasmine : {
-      src : 'app/js/controllers.js',
-      options : {
-        specs : './test/unit/**/*.js',
-        template : require('grunt-template-jasmine-istanbul'),
-        templateOptions: {
-          coverage: 'reports/coverage.json',
-          report: 'reports/coverage'
+      coverage: {
+        src : 'app/js/controllers.js',
+        options : {
+          specs : 'test/karma-unit.conf.js',
+          template : require('grunt-template-jasmine-istanbul'),
+          templateOptions: {
+            coverage: 'reports/coverage.json',
+            report: 'reports/coverage'
+          }
         }
       }
     },
@@ -159,7 +160,7 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('jasmine', ['jasmine']);
+  grunt.registerTask('testjasmine', ['jasmine:coverage']);
   grunt.registerTask('test', ['verbosity', 'develop:server', 'karma:unit', 'karma:midway', 'karma:e2e']);
   grunt.registerTask('test:unit', ['karma:unit']);
   grunt.registerTask('test:midway', ['verbosity', 'develop:server', 'karma:midway']);
