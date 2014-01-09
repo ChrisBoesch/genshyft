@@ -38,64 +38,56 @@ function Ctrl($scope) {
   $scope.color = 'blue';
 }
 
-<<<<<<< HEAD
-function PlayerController($scope,$resource,$location,$cookieStore,$http){
-	$scope.player = {};
-	$scope.player.tags = [];
-=======
 function PlayerController($scope,$resource,$location,$cookieStore,$http,currentUserService){
->>>>>>> d0d51bb89e1a86e7931303a81467e9102b1bc93c
-	$scope.list=function(){
-		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
-	  $scope.player = $resource('/jsonapi/player').get();
-		$scope.tags = $resource('/jsonapi/tags').get();
-	    $scope.$watch('player', function() {
-	    	$scope.current_country = $scope.player.country;
-        currentUserService.setUser($scope.player);
-	    },true);
-	};
-	
-	$scope.addTag = function(addedTag){
-		$scope.taglist = addedTag.split(",");
-		for(var i=0;i<$scope.taglist.length;i++){
-			if($scope.player.tags.indexOf($scope.taglist[i]) > -1){
-				alert("Duplicate tag is not allowed!");
-			}
-			else{
-				$scope.player.tags.push($scope.taglist[i]);
-			}
-		}
-		$scope.taglist=[];
-  	};
-	
-	$scope.firstLoad=function(paid){
-		if($scope.player.nickname){
-   			$location.search('storyID', null);
-   			$location.search('difficulty', null);
-   			$location.search('path_ID', null);
-			$cookieStore.put("pid", paid);
-			$location.path("practice");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
+    $scope.player = {};
+    $scope.player.tags = [];
+    $scope.list=function(){
+        $scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
+        $scope.player = $resource('/jsonapi/player').get();
+        $scope.tags = $resource('/jsonapi/tags').get();
+        $scope.$watch('player', function() {
+            $scope.current_country = $scope.player.country;
+            currentUserService.setUser($scope.player);
+        },true);
+    };
+
+    $scope.addTag = function(addedTag){
+        $scope.taglist = addedTag.split(",");
+        for(var i=0;i<$scope.taglist.length;i++){
+            if($scope.player.tags.indexOf($scope.taglist[i]) > -1){
+                alert("Duplicate tag is not allowed!");
+            } else {
+                $scope.player.tags.push($scope.taglist[i]);
+            }
+        }
+        $scope.taglist=[];
+    };
+
+    $scope.firstLoad=function(paid){
+        if($scope.player.nickname){
+            $location.search('storyID', null);
+            $location.search('difficulty', null);
+            $location.search('path_ID', null);
+            $cookieStore.put("pid", paid);
+            $location.path("practice");
+        } else{
+            alert("Please login with FaceBook or Google Account first!");
+        }
+    };
+
     $scope.login=function(){
-  
     }; 
-	
-	$scope.checkQuestLogin = function(){
-		if($scope.player.nickname){
-			$location.search('storyID', null);
-   			$location.search('difficulty', null);
-   			$location.search('path_ID', null);
-			$location.path("quests");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
+
+    $scope.checkQuestLogin = function(){
+        if($scope.player.nickname){
+            $location.search('storyID', null);
+            $location.search('difficulty', null);
+            $location.search('path_ID', null);
+            $location.path("quests");
+        } else {
+            alert("Please login with FaceBook or Google Account first!");
+        }
+    };
 	
 	$scope.checkPracticeLogin = function(){
 		if($scope.player.nickname){
@@ -211,17 +203,16 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
     };
     
     $scope.log_event = function($event){  
-
         var result = $location.absUrl().split("/");
         var page = result[result.length-1];
         if($event.target.innerText){
-          page = page + "_" + $event.target.innerText;        
+          page = page + "_" + $event.target.innerText;
         }    
         $scope.Log = $resource('/jsonapi/log_event');
         var item = new $scope.Log({"page": page});
         $scope.item = item.$save(); 
-    };        
-        
+    };
+
     $scope.dismissModal = function(){
       $('#loginAlert').modal('hide')
     };
@@ -230,8 +221,12 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
       $('#edit_profile').modal('show')
     };
     
-    $scope.logout=function(){    
-            console.log('here');
+
+        window.changeLocation = function(url){
+          location.href = url;
+        };
+
+    $scope.logout=function(){
         $resource('/sign_out').get({}, function(response){
             $scope.logoutresponse = response;
             $scope.player = $resource('/jsonapi/player').get();
@@ -240,9 +235,9 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
               $scope.abc = 'true';
               $scope.def = 'false';
             }
-            window.location.href = "index.html";
+            window.changeLocation("index.html");
         });
-    };     
+    };
 }
 
 function InterfaceController($scope,$resource){
@@ -258,19 +253,19 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 	$scope.resumeHabitChallengeGame = function(chPathID,numPerGame){
 		$scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
 
-	    //Including details=1 returns the nested problemset progress.
-	    $scope.PathModel.get({"pathID":chPathID}, function(response){
-		    $scope.path_progress = response;
-			$scope.resumePracticeGame(response.path.id,response.path.name,numPerGame);
-		});
-	};
+    //Including details=1 returns the nested problemset progress.
+        $scope.PathModel.get({"pathID":chPathID}, function(response){
+            $scope.path_progress = response;
+            $scope.resumePracticeGame(response.path.id,response.path.name,numPerGame);
+        });
+    };
 	
 	$scope.resumeBadgeChallengeGame = function(badgeID,numPerGame,difficulty){
 		$scope.badgeModel = $resource('/jsonapi/all_badges');
 
-	    //Including details=1 returns the nested problemset progress.
-	    $scope.badgeModel.get({}, function(response){
-		    $scope.allBadges = response.badges;
+        //Including details=1 returns the nested problemset progress.
+        $scope.badgeModel.get({}, function(response){
+        $scope.allBadges = response.badges;
 			for(var i=0; i<$scope.allBadges.length; i++){
 				if($scope.allBadges[i].id==badgeID){
 					$scope.chpathid = $scope.allBadges[i].path_id;
@@ -377,29 +372,29 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 	// this method add background color to the selected images 
 	$scope.practiceSelection=function(){
 		$('#myCarousel input:image').click(function() {
-		  $('#myCarousel input:image').removeClass('selected');   
-		  $(this).addClass('selected');
+            $('#myCarousel input:image').removeClass('selected');
+            $(this).addClass('selected');
 		});
 	}
 
 	$scope.practiceBeginnerSelection=function(){
 		$('#myCarouselB input:image').click(function() {
-		  $('#myCarouselB input:image').removeClass('selected');   
-		  $(this).addClass('selected');
+            $('#myCarouselB input:image').removeClass('selected');
+            $(this).addClass('selected');
 		});
 	}
 
 	$scope.practiceBeginnerSelectionSmall=function(){
 		$('#myCarouselSmallB input:image').click(function() {
-		  $('#myCarouselSmallB input:image').removeClass('selected');   
-		  $(this).addClass('selected');
+            $('#myCarouselSmallB input:image').removeClass('selected');
+            $(this).addClass('selected');
 		});
 	}
 
 	$scope.practiceSelectionSmall=function(){
 		$('#myCarouselSmall input:image').click(function() {
-		  $('#myCarouselSmall input:image').removeClass('selected');   
-		  $(this).addClass('selected');   
+            $('#myCarouselSmall input:image').removeClass('selected');
+            $(this).addClass('selected');
 		});
 	}
 
@@ -410,9 +405,9 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 		  $(this).addClass('selected'); 
 		});
 		if(checker == 2){
-		  setTimeout(function () {
-		    $('#myCarouselRank input:image').eq(2).click();
-		  }, 2000);	
+            setTimeout(function () {
+                $('#myCarouselRank input:image').eq(2).click();
+            }, 2000);
 		}
 	}
 

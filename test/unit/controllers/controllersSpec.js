@@ -3,7 +3,7 @@
 // console.log(chai.stub)
 // var sinonChai = require("sinon-chai");
 // chai.use(sinonChai);
-var assert = chai.assert;
+// var assert = chai.assert;
 describe("Unit: Testing Controllers", function() {
 
   //beforeEach(angular.mock.module('App'));
@@ -18,7 +18,7 @@ describe("Unit: Testing Controllers", function() {
   
   //My test
   it('should have a dummy test for autotext demonstration', function() {
-    expect(5).not.to.equal(4);
+    expect(5).not.toEqual(4);
   });
   it('should have a WatchedVideosCtrl controller', function() {
     //expect(App.WatchedVideosCtrl).not.to.equal(null);
@@ -48,7 +48,13 @@ describe("Unit: Testing Controllers", function() {
         player,
         tags
         ;
-
+var localContext = {
+    "window":{
+        location:{
+            href: "testURL"
+        }
+    }
+};
     beforeEach(function(){
         module('myAppConfig');
 
@@ -93,165 +99,168 @@ describe("Unit: Testing Controllers", function() {
     // });
 
     it('should define function list',function(){
-        assert.typeOf(scope.list,'function');
+        // assert.typeOf(scope.list,'function');
+        expect('function').toEqual(typeof scope.list);
     });
+
     function rightHttpResponse() {
         httpBackend.whenGET('/jsonapi/mobile_paths').respond([{"pathModified": "2011-05-18 08:40:46.845609", "name": "Beginner Obj-C", "price": 0.0, "free": true, "number_of_problemsets": 6, "path_id": 7520056, "purchased": false, "number_of_problems": 4, "number_of_solved_problems": 3, "description": "Beginner Path for Objective-C"}, {"pathModified": "2012-05-22 03:51:12.291919", "name": "Beginner Python", "price": 0.0, "free": true, "number_of_problemsets": 9, "path_id": 6920762, "purchased": false, "number_of_problems": 101, "number_of_solved_problems": 101, "description": "Beginner Python"}, {"pathModified": "2012-08-29 02:45:43.079114", "name": "Beginner Javascript", "price": 0.0, "free": true, "number_of_problemsets": 6, "path_id": 12605566, "purchased": false, "number_of_problems": 58, "number_of_solved_problems": 0, "description": "Beginner Javascript Path"}, {"pathModified": "2012-08-29 07:40:01.039161", "name": "Beginner Ruby", "price": 0.0, "free": true, "number_of_problemsets": 6, "path_id": 8277128, "purchased": false, "number_of_problems": 73, "number_of_solved_problems": 1, "description": "Beginner Ruby Path"}, {"pathModified": "2012-08-29 02:53:32.616533", "name": "Beginner Java", "price": 0.0, "free": true, "number_of_problemsets": 6, "path_id": 8113761, "purchased": false, "number_of_problems": 65, "number_of_solved_problems": 22, "description": "Beginner Java Path"}]);
         var player = { countryFlagURL: "http://www.singpath.com/static/flags/sg_on.png",gender: "male",isoYear: 2010,countryCode: "SG",tags: ["SMU","hackerspacesg"],country: "Singapore",yearOfBirth: 1985,about: "I love Scifi",isoDay: 5,isoWeek: 6,isAdmin: true,gravatar: "http://www.gravatar.com/avatar/6e64bb2cab5367fd6e201df2aa722512/?default=&amp;s=80",location: "Singapore",rankings: [ ],player_id: 57754,professional: "1",nickname: "Ruijun",badges: [ ]}
         httpBackend.whenGET('/jsonapi/player').respond(player); 
         httpBackend.whenGET('/jsonapi/tags').respond();
     }
+
     function wrongHttpResponse() {
         httpBackend.whenGET('/jsonapi/player').respond({});
         httpBackend.whenGET('/jsonapi/tags').respond({});
         httpBackend.whenGET('/jsonapi/mobile_paths').respond({});
     }
+
     it('should test function list and response true',function(){
         rightHttpResponse();
 
         scope.list();
         httpBackend.flush();
-        expect(scope.player.country).to.equal('Singapore');
+        expect(scope.player.country).toEqual('Singapore');
     });
 
     it('should test function addTag true',function(){
       var tags = "SMU,hackerspacesg";
       scope.addTag(tags);
-      assert.lengthOf(scope.player.tags,2);
+      // assert.lengthOf(scope.player.tags,2);
+      expect(scope.player.tags.length).toEqual(2);
     });
 
     it('should test function addTag duplicate',function(){
       var tags = "SMU,hackerspacesg,SMU";
       scope.addTag(tags);
-      assert.lengthOf(scope.player.tags,2);
+      // assert.lengthOf(scope.player.tags,2);
+      expect(scope.player.tags.length).toEqual(2);
     });
 
     it('should test  function firstLoad return true', function(){
         rightHttpResponse();
-
         scope.list();
         httpBackend.flush();
         var paid = '3312';
         scope.firstLoad(paid);
-        expect(typeof scope.player.nickname).not.to.equal('undefined');
-        expect(scope.search.storyID).to.equal(null);
-        expect(scope.search.difficulty).to.equal(null);
-        expect(scope.search.path_ID).to.equal(null);
-        expect(scope.cookieStore.pid).to.equal(paid);
-        expect(scope.path).to.equal('practice');
-
+        expect(typeof scope.player.nickname).not.toEqual('undefined');
+        expect(scope.search.storyID).toEqual(null);
+        expect(scope.search.difficulty).toEqual(null);
+        expect(scope.search.path_ID).toEqual(null);
+        expect(scope.cookieStore.pid).toEqual(paid);
+        expect(scope.path).toEqual('practice');
     });
 
     it('should test  function firstLoad return false', function(){
         wrongHttpResponse();
-
         var paid = 'paid';
         scope.list();
         scope.firstLoad(paid);
         httpBackend.flush();
-        expect(typeof scope.player.nickname).to.equal('undefined');
+        expect(typeof scope.player.nickname).toEqual('undefined');
     });
 
     it('should test function checkQuestLogin return true',function(){
         scope.player.nickname = 'nick';
         scope.checkQuestLogin();
-        expect(typeof scope.player.nickname).not.to.equal('undefined');
-        expect(scope.search.storyID).to.equal(null);
-        expect(scope.search.difficulty).to.equal(null);
-        expect(scope.search.path_ID).to.equal(null);
-        expect(scope.path).to.equal('quests');
+        expect(typeof scope.player.nickname).not.toEqual('undefined');
+        expect(scope.search.storyID).toEqual(null);
+        expect(scope.search.difficulty).toEqual(null);
+        expect(scope.search.path_ID).toEqual(null);
+        expect(scope.path).toEqual('quests');
     });
 
     it('should test function checkQuestLogin return false',function(){
         scope.checkQuestLogin();
-        expect(typeof scope.player.nickname).to.equal('undefined');
+        expect(typeof scope.player.nickname).toEqual('undefined');
     });
 
     it('should test function checkPracticeLogin return true',function(){
         scope.player.nickname = 'nick';
         scope.checkPracticeLogin();
-        expect(typeof scope.player.nickname).not.to.equal('undefined');
-        expect(scope.path).to.equal('practice');
+        expect(typeof scope.player.nickname).not.toEqual('undefined');
+        expect(scope.path).toEqual('practice');
     });
 
     it('should test function checkPracticeLogin return false',function(){
         scope.checkPracticeLogin();
-        expect(typeof scope.player.nickname).to.equal('undefined');
+        expect(typeof scope.player.nickname).toEqual('undefined');
     });
 
     it('should test function checkStoryLogin return true',function(){
         scope.player.nickname = 'nick';
         scope.checkStoryLogin();
-        expect(scope.search.storyID).to.equal(null);
-        expect(scope.search.difficulty).to.equal(null);
-        expect(scope.search.path_ID).to.equal(null);
-        expect(typeof scope.player.nickname).not.to.equal('undefined');
-        expect(scope.path).to.equal('story');
+        expect(scope.search.storyID).toEqual(null);
+        expect(scope.search.difficulty).toEqual(null);
+        expect(scope.search.path_ID).toEqual(null);
+        expect(typeof scope.player.nickname).not.toEqual('undefined');
+        expect(scope.path).toEqual('story');
     });
 
     it('should test function checkStoryLogin return false',function(){
         scope.checkStoryLogin();
-        expect(typeof scope.player.nickname).to.equal('undefined');
+        expect(typeof scope.player.nickname).toEqual('undefined');
     });
 
     it('should test function checkChallengesLogin return true',function(){
         scope.player.nickname = 'nick';
         scope.checkChallengesLogin();
-        expect(scope.search.storyID).to.equal(null);
-        expect(scope.search.difficulty).to.equal(null);
-        expect(scope.search.path_ID).to.equal(null);
-        expect(typeof scope.player.nickname).not.to.equal('undefined');
-        expect(scope.path).to.equal('challenges');
+        expect(scope.search.storyID).toEqual(null);
+        expect(scope.search.difficulty).toEqual(null);
+        expect(scope.search.path_ID).toEqual(null);
+        expect(typeof scope.player.nickname).not.toEqual('undefined');
+        expect(scope.path).toEqual('challenges');
     });
 
     it('should test function checkChallengesLogin return false',function(){
         scope.checkChallengesLogin();
-        expect(typeof scope.player.nickname).to.equal('undefined');
+        expect(typeof scope.player.nickname).toEqual('undefined');
     });
 
     it('should test function checkRankingLogin return true',function(){
         scope.player.nickname = 'nick';
         scope.checkRankingLogin();
-        expect(scope.search.storyID).to.equal(null);
-        expect(scope.search.difficulty).to.equal(null);
-        expect(scope.search.path_ID).to.equal(null);
-        expect(typeof scope.player.nickname).not.to.equal('undefined');
-        expect(scope.path).to.equal('ranking');
+        expect(scope.search.storyID).toEqual(null);
+        expect(scope.search.difficulty).toEqual(null);
+        expect(scope.search.path_ID).toEqual(null);
+        expect(typeof scope.player.nickname).not.toEqual('undefined');
+        expect(scope.path).toEqual('ranking');
     });
 
     it('should test function checkRankingLogin return false',function(){
         scope.checkRankingLogin();
-        expect(typeof scope.player.nickname).to.equal('undefined');
+        expect(typeof scope.player.nickname).toEqual('undefined');
     });
 
     it('should test function checkFeedbackLogin return true',function(){
         scope.player.nickname = 'nick';
         scope.checkFeedbackLogin();
-        expect(scope.search.storyID).to.equal(null);
-        expect(scope.search.difficulty).to.equal(null);
-        expect(scope.search.path_ID).to.equal(null);
-        expect(typeof scope.player.nickname).not.to.equal('undefined');
-        expect(scope.path).to.equal('feedback');
+        expect(scope.search.storyID).toEqual(null);
+        expect(scope.search.difficulty).toEqual(null);
+        expect(scope.search.path_ID).toEqual(null);
+        expect(typeof scope.player.nickname).not.toEqual('undefined');
+        expect(scope.path).toEqual('feedback');
     });
 
     it('should test function checkFeedbackLogin return false',function(){
         scope.checkFeedbackLogin();
-        expect(typeof scope.player.nickname).to.equal('undefined');
+        expect(typeof scope.player.nickname).toEqual('undefined');
     });
 
     it('should test function checkProfileLogin return true',function(){
         scope.player.nickname = 'nick';
         scope.checkProfileLogin();
-        expect(scope.search.storyID).to.equal(null);
-        expect(scope.search.difficulty).to.equal(null);
-        expect(scope.search.path_ID).to.equal(null);
-        expect(typeof scope.player.nickname).not.to.equal('undefined');
-        expect(scope.path).to.equal('profile');
+        expect(scope.search.storyID).toEqual(null);
+        expect(scope.search.difficulty).toEqual(null);
+        expect(scope.search.path_ID).toEqual(null);
+        expect(typeof scope.player.nickname).not.toEqual('undefined');
+        expect(scope.path).toEqual('profile');
     });
 
     it('should test function checkProfileLogin return false',function(){
         scope.checkProfileLogin();
-        expect(typeof scope.player.nickname).to.equal('undefined');
+        expect(typeof scope.player.nickname).toEqual('undefined');
     });
 
     it('should test function update_player_profile true',function(){
@@ -269,7 +278,7 @@ describe("Unit: Testing Controllers", function() {
         window.location.reload = function(val){testReload = val;};
         scope.update_player_profile($event);
         httpBackend.flush();
-        expect(testReload).to.equal('profile');
+        expect(testReload).toEqual('profile');
     });
 
     it('should test function update_player_profile fail',function(){
@@ -287,7 +296,7 @@ describe("Unit: Testing Controllers", function() {
         window.location.reload = function(val){testReload = val;};
         scope.update_player_profile($event);
         httpBackend.flush();
-        expect(testReload).to.equal('profile');
+        expect(testReload).toEqual('profile');
     });
 
     it('should test log_event',function(){
@@ -302,14 +311,12 @@ describe("Unit: Testing Controllers", function() {
     it('shoult test logout',function(){
         httpBackend.whenGET('/sign_out').respond({data:'somedata'});
         httpBackend.whenGET('/jsonapi/player').respond({});
-        // window.location = {
-        //   href: ''
-        // };
-        // scope.logout();
-
-        // httpBackend.flush();
 
 
+          var location = spyOn(window, 'changeLocation').andReturn('index.html');
+            scope.logout();
+            expect(location()).toEqual('index.html');
+            httpBackend.flush();
 
     });
 
