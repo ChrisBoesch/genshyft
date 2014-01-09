@@ -160,7 +160,7 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('testjasmine', ['jasmine:coverage']);
+  grunt.registerTask('testjasmine', ['jshint','jasmine:coverage']);
   grunt.registerTask('test', ['verbosity', 'develop:server', 'karma:unit', 'karma:midway', 'karma:e2e']);
   grunt.registerTask('test:unit', ['karma:unit']);
   grunt.registerTask('test:midway', ['verbosity', 'develop:server', 'karma:midway']);
