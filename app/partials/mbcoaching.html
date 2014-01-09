@@ -1,0 +1,69 @@
+</br>
+</br>
+<div ng-controller="MBCoachingController" ng-init="print()" class="container">
+	<center><h1>Mastery Based Coaching</h1><br>
+    To start, please select a coach below 
+    <br>
+    <br>
+
+	<div class="row-fluid">
+		<div ng-init="print()">
+		<table border="0" cellpadding"0" cellspacing="0" width="400" height="700" style="border:1px solid black;border-collapse:collapse;">
+			<tr>
+			<center><th style="border:1px solid black;"><input type="radio" name="coach" value="shannon" ng-model="coach.name">Shannon<img src="img/mbcoach/dummy_woman.jpg"></img></th></center>
+			<center><th style="border:1px solid black;"><input type="radio" name="coach" value="sandra">Sandra<img src="img/mbcoach/dummy_woman.jpg"><img></th></center>
+			</tr>
+			<tr>
+			<td style="border:1px solid black;" width=30%><center>Encourager that wants you to be ready to code with your friends<center></td>
+			<td style="border:1px solid black;" width=30%><center>Recruiter that wants you to be ready for your interview</center></td>
+			</tr>
+			<tr>
+			<center><th style="border:1px solid black;"><input type="radio" name="coach" value="zander">Zander<img src="img/mbcoach/dummy_man.jpg"><img></th></center>
+			<center><th style="border:1px solid black;"><input type="radio" name="coach" value="masterSergeant">Master Sergeant<img src="img/mbcoach/dummy_man.jpg"><img></th></center>
+			</tr>
+			<tr>
+			<td style="border:1px solid black;" width=30%><center>Hacker that wants you to be more awesome</center></td>
+			<td style="border:1px solid black;" width=30%><center>Wants you to quit before you get someone killed</center> </td>
+			</tr>
+			</table>
+
+<!--Zander, Master Sergeant-->
+<!-- Ideally, this should check if the database has successfully captured the school data and return error message(s) if unsuccessful--> 
+		<br/>
+		<br/>
+		<br/>
+		Select Language: 
+		<table style="border:1px solid black;border-collapse:collapse;">
+			<tr>
+			<th style="border:1px solid black;"><input type="radio" name="progLang" value="java">Java&nbsp;</th>
+			<th style="border:1px solid black;"><input type="radio" name="progLang" value="javascript">Javascript&nbsp;</th>
+			<th style="border:1px solid black;"><input type="radio" name="progLang" value="ruby">Ruby&nbsp;</th>
+			<th style="border:1px solid black;"><input type="radio" name="progLang" value="python">Python&nbsp;</th>
+			</tr>
+		</table>
+		<br/>
+		<br/>
+		<div>
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Next</button>
+        </div>
+		<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Let's get started...</h3>
+  </div>
+  <div class="modal-body">
+    <p>Click Start to begin!</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="continuePath(5);" data-dismiss="modal" aria-hidden="true">Start!</button>
+  </div>
+</div>
+<!-- end modal -->
+		<!--<button style= "float: right;"><a href = "#/mbcoaching-play">Next!</a></button>-->
+		
+
+
+		</div>
+	</div>
+<div>

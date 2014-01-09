@@ -1,4 +1,4 @@
-var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'analytics','ui.ace','myApp.directives']).config(['$routeProvider', function($routeProvider) {
+var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'analytics','ui.ace','myApp.directives', 'myApp.services']).config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('', {templateUrl: 'partials/home.html', controller: IndexController});
     $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: IndexController});
     $routeProvider.when('/quests', {templateUrl: 'partials/selectquests.html', controller: IndexController, reloadOnSearch:false});
@@ -18,19 +18,21 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/create', {templateUrl: 'partials/create_paths_and_levels.html', controller: IndexController});
     $routeProvider.when('/videos', {templateUrl: 'partials/videos.html', controller: IndexController});
     $routeProvider.when('/feedback', {templateUrl: 'partials/feedback.html', controller: IndexController});
-    $routeProvider.when('/b1', {templateUrl: 'bisa/b1.html', controller: IndexController});
-    $routeProvider.when('/b2', {templateUrl: 'bisa/b2.html', controller: IndexController});
-    $routeProvider.when('/b3', {templateUrl: 'bisa/b3.html', controller: IndexController});
-    $routeProvider.when('/b4', {templateUrl: 'bisa/b4.html', controller: IndexController});
-    $routeProvider.when('/b5', {templateUrl: 'bisa/b5.html', controller: IndexController});
-    $routeProvider.when('/problemcontribution', {templateUrl: 'bisa/problemcontribution.html', controller: IndexController});
-    $routeProvider.when('/problemcontribution_edit', {templateUrl: 'bisa/problemcontribution_edit.html', controller: IndexController});
-    $routeProvider.when('/problemcontribution_admin', {templateUrl: 'bisa/problemcontribution_admin.html', controller: IndexController});
-    $routeProvider.when('/masterycoaching', {templateUrl: 'bisa/masterycoaching.html', controller: IndexController});
-    $routeProvider.when('/masterycoaching_quiz', {templateUrl: 'bisa/masterycoaching_quiz.html', controller: IndexController});
     $routeProvider.when('/schoolregistration', {templateUrl: 'partials/schoolregistration.html', controller: IndexController});
     $routeProvider.when('/schoolregistrationstats', {templateUrl: 'partials/schoolregistrationstats.html', controller: IndexController});
     $routeProvider.when('/schoolsmap', {templateUrl: 'partials/schoolsmap.html', controller: IndexController});
+    $routeProvider.when('/mytournaments', {templateUrl: 'partials/mytournaments.html', controller: IndexController});
+    $routeProvider.when('/mytournaments-create', {templateUrl: 'partials/mytournaments_create.html', controller: IndexController});
+    $routeProvider.when('/mytournaments-manage', {templateUrl: 'partials/mytournaments_manage.html', controller: IndexController});
+    $routeProvider.when('/tournament-grpjoin', {templateUrl: 'partials/tournament_grpjoin.html', controller: IndexController});
+    $routeProvider.when('/tournament-grpplay', {templateUrl: 'partials/tournament_grpplay.html', controller: IndexController});
+    $routeProvider.when('/tournament-ranking', {templateUrl: 'partials/tournament_ranking.html', controller: IndexController});
+    $routeProvider.when('/mbcoaching', {templateUrl: 'partials/mbcoaching.html', controller: IndexController});
+    $routeProvider.when('/mbcoaching-play', {templateUrl: 'partials/mbcoaching_play.html', controller: IndexController});
+    $routeProvider.when('/purposedriven', {templateUrl: 'partials/purposedriven.html', controller: IndexController});
+    $routeProvider.when('/purposedriven-play', {templateUrl: 'partials/purposedriven-play.html', controller: IndexController});
+    $routeProvider.when('/ymbcoaching', {templateUrl: 'partials/ymbcoaching.html', controller: IndexController});
+    $routeProvider.when('/ymbcoaching-play', {templateUrl: 'partials/ymbcoaching_play.html', controller: IndexController});
     $routeProvider.otherwise({redirectTo: '/home'});
 }]);
 

@@ -1,9 +1,8 @@
-# The SingPath Genshyft GUI based on AngularJS and Karma with a quick start setup for Nitrous.io
-This is the GUI for SingPath.com - the most fun way to practice software. 
+[![Build Status](https://travis-ci.org/ChrisBoesch/genshyft.png?branch=master)](https://travis-ci.org/ChrisBoesch/genshyft)
 
-## Original Testing Blog Article
-If you are interested in the testing, check out the the link below to view the blog article which explains exactly what and how this application is used.
-http://www.yearofmoo.com/2013/01/full-spectrum-testing-with-angularjs-and-karma.html
+## Genshyft - Angularjs GUI for SingPath.com
+
+SingPath.com is the most fun way to practice software. 
 
 ## Setup on Nitrous.io
 If you've ever had trouble setting up angular testing on your own machine, then this is a quick way to start. 
@@ -12,11 +11,20 @@ You should be able to get everything working on Nitrous.io just by running npm i
 Sign in to Nitrous.io
 Create a Node box
 From the command line at the bottom, clone YOUR fork from Github and enter these other lines at the command line as well: 
-1. git clone https://github.com/ChrisBoesch/genshyft.git
-2. cd genshyft
-3. npm install
-4. npm install -g grunt-cli 
-5. grunt test
+
+```
+$ git clone https://github.com/ChrisBoesch/genshyft.git
+
+$ cd genshyft
+
+$ npm install
+
+$ npm install -g grunt-cli 
+
+$ grunt install
+
+$ grunt test
+```
 
 You should see all the tests passing. 
 

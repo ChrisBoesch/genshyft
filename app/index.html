@@ -21,508 +21,7 @@
     <script src="./js/fancybox-fire.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>    
-    <style>    /* GLOBAL STYLES     -------------------------------------------------
-    /* GLOBAL STYLES
-    -------------------------------------------------- */
-    /* Padding below the footer and lighter body text */
-    html {-webkit-text-size-adjust: none;}
-    body{
-      background-image:url("assets/img/");
-      background-repeat:repeat;
-      background-attachment:fixed;
-      padding-bottom: 40px;
-      font-family: Helvetica Neue, Helvetica, Arial, "sans-serif";
-      color: black;
-    }
-
-    /* Theme for box heading */
-    .bootCamp{
-        color: #ffffff;
-        font-size: 14px;
-        font-weight: bold;
-        background-color: #000000;
-        background-image: -moz-linear-gradient(#5D5E53, #373835);
-        background-image: -webkit-linear-gradient(#5D5E53, #373835);
-        background-image: linear-gradient(#5D5E53, #373835);
-        background-image: -o-linear-gradient(top, #5D5E53, #373835);
-        background-image: -webkit-gradient(linear, 0 0, 0 80%, from(#5D5E53), to(#373835));
-        background-repeat: repeat-x;
-        border: 1px solid #677c89;
-        border-bottom-color: #6b808d;
-        border-radius: 6px 6px 0 0;
-        text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
-        margin: 0;
-        padding: 2px 2px;
-        position: relative;
-        text-align: center;
-    }
-
-    /* Theme for box heading */
-    .bootCampSmall{
-        color: #ffffff;
-        font-size: 14px;
-        font-weight: bold;
-        background-color: #000000;
-        background-image: -moz-linear-gradient(#5D5E53, #373835);
-        background-image: -webkit-linear-gradient(#5D5E53, #373835);
-        background-image: linear-gradient(#5D5E53, #373835);
-        background-image: -o-linear-gradient(top, #5D5E53, #373835);
-        background-image: -webkit-gradient(linear, 0 0, 0 80%, from(#5D5E53), to(#373835));
-        background-repeat: repeat-x;
-        border: 1px solid #677c89;
-        border-bottom-color: #6b808d;
-        border-radius: 6px 6px 0 0;
-        text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
-        margin: 0;
-        padding: 2px 2px;
-        position: relative;
-        text-align: center;
-    }
-
-    .bootcamp-body {
-        padding: 10px 10px 10px 10px;
-        background-color: #F9F9F9;
-        overflow: hidden;
-        border-style: solid;
-        border-width: 1px 1px 2px 2px;
-        border-color: #333333 #333333 #333333 #333333;
-        border-radius: 5px 5px 5px 5px;
-
-    }
-
-    /* to change tab hover and active color*/
-    .nav-tabs > .active > a,
-    .nav-tabs > .active > a:hover {
-      color: black;
-      cursor: default;
-      /*background-color: #AFA199;*/
-      background-color: #ffffff;
-      border: 1px solid #ddd;
-      border-bottom-color: transparent;
-    }
-    .nav-tabs > li > a:hover {
-        background-color: #DCD9CD;
-        border-color: #eeeeee #eeeeee #dddddd;
-    }
-
-    /* to change table background*/
-    .tab-content {
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        padding: 10px;
-        background-color: #ffffff;
-    }
-
-    .nav-tabs {
-        margin-bottom: 0;
-    }
-
-    .btn-primary:active,
-    .btn-primary.active {
-      color: #ffffff;
-      background-color: #000066;
-      *background-color: #003bb3;
-    }
-
-    .btn-primary:hover{
-      color: #ffffff;
-      background: #000066;
-      *background: #003bb3;
-    }
-    .img-polaroid{
-      height:215px;
-    }
-    .well{
-      /*background-color: #FCFAFA;*/
-      background-color: #F0EFEA;
-    }
-    #well-c{
-      /*background-color: #F2F2F2;*/
-      background-color: #DBDACB;
-    }
-    .table td {
-     text-align: center;   
-    }
-
-    .table th {
-     text-align: center;   
-    }
-    /* CUSTOMIZE THE NAVBAR
-    -------------------------------------------------- */
-
-    /* Special class on .container surrounding .navbar, used for positioning it into place. */
-    .navbar-wrapper {
-      position: absolute;
-      top: 17px;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      margin-top: 30px;
-      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-    }
-    .navbar-wrapper .navbar {
-
-    }
-
-    /* Remove border and change up box shadow for more contrast */
-    .navbar .navbar-inner {
-      border: 0;
-      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
-         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
-              box-shadow: 0 2px 10px rgba(0,0,0,.25);
-    }
-
-    /* Downsize the brand/project name a bit */
-    .navbar .brand {
-      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
-      font-size: 16px;
-      font-weight: bold;
-      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
-    }
-
-    /* Navbar links: increase padding for taller navbar */
-    .navbar .nav > li > a {
-      padding: 15px 15px;
-    }
-
-    /* Offset the responsive button for proper vertical alignment */
-    .navbar .btn-navbar {
-      margin-top: 10px;
-    }
-
-    /* CUSTOMIZE THE NAVBAR
-    -------------------------------------------------- */
-
-    /* Carousel base class */
-    .carousel {
-      margin-bottom: 10px;
-    }
-
-    .carousel .container {
-      position: relative;
-      z-index: 5;
-    }
-
-    .carousel .item {
-      height: 100%;
-    }
-    .carousel img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      height: 100%;
-    }
-
-    .carousel-caption {
-      background-color: transparent;
-      position: static;
-      max-width: 100%;
-      padding: 0 20px;
-      margin-top: 200px;
-    }
-    .carousel-caption h1,
-    .carousel-caption .lead {
-      margin: 0;
-      line-height: 1.25;
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-    }
-    .carousel-caption .btn {
-      margin-top: 10px;
-    }
-
-    .carousel-control {
-      position: absolute;
-      top: 40%;
-      left: 15px;
-      width: 40px;
-      height: 40px;
-      margin-top: -20px;
-      font-size: 60px;
-      font-weight: 100;
-      line-height: 30px;
-      color: #ffffff;
-      text-align: center;
-      background: gray0;
-      border: 3px solid black ;
-      -webkit-border-radius: 23px;
-         -moz-border-radius: 23px;
-              border-radius: 23px;
-      opacity: 0.5;
-      filter: alpha(opacity=50);
-    }
-
-    /* MARKETING CONTENT
-    -------------------------------------------------- */
-
-    /* Center align the text within the three columns below the carousel */
-    .marketing .span4 {
-      text-align: center;
-      
-    }
-    .marketing h2 {
-      font-weight: normal;
-    }
-    .marketing .span4 p {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-
-
-    /* Featurettes
-    ------------------------- */
-
-    .featurette-divider {
-      margin: 80px 0; /* Space out the Bootstrap <hr> more */
-    }
-    .featurette {
-      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
-      overflow: hidden; /* Vertically center images part 2: clear their floats. */
-    }
-    .featurette-image {
-      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
-    }
-
-    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
-    .featurette-image.pull-left {
-      margin-right: 40px;
-    }
-    .featurette-image.pull-right {
-      margin-left: 40px;
-    }
-
-    /* Thin out the marketing headings */
-    .featurette-heading {
-      font-size: 50px;
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -1px;
-    }
-
-    #smallProfile,#smallSelectPlay,#mediumComment{
-      display:none;
-    }
-
-    #largeProfile,#largeSelectPlay,#largeComment{
-      display:block;
-    }
-    h6 {
-      font-size: 120%;
-    }
-
-  /* RESPONSIVE CSS
-  -------------------------------------------------- */
-  @media (max-width: 1024px) {
-    
-    .navbar-wrapper {
-      position: absolute;
-      top: 40px;
-      }
-
-    .container.navbar-wrapper {
-      margin-top: 30px;
-      margin-bottom: 0;
-      width: auto;
-    }
-    .navbar-inner {
-      border-radius: 0;
-      margin: -20px 0;
-    }
-
-    .carousel .item {
-      height: 100%;
-    }
-    .carousel img {
-      width: auto;
-      height: 100%;
-    }
-
-    .featurette {
-      height: auto;
-      padding: 0;
-    }
-    .featurette-image.pull-left,
-    .featurette-image.pull-right {
-      display: block;
-      float: none;
-      max-width: 40%;
-      margin: 0 auto 20px;
-    }
-    #homevideo{
-      margin-top:10px;
-      height: 300px;
-      width: 90%;
-    }
-
-    .abc{
-      display:none;
-    }
-
-    .img-polaroid{
-      height:180px;
-    }
-
-    #smallProfile,#smallSelectPlay,#mediumComment{
-      display:none;
-    }
-
-    #largeProfile,#largeSelectPlay,#largeComment{
-      display:block;
-    }
-  
-    h5 {
-      font-size: 120%;
-    }
-  }
-
-
-  @media (max-width: 800px) {
-
-    .navbar-inner {
-      margin: -20px;
-    }
-
-    .carousel {
-      margin-left: -20px;
-      margin-right: -20px;
-    }
-    .carousel .container {
-
-    }
-    .carousel .item {
-      height: 100%;
-    }
-    .carousel img {
-      height: 100%;
-    }
-    .carousel-caption {
-      width: 65%;
-      padding: 0 70px;
-      margin-top: 100px;
-    }
-    .carousel-caption h1 {
-      font-size: 30px;
-    }
-    .carousel-caption .lead,
-    .carousel-caption .btn {
-      font-size: 18px;
-    }
-
-    .marketing .span4 + .span4 {
-      margin-top: 40px;
-    }
-
-    .featurette-heading {
-      font-size: 30px;
-    }
-    .featurette .lead {
-      font-size: 18px;
-      line-height: 1.5;
-    }
-
-    #homevideo{
-      height: 90%px;
-      width: 90%;
-    }
-
-    .abc{
-      display:none;
-    }
-
-    #smallProfile,#smallSelectPlay,#mediumComment{
-      display:block;
-    }
-
-    #largeProfile,#largeSelectPlay,#largeComment{
-      display:none;
-    }
-
-  }
-
-  @media (max-width: 768px) {
-    #homevideo{
-      height: 80%px;
-      width: 80%;
-    }
-
-    .carousel {
-      position:relative;
-      margin-left: -20px;
-      margin-right: -20px;
-    }
-
-    .img-polaroid{
-      height:80px;
-    }
-
-    #smallProfile,#smallSelectPlay,#mediumComment{
-      display:block;
-    }
-
-    #largeProfile,#largeSelectPlay,#largeComment{
-      display:none;
-    }
-
-  }
-
-  @media (max-width: 600px) {
-    #homevideo{
-      height: 80%px;
-      width: 80%;
-    }
-
-    .carousel {
-      position:relative;
-      margin-left: -20px;
-      margin-right: -20px;
-    }
-
-    .img-polaroid{
-      height:50px;
-    }
-
-    #smallProfile,#smallSelectPlay,#mediumComment{
-      display:block;
-    }
-
-    #largeProfile,#largeSelectPlay,#largeComment{
-      display:none;
-    }
-
-   @media (max-width: 320px) {
-      #activityTable{
-        width:30%;
-        font-size:80%
-      }
-    }
-  }
-
-
-
-
-    /* To insert background theme */
-   body{
-    color: black;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    background-color: #FCFAFA;
-    *background-color: #FCFAFA;
-    background-image: -moz-linear-gradient(top, #FCFAFA, #FCFAFA);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FCFAFA), to(#FCFAFA));
-    background-image: -webkit-linear-gradient(top, #FCFAFA, #FCFAFA);
-    background-image: -o-linear-gradient(top, #FCFAFA, #FCFAFA);
-    background-image: linear-gradient(to bottom,#FCFAFA, #FCFAFA);
-    background-repeat: repeat-x;
-    border-color: #0044cc #0044cc #002a80;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-  }
-
-
-
-    </style>
-	<link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
 	<!-- Fav and touch icons -->
     <link rel="shortcut icon" href="assets/ico/favicon.ico">  
   
@@ -611,15 +110,22 @@
                 <li class="dropdown" id="menu">                  
                   <a href="" class="dropdown-toggle" data-toggle="dropdown">More... 
                     <b class="caret"></b></a>                  
-                  <ul class="dropdown-menu">                    
-                    <li>
-                      <a href="#tournaments">Tournaments</a>
-                    </li> 
+                  <ul class="dropdown-menu"> 
+                    
+                    
                     <li>
                       <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
                     </li> 
                     <li>
                       <a type="button" ng-click="checkRankingLogin()">Rankings</a>
+                    </li>
+                    <li class="divider"></li> 
+                    <li class="nav-header">Tournaments</li>                  
+                    <li>
+                      <a type="button" ng-click="checkCreateTournLogin()" >Create Tournaments</a>
+                    </li>
+                    <li>
+                      <a type="button" ng-click="checkJoinTournLogin()">Join Tournaments</a>
                     </li>                                                 
                     <li class="divider"></li>                    
                     <li class="nav-header">Create</li>
@@ -634,6 +140,7 @@
                     <li>
                       <a href="#videos">Learn about SingPath</a>
                     </li> 
+                    <li class="divider"></li>
                     <li ng-show="player.countryCode=='SG'" class="nav-header">Singapore Schools</li>                    
                     
                     <li ng-show="player.countryCode=='SG'">
@@ -693,10 +200,15 @@
 <script src="js/analytics.js"></script> 
 <script src="js/ui-ace.js"></script>
 <script src="js/directives.js"></script>
+<script src="js/services.js"></script>
 <script src="js/app-config.js"></script>
 <script src="js/app.js"></script> 
 <!-- Genshyft -->
 <script src="js/school-controllers.js"></script> 
+<script src="js/tournament-controllers.js"></script>
+<script src="js/PurposeDrivenController.js"> </script>
+<script src="js/mbcoaching-controllers.js"> </script>
+<script src="js/ymbcoaching-controllers.js"> </script>
 
 <!-- For testing -->
 <script type="text/javascript">
@@ -708,7 +220,7 @@
       test_module = document.location.search.split('test_with=')[1].split('#')[0];
       console.log("loading test data from "+test_module);
       document.write('<script src="../test/'+test_module+'"> </'+'script> ');
-      document.write('<script src="../test/lib/angular/angular-mocks.js"> </'+'script>  ');
+      document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
     }
 
 </script>
@@ -717,7 +229,6 @@
 <script src="./js/angular-leaflet-directive.min.js"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
 <script src="./js/angular-google-maps.js"></script>
-<script src="js/services.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/cookies.js"></script>
 <script src="assets/js/jquery.js"></script>    
