@@ -129,7 +129,6 @@ float:left;
 
 
 <div ng-controller="PathController" ng-init="list();">
-	<div id="largeSelectPlay">
 
 		<center><b> This UI does not support responsive yet </b></center>
 
@@ -182,25 +181,6 @@ float:left;
 					</div>					
 				</div>
 			</div>
-	
-	 
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		</div>
 		</div>
 
 
@@ -219,6 +199,7 @@ float:left;
 
 
 
+
 	
 	
 	
@@ -231,9 +212,13 @@ float:left;
 	
 	
 	
-	<div class="container" > <!-- start of select language !-->
-		<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') > -1 && currentURL.indexOf('difficulty') > -1">#1. Pick {{path_name}}!</h4>
-		<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') == -1">2. Select a Language!</h4>
+
+	<div class="row-fluid">
+
+	<div class="span12">
+	<div class="container" > <!-- start of select language !-->		
+		<h4 class="well well-small bootCamp" align="center" id="well-c" >2. Select a language</h4>
+
 		</div>
 		
 		<div id="myCarousel" class="carousel slide" ng-hide="difficulty=='Drag-n-Drop'">
@@ -276,6 +261,8 @@ float:left;
 			</div> 
 			<a class="left carousel-control" data-target="#myCarouselB" data-slide="prev">&lsaquo;</a>
 			<a class="right carousel-control" data-target="#myCarouselB" data-slide="next">&rsaquo;</a>
+		</div>
+		</div>
 		</div> <!-- end of select language !-->
 	
 	
@@ -287,41 +274,7 @@ float:left;
 
 	
 	
-	<!--  Continue button  to start game part!-->
 
-					<!-- /.span4 -->
-					<div class="span2"  align = "center">
-						<table align="center">
-							<tr><td align="center">
-								</br></br>
-								<!--Continue-->
-								<div  ng-show="!difficulty || !path_ID">
-									<button class="btn disabled" style="width: 145px"><h5>Continue Path</h5></button>									
-								</div>
-
-								<div  ng-show="difficulty && path_ID">
-									<button class="btn btn-primary" ng-click="continuePath(5);" style="width: 145px"><h5>Continue Path</h5></button>									
-								</div>
-								
-								<span class="label label-info" align="left">
-									<b><i>You are going to play</i></b>
-									</br></br>
-									Path: {{practice_path_name}}
-									</br>
-									Diffculty: {{difficulty}}
-								</span>
-							</td></tr>
-							<tr><td>
-								</br>
-								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><h5>Continue Level {{lvlName}}</h5></button></div>
-							</td></tr>
-							<tr><td>
-								</br>
-								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="continuePath(5);"><h5>Resolve Level {{lvlName}}</h5></button></div>
-							</td></tr>
-						</table>
-
-	</div> <!-- end of select play !-->
 	
 
 
@@ -341,9 +294,12 @@ float:left;
 	
 	
 	
+	<div class="container" >
+	<div class="row-fluid">
+	<div class="span12">
 	
 		<!--display the level, topic name & progress of the player when the path is selected by the player-->
-					<div class="span6" ng-model="$parent.pathName" >
+					<div class="span12" ng-model="$parent.pathName" >
 						<div align="center"><h4  class="well well-small bootCamp">#3. Select a Path Level!</h4></div>
 						<div class = "tabbable well well-small">                      
 						  <ul id="myTab" class="nav nav-tabs">                        
@@ -412,20 +368,66 @@ float:left;
 						 </div>   
 						</div>					
 					</div>		
+				</div>				
+			</div>
+		</div>
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<!--  Continue button  to start game part!-->
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+					<!-- 
+					 
+					<div class="span2"  align = "center">
+						<table align="center">
+							<tr><td align="center">
+								</br></br>
+					!-->
+								<!--Continue-->
+					<!--		<div  ng-show="!difficulty || !path_ID">
+									<button class="btn disabled" style="width: 145px"><h5>Continue Path</h5></button>									
+								</div>
+						
+								<div  ng-show="difficulty && path_ID">
+									<button class="btn btn-primary" ng-click="continuePath(5);" style="width: 145px"><h5>Continue Path</h5></button>									
+								</div>
+								
+								<span class="label label-info" align="left">
+									<b><i>You are going to play</i></b>
+									</br></br>
+									Path: {{practice_path_name}}
+									</br>
+									Diffculty: {{difficulty}}
+								</span>
+						
+					
+					</td></tr>
+							<tr><td>
+								</br>
+								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><h5>Continue Level {{lvlName}}</h5></button></div>
+							</td></tr>
+				
+							<tr><td>
+						!-->
+						
+								</br>
+								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><h5>Master  Level {{lvlName}} Now </h5></button></div>
+								<div ng-show="!difficulty || !path_ID" align ="center">
+							<center> <b> Select a Coach, a Language and a Level </b> </center> </div>
+							
+						<!--	
+							</td></tr>
+						</table>
+						!--> 
+	</div> <!-- end of select play !-->
 	
 	
 	

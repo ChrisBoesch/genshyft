@@ -159,26 +159,7 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 			alert("Please login with FaceBook or Google Account first!");
 		}
 	};
-
-	/*GENShyFT Methods*/
 	
-	$scope.checkCreateTournLogin = function(){
-		if($scope.player.nickname){
-			$location.path("mytournaments");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkJoinTournLogin = function(){
-		if($scope.player.nickname){
-			$location.path("tournament-grpjoin");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};// GENShYFT Methods End
 	
     $scope.update_player_profile = function($event){  
   

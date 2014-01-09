@@ -110,22 +110,15 @@
                 <li class="dropdown" id="menu">                  
                   <a href="" class="dropdown-toggle" data-toggle="dropdown">More... 
                     <b class="caret"></b></a>                  
-                  <ul class="dropdown-menu"> 
-                    
-                    
+                  <ul class="dropdown-menu">                    
+                    <li>
+                      <a href="#tournaments">Tournaments</a>
+                    </li> 
                     <li>
                       <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
                     </li> 
                     <li>
                       <a type="button" ng-click="checkRankingLogin()">Rankings</a>
-                    </li>
-                    <li class="divider"></li> 
-                    <li class="nav-header">Tournaments</li>                  
-                    <li>
-                      <a type="button" ng-click="checkCreateTournLogin()" >Create Tournaments</a>
-                    </li>
-                    <li>
-                      <a type="button" ng-click="checkJoinTournLogin()">Join Tournaments</a>
                     </li>                                                 
                     <li class="divider"></li>                    
                     <li class="nav-header">Create</li>
@@ -140,7 +133,6 @@
                     <li>
                       <a href="#videos">Learn about SingPath</a>
                     </li> 
-                    <li class="divider"></li>
                     <li ng-show="player.countryCode=='SG'" class="nav-header">Singapore Schools</li>                    
                     
                     <li ng-show="player.countryCode=='SG'">
@@ -214,11 +206,12 @@
 <script type="text/javascript">
     console.log("Current location "+document.location.host);
 
-    // Defaulting to staticly mock the API when not on port 80 for testing simplisity. 
-    if(document.location.port != "80"){
-      console.log("loading test data from app-test.js");
-      document.write('<script src="../test/game-app-test.js"> </' + 'script> ');
-      document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
+    if(document.location.search.indexOf("test_with=") !== -1) {
+    //Pull the name of the test config from teh url. test_with=test_module.js#
+     test_module = document.location.search.split('test_with=')[1].split('#')[0];
+     console.log("loading test data from "+test_module);
+     document.write('<script src="../test/'+test_module+'"> </'+'script> ');
+     document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
     }
 
 </script>
