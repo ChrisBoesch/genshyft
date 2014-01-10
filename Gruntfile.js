@@ -1,7 +1,9 @@
 module.exports = function (grunt) {
-
   require('time-grunt')(grunt);
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+  // grunt.loadNpmTasks('grunt-contrib-jshint');
+    // "grunt-template-jasmine-istanbul": "~0.2.5",
 
   grunt.initConfig({
     shell: {
@@ -18,7 +20,16 @@ module.exports = function (grunt) {
         command: 'cp -R bower_components/components-font-awesome/font/ app/font'
       }
     },
-
+    jshint: {
+      all: [
+        'Gruntfile.js',
+        'app/js/PlayerController.js',
+        'test/unit/controllers/controllersSpec.js'
+      ],
+      options: {
+        jshintrc: '.jshintrc'
+      }
+    },
     connect: {
       options: {
         base: '/app'
@@ -135,13 +146,14 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('test', ['verbosity', 'develop:server', 'karma:unit', 'karma:midway', 'karma:e2e']);
+
+  grunt.registerTask('test', ['jshint','verbosity', 'develop:server', 'karma:midway', 'karma:e2e','karma:unit']);
   grunt.registerTask('test:unit', ['karma:unit']);
   grunt.registerTask('test:midway', ['verbosity', 'develop:server', 'karma:midway']);
   grunt.registerTask('test:e2e', ['verbosity', 'develop:server', 'karma:e2e']);
 
   // installation-related
-  grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install', 'shell:font_awesome_fonts']);
+  grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install', 'shell:font_awesome_fonts','karma:unit']);
 
   // defaults
   grunt.registerTask('default', ['dev']);
