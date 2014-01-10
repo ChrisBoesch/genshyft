@@ -2,11 +2,20 @@ module.exports = function () {
     return {
         basePath: '../',
         frameworks: ['jasmine'],
-        reporters: ['progress'],
+        reporters: ['progress', 'coverage'],
         // browsers: ['Chrome'],
         browsers: ['PhantomJS'],
         autoWatch: false,
-
+        preprocessors: {
+          // source files, that you wanna generate coverage for
+          // do not include tests or libraries
+          // (these files will be instrumented by Istanbul)
+          'app/js/PlayerController.js': ['coverage']
+        },
+        coverageReporter: {
+          type : 'html',
+          dir : 'coverage/'
+        },
         // these are default values anyway
         singleRun: false,
         colors: true,
@@ -16,8 +25,8 @@ module.exports = function () {
             // 'bower_components/angular-unstable/angular.js',
             'app/lib/angular/angular.js',
 
-            'bower_components/angular-route/angular-route.js',
-            'bower_components/angularjs-scope.safeapply/src/Scope.SafeApply.js',
+            // 'bower_components/angular-route/angular-route.js',
+            // 'bower_components/angularjs-scope.safeapply/src/Scope.SafeApply.js',
 
             "app/lib/angular/angular-resource.js",
             'app/js/app-config.js',
@@ -30,7 +39,9 @@ module.exports = function () {
             'app/js/angular-google-maps.js',
 
             //App-specific Code
+            'app/js/PlayerController.js',
             'app/js/controllers.js',
+
             'app/js/directives.js',
             'app/js/services.js',
             'app/js/app.js',

@@ -20,24 +20,11 @@ module.exports = function (grunt) {
         command: 'cp -R bower_components/components-font-awesome/font/ app/font'
       }
     },
-    jasmine : {
-      coverage: {
-        src : 'app/js/controllers.js',
-        options : {
-          specs : 'test/karma-unit.conf.js',
-          template : require('grunt-template-jasmine-istanbul'),
-          templateOptions: {
-            coverage: 'reports/coverage.json',
-            report: 'reports/coverage'
-          }
-        }
-      }
-    },
     jshint: {
       all: [
         'Gruntfile.js',
-        './app/js/controllers.js',
-        './test/unit/**/*.js'
+        'app/js/PlayerController.js',
+        'test/unit/controllers/controllersSpec.js'
       ],
       options: {
         jshintrc: '.jshintrc'
@@ -160,8 +147,7 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('testjasmine', ['jshint','jasmine:coverage']);
-  grunt.registerTask('test', ['verbosity', 'develop:server', 'karma:unit', 'karma:midway', 'karma:e2e']);
+  grunt.registerTask('test', ['jshint','verbosity', 'develop:server', 'karma:midway', 'karma:e2e','karma:unit']);
   grunt.registerTask('test:unit', ['karma:unit']);
   grunt.registerTask('test:midway', ['verbosity', 'develop:server', 'karma:midway']);
   grunt.registerTask('test:e2e', ['verbosity', 'develop:server', 'karma:e2e']);

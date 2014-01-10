@@ -10,7 +10,7 @@
   "boss"    : true,
   "eqnull"  : true,
   "node"    : true,
-  "es5"     : true,
+  "devel"   : true,
   "globals" : {
     "it"         : false,
     "xit"        : false,
@@ -19,6 +19,10 @@
     "beforeEach" : false,
     "afterEach"  : false,
     "expect"     : false,
-    "spyOn"      : false
+    "spyOn"      : false,
+    "window"     : false,
+    "angular"    : false,
+    "$"          : false,
+    "inject"     : false
   }
 }
