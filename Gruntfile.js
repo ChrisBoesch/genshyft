@@ -153,7 +153,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test:e2e', ['verbosity', 'develop:server', 'karma:e2e']);
 
   // installation-related
-  grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install', 'shell:font_awesome_fonts']);
+  grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install', 'shell:font_awesome_fonts','karma:unit']);
 
   // defaults
   grunt.registerTask('default', ['dev']);
