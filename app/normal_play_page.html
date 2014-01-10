@@ -871,7 +871,7 @@
     <script src="assets/js/bootstrap-tab.js"></script> 
     <script type="text/javascript">
       // Defaulting to staticly mock the API when not on port 80 for testing simplisity. 
-      if(document.location.port != "80"){
+      if(document.location.port != 80){
         console.log("loading test data from game-app-test.js");
         document.write('<script src="../test/game-app-test.js"> </' + 'script> ');
         document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
