@@ -204,16 +204,11 @@
 
 <!-- For testing -->
 <script type="text/javascript">
-    console.log("Current location "+document.location.host);
-
-    if(document.location.search.indexOf("test_with=") !== -1) {
-    //Pull the name of the test config from teh url. test_with=test_module.js#
-     test_module = document.location.search.split('test_with=')[1].split('#')[0];
-     console.log("loading test data from "+test_module);
-     document.write('<script src="../test/'+test_module+'"> </'+'script> ');
-     document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
+    if(document.location.port != "80"){
+          console.log("loading test data from game-app-test.js");
+          document.write('<script src="../test/game-app-test.js"> </' + 'script> ');
+          document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
     }
-
 </script>
 <!-- End Deployment Comment -->
 <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
