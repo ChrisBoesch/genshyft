@@ -66,4 +66,10 @@ function GenshyftTournamentController($scope,$resource){
 
     }
   
+
+    $scope.add_qns = function(qnsLanguage){
+      if(qnsLanguage==undefined){
+        alert("Please choose a language for the round!")
+      }
+    }
 }

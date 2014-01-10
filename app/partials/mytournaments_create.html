@@ -105,7 +105,7 @@
 			<div class="span9">	
 				</br><select ng-model="qnsLanguage" ng-options="qnsLanguage for qnsLanguage in ['Ruby','Python', 'Javascript','Java']"></select>
 
-				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">+ Add Questions </button>
+				</br><button class="btn btn-primary" type="button" ng-click="add_qns(qnsLanguage)" data-toggle="modal" data-target="#myModal">+ Add Questions </button>
 			</div>
 		</div>
 	</div>
