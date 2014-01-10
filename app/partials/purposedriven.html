@@ -8,7 +8,6 @@
 
 
 
-
 <div class="container" style="position:relative;">
 		<center> 
 			<table border = '1'  align = "center" >
@@ -64,7 +63,7 @@
 						<tr >
 							<td  ng-repeat = "userVideo in purposeVideosUnlocked.Unlocked" >
 								<center> <div ng-show="{{ userVideo.s }}">  
-								<button class="btn btn-inverse"  ng-click = "get_test(purposeVideos.Videos[userVideo.no].vlink,userVideo.no)">  Play  <!-- {{ userVideo.no }} !-->	</button> 
+								<button class="btn btn-inverse"  ng-click = "view_video(purposeVideos.Videos[userVideo.no].vlink,userVideo.no)">  Play  <!-- {{ userVideo.no }} !-->	</button> 
 								 </div>
 								 <div ng-hide="{{ userVideo.s }}"> Lock </div>
 								<center>	 

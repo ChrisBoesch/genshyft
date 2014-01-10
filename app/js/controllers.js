@@ -3312,7 +3312,6 @@ function TimeAndAttemptsController($scope,$resource){
 function TournamentController($scope,$resource,$http,$cookieStore,$location,$timeout){
     $scope.TournamentModel = $resource('/jsonapi/list_open_tournaments');
     $scope.TournamentHeatGameModel = $resource('/jsonapi/create_game/heatID/:heatID');
-    
     $scope.TournamentHeatModel = $resource('/jsonapi/get_heat_ranking');
     //$scope.Tournament = $resource('/jsonapi/tournament/tournamentID');
     $scope.tournamentID = null;
@@ -3334,12 +3333,12 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
     //A method to fetch a generic model and id. 
     //Pass in ID
     $scope.check_location = function(){
-    	$scope.heatID = $location.search().heatID;
+      $scope.heatID = $location.search().heatID;
     	if (!$scope.heatID){
     		alert("No heat ID passed via URL.");
     	}
     	else{
-    		console.log("Fetching heat "+$scope.heatID);
+    		//console.log("Fetching heat "+$scope.heatID);
     		$scope.fetch_heat($scope.heatID);
     	}
     }

@@ -1,7 +1,7 @@
 <div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked()" > 
 
 <br><br>
-*{{youtube[0]}}*
+ ok ..
 	
 <div class="container" style="position:relative;">
 	<div class="row-fluid">
@@ -28,7 +28,7 @@
 					</tr>
 
 					<tr>
-						<td colspan = '3'> How much can you appreciate from this video " 
+						<td colspan = '3'> {{purposeVideos.Videos[vno].question}}
 						</td>
 					</tr>
 
@@ -41,7 +41,7 @@
 									   min="0"
 									   max="6"
 									   step="1"
-									   value="3"
+									   value= "{{purposeVideosUnlocked.Unlocked[vno].v}}";
 									   onclick="enableButton2()" >
 							<center>
 						</td>

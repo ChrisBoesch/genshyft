@@ -8,14 +8,12 @@ $('#myTab a').click(function (e) {
 })
 
 /*TournamentController*/
-
-function TournamentController($scope,$resource){
+function GenshyftTournamentController($scope,$resource){
 
 	$scope.rounds = [1];
 	$scope.tournaments = {};
 	$scope.unregisteredPlayers = {};
 	$scope.registeredPlayers = {};
-  $scope.players = {};
 
 	$scope.add_tournaments = function(){
 		$scope.tournament_title = {};
@@ -33,6 +31,7 @@ function TournamentController($scope,$resource){
 		}	
 	}
 
+  //To implement for Create Tournaments
 	$scope.questions = function(){
 
        
@@ -60,6 +59,11 @@ function TournamentController($scope,$resource){
             $scope.registeredPlayers = response; // stores the Json files
             console.log($scope.registeredPlayers);
        	})
+    }
+
+    //list_rankings() method is for Group Rankings page. To implement method.
+    $scope.list_rankings = function(){
+
     }
   
 }
