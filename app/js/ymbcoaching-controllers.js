@@ -316,7 +316,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			else{
 				//Hi RJ. Here is the change that I made to help simplify things.
 				//The goal is to simplify every game play page to just use one controller. 
-				window.location.href = "practice_game_play.html";
+				window.location.href = "ymbcoaching-play.html";
 				//window.location.href = "normal_play_page.html";
 			}
 		}
