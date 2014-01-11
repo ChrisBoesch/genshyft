@@ -44,7 +44,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
         }      
 
 
-        $scope.get_test = function(address,no){
+        $scope.view_video = function(address,no){
         	$scope.videotoWatch = address;
         	//window.location.replace('#/purposedriven-play?v=' +value);
         	//$location.path('purposedriven-play')

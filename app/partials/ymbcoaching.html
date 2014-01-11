@@ -171,7 +171,7 @@ float:left;
 							<span class ="divfloatleft" ng-repeat="item in levels">
 							<input style="visibility:hidden" type="radio" ng-model="$parent.$parent.difficulty" name="difficultyLevel" value="{{item.name}}"/ >  
 
-								<button type="button" ng-click = "changeDifficulty(item.name,path_progress.path.name)" class="btn btn-primary" style="height: 200px; width: 250px"  btn-radio="{{item.name}}"> 
+								<button type="button" ng-click = "changeDifficulty(item.name,path_progress.path.name,item.coach)" class="btn btn-primary" style="height: 200px; width: 250px"  btn-radio="{{item.name}}"> 
 									<IMG ng-src=" {{item.link}} " width = 50% > 
 
 								<b> {{item.coach}} </b> <br> <br>{{item.desc}}
