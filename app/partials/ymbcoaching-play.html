@@ -46,12 +46,15 @@
 
 											&nbsp;&nbsp;Coach Name: <span ng-bind="nameOfCoach"></span> <br>
 											&nbsp;&nbsp;status: <span> {{specialMessage}} </span> <br>
+											&nbsp;&nbsp;audio loaded: <span> {{audio}} </span> <br>
                                             &nbsp;&nbsp;Difficulty: <span ng-bind="gameDifficulty"></span>
                                     </font>
 									</div>
                                 </div>
-<audio autoplay="autoplay" controls="controls">
-  <source src="horse.mp3" type="audio/mpeg">
+<audio  autoplay controls hidden>
+<!-- only mp3 format.. !-->
+  <source src="{{audio}}" type="audio/ogg">
+
 Your browser does not support the audio element.
 </audio>
                             </div>  

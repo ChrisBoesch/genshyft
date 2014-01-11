@@ -150,6 +150,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
       $('#ta11').removeClass('active');
       $('#ta21').addClass('active');
 	  $scope.specialMessage = "Let's see !";
+	  $scope.audio = "audio\\Kalimba.mp3";
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,
