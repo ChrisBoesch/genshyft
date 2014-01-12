@@ -4012,7 +4012,7 @@ function EventController($scope, $resource){
             }
             
           });
-        }
+        },
         
         $scope.create_edit_event = function(id){
           var event = Event.save({eventId:id},$scope.event, function() {
@@ -4021,9 +4021,10 @@ function EventController($scope, $resource){
         },
 
         $scope.register_for_event = function(id,action){
-          var EventRegistration = $resource('/jsonapi/eventregistration/:eventId', {eventId:'@id', action:'@action'});
-        
-          var registration = EventRegistration.save({eventId:id,action:action},$scope.event, function() {
+          var EventRegistration = $resource('/jsonapi/eventregistration/:eventId', {eventId:'@id'});
+          var thedata = {"status":action};
+          
+          var registration = EventRegistration.save({eventId:id}, thedata, function() {
                  $scope.registration = registration;
                  var events = Event.get().events;
             });
