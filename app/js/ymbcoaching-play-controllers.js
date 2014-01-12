@@ -13,7 +13,8 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
     $scope.permutation = "12345"; 
-    
+    $scope.audio = "audio\\Maid with the Flaxen Hair.mp3";
+	
     if($cookieStore.get("name")){
       $scope.LevelID = $cookieStore.get("name"); //retrieve level id from practice page
     }
@@ -128,16 +129,30 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
 
     }
     $scope.skip_problem = function(){
+$scope.audio ="audio\\Kalimba.mp3"
+var audioplayer = document.getElementsByTagName('audio')[0];
+
+audioplayer.pause();
+audioplayer.load();
+audioplayer.pause();
+audioplayer.play();
+
       $('#t11').addClass('active');
       $('#t21').removeClass('active');
       $('#ta11').addClass('active');
       $('#ta21').removeClass('active');
 	  $scope.specialMessage = " You just skipped one ! ";
+	 
+	 
+
+
+		
+	  
       if ($scope.remaining_problems.length>1){
         $scope.skip_problem_count += 1;
         $scope.move_to_next_unsolved_problem();
-
       }
+	 
     }
 
 
@@ -145,12 +160,17 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
       //$scope.solution
       //$scope.current_problem
       //$scope.game.gameID
+var audioplayer = document.getElementsByTagName('audio')[0];
+$scope.audio = "audio\\Maid with the Flaxen Hair.mp3";
+audioplayer.pause();
+audioplayer.load();
+	  
       $('#t11').removeClass('active');
       $('#t21').addClass('active');
       $('#ta11').removeClass('active');
       $('#ta21').addClass('active');
 	  $scope.specialMessage = "Let's see !";
-	  $scope.audio = "audio\\Kalimba.mp3";
+
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,

@@ -1,5 +1,5 @@
 <div ng-controller="yMBcoachingPlayController" ng-init="list()" class="container">
-            <div>
+            <div id = "allymbplay">
                 <!--<a class="janrainEngage" href="#"><input type="submit" value="Hyperlinked Sign In Button"></a>-->  
                 <div class="row-fluid"> 
                     <div class="span12 well">
@@ -51,9 +51,13 @@
                                     </font>
 									</div>
                                 </div>
-<audio  autoplay controls hidden>
-<!-- only mp3 format.. !-->
-  <source src="{{audio}}" type="audio/ogg">
+										<div id = "audioDiv">	
+										
+											
+											 <audio src="{{audio}}" autoplay controls></audio>
+
+											
+										</div>
 
 Your browser does not support the audio element.
 </audio>
