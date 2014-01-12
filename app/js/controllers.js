@@ -4026,7 +4026,7 @@ function EventController($scope, $resource){
           
           var registration = EventRegistration.save({eventId:id}, thedata, function() {
                  $scope.registration = registration;
-                 $scope.events = Event.get().events;
+                 $scope.fetch_event();
             });
         }
           
