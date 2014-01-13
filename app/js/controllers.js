@@ -3990,3 +3990,44 @@ function CountdownController($scope,$timeout) {
     //$scope.start_timer(5);
             
 }
+
+function EventController($scope, $resource){
+        $scope.event = {"name":"Default name", 
+                            "description": "Default description",
+                            "venue": "Default venue"};
+        $scope.events = [];
+  
+        var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
+                  
+        // posting without and id should result in creating an object.
+        $scope.fetch_event = function(id){
+          var event = Event.get({eventId:id}, function() {
+            $scope.last_result = event;
+            //If id return event
+            if(id){
+                 $scope.event = event;
+            }
+            else{
+                 $scope.events = event.events; 
+            }
+            
+          });
+        },
+        
+        $scope.create_edit_event = function(id){
+          var event = Event.save({eventId:id},$scope.event, function() {
+                 $scope.event = event;
+            });
+        },
+
+        $scope.register_for_event = function(id,action){
+          var EventRegistration = $resource('/jsonapi/eventregistration/:eventId', {eventId:'@id'});
+          var thedata = {"status":action};
+          
+          var registration = EventRegistration.save({eventId:id}, thedata, function() {
+                 $scope.registration = registration;
+                 $scope.fetch_event();
+            });
+        }
+          
+}

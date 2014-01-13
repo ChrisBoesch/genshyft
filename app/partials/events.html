@@ -1,0 +1,24 @@
+</br>
+</br>
+<div ng-controller="EventController" ng-init="fetch_event()">
+  <br>
+	<div class="row-fluid">
+
+          Upcoming events
+			    <ol>
+			      <li ng-repeat="event in events">
+			        {{event.name}}<br>
+              {{event.description}}<br>
+              Registration Status: {{event.currentPlayerStatus}}<br>
+              <input type="submit" value="I'd like to participate" ng-click="register_for_event(event.id, 'participate')">
+              <input type="submit" value="I'd like to come watch" ng-click="register_for_event(event.id, 'watch')">
+              <input type="submit" value="Keep me posted" ng-click="register_for_event(event.id, 'follow')">
+              <input type="submit" value="Unregister" ng-click="register_for_event(event.id, 'Not registered')">
+              <input type="submit" value="+1" ng-click="">
+              <br>
+            </li>
+            <br>
+			    </ol>
+
+	</div>
+<div>
