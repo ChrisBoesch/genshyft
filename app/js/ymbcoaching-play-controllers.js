@@ -13,7 +13,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
     $scope.permutation = "12345"; 
-    $scope.audio = "audio\\Maid with the Flaxen Hair.mp3";
+   
 	
     if($cookieStore.get("name")){
       $scope.LevelID = $cookieStore.get("name"); //retrieve level id from practice page
@@ -40,6 +40,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
       $scope.nameOfCoach= $cookieStore.get("coach"); //retrieve name of the coach
     }		
 	
+	 $scope.audio = "audio\\"+$scope.nameOfCoach+"\\welcome.mp3";
 	
 	$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
 		$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
@@ -129,8 +130,10 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
 
     }
     $scope.skip_problem = function(){
-$scope.audio ="audio\\Kalimba.mp3"
+$scope.audio = "audio\\"+$scope.nameOfCoach+"\\skip\\" + Math.floor((Math.random()*3)+1) +".mp3";
 var audioplayer = document.getElementsByTagName('audio')[0];
+
+console.log(Math.floor((Math.random()*10)+1));
 
 audioplayer.pause();
 audioplayer.load();
@@ -161,7 +164,7 @@ audioplayer.play();
       //$scope.current_problem
       //$scope.game.gameID
 var audioplayer = document.getElementsByTagName('audio')[0];
-$scope.audio = "audio\\Maid with the Flaxen Hair.mp3";
+$scope.audio = "audio\\"+$scope.nameOfCoach+"\\run\\"+Math.floor((Math.random()*3)+1)  +".mp3";
 audioplayer.pause();
 audioplayer.load();
 	  

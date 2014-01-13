@@ -19,32 +19,32 @@ myApp.run(function($httpBackend) {
 		{"title":"What Most School Don't Teach",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
-		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D",
+		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"insert question here",
 		"no":"0"},
 
 		{"title":"Art of Creative Coding",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
-		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.",
+		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"insert question here",
 		"no":"1"},
 
 		{"title":"Purpose Driven Part C",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"This is test Data for C",
+		"description":"This is test Data for C","question":"insert question here",
 		"no":"2"},
 
 		{"title":"Purpose Driven Part D",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"This is test Data for D",
+		"description":"This is test Data for D","question":"insert question here",
 		"no":"3"},
 
 		{"title":"Purpose Driven Part E",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
 		"description":"This is test Data for E"
-		,"no":"4"}   
+		,"question":"insert question here","no":"4"}   
 		]};
 		$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
 		  
