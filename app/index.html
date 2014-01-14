@@ -97,30 +97,52 @@
             <a class="brand" href="#home">SingPath</a>            
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->            
             <div class="nav-collapse collapse">              
-              <ul class="nav pull-right" id="myTab">   
-                <li>
-                  <a type="button" ng-click="checkQuestLogin()">Quests</a>
-                </li>                
-                <li>
-                  <a type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice</a>
-                </li>  
-                <li>
-                  <a type="button" ng-click="checkFeedbackLogin()">Feedback</a>
-                </li>
+              <ul class="nav pull-right" id="myTab">  
+
+              <li class="dropdown" id="practice-menu">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">Practice 
+                  <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice Coding</a>
+                    </li>
+                    <li>
+                      <a type="button" ng-click="checkMasteryLogin()">Mastery Coaching</a>
+                    </li>
+                  </ul>      
+              </li> 
+
+              <li >
+                <a type="button" ng-click="checkQuestLogin()">Quests</a>
+              </li>
+
+              <li>
+                <a type="button" ng-click="checkPurposeDrivenLogin()">Purpose Driven</a>
+              </li>
+
+              <li>
+                <a type="button" ng-click="checkFeedbackLogin()">Feedback</a>
+              </li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->                 
                 <li class="dropdown" id="menu">                  
                   <a href="" class="dropdown-toggle" data-toggle="dropdown">More... 
                     <b class="caret"></b></a>                  
                   <ul class="dropdown-menu">                    
                     <li>
-                      <a href="#tournaments">Tournaments</a>
-                    </li> 
-                    <li>
                       <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
                     </li> 
                     <li>
                       <a type="button" ng-click="checkRankingLogin()">Rankings</a>
-                    </li>                                                 
+                    </li> 
+                    <li class="divider"></li>
+                    <li class="nav-header">Tournaments</li>
+                    <li>
+                      <a type="button"ng-click="checkTournamentLogin()">Join Tournaments</a>
+                    </li> 
+                    <li>
+                      <a type="button"ng-click="checkCreateTournamentLogin()">Create Tournaments</a>
+                    </li> 
+                    <li>                                                  
                     <li class="divider"></li>                    
                     <li class="nav-header">Create</li>
                     <li>
@@ -134,6 +156,7 @@
                     <li>
                       <a href="#videos">Learn about SingPath</a>
                     </li> 
+                    <li class="divider"></li>  
                     <li ng-show="player.countryCode=='SG'" class="nav-header">Singapore Schools</li>                    
                     
                     <li ng-show="player.countryCode=='SG'">

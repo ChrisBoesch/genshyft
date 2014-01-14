@@ -159,6 +159,45 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 			alert("Please login with FaceBook or Google Account first!");
 		}
 	};
+
+	//GENShYFT Codes
+	$scope.checkMasteryLogin = function(){
+		if($scope.player.nickname){
+			$location.path("ymbcoaching");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkPurposeDrivenLogin = function(){
+		if($scope.player.nickname){
+			$location.path("purposedriven");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkTournamentLogin = function(){
+		if($scope.player.nickname){
+			$location.path("tournaments");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkCreateTournamentLogin = function(){
+		if($scope.player.nickname){
+			$location.path("mytournaments");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+	// End GENShYFT Code
+
 	
 	
     $scope.update_player_profile = function($event){  
