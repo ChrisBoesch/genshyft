@@ -11,7 +11,34 @@
 				Title
 			</div>
 			<div class="span9">
-				 <input class="span8" type="text" ng-model="tournTitle" placeholder="Enter tournament title here" ></input>
+				 <input class="span8" type="text" ng-model="grpTourTitle" placeholder="Enter tournament title here" ></input>
+			</div>
+		</div>	
+	</div>
+
+	<!--Description input field-->
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="span1"></div>
+			<div class="span2">
+				Description
+			</div>
+			<div class="span9">
+				 <textarea class="span8" rows="4" ng-model="grpTourDescription" placeholder = "Please enter a description for your tournament" >
+				</textarea>
+			</div>
+		</div>	
+	</div>
+
+	<!--Password input field-->
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="span1"></div>
+			<div class="span2">
+				Password
+			</div>
+			<div class="span9">
+				 <input class="span8" type="password" ng-model="grpTourPassword" placeholder="Enter tournament password here" ></input>
 			</div>
 		</div>	
 	</div>
@@ -26,11 +53,11 @@
 			<div class="span9">
 				 <div class="span8">
 				  <label>
-				    <input type="radio" ng-model="tournType" id="optionsRadios1" value="individual">
+				    <input type="radio" ng-model="grpTourType" id="optionsRadios1" value="individual">
 				    Individual
 				  </label>
 				  <label>
-				    <input type="radio" ng-model="tournType" id="optionsRadios2" value="group">
+				    <input type="radio" ng-model="grpTourType" id="optionsRadios2" value="group">
 				    Group
 				  </label>
 				</div>
@@ -48,7 +75,7 @@
 					Mentor Assignment within team
 				</div>
 				<div class="span1">
-					 <input type="checkbox" ng-model="withinTeam" ></input>
+					 <input type="checkbox" ng-model="grpTourMentor" ></input>
 				</div>
 			</div>	
 		</div>
@@ -61,7 +88,7 @@
 					Max no. of groups
 				</div>
 				<div class="span9">
-					 <select ng-model="maxNumGrps" ng-options="numgrp for numgrp in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+					 <select ng-model="grpTourMaxNoGroup" ng-options="numgrp for numgrp in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 				</div>
 			</div>	
 		</div>
@@ -74,7 +101,7 @@
 					Max no. of players per group
 				</div>
 				<div class="span9">
-					 <select ng-model="maxNumPlayersPerGrps" ng-options="maxnumplayers for maxnumplayers in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+					 <select ng-model="grpTourMaxNoPlayer" ng-options="maxnumplayers for maxnumplayers in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 				</div>
 			</div>	
 		</div>
@@ -112,18 +139,18 @@
 
 
 	<!--Create & Save button-->
-	<div class="row-fluid">
+	<div class="row-fluid" ng-controller="GenshyftTournamentController">
 		<div class="span12">	
 				<center>
 					<button class="btn btn-primary" id="save" type="button">Save</button>
-					<button class="btn btn-primary" id="create" type="button">Create</button>
+					<button class="btn btn-primary" id="create" type="button" ng-click="create_grptournament()">Create</button>
 				</center>
 		</div>	
 	</div>
 
 
 	<!-- Questions modal -->
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-show="qns_modal(qnsLanguage)">
 		<div class="modal-header">
 	    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	    	<h3 id="myModalLabel">Select  your questions</h3>
@@ -142,7 +169,15 @@
 
 	</div>
 
-
+	<!-- Tournament Creation Success Modal -->
+	<div class="modal fade" id="grpTournamentCreated" style="display:none">         
+    <div class="modal-body" style="color:black">
+        You have successfully created a tournament!
+    </div>
+    <div class="modal-footer">
+        <a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click="hideSuccessTournamentModal()">Ok</button></a>
+    </div>
 </div>
 
 
+</div>
