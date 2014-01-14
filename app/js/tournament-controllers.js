@@ -8,12 +8,37 @@ $('#myTab a').click(function (e) {
 });
 
 /*TournamentController*/
-function GenshyftTournamentController($scope,$resource){
+function GenshyftTournamentController($scope,$resource,$timeout){
 
 	$scope.rounds = [1];
 	$scope.tournaments = {};
 	$scope.unregisteredPlayers = {};
 	$scope.registeredPlayers = {};
+  $scope.statusValue = 0;
+
+  /*Function which auto refresh*/
+  var scheduleReload = function(){
+    console.log("get_unregisteredPlayers");
+    $resource("/jsonapi/unregisteredPlayersTest/ALL").get({},
+      function(response){
+        $scope.unregisteredPlayers = response; // stores the Json files
+        console.log($scope.unregisteredPlayers);
+    });
+    $timeout(function(){ scheduleReload(); }, 2000);
+  };
+
+  /*Function which calculate the countdown time, takes in seconds*/
+  var tournamentCountdownCal = function(tournamentActivationTime, currentServerTime, timeLimit){    
+    var timeDifference = currentServerTime - tournamentActivationTime;
+    counter = 0;
+    if(timeDifference <= 0){
+      counter = 0;
+    }else if(timeLimit <= timeDifference){
+      counter = 0;
+    }else if(timeLimit >= timeDifference){
+      counter = timeLimit - timeDifference;
+    }
+  };
 
 	$scope.add_tournaments = function(){
 		$scope.tournament_title = {};
@@ -46,11 +71,7 @@ function GenshyftTournamentController($scope,$resource){
     };
 
     $scope.get_unregisteredPlayers = function(){
-        console.log("get_unregisteredPlayers");
-        $resource("/jsonapi/unregisteredPlayersTest/ALL").get({},function(response){
-            $scope.unregisteredPlayers = response; // stores the Json files
-            console.log($scope.unregisteredPlayers);
-       	});
+        scheduleReload(); 
     };
 
     $scope.get_registeredPlayers = function(){
@@ -148,5 +169,9 @@ function GenshyftTournamentController($scope,$resource){
     $('#grpTournamentCreated').modal('hide');
     window.location="index.html#/mytournaments";
   };
+
+  $scope.get_tournament_details = function(){
+
+  }
 
 }
