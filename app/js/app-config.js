@@ -35,6 +35,7 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/ymbcoaching', {templateUrl: 'partials/ymbcoaching.html', controller: IndexController});
     $routeProvider.when('/ymbcoaching-play', {templateUrl: 'partials/ymbcoaching-play.html', controller: IndexController});
     $routeProvider.when('/ymbcoaching-shzedit', {templateUrl: 'partials/ymbcoaching-shzedit.html', controller: IndexController});
+    $routeProvider.when('/home2', {templateUrl: 'partials/home2.html', controller: IndexController});
     $routeProvider.otherwise({redirectTo: '/home'});
 }]);
 
