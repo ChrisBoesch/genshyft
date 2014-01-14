@@ -161,6 +161,28 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 	};
 
 //GENShYFT Codes
+	$scope.toVideos = function(){
+		$location.path("videos");
+	}
+
+	$scope.checkCreatePathorLevelLogin = function(){
+		if($scope.player.nickname){
+			$location.path("create");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkSchoolRegistrationLogin = function(){
+		if($scope.player.nickname){
+			$location.path("schoolregistration");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
 	$scope.checkMasteryLogin = function(){
 		if($scope.player.nickname){
 			$location.path("ymbcoaching");
@@ -191,6 +213,15 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 	$scope.checkCreateTournamentLogin = function(){
 		if($scope.player.nickname){
 			$location.path("mytournaments");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkEventsLogin = function(){
+		if($scope.player.nickname){
+			$location.path("events");
 		}
 		else{
 			alert("Please login with FaceBook or Google Account first!");
