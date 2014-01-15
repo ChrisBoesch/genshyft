@@ -30,6 +30,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
           console.log("get_purpose driven videos");
           $resource("/jsonapi/purposeVideos/ALL").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
+			  $scope.videoArray = $scope.purposeVideos.Videos[0].title;
                console.log($scope.purposeVideos);
         	 })
         }
