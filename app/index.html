@@ -98,26 +98,18 @@
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->            
             <div class="nav-collapse collapse">              
               <ul class="nav pull-right" id="myTab">  
-
-              <li class="dropdown" id="practice-menu">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown">Practice 
-                  <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice Coding</a>
-                    </li>
-                    <li>
-                      <a type="button" ng-click="checkMasteryLogin()">Mastery Coaching</a>
-                    </li>
-                  </ul>      
-              </li> 
-
+              <li>
+                <a type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice</a>
+              </li>
               <li >
                 <a type="button" ng-click="checkQuestLogin()">Quests</a>
               </li>
 
               <li>
-                <a type="button" ng-click="checkPurposeDrivenLogin()">Purpose Driven</a>
+                <a type="button" ng-click="checkMasteryLogin()">Mastery</a>
+              </li>
+              <li>
+                <a type="button" ng-click="checkPurposeDrivenLogin()">Purpose</a>
               </li>
 
               <li>
@@ -130,10 +122,13 @@
                   <ul class="dropdown-menu"> 
                     <li class="nav-header">Tournaments</li>
                     <li>
+                      <a type="button" ng-click="checkEventsLogin()">Upcoming Events</a>
+                    </li>
+                    <li>
                       <a type="button" ng-click="checkTournamentLogin()">Join Tournaments</a>
                     </li> 
                     <li>
-                      <a type="button" ng-click="checkCreateTournamentLogin()">Create Tournaments</a>
+                      <a type="button" ng-click="checkCreateTournamentLogin()">My Tournaments</a>
                     </li> 
                     <li>                                                  
                     <li class="divider"></li>                    
@@ -157,9 +152,7 @@
                     </li>
                     <li class="divider"></li> 
                     <li class="nav-header">Others</li>  
-                    <li>
-                      <a type="button" ng-click="checkEventsLogin()">Events</a>
-                    </li>                   
+                                       
                     <li>
                       <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
                     </li> 
