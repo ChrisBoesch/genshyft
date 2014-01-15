@@ -14,16 +14,16 @@
 					
 						 
 						<form action="" onclick="enableButton2()" >
-						<table> 
-							<tr><td> <input type="radio" name="rating" value="male">Very<br></td></tr>
-							<tr><td> <input type="radio" name="rating" value="female">A little<br></td></tr>
-							<tr><td> <input type="radio" name="rating" value="male">Nah..<br></td></tr>
-							<tr><td> <input type="radio" name="rating" value="female">NO!<br></td></tr>
+						<table cellspacing ="4"> 
+							<tr><td> <input type="radio" name="rating" value="1"> I cannot Relate<br></td></tr>
+							<tr><td> <input type="radio" name="rating" value="2"> Maybe a little<br></td></tr>
+							<tr><td> <input type="radio" name="rating" value="3"> Somewhat like me<br></td></tr>
+							<tr><td> <input type="radio" name="rating" value="4"> I like this<br></td></tr>
 						<!-- value= "{{purposeVideosUnlocked.Unlocked[vno].v}}"; !-->	
 						</table>
 						</form>
 						 
-						 	 <center> <button id="nextVideo" disabled ng-click = "nextVideo(vno,purposeVideos.Videos,purposeVideosUnlocked.Unlocked)"> Next  </button>  </center>
+						 	 <center> <button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos,purposeVideosUnlocked.Unlocked)"> Next  </button>  </center>
 						 
 						</td>
 					
