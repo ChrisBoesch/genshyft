@@ -25,6 +25,16 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.grpTourMentor ="";
     $scope.grpTourMaxNoGroup ="";
     $scope.grpTourMaxNoPlayer ="";
+
+    //Taken From TournamentController
+    $scope.TournamentModel = $resource('/jsonapi/list_open_tournaments');
+    $scope.TournamentHeatGameModel = $resource('/jsonapi/create_game/heatID/:heatID');
+    $scope.TournamentHeatModel = $resource('/jsonapi/get_heat_ranking');
+    $scope.tournamentID = null;
+    //$scope.heatID = 12883052;
+    $scope.heat = null;
+    $scope.round = null;
+    $scope.roundDirty = false;
   };
   /*Function which auto refresh*/
   var scheduleReload = function(){
@@ -80,6 +90,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
             console.log($scope.tournaments);
        	});
     };
+
 
     $scope.get_unregisteredPlayers = function(){
         scheduleReload(); 
@@ -181,9 +192,38 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     window.location="index.html#/mytournaments";
   };
 
-  $scope.get_tournament_details = function(){
+  $scope.fetch_tournament_details = function(tournamentID){
+    $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
+        $scope.tournament = response;
+        //$scope.startTime = new Date("2013-09-29 08:24:46.840830");
+        //$scope.stopTime = new Date("2013-09-29 12:00:11.784760");
+        //console.log(($scope.stopTime - $scope.startTime)/1000);
+    });
+  };
 
-  }
+  $scope.register_for_tournament_new = function(tournamentID, tournamentPassword){
+        //Use a normal form post for this legacy API.
+        console.log("id "+tournamentID+" "+tournamentPassword);
+        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        $http.post("/jsonapi/register_for_tournament_updated", {
+            tournamentID: tournamentID,
+            password: tournamentPassword
+        }).success(function (data, status, headers, config) {
+            $scope.registration_response = data;
+            console.log(data);
+            if (data.failed){
+              alert(data.failed);
+            }
+            else{
+              $scope.tournamentID = tournamentID;
+              $scope.fetch_tournament_details(tournamentID);
+            }
+        }).error(function (data, status, headers, config) {
+          console.log("Error");
+            alert("An error occurred.")
+            console.log(data);
+        });
+    };
 
 }
 
