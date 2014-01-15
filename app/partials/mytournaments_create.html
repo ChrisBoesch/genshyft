@@ -1,5 +1,5 @@
 </br>
-<div ng-controller="GenshyftTournamentController" class="container" id="tourncreate"style="position:relative;" >
+<div ng-controller="GenshyftTournamentController" ng-init="loading()" class="container" id="tourncreate"style="position:relative;" >
 	<center><h2>Tournament Creation</h2></center>
 	</br>
 	</br>
@@ -65,7 +65,7 @@
 		</div>	
 	</div>
 
-	<div ng-show="tournType == 'group'">
+	<div ng-show="grpTourType == 'group'">
 
 		<!--Mentor assignments-->
 		<div class="row-fluid">

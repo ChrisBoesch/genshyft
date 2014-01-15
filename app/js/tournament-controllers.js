@@ -8,14 +8,24 @@ $('#myTab a').click(function (e) {
 });
 
 /*GENShYFT's TournamentController*/
-function GenshyftTournamentController($scope,$resource,$timeout){
+function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route){
 
-	$scope.rounds = [1];
-	$scope.tournaments = {};
-	$scope.unregisteredPlayers = {};
-	$scope.registeredPlayers = {};
-  $scope.statusValue = 0;
+  $scope.loading = function(){	
+    $scope.rounds = [1];
+  	$scope.tournaments = {};
+  	$scope.unregisteredPlayers = {};
+  	$scope.registeredPlayers = {};
+    $scope.statusValue = 0;
 
+    $scope.grpTourTitle ="";
+    $scope.grpTourDescription ="";
+    $scope.grpTourPassword ="";
+    $scope.grpTourStatus ="Closed";
+    $scope.grpTourType ="";
+    $scope.grpTourMentor ="";
+    $scope.grpTourMaxNoGroup ="";
+    $scope.grpTourMaxNoPlayer ="";
+  };
   /*Function which auto refresh*/
   var scheduleReload = function(){
     console.log("get_unregisteredPlayers");
@@ -65,7 +75,7 @@ function GenshyftTournamentController($scope,$resource,$timeout){
   //Gets tournaments created by user.
 	$scope.get_mytournaments = function(){
         console.log("get_mytournaments");
-        $resource("/jsonapi/mytournaments/all").get({},function(response){
+        $resource("/jsonapi/list_grpTournaments/all").get({},function(response){
             $scope.tournaments = response; // stores the Json files
             console.log($scope.tournaments);
        	});
@@ -121,7 +131,7 @@ function GenshyftTournamentController($scope,$resource,$timeout){
         }
       });
       */
-      $scope.grpTourModel = $resource('/jsonapi/list_grpTournaments');
+      $scope.grpTourModel = $resource('/jsonapi/list_grpTournaments/all');
       $scope.grpTourModel.get({}, function(response){
         $scope.newGrpTournament = {};
         $scope.newGrpTournament.title = $scope.grpTourTitle;
@@ -129,7 +139,7 @@ function GenshyftTournamentController($scope,$resource,$timeout){
         $scope.newGrpTournament.password = $scope.grpTourPassword;
         $scope.newGrpTournament.status = $scope.grpTourStatus;
         $scope.newGrpTournament.type = $scope.grpTourType;
-        $scope.newGrpTournament.mentorAssignment = $scope.grpTourMentor
+        $scope.newGrpTournament.mentorAssignment = $scope.grpTourMentor;
         $scope.newGrpTournament.maxNoGroup = $scope.grpTourMaxNoGroup;
         $scope.newGrpTournament.maxNoPlayer = $scope.grpTourMaxNoPlayer;
 
@@ -143,7 +153,7 @@ function GenshyftTournamentController($scope,$resource,$timeout){
           alert("The tournament password cannot be empty!");
         }
         else if($scope.newGrpTournament.type==""){
-          alert("The tournament type cannot be empty!");
+          alert("Please select a tournament type!");
         }
         else if($scope.newGrpTournament.type=="group"){
           if($scope.newGrpTournament.maxNoGroup==""){
