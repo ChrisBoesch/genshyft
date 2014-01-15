@@ -47,7 +47,7 @@ myApp.run(function($httpBackend) {
 		"description":"This is test Data for E"
 		,"question":"insert question here","no":"4"}   
 		]};
-		$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
+	$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
 		  
 	var tournaments = {"Tournaments":[
 		{"tournamentId":"001",
@@ -71,7 +71,7 @@ myApp.run(function($httpBackend) {
 		"maxNoOfPlayers":"5"}
 		
 		]};
-		$httpBackend.whenGET('/jsonapi/tournamentsTest/ALL').respond(tournaments);
+		$httpBackend.whenGET('/jsonapi/mytournaments/all').respond(tournaments);
 
 	var unregisteredPlayers = {"UnregisteredPlayers":[
 		{"tournamentId":"12345",
@@ -89,127 +89,87 @@ myApp.run(function($httpBackend) {
 		]};
 		$httpBackend.whenGET('/jsonapi/unregisteredPlayersTest/ALL').respond(unregisteredPlayers);
 		
-	var registeredPlayers =
-	    {"TournamentID": "12345",
-	    "Groups": [
+	var registeredPlayers = {
+	    "TournamentID": "12345",
+	    "Groups": [{
+	       "grpNum": "1",
+	        "Players": [{
+	            "playerId": "123",
+	            "playerName": "Thor"},
+	        	{
+	            "playerId": "234",
+	            "playerName": "Loki"},
+	        	{
+	            "playerId": "345",
+	            "playerName": "Algor"}]},
+	    	{
+            "grpNum": "2",
+            "Players": [{
+                "playerId": "678",
+                "playerName": "Peter"},
+            	{
+                "playerId": "789",
+                "playerName": "Mary"},
+            	{
+                "playerId": "890",
+                "playerName": "May"},
+           		{
+                "playerId": "901",
+                "playerName": "Harry"},
+            	{
+                "playerId": "012",
+                "playerName": "Oct"}]},
 	        {
-	            "grpNum": "1",
-	            "Players": [
-	                {
-	                    "playerId": "123",
-	                    "playerName": "Thor"
-	                },
-	                {
-	                    "playerId": "234",
-	                    "playerName": "Loki"
-	                },
-	                {
-	                    "playerId": "345",
-	                    "playerName": "Algor"
-	                }      
-	            ]
-	        },
+            "grpNum": "3",
+            "Players": [{
+                "playerId": "110",
+                "playerName": "Tony"},
+           	 	{
+                "playerId": "111",
+                "playerName": "Rhody" },
+            	{
+                "playerId": "112",
+                "playerName": "Mandarin"},
+            	{
+                "playerId": "113",
+                "playerName": "Jarvis"},
+           	 	{
+                "playerId": "114",
+                "playerName": "Pepper"}]},
 	        {
-	            "grpNum": "2",
-	            "Players": [
-	                {
-	                    "playerId": "678",
-	                    "playerName": "Peter"
-	                },
-	                {
-	                    "playerId": "789",
-	                    "playerName": "Mary"
-	                },
-	                {
-	                    "playerId": "890",
-	                    "playerName": "May"
-	                },
-	                {
-	                    "playerId": "901",
-	                    "playerName": "Harry"
-	                },
-	                {
-	                    "playerId": "012",
-	                    "playerName": "Oct"
-	                }
-	            ]
-	        },
+            "grpNum": "4",
+            "Players": [{
+                "playerId": "221",
+                "playerName": "Logan"},
+           	 	{
+                "playerId": "222",
+                "playerName": "Xavier"},
+            	{
+                "playerId": "223",
+                "playerName": "Jean" },
+            	{
+                "playerId": "224",
+                "playerName": "Scott"},
+            	{
+                "playerId": "225",
+                "playerName": "Gambit"}]},
 	        {
-	            "grpNum": "3",
-	            "Players": [
-	                {
-	                    "playerId": "110",
-	                    "playerName": "Tony"
-	                },
-	                {
-	                    "playerId": "111",
-	                    "playerName": "Rhody"
-	                },
-	                {
-	                    "playerId": "112",
-	                    "playerName": "Mandarain"
-	                },
-	                {
-	                    "playerId": "113",
-	                    "playerName": "Jarvis"
-	                },
-	                {
-	                    "playerId": "114",
-	                    "playerName": "Pepper"
-	                }
-	            ]
-	        },
-	        {
-	            "grpNum": "4",
-	            "Players": [
-	                {
-	                    "playerId": "221",
-	                    "playerName": "Logan"
-	                },
-	                {
-	                    "playerId": "222",
-	                    "playerName": "Xavier"
-	                },
-	                {
-	                    "playerId": "223",
-	                    "playerName": "Jean"
-	                },
-	                {
-	                    "playerId": "224",
-	                    "playerName": "Scott"
-	                },
-	                {
-	                    "playerId": "225",
-	                    "playerName": "Gambit"
-	                }
-	            ]
-	        },
-	        {
-	            "grpNum": "5",
-	            "Players": [
-	                {
-	                    "playerId": "331",
-	                    "playerName": "Sky"
-	                },
-	                {
-	                    "playerId": "332",
-	                    "playerName": "May"
-	                },
-	                {
-	                    "playerId": "333",
-	                    "playerName": "Phil"
-	                },
-	                {
-	                    "playerId": "334",
-	                    "playerName": "Feeks"
-	                },
-	                {
-	                    "playerId": "335",
-	                    "playerName": "Fury"
-	                }
-	            ]
-	        }
-	    ]
+            "grpNum": "5",
+            "Players": [{
+                "playerId": "331",
+                "playerName": "Sky"},
+            	{
+                "playerId": "332",
+                "playerName": "May"},
+            	{
+                "playerId": "333",
+                "playerName": "Phil"},
+            	{
+                "playerId": "334",
+                "playerName": "Feeks"},
+            	{
+                "playerId": "335",
+                "playerName": "Fury"}]}]
 	};
 	$httpBackend.whenGET('/jsonapi/registeredPlayersTest/ALL').respond(registeredPlayers);
 		
