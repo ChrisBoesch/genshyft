@@ -210,13 +210,13 @@ float:left;
 	
 	
 	
-	
+	<!--
 	
 
 	<div class="row-fluid">
 
 	<div class="span12">
-	<div class="container" > <!-- start of select language !-->		
+	<div class="container" > <!-- start of select language !	
 		<h4 class="well well-small bootCamp" align="center" id="well-c" >2. Select a language</h4>
 
 		</div>
@@ -224,7 +224,7 @@ float:left;
 		<div id="myCarousel" class="carousel slide" ng-hide="difficulty=='Drag-n-Drop'">
 			<div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
 				<div class="item" ng-repeat="paths in paths_grouped" ng-class="{active : $first}" >
-	                <!-- Three columns of text below the carousel -->
+	                <!-- Three columns of text below the carousel 
 					<div class="container">
 						<div class="row">	
 							<div class="span4"  ng-repeat="path in paths" ng-init="practiceSelection()">
@@ -245,7 +245,7 @@ float:left;
 		<div id="myCarouselB" class="carousel slide" ng-show="difficulty=='Drag-n-Drop'">
 			<div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
 				<div class="item" ng-repeat="mobile_path in mobile_paths_grouped" ng-class="{active : $first}" >
-	                <!-- Three columns of text below the carousel -->
+	                <!-- Three columns of text below the carousel 
 					<div class="container">
 						<div class="row">	
 							<div class="span4" ng-repeat="path in mobile_path" ng-init="practiceBeginnerSelection()">
@@ -263,7 +263,7 @@ float:left;
 			<a class="right carousel-control" data-target="#myCarouselB" data-slide="next">&rsaquo;</a>
 		</div>
 		</div>
-		</div> <!-- end of select language !-->
+		</div> <!-- end of select language 
 	
 	
 	
@@ -298,7 +298,7 @@ float:left;
 	<div class="row-fluid">
 	<div class="span12">
 	
-		<!--display the level, topic name & progress of the player when the path is selected by the player-->
+		<!--display the level, topic name & progress of the player when the path is selected by the player
 					<div class="span12" ng-model="$parent.pathName" >
 						<div align="center"><h4  class="well well-small bootCamp">#3. Select a Path Level!</h4></div>
 						<div class = "tabbable well well-small">                      
@@ -416,7 +416,7 @@ float:left;
 							</td></tr>
 				
 							<tr><td>
-						!-->
+						
 						
 								</br>
 								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><h5>Master  Level {{lvlName}} Now </h5></button></div>
@@ -426,7 +426,7 @@ float:left;
 						<!--	
 							</td></tr>
 						</table>
-						!--> 
+						
 	</div> <!-- end of select play !-->
 	
 	
@@ -449,6 +449,7 @@ float:left;
 		</div>
 	</div>
 </div>
+
 
 <script>
 	$("#myCarousel")
@@ -560,3 +561,47 @@ float:left;
 
 
  !-->
+	<div class ="container">
+	
+		<div class="tabbable" ng-controller="PathController" ng-init="update_path_details();get_player_progress();list()">
+		  <ul class="nav nav-tabs">
+
+			<li class="tabspacing">
+			  <a data-target="#practice" data-toggle="tab">Click to Select Path to master</a>
+			</li>
+ 
+		  </ul>
+		  <div class="tab-content">
+	
+			<div class="tab-pane" id="practice">
+			  <div width="400px"style="width:98.7%; height:30px">
+				<table class="table table-condensed">
+					<tr>
+						<th class="name">Path Name</th>
+						<th class="myprogress">Progress</th>
+						<th class="continue">Take the leap</th>
+					</tr>                                   
+				</table> 
+				</div>
+				<div style="height:270px;overflow-y:auto;overflow-x:hidden" ng-model="filter">
+					<table class="table table-hover">
+						<tr ng-repeat="path in player_progress.paths" ng-init="count(0);">	   
+							<td class="name">{{path.name}}</td>
+							<td class="myprogress">{{path.solvedProblems}}/{{path.problemsInPath}}
+								<div class="progress progress-success">
+									<div class="bar" style="width:{{count = (path.solvedProblems/path.problemsInPath)*100 |number:0}}%"></div>
+								</div>
+							</td>
+							<td class="continue">
+								<button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(path.id,path.name,5)">Resume!!</button>
+							</td>                                 
+						</tr>									 
+					</table>				
+				</div>
+			</div>
+
+		</div>
+		
+	</div>
+	
+	</div>
