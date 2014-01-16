@@ -10,6 +10,16 @@ $('#myTab a').click(function (e) {
 /*GENShYFT's TournamentController*/
 function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route){
 
+  //Taken From TournamentController
+    $scope.TournamentModel = $resource('/jsonapi/list_open_tournaments');
+    $scope.TournamentHeatGameModel = $resource('/jsonapi/create_game/heatID/:heatID');
+    $scope.TournamentHeatModel = $resource('/jsonapi/get_heat_ranking');
+    $scope.tournamentID = null;
+    //$scope.heatID = 12883052;
+    $scope.heat = null;
+    $scope.round = null;
+    $scope.roundDirty = false;
+
   $scope.loading = function(){	
     $scope.rounds = [1];
   	$scope.tournaments = {};
@@ -25,16 +35,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.grpTourMentor ="";
     $scope.grpTourMaxNoGroup ="";
     $scope.grpTourMaxNoPlayer ="";
-
-    //Taken From TournamentController
-    $scope.TournamentModel = $resource('/jsonapi/list_open_tournaments');
-    $scope.TournamentHeatGameModel = $resource('/jsonapi/create_game/heatID/:heatID');
-    $scope.TournamentHeatModel = $resource('/jsonapi/get_heat_ranking');
-    $scope.tournamentID = null;
-    //$scope.heatID = 12883052;
-    $scope.heat = null;
-    $scope.round = null;
-    $scope.roundDirty = false;
   };
   /*Function which auto refresh*/
   var scheduleReload = function(){
