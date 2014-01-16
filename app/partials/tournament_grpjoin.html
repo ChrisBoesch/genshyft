@@ -31,7 +31,7 @@
 </br>
 <div class="container" id="grpJoinTourn" style="position:relative" ng-controller="GenshyftTournamentController">
 
-	<div class="row-fluid"  ng-init="register_for_tournament_new('5060388987076608','');">
+	<div class="row-fluid"  ng-init="tournamentInit();">
 		<div class="span12">
 
 			<div class="span4" style="overflow:auto;" width="100%">
@@ -63,7 +63,7 @@
 	    					Number of problems {{round.problemIDs.length}}<br>
 								<div ng-controller="CountdownController" ng-init="start_timer(get_seconds_to_start(round.currentHeatDetails.startTime, round.currentHeatDetails.currentTime))">
 									<font ng-show="counter>0">Round starting in <b> {{counter}} seconds </b> </font><font ng-show="counter==0"><b>Round have started, Let's </b></font><font ng-show="counter<0"><b>Round have not started</b> </font>
-									<button class="btn btn-primary" type="button" ng-show="counter==0">Play </button>
+									<button class="btn btn-primary" type="button" ng-show="counter==0" ng-click="create_tournament_round_game(round.roundID)">Play </button>
 									</br>
 									</br>
 								</div>
@@ -72,12 +72,10 @@
 					</div>
 				</div>	
 				
-			</br>
 			
 			</div>			
 		</div>
 	</div>
-	</br>
 
 	<div class="row-fluid">
 		<div class"span12">
@@ -102,24 +100,28 @@
 				<div class="row-fluid" ng-init="get_registeredPlayers()" >
 					<div class="row-fluid" >
 						<div class="span12 well well-small" >
-							<div ng-repeat="group in registeredPlayers.Groups track by $index">
+							<div >
 								<table class="table table-hover">
 
-									<th><b >Group {{registeredPlayers.Groups[$index].grpNum}}</b></th>
-									</br>
-								
-									<tr class="Group_Member" ng-repeat="player in registeredPlayers.Groups[$index].Players">
-										<td>{{player.playerName}}</td>
+									<tr >
+										<td ng-repeat="group in registeredPlayers.Groups track by $index">
+										<b >Group {{registeredPlayers.Groups[$index].grpNum}}</b>
+										
+											<li ng-repeat="player in registeredPlayers.Groups[$index].Players">{{player.playerName}}</li>
+										
+										</td>
+
 									</tr>
-								
-									<!-- 1. To make button dynamic, lock buttons after player has joined -->
-									<!-- 2. To update the teams with new player after clicking join, page has to be refreshed to show updated team list -->
 									<tr>
-										<td>
+										<td ng-repeat="group in registeredPlayers.Groups track by $index">
+											<!-- 1. To make button dynamic, lock buttons after player has joined -->
+											<!-- 2. To update the teams with new player after clicking join, page has to be refreshed to show updated team list -->
+
 											<button class="btn btn-primary ng-hide" ng-click="animationsOff=true" ng-hide="animationsOff" style="">Join</button>
 											<button class="btn btn-danger" ng-click="animationsOff=false" ng-show="animationsOff" style="">Leave Team</button>
-										</td>
+											</td>
 									</tr>
+									</br>
 								</table>
 							</div>
 						</div>
