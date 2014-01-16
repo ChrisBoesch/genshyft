@@ -15,10 +15,40 @@
 						 
 						<form action="" onclick="enableButton2()" >
 						<table cellspacing ="4"> 
-							<tr><td> <input type="radio" name="rating" value="1"> I cannot Relate<br></td></tr>
-							<tr><td> <input type="radio" name="rating" value="2"> Maybe a little<br></td></tr>
-							<tr><td> <input type="radio" name="rating" value="3"> Somewhat like me<br></td></tr>
-							<tr><td> <input type="radio" name="rating" value="4"> I like this<br></td></tr>
+						
+						
+							<tr><td> 
+							<div ng-show = "purposeVideosUnlocked.Unlocked[vno].rating === '1'">
+							<input type="radio" name="rating" value="1" checked> I cannot Relate 1
+							</div>
+							<div ng-hide = "purposeVideosUnlocked.Unlocked[vno].rating === '1' ">
+							<input type="radio" name="rating" value="1"> I cannot Relate 2
+							</div>							
+							<br></td></tr>
+							<tr><td> 
+								<div ng-show = "purposeVideosUnlocked.Unlocked[vno].rating === '2' ">
+									<input type="radio" name="rating" value="2" checked> Not Really Relate 
+									</div>
+									<div ng-hide = "purposeVideosUnlocked.Unlocked[vno].rating === '2' ">
+									<input type="radio" name="rating" value="2"> Not ReallyRelate 
+								</div>	
+							<br></td></tr>
+							<tr><td> 
+								<div ng-show = "purposeVideosUnlocked.Unlocked[vno].rating === '3' ">
+									<input type="radio" name="rating" value="3" checked>  A Little Yes 
+									</div>
+									<div ng-hide = "purposeVideosUnlocked.Unlocked[vno].rating === '3' ">
+									<input type="radio" name="rating" value="3"> A Little Yes
+								</div>	
+							<br></td></tr>
+							<tr><td> 
+								<div ng-show = "purposeVideosUnlocked.Unlocked[vno].rating === '4' ">
+									<input type="radio" name="rating" value="4" checked> Really Relate 
+									</div>
+									<div ng-hide = "purposeVideosUnlocked.Unlocked[vno].rating === '4' ">
+									<input type="radio" name="rating" value="4"> Really Relate 
+								</div>	
+							<br></td></tr>
 						<!-- value= "{{purposeVideosUnlocked.Unlocked[vno].v}}"; !-->	
 						</table>
 						</form>

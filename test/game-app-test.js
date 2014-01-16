@@ -174,14 +174,15 @@ myApp.run(function($httpBackend) {
 	$httpBackend.whenGET('/jsonapi/registeredPlayersTest/ALL').respond(registeredPlayers);
 		
 	var videosUnlock = {"Unlocked":[
-		{"no":"0", "s":"true"},
-		{"no":"1", "s":"true"},
-		{"no":"2", "s":"false"},
-		{"no":"3", "s":"false"},
-		{"no":"4", "s":"false"}
+		{"no":"0", "s":"true", "rating" : "1"},
+		{"no":"1", "s":"true", "rating" : "1"},
+		{"no":"2", "s":"false", "rating" : "0"},
+		{"no":"3", "s":"false", "rating" : "0"},
+		{"no":"4", "s":"false", "rating" : "0"}
 		]};
 	
 	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
+	$httpBackend.whenPOST('/jsonapi/purposeVideos/CURRENT').respond({"result":"video unlock!"});
 
 
       var events = {"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};
