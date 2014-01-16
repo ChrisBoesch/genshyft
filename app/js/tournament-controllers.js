@@ -36,11 +36,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.grpTourTitle ="";
     $scope.grpTourDescription ="";
     $scope.grpTourPassword ="";
-    $scope.grpTourStatus ="Closed";
-    $scope.grpTourType ="";
+    $scope.grpTourStatus ="closed";
+    $scope.grpTourType ="individual";
     $scope.grpTourMentor ="";
     $scope.grpTourMaxNoGroup ="";
     $scope.grpTourMaxNoPlayer ="";
+    $scope.qnsLanguage ="Ruby";
   };
   /*Function which auto refresh*/
   var scheduleReload = function(){
@@ -83,8 +84,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 	};
 
   //To implement for Create Tournaments
-	$scope.questions = function(){
-
+	$scope.get_tournamentQns = function(){
+    console.log("get_tournamentQns");
+    $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
+        $scope.tournamentQns = response; // stores the Json files
+        console.log($scope.tournamentQns);
+    });
        
 	}
 
@@ -115,9 +120,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   };
   
+  /* engsen
   $scope.add_qns = function(qnsLanguage){
     if(qnsLanguage==undefined){
       alert("Please choose a language for the round!");
+      $('#myModal').modal('hide');
+      //return false;
     }
   };
 
@@ -126,6 +134,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       return false;
     }
   };
+  */
 
   $scope.create_grptournament = function(){
     /*
@@ -168,15 +177,22 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       else if($scope.newGrpTournament.password==""){
         alert("The tournament password cannot be empty!");
       }
-      else if($scope.newGrpTournament.type==""){
-        alert("Please select a tournament type!");
-      }
       else if($scope.newGrpTournament.type=="group"){
         if($scope.newGrpTournament.maxNoGroup==""){
-          alert("The tournament title cannot be empty!");
+          alert("Please specify the maximum number of groups!");
         }
         else if($scope.newGrpTournament.maxNoPlayer==""){
-          alert("The tournament title cannot be empty!");
+          alert("Please specify the maximum number of players per group!");
+        }
+        else{
+          $scope.NewGrpTournament = $resource('/jsonapi/add_or_update_grptournament');
+          var new_grpTournament = new $scope.NewGrpTournament($scope.newGrpTournament);
+          new_grpTournament.$save(function(response){
+            $scope.grpTournament = response;
+            console.log("new group tournament" + response);
+            $scope.newGrpTournamentID = response.id;
+          });
+          $('#grpTournamentCreated').modal('show');
         }
       }
       else{
@@ -353,6 +369,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
                        "largePicture": "largePicture",
                        "status": "Closed",
                        "type": "Normal"}
+          //backend POST but not in game-app-test.js --engsen
           $scope.NewTournament = $resource('/jsonapi/add_or_update_tournament');
       var new_tournament = new $scope.NewTournament(data);
       new_tournament.$save(function(response){
