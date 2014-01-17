@@ -127,14 +127,14 @@ float:left;
 
 
 
-
+<!--
 <div ng-controller="yMBCoachingController" ng-init="list();">
 
 		<center><b> This UI does not support responsive yet </b></center>
 
 		<!-- /.carousel This is select difficulty , also there coaches name-->
 
-
+<!--
 
 
 		<div class="container marketing">
@@ -151,11 +151,12 @@ float:left;
 
 
 <!-- This is the coaches part!-->
-
+	<!--
 
 			<div class="row-fluid">
 				<div class="span12">
-					<div class="span12 align="center"> <!-- Difficulty level !-->
+			
+					<div class="span12 align="center"> <!-- Difficulty level !--
 						<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') > -1 && currentURL.indexOf('difficulty') > -1">#2. Select {{passed_in_difficulty}}</h4>
 
 						<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') == -1">1. Select Your Mentor!</h4>
@@ -183,23 +184,26 @@ float:left;
 			</div>
 		</div>
 
-
+!-->
 		
-		<div class ="container" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop','coach':'Shannon','link': 'img/mbcoach/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends'},
+		<div class ="container" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop','coach':'Shannon','link': 'img/mbcoach/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
 
-						{'name':'Easy','id':'Easy','coach':'Sandra','link': 'img/mbcoach/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview' },
+						{'name':'Easy','id':'Easy','coach':'Sandra','link': 'img/mbcoach/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview','show':'true' },
 
-						{'name':'Medium','id':'Medium','coach':'Zandar','link': 'img/mbcoach/Zandar.jpg','desc':'Hacker that wants you to be more awesome'},
+						{'name':'Medium','id':'Medium','coach':'Zandar','link': 'img/mbcoach/Zandar.jpg','desc':'Hacker that wants you to be more awesome','show':'true'},
 
-						{'name':'Hard','id':'Hard','coach':'SGT MJR','link': 'img/mbcoach/SGT MJR.jpg','desc':'Wants you to quit before you get someone killed'}];">
+						{'name':'Hard','id':'Hard','coach':'SGT MJR','link': 'img/mbcoach/SGT MJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}];">
 						
+		<div>
+		<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') == -1">1. Select Your Mentor!</h4>				
 		      
-				<table>
+				<table cellpadding ="10">
 				<tr>
 				<td>
 					<select ng-model="coaches" ng-options="mentor.coach for mentor in levels">
 						<option value="">-- choose coach --</option>
 					</select>
+					
 				</td>
 				<td>
 				
@@ -207,13 +211,16 @@ float:left;
 					
 				</td>				
 				<td>
+					
 					{{coaches.desc}}
+					
 				</td>
 				</tr>
 				</table>
 			  <br/>
 		
 		</div>
+	
 
 
 
@@ -463,11 +470,11 @@ float:left;
 	
 	
 	
-	
-	
+	{{coaches.show}} +++
 	
 
-
+<div class="row-fluid">
+				<div class="span12">
 
 	<div class="modal fade" id="levelBlock" style="display:none">    		
 		<div class="modal-body" style="color:black">
@@ -477,6 +484,7 @@ float:left;
 			<a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click='hideModal()'>Back</button></a>
 		</div>
 	</div>
+</div>
 </div>
 
 
@@ -590,6 +598,8 @@ float:left;
 
 
  !-->
+ {{coaches.show}} xyz
+ <div ng-show = "coaches.show">
 	<div class ="container">
 	
 		<div class="tabbable" ng-controller="PathController" ng-init="update_path_details();get_player_progress();list()">
@@ -632,5 +642,6 @@ float:left;
 		</div>
 		
 	</div>
-	
+	</div>
+	</div>
 	</div>
