@@ -215,9 +215,10 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	
 	
 	//resume game from profile page
-    $scope.resumePracticeGame=function(pathid,pathname,num){
+    $scope.resumePracticeGame=function(pathid,pathname,num,coach){
 		$scope.path_progress = null;
 		$cookieStore.put("pid", pathid);
+		$cookieStore.put("coach",coach);
         $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
 
         //Including details=1 returns the nested problemset progress.
@@ -311,7 +312,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			$cookieStore.put("gameDifficulty", $scope.difficulty);			
 			$cookieStore.put("nameOfPath", $scope.path_progress.path.name);
 			$cookieStore.put("path_IDD", $scope.path_progress.path.id);
-			$cookieStore.put("coach",$scope.coach);
+			
 			if($scope.difficulty == "Drag-n-Drop"){
 				window.location.href = "practice_play_page.html";
 			}
