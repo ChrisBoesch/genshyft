@@ -706,7 +706,15 @@ myApp.run(function($httpBackend) {
 							}
 	  $httpBackend.whenGET('/jsonapi/list_grpTournaments/all').respond(list_grpTournaments);
       //cannot test whether it is added into database without backend codes - engsen
-      $httpBackend.whenPOST('/jsonapi/add_or_update_grptournament').respond({"message": "tournament created!"});
+      
+      var added_grpTournaments = [];
+
+      $httpBackend.whenPOST('/jsonapi/add_grptournament').respond(function(method, url, data) {
+        var grpTournament = JSON.parse(data);
+        added_grpTournaments.push(grpTournament);
+        return [200,grpTournament];
+      });
+      $httpBackend.whenGET('/jsonapi/added_tournaments').respond(added_grpTournaments);
 
       var list_tournamentQns = {"tournamentQns":[
   								{"Ruby":[

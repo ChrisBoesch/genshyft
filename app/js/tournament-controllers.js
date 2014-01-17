@@ -93,7 +93,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 		}	
 	};
 
-  //To implement for Create Tournaments
+  //To implement for Create Tournaments - engsen
 	$scope.get_tournamentQns = function(){
     console.log("get_tournamentQns");
     $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
@@ -103,6 +103,18 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
        
 	}
 
+  $scope.list_questions = function(qnsLanguage){
+    console.log("list_questions");
+    $scope.allQns = $scope.get_tournamentQns();
+
+    $scope.qnsArray = [];
+    
+    for(var i = 0; i < $scope.allQns.qnsLanguage.length - 1; i++){
+      var question = $scope.allQns.qnsLanguage[i].qns;
+      qnsArray.push(question);
+    }
+  }
+
   //Gets tournaments created by user.
 	$scope.get_mytournaments = function(){
     console.log("get_mytournaments");
@@ -110,6 +122,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.tournaments = response; // stores the Json files
         console.log($scope.tournaments);
    	});
+
+    $resource("/jsonapi/added_tournaments").query({},function(response){
+        $scope.grpTournaments = response; // stores the Json files
+        console.log($scope.grpTournaments);
+    });
   };
 
 
@@ -196,7 +213,25 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           alert("Please specify the maximum number of players per group!");
         }
         else{
-          $scope.NewGrpTournament = $resource('/jsonapi/add_or_update_grptournament');
+          var data = {"description":$scope.newGrpTournament.description,
+                       "password": $scope.newGrpTournament.password,
+                       "title":$scope.newGrpTournament.title,
+                       "status": $scope.newGrpTournament.status,
+                       "type": $scope.newGrpTournament.type}
+          $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
+          var new_grpTournament = new $scope.NewGrpTournament(data);
+          new_grpTournament.$save(function(response){
+             if(response.error) {
+              console.log(response.error);
+             }
+             else{
+
+            $scope.grpTournament = response;
+            }
+          });
+          $('#grpTournamentCreated').modal('show');
+          /*
+          $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
           var new_grpTournament = new $scope.NewGrpTournament($scope.newGrpTournament);
           new_grpTournament.$save(function(response){
             $scope.grpTournament = response;
@@ -204,10 +239,29 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
             $scope.newGrpTournamentID = response.id;
           });
           $('#grpTournamentCreated').modal('show');
+          */
         }
       }
       else{
-        $scope.NewGrpTournament = $resource('/jsonapi/add_or_update_grptournament');
+        var data = {"description":$scope.newGrpTournament.description,
+                       "password": $scope.newGrpTournament.password,
+                       "title":$scope.newGrpTournament.title,
+                       "status": $scope.newGrpTournament.status,
+                       "type": $scope.newGrpTournament.type}
+          $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
+          var new_grpTournament = new $scope.NewGrpTournament(data);
+          new_grpTournament.$save(function(response){
+             if(response.error) {
+              console.log(response.error);
+             }
+             else{
+
+            $scope.grpTournament = response;
+            }
+          });
+          $('#grpTournamentCreated').modal('show');
+          /*
+        $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
         var new_grpTournament = new $scope.NewGrpTournament($scope.newGrpTournament);
         new_grpTournament.$save(function(response){
           $scope.grpTournament = response;
@@ -215,6 +269,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           $scope.newGrpTournamentID = response.id;
         });
         $('#grpTournamentCreated').modal('show');
+        */
       }
     });
   };
