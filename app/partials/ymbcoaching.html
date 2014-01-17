@@ -185,7 +185,7 @@ float:left;
 		</div>
 
 !-->
-		<h3> Mastery Base Coaching </h3>
+
 		
 		<div class ="container" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop','coach':'Shannon','link': 'img/mbcoach/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
 
@@ -196,7 +196,7 @@ float:left;
 						{'name':'Hard','id':'Hard','coach':'SGT MJR','link': 'img/mbcoach/SGT MJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}];">
 						
 		<div>
-		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Select Your Mentor!</h4>			 abc	
+		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Select Your Mentor!</h4>				
 		      
 				<table cellpadding ="10" width ='800'>
 				<tr>
@@ -215,13 +215,10 @@ float:left;
 				<td>
 					<!-- place holder !-->
 					
-					
 				</td>
 				</tr>
 				</table>
-			  <br/>
-		
-		</div>
+			 		</div>
 	
 
 
@@ -599,13 +596,17 @@ float:left;
  !-->
 
  <div ng-show = "coaches.show">
+ <h4 class="well well-small bootCamp" align="center" id="well-c" >1. Select Your path!</h4>
 	<div class ="container">
 	
 		<div class="tabbable" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list()">
 		  <ul class="nav nav-tabs">
 
 			<li class="tabspacing">
-			  <a data-target="#practice" data-toggle="tab"><h3>Click to Select Path to master</h3></a>
+			  <a data-target="#practice" data-toggle="tab">Click to here open path menu</a>
+			</li>
+			<li class="tabspacing">
+			  <a data-target="#hidepath" data-toggle="tab">Hide</a>
 			</li>
  
 		  </ul>
@@ -637,7 +638,9 @@ float:left;
 					</table>				
 				</div>
 			</div>
-
+			<div class="tab-pane" id="hidepath">
+			</div>
+			
 		</div>
 		
 	</div>
