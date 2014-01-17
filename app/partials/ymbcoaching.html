@@ -184,7 +184,36 @@ float:left;
 		</div>
 
 
+		
+		<div class ="container" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop','coach':'Shannon','link': 'img/mbcoach/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends'},
 
+						{'name':'Easy','id':'Easy','coach':'Sandra','link': 'img/mbcoach/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview' },
+
+						{'name':'Medium','id':'Medium','coach':'Zandar','link': 'img/mbcoach/Zandar.jpg','desc':'Hacker that wants you to be more awesome'},
+
+						{'name':'Hard','id':'Hard','coach':'SGT MJR','link': 'img/mbcoach/SGT MJR.jpg','desc':'Wants you to quit before you get someone killed'}];">
+						
+		      
+				<table>
+				<tr>
+				<td>
+					<select ng-model="coaches" ng-options="mentor.coach for mentor in levels">
+						<option value="">-- choose coach --</option>
+					</select>
+				</td>
+				<td>
+				
+					<IMG ng-src=" {{coaches.link}} ">
+					
+				</td>				
+				<td>
+					{{coaches.desc}}
+				</td>
+				</tr>
+				</table>
+			  <br/>
+		
+		</div>
 
 
 
