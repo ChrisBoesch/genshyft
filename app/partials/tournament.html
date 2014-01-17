@@ -5,34 +5,8 @@
 	
 	<div class="row-fluid">
 
-		<div ng-show="tournamentID">
-			<!--TournamentID: {{tournament.tournamentID}}<br>
-    		description: {{tournament.description}} <br>
-    		{{tournament.longTitle}}<br>
-    		
-    		-->
-    		Tournament: {{tournament.shortTitle}}<br> 
-    		Status: {{tournament.status}}<br>
-    		Registered Players: {{tournament.registeredPlayerIDs.length}}<br>
-    		
-    		Number of Rounds: {{tournament.rounds.length}}<br>
-    		<ol>
-    			<li ng-repeat="round in tournament.rounds">
-    			{{round.description}}<br>
-    			Number of problems {{round.problemIDs.length}}<br>
-    			<div ng-controller="CountdownController" ng-init="start_timer(get_seconds_to_start(round.currentHeatDetails.startTime, round.currentHeatDetails.currentTime))">
-    				<input ng-show="counter==0" type="submit" value="Start Round Now" ng-click="create_tournament_round_game(round.roundID)">
-    		 		<font ng-show="counter>=0">Round staring in <b>{{counter}}</b> seconds</font>
-                    <font ng-show="counter<0">Round countdown has not begun</font>
-
-                    <br>
-    				<!--<button ng-click="start_timer(10)">Reset</button>-->    
-    			</div>
-    			</li>
-    		</ol>
-
-		</div>
-		<div ng-show="!tournamentID">
+		
+		
 				Open Tournaments
 			    <ol>
 			      <li ng-repeat="tournament in tournaments | filter: { status: 'open' }">
@@ -40,11 +14,11 @@
 			        {{tournament.registeredPlayerIDs.length}} registered.  
 			        Enter password to join 
 					<input type="text" ng-model="tournamentPassword">
-			        <input type="submit" value="Register" ng-click="register_for_tournament(tournament.tournamentID, tournamentPassword)"><br>
+			        <input type="submit" value="Register" ng-controller="GenshyftTournamentController" ng-click="register_for_tournament_new(tournament.tournamentID, tournamentPassword)"><br>
 			      </li>
 			    </ol>
 
-		</div>
+	
 
 	</div>
 <div>

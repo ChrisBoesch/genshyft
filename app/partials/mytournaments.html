@@ -1,5 +1,5 @@
 </br>
-<div class="container" id="manageTournament" style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="get_tournaments()">
+<div class="container" id="manageTournament" style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="get_mytournaments()">
 	<center><h2>My Tournaments</h2></center>
 	</br>
 	<div class="row-fluid">
@@ -8,18 +8,18 @@
 			<b>Tournaments by you:</b>
 		</div>
 	</div>
-	<div ng-show="tournaments.Tournaments.length==0">
+	<div ng-show="tournaments.list_grpTournaments.length==0">
 		<center><b> You have not created any tournaments. Click on the button above to create one! </b></center>
 	</div>
-	<div ng-show="tournaments.Tournaments.length!=0">
-		<div class="row-fluid" ng-repeat="tournament in tournaments.Tournaments track by $index">		
+	<div ng-show="tournaments.list_grpTournaments.length!=0">
+		<div class="row-fluid" ng-repeat="tournament in tournaments.list_grpTournaments track by $index">		
 			<div class="span12 well well-small" >
-				ID: {{tournaments.Tournaments[$index].tournamentId}}
-				</br>Title: {{tournaments.Tournaments[$index].title}}
-				</br>Type: {{tournaments.Tournaments[$index].type}}
-				</br>Status: {{tournaments.Tournaments[$index].status}}
+				Title: {{tournaments.list_grpTournaments[$index].title}}
+				</br>Description: {{tournaments.list_grpTournaments[$index].description}}
+				</br>Status: {{tournaments.list_grpTournaments[$index].status}}
+				</br>Status: {{tournaments.list_grpTournaments[$index].type}}
 				</br><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-manage'">Manage </button>
-				<span style="float: right">Last Changes Made: {{tournaments.Tournaments[$index].lastChangesMade}}</span>
+				<span style="float: right">Last Changes Made: {{tournaments.list_grpTournaments[$index].lastDateChanged}}</span>
 			</div>
 		</div>
 	</div>

@@ -1,24 +1,46 @@
+<style>
+.bootCamp{
+    color: #ffffff;
+    font-size: 22px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 20px;
+    padding: 8px 8px;
+}
+</style>
 </br>
 </br>
-<div ng-controller="EventController" ng-init="fetch_event()">
-  <br>
+<div ng-controller="EventController" ng-init="fetch_event()" class="container">
+  
 	<div class="row-fluid">
 
-          Upcoming events
-			    <ol>
+         
+
+          <div class="span12 well">
+			      <h1 class="well well-small bootCamp" align="center">- UPCOMING EVENTS -</h1>
+          <div class="container">  
+          <ol>
 			      <li ng-repeat="event in events">
-			        {{event.name}}<br>
+			        <h4>{{event.name}}</h4><br>
               {{event.description}}<br>
-              Registration Status: {{event.currentPlayerStatus}}<br>
-              <input type="submit" value="I'd like to participate" ng-click="register_for_event(event.id, 'participate')">
+              Registration Status: {{event.currentPlayerStatus}}<br><br>
+              <button class="btn btn-primary" ng-click="register_for_event(event.id, 'participate')">I'd like to participate</button>
+              <button class="btn btn-primary" ng-click="register_for_event(event.id, 'watch')">I'd like to come watch</button>
+              <button class="btn btn-primary" ng-click="register_for_event(event.id, 'follow')">Keep me posted</button>
+              <button class="btn btn-primary" ng-click="">+1</button>
+              <!--input type="submit" value="I'd like to participate" ng-click="register_for_event(event.id, 'participate')">
               <input type="submit" value="I'd like to come watch" ng-click="register_for_event(event.id, 'watch')">
               <input type="submit" value="Keep me posted" ng-click="register_for_event(event.id, 'follow')">
               <input type="submit" value="Unregister" ng-click="register_for_event(event.id, 'Not registered')">
-              <input type="submit" value="+1" ng-click="">
-              <br>
+              <input type="submit" value="+1" ng-click=""-->
+              <br><br>
             </li>
             <br>
 			    </ol>
+          </div>
+          </div>
 
 	</div>
 <div>

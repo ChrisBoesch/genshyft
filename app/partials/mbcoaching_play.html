@@ -1,5 +1,7 @@
  <br>
-        <div ng-controller="PracticeGameController" ng-init="list()" class="container">
+<!--need to insert a pop up here before proceeding to the qns-->
+
+        <div ng-controller="MBCoachingPlayController" ng-init="list()" class="container">
             <div>
                 <!--<a class="janrainEngage" href="#"><input type="submit" value="Hyperlinked Sign In Button"></a>-->  
                 <div class="row-fluid"> 
@@ -38,8 +40,8 @@
                             <div class="span3" >
                                 <div class="span12" style="border: 1px solid #DBDACB;">
                                     <font>
-                                        <img src="img\mbcoach\dummy_woman.jpg" alt="dummy woman" width="50" height="50" style="float: left;">
-                                        &nbsp;&nbsp;Hello, my name is Shannon.
+                                        <img src="{{coachPicture}}"width="50" height="50"style="float: left;">
+                                        &nbsp;&nbsp;Hello, my name is <span ng-bind="nameOfSelectedCoach"></span>.
                                         I &nbsp;&nbsp;will be your coach for today.
                                     </img>
                                     </font>

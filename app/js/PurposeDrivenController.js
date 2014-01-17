@@ -30,6 +30,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
           console.log("get_purpose driven videos");
           $resource("/jsonapi/purposeVideos/ALL").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
+			  $scope.videoArray = $scope.purposeVideos.Videos[0].title;
                console.log($scope.purposeVideos);
         	 })
         }
@@ -44,7 +45,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
         }      
 
 
-        $scope.get_test = function(address,no){
+        $scope.view_video = function(address,no){
         	$scope.videotoWatch = address;
         	//window.location.replace('#/purposedriven-play?v=' +value);
         	//$location.path('purposedriven-play')
@@ -59,9 +60,11 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
              if(purposeVideo.length-1 > vnoNumber)
               {
                 if(videosUnlock[(vnoNumber+1)].s == "false"){
-                  alert ("Next video unlock \n  no: " + videosUnlock[(vnoNumber+1)].no + " s: " + videosUnlock[(vnoNumber+1)].s + " --> true" );
+                  alert ("You have unlock a new video!" );
+				  
+							 
                 }
-
+		
                 // if lock, prompt lock
                 $location.search({'youtube':purposeVideo[(vnoNumber+1)].vlink, 'vno':(vnoNumber+1)}).path('purposedriven-play') 
               }
@@ -73,6 +76,22 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
 
 
 
+		$scope.saveNewUnlock = function(videoNumber){
+		
+
+		  $scope.videoUnlockedResource = $resource('/jsonapi/purposeVideos/CURRENT');
+
+			  var data = {"no": videoNumber,
+						  "s": "true"};
+
+			  var item = new $scope.videoUnlockedResource(data);
+				item.$save(function(response) { 
+                  $scope.response = response;
+                  //Handle any errors
+                  console.log(response);
+				  
+			  })
+		}
 
 
 

@@ -215,9 +215,10 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	
 	
 	//resume game from profile page
-    $scope.resumePracticeGame=function(pathid,pathname,num){
+    $scope.resumePracticeGame=function(pathid,pathname,num,coach){
 		$scope.path_progress = null;
 		$cookieStore.put("pid", pathid);
+		$cookieStore.put("coach",coach);
         $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
 
         //Including details=1 returns the nested problemset progress.
@@ -258,7 +259,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	};
 	
 	//change the difficulty level as well as the path level detail table
-	$scope.changeDifficulty = function(difficulty,pathName){
+	$scope.changeDifficulty = function(difficulty,pathName,coach){
 		if(difficulty == "Drag-n-Drop" && pathName.indexOf("Beginner") == -1){
 			$scope.path_ID = undefined;
 			$scope.practice_path_name = undefined;
@@ -272,6 +273,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			$scope.practice_path_name = undefined;
 		}
 		$scope.difficulty = difficulty;
+		$scope.coach = coach;
 		if(difficulty != "" && $scope.path_ID != ""){
 			//$location.search({path_ID: $scope.path_ID, difficulty: difficulty});
 		}
@@ -309,14 +311,16 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			$cookieStore.put("level", lvlnum);		
 			$cookieStore.put("gameDifficulty", $scope.difficulty);			
 			$cookieStore.put("nameOfPath", $scope.path_progress.path.name);
-			$cookieStore.put("path_IDD", $scope.path_progress.path.id);					
+			$cookieStore.put("path_IDD", $scope.path_progress.path.id);
+			
 			if($scope.difficulty == "Drag-n-Drop"){
 				window.location.href = "practice_play_page.html";
 			}
 			else{
 				//Hi RJ. Here is the change that I made to help simplify things.
 				//The goal is to simplify every game play page to just use one controller. 
-				window.location.href = "practice_game_play.html";
+				//window.location.href = "ymbcoaching-play";
+				$location.path('ymbcoaching-play')
 				//window.location.href = "normal_play_page.html";
 			}
 		}
