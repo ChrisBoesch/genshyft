@@ -183,6 +183,140 @@ myApp.run(function($httpBackend) {
  	});
 
  	//New Tournament Join Page Data
+ 	var tournamentIndivData={
+    "status": "Open for registration",
+    "currentPlayerID": 57754,
+    "description": "Test Individual Tournament",
+    "directorID": 57754,
+    "tournType": "Individual",
+    "tournamentID": 5060388987076608,
+	"maxNoPlayerPerGrp":5,
+	"maxNoGrp":5,
+    "rounds": [
+        {
+            "roundID": 4912161075757056,
+            "currentHeatDetails": {
+                "gameIDsForHeat": {
+                    "57754": 6096747415732224,
+                    "2739102": 6412161224015872
+                },
+                "problemsInHeat": [
+                    10033,
+                    17155
+                ],
+                "heatID": 6144086545268736,
+                "description": "Heat 2",
+                "startTime": "2013-10-04 14:02:05.835670",
+                "currentTime": "2013-10-04 14:02:00.246270",
+                "solvedProblemIDListsByPlayerID": {
+                    "57754": [
+                        "/problem_is_solved_for_game/6096747415732224/10033",
+                        "/problem_is_solved_for_game/6096747415732224/17155"
+                    ],
+                    "2739102": [
+                        "/problem_is_solved_for_game/6412161224015872/10033",
+                        "/problem_is_solved_for_game/6412161224015872/17155"
+                    ]
+                },
+                "stopTime": "2013-10-04 15:02:05.835670",
+                "heatNumber": 2
+            },
+            "problemIDs": [
+                10033,
+                17155
+            ],
+            "heats": [
+                {
+                    "gameIDsForHeat": {
+                        "57754": 5817368383062016
+                    },
+                    "problemsInHeat": [
+                        10033,
+                        17155
+                    ],
+                    "heatID": 4691468476219392,
+                    "description": "Heat 1",
+                    "startTime": "2013-09-29 08:24:46.840830",
+                    "currentTime": "2013-10-04 13:57:28.164880",
+                    "solvedProblemIDListsByPlayerID": {
+                        "57754": [
+                            "/problem_is_solved_for_game/5817368383062016/10033",
+                            "/problem_is_solved_for_game/5817368383062016/17155"
+                        ]
+                    },
+                    "stopTime": "2013-09-29 09:24:46.840830",
+                    "heatNumber": 1
+                },
+                {
+                    "gameIDsForHeat": {
+                        "57754": 6096747415732224,
+                        "2739102": 6412161224015872
+                    },
+                    "problemsInHeat": [
+                        10033,
+                        17155
+                    ],
+                    "heatID": 6144086545268736,
+                    "description": "Heat 2",
+                    "startTime": "2013-10-04 14:02:05.835670",
+                    "currentTime": "2013-10-04 13:57:28.306810",
+                    "solvedProblemIDListsByPlayerID": {
+                        "57754": [
+                            "/problem_is_solved_for_game/6096747415732224/10033",
+                            "/problem_is_solved_for_game/6096747415732224/17155"
+                        ],
+                        "2739102": [
+                            "/problem_is_solved_for_game/6412161224015872/10033",
+                            "/problem_is_solved_for_game/6412161224015872/17155"
+                        ]
+                    },
+                    "stopTime": "2013-10-04 15:02:05.835670",
+                    "heatNumber": 2
+                }
+            ],
+            "description": "Round 1",
+            "currentHeatID": 6144086545268736,
+            "currentHeat": 2,
+            "problemDetails": {
+                "10033": {
+                    "name": "Expected Results",
+                    "description": "When you run your code, SingPath has certain tests that it checks to see if you did what you were supposed to do.  If incorrect you'll see a table with the results of the tests.  \r\n\r\nNotice that the starter code has the wrong value. Go ahead and run the code now so you can see the results (you can finish reading this after you run it).\r\n\r\nThe results tell you that SingPath looked at the variable named 'oops' expecting to find 713, but found 317 instead. Fix the error now and run it to advance to the next problem."
+                },
+                "17155": {
+                    "name": "Variables",
+                    "description": "Variables are an important part of programming; they allow the you to store a value and reuse it later.  You are allowed to use just about anything you like as your variable name.\r\n\r\nFor this problem, create a variable named 'age' with the value 7."
+                }
+            },
+            "heatIDs": [
+                4691468476219392,
+                6144086545268736
+            ]
+        }
+		],
+		"registeredPlayers":[
+		{ 
+			"playerId":57754,
+			"playerName":"Chris Boesch", 
+			"Group": 0
+		},
+
+		{ 
+			"playerId":2739102,
+			"playerName":"Player 2", 
+			"Group":0
+		},
+		{
+			"playerId":9379339,
+			"playerName":"Player 3", 
+			"Group":0
+		}],
+
+		"numRounds": 1,
+		"shortTitle": "Test Individual tournament",
+		"tournamentType": "Normal",
+		"winnerText": ""
+	};
+
  	var tournamentGrpData = {
     "status": "Open for registration",
     "currentPlayerID": 57754,
@@ -379,6 +513,7 @@ myApp.run(function($httpBackend) {
 	    "winnerText": ""
 	};
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076609').respond(tournamentGrpData);
+	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076608').respond(tournamentIndivData);
 	
 		
 	var videosUnlock = {"Unlocked":[

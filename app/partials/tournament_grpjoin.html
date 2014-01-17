@@ -70,9 +70,7 @@
 							</li>
 						</ol>		
 					</div>
-				</div>	
-				
-			
+				</div>			
 			</div>			
 		</div>
 	</div>
@@ -111,16 +109,16 @@
 								<table class="table table-hover">
 
 									<tr >
-										<td ng-repeat="group in registeredPlayers.Groups track by $index">
-										<b >Group {{registeredPlayers.Groups[$index].grpNum}}</b>
+										<td ng-repeat="group in numGrp track by $index">
+										<b >Group {{$index+1}}</b>
 										
-											<li ng-repeat="player in registeredPlayers.Groups[$index].Players">{{player.playerName}}</li>
+											<li ng-repeat="player in group track by $index">{{player}}</li>
 										
 										</td>
 
 									</tr>
 									<tr>
-										<td ng-repeat="group in registeredPlayers.Groups track by $index">
+										<td ng-repeat="group in numGrp track by $index">
 											<!-- 1. To make button dynamic, lock buttons after player has joined -->
 											<!-- 2. To update the teams with new player after clicking join, page has to be refreshed to show updated team list -->
 

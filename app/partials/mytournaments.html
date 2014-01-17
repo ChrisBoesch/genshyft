@@ -14,10 +14,10 @@
 	<div ng-show="tournaments.list_grpTournaments.length!=0">
 		<div class="row-fluid" ng-repeat="tournament in tournaments.list_grpTournaments track by $index">		
 			<div class="span12 well well-small" >
-				Title: {{tournaments.list_grpTournaments[$index].title}}
+				Title : {{tournaments.list_grpTournaments[$index].title}}
 				</br>Description: {{tournaments.list_grpTournaments[$index].description}}
-				</br>Status: {{tournaments.list_grpTournaments[$index].status}}
-				</br>Status: {{tournaments.list_grpTournaments[$index].type}}
+				</br>Status : {{tournaments.list_grpTournaments[$index].status}}
+				</br>Type : {{tournaments.list_grpTournaments[$index].type}}
 				</br><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-manage'">Manage </button>
 				<span style="float: right">Last Changes Made: {{tournaments.list_grpTournaments[$index].lastDateChanged}}</span>
 			</div>

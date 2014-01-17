@@ -12,14 +12,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   $scope.tournamentID = null;
   $scope.location = $location;
-  $scope.$watch('location.search()', function() {
-      $scope.tournamentID = ($location.search()).tournamentID;
-  }, true);
+  //$scope.$watch('location.search()', function() {
+    //  $scope.tournamentID = ($location.search()).tournamentID;
+  //}, true);
 
-  //Taken From TournamentController
-  $scope.TournamentModel = $resource('/jsonapi/list_open_tournaments');
-  $scope.TournamentHeatGameModel = $resource('/jsonapi/create_game/heatID/:heatID');
-  $scope.TournamentHeatModel = $resource('/jsonapi/get_heat_ranking');
+
   
   //$scope.heatID = 12883052;
   $scope.heat = null;
@@ -43,6 +40,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.grpTourMaxNoPlayer ="";
     $scope.qnsLanguage ="Ruby";
   };
+
   /*Function which auto refresh*/
   var scheduleReload = function(){
     console.log("get_unregisteredPlayers");
@@ -237,7 +235,32 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.tournament = response;
         console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
         $scope.get_unregisteredPlayers($scope.tournament);
+        $scope.get_grpPlayers($scope.tournament);
     });
+  };
+
+  $scope.get_grpPlayers = function(tournament){
+      console.log("get_grpPlayers");
+      $scope.numGrp = [];
+      $scope.grpArray = [];
+      
+      for(var i=0; i < tournament.maxNoGrp ; i++){
+        $scope.grpArray.push(i+1);
+      }
+
+      for(var i=0; i < tournament.maxNoGrp ; i++){
+        var grouping = [];
+
+        for(var j=0; j < tournament.registeredPlayers.length ;j++){
+          if(tournament.registeredPlayers[j].Group == (i+1)){
+            var player = tournament.registeredPlayers[j].playerName;
+            grouping.push(player);      
+           }
+        }
+        if(grouping.length>0){
+          $scope.numGrp.push(grouping);
+        }
+      }
   };
 
   $scope.register_for_tournament_new = function(tournamentID, tournamentPassword){
