@@ -42,7 +42,7 @@
 					<div class="span12 well well-small" style="height:145px;overflow:auto;" >
 						<b>Tournament :</b> {{tournament.shortTitle}} </br>
 						<b>Status :</b> {{tournament.status}}</br>
-						<b>No. of Registered Players :</b> {{tournament.registeredPlayerIDs.length}}</b></br>
+						<b>No. of Registered Players :</b> {{tournament.registeredPlayers.length}}</b></br>
 						<b>Number of Rounds:</b> {{tournament.rounds.length}}</br>
 						</br>
 					</div>
@@ -59,8 +59,8 @@
 					<div class="span12 well well-small" style="height:145px;overflow:auto;" ng-controller="TournamentController">
 						<ol>
 	    					<li ng-repeat="round in tournament.rounds">
-	    					{{round.description}}<br>
-	    					Number of problems {{round.problemIDs.length}}<br>
+	    					<b>{{round.description}}</b><br>
+	    					Number of problems : <b>{{round.problemIDs.length}}</b><br>
 								<div ng-controller="CountdownController" ng-init="start_timer(get_seconds_to_start(round.currentHeatDetails.startTime, round.currentHeatDetails.currentTime))">
 									<font ng-show="counter>0">Round starting in <b> {{counter}} seconds </b> </font><font ng-show="counter==0"><b>Round have started, Let's </b></font><font ng-show="counter<0"><b>Round have not started</b> </font>
 									<button class="btn btn-primary" type="button" ng-show="counter==0" ng-click="create_tournament_round_game(round.roundID)">Play </button>
@@ -82,18 +82,25 @@
 			<!-- Player profile-->
 			<div class="span4" id="unregisteredUsers" style="overflow:auto;" width="100%">
 				<div class="row-fluid">
-					<div class="span12 bootCamp" id="heading">Registered Users Without Groups</div>
+					<div class="span12 bootCamp" id="heading"> 
+						<div ng-hide="tournament.tournType=='Individual'">
+							Registered Users Without Groups
+						</div>
+						<div ng-hide="tournament.tournType=='Group'">
+							Registered Users
+						</div>		
+					</div>
 				</div>	
-				<div class="row-fluid" ng-init="get_unregisteredPlayers()">
-					<div class="span12 well well-small" style="height:200px;overflow:auto;">
-						<li ng-repeat="unregisteredPlayer in unregisteredPlayers.UnregisteredPlayers track by $index">
-							{{unregisteredPlayers.UnregisteredPlayers[$index].name}}
+				<div class="row-fluid">
+					<div class="span12 well well-small" style="overflow:auto;">
+						<li ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
+							{{registeredPlayersArray[$index]}}
 						</li>	
 					</div>
 				</div>
 			</div> 	
 
-			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%">
+			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%" ng-hide="tournament.tournType=='Individual'">
 				<div class="row-fluid">
 					<div class="span12 bootCamp" id="heading">Registered Groups</div>
 				</div>
@@ -119,7 +126,7 @@
 
 											<button class="btn btn-primary ng-hide" ng-click="animationsOff=true" ng-hide="animationsOff" style="">Join</button>
 											<button class="btn btn-danger" ng-click="animationsOff=false" ng-show="animationsOff" style="">Leave Team</button>
-											</td>
+										</td>
 									</tr>
 									</br>
 								</table>

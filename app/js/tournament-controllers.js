@@ -54,6 +54,18 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $timeout(function(){ scheduleReload(); }, 2000);
   };
 
+  /*Function to seperate Registered Users without group or Individual Tournament*/
+  var scheduleReloadTourn =function(tournament){
+    $scope.registeredPlayersArray =[];
+    console.log("scheduleReloadTourn: " + tournament.tournamentID);
+    for(var i =0; i < tournament.registeredPlayers.length; i++){
+      if(tournament.registeredPlayers[i].Group===0){
+        var playerDetails = tournament.registeredPlayers[i].playerName;
+        $scope.registeredPlayersArray.push(playerDetails);
+      }
+    }
+  }
+
   /*Function which calculate the countdown time, takes in seconds*/
   var tournamentCountdownCal = function(tournamentActivationTime, currentServerTime, timeLimit){    
     var timeDifference = currentServerTime - tournamentActivationTime;
@@ -103,8 +115,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
 
-  $scope.get_unregisteredPlayers = function(){
-      scheduleReload(); 
+  $scope.get_unregisteredPlayers = function(tournament){
+      //scheduleReload();
+      scheduleReloadTourn(tournament); 
   };
 
   $scope.get_registeredPlayers = function(){
@@ -220,11 +233,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   }
 
   $scope.fetch_tournament_details = function(tournamentID){
-    $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
+    $resource('/jsonapi/tournament_progress/:tournamentID').get({"tournamentID":tournamentID}, function(response){
         $scope.tournament = response;
-        //$scope.startTime = new Date("2013-09-29 08:24:46.840830");
-        //$scope.stopTime = new Date("2013-09-29 12:00:11.784760");
-        //console.log(($scope.stopTime - $scope.startTime)/1000);
+        console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
+        $scope.get_unregisteredPlayers($scope.tournament);
     });
   };
 
@@ -408,6 +420,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
   $scope.fetch_tournament = function(tournamentID){
           $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
               $scope.tournament = response;
+              console.log("fetch_tournament = " + $scope.tournament);
               //$scope.startTime = new Date("2013-09-29 08:24:46.840830");
               //$scope.stopTime = new Date("2013-09-29 12:00:11.784760");
               //console.log(($scope.stopTime - $scope.startTime)/1000);
