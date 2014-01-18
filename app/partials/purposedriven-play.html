@@ -36,17 +36,33 @@
 											</td>
 										</tr>
 										<tr>
-										<td ng-repeat = "qns in purposeVideos.Videos[vno].options">
-										  <input type='radio' name ="answer" value ="{{qns.choice}}" onclick="enableButton2()"> {{qns.choice}}
+										<form>
+										<td>
+											<label ng-repeat = "qns in purposeVideos.Videos[vno].options">
+											
+										  
+										  <input type="radio" name="answer" ng-model="$parent.radioAns" ng-value ="qns.choice" onclick="enableButton2()"> {{qns.choice}}  
+										  </label>
+										  
+										  
+										  
+											<center> <button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos,purposeVideosUnlocked.Unlocked)"> Next  </button>  
+											 <br>
+											<font size="2" color="red" ng-show="value1">Please do the survey to proceed.</font>
+											  </center> 	
+
+											  
+										  </div>
 										 </td>
+										
+										  </form>
 										</tr>
 										<tr>
 										<td colspan='5'>
 										 
-											<center> <button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos,purposeVideosUnlocked.Unlocked)"> Next  </button>  
-											 <br>
-											<font size="2" color="red" ng-show="value1">Please do the survey to proceed.</font>
-											</center>
+
+											
+											
 										 </td>
 										</tr>
 												
@@ -89,7 +105,8 @@
 	
 	
 </div>
-	
+</div>
+</div>
 <script>
         function enableButton2() {
             document.getElementById("nextVideo").disabled = false;
