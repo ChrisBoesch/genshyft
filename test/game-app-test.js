@@ -19,35 +19,54 @@ myApp.run(function($httpBackend) {
       var purposeDrivenVideos = {"Videos":[
 		{"title":"What Most School Don't Teach",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
-		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"insert question here",
+		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"0"},
 
 		{"title":"Art of Creative Coding",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
-		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"insert question here",
+		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"1"},
 
 		{"title":"Purpose Driven Part C",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"This is test Data for C","question":"insert question here",
+		"description":"This is test Data for C","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"2"},
 
 		{"title":"Purpose Driven Part D",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"This is test Data for D","question":"insert question here",
+		"description":"This is test Data for D","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"3"},
 
 		{"title":"Purpose Driven Part E",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
 		"description":"This is test Data for E"
-		,"question":"insert question here","no":"4"}   
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"}   
 		]};
 	$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
+	// status determines if a video is unlocked.
+		var videosUnlock = {"Unlocked":[
+		{"no":"0", "status":"true", "rating" : "1"},
+		{"no":"1", "status":"true", "rating" : "1"},
+		{"no":"2", "status":"false", "rating" : "0"},
+		{"no":"3", "status":"false", "rating" : "0"},
+		{"no":"4", "status":"false", "rating" : "0"}
+		]};
+	
+	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
+	$httpBackend.whenPOST('/jsonapi/purposeVideos/CURRENT').respond({"result":"video unlock!"});
+	
+	
+	
 		  
 	var tournaments = {"Tournaments":[
 		{"tournamentId":"001",
@@ -516,16 +535,7 @@ myApp.run(function($httpBackend) {
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076608').respond(tournamentIndivData);
 	
 		
-	var videosUnlock = {"Unlocked":[
-		{"no":"0", "s":"true", "rating" : "1"},
-		{"no":"1", "s":"true", "rating" : "1"},
-		{"no":"2", "s":"false", "rating" : "0"},
-		{"no":"3", "s":"false", "rating" : "0"},
-		{"no":"4", "s":"false", "rating" : "0"}
-		]};
-	
-	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
-	$httpBackend.whenPOST('/jsonapi/purposeVideos/CURRENT').respond({"result":"video unlock!"});
+
 
 
       var events = {"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};

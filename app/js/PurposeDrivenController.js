@@ -59,7 +59,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
 			var vnoNumber = parseInt(vno);
              if(purposeVideo.length-1 > vnoNumber)
               {
-                if(videosUnlock[(vnoNumber+1)].s == "false"){
+                if(videosUnlock[(vnoNumber+1)].status == "false"){
                   alert ("You have unlock a new video!" );
 				  
 							 
@@ -82,7 +82,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
 		  $scope.videoUnlockedResource = $resource('/jsonapi/purposeVideos/CURRENT');
 
 			  var data = {"no": videoNumber,
-						  "s": "true"};
+						  "status": "true"};
 
 			  var item = new $scope.videoUnlockedResource(data);
 				item.$save(function(response) { 

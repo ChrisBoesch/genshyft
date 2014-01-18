@@ -45,7 +45,7 @@
 ng-init = "videoArray = videoArray || purposeVideos.Videos[0].title "
 ng-options="video.title for video in purposeVideos.Videos"></select>
 <br><br>
-<div ng-show=" purposeVideosUnlocked.Unlocked[videoArray.no].s ">  
+<div ng-show=" purposeVideosUnlocked.Unlocked[videoArray.no].status ">  
 <button class="btn btn-inverse"  ng-click = "view_video(purposeVideos.Videos[videoArray.no].vlink,videoArray.no)">  Play  </button> 
 
 </div>
