@@ -230,11 +230,13 @@ myApp.run(function($httpBackend) {
 
 	var grpPlayers = [];
 
-  	$httpBackend.whenPOST('/jsonapi/joinGroup').respond(function(method, url, data) {
-	    var item = JSON.parse(data);
-	    submitted_problems.push(item);
+  	$httpBackend.whenPOST('/jsonapi/joinGroup/join').respond(function(method, url, data) {
+        var item = JSON.parse(data);
+	    grpPlayers.push(item);
 	    return [200,item];
  	});
+
+    $httpBackend.whenGET('/jsonapi/joinGroup/check').respond(grpPlayers);
 
  	//New Tournament Join Page Data
  	var tournamentIndivData={
@@ -350,7 +352,7 @@ myApp.run(function($httpBackend) {
 		"registeredPlayers":[
 		{ 
 			"playerId":57754,
-			"playerName":"Chris Boesch", 
+			"playerName":"Chris", 
 			"Group": 0
 		},
 
@@ -483,8 +485,8 @@ myApp.run(function($httpBackend) {
 	    "registeredPlayers":[
 		{ 
 			"playerId":57754,
-			"playerName":"Chris Boesch", 
-			"Group": 0
+			"playerName":"Chris", 
+			"Group":0
 		},
 		
 		{ 
@@ -497,66 +499,66 @@ myApp.run(function($httpBackend) {
 			"playerName":"Player 3", 
 			"Group":1
 		},{ 
-			"playerId":57754,
+			"playerId":57753,
 			"playerName":"Player 4", 
 			"Group": 1
 		},
 		
 		{ 
-			"playerId":2739102,
+			"playerId":2739101,
 			"playerName":"Player 5", 
 			"Group":1
 		},
 		{
-			"playerId":9379339,
+			"playerId":9379338,
 			"playerName":"Player 6", 
 			"Group":2
 		},
 		{ 
-			"playerId":57754,
+			"playerId":57752,
 			"playerName":"Player 7", 
 			"Group": 2
 		},
 		
 		{ 
-			"playerId":2739102,
+			"playerId":2739100,
 			"playerName":"Player 8", 
 			"Group":3
 		},
 		{
-			"playerId":9379339,
+			"playerId":9379337,
 			"playerName":"Player 9", 
 			"Group":4
 		},
 		{ 
-			"playerId":57754,
+			"playerId":57751,
 			"playerName":"Player 10", 
 			"Group": 4
 		},
 		
 		{ 
-			"playerId":2739102,
+			"playerId":2739099,
 			"playerName":"Player 11", 
 			"Group":4
 		},
 		{
-			"playerId":9379339,
+			"playerId":9379336,
 			"playerName":"Player 12", 
 			"Group":5
 		},
 		{ 
-			"playerId":57754,
+			"playerId":57750,
 			"playerName":"Player 13", 
 			"Group": 5
 		},
 		
 		{ 
-			"playerId":2739102,
+			"playerId":2739098,
 			"playerName":"Player 14", 
 			"Group":5
 		},
 		{
-			"playerId":9379339,
+			"playerId":9379335,
 			"playerName":"Player 15", 
 			"Group":5
 		}],
@@ -636,7 +638,7 @@ myApp.run(function($httpBackend) {
       $httpBackend.whenPOST('/jsonapi/log_access').respond({"message":"testing logging"});
       $httpBackend.whenPOST('/jsonapi/log_event').respond({"message":"testing logging"});
 
-      var player = { countryFlagURL: "http://www.singpath.com/static/flags/sg_on.png",gender: "male",isoYear: 2010,countryCode: "SG",tags: ["SMU","hackerspacesg"],country: "Singapore",yearOfBirth: 1985,about: "I love Scifi",isoDay: 5,isoWeek: 6,isAdmin: true,gravatar: "http://www.gravatar.com/avatar/6e64bb2cab5367fd6e201df2aa722512/?default=&amp;s=80",location: "Singapore",rankings: [ ],player_id: 57754,professional: "1",nickname: "Chris Boesch",badges: [ ]}
+      var player = { countryFlagURL: "http://www.singpath.com/static/flags/sg_on.png",gender: "male",isoYear: 2010,countryCode: "SG",tags: ["SMU","hackerspacesg"],country: "Singapore",yearOfBirth: 1985,about: "I love Scifi",isoDay: 5,isoWeek: 6,isAdmin: true,gravatar: "http://www.gravatar.com/avatar/6e64bb2cab5367fd6e201df2aa722512/?default=&amp;s=80",location: "Singapore",rankings: [ ],player_id: 57754,professional: "1",nickname: "Chris",badges: [ ]}
 
       $httpBackend.whenGET('/jsonapi/player').respond(player); 
       $httpBackend.whenGET('/jsonapi/get_player_progress').respond({"paths": [{"name": "Java", "isGamePath": true, "editorPlayerId": 57754, "solvedProblems": 28, "problemsInPath": 155, "id": 2243213, "description": "Java game path"}, {"name": "Python", "isGamePath": true, "editorPlayerId": 58546, "solvedProblems": 12, "problemsInPath": 256, "id": 10030, "description": "Python game path"}, {"name": "Beginner Obj-C", "isGamePath": false, "editorPlayerId": 12196157, "solvedProblems": 1, "problemsInPath": 4, "id": 7520056, "description": "Beginner Path for Objective-C"}], "type": "Player Path Progress"});

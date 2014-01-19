@@ -18,6 +18,10 @@
       margin-bottom:0px;
     }
 
+    li.bulletless {
+    	list-style-type: none;
+    }
+
     tbody{
         overflow:auto;  
     }
@@ -91,7 +95,7 @@
 				</div>	
 				<div class="row-fluid">
 					<div class="span12 well well-small" style="overflow:auto;">
-						<li ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
+						<li class="bulletless" ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
 							{{registeredPlayersArray[$index]}}
 						</li>	
 					</div>
@@ -112,7 +116,7 @@
 										<td ng-repeat="group in numGrp track by $index">
 										<b >Group {{$index+1}}</b>
 										
-											<li ng-repeat="player in group track by $index">{{player}}</li>
+											<li class="bulletless" ng-repeat="player in group track by $index">{{player}}</li>
 										
 										</td>
 
@@ -122,8 +126,8 @@
 											<!-- 1. To make button dynamic, lock buttons after player has joined -->
 											<!-- 2. To update the teams with new player after clicking join, page has to be refreshed to show updated team list -->
 
-											<button class="btn btn-primary ng-hide" ng-click="animationsOff=true" ng-hide="animationsOff" style="">Join</button>
-											<button class="btn btn-danger" ng-click="animationsOff=false" ng-show="animationsOff" style="">Leave Team</button>
+											<button class="btn btn-primary" ng-click="join_grp(tournament.currentPlayerID, tournament.tournamentID, $index+1)" ng-show="currentUserGrping == 0" style="">Join</button>
+											<button class="btn btn-danger" ng-click="join_grp(tournament.currentPlayerID, tournament.tournamentID, 0)" ng-show="currentUserGrping == $index+1" style="">Leave Team</button>
 										</td>
 									</tr>
 									</br>
