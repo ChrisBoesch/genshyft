@@ -1,6 +1,6 @@
 
 
-function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http){
+function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$route){
 
 
     // this method gets the parameter , variables are declared as youtube and vno

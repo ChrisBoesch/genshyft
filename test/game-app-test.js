@@ -50,7 +50,42 @@ myApp.run(function($httpBackend) {
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
 		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
-		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"}   
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"},
+
+		{"title":"Purpose Driven Part F",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"he trademarked term purpose driven comes from the teaching of Rick Warren, senior pastor of Saddleback Church in Lake Forest, California. It originally came","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"2"},
+
+		{"title":"Purpose Driven Part G",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"87 quotes from The Purpose Driven Life: What on Earth Am I Here for?: 'We are products of our past, but we don't have to be prisoners of it.","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"3"},
+
+		{"title":"Purpose Driven Part H",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"},
+
+		{"title":"Purpose Driven Part I",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"87 quotes from The Purpose Driven Life: What on Earth Am I Here for?: 'We are products of our past, but we don't have to be prisoners of it.","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"3"},
+
+		{"title":"Purpose Driven Part J",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"}  		
 		]};
 	$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
 	// status determines if a video is unlocked.

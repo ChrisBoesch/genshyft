@@ -21,6 +21,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
         mytimeout = $timeout($scope.onTimeout,1000);
 		if($scope.counter >=30){
 			$scope.counter = 0;
+			$scope.audio = "play Hurry UP msg" ;
 			// execute hurry up audio
 		}
 		
