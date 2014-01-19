@@ -523,7 +523,7 @@ myApp.run(function($httpBackend) {
 		{ 
 			"playerId":2739100,
 			"playerName":"Player 8", 
-			"Group":3
+			"Group":0
 		},
 		{
 			"playerId":9379337,

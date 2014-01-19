@@ -300,7 +300,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.get_indivNoGrpPlayers($scope.tournament);
         $scope.get_grpPlayers($scope.tournament);
     });
-    $timeout(function(){ $scope.fetch_tournament_details(tournamentID); }, 5000);
+    //$timeout(function(){ $scope.fetch_tournament_details(tournamentID); }, 5000);
   };
 
   /*Extract players and sort them into the respective group - by Glen*/
@@ -311,7 +311,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
       for(var i=0; i < tournament.maxNoGrp ; i++){
         var grouping = [];
-
+        grouping.push("Group "+(i+1));
+        
         for(var j=0; j < tournament.registeredPlayers.length ;j++){
           if(tournament.registeredPlayers[j].Group == (i+1)){
             var player = tournament.registeredPlayers[j].playerName;

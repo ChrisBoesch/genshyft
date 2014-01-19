@@ -113,10 +113,13 @@
 								<table class="table table-hover">
 
 									<tr >
-										<td ng-repeat="group in numGrp track by $index">
-										<b >Group {{$index+1}}</b>
-										
-											<li class="bulletless" ng-repeat="player in group track by $index">{{player}}</li>
+										<td ng-repeat="group in numGrp track by $index">										
+											<b>Group {{$index+1}}</b>
+											
+											<li class="bulletless" ng-repeat="player in group track by $index">
+												<font ng-if="$index != 0">{{player}}
+												</font>
+											</li>
 										
 										</td>
 
