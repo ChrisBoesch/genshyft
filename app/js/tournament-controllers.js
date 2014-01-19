@@ -218,7 +218,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                        "password": $scope.newGrpTournament.password,
                        "title":$scope.newGrpTournament.title,
                        "status": $scope.newGrpTournament.status,
-                       "type": $scope.newGrpTournament.type}
+                       "type": $scope.newGrpTournament.type,
+                       "mentorAssignment": $scope.grpTourMentor,
+                       "maxNoGroup": $scope.grpTourMaxNoGroup,
+                       "maxNoPlayer": $scope.grpTourMaxNoPlayer,
+                       "lastDateChanged": Date()}
           $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
           var new_grpTournament = new $scope.NewGrpTournament(data);
           new_grpTournament.$save(function(response){
@@ -248,7 +252,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                        "password": $scope.newGrpTournament.password,
                        "title":$scope.newGrpTournament.title,
                        "status": $scope.newGrpTournament.status,
-                       "type": $scope.newGrpTournament.type}
+                       "type": $scope.newGrpTournament.type,
+                       "lastDateChanged": Date()}
           $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
           var new_grpTournament = new $scope.NewGrpTournament(data);
           new_grpTournament.$save(function(response){

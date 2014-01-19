@@ -8,9 +8,10 @@
 			<b>Tournaments by you:</b>
 		</div>
 	</div>
-	<div ng-show="tournaments.list_grpTournaments.length==0">
+	<div ng-show="grpTournaments.length==0">
 		<center><b> You have not created any tournaments. Click on the button above to create one! </b></center>
 	</div>
+	<!--
 	<div ng-show="tournaments.list_grpTournaments.length!=0">
 		<div class="row-fluid" ng-repeat="tournament in tournaments.list_grpTournaments track by $index">		
 			<div class="span12 well well-small" >
@@ -23,7 +24,8 @@
 			</div>
 		</div>
 	</div>
-	<div ng-show="grpTournaments.added_grpTournaments.length!=0">
+	-->
+	<div ng-show="grpTournaments.length!=0">
 		<div class="row-fluid" ng-repeat="grpTournament in grpTournaments track by $index">	
 			<div class="span12 well well-small" >
 				Title : {{grpTournaments[$index].title}}
