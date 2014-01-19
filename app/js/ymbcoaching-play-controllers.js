@@ -1,4 +1,4 @@
-function yMBcoachingPlayController($scope,$resource,$cookieStore){
+function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
     //$scope.currentProblem
     //$scope.game = $resource('test_data/python_game.json').get();
     //$scope.mobile_game = $resource('test_data/mobile_python_game.json').get();
@@ -13,6 +13,29 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
     $scope.permutation = "12345"; 
+   
+   
+    $scope.counter = 0;
+    $scope.onTimeout = function(){
+        $scope.counter++;
+        mytimeout = $timeout($scope.onTimeout,1000);
+		if($scope.counter >=30){
+			$scope.counter = 0;
+			// execute hurry up audio
+		}
+		
+    }
+	
+	
+	
+    var mytimeout = $timeout($scope.onTimeout,1000);
+    
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+   }
+   
+   
+   
    
 	
     if($cookieStore.get("name")){
@@ -130,60 +153,72 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore){
 
     }
     $scope.skip_problem = function(){
-$scope.audio = "audio\\"+$scope.nameOfCoach+"\\skip\\" + Math.floor((Math.random()*3)+1) +".mp3";
-var audioplayer = document.getElementsByTagName('audio')[0];
-
-console.log(Math.floor((Math.random()*10)+1));
-
-audioplayer.pause();
-audioplayer.load();
-audioplayer.pause();
-audioplayer.play();
-
-      $('#t11').addClass('active');
-      $('#t21').removeClass('active');
-      $('#ta11').addClass('active');
-      $('#ta21').removeClass('active');
-	  $scope.specialMessage = " You just skipped one ! ";
-	 
-	 
-
-
+	
 		
-	  
-      if ($scope.remaining_problems.length>1){
-        $scope.skip_problem_count += 1;
-        $scope.move_to_next_unsolved_problem();
-      }
+		$scope.audio = "audio\\"+$scope.nameOfCoach+"\\skip\\" + Math.floor((Math.random()*3)+1) +".mp3";
+		var audioplayer = document.getElementsByTagName('audio')[0];
+
+		console.log(Math.floor((Math.random()*10)+1));
+
+		audioplayer.pause();
+		audioplayer.load();
+		audioplayer.pause();
+		audioplayer.play();
+		console.log("time");
+		$timeout(function(){ // 3sec delay for user to listen
+
+			$('#t11').addClass('active');
+			  $('#t21').removeClass('active');
+			  $('#ta11').addClass('active');
+			  $('#ta21').removeClass('active');
+			  $scope.specialMessage = " You just skipped one ! ";
+			 
+			 
+
+
+				
+			  
+			  if ($scope.remaining_problems.length>1){
+				$scope.skip_problem_count += 1;
+				$scope.move_to_next_unsolved_problem();
+			  }
+
+
+		},3000);
+
+      
 	 
-    }
+	}
 
 
     $scope.check_solution_for_game = function() {
       //$scope.solution
       //$scope.current_problem
-      //$scope.game.gameID
-var audioplayer = document.getElementsByTagName('audio')[0];
-$scope.audio = "audio\\"+$scope.nameOfCoach+"\\run\\"+Math.floor((Math.random()*3)+1)  +".mp3";
-audioplayer.pause();
-audioplayer.load();
-	  
-      $('#t11').removeClass('active');
-      $('#t21').addClass('active');
-      $('#ta11').removeClass('active');
-      $('#ta21').addClass('active');
-	  $scope.specialMessage = "Let's see !";
+	  //$scope.game.gameID
+		var audioplayer = document.getElementsByTagName('audio')[0];
+		$scope.audio = "audio\\"+$scope.nameOfCoach+"\\run\\"+Math.floor((Math.random()*3)+1)  +".mp3";
+		audioplayer.pause();
+		audioplayer.load();
 
-      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
-      //alert($scope.game.gameID);
-      $scope.theData = {user_code:$scope.solution1,
-                        problem_id:$scope.current_problem,
-                        game_id:$scope.game.gameID};
-      
-      var item = new $scope.SaveResource($scope.theData);
-      item.$save(function(response) { 
-              $scope.solution_check_result = response;
-              if($scope.solution_check_result.last_solved){
+
+		$timeout(function(){// 3sec delay for user to listen
+
+		  $('#t11').removeClass('active');
+		  $('#t21').addClass('active');
+		  $('#ta11').removeClass('active');
+		  $('#ta21').addClass('active');
+		  $scope.specialMessage = "Let's see !";
+
+		  $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+		  //alert($scope.game.gameID);
+		  $scope.theData = {user_code:$scope.solution1,
+							problem_id:$scope.current_problem,
+							game_id:$scope.game.gameID};
+		  
+		  var item = new $scope.SaveResource($scope.theData);
+		  item.$save(function(response) { 
+			  $scope.solution_check_result = response;
+			  if($scope.solution_check_result.last_solved){
 				$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
 
 				$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
@@ -195,10 +230,14 @@ audioplayer.load();
 					window.location.href="index.html#/practice";
 					}
 				});
-                //If you hardcode to the game, this will automatically advance the game to the next problem. 
-                $scope.fetch($scope.game.gameID);
-              }
-		});
+				//If you hardcode to the game, this will automatically advance the game to the next problem. 
+				$scope.fetch($scope.game.gameID);
+			  }
+			});
+
+		},3000); 
+		  
+
     };
 
     $scope.verify_solution = function() {
