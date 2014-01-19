@@ -186,19 +186,61 @@ float:left;
 
 !-->
 
+
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
-		<div class ="container" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop','coach':'Shannon','link': 'img/mbcoach/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
-
-						{'name':'Easy','id':'Easy','coach':'Sandra','link': 'img/mbcoach/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview','show':'true' },
-
-						{'name':'Medium','id':'Medium','coach':'Zandar','link': 'img/mbcoach/Zandar.jpg','desc':'Hacker that wants you to be more awesome','show':'true'},
-
-						{'name':'Hard','id':'Hard','coach':'SGTMJR','link': 'img/mbcoach/SGT MJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}];">
+		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches()">
+		
+		
 						
 		<div>
-		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Select Your Mentor!</h4>				
+		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Select Your Mentor!</h4>	
+
+		
+		
+		
+		
+		
+		
+		
+		
+			<span class="span11">
+			
+			<center><table border = '1'>
+			<td ng-repeat ="coaches in allCoachesData.coachesData" align ='center'>
+			
+			<IMG ng-src=" {{coaches.link}}" width ='150'> <br>
+			<input type ="radio" name = "coachSelect" ng-model ="$parent.isTrue.coach" value ="{{coaches.coach}}"> 
+
+			<b><br>{{coaches.coach}}</b> <br><br> {{coaches.desc}}
+			<br>
+			</td>
+			</table>
+			</span>
+	</center>
+    </div>
 		      
-				<table cellpadding ="10" width ='800'>
+				<!-- <table cellpadding ="10" width ='800'>
 				<tr>
 				<td width = '50%'>
 					<select ng-model="coaches" ng-options="mentor.coach for mentor in levels">
@@ -213,12 +255,12 @@ float:left;
 					
 				</td>				
 				<td>
-					<!-- place holder !-->
+					<!-- place holder 
 					
 				</td>
 				</tr>
-				</table>
-			 		</div>
+				</table>   !-->
+			 		
 	
 
 
@@ -588,18 +630,17 @@ float:left;
 
 
 
-<!--  This portion deals with responsive.
+<!--  This portion deals with responsive. !-->
 
 
 
 
- !-->
 
- <div ng-show = "coaches.show">
- <h4 class="well well-small bootCamp" align="center" id="well-c" >1. Select Your path!</h4>
+ <div ng-show = "isTrue.coach"> <!-- to check existence of isTrue !-->
+ <h4 class="well well-small bootCamp" align="center" id="well-c" >2. Select Your path!</h4>
 	<div class ="container">
 	
-		<div class="tabbable" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list()">
+		<div class="tabbable" >
 		  <ul class="nav nav-tabs">
 
 			<li class="tabspacing">
@@ -632,7 +673,8 @@ float:left;
 								</div>
 							</td>
 							<td class="continue">
-								<button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(path.id,path.name,5,coaches.coach)">Master it Now </button>
+								<button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(path.id,path.name,5,isTrue.coach)">Master it Now </button>
+								
 							</td>                                 
 						</tr>									 
 					</table>				
@@ -643,6 +685,7 @@ float:left;
 			
 		</div>
 		
+	</div>
 	</div>
 	</div>
 	</div>

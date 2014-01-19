@@ -1,6 +1,42 @@
 'use strict';
 
 function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
+	//check if the user had select a mentor before.
+	
+
+	$scope.getCurrentMastery = function(){
+
+          $resource('/jsonapi/MasteryBased/CURRENT').get({},function(response){
+			  $scope.mastery = response;
+			   console.log($scope.mastery.currentUserMastery[0]);
+			   
+			if($scope.mastery.currentUserMastery[0].coach == null ){
+				console.log("remain on page");
+			}
+			else{
+				console.log("will forward to cache page");
+				$location.path('ymbcoaching-cache')
+			}
+			   });	   		
+
+
+			   
+    } 
+			$scope.getCurrentMastery();
+	
+	
+	
+	
+	$scope.getCoaches = function(){
+
+	  $resource('/jsonapi/MasteryBased/COACHES').get({},function(response){
+		  $scope.allCoachesData = response;
+		   console.log($scope.allCoachesData.coachesData[0].coach);
+		   });	   			   
+	}
+	
+	
+	
 	
 	//Assuming this is what you wanted by calling list in ng-init
     $scope.fetch_game_paths = function(){
