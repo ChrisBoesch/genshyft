@@ -94,7 +94,12 @@ myApp.run(function($httpBackend) {
 		{"no":"1", "status":"true", "answer" : ""},
 		{"no":"2", "status":"false", "answer" : ""},
 		{"no":"3", "status":"false", "answer" : ""},
-		{"no":"4", "status":"false", "answer" : ""}
+		{"no":"4", "status":"false", "answer" : ""},
+		{"no":"5", "status":"true", "answer" : ""},
+		{"no":"6", "status":"true", "answer" : ""},
+		{"no":"7", "status":"false", "answer" : ""},
+		{"no":"8", "status":"false", "answer" : ""},
+		{"no":"9", "status":"false", "answer" : ""}		
 		]};
 	
 	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
