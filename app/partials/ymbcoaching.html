@@ -108,124 +108,46 @@ float:left;
 
 </style>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<div ng-controller="yMBCoachingController" ng-init="list();">
-
-		<center><b> This UI does not support responsive yet </b></center>
-
-		<!-- /.carousel This is select difficulty , also there coaches name-->
-
-<!--
-
-
-		<div class="container marketing">
-			<!-- Three columns of text below the carousel -->
-
-
-
-
-
-
-
-
-
-
-
-<!-- This is the coaches part!-->
-	<!--
-
-			<div class="row-fluid">
-				<div class="span12">
-			
-					<div class="span12 align="center"> <!-- Difficulty level !--
-						<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') > -1 && currentURL.indexOf('difficulty') > -1">#2. Select {{passed_in_difficulty}}</h4>
-
-						<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') == -1">1. Select Your Mentor!</h4>
-						<div class="well" id="levels" style="height:235px;" class="btn-group" data-toggle="buttons-radio" align="center" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop','coach':'Shannon','link': 'img/mbcoach/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends'},
-
-						{'name':'Easy','id':'Easy','coach':'Sandra','link': 'img/mbcoach/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview' },
-
-						{'name':'Medium','id':'Medium','coach':'Zandar','link': 'img/mbcoach/Zandar.jpg','desc':'Hacker that wants you to be more awesome'},
-
-						{'name':'Hard','id':'Hard','coach':'SGT MJR','link': 'img/mbcoach/SGT MJR.jpg','desc':'Wants you to quit before you get someone killed'}];">					
-
-							
-							<span class ="divfloatleft" ng-repeat="item in levels">
-							<input style="visibility:hidden" type="radio" ng-model="$parent.$parent.difficulty" name="difficultyLevel" value="{{item.name}}"/ >  
-
-								<button type="button" ng-click = "changeDifficulty(item.name,path_progress.path.name,item.coach)" class="btn btn-primary" style="height: 200px; width: 250px"  btn-radio="{{item.name}}"> 
-									<IMG ng-src=" {{item.link}} " width = 50% > 
-
-								<b> {{item.coach}} </b> <br> <br>{{item.desc}}
-								</button></br></br>
-							</span>
-						</div>	
-					</div>					
-				</div>
-			</div>
-		</div>
-
-!-->
-
-
-					
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		
-		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches()">
-		
-		
-						
-		<div>
-		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Select Your Mentor!</h4>	
-
-		
-		
-		
-		
-		
-		
-		
-		
+		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches();getCurrentMastery()">
+		 {{mastercache}}
+		<div ng-show = "mastercache">
+		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Player Progress</h4>	
 			<span class="span11">
+		<table>
+		<tr class = 'span11'ng-repeat ="coaches in allCoachesData.coachesData|filter:mastery.currentUserMastery[0].coach" >
+			<td class="span3"> <IMG class ="Span3" ng-src=" {{coaches.link}}" width ='200'> </td> 
+			 <td class="span4">
+			 <h3> You are currently mentored by</h3> <h2>{{coaches.coach}}</h2> <h3>in your path to master </h3><h2>{{mastery.currentUserMastery[0].pathName}} </h2>
+			 
+			 	 <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(path.id,path.name,5,coaches.coach)">Master it Now </button>
+			 <button id="reset" class="btn btn-warning" ng-click ="reset()"> Select New Path </button> 
+			 </td>
+			 <td class = "span3">
+		
+						<div  class ='span3'ng-repeat="path in player_progress.paths|filter:mastery.currentUserMastery[0].pathId" >
+						<br>
+						<div class="myprogress"> <b>A total of</b> <h3>{{path.solvedProblems}}</h3> <b> answered completed out of </b><h3>{{path.problemsInPath}}</h3><b> questions  so far !</b>.
 			
+						</div>
+						</div>
+			</td> 
+		</tr>
+		</table>
+			
+			
+			
+		</div> 
+		</span>
+	
+
+		
+s
+						
+		<div class = "container" ng-show = "masterselect">
+	
+			<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Player Progress</h4>	
+			<span class="span11">
 			<center><table border = '1'>
 			<td ng-repeat ="coaches in allCoachesData.coachesData" align ='center'>
 			
@@ -236,280 +158,10 @@ float:left;
 			<br>
 			</td>
 			</table>
-			</span>
+			</span> <br>
 	</center>
     </div>
-		      
-				<!-- <table cellpadding ="10" width ='800'>
-				<tr>
-				<td width = '50%'>
-					<select ng-model="coaches" ng-options="mentor.coach for mentor in levels">
-						<option value="">-- choose coach --</option>
-					</select>
-					<br><br>
-					{{coaches.desc}}
-				</td>
-				<td>
-				
-					<IMG ng-src=" {{coaches.link}} ">
-					
-				</td>				
-				<td>
-					<!-- place holder 
-					
-				</td>
-				</tr>
-				</table>   !-->
-			 		
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!--
-	
-
-	<div class="row-fluid">
-
-	<div class="span12">
-	<div class="container" > <!-- start of select language !	
-		<h4 class="well well-small bootCamp" align="center" id="well-c" >2. Select a language</h4>
-
-		</div>
-		
-		<div id="myCarousel" class="carousel slide" ng-hide="difficulty=='Drag-n-Drop'">
-			<div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
-				<div class="item" ng-repeat="paths in paths_grouped" ng-class="{active : $first}" >
-	                <!-- Three columns of text below the carousel 
-					<div class="container">
-						<div class="row">	
-							<div class="span4"  ng-repeat="path in paths" ng-init="practiceSelection()">
-								<label class="radio">
-									<input style="visibility:hidden" type="radio" name="optionsRadios" ng-model="$parent.pathid" id="{{path.id}}" value="{{path.id}}" >
-									<input class="well" type="image" ng-src="img/language/{{path.description.split(' ').join('_')}}.png" alt="" id="pathImg" ng-click="changePath(path.id)"/>
-									<h6>{{path.name}}</h6>
-								</label>
-							</div>
-						</div>
-					</div>	
-				</div>
-			</div>
-			<a class="left carousel-control" data-target="#myCarousel" data-slide="prev">&lsaquo;</a>
-			<a class="right carousel-control" data-target="#myCarousel" data-slide="next">&rsaquo;</a>
-		</div>
-
-		<div id="myCarouselB" class="carousel slide" ng-show="difficulty=='Drag-n-Drop'">
-			<div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
-				<div class="item" ng-repeat="mobile_path in mobile_paths_grouped" ng-class="{active : $first}" >
-	                <!-- Three columns of text below the carousel 
-					<div class="container">
-						<div class="row">	
-							<div class="span4" ng-repeat="path in mobile_path" ng-init="practiceBeginnerSelection()">
-								<label class="radio">
-									<input style="visibility:hidden" type="radio" ng-click="changePath($parent.pathid)" name="optionsRadios" ng-model="$parent.pathid" id="{{path.id}}" value="{{path.path_id}}">
-									<input class="well"type="image" ng-src="img/language/{{path.description.split(' ').join('_')}}.png" alt="" id="pathImg" ng-click="changePath(path.path_id)"/>
-									<h6>{{path.name}}</h6>
-								</label>
-							</div>
-						</div>
-					</div>	
-				</div>
-			</div> 
-			<a class="left carousel-control" data-target="#myCarouselB" data-slide="prev">&lsaquo;</a>
-			<a class="right carousel-control" data-target="#myCarouselB" data-slide="next">&rsaquo;</a>
-		</div>
-		</div>
-		</div> <!-- end of select language 
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-
-	
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="container" >
-	<div class="row-fluid">
-	<div class="span12">
-	
-		<!--display the level, topic name & progress of the player when the path is selected by the player
-					<div class="span12" ng-model="$parent.pathName" >
-						<div align="center"><h4  class="well well-small bootCamp">#3. Select a Path Level!</h4></div>
-						<div class = "tabbable well well-small">                      
-						  <ul id="myTab" class="nav nav-tabs">                        
-							<li id="path1" class="tabspacing active">
-							<a  data-target="#path" data-toggle="tab">{{path_progress.path.name}} Path</a>
-							</li>                        
-							<li id="level1" class="tabspacing">
-							<a  data-target="#level" data-toggle="tab">Level {{lvlName}}</a>
-							</li>                                          
-						  </ul>           					  
-						  <div class="tab-content" style="font-family:verdana">                        
-							<div class="tab-pane fade in active" id="path">
-								<div style="height:190px;overflow:auto">
-									<div class="span12" style="font-size:12px;">
-										<div align = "center" class="span3 pull-left">Level#</div>
-										<div class="span5 pull-left">Description</div>
-										<div class="span2 pull-left">Progress</div>
-										<div class="span2 pull-left">Solved</div>
-									</div>
-									<li ng-repeat="v in path_progress.details" ng-init="$parent.$parent.$parent.lvl=path_progress.details[0].id;setDefaultButton(path_progress.details[0].pathorder,path_progress.details[0].id)">
-									<div class="row-fluid">
-										<div class="span12" style="font-size:12px;">
-											
-											<div class="span3">
-												<label class="radio pull-left">
-													<input style="visibility:hidden" type="radio" ng-model="$parent.$parent.$parent.lvl" name="pathLevel" value="{{v.id}}"/ >
-													<button type="button" class="btn btn-primary span3" ng-click="setButton(v.pathorder,v.id)" style="height: 30px; width: 100%"  btn-radio="{{v.name}}">
-													Level {{$index+1}}
-												</button> 											
-												</label>
-											</div>
-											<div class="span5">
-												{{v.description}}
-											</div>
-											
-											<div class="span2">
-												{{v.currentPlayerProgress}}/{{v.problemsInProblemset}}
-											</div>
-											<div class="span2 container" ng-show="v.currentPlayerProgress>=v.problemsInProblemset">
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004;
-											</div>
-										</div>
-									</div>
-									</li>		
-								</div>
-							</div>                        
-							<div class="tab-pane fade in " id="level" style="height:220px;overflow:auto">
-								<div class="span12" style="font-size:12px;">
-									<div class="span5 pull-left" >Problem Name</div>
-									<div class="span2 pull-left">Solved</div>
-								</div>                     
-								<li ng-repeat="prob in problems.problems">
-								<div class="row-fluid">
-									<div class="span12" style="font-size:12px;">
-										<div class="span5">
-										{{prob.name}}
-										</div>
-										<div class="span2 container" ng-show="prob.solved">
-										
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004;
-										</div>
-									</div>
-								</div>
-								</li>
-							</div> 								
-						 </div>   
-						</div>					
-					</div>		
-				</div>				
-			</div>
-		</div>
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		<!--  Continue button  to start game part!-->
-
-					<!-- 
-					 
-					<div class="span2"  align = "center">
-						<table align="center">
-							<tr><td align="center">
-								</br></br>
-					!-->
-								<!--Continue-->
-					<!--		<div  ng-show="!difficulty || !path_ID">
-									<button class="btn disabled" style="width: 145px"><h5>Continue Path</h5></button>									
-								</div>
-						
-								<div  ng-show="difficulty && path_ID">
-									<button class="btn btn-primary" ng-click="continuePath(5);" style="width: 145px"><h5>Continue Path</h5></button>									
-								</div>
-								
-								<span class="label label-info" align="left">
-									<b><i>You are going to play</i></b>
-									</br></br>
-									Path: {{practice_path_name}}
-									</br>
-									Diffculty: {{difficulty}}
-								</span>
-						
-					
-					</td></tr>
-							<tr><td>
-								</br>
-								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><h5>Continue Level {{lvlName}}</h5></button></div>
-							</td></tr>
-				
-							<tr><td>
-						
-						
-								</br>
-								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><h5>Master  Level {{lvlName}} Now </h5></button></div>
-								<div ng-show="!difficulty || !path_ID" align ="center">
-							<center> <b> Select a Coach, a Language and a Level </b> </center> </div>
-							
-						<!--	
-							</td></tr>
-						</table>
-						
-	</div> <!-- end of select play !-->
-	
-	
-	
-	
-
+		     
 
 <div class="row-fluid">
 				<div class="span12">
@@ -533,101 +185,6 @@ float:left;
 	$("#myCarouselSmall")
 		.appendTo("#des");
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!--  This portion deals with responsive. !-->
@@ -685,7 +242,6 @@ float:left;
 			
 		</div>
 		
-	</div>
 	</div>
 	</div>
 	</div>

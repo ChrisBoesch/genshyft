@@ -15,16 +15,20 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			}
 			else{
 				console.log("will forward to cache page");
-				$location.path('ymbcoaching-cache')
+				$scope.mastercache = "true";
+				$scope.masterselect ="false";
 			}
 			   });	   		
 
 
 			   
     } 
-			$scope.getCurrentMastery();
+			//$scope.getCurrentMastery();
 	
-	
+	$scope.reset=function(){
+				$scope.mastercache = "false";
+				$scope.masterselect ="true";
+	}
 	
 	
 	$scope.getCoaches = function(){
