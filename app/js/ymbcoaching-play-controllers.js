@@ -227,16 +227,26 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 					$scope.current_level_progress = $scope.problems_progress.currentPlayerProgress;
 					$scope.total_level_progress = $scope.problems_progress.problemsInProblemset;
 					if($scope.problems_progress.problemsInProblemset<=$scope.problems_progress.currentPlayerProgress){
+					
+						//FINISH GAME AUDIO
+					
 						alert("Congrats! You have successfully complete this level!");
 					window.location.href="index.html#/practice";
 					}
 				});
 				//If you hardcode to the game, this will automatically advance the game to the next problem. 
+				
+				//
 				$scope.fetch($scope.game.gameID);
+				
+						var audioplayer = document.getElementsByTagName('audio')[0];
+						$scope.audio = "audio\\"+$scope.nameOfCoach+"\\run\\"+Math.floor((Math.random()*3)+1)  +".mp3";
+						audioplayer.pause();
+						audioplayer.load();
 			  }
 			});
 
-		},3000); 
+		},5000); 
 		  
 
     };
