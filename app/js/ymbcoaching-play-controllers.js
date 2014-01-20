@@ -20,8 +20,13 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
         $scope.counter++;
         mytimeout = $timeout($scope.onTimeout,1000);
 		if($scope.counter >=30){
+			$scope.audio = "audio\\"+$scope.nameOfCoach+ "\\pause.mp3";
+			var audioplayer = document.getElementsByTagName('audio')[0];
+			$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+			audioplayer.pause();
+			audioplayer.load()
 			$scope.counter = 0;
-			$scope.audio = "play Hurry UP msg" ;
+
 			// execute hurry up audio
 		}
 		
@@ -65,6 +70,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
     }		
 	
 	 $scope.audio = "audio\\"+$scope.nameOfCoach+"\\welcome.mp3";
+	 $scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+$scope.nameOfCoach+".jpg";
 	
 	$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
 		$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
@@ -155,8 +161,9 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
     }
     $scope.skip_problem = function(){
 	
-		
-		$scope.audio = "audio\\"+$scope.nameOfCoach+"\\skip\\" + Math.floor((Math.random()*3)+1) +".mp3";
+		$scope.counter = 0;  //reset timer
+		$scope.audio = "audio\\"+$scope.nameOfCoach+ "\\"+ Math.floor((Math.random()*13)+1) +".mp3";
+		$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 		var audioplayer = document.getElementsByTagName('audio')[0];
 
 		console.log(Math.floor((Math.random()*10)+1));
@@ -196,8 +203,10 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
       //$scope.solution
       //$scope.current_problem
 	  //$scope.game.gameID
+		$scope.counter = 0; //reset timer
 		var audioplayer = document.getElementsByTagName('audio')[0];
-		$scope.audio = "audio\\"+$scope.nameOfCoach+"\\run\\"+Math.floor((Math.random()*3)+1)  +".mp3";
+		$scope.audio = "audio\\"+$scope.nameOfCoach+"\\"+ Math.floor((Math.random()*13)+1)  +".mp3";
+		$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 		audioplayer.pause();
 		audioplayer.load();
 
@@ -230,7 +239,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 					
 						//FINISH GAME AUDIO
 					
-						alert("Congrats! You have successfully complete this level!");
+					alert("Congrats! You have successfully complete this level!");
 					window.location.href="index.html#/practice";
 					}
 				});
@@ -238,15 +247,33 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 				
 				//
 				$scope.fetch($scope.game.gameID);
-				
-						var audioplayer = document.getElementsByTagName('audio')[0];
-						$scope.audio = "audio\\"+$scope.nameOfCoach+"\\run\\"+Math.floor((Math.random()*3)+1)  +".mp3";
-						audioplayer.pause();
-						audioplayer.load();
+					$timeout(function(){
+					var audioplayer = document.getElementsByTagName('audio')[0];
+					$scope.audio = "audio\\"+$scope.nameOfCoach+"\\"+ Math.floor((Math.random()*13)+1)  +".mp3";
+					$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+					audioplayer.pause();
+					audioplayer.load();
+					},4000);
+					
+					//if more than percentage
+					$timeout(function(){
+						if( (($scope.problems_progress.currentPlayerProgress/$scope.problems_progress.problemsInProblemset)*100)% 75 == 0)
+						{
+						$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+						}
+						else if( (($scope.problems_progress.currentPlayerProgress/$scope.problems_progress.problemsInProblemset)*100)% 50 == 0)
+						{
+						$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+						}
+						else if( (($scope.problems_progress.currentPlayerProgress/$scope.problems_progress.problemsInProblemset)*100)% 15 == 0)
+						{
+						$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+						}
+					},4000);
 			  }
 			});
 
-		},5000); 
+		},3000); 
 		  
 
     };

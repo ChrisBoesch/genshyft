@@ -527,10 +527,10 @@
 									
 									<div class = "span3">
 									
-									<img ng-src="img\mbcoach\{{nameOfCoach}}.jpg"/>
+									<img ng-src="{{image}}"/>
 									</div>
 
-									<div class = "span9">
+									<div class = "span9" id ="audioText">
                                     <font>
 
 											&nbsp;&nbsp;Coach Name: <span ng-bind="nameOfCoach"></span> <br>
@@ -541,15 +541,12 @@
 									</div>
                                 </div>
 										<div id = "audioDiv">	
+											<audio src="{{audio}}" autoplay controls></audio>
 										
-											
-											 <audio src="{{audio}}" autoplay controls></audio>
-
-											
+										
 										</div>
 
-Your browser does not support the audio element.
-</audio>
+
                             </div>  
 							<!-- video end here !-->
 							

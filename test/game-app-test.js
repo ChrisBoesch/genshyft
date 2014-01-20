@@ -101,13 +101,13 @@ myApp.run(function($httpBackend) {
 	$httpBackend.whenPOST('/jsonapi/purposeVideos/UPDATE').passThrough();
 	
 	var coachesData = {"coachesData":[
-	{'coach':'Shannon','link': 'img/mbcoach/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
+	{'coach':'Shannon','link': 'img/mbcoach/Shannon/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
 
-	{'coach':'Sandra','link': 'img/mbcoach/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview','show':'true' },
+	{'coach':'Sandra','link': 'img/mbcoach/Sandra/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview','show':'true' },
 
-	{'coach':'Zandar','link': 'img/mbcoach/Zandar.jpg','desc':'Hacker that wants you to be more awesome','show':'true'},
+	{'coach':'Zandar','link': 'img/mbcoach/Zandar/Zandar.jpg','desc':'Hacker that wants you to be more awesome','show':'true'},
 
-	{'coach':'SGTMJR','link': 'img/mbcoach/SGT MJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}
+	{'coach':'SGTMJR','link': 'img/mbcoach/SGTMJR/SGTMJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}
 	]};
 	
 	$httpBackend.whenGET('/jsonapi/MasteryBased/COACHES').respond(coachesData);
