@@ -1,5 +1,5 @@
 </br>
-<div ng-controller="GenshyftTournamentController" ng-init="loading(); get_tournamentQns()" class="container" id="tourncreate"style="position:relative;" >
+<div ng-controller="GenshyftTournamentController" ng-init="loading()" class="container" id="tourncreate"style="position:relative;" >
 	<center><h2>Tournament Creation</h2></center>
 	</br>
 	</br>
@@ -130,7 +130,7 @@
 				</br>Choose a language:
 			</div>
 			<div class="span9">	
-				</br><select ng-model="qnsLanguage" ng-options="qnsLanguage for qnsLanguage in ['Ruby','Python', 'Javascript','Java']"></select>
+				</br><select ng-model="qnsLanguage" ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']"></select>
 
 				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">+ Add Questions </button>
 			</div>
@@ -152,16 +152,16 @@
 
 
 	<!-- Questions modal -->
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-init="list_questions(qnsLanguage)">
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-init="get_tournamentQns(qnsLanguage)">
 		<div class="modal-header" ng->
 	    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	    	<h3 id="myModalLabel">Select  your questions</h3>
 	  	</div>
 
-	  	<div class="modal-body" >
-	  		<input type="checkbox" ng-repeat="qns in qnsArray" ng-model="questions"> 
-	  		{{qns}}
-	  		test</input></br>
+	  	<div class="modal-body" ng-repeat="question in qnsArray track by $index" ng-model="questions">
+	  		<input type="checkbox"> 
+	  		{{question}}
+	  		</input></br>
 	  	</div>
 	  	
 	  	<div class="modal-footer">

@@ -95,34 +95,39 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 	};
 
   //To implement for Create Tournaments - engsen
-	$scope.get_tournamentQns = function(){
+	$scope.get_tournamentQns = function(qnsLanguage){
     console.log("get_tournamentQns");
     $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
-        $scope.tournamentQns = response; // stores the Json files
-        console.log($scope.tournamentQns);
+      $scope.tournamentQns = response; 
+      console.log($scope.tournamentQns);
+      $scope.list_questions(qnsLanguage, $scope.tournamentQns);
+      //console.log($scope.qnsArray + "here");
     });
        
-	}
+	};
 
-  $scope.list_questions = function(qnsLanguage){
-    console.log("list_questions");
-    $scope.allQns = $scope.get_tournamentQns();
-
+  $scope.list_questions = function(qnsLanguage, tournamentQns){
     $scope.qnsArray = [];
-    
-    for(var i = 0; i < $scope.allQns.qnsLanguage.length - 1; i++){
-      var question = $scope.allQns.qnsLanguage[i].qns;
-      qnsArray.push(question);
+    console.log("list_questions");
+    for(var i = 0; i < tournamentQns.tourQns.length; i++){
+      var language = tournamentQns.tourQns[i].language;
+      if(language===qnsLanguage){
+        var question = tournamentQns.tourQns[i].qns;
+        $scope.qnsArray.push(question);
+      }
     }
-  }
+    //console.log($scope.qnsArray);
+  };
 
   //Gets tournaments created by user.
 	$scope.get_mytournaments = function(){
     console.log("get_mytournaments");
+    /*
     $resource("/jsonapi/list_grpTournaments/all").get({},function(response){
         $scope.tournaments = response; // stores the Json files
         console.log($scope.tournaments);
    	});
+    */
 
     $resource("/jsonapi/added_tournaments").query({},function(response){
         $scope.grpTournaments = response; // stores the Json files
@@ -185,7 +190,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
     });
     */
-    $scope.grpTourModel = $resource('/jsonapi/list_grpTournaments/all');
+    $scope.grpTourModel = $resource('/jsonapi/added_tournaments');
     $scope.grpTourModel.get({}, function(response){
       $scope.newGrpTournament = {};
       $scope.newGrpTournament.title = $scope.grpTourTitle;
