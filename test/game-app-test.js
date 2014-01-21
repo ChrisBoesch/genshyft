@@ -779,7 +779,7 @@ myApp.run(function($httpBackend) {
 	  $httpBackend.whenGET('/jsonapi/list_grpTournaments/all').respond(list_grpTournaments);
       */
 
-      //Tournaments are added successfully and displayed on the partials
+      //Tournaments are added successfully and displayed on the partials - engsen
       var added_grpTournaments = [];
 
       $httpBackend.whenPOST('/jsonapi/add_grptournament').respond(function(method, url, data) {

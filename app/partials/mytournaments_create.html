@@ -85,10 +85,10 @@
 			<div class="span12">
 				<div class="span1"></div>
 				<div class="span2">
-					Max no. of groups
+					No. of groups
 				</div>
 				<div class="span9">
-					 <select ng-model="grpTourMaxNoGroup" ng-options="numgrp for numgrp in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+					 <select ng-model="grpTourNoGroup" ng-options="numgrp for numgrp in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 				</div>
 			</div>	
 		</div>
@@ -126,13 +126,16 @@
 		<div class="span1"></div>	
 		<div class="span10 well well-small">
 			<button type="button" class="close" aria-hidden="true" ng-click="delete_rounds($index)">×</button>
-			<div class="span2"><b>Round {{$index+1}}</b>
+			<div class="span3"><b>Round {{$index+1}}</b>
 				</br>Choose a language:
+				</br></br>Choose a difficulty level:
 			</div>
-			<div class="span9">	
+			<div class="span8">	
 				</br><select ng-model="qnsLanguage" ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']"></select>
 
-				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">+ Add Questions </button>
+				</br><select ng-model="qnsDifficulty" ng-options="difficulty for difficulty in [1,2,3,4,5,6,7,8,9,10]"></select>
+
+				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal" ng-click="get_tournamentQns(qnsLanguage,qnsDifficulty)">+ Add Questions </button>
 			</div>
 		</div>
 	</div>
@@ -152,7 +155,7 @@
 
 
 	<!-- Questions modal -->
-	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-init="get_tournamentQns(qnsLanguage)">
+	<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-header" ng->
 	    	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 	    	<h3 id="myModalLabel">Select  your questions</h3>
@@ -173,13 +176,13 @@
 
 	<!-- Tournament Creation Success Modal -->
 	<div class="modal fade" id="grpTournamentCreated" style="display:none">         
-    <div class="modal-body" style="color:black">
-        You have successfully created a tournament!
-    </div>
-    <div class="modal-footer">
-        <a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click="hideSuccessTournamentModal()">Ok</button></a>
-    </div>
-</div>
+	    <div class="modal-body" style="color:black">
+	        You have successfully created a tournament!
+	    </div>
+	    <div class="modal-footer">
+	        <a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click="hideSuccessTournamentModal()">Ok</button></a>
+	    </div>
+	</div>
 
 
 </div>
