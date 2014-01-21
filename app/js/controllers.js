@@ -38,14 +38,14 @@ function Ctrl($scope) {
   $scope.color = 'blue';
 }
 
-function PlayerController($scope,$resource,$location,$cookieStore,$http,currentUser){
+function PlayerController($scope,$resource,$location,$cookieStore,$http,currentUserService){
 	$scope.list=function(){
 		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
 	  $scope.player = $resource('/jsonapi/player').get();
 		$scope.tags = $resource('/jsonapi/tags').get();
 	    $scope.$watch('player', function() {
 	    	$scope.current_country = $scope.player.country;
-        currentUser.setUser($scope.player);
+        currentUserService.setUser($scope.player);
 	    },true);
 	};
 	
@@ -159,6 +159,76 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 			alert("Please login with FaceBook or Google Account first!");
 		}
 	};
+
+//GENShYFT Codes
+	$scope.toVideos = function(){
+		$location.path("videos");
+	}
+
+	$scope.checkCreatePathorLevelLogin = function(){
+		if($scope.player.nickname){
+			$location.path("create");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkSchoolRegistrationLogin = function(){
+		if($scope.player.nickname){
+			$location.path("schoolregistration");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkMasteryLogin = function(){
+		if($scope.player.nickname){
+			$location.path("ymbcoaching");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkPurposeDrivenLogin = function(){
+		if($scope.player.nickname){
+			$location.path("purposedriven");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkTournamentLogin = function(){
+		if($scope.player.nickname){
+			$location.path("tournaments");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkCreateTournamentLogin = function(){
+		if($scope.player.nickname){
+			$location.path("mytournaments");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+
+	$scope.checkEventsLogin = function(){
+		if($scope.player.nickname){
+			$location.path("events");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
+	// End GENShYFT Code
+
 	
 	
     $scope.update_player_profile = function($event){  
@@ -221,7 +291,7 @@ function InterfaceController($scope,$resource){
     $scope.interfaces = $resource('/jsonapi/interfaces').get();
 }
 
-function PathController($scope,$resource,$cookieStore,$location,$filter){
+function PathController($scope,$resource,$cookieStore,$location,$filter,gameService,$q){
 	//Assuming this is what you wanted by calling list in ng-init
     $scope.fetch_game_paths = function(){
 		$scope.game_paths = $resource('/jsonapi/get_game_paths').get();
@@ -294,29 +364,37 @@ function PathController($scope,$resource,$cookieStore,$location,$filter){
 	};
 	
     $scope.list = function(){
-    	$scope.paths_unfiltered = $resource('/jsonapi/get_game_paths').get();
-		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
-		$scope.abc = $cookieStore.get("pid");
-		$scope.lvlName = 1;
-		$scope.player_progress = "";
-		$scope.difficulty = "";
-		$scope.path_ID = "";
-		$scope.path_name = "a Language";
-		$scope.practice_path_name = "";
-		$scope.currentURL = location.href;
-		
-		setTimeout(function () {
-			$scope.paths = $scope.paths_unfiltered;
-			$scope.paths_grouped = $filter('groupBy')($scope.paths.paths, 3);
-			$scope.mobile_paths_grouped = $filter('groupBy')($scope.mobile_paths, 3);
-			$scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
+        $scope.abc = $cookieStore.get("pid");
+        $scope.lvlName = 1;
+        $scope.player_progress = "";
+        $scope.difficulty = "";
+        $scope.path_ID = "";
+        $scope.path_name = "a Language";
+        $scope.practice_path_name = "";
+        $scope.currentURL = location.href;
+        $scope.paths_unfiltered = null;
+        $scope.mobile_paths = null;
 
-		    //Including details=1 returns the nested problemset progress.
-		    $scope.PathModel.get({"pathID":$scope.abc,"details":1}, function(response){
-		        $scope.path_progress = response;
-		    });
-		    $('#largeSelectPlay').click();
-		}, 1500);
+        $q.all([
+            gameService.getGamePaths(),
+            gameService.getMobilePaths()
+        ])
+        .then(function (responseArray) {
+            $scope.paths_unfiltered = responseArray[0];
+            $scope.mobile_paths = responseArray[1];
+            $scope.paths = $scope.paths_unfiltered;
+            $scope.paths_grouped = $filter('groupBy')($scope.paths.paths, 3);
+            $scope.mobile_paths_grouped = $filter('groupBy')($scope.mobile_paths, 3);
+            $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
+
+            // Including details=1 returns the nested problemset progress.
+            $scope.PathModel.get({"pathID":$scope.abc,"details":1}, function(response){
+                $scope.path_progress = response;
+            });
+
+            // Todo: I don't really know what it was doing!
+            // $('#largeSelectPlay').click();
+        });
     };
 
 	//Try to only fetch what you need in the init of the controller.
@@ -3478,292 +3556,7 @@ function TimeAndAttemptsController($scope,$resource){
     $scope.item = $resource('/jsonapi/attempts_and_time_by_day').get();
 }
 
-function TournamentController($scope,$resource,$http,$cookieStore,$location,$timeout){
-    $scope.TournamentModel = $resource('/jsonapi/list_open_tournaments');
-    $scope.TournamentHeatGameModel = $resource('/jsonapi/create_game/heatID/:heatID');
-    
-    $scope.TournamentHeatModel = $resource('/jsonapi/get_heat_ranking');
-    //$scope.Tournament = $resource('/jsonapi/tournament/tournamentID');
-    $scope.tournamentID = null;
-    //$scope.heatID = 12883052;
-    $scope.heat = null;
-    $scope.round = null;
-    $scope.roundDirty = false;
-
-	$scope.my_range = function(n) {
-		var result = [];
-		var counter = 1;
-		for(var i=0;i<n;i++){
-			result.push(counter);
-			counter ++;
-		}
-        return result;
-        //return Array(n);
-    };
-    //A method to fetch a generic model and id. 
-    //Pass in ID
-    $scope.check_location = function(){
-    	$scope.heatID = $location.search().heatID;
-    	if (!$scope.heatID){
-    		alert("No heat ID passed via URL.");
-    	}
-    	else{
-    		console.log("Fetching heat "+$scope.heatID);
-    		$scope.fetch_heat($scope.heatID);
-    	}
-    }
-
-    $scope.fetch_heat = function(heatID){
-          $scope.TournamentHeatModel.get({"heatID":heatID}, function(response){
-              $scope.heat = response;
-          });
-    };
-
-	$scope.fetch_heat_with_time = function(heatID,time){
-		  console.log("Fetching heat with time.");
-          $scope.TournamentHeatModel.get({"heatID":heatID, "time":time}, function(response){
-              $scope.heat = response;
-          });
-	};
-
-    $scope.fetch_current_heat = function(){
-    	  console.log("Fetching latest heat results");
-          $scope.TournamentHeatModel.get({"heatID":$scope.heatID}, function(response){
-              $scope.heat = response;
-          });
-    };
-
-    $scope.mytimeout = false;
-	$scope.continually_update_heat_results = function(){
-		if($scope.mytimeout){
-			$scope.fetch_current_heat();
-        	var temp = $timeout($scope.continually_update_heat_results,20000);
-        }		
-	};
-	$scope.stop_heat_updates = function(){
-		$scope.mytimeout = false;		
-	};
-	$scope.start_heat_updates = function(){
-		$scope.mytimeout = true;
-		$scope.continually_update_heat_results();		
-	};
-    $scope.create_heat_game = function(){
-          $scope.TournamentHeatGameModel.get({"heatID":$scope.heat.heatID}, function(response){
-              $scope.game = response;
-          });
-    };
-
-    $scope.fetch_tournaments = function(){
-          $scope.TournamentModel.query({}, function(response){
-              $scope.tournaments = response;
-          });
-    };
-
-    $scope.register_for_tournament = function(tournamentID, tournamentPassword){
-        //Use a normal form post for this legacy API.
-        console.log("id "+tournamentID+" "+tournamentPassword);
-        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-        $http.post("/jsonapi/register_for_tournament_updated", {
-            tournamentID: tournamentID,
-            password: tournamentPassword
-        }).success(function (data, status, headers, config) {
-            $scope.registration_response = data;
-            console.log(data);
-            if (data.failed){
-            	alert(data.failed);
-            }
-            else{
-            	$scope.tournamentID = tournamentID;
-            	$scope.fetch_tournament(tournamentID);
-            }
-        }).error(function (data, status, headers, config) {
-        	console.log("Error");
-            alert("An error occurred.")
-            console.log(data);
-        });
-    };
-
-    $scope.create_tournament = function(){
-          $scope.tournamentDirty = false;
-          var data = {"description":"description",
-                       "password": "password",
-                       "shortTitle":"shortTitle",
-                       "longTitle": "longTitle",
-                       "smallPicture": "smallPicture",
-                       "largePicture": "largePicture",
-                       "status": "Closed",
-                       "type": "Normal"}
-          $scope.NewTournament = $resource('/jsonapi/add_or_update_tournament');
-		  var new_tournament = new $scope.NewTournament(data);
-		  new_tournament.$save(function(response){
-		  	 if(response.error) {
-		  	 	console.log(response.error)
-		  	 }
-		  	 else{
-
-			 	$scope.tournament = response;
-			 }
-		  });	
-    };
-
-    $scope.update_tournament = function(tournamentID){
-          $scope.tournamentDirty = false;
-          var data = {"description":$scope.tournament.description,
-                       "password": $scope.tournament.password,
-                       "shortTitle":$scope.tournament.shortTitle,
-                       "longTitle": $scope.tournament.longTitle,
-                       "smallPicture":$scope.tournament.smallPicture,
-                       "largePicture": $scope.tournament.largePicture,
-                       "status":$scope.tournament.status,
-                       "type": $scope.tournament.type}
-          $scope.NewTournament = $resource('/jsonapi/add_or_update_tournament/'+tournamentID);
-		  var new_tournament = new $scope.NewTournament(data);
-		  new_tournament.$save(function(response){
-		  	 if(response.error) {
-		  	 	console.log(response.error)
-		  	 }
-		  	 else{
-			 	//$scope.tournament = response;
-			 	$scope.fetch_tournament(tournamentID); //Using legacy fetch. 
-			 }
-		  });
-    };
-	$scope.fetch_tournament = function(tournamentID){
-          $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
-              $scope.tournament = response;
-              //$scope.startTime = new Date("2013-09-29 08:24:46.840830");
-              //$scope.stopTime = new Date("2013-09-29 12:00:11.784760");
-              //console.log(($scope.stopTime - $scope.startTime)/1000);
-          });
-
-    };
-
-    $scope.get_seconds_to_start = function(startTime, currentTime){
-    	var diff = Math.round((new Date(startTime) - new Date(currentTime))/1000);
-    	if (diff > 0){
-    		return diff;
-    	}
-    	else if (startTime==null){
-    		console.log("Round has not startTime");
-			return -1;	
-    	}
-    	else return 0;
-    };
-
-    $scope.get_time_delta = function(startTime, stopTime){
-    	var start_date = startTime.split(' ')[0];
-    	console.log("start_date "+start_date)
-    	stopTime = start_date+" "+stopTime;
-    	var diff = Math.round((new Date(stopTime) - new Date(startTime))/1000);
-    	console.log("start time "+startTime+" "+new Date(startTime));
-    	console.log("stop time "+stopTime+" "+new Date(stopTime));
-    	var sec = diff % 60;
-    	var min = (diff - sec)/60;
-    	return min+ " min "+sec+ "sec";
-    	//return new Date(stopTime) - new Date(startTime);
-
-    };
-
-	$scope.add_round = function(tournamentID){
-          $scope.roundDirty = false;
-          var data = {'timelimit':3600,
-      					  'description':'Update this description',
-      					  'problemIDs':[],
-      					  'tournamentID':tournamentID}
-          $scope.NewRound = $resource('/jsonapi/add_or_update_round');
-		  var new_round = new $scope.NewRound(data);
-		  new_round.$save(function(response){
-		  	 if(response.error) {
-		  	 	console.log(response.error)
-		  	 }
-		  	 else{
-			 	$scope.round = response;
-			 }
-		  });	
-          
-    };
-    $scope.update_round = function(roundID){
-          $scope.roundDirty = false;
-          var data = {"timelimit":3600,
-      				  "problemIDs":$scope.round.problemIDs,
-      				  "description":$scope.round.description}
-          $scope.NewRound = $resource('/jsonapi/add_or_update_round/'+roundID);
-		  var new_round = new $scope.NewRound(data);
-		  new_round.$save(function(response){
-		  	 if(response.error) {
-		  	 	console.log(response.error)
-		  	 }
-		  	 else{
-			 	//$scope.round = response;
-			 	$scope.fetch_round(roundID);//Using legacy fetch
-			 }
-		  });
-    };
-	$scope.fetch_round = function(roundID){
-          $resource('/jsonapi/round/:roundID').get({"roundID":roundID}, function(response){
-              $scope.round = response;
-              $scope.roundDirty = false;
-          });
-    };
-
-	$scope.add_problem_to_round = function(problemID){
-          $scope.roundDirty = true;
-          $scope.round.problemIDs.push(problemID);
-          $scope.round.problemDetails[problemID] = {};
-      	  
-          $scope.round.problemDetails[problemID].description = "Placeholder description until reloaded.";
-      	  $scope.round.problemDetails[problemID].name = "Placeholder name until reloaded.";
-              
-    };
-
-    $scope.remove_problem_from_round = function(problemID){
-    	$scope.roundDirty = true;
-    	var index = $scope.round.problemIDs.indexOf(problemID);
-    	if (index > -1) {
-    		$scope.round.problemIDs.splice(index, 1);
-		}
-
-    };
-    $scope.move_problem_down_in_round = function(problemID){
-    	$scope.roundDirty = true;
-    	var index = $scope.round.problemIDs.indexOf(problemID);
-    	if (index > -1 && index < $scope.round.problemIDs.length-1) {
-    		var temp = $scope.round.problemIDs[index];
-    		var temp2 = $scope.round.problemIDs[index+1];
-    		$scope.round.problemIDs[index] = temp2;
-    		$scope.round.problemIDs[index+1] = temp;	
-
-		}
-    };
-    $scope.move_problem_up_in_round = function(problemID){
-    	$scope.roundDirty = true;
-    	var index = $scope.round.problemIDs.indexOf(problemID);
-    	if (index > 0) {
-    		var temp = $scope.round.problemIDs[index];
-    		var temp2 = $scope.round.problemIDs[index-1];
-    		$scope.round.problemIDs[index] = temp2;
-    		$scope.round.problemIDs[index-1] = temp;	
-		}
-    };
-
-    $scope.create_tournament_round_game = function(roundID){
-      $scope.CreateGameModel = $resource('/jsonapi/launch_game_for_round?round_id='+roundID);
-      $scope.CreateGameModel.get({}, function(response){
-      	$scope.game = response;
-      	console.log(response);
-      	$cookieStore.put("roundID", roundID ); 
-    	$cookieStore.put("tournamentGameID", $scope.game.gameID); 
-    	$cookieStore.put("num", $scope.game.problemIDs.length);
-		$cookieStore.put("type", "practiceGame");
-			
-      	window.location.href = "tournament_play_page.html";
-      });
-    };
-    
-}
-
-
-function RankController($scope,$resource,$cookieStore,$location,$filter,currentUser){
+function RankController($scope,$resource,$cookieStore,$location,$filter,currentUserService){
 	$scope.selectedPlayer;
 	//fetch list of rankers based in the path selected by user
 	$scope.get_path_ranks = function(pathId){
@@ -3878,7 +3671,7 @@ function RankController($scope,$resource,$cookieStore,$location,$filter,currentU
     }
 
     // Load default country on load
-    var user = currentUser.getUser();
+    var user = currentUserService.getUser();
     if(angular.isDefined(user.country) && angular.isDefined(user.countryCode)) {
       $scope.get_countrypath_ranks(user.countryCode, user.country);
     }
@@ -3982,4 +3775,45 @@ function CountdownController($scope,$timeout) {
 	var mytimeout = null;//$timeout($scope.onTimeout,1000);
     //$scope.start_timer(5);
             
+}
+
+function EventController($scope, $resource){
+        $scope.event = {"name":"Default name", 
+                            "description": "Default description",
+                            "venue": "Default venue"};
+        $scope.events = [];
+  
+        var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
+                  
+        // posting without and id should result in creating an object.
+        $scope.fetch_event = function(id){
+          var event = Event.get({eventId:id}, function() {
+            $scope.last_result = event;
+            //If id return event
+            if(id){
+                 $scope.event = event;
+            }
+            else{
+                 $scope.events = event.events; 
+            }
+            
+          });
+        },
+        
+        $scope.create_edit_event = function(id){
+          var event = Event.save({eventId:id},$scope.event, function() {
+                 $scope.event = event;
+            });
+        },
+
+        $scope.register_for_event = function(id,action){
+          var EventRegistration = $resource('/jsonapi/eventregistration/:eventId', {eventId:'@id'});
+          var thedata = {"status":action};
+          
+          var registration = EventRegistration.save({eventId:id}, thedata, function() {
+                 $scope.registration = registration;
+                 $scope.fetch_event();
+            });
+        }
+          
 }

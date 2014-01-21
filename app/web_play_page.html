@@ -575,7 +575,8 @@
         <script>document.write('<base href="' + document.location + '" />');</script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         <script src="https://rawgithub.com/ajaxorg/ace-builds/v1.1.1/src-min-noconflict/ace.js"></script>
-        <script src="http://angular-ui.github.io/ui-ace/build/ui-ace.js"></script>
+        <script src="js/
+                     .js"></script>
         <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
         <script src="./js/fancybox-fire.js"></script>
     </head>
@@ -741,12 +742,12 @@
     <script src="./js/jquery.fancybox.js"></script>
     <script src="assets/js/bootstrap-tab.js"></script> 
     <script type="text/javascript">
-        console.log("Current location " + document.location.host);
-        if (document.location.host == "localhost:8000" || document.location.host == "localhost" || document.location.host == "smu-sis.github.io") {
-            console.log("loading test data from app-test.js");
-            document.write('<script src="../test/app-test.js"> </' + 'script> ');
-            document.write('<script src="../test/lib/angular/angular-mocks.js"> </' + 'script>  ');
-        }
+       // Defaulting to staticly mock the API when not on port 80 for testing simplisity. 
+      if(document.location.port != 80){
+        console.log("loading test data from game-app-test.js");
+        document.write('<script src="../test/game-app-test.js"> </' + 'script> ');
+        document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
+      }
         $(document).on("keydown", function (e) {
             if (e.which === 8 && !$(e.target).is("input, textarea")) {
                 e.preventDefault();

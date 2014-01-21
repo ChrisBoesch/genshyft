@@ -15,12 +15,15 @@
     <link href="assets/css/ui-lightness_jquery-ui.css" rel="stylesheet">
     <link href="./lib/fancybox/jquery.fancybox.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-
+	<link rel="stylesheet" type="text/css" href="engine1/style.css" />
     <script src="./js/jquery-1.7.2.js"></script>
     <script src="./js/jquery-ui.min.js"></script>
     <script src="./js/fancybox-fire.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>    
+	 
+
+
     <link rel="stylesheet" href="css/style.css"/>
 	<!-- Fav and touch icons -->
     <link rel="shortcut icon" href="assets/ico/favicon.ico">  
@@ -96,34 +99,44 @@
             <a class="brand" href="#home">SingPath</a>            
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->            
             <div class="nav-collapse collapse">              
-              <ul class="nav pull-right" id="myTab">   
-                <li>
-                  <a type="button" ng-click="checkQuestLogin()">Quests</a>
-                </li>                
-                <li>
-                  <a type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice</a>
-                </li>  
-                <li>
-                  <a type="button" ng-click="checkFeedbackLogin()">Feedback</a>
-                </li>
+              <ul class="nav pull-right" id="myTab">  
+              <li>
+                <a type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice</a>
+              </li>
+              <li >
+                <a type="button" ng-click="checkQuestLogin()">Quests</a>
+              </li>
+
+              <li>
+                <a type="button" ng-click="checkMasteryLogin()">Mastery</a>
+              </li>
+              <li>
+                <a type="button" ng-click="checkPurposeDrivenLogin()">Purpose</a>
+              </li>
+
+              <li>
+                <a type="button" ng-click="checkFeedbackLogin()">Feedback</a>
+              </li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->                 
                 <li class="dropdown" id="menu">                  
                   <a href="" class="dropdown-toggle" data-toggle="dropdown">More... 
                     <b class="caret"></b></a>                  
-                  <ul class="dropdown-menu">                    
+                  <ul class="dropdown-menu"> 
+                    <li class="nav-header">Tournaments</li>
                     <li>
-                      <a href="#tournaments">Tournaments</a>
+                      <a type="button" ng-click="checkEventsLogin()">Upcoming Events</a>
+                    </li>
+                    <li>
+                      <a type="button" ng-click="checkTournamentLogin()">Join Tournaments</a>
                     </li> 
                     <li>
-                      <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
+                      <a type="button" ng-click="checkCreateTournamentLogin()">My Tournaments</a>
                     </li> 
-                    <li>
-                      <a type="button" ng-click="checkRankingLogin()">Rankings</a>
-                    </li>                                                 
+                    <li>                                                  
                     <li class="divider"></li>                    
                     <li class="nav-header">Create</li>
                     <li>
-                      <a href="#create">Path or Level</a>
+                      <a ng-click="checkCreatePathorLevelLogin()">Path or Level</a>
                     </li>   
                     <li>
                       <a type="button" ng-click="checkStoryLogin()">Story or Tutorial</a>
@@ -131,13 +144,24 @@
                     <li class="divider"></li>                    
                     <li class="nav-header">Videos</li>                    
                     <li>
-                      <a href="#videos">Learn about SingPath</a>
+                      <a ng-click="toVideos()">Learn about SingPath</a>
                     </li> 
-                    <li ng-show="player.countryCode=='SG'" class="nav-header">Singapore Schools</li>                    
+                    <li class="divider"></li>  
+                    <li type="button" ng-show="player.countryCode=='SG'" class="nav-header">Singapore Schools</li>                    
                     
                     <li ng-show="player.countryCode=='SG'">
-                      <a href="#schoolregistration">Register Your School</a>
-                    </li>               
+                      <a type="button" ng-click="checkSchoolRegistrationLogin()">Register Your School</a>
+                    </li>
+                    <li class="divider"></li> 
+                    <li class="nav-header">Others</li>  
+                                       
+                    <li>
+                      <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
+                    </li> 
+                    <li>
+                      <a type="button" ng-click="checkRankingLogin()">Rankings</a>
+                    </li> 
+                                 
                   </ul>                
                 </li>
                 <li>
@@ -180,13 +204,18 @@
         ================================================== -->    
     <!-- Placed at the end of the document so the pages load faster -->  
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">	
+	
+	
 <script src="http://www.youtube.com/player_api"></script>
 <script src="js/jquery-1.7.2.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="lib/angular/angular.js"></script> 
-<!-- Commented out until after ViTech Final 
+
+<!-- Commented out until after ViTech Final !-->
+
 <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.6.0.js"></script>
- --> 
+ 
 <script src="lib/angular/angular-resource.min.js"></script>
 <script src="js/controllers.js"></script> 
 <script src="js/analytics.js"></script> 
@@ -197,18 +226,20 @@
 <script src="js/app.js"></script> 
 <!-- Genshyft -->
 <script src="js/school-controllers.js"></script> 
+<script src="js/tournament-controllers.js"></script>
+<script src="js/PurposeDrivenController.js"> </script>
+<script src="js/mbcoaching-controllers.js"> </script>
+<script src="js/ymbcoaching-controllers.js"> </script>
+<script src="js/ymbcoaching-play-controllers.js"> </script>
+
 
 <!-- For testing -->
 <script type="text/javascript">
-    console.log("Current location "+document.location.host);
-
-
-    if(document.location.search.indexOf("test_with=") !== -1) {
-      //Pull the name of the test config from teh url. test_with=test_module.js#
-      test_module = document.location.search.split('test_with=')[1].split('#')[0];
-      console.log("loading test data from "+test_module);
-      document.write('<script src="../test/'+test_module+'"> </'+'script> ');
-      document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
+    console.log("document.location.port "+document.location.port);
+    if(document.location.port && document.location.port!= 80){
+          console.log("loading test data from game-app-test.js");
+          document.write('<script src="../test/game-app-test.js"> </' + 'script> ');
+          document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');
     }
 
 </script>

@@ -1,0 +1,116 @@
+
+</br>
+<div class="container" id="manageTournInidv" style="position:relative">
+	<div class="row-fluid">
+		<div class="span12 well well-small">
+			<div class="span9">
+				</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<b>Title :</b> {{title}} </br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<b>Type :</b>{{type}} </br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<b>Language :</b>{{lanaguage}}</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<b>Max no. of groups :</b>{{maxNumGrp}}</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;<b>Max no. of players per group :</b>{{maxNumPerGrp}}
+				</br>
+				</br>&nbsp;&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-primary" type="button">Edit </button>
+				<button class="btn btn-danger" type="button">Delete </button>
+				</br>
+				</br>
+			</div>
+			<div class="span2">
+				</br><b>Status :</b>{{status}}
+					</br>
+					</br>
+					</br>
+					
+					</br>
+					</br>
+
+			</div>			
+		</div>
+	</div>
+	</br>
+
+	<div class="row-fluid">
+		<div class="span12">
+			<ul class="nav nav-tabs">
+ 			 	<li class="tabspacing-create active"><a data-target='#Rounds' data-toggle="tab">Rounds</a></li>
+				 <li class="tabspacing-create"><a data-target='#Groups' data-toggle="tab" id="groups">Groups</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="tab-content">
+		<div class="tab-pane active" id="Rounds">
+			<div class="row-fluid">
+			<div class="span10 well well-small">
+				<button type="button" class="close" aria-hidden="true">×</button>
+				<div class="span2"><b>Round 1</b>
+				</div>
+			</div>
+		</div>
+		</div>
+
+  		<div class="tab-pane" id="Groups">
+  			<div class="row-fluid">
+	  			<div class="span4" id="unregisteredUsers" style="overflow:auto;" width="100%">
+					<div class="row-fluid ">
+						<div class="span12 bootCamp" id="heading">Registered Users Without Groups</div>
+					</div>		
+					<div class="row-fluid" ng-controller="GrpTournamentController" ng-init="get_unregisteredPlayers()">
+						<div class="span12 well well-small" style="height:200px;overflow:auto;">
+							<li ng-repeat="unregisteredPlayer in unregisteredPlayers.UnregisteredPlayers track by $index">
+								{{unregisteredPlayers.UnregisteredPlayers[$index].name}}
+							</li>	
+						</div>
+					</div>
+				</div> 	
+
+	  			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%">
+					<div class="row-fluid">
+						<div class="span12 bootCamp" id="heading">Registered Groups</div>
+					</div>
+					<div class="row-fluid" ng-controller="GrpTournamentController" ng-init="get_registeredPlayers()" >
+						<div class="row-fluid" ng-repeat="group in registeredPlayers.Groups track by $index">
+							<div class="span12 well well-small" >
+
+								<b>Group {{registeredPlayers.Groups[$index].grpNum}}</b>
+							</br>
+							<table class="table table-hover">
+								<tr>
+									<td class="Group_Member" ng-repeat="player in registeredPlayers.Groups[$index].Players">{{player.playerName}}</td>
+								</tr>
+							</table>
+							</div>
+						</div>				  
+					</div>
+				</div>	
+			</div>	
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span12">
+			</br>
+			<div class="span4">
+				</br>
+				<button class="btn btn-primary" type="button" ng-model="start">Start</button>
+				<button class="btn btn-danger" type="button" ng-model="activation">Deactivate</button> 
+				</br>
+				</br>
+				<button class="btn btn-primary" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking >>></button>
+			</div>
+			<div class="span7">
+				<b>Start in</b></br>
+				<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">				<button type="button" class="btn btn-primary">1 min</button>
+  					<button type="button" class="btn btn-primary">2 min</button>
+  					<button type="button" class="btn btn-primary">5 min</button>
+  					<button type="button" class="btn btn-primary">30 min</button>
+  					<button type="button" class="btn btn-primary">60 min</button>			
+				</div>
+			</div>	
+		</div>
+	</div>
+
+</div>
+	

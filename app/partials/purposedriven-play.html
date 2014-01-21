@@ -1,0 +1,90 @@
+<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked()" > 
+<div class="container" style="position:relative;">
+	<div class="row-fluid">
+		<div class = "span12">
+		<br><br>
+				<table border = '0' align = 'center'>
+
+					<tr>
+						<td width =30%> <h3><center> {{purposeVideos.Videos[vno].title}} <center></h3>
+						 <center> {{purposeVideos.Videos[vno].description}} <center>
+						 <br><br>
+						 <b>{{purposeVideos.Videos[vno].question}} <br> <br> </b>
+						 
+						 
+					
+						Show Survey Question: <input type="checkbox" ng-model="value1"> <br/>
+						<font size="2" color="red" ng-hide="value1">You need to check the box to proceed to do the survey</font>
+						
+						<div ng-show="value1">
+						
+						<br>
+						<br>
+						<form action="" onclick="enableButton2()" >
+							<table cellspacing ="4"> 
+							
+							
+								<tr><td> 
+								
+								<input type="radio" name="rating" value="1" checked> I cannot Relate 1
+														
+								<br></td></tr>
+								<tr><td> 
+									
+										<input type="radio" name="rating" value="2" checked> Not Really Relate 
+
+								<br></td></tr>
+								<tr><td> 
+									
+										<input type="radio" name="rating" value="3" checked>  A Little Yes 
+										
+								<br></td></tr>
+								<tr><td> 
+								
+										<input type="radio" name="rating" value="4" > Really Relate 
+											
+								<br></td></tr>
+							<!-- value= "{{purposeVideosUnlocked.Unlocked[vno].v}}"; !-->	
+						</table>
+						</form>
+						</div> 
+						 	 <center> <button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos,purposeVideosUnlocked.Unlocked)"> Next  </button>  
+							 <br>
+							<font size="2" color="red" ng-show="value1">Please do the survey to proceed.</font>
+							</center>
+						 
+						</td>
+					
+
+						<td >
+							
+						<center> <iframe width= 90% height= '420px' src="//www.youtube.com/embed/{{youtube[0]}}?rel=0" frameborder="0" allowfullscreen></iframe> </center>
+							
+						</td>
+							
+					</tr>
+					
+					
+				</table>
+
+				</div>
+
+			
+
+			</div>
+		</div>
+	</div>
+
+<script>
+        function enableButton2() {
+            document.getElementById("nextVideo").disabled = false;
+        }
+
+        function getParam(){
+        var myParam = location.search.split('xyz=')[1]
+        	alert(myParam);
+        }
+
+        
+</script>
+

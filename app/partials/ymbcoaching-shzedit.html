@@ -1,0 +1,549 @@
+<p><p>
+<style>
+/* Theme for box heading */
+.bootCamp{
+    color: #ffffff;
+    font-size: 16px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding: 8px 8px;
+}
+.bootCampSmall{
+    color: #ffffff;
+    font-size: 12px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding: 5px 5px;
+}
+
+
+.radio{
+  text-align: center;	
+}
+
+H5 {FONT-SIZE: 11pt;}
+
+#gradient1{  
+  #gradient > .vertical(@black, @white);  
+}
+
+#radButton{
+  display:inline;
+}
+
+#pathImg label {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#paths {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#pathImg{
+  width:100px;
+  height:100px;
+}
+
+#smallPathImg{
+  width:60px;
+  height:60px;
+}
+
+.selected {
+  background-color: #002369;
+}
+
+#paths input {
+  display: inline-block;
+  cursor: pointer;
+}
+
+input:hover{
+  background-color: #002369;
+}
+
+#paths input img {
+  padding: 3px;
+}
+
+<!--small-->
+
+#smallDifficulty{
+  height: 30px;
+  width: 100px;
+  border-radius: 3px;
+}
+
+#largeDifficulty{
+  height: 40px;
+  width: 170px;
+  border-radius: 3px;
+}
+
+li{ list-style:none; }
+
+.tabspacing{
+  width:50%;
+  text-align:center;
+}
+
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}
+.divfloatleft
+{
+float:left;
+}
+
+</style>
+
+
+
+
+
+
+
+
+<div ng-controller="MBCoachingController" ng-init="list();">
+
+		<center><b> This UI does not support responsive yet </b></center>
+
+		<!-- /.carousel This is select difficulty , also there coaches name-->
+
+
+
+
+		<div class="container marketing">
+			<!-- Three columns of text below the carousel -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- This is the coaches part!-->
+
+
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span12 align="center"> <!-- Difficulty level !-->
+						<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') > -1 && currentURL.indexOf('difficulty') > -1">#2. Select {{passed_in_difficulty}}</h4>
+
+						<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') == -1">1. Select Your Mentor!</h4>
+						<div class="well" id="levels" style="height:235px;" class="btn-group" data-toggle="buttons-radio" align="center" ng-init="levels = [{'name':'Drag-n-Drop', 'id':'Drag-n-Drop','coach':'Shannon','link': 'img/mbcoach/dummy_woman.jpg','desc':'Encourager that wants you to be ready to code with your friends'},
+
+						{'name':'Easy','id':'Easy','coach':'Sandra','link': 'img/mbcoach/dummy_woman_2.jpg','desc':'Recruiter that wants you to be ready for your interview' },
+
+						{'name':'Medium','id':'Medium','coach':'Zandar','link': 'img/mbcoach/dummy_man.jpg','desc':'Hacker that wants you to be more awesome'},
+
+						{'name':'Hard','id':'Hard','coach':'Sgt Major','link': 'img/mbcoach/dummy_man_2.jpg','desc':'Wants you to quit before you get someone killed'}];">					
+
+							
+							<span class ="divfloatleft" ng-repeat="item in levels">
+							<input style="visibility:hidden" type="radio" ng-model="$parent.$parent.difficulty" name="difficultyLevel" value="{{item.name}}"/ >  
+
+								<button type="button" ng-click = "changeDifficulty(item.name,path_progress.path.name,item.coach)" class="btn btn-primary" style="height: 200px; width: 250px"  btn-radio="{{item.name}}"> 
+									<IMG ng-src=" {{item.link}} " width = 50% > 
+
+								<b> {{item.coach}} </b> <br> <br>{{item.desc}}
+								</button></br></br>
+							</span>
+						</div>	
+					</div>					
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	<div class="row-fluid">
+
+	<div class="span12">
+	<div class="container" > <!-- start of select language !-->		
+		<h4 class="well well-small bootCamp" align="center" id="well-c" >2. Select a language</h4>
+
+		</div>
+		
+		<div id="myCarousel" class="carousel slide" ng-hide="difficulty=='Drag-n-Drop'">
+			<div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
+				<div class="item" ng-repeat="paths in paths_grouped" ng-class="{active : $first}" >
+	                <!-- Three columns of text below the carousel -->
+					<div class="container">
+						<div class="row">	
+							<div class="span4"  ng-repeat="path in paths" ng-init="practiceSelection()">
+								<label class="radio">
+									<input style="visibility:hidden" type="radio" name="optionsRadios" ng-model="$parent.pathid" id="{{path.id}}" value="{{path.id}}" >
+									<input class="well" type="image" ng-src="img/language/{{path.description.split(' ').join('_')}}.png" alt="" id="pathImg" ng-click="changePath(path.id)"/>
+									<h6>{{path.name}}</h6>
+								</label>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<a class="left carousel-control" data-target="#myCarousel" data-slide="prev">&lsaquo;</a>
+			<a class="right carousel-control" data-target="#myCarousel" data-slide="next">&rsaquo;</a>
+		</div>
+
+		<div id="myCarouselB" class="carousel slide" ng-show="difficulty=='Drag-n-Drop'">
+			<div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
+				<div class="item" ng-repeat="mobile_path in mobile_paths_grouped" ng-class="{active : $first}" >
+	                <!-- Three columns of text below the carousel -->
+					<div class="container">
+						<div class="row">	
+							<div class="span4" ng-repeat="path in mobile_path" ng-init="practiceBeginnerSelection()">
+								<label class="radio">
+									<input style="visibility:hidden" type="radio" ng-click="changePath($parent.pathid)" name="optionsRadios" ng-model="$parent.pathid" id="{{path.id}}" value="{{path.path_id}}">
+									<input class="well"type="image" ng-src="img/language/{{path.description.split(' ').join('_')}}.png" alt="" id="pathImg" ng-click="changePath(path.path_id)"/>
+									<h6>{{path.name}}</h6>
+								</label>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div> 
+			<a class="left carousel-control" data-target="#myCarouselB" data-slide="prev">&lsaquo;</a>
+			<a class="right carousel-control" data-target="#myCarouselB" data-slide="next">&rsaquo;</a>
+		</div>
+		</div>
+		</div> <!-- end of select language !-->
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="container" >
+	<div class="row-fluid">
+	<div class="span12">
+	
+		<!--display the level, topic name & progress of the player when the path is selected by the player-->
+					<div class="span12" ng-model="$parent.pathName" >
+						<div align="center"><h4  class="well well-small bootCamp">#3. Select a Path Level!</h4></div>
+						<div class = "tabbable well well-small">                      
+						  <ul id="myTab" class="nav nav-tabs">                        
+							<li id="path1" class="tabspacing active">
+							<a  data-target="#path" data-toggle="tab">{{path_progress.path.name}} Path</a>
+							</li>                        
+							<li id="level1" class="tabspacing">
+							<a  data-target="#level" data-toggle="tab">Level {{lvlName}}</a>
+							</li>                                          
+						  </ul>           					  
+						  <div class="tab-content" style="font-family:verdana">                        
+							<div class="tab-pane fade in active" id="path">
+								<div style="height:190px;overflow:auto">
+									<div class="span12" style="font-size:12px;">
+										<div align = "center" class="span3 pull-left">Level#</div>
+										<div class="span5 pull-left">Description</div>
+										<div class="span2 pull-left">Progress</div>
+										<div class="span2 pull-left">Solved</div>
+									</div>
+									<li ng-repeat="v in path_progress.details" ng-init="$parent.$parent.$parent.lvl=path_progress.details[0].id;setDefaultButton(path_progress.details[0].pathorder,path_progress.details[0].id)">
+									<div class="row-fluid">
+										<div class="span12" style="font-size:12px;">
+											
+											<div class="span3">
+												<label class="radio pull-left">
+													<input style="visibility:hidden" type="radio" ng-model="$parent.$parent.$parent.lvl" name="pathLevel" value="{{v.id}}"/ >
+													<button type="button" class="btn btn-primary span3" ng-click="setButton(v.pathorder,v.id)" style="height: 30px; width: 100%"  btn-radio="{{v.name}}">
+													Level {{$index+1}}
+												</button> 											
+												</label>
+											</div>
+											<div class="span5">
+												{{v.description}}
+											</div>
+											
+											<div class="span2">
+												{{v.currentPlayerProgress}}/{{v.problemsInProblemset}}
+											</div>
+											<div class="span2 container" ng-show="v.currentPlayerProgress>=v.problemsInProblemset">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004;
+											</div>
+										</div>
+									</div>
+									</li>		
+								</div>
+							</div>                        
+							<div class="tab-pane fade in " id="level" style="height:220px;overflow:auto">
+								<div class="span12" style="font-size:12px;">
+									<div class="span5 pull-left" >Problem Name</div>
+									<div class="span2 pull-left">Solved</div>
+								</div>                     
+								<li ng-repeat="prob in problems.problems">
+								<div class="row-fluid">
+									<div class="span12" style="font-size:12px;">
+										<div class="span5">
+										{{prob.name}}
+										</div>
+										<div class="span2 container" ng-show="prob.solved">
+										
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004;
+										</div>
+									</div>
+								</div>
+								</li>
+							</div> 								
+						 </div>   
+						</div>					
+					</div>		
+				</div>				
+			</div>
+		</div>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<!--  Continue button  to start game part!-->
+
+					<!-- 
+					 
+					<div class="span2"  align = "center">
+						<table align="center">
+							<tr><td align="center">
+								</br></br>
+					!-->
+								<!--Continue-->
+					<!--		<div  ng-show="!difficulty || !path_ID">
+									<button class="btn disabled" style="width: 145px"><h5>Continue Path</h5></button>									
+								</div>
+						
+								<div  ng-show="difficulty && path_ID">
+									<button class="btn btn-primary" ng-click="continuePath(5);" style="width: 145px"><h5>Continue Path</h5></button>									
+								</div>
+								
+								<span class="label label-info" align="left">
+									<b><i>You are going to play</i></b>
+									</br></br>
+									Path: {{practice_path_name}}
+									</br>
+									Diffculty: {{difficulty}}
+								</span>
+						
+					
+					</td></tr>
+							<tr><td>
+								</br>
+								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><h5>Continue Level {{lvlName}}</h5></button></div>
+							</td></tr>
+				
+							<tr><td>
+						!-->
+						
+								</br>
+								<div ng-show="difficulty && path_ID" align="center"><button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><h5>Master  Level {{lvlName}} Now </h5></button></div>
+								<div ng-show="!difficulty || !path_ID" align ="center">
+							<center> <b> Select a Coach, a Language and a Level </b> </center> </div>
+							
+						<!--	
+							</td></tr>
+						</table>
+						!--> 
+	</div> <!-- end of select play !-->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+	<div class="modal fade" id="levelBlock" style="display:none">    		
+		<div class="modal-body" style="color:black">
+			Please clear previous level problems to unlock this level!
+		</div>
+		<div class="modal-footer">
+			<a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click='hideModal()'>Back</button></a>
+		</div>
+	</div>
+</div>
+
+<script>
+	$("#myCarousel")
+		.appendTo("#des");
+
+	$("#myCarouselSmall")
+		.appendTo("#des");
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  This portion deals with responsive.
+
+
+
+
+ !-->

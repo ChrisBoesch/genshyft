@@ -1,0 +1,90 @@
+<style>
+   
+    .table td, .table th {
+        border: none;
+    }
+    .table tbody tr:hover td,
+    .table tbody tr:hover th {
+        background-color: #DCD9CD;
+    }
+    
+    .tabspacing{
+        width:25%;
+	}
+
+    
+    .tab-content {
+      clear: none;
+      margin-bottom:0px;
+    }
+
+    tbody{
+        overflow:auto;  
+    }
+	
+	
+	<!--All Rankings : Rankings-->
+	th.Rank_Ranking, td.Rank_Ranking						{width:10%;}
+	th.Rank_RankInGrp, td.Rank_RankInGrp					{width:10%;}
+    th.Rank_Grp, td.Rank_Grp								{width:10%;}
+    th.Rank_PlayerName, td.Rank_PlayerName					{width:15%;}
+    th.Rank_Qns, td.Rank_Qns								{width:20%;}
+    th.Rank_Progress, td.Rank_Progress						{width:10%;}
+    th.Rank_AssignedTo, td.Rank_AssignedTo					{width:10%;}
+    th.Rank_MentoredBy, td.Rank_MentoredBy					{width:10%;}
+		
+
+</style>
+</br>
+<center><h2>Tournament Ranking page</h2></center>
+<div class="container"  style="position:relative;">
+    
+    <div class="row-fluid">
+        <div class="span12" ng-controller="GenshyftTournamentController">
+            
+			<div class="tabbable well" align="center">				
+				<!--Top Tabs : All Challenges & My Creations-->
+				<ul class="nav nav-tabs">
+					<li class="tabspacing active">
+					  <a data-target="#Ranking" data-toggle="tab">Round</a>
+					</li>
+					<!-- Need to make sure tabs is dynamically displayed according to the number of rounds each tournaments have. -->
+					 <button type="button" class="btn btn-primary" id="createChallenge" ng-click="">End Tournament</button>
+				
+					
+				</ul>
+				<div class="tab-content" id="top-content">				
+					<div class="tab-pane active" align="left" id="Ranking">
+						<div style="width:99.8%; height:{{window_Height_challenge}}px;overflow-y:auto;overflow-x:hidden">									
+							<table class="table table-hover" ng-init="list_rankings();">	
+								<tr>
+									<th class="Rank_Ranking">Overall Ranking</th>
+									<th class="Rank_RankInGrp">Rank in Group</th>
+									<th class="Rank_Grp">Group Number</th>										
+									<th class="Rank_PlayerName">Player Name</th>
+									<th class="Rank_Qns">Questions</th>
+									<th class="Rank_Progress">Progress</th>
+									<th class="Rank_AssignedTo">Assigned To</th>
+									<th class="Rank_MentoredBy">Mentored By</th>
+								</tr>  							
+								<tr ng-repeat="" ng-hide="" ng-show ="">
+									<td class="Rank_Ranking"></th>
+									<td class="Rank_RankInGrp"></td>
+									<td class="Rank_Grp"></td>	
+									<td class="Rank_PlayerName"></td>				
+									<!-- Need to add in the questions associated to each round and the tick logo -->
+									<td class="Rank_Qns"></td>
+									<!-- -->
+									<td class="Rank_Progress"></td>
+									<td class="Rank_AssignedTo"></td>
+									<td class="Rank_MentoredBy"></td>
+								</tr>           
+							</table>																	
+						</div>
+						
+					</div>
+					
+
+        </div>
+    </div>
+</div>
