@@ -274,7 +274,25 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			{ 
 				if($scope.path_progress.details[i].problemsInProblemset>$scope.path_progress.details[i].currentPlayerProgress){
 					console.log("level "+$scope.path_progress.details[i].pathorder);
+					
+							var data = 	{"pathId":pathid,
+										"pathName":pathname,
+										"coach":coach
+										}
+						  
+							$http.post('/jsonapi/MasteryBased/UPDATE', data)
+							.success(function (data, status, headers, config) {
+								window.console.log(data);
+								
+
+							}).error(function (data, status, headers, config) {
+								$scope.status = status;
+							})
+					
+					
+					
 					$scope.create_prac($scope.path_progress.details[i].id,num,$scope.path_progress.details[i].pathorder);
+					console.log($scope.path_progress.details[i].id);D;D
 					break;
 				}
 			}
@@ -319,7 +337,13 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		}
 	};
 	
-	$scope.continuePath = function(num){
+	$scope.continuePath = function(num,coach){
+	
+		$scope.path_progress = null;
+		$cookieStore.put("pid", pathid);
+		$cookieStore.put("coach",coach);
+        $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
+	
 		for (var i=0;i<$scope.path_progress.details.length;i++)
 		{ 
 			if($scope.path_progress.details[i].problemsInProblemset>$scope.path_progress.details[i].currentPlayerProgress){

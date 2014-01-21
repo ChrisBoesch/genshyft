@@ -81,14 +81,14 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 		$scope.saveNewUnlock = function(videoNumber,radioAns){
 			console.log("saveNewUnlock is being executed");
 			
-			  var data = {"no": videoNumber,
+		var data = {"no": videoNumber,
 						  "status": "true",
 						  "answer": radioAns};
 						  
 		$http.post("/jsonapi/purposeVideos/UPDATE", data)
             .success(function (data, status, headers, config) {
                 window.console.log(data);
-                $scope.player = data;
+				
 
             }).error(function (data, status, headers, config) {
                 $scope.status = status;

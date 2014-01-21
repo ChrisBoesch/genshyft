@@ -16,7 +16,7 @@ myApp.run(function($httpBackend) {
       //Mocking for Genshyft
       //$httpBackend.whenGET('schools.json').passThrough();
 
-      var purposeDrivenVideos = {"Videos":[
+    var purposeDrivenVideos = {"Videos":[
 	{"title":"What Most School Don't Teach",
 	"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
 	"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",

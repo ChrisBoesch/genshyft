@@ -121,11 +121,11 @@ myApp.run(function($httpBackend) {
 	var currentUserMasteryProgress = {"currentUserMastery":[
 	{"pathId":"2243213",
 	"pathName":"Java",
-	"coach":"Zandar",
-	"date" : "19/1/2014"}
+	"coach":"Zandar"
+	}
 	]};
 	$httpBackend.whenGET('/jsonapi/MasteryBased/CURRENT').respond(currentUserMasteryProgress);
-	
+	$httpBackend.whenPOST('/jsonapi/MasteryBased/UPDATE').passThrough();
 		  
 	var tournaments = {"Tournaments":[
 		{"tournamentId":"001",
