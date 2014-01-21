@@ -126,7 +126,121 @@ myApp.run(function($httpBackend) {
 	]};
 	$httpBackend.whenGET('/jsonapi/MasteryBased/CURRENT').respond(currentUserMasteryProgress);
 	$httpBackend.whenPOST('/jsonapi/MasteryBased/UPDATE').passThrough();
-		  
+	
+	
+	var zandar ={"speech":[
+	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
+	
+	{"text": "Good job!"},
+	{"text": "That is correct !"},
+	{"text": "Congratulations!"},
+	
+	{"text": "You got this question Wrong !"},
+	{"text": "That is not the correct answer."},
+	{"text": "Try again."},
+	
+	{"text": "Let's see.."},
+	{"text": "Let's compile this"},
+	{"text": "Here we go."},
+
+	{"text": "Was it too difficult"},
+	{"text": "You just skip question."},
+	{"text": "Let's redo this question later."},
+	
+	{"text": "You are already 25% there"},
+	{"text": "You're only 1/2 way more to go"},
+	{"text": "75% , almost done !"},
+	
+	{"text": "Congratulation, you already master this"}
+	
+	]};
+	$httpBackend.whenGET('/jsonapi/speech/Zandar').respond(zandar);
+
+
+	var SGTMJR ={"speech":[
+	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
+	
+	{"text": "Good job!"},
+	{"text": "That is correct !"},
+	{"text": "Congratulations!"},
+	
+	{"text": "You got this question Wrong !"},
+	{"text": "That is not the correct answer."},
+	{"text": "Try again."},
+	
+	{"text": "Let's see.."},
+	{"text": "Let's compile this"},
+	{"text": "Here we go."},
+
+	{"text": "Was it too difficult"},
+	{"text": "You just skip question."},
+	{"text": "Let's redo this question later."},
+	
+	{"text": "You are already 25% there"},
+	{"text": "You're only 1/2 way more to go"},
+	{"text": "75% , almost done !"},
+	
+	{"text": "Congratulation, you already master this"}
+	
+	]};
+	$httpBackend.whenGET('/jsonapi/speech/SGTMJR').respond(SGTMJR);
+	
+	var Sandra ={"speech":[
+	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
+	
+	{"text": "Good job!"},
+	{"text": "That is correct !"},
+	{"text": "Congratulations!"},
+	
+	{"text": "You got this question Wrong !"},
+	{"text": "That is not the correct answer."},
+	{"text": "Try again."},
+	
+	{"text": "Let's see.."},
+	{"text": "Let's compile this"},
+	{"text": "Here we go."},
+
+	{"text": "Was it too difficult"},
+	{"text": "You just skip question."},
+	{"text": "Let's redo this question later."},
+	
+	{"text": "You are already 25% there"},
+	{"text": "You're only 1/2 way more to go"},
+	{"text": "75% , almost done !"},
+	
+	{"text": "Congratulation, you already master this"}
+	
+	]};
+	$httpBackend.whenGET('/jsonapi/speech/Sandra').respond(Sandra);
+	
+	var Shannon ={"speech":[
+	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
+	
+	{"text": "Good job!"},
+	{"text": "That is correct !"},
+	{"text": "Congratulations!"},
+	
+	{"text": "You got this question Wrong !"},
+	{"text": "That is not the correct answer."},
+	{"text": "Try again."},
+	
+	{"text": "Let's see.."},
+	{"text": "Let's compile this"},
+	{"text": "Here we go."},
+
+	{"text": "Was it too difficult"},
+	{"text": "You just skip question."},
+	{"text": "Let's redo this question later."},
+	
+	{"text": "You are already 25% there"},
+	{"text": "You're only 1/2 way more to go"},
+	{"text": "75% , almost done !"},
+	
+	{"text": "Congratulation, you already master this"}
+	
+	]};
+	$httpBackend.whenGET('/jsonapi/speech/Shannon').respond(Shannon);
+	
 	var tournaments = {"Tournaments":[
 		{"tournamentId":"001",
 		"title":"test",

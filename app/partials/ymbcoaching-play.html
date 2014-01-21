@@ -487,7 +487,7 @@
 
 		
 		
-<div ng-controller="yMBcoachingPlayController" ng-init="list()" class="container">
+<div ng-controller="yMBcoachingPlayController" ng-init="list();coachText();" class="container">
             <div id = "allymbplay">
                 <!--<a class="janrainEngage" href="#"><input type="submit" value="Hyperlinked Sign In Button"></a>-->  
                 <div class="row-fluid"> 
@@ -533,10 +533,9 @@
 									<div class = "span9" id ="audioText">
                                     <font>
 
-											&nbsp;&nbsp;Coach Name: <span ng-bind="nameOfCoach"></span> <br>
-											&nbsp;&nbsp;status: <span> {{specialMessage}} </span> <br>
-											&nbsp;&nbsp;audio loaded: <span> {{audio}} </span> <br>
-                                            &nbsp;&nbsp;Difficulty: <span>{{counter}}</span>
+											&nbsp;&nbsp;<b> {{nameOfCoach}} says </b> <br>
+											&nbsp;&nbsp;<div class ='span12'> {{words}} </div> <br>
+												
                                     </font>
 									</div>
                                 </div>

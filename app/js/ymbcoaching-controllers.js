@@ -339,7 +339,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	
 	$scope.continuePath = function(num,coach){
 	
-		$scope.path_progress = null;
+
 		$cookieStore.put("pid", pathid);
 		$cookieStore.put("coach",coach);
         $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
