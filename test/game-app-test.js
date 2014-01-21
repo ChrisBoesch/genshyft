@@ -270,8 +270,9 @@ myApp.run(function($httpBackend) {
     "directorID": 57754,
     "tournType": "Individual",
     "tournamentID": 5060388987076608,
-	"maxNoPlayerPerGrp":5,
-	"maxNoGrp":5,
+	"maxNoPlayerPerGrp":0,
+	"maxNoGrp":0,
+    "mentorAssignInTeam":"N",
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -406,6 +407,7 @@ myApp.run(function($httpBackend) {
     "tournamentID": 5060388987076609,
 	"maxNoPlayerPerGrp":5,
 	"maxNoGrp":5,
+    "mentorAssignInTeam":"Y",
     "rounds": [
         {
             "roundID": 4912161075757056,

@@ -269,6 +269,20 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     //$timeout(function(){ $scope.fetch_tournament_details(tournamentID); }, 5000);
   };
 
+  /*JSON API Call to retrieve tournament data once - By Glen*/
+  $scope.fetch_tournament_details_once = function(){
+    $scope.tournamentID = ($location.search()).tournamentID;      
+    $resource('/jsonapi/tournament_progress/:tournamentID').get({"tournamentID": $scope.tournamentID}, function(response){
+        $scope.tournament = response;
+        console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
+        $scope.get_indivNoGrpPlayers($scope.tournament);
+        console.log("tournType : " + $scope.tournament.tournType );
+        if($scope.tournament.tournType == "Group"){
+          $scope.get_grpPlayers($scope.tournament);
+        }       
+    });
+  };
+
   /*Extract players and sort them into the respective group - by Glen*/
   $scope.get_grpPlayers = function(tournament){
       console.log("get_grpPlayers");
@@ -287,6 +301,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
            if(tournament.registeredPlayers[j].playerId === tournament.currentPlayerID){
               $scope.currentUserGrping = tournament.registeredPlayers[j].Group;
+              $scope.have_grp($scope.currentUserGrping);
            }
         }
         if(grouping.length>0){
@@ -343,13 +358,59 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
             $scope.joinGrpingVal = response;
            console.log("joinGrpingVal = " + $scope.joinGrpingVal.length);
           }); 
+          $scope.fetch_tournament_details_once();
         }
     }).error(function (data, status, headers, config) {
       console.log("Error");
         alert("An error occurred.")
         console.log(data);
     });   
-  }
+  };
+
+  $scope.have_grp =  function(group){
+
+    $scope.isInGrp = false;
+
+    if(group<=0){
+      $scope.isInGrp = false;
+    }else{
+      $scope.isInGrp = true;
+    }
+
+    console.log("have_grp: "+$scope.isInGrp);
+  };
+
+  $scope.create_tournament_round_game_new = function(roundID, grpHave, tournamentType){
+    if(tournamentType==="Group"){
+      if(grpHave==true){
+        $scope.CreateGameModel = $resource('/jsonapi/launch_game_for_round?round_id='+roundID);
+        $scope.CreateGameModel.get({}, function(response){
+          $scope.game = response;
+          console.log(response);
+          $cookieStore.put("roundID", roundID ); 
+          $cookieStore.put("tournamentGameID", $scope.game.gameID); 
+          $cookieStore.put("num", $scope.game.problemIDs.length);
+          $cookieStore.put("type", "practiceGame");
+        
+          window.location.href = "tournament_play_page.html";
+        });
+      }else{
+        alert("Please join a group in order to Play!");
+      }
+    }else{
+      $scope.CreateGameModel = $resource('/jsonapi/launch_game_for_round?round_id='+roundID);
+      $scope.CreateGameModel.get({}, function(response){
+        $scope.game = response;
+        console.log(response);
+        $cookieStore.put("roundID", roundID ); 
+        $cookieStore.put("tournamentGameID", $scope.game.gameID); 
+        $cookieStore.put("num", $scope.game.problemIDs.length);
+        $cookieStore.put("type", "practiceGame");
+      
+        window.location.href = "tournament_play_page.html";
+      });  
+    }
+  };
   
 }
 
