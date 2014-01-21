@@ -64,20 +64,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
   };*/
 
-  /*Function to seperate Registered Users without group or Individual Tournament - By Glen*/
-  var fetchRegisteredUser =function(tournament){
-    $scope.registeredPlayersArray =[];
-    console.log("scheduleReloadTourn: " + tournament.tournamentID);
-    for(var i =0; i < tournament.registeredPlayers.length; i++){
-      if(tournament.registeredPlayers[i].Group===0){
-        var playerDetails = tournament.registeredPlayers[i].playerName;
-        $scope.registeredPlayersArray.push(playerDetails);
-      }
-    }
-  }
-
-  
-
   $scope.add_tournaments = function(){
 		$scope.tournament_title = {};
 		$scope.tournament_type = {};
@@ -139,6 +125,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.get_indivNoGrpPlayers = function(tournament){
       fetchRegisteredUser(tournament); 
   };
+  /*Function to seperate Registered Users without group or Individual Tournament - By Glen*/
+  var fetchRegisteredUser =function(tournament){
+    $scope.registeredPlayersArray =[];
+    console.log("fetchRegisteredUser: " + tournament.tournamentID);
+    for(var i =0; i < tournament.registeredPlayers.length; i++){
+      if(tournament.registeredPlayers[i].Group===0){
+        var playerDetails = tournament.registeredPlayers[i].playerName;
+        $scope.registeredPlayersArray.push(playerDetails);
+      }
+    }
+  }
 
   /*Unused - By Glen
   $scope.get_registeredPlayers = function(){
@@ -303,7 +300,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.tournament = response;
         console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
         $scope.get_indivNoGrpPlayers($scope.tournament);
-        $scope.get_grpPlayers($scope.tournament);
+        console.log("tournType : " + $scope.tournament.tournType );
+        if($scope.tournament.tournType == "Group"){
+          $scope.get_grpPlayers($scope.tournament);
+        }       
     });
     //$timeout(function(){ $scope.fetch_tournament_details(tournamentID); }, 5000);
   };
@@ -389,12 +389,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log(data);
     });   
   }
-
-  $scope.current_user_group = function(playerId){
-
-  }
-
-
+  
 }
 
 /*Previous Controller from controllers.js*/
