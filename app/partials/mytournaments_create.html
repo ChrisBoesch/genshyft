@@ -128,14 +128,11 @@
 			<button type="button" class="close" aria-hidden="true" ng-click="delete_rounds($index)">×</button>
 			<div class="span3"><b>Round {{$index+1}}</b>
 				</br>Choose a language:
-				</br></br>Choose a difficulty level:
 			</div>
 			<div class="span8">	
 				</br><select ng-model="qnsLanguage" ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']"></select>
 
-				</br><select ng-model="qnsDifficulty" ng-options="difficulty for difficulty in [1,2,3,4,5,6,7,8,9,10]"></select>
-
-				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal" ng-click="get_tournamentQns(qnsLanguage,qnsDifficulty)">+ Add Questions </button>
+				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal" ng-click="get_tournamentQns(qnsLanguage)">+ Add Questions </button>
 			</div>
 		</div>
 	</div>
@@ -148,7 +145,7 @@
 					<!--
 					<button class="btn btn-primary" id="save" type="button">Save</button>
 					-->
-					<button class="btn btn-primary" id="create" type="button" ng-click="create_grptournament()">Create</button>
+					<button class="btn btn-primary" id="create" type="button" ng-click="create_grptournament(10001)">Create</button>
 				</center>
 		</div>	
 	</div>
@@ -169,7 +166,7 @@
 	  	
 	  	<div class="modal-footer">
 	    	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	    	<button class="btn btn-primary">Save changes</button>
+	    	<button class="btn btn-primary" ng-click="add_round(10001)">Save changes</button>
 	  	</div>
 
 	</div>
