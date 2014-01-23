@@ -5,7 +5,7 @@
     }
     .table tbody tr:hover td,
     .table tbody tr:hover th {
-        background-color: #DCD9CD;
+        background-color: #eeeeee;
     }
     
     .tabspacing{
@@ -149,7 +149,7 @@
 					<div class="row-fluid">
 						<div class="span12 well well-small" style="overflow:auto;">
 							<li class="bulletless" ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
-								<button class="btn bttn ft"><span><b>{{registeredPlayersArray[$index]}}</b></span></button>
+								<button class="btn bttn ft" ng-click="remove_from_tournament(unregisteredPlayer.playerId, tournament.tournamentID)"><span><b>{{unregisteredPlayer.playerName}}</b></span></button>
 							</li>	
 						</div>
 					</div>
@@ -169,7 +169,7 @@
 												<b>Group {{$index+1}}</b>
 												
 												<li class="bulletless" ng-repeat="player in group track by $index">
-													<button class="btn bttn ft" ng-if="$index != 0"><span><b>{{player}}</b></span>
+													<button class="btn bttn ft" ng-if="$index != 0" ng-click="join_grp(player.playerId, tournament.tournamentID, 0)"><span><b>{{player.playerName}}</b></span>
 													</button>
 												</li>
 											
@@ -195,7 +195,7 @@
 				<button class="btn btn-danger" type="button" ng-model="activation">Deactivate</button> 
 				</br>
 				</br>
-				<button class="btn btn-primary" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking >>></button>
+				<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking >>></button>
 			</div>
 			<div class="span7">
 				<b>Start in</b></br>

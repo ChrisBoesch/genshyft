@@ -96,7 +96,7 @@
 				<div class="row-fluid">
 					<div class="span12 well well-small" style="overflow:auto;">
 						<li class="bulletless" ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
-							{{registeredPlayersArray[$index]}}
+							{{unregisteredPlayer.playerName}}
 						</li>	
 					</div>
 				</div>
@@ -118,7 +118,7 @@
 											<b>Group {{$index+1}}</b>
 											
 											<li class="bulletless" ng-repeat="player in group track by $index">
-												<font ng-if="$index != 0">{{player}}
+												<font ng-if="$index != 0">{{player.playerName}}
 												</font>
 											</li>
 										

@@ -152,7 +152,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     console.log("fetchRegisteredUser: " + tournament.tournamentID);
     for(var i =0; i < tournament.registeredPlayers.length; i++){
       if(tournament.registeredPlayers[i].Group===0){
-        var playerDetails = tournament.registeredPlayers[i].playerName;
+        var playerDetails = {"playerName":tournament.registeredPlayers[i].playerName,"playerId":tournament.registeredPlayers[i].playerId};
         $scope.registeredPlayersArray.push(playerDetails);
       }
     }
@@ -295,7 +295,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         
         for(var j=0; j < tournament.registeredPlayers.length ;j++){
           if(tournament.registeredPlayers[j].Group == (i+1)){
-            var player = tournament.registeredPlayers[j].playerName;
+            var player = {"playerName":tournament.registeredPlayers[j].playerName,"playerId":tournament.registeredPlayers[j].playerId};
             grouping.push(player);      
            }
 
@@ -376,8 +376,34 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }else{
       $scope.isInGrp = true;
     }
+  };
 
-    console.log("have_grp: "+$scope.isInGrp);
+  /*Remove from tournament - by Glen (GENShYFT)*/
+  $scope.remove_from_tournament = function(playerId, tournamentId){
+    console.log("remove_from_tournament:"+ playerId+" tournamentId="+tournamentId);
+
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    $http.post("/jsonapi/removePlayer/tournament", {
+        playerID: playerId,
+        tournamentID: tournamentId,
+    }).success(function (data, status, headers, config) {
+        $scope.registration_response = data;
+        console.log(data);
+        if (data.failed){
+          alert(data.failed);
+        }
+        else{
+          $resource('/jsonapi/removePlayer/check').query({}, function(response){
+            $scope.removePlayerVal = response;
+           console.log("removePlayerVal = " + $scope.removePlayerVal.length);
+          }); 
+          $scope.fetch_tournament_details_once();
+        }
+    }).error(function (data, status, headers, config) {
+      console.log("Error");
+        alert("An error occurred.")
+        console.log(data);
+    });   
   };
 
   $scope.create_tournament_round_game_new = function(roundID, grpHave, tournamentType){

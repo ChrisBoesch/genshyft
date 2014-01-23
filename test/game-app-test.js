@@ -376,6 +376,15 @@ myApp.run(function($httpBackend) {
 
     $httpBackend.whenGET('/jsonapi/joinGroup/check').respond(grpPlayers);
 
+    var removedPlayersFromTourn =[];
+
+    $httpBackend.whenPOST('/jsonapi/removePlayer/tournament').respond(function(method, url, data) {
+        var item = JSON.parse(data);
+        removedPlayersFromTourn.push(item);
+        return [200,item];
+    });
+    $httpBackend.whenGET('/jsonapi/removePlayer/check').respond(removedPlayersFromTourn);
+
  	//New Tournament Join Page Data
  	var tournamentIndivData={
     "status": "Open for registration",
