@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 
     connect: {
       options: {
-        base: '/app'
+        base: 'app/'
       },
       webserver: {
         options: {
@@ -31,7 +31,8 @@ module.exports = function (grunt) {
       },
       devserver: {
         options: {
-          port: 8888
+          port: 8888,
+          keepalive: true
         }
       },
       testserver: {
@@ -93,6 +94,19 @@ module.exports = function (grunt) {
       },
       e2e_auto: {
         configFile: './test/karma-e2e.conf.js'
+      },
+      unit_coverage: {
+        configFile: './test/karma-unit.conf.js',
+        autoWatch: false,
+        singleRun: true,
+        reporters: ['progress', 'coverage'],
+        preprocessors: {
+          'app/js/controllers.js': ['coverage']
+        },
+        coverageReporter: {
+          type: 'html',
+          dir: 'coverage/'
+        }
       }
     },
 
@@ -129,7 +143,7 @@ module.exports = function (grunt) {
           'app/scripts/controllers/**/*.js',
           'app/scripts/filters/**/*.js',
           'app/scripts/config/routes.js',
-          'app/scripts/app.js',
+          'app/scripts/app.js'
         ]
       }
     }
@@ -139,6 +153,10 @@ module.exports = function (grunt) {
   grunt.registerTask('test:unit', ['karma:unit']);
   grunt.registerTask('test:midway', ['verbosity', 'develop:server', 'karma:midway']);
   grunt.registerTask('test:e2e', ['verbosity', 'develop:server', 'karma:e2e']);
+
+  // coverage testing
+  grunt.registerTask('test:coverage', ['karma:unit_coverage']);
+  grunt.registerTask('coverage', ['karma:unit_coverage', 'open:coverage', 'connect:coverage']);
 
   // installation-related
   grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install', 'shell:font_awesome_fonts']);
