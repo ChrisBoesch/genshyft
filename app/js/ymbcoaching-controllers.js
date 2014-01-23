@@ -3,7 +3,7 @@
 function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	//check if the user had select a mentor before.
 	$scope.currentCoach = "";
-
+		$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
 	$scope.getCurrentMastery = function(){
 
           $resource('/jsonapi/MasteryBased/CURRENT').get({},function(response){
@@ -279,17 +279,16 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		$scope.path_progress = null;
 		$cookieStore.put("pid", pathid);
 		$cookieStore.put("coach",coach);
+		
+		// to update the new path/mentor user has selected
         $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
-
 		var data = 	{"pathId":pathid,
 					"pathName":pathname,
 					"coach":coach
 					}
-	  
 		$http.post('/jsonapi/MasteryBased/UPDATE', data)
 		.success(function (data, status, headers, config) {
 			window.console.log(data);
-			
 
 		}).error(function (data, status, headers, config) {
 			$scope.status = status;

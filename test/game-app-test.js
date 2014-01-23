@@ -129,29 +129,23 @@ myApp.run(function($httpBackend) {
 	
 	
 	var zandar ={"speech":[
-	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
+	{"text": "Welcome back buddy, we had some have fun that last time. If you spend at least 5 minutes coding everyday, you'll be a pro like me in no time!"},
 	
-	{"text": "Good job!"},
-	{"text": "That is correct !"},
-	{"text": "Congratulations!"},
+	{"text": "Mind blowing buddy, let's do another one. I think this is one problem that you can solve with less attempts than last time. "},
+	{"text": "phenominial work buddy, let's keep up with this streak."},
+	{"text": "Amazing buddy, you have come so far.You are doing a great job. Keep going. "},
 	
-	{"text": "You got this question Wrong !"},
-	{"text": "That is not the correct answer."},
-	{"text": "Try again."},
 	
-	{"text": "Let's see.."},
-	{"text": "Let's compile this"},
-	{"text": "Here we go."},
+	{"text": "That's ok buddy. Go to the compiler and see what's wrong. We can solve this problem sooner than you think."},
+	{"text": "Perhaps you can look at the compiler tab,It'll help you solve it quick. Let's do this !"},
 
-	{"text": "Was it too difficult"},
-	{"text": "You just skip question."},
-	{"text": "Let's redo this question later."},
+	{"text": "Not bad, but I think you can do even better. You know what, let's try that skip question again later."},
+	{"text": "Don't worry man. The more you code, the more you improve. We'll come back to that skip question later"},
+
 	
-	{"text": "You are already 25% there"},
-	{"text": "You're only 1/2 way more to go"},
-	{"text": "75% , almost done !"},
+	{"text": "Yes, you have solved the last question buddy!"},
 	
-	{"text": "Congratulation, you already master this"}
+	{"text": "where are you buddy, we can't stop now, Let's finish this !"}
 	
 	]};
 	$httpBackend.whenGET('/jsonapi/speech/Zandar').respond(zandar);

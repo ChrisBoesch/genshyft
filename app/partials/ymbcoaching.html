@@ -108,12 +108,24 @@ float:left;
 
 </style>
 
+
+
+
 		
 		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches();getCurrentMastery();
-		text = [{'name':'Shannon', 'word':'Hi there, im shannon'},
-		{'name':'Zandar', 'word':'Hi there,im zandar'},
-		{'name':'Sandra', 'word':'Hi there, im sandra'},
-		{'name':'SGTMJR', 'word':'Hi there, im sgt mjr'}]">
+		text = [{'name':'Shannon', 'word':'Hi im shannon, Im here to help you practice and resolve some of the problems you seen before.By resolving this problems, youll be a little better prepared the next time you get together with your friends to do some coding.'},
+		{'name':'Zandar', 'word':'Hello, fellow coder, let me help you practice some of the problems you tried before. With my guidance, you be a pro in no time.'},
+		{'name':'Sandra', 'word':'Welcome back ! Lets continue solving those question. By doing this everyday, youll be better prepared the next time you get together with your friends to do some coding. Lets start!'},
+		{'name':'SGTMJR', 'word':'Attention recruit !, I am your  SGT Major. I am going to make sure you solve this problem much better and improve your coding skill. Lets get to it !'}]">
+		
+		
+		<div ng-show="allCoachesData.coachesData[0].coach==null">
+		 <h3>More Features coming up soon!</h3>
+		<IMG ng-src ="{{tempimage}}" width =30%>
+		</div>
+		
+		
+		
 		<div ng-show = "mastercache">
 		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Player Progress</h4>	
 			<span class="span11">
@@ -133,9 +145,9 @@ float:left;
 			<br> <br> Current Mentor :  {{coaches.coach}}
 			<br> Current Path :{{currentPathName}}
 			 </td>
-			 <td class = "span4">
-				 <div ng-repeat = "words in text | filter:currentCoach">
-					<h3> <br>{{words.word}} {{words.word}}  {{words.word}}    </h3>
+			 <td class = "span4"> 
+				 <div ng-repeat = "words in text | filter:currentCoach"> 
+					<h3> <br><br> <center> {{words.word}} </center>  </h3>
 				 </div>			
 
 			</td> 

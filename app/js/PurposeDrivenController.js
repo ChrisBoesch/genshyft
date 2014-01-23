@@ -5,6 +5,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 
     // this method gets the parameter , variables are declared as youtube and vno
     $scope.location = $location;
+	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
 
     $scope.$watch('location.search()', function() {
         $scope.you = ($location.search()).youtube;

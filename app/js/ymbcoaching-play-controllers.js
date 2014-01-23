@@ -56,7 +56,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 	$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
 		$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
 		$scope.problems_progress = response;
-		$scope.current_level_progress = $scope.problems_progress.currentPlayerProgress;
+		$scope.current_level_progress = 1; //$scope.problems_progress.currentPlayerProgress;
 		$scope.total_level_progress = $scope.problems_progress.problemsInProblemset;
 	});
 	
@@ -64,18 +64,15 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 	    $scope.onTimeout = function(){
         $scope.counter++;
         mytimeout = $timeout($scope.onTimeout,1000);
-		if($scope.counter >=30){
-			$scope.audio = "audio\\"+$scope.nameOfCoach+ "\\17.mp3";
+		if($scope.counter >=30){ // execute hurry up audio
+			$scope.audio = "audio\\"+$scope.nameOfCoach+ "\\9.mp3";
 			var audioplayer = document.getElementsByTagName('audio')[0];
-			$scope.words = $scope.audioText.speech[17].text
+			$scope.words = $scope.audioText.speech[9].text
 			$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 			audioplayer.pause();
 			audioplayer.load()
 			$scope.counter = 0;
-
-			// execute hurry up audio
 		}
-		
     }
 	
     $scope.stop = function(){
@@ -89,10 +86,6 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 			  	$scope.words = $scope.audioText.speech[0].text;
                console.log($scope.audiText);
         	 })
-		
-	
-	
-	
 	}
 
 				
@@ -179,7 +172,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
     $scope.skip_problem = function(){
 	
 		$scope.counter = 0;  //reset timer
-		$scope.randomAudioNum = Math.floor((Math.random()*3)+10);
+		$scope.randomAudioNum = Math.floor((Math.random()*2)+5);
 		$scope.words = $scope.audioText.speech[$scope.randomAudioNum].text
 		$scope.audio = "audio\\"+$scope.nameOfCoach+ "\\"+ $scope.randomAudioNum +".mp3";
 		$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
@@ -189,32 +182,20 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 
 		audioplayer.pause();
 		audioplayer.load();
-		audioplayer.pause();
-		audioplayer.play();
+
 		console.log("time");
 		$timeout(function(){ // 3sec delay for user to listen
-
 			$('#t11').addClass('active');
 			  $('#t21').removeClass('active');
 			  $('#ta11').addClass('active');
 			  $('#ta21').removeClass('active');
 			  $scope.specialMessage = " You just skipped one ! ";
-			 
-			 
 
-
-				
-			  
 			  if ($scope.remaining_problems.length>1){
 				$scope.skip_problem_count += 1;
 				$scope.move_to_next_unsolved_problem();
 			  }
-
-
 		},3000);
-
-      
-	 
 	}
 
 
@@ -223,14 +204,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
       //$scope.current_problem
 	  //$scope.game.gameID
 		$scope.counter = 0; //reset timer
-		var audioplayer = document.getElementsByTagName('audio')[0];
-		$scope.randomAudioNum = Math.floor((Math.random()*3)+7);
-		$scope.words = $scope.audioText.speech[$scope.randomAudioNum].text
-		$scope.audio = "audio\\"+$scope.nameOfCoach+"\\"+ $scope.randomAudioNum +".mp3";
-		$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-		audioplayer.pause();
-		audioplayer.load();
-
+		
 
 		$timeout(function(){// 3sec delay for user to listen
 
@@ -260,8 +234,8 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 					
 						//FINISH GAME AUDIO
 						var audioplayer = document.getElementsByTagName('audio')[0];
-						$scope.words = $scope.audioText.speech[16].text
-						$scope.audio = "audio\\"+$scope.nameOfCoach+"\\16.mp3";
+						$scope.words = $scope.audioText.speech[8].text
+						$scope.audio = "audio\\"+$scope.nameOfCoach+"\\8.mp3";
 						$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 						audioplayer.pause();
 						audioplayer.load();
@@ -276,57 +250,41 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 				$scope.fetch($scope.game.gameID);
 					$timeout(function(){
 					var audioplayer = document.getElementsByTagName('audio')[0];
-					
-					$scope.randomAudioNum = Math.floor((Math.random()*3)+1) ;
+				
+					$scope.randomAudioNum = Math.floor((Math.random()*2)+1) ;
 					$scope.words = $scope.audioText.speech[$scope.randomAudioNum].text
 					$scope.audio = "audio\\"+$scope.nameOfCoach+"\\"+ $scope.randomAudioNum +".mp3";
 					$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 					audioplayer.pause();
 					audioplayer.load();
 					},4000);
-					
-					//if more than percentage
-					$timeout(function(){
-						if( (($scope.problems_progress.currentPlayerProgress/$scope.problems_progress.problemsInProblemset)*100)% 75 == 0)
-						{
-							$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-							var audioplayer = document.getElementsByTagName('audio')[0];
-							$scope.words = $scope.audioText.speech[15].text
-							$scope.audio = "audio\\"+$scope.nameOfCoach+"\\15.mp3";
-							$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-							audioplayer.pause();
-							audioplayer.load();
-						}
-						else if( (($scope.problems_progress.currentPlayerProgress/$scope.problems_progress.problemsInProblemset)*100)% 50 == 0)
-						{
-							$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-							var audioplayer = document.getElementsByTagName('audio')[0];
-							$scope.words = $scope.audioText.speech[14].text
-							$scope.audio = "audio\\"+$scope.nameOfCoach+"\\14.mp3";
-							$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-							audioplayer.pause();
-							audioplayer.load();
-						}
-						else if( (($scope.problems_progress.currentPlayerProgress/$scope.problems_progress.problemsInProblemset)*100)% 15 == 0)
-						{
-							$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-							var audioplayer = document.getElementsByTagName('audio')[0];
-							$scope.words = $scope.audioText.speech[13].text
-							$scope.audio = "audio\\"+$scope.nameOfCoach+"\\13.mp3";
-							$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-							audioplayer.pause();
-							audioplayer.load();
-						}
-					},4000);
 			  }
+			  else {
+						  //wrong answer
+					var audioplayer = document.getElementsByTagName('audio')[0];
+					$scope.randomAudioNum = Math.floor((Math.random()*2)+3) ;
+					$scope.words = $scope.audioText.speech[$scope.randomAudioNum].text
+					$scope.audio = "audio\\"+$scope.nameOfCoach+"\\"+ $scope.randomAudioNum +".mp3";
+					$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+					audioplayer.pause();
+					audioplayer.load();	
+		  
+			  }
+			  
+			  
+			  
+			  
 			});
-			
-			
-			
-
 		},3000); 
 		  
 		  //wrong answer
+					var audioplayer = document.getElementsByTagName('audio')[0];
+					$scope.randomAudioNum = Math.floor((Math.random()*2)+1) ;
+					$scope.words = $scope.audioText.speech[$scope.randomAudioNum].text
+					$scope.audio = "audio\\"+$scope.nameOfCoach+"\\"+ $scope.randomAudioNum +".mp3";
+					$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+					audioplayer.pause();
+					audioplayer.load();
 
     };
 
