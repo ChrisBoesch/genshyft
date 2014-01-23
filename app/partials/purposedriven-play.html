@@ -1,4 +1,4 @@
-<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked()" > 
+<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked();" > 
 <div class="container" style="position:relative;">
 	<div class="row-fluid">
 		<div class = "span12">
@@ -38,11 +38,21 @@
 										</tr>
 										<tr>
 										<form>
-										<td>
-											<label ng-repeat = "qns in purposeVideos.Videos[vno].options">
+										<td> 
 											
+									
+											<label ng-repeat = "qns in purposeVideos.Videos[vno].options">
+										
+										
+										  <input
+										  type="radio" name="answer" ng-model="$parent.radioAns" value ="{{qns.choice}}" 
+										  onclick="enableButton2()"> 
 										  
-										  <input type="radio" name="answer" ng-model="$parent.radioAns" ng-value ="qns.choice" onclick="enableButton2()"> {{qns.choice}}  
+										  {{qns.choice}}  
+										</label>
+										
+										
+										  
 										  </label>
 										  
 										  
@@ -78,26 +88,38 @@
 	
 	
 								<br>
-								<table> <tr>
+								<table border = '0'>
 								<td ng-repeat ="vids in purposeVideos.Videos" width =10%>
 									<div ng-show ="purposeVideosUnlocked.Unlocked[vids.no].status"> 
-										
-											<IMG ng-src="{{vids.thumbnail}}" width =50%
-											ng-click = "view_video(purposeVideos.Videos[vids.no].vlink,vids.no)">
-											<br> </a>
-											{{vids.title}}
-										
-										
+									
+											<center> <IMG ng-src="{{vids.thumbnail}}" width =70%
+											ng-click = "view_video(purposeVideos.Videos[vids.no].vlink,vids.no)"></center>			
 									</div>	
+
 									<div ng-hide ="purposeVideosUnlocked.Unlocked[vids.no].status"> 
 										
-											<IMG ng-src="img/purposedrivenPlaceholder/thumb/lock.jpg" width =50%>
-											<br>
-											Locked
-										
+											<center> <IMG ng-src="img/purposedrivenPlaceholder/thumb/lock.jpg" width =50%>
+											<br> </center>
+											
 									</div>									
 
-								</td> 
+								</td>
+								<tr>
+									<td ng-repeat ="vids in purposeVideos.Videos" width =10%>
+									<div ng-show ="purposeVideosUnlocked.Unlocked[vids.no].status"> 	
+											<center> {{vids.title}} </center>
+									</div>	
+									<div ng-hide ="purposeVideosUnlocked.Unlocked[vids.no].status"> 	
+											<center> Locked </center>
+									</div>									
+									
+									
+								</tr>
+								<tr>
+									<td ng-repeat ="vids in purposeVideos.Videos" width =10%>
+										<div ng-show ="purposeVideosUnlocked.Unlocked[vids.no].status"> 	
+											<center><IMG ng-src="img/purposedrivenPlaceholder/arrow.jpg" width =25%></center>
+									</div>	
 								</tr>
 								</table>
 		

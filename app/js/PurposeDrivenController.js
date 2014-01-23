@@ -5,7 +5,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 
     // this method gets the parameter , variables are declared as youtube and vno
     $scope.location = $location;
-	$scope.radioAns ="";
+
     $scope.$watch('location.search()', function() {
         $scope.you = ($location.search()).youtube;
         $scope.tube = $scope.you.split("watch?v=");
@@ -17,10 +17,11 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 
     $scope.$watch('location.search()', function() {
         $scope.vno = ($location.search()).vno;
+		
     }, true);
 
 
-
+	
 	
 	
 	
@@ -40,6 +41,8 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
           console.log("get_purpose driven videos unlocked");
           $resource("/jsonapi/purposeVideos/CURRENT").get({},function(response){
               $scope.purposeVideosUnlocked = response;
+			  $scope.radioAns = $scope.purposeVideosUnlocked.Unlocked[$scope.vno].answer;
+			  	
                console.log($scope.purposeVideosUnlocked);
         	 })
         }      
@@ -65,7 +68,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
                   alert ("You have unlock a new video!" );						 
                 }
 		
-                
+               
 				$scope.saveNewUnlock(vnoNumber,$scope.radioAns); // unlock , resave answer into datastore.
                 $location.search({'youtube':purposeVideo[(vnoNumber+1)].vlink, 'vno':(vnoNumber+1)}).path('purposedriven-play') 
 				

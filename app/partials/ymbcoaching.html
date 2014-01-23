@@ -109,31 +109,40 @@ float:left;
 </style>
 
 		
-		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches();getCurrentMastery()">
+		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches();getCurrentMastery();
+		text = [{'name':'Shannon', 'word':'Hi there, im shannon'},
+		{'name':'Zandar', 'word':'Hi there,im zandar'},
+		{'name':'Sandra', 'word':'Hi there, im sandra'},
+		{'name':'SGTMJR', 'word':'Hi there, im sgt mjr'}]">
 		<div ng-show = "mastercache">
 		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Player Progress</h4>	
 			<span class="span11">
 		<table>
-		<tr class = 'span11'ng-repeat ="coaches in allCoachesData.coachesData|filter:mastery.currentUserMastery[0].coach" >
+		<tr class = 'span11'ng-repeat ="coaches in allCoachesData.coachesData|filter:currentCoach" >
 			<td class="span3"> <IMG class ="Span3" ng-src=" {{coaches.link}}" width ='200'> </td> 
-			 <td class="span4">
-			 <h3> You are currently mentored by</h3> <h2>{{coaches.coach}}</h2> <h3>in your path to master </h3><h2>{{mastery.currentUserMastery[0].pathName}} </h2>
+			 <td class="span3">
+
+
+				<div id = "audioDiv">	
+					<audio src="audio/{{coaches.coach}}/welcome.mp3" autoplay controls></audio> <br> <br>
+				</div>
 			 
-			 	 <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(path.id,path.name,5,coaches.coach)">Master it Now </button>
-			 <button id="reset" class="btn btn-warning" ng-click ="reset()"> Select New Path </button> 
+			 	  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,coaches.coach)">Start Practising </button> <br>  <br>
+			 <button id="reset" class="btn btn-warning" ng-click ="resetMentor()">  New Mentor </button> 
+			 <button id="reset" class="btn btn-warning" ng-click ="resetPath()">  New Path </button> 
+			<br> <br> Current Mentor :  {{coaches.coach}}
+			<br> Current Path :{{currentPathName}}
 			 </td>
-			 <td class = "span3">
-		
-						<div  class ='span3'ng-repeat="path in player_progress.paths|filter:mastery.currentUserMastery[0].pathId" >
-						<br>
-						<div class="myprogress"> <b>A total of</b> <h3>{{path.solvedProblems}}</h3> <b> answered completed out of </b><h3>{{path.problemsInPath}}</h3><b> questions  so far !</b>.
-			
-						</div>
-						</div>
+			 <td class = "span4">
+				 <div ng-repeat = "words in text | filter:currentCoach">
+					<h3> <br>{{words.word}} {{words.word}}  {{words.word}}    </h3>
+				 </div>			
+
 			</td> 
 		</tr>
 		</table>
-			
+		<br>	
+		<br>	
 			
 			
 		</div> 
@@ -141,17 +150,15 @@ float:left;
 	
 
 		
-s
+	<div ng-show ="masterselect">
 						
-		<div class = "container" ng-show = "masterselect">
 	
-			<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Player Progress</h4>	
 			<span class="span11">
 			<center><table border = '1'>
 			<td ng-repeat ="coaches in allCoachesData.coachesData" align ='center'>
 			
 			<IMG ng-src=" {{coaches.link}}" width ='150'> <br>
-			<input type ="radio" name = "coachSelect" ng-model ="$parent.isTrue.coach" value ="{{coaches.coach}}"> 
+			<input type ="radio" name = "coachSelect" ng-model ="$parent.currentCoach" value ="{{coaches.coach}}"> 
 
 			<b><br>{{coaches.coach}}</b> <br><br> {{coaches.desc}}
 			<br>
@@ -159,7 +166,7 @@ s
 			</table>
 			</span> <br>
 	</center>
-    </div>
+ </div> 
 		     
 
 <div class="row-fluid">
@@ -192,7 +199,7 @@ s
 
 
 
- <div ng-show = "isTrue.coach"> <!-- to check existence of isTrue !-->
+ <div ng-show ="masterpath"> <!-- to check existence of isTrue !-->
  <h4 class="well well-small bootCamp" align="center" id="well-c" >2. Select Your path!</h4>
 	<div class ="container">
 	
@@ -229,7 +236,7 @@ s
 								</div>
 							</td>
 							<td class="continue">
-								<button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(path.id,path.name,5,isTrue.coach)">Master it Now </button>
+								<button id="resume" class="btn btn-info" ng-click = "resetLanguage(path.id,path.name)">Master it Now </button>
 								
 							</td>                                 
 						</tr>									 

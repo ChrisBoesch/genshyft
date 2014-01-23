@@ -90,8 +90,8 @@ myApp.run(function($httpBackend) {
 	$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
 	// status determines if a video is unlocked.
 		var videosUnlock = {"Unlocked":[
-		{"no":"0", "status":"true", "answer" : ""},
-		{"no":"1", "status":"true", "answer" : ""},
+		{"no":"0", "status":"true", "answer" : "Somewhat Good"},
+		{"no":"1", "status":"true", "answer" : "Don't like it"},
 		{"no":"2", "status":"false", "answer" : ""},
 		{"no":"3", "status":"false", "answer" : ""},
 		{"no":"4", "status":"false", "answer" : ""},
@@ -492,7 +492,7 @@ myApp.run(function($httpBackend) {
 		{ 
 			"playerId":57754,
 			"playerName":"Chris", 
-			"Group": 0
+			"Group": 3
 		},
 
 		{ 
