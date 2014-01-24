@@ -1,6 +1,66 @@
 'use strict';
 
 function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
+	//check if the user had select a mentor before.
+	$scope.currentCoach = "";
+		$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
+	$scope.getCurrentMastery = function(){
+
+          $resource('/jsonapi/MasteryBased/CURRENT').get({},function(response){
+			  $scope.mastery = response;
+			   console.log($scope.mastery.currentUserMastery[0]);
+
+			if($scope.mastery.currentUserMastery[0].coach == null ){
+				console.log("remain on page");
+				$scope.mastercache = "false";
+				$scope.masterselect ="true";
+				$scope.masterpath ="true";
+				
+			}
+			else{
+				console.log("will forward to cache page");
+				$scope.mastercache = "true";
+				$scope.masterselect ="false";
+			   $scope.currentCoach = $scope.mastery.currentUserMastery[0].coach;
+			   $scope.currentPathId = $scope.mastery.currentUserMastery[0].pathId;
+			   $scope.currentPathName = $scope.mastery.currentUserMastery[0].pathName;
+				
+				
+			}
+			   });	   		
+
+
+			   
+    } 
+	
+	 
+	
+	$scope.resetMentor=function(){
+				$scope.mastercache = "true";
+				$scope.masterselect ="true";
+				$scope.masterpath ="false"
+	}
+	$scope.resetPath=function(){
+				$scope.mastercache = "true";
+				$scope.masterselect ="false";
+				$scope.masterpath ="true";
+	}
+	$scope.resetLanguage=function(id,name){
+		$scope.currentPathId = id;
+	   $scope.currentPathName = name;
+	
+	}
+	
+	$scope.getCoaches = function(){
+
+	  $resource('/jsonapi/MasteryBased/COACHES').get({},function(response){
+		  $scope.allCoachesData = response;
+		  
+		   console.log($scope.allCoachesData.coachesData[0].coach);
+		   });	   			   
+	}
+	
+	
 	
 	//Assuming this is what you wanted by calling list in ng-init
     $scope.fetch_game_paths = function(){
@@ -219,8 +279,22 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		$scope.path_progress = null;
 		$cookieStore.put("pid", pathid);
 		$cookieStore.put("coach",coach);
+		
+		// to update the new path/mentor user has selected
         $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
+		var data = 	{"pathId":pathid,
+					"pathName":pathname,
+					"coach":coach
+					}
+		$http.post('/jsonapi/MasteryBased/UPDATE', data)
+		.success(function (data, status, headers, config) {
+			window.console.log(data);
 
+		}).error(function (data, status, headers, config) {
+			$scope.status = status;
+		})
+		
+		
         //Including details=1 returns the nested problemset progress.
         $scope.PathModel.get({"pathID":pathid,"details":1}, function(response){
             $scope.path_progress = response;
@@ -230,13 +304,19 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			else{
 				$scope.difficulty = "Easy";
 			}
-			for (var i=0;i<$scope.path_progress.details.length;i++)
+			for (var i=$scope.path_progress.details.length-1;i> 0;i--)
 			{ 
-				if($scope.path_progress.details[i].problemsInProblemset>$scope.path_progress.details[i].currentPlayerProgress){
+				if($scope.path_progress.details[i].problemsInProblemset <= $scope.path_progress.details[i].currentPlayerProgress){ // means has completed a set
 					console.log("level "+$scope.path_progress.details[i].pathorder);
+				
 					$scope.create_prac($scope.path_progress.details[i].id,num,$scope.path_progress.details[i].pathorder);
+					console.log($scope.path_progress.details[i].id);D;D
 					break;
 				}
+				else{
+					alert("Please complete at least 1 level of Practice session first");
+				}
+				
 			}
         });
 
@@ -279,7 +359,13 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		}
 	};
 	
-	$scope.continuePath = function(num){
+	$scope.continuePath = function(num,coach){
+	
+
+		$cookieStore.put("pid", pathid);
+		$cookieStore.put("coach",coach);
+        $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
+	
 		for (var i=0;i<$scope.path_progress.details.length;i++)
 		{ 
 			if($scope.path_progress.details[i].problemsInProblemset>$scope.path_progress.details[i].currentPlayerProgress){

@@ -32,8 +32,8 @@
   	<!-- <select ng-model="videoID" ng-options= "video.id as video.title for video in purposeVideos.Videos | orderBy:'title'"></select !-->
 <div class="container" style="position:relative;">
 		
-
-<h3> Choose a video and get inspired ! </h3>
+<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Choose a video and get inspired ! </h4>	
+			<span class="span11">
 <table border="0"align ="center" cellpadding="11"cellspacing="11" >
 <th width =30%> </th>
 <th>  </th>
@@ -45,17 +45,22 @@
 ng-init = "videoArray = videoArray || purposeVideos.Videos[0].title "
 ng-options="video.title for video in purposeVideos.Videos"></select>
 <br><br>
-<div ng-show=" purposeVideosUnlocked.Unlocked[videoArray.no].s ">  
+<div ng-show=" purposeVideosUnlocked.Unlocked[videoArray.no].status ">  
 <button class="btn btn-inverse"  ng-click = "view_video(purposeVideos.Videos[videoArray.no].vlink,videoArray.no)">  Play  </button> 
 
 </div>
 <br><br>
 {{ videoArray.description }}
+
 </td>
 
 
 <td>
 <IMG ng-src="{{ videoArray.image }}" >
+<div ng-show="videoArray==null">
+<h3>PurposeDriven videos coming up soon! </h3>
+<IMG ng-src ="{{tempimage}}" width =50%>
+</div>
 </td>
 
 <td>

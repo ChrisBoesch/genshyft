@@ -19,36 +19,222 @@ myApp.run(function($httpBackend) {
       var purposeDrivenVideos = {"Videos":[
 		{"title":"What Most School Don't Teach",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
-		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"insert question here",
+		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"0"},
 
 		{"title":"Art of Creative Coding",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
-		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"insert question here",
+		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"1"},
 
 		{"title":"Purpose Driven Part C",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"This is test Data for C","question":"insert question here",
+		"description":"he trademarked term purpose driven comes from the teaching of Rick Warren, senior pastor of Saddleback Church in Lake Forest, California. It originally came","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"2"},
 
 		{"title":"Purpose Driven Part D",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"This is test Data for D","question":"insert question here",
+		"description":"87 quotes from The Purpose Driven Life: What on Earth Am I Here for?: 'We are products of our past, but we don't have to be prisoners of it.","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"3"},
 
 		{"title":"Purpose Driven Part E",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"This is test Data for E"
-		,"question":"insert question here","no":"4"}   
+		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"},
+
+		{"title":"Purpose Driven Part F",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"he trademarked term purpose driven comes from the teaching of Rick Warren, senior pastor of Saddleback Church in Lake Forest, California. It originally came","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"2"},
+
+		{"title":"Purpose Driven Part G",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"87 quotes from The Purpose Driven Life: What on Earth Am I Here for?: 'We are products of our past, but we don't have to be prisoners of it.","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"3"},
+
+		{"title":"Purpose Driven Part H",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"},
+
+		{"title":"Purpose Driven Part I",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"87 quotes from The Purpose Driven Life: What on Earth Am I Here for?: 'We are products of our past, but we don't have to be prisoners of it.","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"3"},
+
+		{"title":"Purpose Driven Part J",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
+		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
+		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"}  		
 		]};
 	$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
-		  
+	// status determines if a video is unlocked.
+		var videosUnlock = {"Unlocked":[
+		{"no":"0", "status":"true", "answer" : "Somewhat Good"},
+		{"no":"1", "status":"true", "answer" : "Don't like it"},
+		{"no":"2", "status":"false", "answer" : ""},
+		{"no":"3", "status":"false", "answer" : ""},
+		{"no":"4", "status":"false", "answer" : ""},
+		{"no":"5", "status":"true", "answer" : ""},
+		{"no":"6", "status":"true", "answer" : ""},
+		{"no":"7", "status":"false", "answer" : ""},
+		{"no":"8", "status":"false", "answer" : ""},
+		{"no":"9", "status":"false", "answer" : ""}		
+		]};
+	
+	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
+	$httpBackend.whenPOST('/jsonapi/purposeVideos/UPDATE').passThrough();
+	
+	var coachesData = {"coachesData":[
+	{'coach':'Shannon','link': 'img/mbcoach/Shannon/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
+
+	{'coach':'Sandra','link': 'img/mbcoach/Sandra/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview','show':'true' },
+
+	{'coach':'Zandar','link': 'img/mbcoach/Zandar/Zandar.jpg','desc':'Hacker that wants you to be more awesome','show':'true'},
+
+	{'coach':'SGTMJR','link': 'img/mbcoach/SGTMJR/SGTMJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}
+	]};
+	
+	$httpBackend.whenGET('/jsonapi/MasteryBased/COACHES').respond(coachesData);
+	
+	
+	var currentUserMasteryProgress = {"currentUserMastery":[
+	{"pathId":"2243213",
+	"pathName":"Java",
+	"coach":"Zandar"
+	}
+	]};
+	$httpBackend.whenGET('/jsonapi/MasteryBased/CURRENT').respond(currentUserMasteryProgress);
+	$httpBackend.whenPOST('/jsonapi/MasteryBased/UPDATE').passThrough();
+	
+	
+	var zandar ={"speech":[
+	{"text": "Welcome back buddy, we had some have fun that last time. If you spend at least 5 minutes coding everyday, you'll be a pro like me in no time!"},
+	
+	{"text": "Mind blowing buddy, let's do another one. I think this is one problem that you can solve with less attempts than last time. "},
+	{"text": "phenominial work buddy, let's keep up with this streak."},
+	{"text": "Amazing buddy, you have come so far.You are doing a great job. Keep going. "},
+	
+	
+	{"text": "That's ok buddy. Go to the compiler and see what's wrong. We can solve this problem sooner than you think."},
+	{"text": "Perhaps you can look at the compiler tab,It'll help you solve it quick. Let's do this !"},
+
+	{"text": "Not bad, but I think you can do even better. You know what, let's try that skip question again later."},
+	{"text": "Don't worry man. The more you code, the more you improve. We'll come back to that skip question later"},
+
+	
+	{"text": "Yes, you have solved the last question buddy!"},
+	
+	{"text": "where are you buddy, we can't stop now, Let's finish this !"}
+	
+	]};
+	$httpBackend.whenGET('/jsonapi/speech/Zandar').respond(zandar);
+
+
+	var SGTMJR ={"speech":[
+	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
+	
+	{"text": "Good job!"},
+	{"text": "That is correct !"},
+	{"text": "Congratulations!"},
+	
+	{"text": "You got this question Wrong !"},
+	{"text": "That is not the correct answer."},
+	{"text": "Try again."},
+	
+	{"text": "Let's see.."},
+	{"text": "Let's compile this"},
+	{"text": "Here we go."},
+
+	{"text": "Was it too difficult"},
+	{"text": "You just skip question."},
+	{"text": "Let's redo this question later."},
+	
+	{"text": "You are already 25% there"},
+	{"text": "You're only 1/2 way more to go"},
+	{"text": "75% , almost done !"},
+	
+	{"text": "Congratulation, you already master this"}
+	
+	]};
+	$httpBackend.whenGET('/jsonapi/speech/SGTMJR').respond(SGTMJR);
+	
+	var Sandra ={"speech":[
+	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
+	
+	{"text": "Good job!"},
+	{"text": "That is correct !"},
+	{"text": "Congratulations!"},
+	
+	{"text": "You got this question Wrong !"},
+	{"text": "That is not the correct answer."},
+	{"text": "Try again."},
+	
+	{"text": "Let's see.."},
+	{"text": "Let's compile this"},
+	{"text": "Here we go."},
+
+	{"text": "Was it too difficult"},
+	{"text": "You just skip question."},
+	{"text": "Let's redo this question later."},
+	
+	{"text": "You are already 25% there"},
+	{"text": "You're only 1/2 way more to go"},
+	{"text": "75% , almost done !"},
+	
+	{"text": "Congratulation, you already master this"}
+	
+	]};
+	$httpBackend.whenGET('/jsonapi/speech/Sandra').respond(Sandra);
+	
+	var Shannon ={"speech":[
+	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
+	
+	{"text": "Good job!"},
+	{"text": "That is correct !"},
+	{"text": "Congratulations!"},
+	
+	{"text": "You got this question Wrong !"},
+	{"text": "That is not the correct answer."},
+	{"text": "Try again."},
+	
+	{"text": "Let's see.."},
+	{"text": "Let's compile this"},
+	{"text": "Here we go."},
+
+	{"text": "Was it too difficult"},
+	{"text": "You just skip question."},
+	{"text": "Let's redo this question later."},
+	
+	{"text": "You are already 25% there"},
+	{"text": "You're only 1/2 way more to go"},
+	{"text": "75% , almost done !"},
+	
+	{"text": "Congratulation, you already master this"}
+	
+	]};
+	$httpBackend.whenGET('/jsonapi/speech/Shannon').respond(Shannon);
+	
 	var tournaments = {"Tournaments":[
 		{"tournamentId":"001",
 		"title":"test",
@@ -176,13 +362,159 @@ myApp.run(function($httpBackend) {
 
 	var grpPlayers = [];
 
-  	$httpBackend.whenPOST('/jsonapi/joinGroup').respond(function(method, url, data) {
-	    var item = JSON.parse(data);
-	    submitted_problems.push(item);
+  	$httpBackend.whenPOST('/jsonapi/joinGroup/join').respond(function(method, url, data) {
+        var item = JSON.parse(data);
+	    grpPlayers.push(item);
 	    return [200,item];
  	});
 
+    $httpBackend.whenGET('/jsonapi/joinGroup/check').respond(grpPlayers);
+
+    var removedPlayersFromTourn =[];
+
+    $httpBackend.whenPOST('/jsonapi/removePlayer/tournament').respond(function(method, url, data) {
+        var item = JSON.parse(data);
+        removedPlayersFromTourn.push(item);
+        return [200,item];
+    });
+    $httpBackend.whenGET('/jsonapi/removePlayer/check').respond(removedPlayersFromTourn);
+
  	//New Tournament Join Page Data
+ 	var tournamentIndivData={
+    "status": "Open for registration",
+    "currentPlayerID": 57754,
+    "description": "Test Individual Tournament",
+    "directorID": 57754,
+    "tournType": "Individual",
+    "tournamentID": 5060388987076608,
+	"maxNoPlayerPerGrp":0,
+	"maxNoGrp":0,
+    "mentorAssignInTeam":"N",
+    "rounds": [
+        {
+            "roundID": 4912161075757056,
+            "currentHeatDetails": {
+                "gameIDsForHeat": {
+                    "57754": 6096747415732224,
+                    "2739102": 6412161224015872
+                },
+                "problemsInHeat": [
+                    10033,
+                    17155
+                ],
+                "heatID": 6144086545268736,
+                "description": "Heat 2",
+                "startTime": "2013-10-04 14:02:05.835670",
+                "currentTime": "2013-10-04 14:02:00.246270",
+                "solvedProblemIDListsByPlayerID": {
+                    "57754": [
+                        "/problem_is_solved_for_game/6096747415732224/10033",
+                        "/problem_is_solved_for_game/6096747415732224/17155"
+                    ],
+                    "2739102": [
+                        "/problem_is_solved_for_game/6412161224015872/10033",
+                        "/problem_is_solved_for_game/6412161224015872/17155"
+                    ]
+                },
+                "stopTime": "2013-10-04 15:02:05.835670",
+                "heatNumber": 2
+            },
+            "problemIDs": [
+                10033,
+                17155
+            ],
+            "heats": [
+                {
+                    "gameIDsForHeat": {
+                        "57754": 5817368383062016
+                    },
+                    "problemsInHeat": [
+                        10033,
+                        17155
+                    ],
+                    "heatID": 4691468476219392,
+                    "description": "Heat 1",
+                    "startTime": "2013-09-29 08:24:46.840830",
+                    "currentTime": "2013-10-04 13:57:28.164880",
+                    "solvedProblemIDListsByPlayerID": {
+                        "57754": [
+                            "/problem_is_solved_for_game/5817368383062016/10033",
+                            "/problem_is_solved_for_game/5817368383062016/17155"
+                        ]
+                    },
+                    "stopTime": "2013-09-29 09:24:46.840830",
+                    "heatNumber": 1
+                },
+                {
+                    "gameIDsForHeat": {
+                        "57754": 6096747415732224,
+                        "2739102": 6412161224015872
+                    },
+                    "problemsInHeat": [
+                        10033,
+                        17155
+                    ],
+                    "heatID": 6144086545268736,
+                    "description": "Heat 2",
+                    "startTime": "2013-10-04 14:02:05.835670",
+                    "currentTime": "2013-10-04 13:57:28.306810",
+                    "solvedProblemIDListsByPlayerID": {
+                        "57754": [
+                            "/problem_is_solved_for_game/6096747415732224/10033",
+                            "/problem_is_solved_for_game/6096747415732224/17155"
+                        ],
+                        "2739102": [
+                            "/problem_is_solved_for_game/6412161224015872/10033",
+                            "/problem_is_solved_for_game/6412161224015872/17155"
+                        ]
+                    },
+                    "stopTime": "2013-10-04 15:02:05.835670",
+                    "heatNumber": 2
+                }
+            ],
+            "description": "Round 1",
+            "currentHeatID": 6144086545268736,
+            "currentHeat": 2,
+            "problemDetails": {
+                "10033": {
+                    "name": "Expected Results",
+                    "description": "When you run your code, SingPath has certain tests that it checks to see if you did what you were supposed to do.  If incorrect you'll see a table with the results of the tests.  \r\n\r\nNotice that the starter code has the wrong value. Go ahead and run the code now so you can see the results (you can finish reading this after you run it).\r\n\r\nThe results tell you that SingPath looked at the variable named 'oops' expecting to find 713, but found 317 instead. Fix the error now and run it to advance to the next problem."
+                },
+                "17155": {
+                    "name": "Variables",
+                    "description": "Variables are an important part of programming; they allow the you to store a value and reuse it later.  You are allowed to use just about anything you like as your variable name.\r\n\r\nFor this problem, create a variable named 'age' with the value 7."
+                }
+            },
+            "heatIDs": [
+                4691468476219392,
+                6144086545268736
+            ]
+        }
+		],
+		"registeredPlayers":[
+		{ 
+			"playerId":57754,
+			"playerName":"Chris", 
+			"Group": 3
+		},
+
+		{ 
+			"playerId":2739102,
+			"playerName":"Player 2", 
+			"Group":0
+		},
+		{
+			"playerId":9379339,
+			"playerName":"Player 3", 
+			"Group":0
+		}],
+
+		"numRounds": 1,
+		"shortTitle": "Test Individual tournament",
+		"tournamentType": "Normal",
+		"winnerText": ""
+	};
+
  	var tournamentGrpData = {
     "status": "Open for registration",
     "currentPlayerID": 57754,
@@ -192,6 +524,7 @@ myApp.run(function($httpBackend) {
     "tournamentID": 5060388987076609,
 	"maxNoPlayerPerGrp":5,
 	"maxNoGrp":5,
+    "mentorAssignInTeam":"Y",
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -295,8 +628,8 @@ myApp.run(function($httpBackend) {
 	    "registeredPlayers":[
 		{ 
 			"playerId":57754,
-			"playerName":"Chris Boesch", 
-			"Group": 0
+			"playerName":"Chris", 
+			"Group":0
 		},
 		
 		{ 
@@ -309,66 +642,66 @@ myApp.run(function($httpBackend) {
 			"playerName":"Player 3", 
 			"Group":1
 		},{ 
-			"playerId":57754,
+			"playerId":57753,
 			"playerName":"Player 4", 
 			"Group": 1
 		},
 		
 		{ 
-			"playerId":2739102,
+			"playerId":2739101,
 			"playerName":"Player 5", 
 			"Group":1
 		},
 		{
-			"playerId":9379339,
+			"playerId":9379338,
 			"playerName":"Player 6", 
 			"Group":2
 		},
 		{ 
-			"playerId":57754,
+			"playerId":57752,
 			"playerName":"Player 7", 
 			"Group": 2
 		},
 		
 		{ 
-			"playerId":2739102,
+			"playerId":2739100,
 			"playerName":"Player 8", 
-			"Group":3
+			"Group":0
 		},
 		{
-			"playerId":9379339,
+			"playerId":9379337,
 			"playerName":"Player 9", 
 			"Group":4
 		},
 		{ 
-			"playerId":57754,
+			"playerId":57751,
 			"playerName":"Player 10", 
 			"Group": 4
 		},
 		
 		{ 
-			"playerId":2739102,
+			"playerId":2739099,
 			"playerName":"Player 11", 
 			"Group":4
 		},
 		{
-			"playerId":9379339,
+			"playerId":9379336,
 			"playerName":"Player 12", 
 			"Group":5
 		},
 		{ 
-			"playerId":57754,
+			"playerId":57750,
 			"playerName":"Player 13", 
 			"Group": 5
 		},
 		
 		{ 
-			"playerId":2739102,
+			"playerId":2739098,
 			"playerName":"Player 14", 
 			"Group":5
 		},
 		{
-			"playerId":9379339,
+			"playerId":9379335,
 			"playerName":"Player 15", 
 			"Group":5
 		}],
@@ -379,18 +712,10 @@ myApp.run(function($httpBackend) {
 	    "winnerText": ""
 	};
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076609').respond(tournamentGrpData);
+	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076608').respond(tournamentIndivData);
 	
 		
-	var videosUnlock = {"Unlocked":[
-		{"no":"0", "s":"true", "rating" : "1"},
-		{"no":"1", "s":"true", "rating" : "1"},
-		{"no":"2", "s":"false", "rating" : "0"},
-		{"no":"3", "s":"false", "rating" : "0"},
-		{"no":"4", "s":"false", "rating" : "0"}
-		]};
-	
-	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
-	$httpBackend.whenPOST('/jsonapi/purposeVideos/CURRENT').respond({"result":"video unlock!"});
+
 
 
       var events = {"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};
@@ -456,7 +781,7 @@ myApp.run(function($httpBackend) {
       $httpBackend.whenPOST('/jsonapi/log_access').respond({"message":"testing logging"});
       $httpBackend.whenPOST('/jsonapi/log_event').respond({"message":"testing logging"});
 
-      var player = { countryFlagURL: "http://www.singpath.com/static/flags/sg_on.png",gender: "male",isoYear: 2010,countryCode: "SG",tags: ["SMU","hackerspacesg"],country: "Singapore",yearOfBirth: 1985,about: "I love Scifi",isoDay: 5,isoWeek: 6,isAdmin: true,gravatar: "http://www.gravatar.com/avatar/6e64bb2cab5367fd6e201df2aa722512/?default=&amp;s=80",location: "Singapore",rankings: [ ],player_id: 57754,professional: "1",nickname: "Chris Boesch",badges: [ ]}
+      var player = { countryFlagURL: "http://www.singpath.com/static/flags/sg_on.png",gender: "male",isoYear: 2010,countryCode: "SG",tags: ["SMU","hackerspacesg"],country: "Singapore",yearOfBirth: 1985,about: "I love Scifi",isoDay: 5,isoWeek: 6,isAdmin: true,gravatar: "http://www.gravatar.com/avatar/6e64bb2cab5367fd6e201df2aa722512/?default=&amp;s=80",location: "Singapore",rankings: [ ],player_id: 57754,professional: "1",nickname: "Chris",badges: [ ]}
 
       $httpBackend.whenGET('/jsonapi/player').respond(player); 
       $httpBackend.whenGET('/jsonapi/get_player_progress').respond({"paths": [{"name": "Java", "isGamePath": true, "editorPlayerId": 57754, "solvedProblems": 28, "problemsInPath": 155, "id": 2243213, "description": "Java game path"}, {"name": "Python", "isGamePath": true, "editorPlayerId": 58546, "solvedProblems": 12, "problemsInPath": 256, "id": 10030, "description": "Python game path"}, {"name": "Beginner Obj-C", "isGamePath": false, "editorPlayerId": 12196157, "solvedProblems": 1, "problemsInPath": 4, "id": 7520056, "description": "Beginner Path for Objective-C"}], "type": "Player Path Progress"});
@@ -553,83 +878,85 @@ myApp.run(function($httpBackend) {
 	var list_challenges ={"path_id": null, "challenges": [{"startDate": "2013-03-03", "endDate": "2013-04-06", "_playerViewed": false, "unlockRequiredBadges": [2595052], "owner": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "The SISS Java Tournament sponsored by Softlayer will take place on Friday, April 5th, at 4&#58;30pm in SIS Seminar Rm 2-1. The grand prize for this tournament will be a Microsoft XBox360 and Kinect. Come to win. Come to play. Come to watch, or just come to be in the picture at the end with all the other participants. All you need to do is register by clicking the button on the right and then earn the badge shown below. This should only take a few minutes.\n", "maxUnlocks": null, "registeredRequiredBadges": [], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": null, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [893049], "_registeredBadgesEarned": true, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "The SISS Java Tournament sponsored by Softlayer", "owner_player_id": 57754, "_playerUnlocked": false, "challenge_id": 14382620, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "SISS Java Tournament", "created": "2013-03-04 01:56:19.341490", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 0}, {"startDate": "2012-03-27", "endDate": "2013-04-05", "_playerViewed": false, "unlockRequiredBadges": [2604065], "owner": {"player_id": 9254274, "nickname": "Kelvin Leong", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "Finish all 12 levels to gain more experience for your labtest", "maxUnlocks": null, "registeredRequiredBadges": [2631011], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": {"error": "You need to earn Java Level 4 Badge to see this message"}, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [893049], "_registeredBadgesEarned": false, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "Your challenge to unlock this before lab test!", "owner_player_id": 9254274, "_playerUnlocked": false, "challenge_id": 11480920, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "Lab Test LAI!", "created": "2012-03-28 02:22:36.240405", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 0}, {"startDate": "2013-04-02", "endDate": "2013-05-03", "_playerViewed": false, "unlockRequiredBadges": [88541], "owner": {"player_id": 15450597, "nickname": "Secret Agent", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "fasdf", "maxUnlocks": null, "registeredRequiredBadges": [], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": null, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": true, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "df", "owner_player_id": 15450597, "_playerUnlocked": false, "challenge_id": 15162771, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "fsafdas", "created": "2013-04-03 05:00:27.916580", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2013-04-01", "endDate": "2013-05-02", "_playerViewed": false, "unlockRequiredBadges": [87572, 88541, 87573, 88542, 92683, 549028], "owner": {"player_id": 15450597, "nickname": "Secret Agent", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "Learning Py", "maxUnlocks": null, "registeredRequiredBadges": [], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": null, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": true, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "Learning Python", "owner_player_id": 15450597, "_playerUnlocked": false, "challenge_id": 14531792, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "Python", "created": "2013-04-02 05:34:35.905800", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2013-04-01", "endDate": "2013-05-02", "_playerViewed": false, "unlockRequiredBadges": [87572, 88541, 87573, 88542, 92683, 549028], "owner": {"player_id": 15450597, "nickname": "Secret Agent", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "Learning Py", "maxUnlocks": null, "registeredRequiredBadges": [], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": null, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": true, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "Learning Python", "owner_player_id": 15450597, "_playerUnlocked": false, "challenge_id": 15160607, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "Python", "created": "2013-04-02 05:34:35.673970", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2013-03-22", "endDate": "2013-04-22", "_playerViewed": false, "unlockRequiredBadges": [3454078], "owner": {"player_id": 14806833, "nickname": "PsiCat", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "pm", "maxUnlocks": null, "registeredRequiredBadges": [], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": null, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": true, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "Desc", "owner_player_id": 14806833, "_playerUnlocked": false, "challenge_id": 14525681, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "I gotta go", "created": "2013-03-23 07:58:01.506160", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2013-03-21", "endDate": "2013-04-21", "_playerViewed": false, "unlockRequiredBadges": [2574074], "owner": {"player_id": 12715771, "nickname": "Akash", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "Please earn a Java Level 5 badge to progress in this tournament!", "maxUnlocks": null, "registeredRequiredBadges": [], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": null, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": true, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "Fancy Java? Show your skills here!", "owner_player_id": 12715771, "_playerUnlocked": false, "challenge_id": 14495677, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "Akash's Java Challenge", "created": "2013-03-22 03:59:25.502980", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2013-03-03", "endDate": "2013-04-03", "_playerViewed": false, "unlockRequiredBadges": [92683], "owner": {"player_id": 14313761, "nickname": "Secret Agent", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "You should use for loop for this assignment", "maxUnlocks": null, "registeredRequiredBadges": [], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": null, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": true, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "Write a function that tets if a given argument is in the range 1 to 10", "owner_player_id": 14313761, "_playerUnlocked": false, "challenge_id": 14337847, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "is_range", "created": "2013-03-04 09:29:54.281870", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2012-12-26", "endDate": "2015-01-04", "_playerViewed": false, "unlockRequiredBadges": [515027], "owner": {"player_id": 13657683, "nickname": "yang", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "Hello World.", "maxUnlocks": null, "registeredRequiredBadges": [88541], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": {"error": "You need to earn Python Level 2 Badge to see this message"}, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": false, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "test1", "owner_player_id": 13657683, "_playerUnlocked": false, "challenge_id": 13656349, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "Test", "created": "2012-12-27 01:22:11.783174", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2012-08-21", "endDate": "2016-09-30", "_playerViewed": false, "unlockRequiredBadges": [11363220], "owner": {"player_id": 12471420, "nickname": "Evans Ti", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "Just for FUn", "maxUnlocks": null, "registeredRequiredBadges": [3523070, 10933926, 3212074, 8125949, 12195118, 2604065], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": {"error": "You need to earn Ruby Level 11 Badge, API Level 1 Badge, Javascript Level 11 Badge, Python Level 10 Badge, R Level 7 Badge and Java Level 11 Badge to see this message"}, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": false, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "You want It?", "owner_player_id": 12471420, "_playerUnlocked": false, "challenge_id": 12518615, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "BBQ", "created": "2012-08-22 05:03:19.036276", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2012-06-21", "endDate": "2013-06-21", "_playerViewed": false, "unlockRequiredBadges": [92683], "owner": {"player_id": 11915570, "nickname": "YJ", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "The general description of the Monty Hall problem can be found here.  [ http&#58;//en.wikipedia.org/wiki/Monty_Hall_problem ]  The challenge is to create a function that will repeat the Monty Hall problem to the number of times given by the user.  The function will display the result of each simulation and at the end of the simulation will sum up the results and show the ratio of win/loss.", "maxUnlocks": null, "registeredRequiredBadges": [88542], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": {"error": "You need to earn Python Level 4 Badge to see this message"}, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": false, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "Monty Hall Problem Simulation", "owner_player_id": 11915570, "_playerUnlocked": false, "challenge_id": 12270683, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "Monty Hall Problem", "created": "2012-06-22 22:21:49.409664", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}, {"startDate": "2011-02-15", "endDate": "2051-03-18", "_playerViewed": false, "unlockRequiredBadges": [87572], "owner": {"player_id": 6646408, "nickname": "Pythonista Supra", "email": "PRIVATE"}, "premium": 0, "_unlockBadgesEarned": false, "publicMessage": "test test", "maxUnlocks": null, "registeredRequiredBadges": [87572], "playerFeedback": null, "isJobListing": "0", "registeredMessage": {"_playerRegisteredRequiredBadges": null, "error": "You need to register for this challenge to see this message"}, "allowedCountries": [], "_registeredBadgesEarned": true, "privateMessage": {"error": "You need to unlock this challenge and send a private message to the challenge owner to see this message"}, "_publicBadgesEarned": true, "playerAttachmentID": null, "_playerSubmitted": false, "playerFeedbackDate": null, "unlockRequiredTrials": [], "description": "test test", "owner_player_id": 6646408, "_playerUnlocked": false, "challenge_id": 6649370, "_playerRegistered": false, "_ownerResponded": false, "ownerResponse": null, "unlockMessage": {"error": "You need to register for this challenge to see this message"}, "name": "test test", "created": "2011-02-17 00:44:02.815205", "publicRequiredBadges": [], "ownerResponseDate": null, "_can_edit": 0, "worldwide": 1}], "type": "challenges"}
 	$httpBackend.whenGET('/jsonapi/list_challenges').respond(list_challenges); 
  	  
- 	  //development for creation of group tournament - engsen
- 	  var list_grpTournaments = {
-							    "list_grpTournaments": [
-							        {
-							            "tournamentId": "0001",
-							            "title": "New Tournament",
-							            "description": "Testing for new tournament",
-							            "password": "test",
-							            "status": "closed",
-							            "type": "group",
-							            "maxNoGroup": "5",
-							            "maxNoPlayers": "5",
-							            "lastDateChanged": "10/01/2014"
-							        }
-							    ]
-							}
-	  $httpBackend.whenGET('/jsonapi/list_grpTournaments/all').respond(list_grpTournaments);
-      //cannot test whether it is added into database without backend codes - engsen
-      $httpBackend.whenPOST('/jsonapi/add_or_update_grptournament').respond({"message": "tournament created!"});
+      var added_rounds = [];
+       $httpBackend.whenPOST('/jsonapi/add_round').respond(function(method, url, data) {
+        var round = JSON.parse(data);
+        added_rounds.push(round);
+        return [200,round];
+      });
+      $httpBackend.whenGET('/jsonapi/added_rounds').respond(added_rounds);
 
-      var list_tournamentQns = {"tournamentQns":[
-  								{"Ruby":[
-  									{
-  										"qnsId":"1",
-  										"qns":"Recursion"
-  									},
-  									{
-  										"qnsId":"2",
-  										"qns":"Hash"
-  									},
-  									{
-  										"qnsId":"3",
-  										"qns":"Iterative"
-  									}
-  								]},
-  								{"Python":[
-  									{
-  										"qnsId":"1",
-  										"qns":"Snake"
-  									},
-  									{
-  										"qnsId":"2",
-  										"qns":"Cobra"
-  									},
-  									{
-  										"qnsId":"3",
-  										"qns":"Adder"
-  									}
-  								]},
-  								{"Javascript":[
-  									{
-  										"qnsId":"1",
-  										"qns":"Popup"
-  									},
-  									{
-  										"qnsId":"2",
-  										"qns":"Validation"
-  									},
-  									{
-  										"qnsId":"3",
-  										"qns":"Animation"
-  									}
-  								]},
-  								{"Java":[
-  									{
-  										"qnsId":"1",
-  										"qns":"Easy"
-  									},
-  									{
-  										"qnsId":"2",
-  										"qns":"Medium"
-  									},
-  									{
-  										"qnsId":"3",
-  										"qns":"Hard"
-  									}
-  								]}
+      //Tournaments are added successfully and displayed on the partials - engsen
+      var added_grpTournaments = [];
+
+      $httpBackend.whenPOST('/jsonapi/add_grptournament').respond(function(method, url, data) {
+        var grpTournament = JSON.parse(data);
+        added_grpTournaments.push(grpTournament);
+        return [200,grpTournament];
+      });
+      $httpBackend.whenGET('/jsonapi/added_tournaments').respond(added_grpTournaments);
+
+      var list_tournamentQns = {"tourQns":[
+								{
+									"language":"Ruby",
+                                    "qnsId":1,
+									"qns":"Recursion"
+								},
+								{
+									"language":"Ruby",
+                                    "qnsId":2,
+									"qns":"Hash"
+								},
+								{
+									"language":"Ruby",
+                                    "qnsId":3,
+									"qns":"Iterative"
+								},
+								{
+									"language":"Python",
+                                    "qnsId":4,
+									"qns":"Snake"
+								},
+								{
+									"language":"Python",
+                                    "qnsId":5,
+									"qns":"Cobra"
+								},
+								{
+									"language":"Python",
+                                    "qnsId":6,
+									"qns":"Adder"
+								},
+								{
+									"language":"Javascript",
+                                    "qnsId":7,
+									"qns":"Popup"
+								},
+								{
+									"language":"Javascript",
+                                    "qnsId":8,
+									"qns":"Validation"
+								},
+								{
+									"language":"Javascript",
+                                    "qnsId":9,
+									"qns":"Animation"
+								},
+								{
+									"language":"Java",
+                                    "qnsId":10,
+									"qns":"Easy"
+								},
+								{
+									"language":"Java",
+                                    "qnsId":11,
+									"qns":"Medium"
+								},
+								{
+									"language":"Java",
+                                    "qnsId":12,
+									"qns":"Hard"
+								}
       						]}
       $httpBackend.whenGET('/jsonapi/list_tournamentQns/all').respond(list_tournamentQns);
       //Verify Request

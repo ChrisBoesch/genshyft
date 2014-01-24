@@ -1,0 +1,129 @@
+
+<style>
+/* Theme for box heading */
+.bootCamp{
+    color: #ffffff;
+    font-size: 16px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding: 8px 8px;
+}
+.bootCampSmall{
+    color: #ffffff;
+    font-size: 12px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding: 5px 5px;
+}
+
+
+.radio{
+  text-align: center;	
+}
+
+H5 {FONT-SIZE: 11pt;}
+
+#gradient1{  
+  #gradient > .vertical(@black, @white);  
+}
+
+#radButton{
+  display:inline;
+}
+
+#pathImg label {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#paths {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#pathImg{
+  width:100px;
+  height:100px;
+}
+
+#smallPathImg{
+  width:60px;
+  height:60px;
+}
+
+.selected {
+  background-color: #002369;
+}
+
+#paths input {
+  display: inline-block;
+  cursor: pointer;
+}
+
+input:hover{
+  background-color: #002369;
+}
+
+#paths input img {
+  padding: 3px;
+}
+
+<!--small-->
+
+#smallDifficulty{
+  height: 30px;
+  width: 100px;
+  border-radius: 3px;
+}
+
+#largeDifficulty{
+  height: 40px;
+  width: 170px;
+  border-radius: 3px;
+}
+
+li{ list-style:none; }
+
+.tabspacing{
+  width:50%;
+  text-align:center;
+}
+
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+}
+.divfloatleft
+{
+float:left;
+}
+
+</style>
+<p>
+		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches()">
+		
+		<h3> Current Player Progress </h3>
+		<b><br> Note </b>
+		<br> to see ymbcoaching page, go to ymbcoaching-controllers.js and comment off // line 25.
+		<br> This page serve to auto direct user that has already selected a mentor before.
+		
+		<span ng-repeat ="coaches in allCoachesData.coachesData|filter:mastery.currentUserMastery[0].coach" align ='center'>
+			<br><br>
+			Name: {{coaches.coach}} <br><br>{{coaches.desc}}
+			<IMG ng-src=" {{coaches.link}}" width ='150'> <br>
+			
+		</span> 
+		Path id: {{mastery.currentUserMastery[0].pathId}}<br><br>
+		Path name: {{mastery.currentUserMastery[0].pathName}}<br><br>
+		Last Played : {{mastery.currentUserMastery[0].date}}<br><br>
+
+
+</div>

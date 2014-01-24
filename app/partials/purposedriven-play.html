@@ -1,80 +1,135 @@
-<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked()" > 
+<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked();" > 
 <div class="container" style="position:relative;">
 	<div class="row-fluid">
 		<div class = "span12">
 		<br><br>
-				<table border = '0' align = 'center'>
+		<div class = 'container'>
+				<table border = '1' align = 'center' width ='1000'>
 
 					<tr>
-						<td width =30%> <h3><center> {{purposeVideos.Videos[vno].title}} <center></h3>
+						<td width =25%> <h3><center> {{purposeVideos.Videos[vno].title}} <center></h3>
 						 <center> {{purposeVideos.Videos[vno].description}} <center>
 						 <br><br>
-						 <b>{{purposeVideos.Videos[vno].question}} <br> <br> </b>
-						 
-						 
-					
-						Show Survey Question: <input type="checkbox" ng-model="value1"> <br/>
-						<font size="2" color="red" ng-hide="value1">You need to check the box to proceed to do the survey</font>
-						
-						<div ng-show="value1">
-						
-						<br>
-						<br>
-						<form action="" onclick="enableButton2()" >
-							<table cellspacing ="4"> 
-							
-							
-								<tr><td> 
-								
-								<input type="radio" name="rating" value="1" checked> I cannot Relate 1
-														
-								<br></td></tr>
-								<tr><td> 
-									
-										<input type="radio" name="rating" value="2" checked> Not Really Relate 
-
-								<br></td></tr>
-								<tr><td> 
-									
-										<input type="radio" name="rating" value="3" checked>  A Little Yes 
-										
-								<br></td></tr>
-								<tr><td> 
-								
-										<input type="radio" name="rating" value="4" > Really Relate 
-											
-								<br></td></tr>
-							<!-- value= "{{purposeVideosUnlocked.Unlocked[vno].v}}"; !-->	
-						</table>
-						</form>
-						</div> 
-						 	 <center> <button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos,purposeVideosUnlocked.Unlocked)"> Next  </button>  
-							 <br>
-							<font size="2" color="red" ng-show="value1">Please do the survey to proceed.</font>
-							</center>
-						 
+							Do this survey to proceed: <input type="checkbox" ng-model="value1"> <br/>	
+							<br><br> * Refresh page if video is not loading 
 						</td>
 					
 
-						<td >
+						<td>
 							
 						<center> <iframe width= 90% height= '420px' src="//www.youtube.com/embed/{{youtube[0]}}?rel=0" frameborder="0" allowfullscreen></iframe> </center>
 							
 						</td>
 							
 					</tr>
-					
-					
-				</table>
+					<td colspan ='2' align ='center'>
+						
+							<div ng-show="value1">
+								<br>
+								
+									<table cellspacing ="5" cellpadding ="5" border ='0'> 
+									
+										<tr>
+											<td colspan ='5'>
+											<center>
+											<b> {{purposeVideos.Videos[vno].question}} </b>
+											</center>
+											</td>
+										</tr>
+										<tr>
+										<form>
+										<td> 
+											
+									
+											<label ng-repeat = "qns in purposeVideos.Videos[vno].options">
+										
+										
+										  <input
+										  type="radio" name="answer" ng-model="$parent.radioAns" value ="{{qns.choice}}" 
+										  onclick="enableButton2()"> 
+										  
+										  {{qns.choice}}  
+										</label>
+										
+										
+										  
+										  </label>
+										  
+										  
+										  
+											<center> <button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos,purposeVideosUnlocked.Unlocked)"> Next  </button>  
+											 <br>
+											<font size="2" color="red" ng-show="value1">Please do the survey to proceed.</font>
+											  </center> 	
 
-				</div>
+											  
+										  </div>
+										 </td>
+										
+										  </form>
+										</tr>
+										<tr>
+										<td colspan='5'>
+										 
 
-			
-
-			</div>
+											
+											
+										 </td>
+										</tr>
+												
+											<!-- value= "{{purposeVideosUnlocked.Unlocked[vno].v}}"; !-->	
+									</table>
+								
+							</div> 
 		</div>
+		</table>
 	</div>
 
+	
+	
+								<br>
+								<table border = '0'>
+								<td ng-repeat ="vids in purposeVideos.Videos" width =10%>
+									<div ng-show ="purposeVideosUnlocked.Unlocked[vids.no].status"> 
+									
+											<center> <IMG ng-src="{{vids.thumbnail}}" width =70%
+											ng-click = "view_video(purposeVideos.Videos[vids.no].vlink,vids.no)"></center>			
+									</div>	
+
+									<div ng-hide ="purposeVideosUnlocked.Unlocked[vids.no].status"> 
+										
+											<center> <IMG ng-src="img/purposedrivenPlaceholder/thumb/lock.jpg" width =50%>
+											<br> </center>
+											
+									</div>									
+
+								</td>
+								<tr>
+									<td ng-repeat ="vids in purposeVideos.Videos" width =10%>
+									<div ng-show ="purposeVideosUnlocked.Unlocked[vids.no].status"> 	
+											<center> {{vids.title}} </center>
+									</div>	
+									<div ng-hide ="purposeVideosUnlocked.Unlocked[vids.no].status"> 	
+											<center> Locked </center>
+									</div>									
+									
+									
+								</tr>
+								<tr>
+									<td ng-repeat ="vids in purposeVideos.Videos" width =10%>
+										<div ng-show ="purposeVideosUnlocked.Unlocked[vids.no].status"> 	
+											<center><IMG ng-src="img/purposedrivenPlaceholder/arrow.jpg" width =25%></center>
+									</div>	
+								</tr>
+								</table>
+		
+	
+	
+	
+	
+</div>
+</div>
+</div>
 <script>
         function enableButton2() {
             document.getElementById("nextVideo").disabled = false;

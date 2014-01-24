@@ -1,5 +1,5 @@
 </br>
-<div ng-controller="GenshyftTournamentController" ng-init="loading(); get_tournamentQns()" class="container" id="tourncreate"style="position:relative;" >
+<div ng-controller="GenshyftTournamentController" ng-init="loading()" class="container" id="tourncreate"style="position:relative;" >
 	<center><h2>Tournament Creation</h2></center>
 	</br>
 	</br>
@@ -85,10 +85,10 @@
 			<div class="span12">
 				<div class="span1"></div>
 				<div class="span2">
-					Max no. of groups
+					No. of groups
 				</div>
 				<div class="span9">
-					 <select ng-model="grpTourMaxNoGroup" ng-options="numgrp for numgrp in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+					 <select ng-model="grpTourNoGroup" ng-options="numgrp for numgrp in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 				</div>
 			</div>	
 		</div>
@@ -126,13 +126,13 @@
 		<div class="span1"></div>	
 		<div class="span10 well well-small">
 			<button type="button" class="close" aria-hidden="true" ng-click="delete_rounds($index)">×</button>
-			<div class="span2"><b>Round {{$index+1}}</b>
+			<div class="span3"><b>Round {{$index+1}}</b>
 				</br>Choose a language:
 			</div>
-			<div class="span9">	
-				</br><select ng-model="qnsLanguage" ng-options="qnsLanguage for qnsLanguage in ['Ruby','Python', 'Javascript','Java']"></select>
+			<div class="span8">	
+				</br><select ng-model="qnsLanguage" ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']"></select>
 
-				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal">+ Add Questions </button>
+				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal" ng-click="get_tournamentQns(qnsLanguage)">+ Add Questions </button>
 			</div>
 		</div>
 	</div>
@@ -145,7 +145,7 @@
 					<!--
 					<button class="btn btn-primary" id="save" type="button">Save</button>
 					-->
-					<button class="btn btn-primary" id="create" type="button" ng-click="create_grptournament()">Create</button>
+					<button class="btn btn-primary" id="create" type="button" ng-click="create_grptournament(10001)">Create</button>
 				</center>
 		</div>	
 	</div>
@@ -158,28 +158,28 @@
 	    	<h3 id="myModalLabel">Select  your questions</h3>
 	  	</div>
 
-	  	<div class="modal-body" >
-	  		<input type="checkbox" ng-repeat="qns in tournamentQns.list_tournamentQns.qnsLanguage.qns | filter:qnsLanguage" ng-model="questions"> 
-	  		{{tournamentQns.list_tournamentQns.qnsLanguage.qns}}
-	  		test</input></br>
+	  	<div class="modal-body" ng-repeat="question in qnsArray track by $index" ng-model="questions">
+	  		<input type="checkbox"> 
+	  		{{question}}
+	  		</input></br>
 	  	</div>
 	  	
 	  	<div class="modal-footer">
 	    	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	    	<button class="btn btn-primary">Save changes</button>
+	    	<button class="btn btn-primary" ng-click="add_round(10001)">Save changes</button>
 	  	</div>
 
 	</div>
 
 	<!-- Tournament Creation Success Modal -->
 	<div class="modal fade" id="grpTournamentCreated" style="display:none">         
-    <div class="modal-body" style="color:black">
-        You have successfully created a tournament!
-    </div>
-    <div class="modal-footer">
-        <a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click="hideSuccessTournamentModal()">Ok</button></a>
-    </div>
-</div>
+	    <div class="modal-body" style="color:black">
+	        You have successfully created a tournament!
+	    </div>
+	    <div class="modal-footer">
+	        <a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click="hideSuccessTournamentModal()">Ok</button></a>
+	    </div>
+	</div>
 
 
 </div>

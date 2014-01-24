@@ -8,18 +8,32 @@
 			<b>Tournaments by you:</b>
 		</div>
 	</div>
-	<div ng-show="tournaments.list_grpTournaments.length==0">
+	<div ng-show="grpTournaments.length==0">
 		<center><b> You have not created any tournaments. Click on the button above to create one! </b></center>
 	</div>
+	<!--
 	<div ng-show="tournaments.list_grpTournaments.length!=0">
 		<div class="row-fluid" ng-repeat="tournament in tournaments.list_grpTournaments track by $index">		
 			<div class="span12 well well-small" >
-				Title: {{tournaments.list_grpTournaments[$index].title}}
+				Title : {{tournaments.list_grpTournaments[$index].title}}
 				</br>Description: {{tournaments.list_grpTournaments[$index].description}}
-				</br>Status: {{tournaments.list_grpTournaments[$index].status}}
-				</br>Status: {{tournaments.list_grpTournaments[$index].type}}
+				</br>Status : {{tournaments.list_grpTournaments[$index].status}}
+				</br>Type : {{tournaments.list_grpTournaments[$index].type}}
 				</br><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-manage'">Manage </button>
 				<span style="float: right">Last Changes Made: {{tournaments.list_grpTournaments[$index].lastDateChanged}}</span>
+			</div>
+		</div>
+	</div>
+	-->
+	<div ng-show="grpTournaments.length!=0">
+		<div class="row-fluid" ng-repeat="grpTournament in grpTournaments track by $index">	
+			<div class="span12 well well-small" >
+				Title : {{grpTournaments[$index].title}}
+				</br>Description: {{grpTournaments[$index].description}}
+				</br>Status : {{grpTournaments[$index].status}}
+				</br>Type : {{grpTournaments[$index].type}}
+				</br><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-manage'">Manage </button>
+				<span style="float: right">Last Changes Made: {{grpTournaments[$index].lastDateChanged}}</span>
 			</div>
 		</div>
 	</div>
