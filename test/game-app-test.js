@@ -899,63 +899,51 @@ myApp.run(function($httpBackend) {
       var list_tournamentQns = {"tourQns":[
 								{
 									"language":"Ruby",
-                                    "qnsId":1,
-									"qns":"Recursion"
+									"pathLevel":"Recursion"
 								},
 								{
 									"language":"Ruby",
-                                    "qnsId":2,
-									"qns":"Hash"
+									"pathLevel":"Hash"
 								},
 								{
 									"language":"Ruby",
-                                    "qnsId":3,
-									"qns":"Iterative"
+									"pathLevel":"Iterative"
 								},
 								{
 									"language":"Python",
-                                    "qnsId":4,
-									"qns":"Snake"
+									"pathLevel":"Snake"
 								},
 								{
 									"language":"Python",
-                                    "qnsId":5,
-									"qns":"Cobra"
+									"pathLevel":"Cobra"
 								},
 								{
 									"language":"Python",
-                                    "qnsId":6,
-									"qns":"Adder"
+									"pathLevel":"Adder"
 								},
 								{
 									"language":"Javascript",
-                                    "qnsId":7,
-									"qns":"Popup"
+									"pathLevel":"Popup"
 								},
 								{
 									"language":"Javascript",
-                                    "qnsId":8,
-									"qns":"Validation"
+									"pathLevel":"Validation"
 								},
 								{
 									"language":"Javascript",
-                                    "qnsId":9,
-									"qns":"Animation"
+									"pathLevel":"Animation"
 								},
 								{
 									"language":"Java",
-                                    "qnsId":10,
-									"qns":"Easy"
+									"pathLevel":"Easy"
 								},
 								{
 									"language":"Java",
-                                    "qnsId":11,
-									"qns":"Medium"
+									"pathLevel":"Medium"
 								},
 								{
 									"language":"Java",
-                                    "qnsId":12,
-									"qns":"Hard"
+									"pathLevel":"Hard"
 								}
       						]}
       $httpBackend.whenGET('/jsonapi/list_tournamentQns/all').respond(list_tournamentQns);
