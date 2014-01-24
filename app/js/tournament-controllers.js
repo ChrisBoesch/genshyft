@@ -31,10 +31,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.grpTourTitle ="";
     $scope.grpTourDescription ="";
     $scope.grpTourPassword ="";
+    $scope.grpTourPasswordConfirm ="";
     $scope.grpTourStatus ="closed";
     $scope.grpTourType ="individual";
     $scope.grpTourMentor ="";
-    $scope.grpTourNoGroup =1;
+    $scope.grpTourNoGroup =2;
     $scope.grpTourMaxNoPlayer =1;
     $scope.qnsLanguage ="Ruby";
   };
@@ -105,7 +106,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*To implement for Create Tournaments - engsen
     method to get all relevant tournament questions 
     according to question language*/
-	$scope.get_tournamentQns = function(qnsLanguage){
+	$scope.get_tournamentLvl = function(qnsLanguage){
     console.log("get_tournamentQns");
     $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
       $scope.tournamentQns = response; 
@@ -118,13 +119,13 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*method to filter questions based on language*/
   $scope.list_questions = function(qnsLanguage, tournamentQns){
-    $scope.qnsArray = [];
+    $scope.lvlArray = [];
     console.log("list_questions");
     for(var i = 0; i < tournamentQns.tourQns.length; i++){
       var language = tournamentQns.tourQns[i].language;
       if(language===qnsLanguage){
-        var question = tournamentQns.tourQns[i].qns;
-        $scope.qnsArray.push(question);
+        var pathLevel = tournamentQns.tourQns[i].pathLevel;
+        $scope.lvlArray.push(pathLevel);
       }
     }
     //console.log($scope.qnsArray);
@@ -184,6 +185,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $scope.newGrpTournament.title = $scope.grpTourTitle;
       $scope.newGrpTournament.description = $scope.grpTourDescription;
       $scope.newGrpTournament.password = $scope.grpTourPassword;
+      $scope.newGrpTournament.passwordConfirm = $scope.grpTourPasswordConfirm;
+      $scope.newGrpTournament.addDetails = $scope.grpTourAddDetails;
       $scope.newGrpTournament.status = $scope.grpTourStatus;
       $scope.newGrpTournament.type = $scope.grpTourType;
       $scope.newGrpTournament.mentorAssignment = $scope.grpTourMentor;
@@ -194,16 +197,18 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       if($scope.newGrpTournament.title==""){
         alert("The tournament title cannot be empty!");
       }
-      else if($scope.newGrpTournament.description==""){
-        alert("The tournament description cannot be empty!");
-      }
       else if($scope.newGrpTournament.password==""){
         alert("The tournament password cannot be empty!");
+      }
+      else if($scope.newGrpTournament.password!=$scope.newGrpTournament.passwordConfirm){
+        alert("The tournament password does not match!");
       }
       else if($scope.newGrpTournament.type=="group"){
         var data = {"tournamentId":tournamentID,
                     "description":$scope.newGrpTournament.description,
                      "password": $scope.newGrpTournament.password,
+                     "passwordConfirm": $scope.newGrpTournament.passwordConfirm,
+                     "addDetails":$scope.newGrpTournament.addDetails,
                      "title":$scope.newGrpTournament.title,
                      "status": $scope.newGrpTournament.status,
                      "type": $scope.newGrpTournament.type,
