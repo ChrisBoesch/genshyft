@@ -716,19 +716,20 @@ function ProblemController($scope,$resource,$http){
           });
     };
     $scope.verify_problem_solution = function() {
-      //$scope.solution
-      //$scope.tests
+      //The API is expecting a form post so this method is used. 
       var theURL = '/jsonapi/check_code_with_interface';
       
-      var xsrf = {interface_id:$scope.the_current_problem.problem.interface_id, 
+      var source = {interface_id:$scope.the_current_problem.problem.interface_id, 
         source_code:$scope.the_current_problem.problem.solution,
         examples:$scope.the_current_problem.problem.examples,
         tests:$scope.the_current_problem.problem.tests
         };
-
+      var xsrf = $.param(source);
+      
       $http({
         method: 'POST',
         url: theURL,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: xsrf
       }).success(function (data, status, headers, config) {
           $scope.solution_check_result = data;
@@ -741,7 +742,7 @@ function ProblemController($scope,$resource,$http){
       $scope.the_current_problem = $resource('/jsonapi/get_problem?problem_id='+problemID).get()
     };
     $scope.save_problem = function() {
-      //the old API still looks for form-like POSTs. 
+      //The API is expecting a form post so this method is used. 
       //if no id, then create problem, else edit problem. 
       var theURL = "/jsonapi/new_problem";
       if ($scope.the_current_problem.problem.problem_id){
@@ -750,7 +751,7 @@ function ProblemController($scope,$resource,$http){
 
       console.log("Under development");
       
-      var xsrf = {problemset_id:$scope.the_current_problem.problem.problemset_id,
+      var source = {problemset_id:$scope.the_current_problem.problem.problemset_id,
         path_id:$scope.the_current_problem.problem.path_id,
         interface_id:$scope.the_current_problem.problem.interface_id,
         problem_id:$scope.the_current_problem.problem.problem_id,
@@ -762,10 +763,13 @@ function ProblemController($scope,$resource,$http){
         publicTests:$scope.the_current_problem.problem.tests, 
         privateTests:$scope.the_current_problem.problem.other_tests
         };
-
+      
+      var xsrf = $.param(source);
+      
       $http({
         method: 'POST',
         url: theURL,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         data: xsrf
       }).success(function (data, status, headers, config) {
 			    console.log(data);
