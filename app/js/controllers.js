@@ -757,6 +757,7 @@ function ProblemController($scope,$resource,$http){
         problem_id:$scope.the_current_problem.problem.problem_id,
         level_id:$scope.the_current_problem.problem.path_id,
         name:$scope.the_current_problem.problem.name,
+        details:$scope.the_current_problem.problem.description,             
         solution_code:$scope.the_current_problem.problem.solution,
         skeleton_code:$scope.the_current_problem.problem.skeleton,
         examples:$scope.the_current_problem.problem.examples,
