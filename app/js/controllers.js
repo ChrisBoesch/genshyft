@@ -687,7 +687,7 @@ function ProblemsetController($scope,$resource){
     };
 }
 
-function ProblemController($scope,$resource){
+function ProblemController($scope,$resource,$http){
     $scope.problemsetID = null;
     $scope.problems = null;
 
@@ -714,8 +714,52 @@ function ProblemController($scope,$resource){
             $scope.contributed_problems = response;
             //alert("There are "+$scope.contributed_problems.length+" contributed problems being under review.")
           });
-    }
+    };
+    $scope.verify_problem_solution = function() {
+      //$scope.solution
+      //$scope.tests
+      $scope.solution_check_result = $resource('/jsonapi/check_code_with_interface').get();
+    };
+    $scope.get_problem = function(problemID){
+      $scope.the_current_problem = $resource('/jsonapi/get_problem?problem_id='+problemID).get()
+    };
+    $scope.save_problem = function() {
+      //the old API still looks for form-like POSTs. 
+      //if no id, then create problem, else edit problem. 
+      var theURL = "/jsonapi/new_problem";
+      if ($scope.the_current_problem.problem.problem_id){
+          theURL = "/jsonapi/edit_problem";        
+      }
 
+      console.log("Under development");
+      $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+		  $http.post(theURL, {
+			  interface_id: $scope.the_current_problem.problem.interface_id, 
+        problemset_id: $scope.the_current_problem.problem.problemset_id,
+        path_id:$scope.the_current_problem.problem.path_id,
+        problem_id:$scope.the_current_problem.problem.problem_id,
+        level_id:$scope.the_current_problem.problem.path_id,
+        name:$scope.the_current_problem.problem.name,
+        solution_code:$scope.the_current_problem.problem.solution,
+        skeleton_code:$scope.the_current_problem.problem.skeleton,
+        examples:$scope.the_current_problem.problem.examples,
+        publicTests:$scope.the_current_problem.problem.tests, 
+        privateTests:$scope.the_current_problem.problem.other_tests        
+		}).success(function (data, status, headers, config) {
+			window.console.log(data);
+			console.log("You are successfully submitted your problem");
+
+		}).error(function (data, status, headers, config) {
+			console.log(data);
+			console.log("You are unable to submit your problem");
+		});
+
+    };
+
+    /* API to add support for in problem controller.  
+   (r'^new_problem$', 'new_problem'),  #interface_id, path_id, level_id, name, details, solution_code, skeleton_code, examples, publicTests, privateTests in form POST or GET
+   (r'^edit_problem$', 'edit_problem'),  #problem_id, interface_id, path_id, level_id, name, details, solution_code, skeleton_code, examples, publicTests, privateTests in form POST or GET
+   */
 }
 
 
