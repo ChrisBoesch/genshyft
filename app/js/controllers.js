@@ -718,7 +718,7 @@ function ProblemController($scope,$resource,$http){
     $scope.verify_problem_solution = function() {
       //$scope.solution
       //$scope.tests
-      $scope.solution_check_result = $resource('/jsonapi/check_code_with_interface').get();
+      //$scope.solution_check_result = $resource('/jsonapi/check_code_with_interface').get();
       
       $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 		  $http.post('/jsonapi/check_code_with_interface', {interface_id:$scope.the_current_problem.problem.interface_id, 
