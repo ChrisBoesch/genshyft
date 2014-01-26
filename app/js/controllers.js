@@ -718,23 +718,24 @@ function ProblemController($scope,$resource,$http){
     $scope.verify_problem_solution = function() {
       //$scope.solution
       //$scope.tests
-      //$scope.solution_check_result = $resource('/jsonapi/check_code_with_interface').get();
+      var theURL = '/jsonapi/check_code_with_interface';
       
-      $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-		  $http.post('/jsonapi/check_code_with_interface', {interface_id:$scope.the_current_problem.problem.interface_id, 
+      var xsrf = {interface_id:$scope.the_current_problem.problem.interface_id, 
         source_code:$scope.the_current_problem.problem.solution,
         examples:$scope.the_current_problem.problem.examples,
-        tests:$scope.the_current_problem.problem.tests                                                
-		}).success(function (data, status, headers, config) {
-			window.console.log(data);
-			console.log("You successfully chedked your problem");
+        tests:$scope.the_current_problem.problem.tests
+        };
 
-		}).error(function (data, status, headers, config) {
-			console.log(data);
-			console.log("You are unable to check your problem");
-		});
-
-      
+      $http({
+        method: 'POST',
+        url: theURL,
+        data: xsrf
+      }).success(function (data, status, headers, config) {
+          $scope.solution_check_result = data;
+			    console.log(data);
+			    console.log("You have successfully submitted your problem");
+		   });
+            
     };
     $scope.get_problem = function(problemID){
       $scope.the_current_problem = $resource('/jsonapi/get_problem?problem_id='+problemID).get()
@@ -748,8 +749,8 @@ function ProblemController($scope,$resource,$http){
       }
 
       console.log("Under development");
-      $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-		  $http.post(theURL, {problemset_id:$scope.the_current_problem.problem.problemset_id,
+      
+      var xsrf = {problemset_id:$scope.the_current_problem.problem.problemset_id,
         path_id:$scope.the_current_problem.problem.path_id,
         interface_id:$scope.the_current_problem.problem.interface_id,
         problem_id:$scope.the_current_problem.problem.problem_id,
@@ -759,22 +760,21 @@ function ProblemController($scope,$resource,$http){
         skeleton_code:$scope.the_current_problem.problem.skeleton,
         examples:$scope.the_current_problem.problem.examples,
         publicTests:$scope.the_current_problem.problem.tests, 
-        privateTests:$scope.the_current_problem.problem.other_tests        
-		}).success(function (data, status, headers, config) {
-			window.console.log(data);
-			console.log("You are successfully submitted your problem");
+        privateTests:$scope.the_current_problem.problem.other_tests
+        };
 
-		}).error(function (data, status, headers, config) {
-			console.log(data);
-			console.log("You are unable to submit your problem");
-		});
+      $http({
+        method: 'POST',
+        url: theURL,
+        data: xsrf
+      }).success(function (data, status, headers, config) {
+			    console.log(data);
+			    console.log("You have successfully submitted your problem");
+           $scope.result = data;
+		   });
 
     };
 
-    /* API to add support for in problem controller.  
-   (r'^new_problem$', 'new_problem'),  #interface_id, path_id, level_id, name, details, solution_code, skeleton_code, examples, publicTests, privateTests in form POST or GET
-   (r'^edit_problem$', 'edit_problem'),  #problem_id, interface_id, path_id, level_id, name, details, solution_code, skeleton_code, examples, publicTests, privateTests in form POST or GET
-   */
 }
 
 
