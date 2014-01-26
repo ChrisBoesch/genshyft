@@ -32,7 +32,7 @@
 
 <div> 
   
-  <div ng-controller="PathController">
+  <div ng-controller="PathController" ng-init="update_path_details()">
    Path Controller
    <p>Path Count = {{paths.paths.length}}</p>
    Available Game Paths:
@@ -49,9 +49,23 @@
           {{path.name}} 
       </li>
     </ul>
-   
+    
+    Click to fetch the paths the player has craeted, played, and other paths.<br>
+    The player should be able to edit their own paths. <br>
+    <input type="Submit" value="Update Path Details" ng-click="update_path_details()"><br><br>
+    
+    
+    The current player has created {{player_paths.paths.length}} paths. (Click the button above.)
+    <ul>
+      <li ng-repeat="path in player_paths.paths">
+          {{path.name}} 
+      </li>
+    </ul>
+ 
+         
   </div>
-
+  
+  //You can list the problemsets for a path the player owns using get_problemsets(pathid)
   <div ng-controller="ProblemsetController" ng-init="get_problemsets(10030);">
     Problemsets for path 10030: 
     <ul>
@@ -65,7 +79,8 @@
   <hr>
     
   </div>
-  
+    
+  //and you can get the problems in a problemset by setting the problemset and calling get_problems()
     <div ng-controller="ProblemController" ng-init="problemsetID=11021;get_progress();get_problems();">
     
     Problems in problemset 11021 with progress ({{progress.currentPlayerProgress}}/{{progress.problemsInProblemset}})
