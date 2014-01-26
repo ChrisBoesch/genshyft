@@ -749,9 +749,7 @@ function ProblemController($scope,$resource,$http){
           theURL = "/jsonapi/edit_problem";        
       }
 
-      console.log("Under development");
-      
-      var source = {problemset_id:$scope.the_current_problem.problem.problemset_id,
+      var source = {level_id:$scope.the_current_problem.problem.problemset_id,
         path_id:$scope.the_current_problem.problem.path_id,
         interface_id:$scope.the_current_problem.problem.interface_id,
         problem_id:$scope.the_current_problem.problem.problem_id,
