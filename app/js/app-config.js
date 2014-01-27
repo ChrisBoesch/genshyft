@@ -31,6 +31,7 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
 
     $routeProvider.when('/purposedriven', {templateUrl: 'partials/purposedriven.html', controller: IndexController});
     $routeProvider.when('/purposedriven-play', {templateUrl: 'partials/purposedriven-play.html', controller: IndexController});
+    $routeProvider.when('/purposedriven-admin', {templateUrl: 'partials/purposedriven-admin.html', controller: IndexController});
     $routeProvider.when('/ymbcoaching', {templateUrl: 'partials/ymbcoaching.html', controller: IndexController});
     $routeProvider.when('/ymbcoaching-play', {templateUrl: 'partials/ymbcoaching-play.html', controller: IndexController});
     $routeProvider.when('/ymbcoaching-cache', {templateUrl: 'partials/ymbcoaching-cache.html', controller: IndexController});
