@@ -901,51 +901,231 @@ myApp.run(function($httpBackend) {
       var list_tournamentQns = {"tourQns":[
 								{
 									"language":"Ruby",
-									"pathLevel":"Recursion"
+									"pathLevel":"Recursion",
+                                    "questionSet":[
+                                        {
+                                            "questionId":111,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":112,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":113,
+                                            "question":"test3"
+                                        }  
+
+                                    ]
 								},
 								{
 									"language":"Ruby",
-									"pathLevel":"Hash"
+									"pathLevel":"Hash",
+                                    "questionSet":[
+                                        {
+                                            "questionId":104,
+                                            "question":"test4"
+                                        },
+                                        {
+                                            "questionId":105,
+                                            "question":"test5"
+                                        }, 
+                                        {
+                                            "questionId":106,
+                                            "question":"test6"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Ruby",
-									"pathLevel":"Iterative"
+									"pathLevel":"Iterative",
+                                    "questionSet":[
+                                        {
+                                            "questionId":107,
+                                            "question":"test7"
+                                        },
+                                        {
+                                            "questionId":108,
+                                            "question":"test8"
+                                        }, 
+                                        {
+                                            "questionId":109,
+                                            "question":"test9"
+                                        }   
+
+                                    ]
 								},
 								{
 									"language":"Python",
-									"pathLevel":"Snake"
+									"pathLevel":"Snake",
+                                    "questionSet":[
+                                        {
+                                            "questionId":101,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":102,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":103,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Python",
-									"pathLevel":"Cobra"
+									"pathLevel":"Cobra",
+                                    "questionSet":[
+                                        {
+                                            "questionId":11,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":11,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":12,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Python",
-									"pathLevel":"Adder"
+									"pathLevel":"Adder",
+                                    "questionSet":[
+                                        {
+                                            "questionId":13,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":14,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":15,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Javascript",
-									"pathLevel":"Popup"
+									"pathLevel":"Popup",
+                                    "questionSet":[
+                                        {
+                                            "questionId":15,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":15,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":16,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Javascript",
-									"pathLevel":"Validation"
+									"pathLevel":"Validation",
+                                    "questionSet":[
+                                        {
+                                            "questionId":111,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":112,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":1314,
+                                            "question":"test3"
+                                        }   
+
+                                    ]
 								},
 								{
 									"language":"Javascript",
-									"pathLevel":"Animation"
+									"pathLevel":"Animation",
+                                    "questionSet":[
+                                        {
+                                            "questionId":134,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":142,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":142,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Java",
-									"pathLevel":"Easy"
+									"pathLevel":"Easy",
+                                    "questionSet":[
+                                        {
+                                            "questionId":413,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":153,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":253,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Java",
-									"pathLevel":"Medium"
+									"pathLevel":"Medium",
+                                    "questionSet":[
+                                        {
+                                            "questionId":253,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":25,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":231,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Java",
-									"pathLevel":"Hard"
+									"pathLevel":"Hard",
+                                    "questionSet":[
+                                        {
+                                            "questionId":235,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":253,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":53,
+                                            "question":"test3"
+                                        }   
+
+                                    ]
 								}
       						]}
       $httpBackend.whenGET('/jsonapi/list_tournamentQns/all').respond(list_tournamentQns);
