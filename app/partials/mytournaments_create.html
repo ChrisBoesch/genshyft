@@ -8,10 +8,12 @@
 		<div class="span12">
 			<div class="span1"></div>
 			<div class="span2">
-				Title
+				Tournament Name*:
 			</div>
 			<div class="span9">
-				 <input class="span8" type="text" ng-model="grpTourTitle" placeholder="Enter tournament title here" ></input>
+				 <input class="span8" type="text" required ng-model="grpTourTitle" placeholder="Enter tournament title here" ></input>
+				 <span class="alert-error" ng-show="grpTourTitle==''">Required!
+				 </span>
 			</div>
 		</div>	
 	</div>
@@ -21,10 +23,10 @@
 		<div class="span12">
 			<div class="span1"></div>
 			<div class="span2">
-				Description
+				Tournament Description:
 			</div>
 			<div class="span9">
-				 <textarea class="span8" rows="4" ng-model="grpTourDescription" placeholder = "Please enter a description for your tournament" >
+				 <textarea class="span8" rows="3" ng-model="grpTourDescription" placeholder = "Please enter a description for your tournament" >
 				</textarea>
 			</div>
 		</div>	
@@ -35,10 +37,41 @@
 		<div class="span12">
 			<div class="span1"></div>
 			<div class="span2">
-				Password
+				Password*:
+			</div>
+			<div class="span6">
+				 <input class="span5" type="password" required ng-model="grpTourPassword" placeholder="Enter tournament password here" ></input>
+				 <span class="alert-error" ng-show="grpTourPassword==''">Required!
+				 </span>
+			</div>
+		</div>	
+	</div>
+
+	<!--Confirm Password input field-->
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="span1"></div>
+			<div class="span2">
+				Password Confirm*:
+			</div>
+			<div class="span6">
+				 <input class="span5" type="password" required ng-model="grpTourPasswordConfirm" placeholder="Confirm tournament password here" ></input>
+				 <span class="alert-error" ng-show="grpTourPasswordConfirm!=grpTourPassword||grpTourPasswordConfirm==''">Password doesn't match!
+				 </span>
+			</div>
+		</div>	
+	</div>
+
+	<!--Additional Details input field-->
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="span1"></div>
+			<div class="span2">
+				Additional Details:
 			</div>
 			<div class="span9">
-				 <input class="span8" type="password" ng-model="grpTourPassword" placeholder="Enter tournament password here" ></input>
+				 <textarea class="span8" rows="3" ng-model="grpTourAddDetails" placeholder = "Please enter any additional details for your tournament" >
+				</textarea>
 			</div>
 		</div>	
 	</div>
@@ -48,7 +81,7 @@
 		<div class="span12">
 			<div class="span1"></div>
 			<div class="span2">
-				Type
+				Type:
 			</div>
 			<div class="span9">
 				 <div class="span8">
@@ -72,7 +105,7 @@
 			<div class="span12">
 				<div class="span1"></div>
 				<div class="span2">
-					Mentor Assignment within team
+					Mentor Assignment within team:
 				</div>
 				<div class="span1">
 					 <input type="checkbox" ng-model="grpTourMentor" ></input>
@@ -85,10 +118,10 @@
 			<div class="span12">
 				<div class="span1"></div>
 				<div class="span2">
-					No. of groups
+					No. of groups:
 				</div>
 				<div class="span9">
-					 <select ng-model="grpTourNoGroup" ng-options="numgrp for numgrp in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+					 <select ng-model="grpTourNoGroup" ng-options="numgrp for numgrp in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 				</div>
 			</div>	
 		</div>
@@ -98,7 +131,7 @@
 			<div class="span12">
 				<div class="span1"></div>
 				<div class="span2">
-					Max no. of players per group
+					Max no. of players per group:
 				</div>
 				<div class="span9">
 					 <select ng-model="grpTourMaxNoPlayer" ng-options="maxnumplayers for maxnumplayers in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
@@ -126,13 +159,62 @@
 		<div class="span1"></div>	
 		<div class="span10 well well-small">
 			<button type="button" class="close" aria-hidden="true" ng-click="delete_rounds($index)">×</button>
-			<div class="span3"><b>Round {{$index+1}}</b>
-				</br>Choose a language:
+			<div class"row-fluid">
+				<div class="span10">
+					<div class="span2"><b>Round {{$index+1}}</b></div>
+				</div>
+			</div>	
+			<!--Round Name input field-->
+			<div class="row-fluid">
+				<div class="span10">
+					<div class="span3">
+						Round Name*:
+					</div>
+					<div class="span7">
+						<input class="span7" type="text" required ng-model="grpTourRoundName" placeholder="Enter round name here" ></input>
+						<span class="alert-error" ng-show="grpTourRoundName==''">Required!
+					 	</span>
+					</div>
+				</div>	
 			</div>
-			<div class="span8">	
-				</br><select ng-model="qnsLanguage" ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']"></select>
+			<!--Round Duration input field-->
+			<div class="row-fluid">
+				<div class="span10">
+					<div class="span3">
+						Duration(minutes)*:
+					</div>
+					<div class="span7">
+						<input class="span7" type="text" required ng-model="grpTourRoundMins" placeholder="Enter round duration here" ></input>
+						<span class="alert-error" ng-show="grpTourRoundMins==''">Required!
+					 	</span>
+					</div>
+				</div>	
+			</div>
+			<!--Choosing a Game Path-->
+			<div class="row-fluid">
+				<div class="span10">
+					<div class="span3">
+						Select a Game Path:
+					</div>
+					<div class="span6">	
+						<select ng-model="qnsLanguage" ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']" ng-change="get_tournamentLvl(qnsLanguage)"></select>
+					</div>
+				</div>
+			</div>	
+			<!--Choosing a Level-->
+			<div class="row-fluid">
+				<div class="span10">
+					<div class="span3">
+						Select a Level:
+					</div>
+					<div class="span6">	
+						<select ng-model="pathLevel" ng-init="get_tournamentLvl(qnsLanguage)" multiple-"multiple" size="4">
+							<option ng-repeat="pathLvl in lvlArray">{{pathLvl}}</option>
+						</select>
 
-				</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal" ng-click="get_tournamentQns(qnsLanguage)">+ Add Questions </button>
+						</br><button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal" ng-click="get_tournamentQns(qnsLanguage,pathLevel)">+ Add Questions </button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -158,15 +240,13 @@
 	    	<h3 id="myModalLabel">Select  your questions</h3>
 	  	</div>
 
-	  	<div class="modal-body" ng-repeat="question in qnsArray track by $index" ng-model="questions">
-	  		<input type="checkbox"> 
-	  		{{question}}
-	  		</input></br>
+	  	<div class="modal-body" ng-repeat="qns in qnsArray" ng-model="grpTourRoundQuestions">
+	  		<input type="checkbox">{{qns}}</input></br>
 	  	</div>
 	  	
 	  	<div class="modal-footer">
 	    	<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-	    	<button class="btn btn-primary" ng-click="add_round(10001)">Save changes</button>
+	    	<button class="btn btn-primary" id="add_round" type="button" ng-click="add_round(10001)">Add Questions</button>
 	  	</div>
 
 	</div>

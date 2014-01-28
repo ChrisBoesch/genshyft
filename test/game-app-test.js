@@ -18,100 +18,102 @@ myApp.run(function($httpBackend) {
 
       var purposeDrivenVideos = {"Videos":[
 		{"title":"What Most School Don't Teach",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
 		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"0"},
 
 		{"title":"Art of Creative Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
 		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"1"},
 
-		{"title":"Purpose Driven Part C",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		{"title":"Why Teach Coding",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
-		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"he trademarked term purpose driven comes from the teaching of Rick Warren, senior pastor of Saddleback Church in Lake Forest, California. It originally came","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
+		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"2"},
 
-		{"title":"Purpose Driven Part D",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		{"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
-		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"87 quotes from The Purpose Driven Life: What on Earth Am I Here for?: 'We are products of our past, but we don't have to be prisoners of it.","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
+		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
 		"no":"3"},
 
-		{"title":"Purpose Driven Part E",
+		{"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
-		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
-		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"},
+		"vlink":"http://www.youtube.com/watch?v=LR8fQiskYII",
+		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ...Java is heavyweight, verbose, and everyone loves to hate it, but Wall still thinks you should know it.","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"},
 
-		{"title":"Purpose Driven Part F",
+		{"title":"Bruce Feiler: Agile programming -- for your family",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
-		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"he trademarked term purpose driven comes from the teaching of Rick Warren, senior pastor of Saddleback Church in Lake Forest, California. It originally came","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"2"},
+		"vlink":"http://www.youtube.com/watch?v=J6oMG7u9HGE",
+		"description":"Bruce Feiler has a radical idea: To deal with the stress of modern family life, go agile. Inspired by agile software programming, Feiler introduces family practices which encourage flexibility, bottom-up idea flow, constant feedback and accountability. ","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"5"},
 
-		{"title":"Purpose Driven Part G",
+		{"title":"iPhone Application Developer... and 6th Grader: Thomas Suarez ",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
-		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"87 quotes from The Purpose Driven Life: What on Earth Am I Here for?: 'We are products of our past, but we don't have to be prisoners of it.","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"3"},
+		"vlink":"http://www.youtube.com/watch?v=ehDAP1OQ9Zw",
+		"description":"Thomas Suarez is a 6th grade student at a middle school in the South Bay of Los Angeles. When Apple released the Software Development Kit (SDK), he began to create and sell his own applications. ","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"6"},
 
-		{"title":"Purpose Driven Part H",
+		{"title":"Mitch Resnick: Let's teach kids to code",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
-		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
-		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"},
+		"vlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
+		"description":"Coding isn't just for computer whizzes, says Mitch Resnick of MIT Media Lab -- it's for everyone. In a fun, demo-filled talk Resnick outlines the benefits of teaching kids to code, so they can do more than just read new technologies -- but also create them."
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"7"},
 
-		{"title":"Purpose Driven Part I",
+		{"title":"Code For Kids - Teaching our kids what our schools don't",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
-		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"87 quotes from The Purpose Driven Life: What on Earth Am I Here for?: 'We are products of our past, but we don't have to be prisoners of it.","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"3"},
+		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
+		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
+		"no":"8"},
 
-		{"title":"Purpose Driven Part J",
+		{"title":"NEW NEWS : Computer coding for kids",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
-		"vlink":"http://www.youtube.com/watch?v=9FY8hl6b54A&list=FLLgpXMdyzLkkXb9TSDiuyZA",
-		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ..."
-		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"}  		
+		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
+		"description":"Teaching kids how to write computer programs, by Marshall Brain marshallbrain.com/kids-programming.htm - Traduzir esta página Let's say that you have children, and you would like to help them learn computer programming at a youngish age."
+		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"9"}  		
 		]};
-	$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
-	// status determines if a video is unlocked.
+		$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
+		$httpBackend.whenPOST('/jsonapi/purposeVideos/ALL').respond({"result":"video added/adjusted"});
+	
+	//Video Unlock determines the video each user has unlock.
+	// status determines if a video is unlocked for a particular user
+	// no refers to video no, status ask if a video is unlocked, answer refers to the option user chose
 		var videosUnlock = {"Unlocked":[
 		{"no":"0", "status":"true", "answer" : "Somewhat Good"},
 		{"no":"1", "status":"true", "answer" : "Don't like it"},
-		{"no":"2", "status":"false", "answer" : ""},
-		{"no":"3", "status":"false", "answer" : ""},
-		{"no":"4", "status":"false", "answer" : ""},
-		{"no":"5", "status":"true", "answer" : ""},
-		{"no":"6", "status":"true", "answer" : ""},
-		{"no":"7", "status":"false", "answer" : ""},
-		{"no":"8", "status":"false", "answer" : ""},
-		{"no":"9", "status":"false", "answer" : ""}		
+		{"no":"2", "status":"false", "answer" : " "},
+		{"no":"3", "status":"false", "answer" : " "},
+		{"no":"4", "status":"false", "answer" : " "},
+		{"no":"5", "status":"false", "answer" : " "},
+		{"no":"6", "status":"false", "answer" : " "},
+		{"no":"7", "status":"false", "answer" : " "},
+		{"no":"8", "status":"false", "answer" : " "},
+		{"no":"9", "status":"false", "answer" : " "}		
 		]};
 	
 	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
-	$httpBackend.whenPOST('/jsonapi/purposeVideos/UPDATE').passThrough();
+		$httpBackend.whenPOST('/jsonapi/purposeVideos/CURRENT').respond({"result":"user video status updated"});
 	
+	
+	//data on the mastery coaches
 	var coachesData = {"coachesData":[
 	{'coach':'Shannon','link': 'img/mbcoach/Shannon/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
-
 	{'coach':'Sandra','link': 'img/mbcoach/Sandra/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview','show':'true' },
-
 	{'coach':'Zandar','link': 'img/mbcoach/Zandar/Zandar.jpg','desc':'Hacker that wants you to be more awesome','show':'true'},
-
 	{'coach':'SGTMJR','link': 'img/mbcoach/SGTMJR/SGTMJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}
 	]};
 	
@@ -629,7 +631,7 @@ myApp.run(function($httpBackend) {
 		{ 
 			"playerId":57754,
 			"playerName":"Chris", 
-			"Group":0
+			"Group":3
 		},
 		
 		{ 
@@ -703,7 +705,7 @@ myApp.run(function($httpBackend) {
 		{
 			"playerId":9379335,
 			"playerName":"Player 15", 
-			"Group":5
+			"Group":3
 		}],
 		
 	    "numRounds": 1,
@@ -899,63 +901,231 @@ myApp.run(function($httpBackend) {
       var list_tournamentQns = {"tourQns":[
 								{
 									"language":"Ruby",
-                                    "qnsId":1,
-									"qns":"Recursion"
+									"pathLevel":"Recursion",
+                                    "questionSet":[
+                                        {
+                                            "questionId":111,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":112,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":113,
+                                            "question":"test3"
+                                        }  
+
+                                    ]
 								},
 								{
 									"language":"Ruby",
-                                    "qnsId":2,
-									"qns":"Hash"
+									"pathLevel":"Hash",
+                                    "questionSet":[
+                                        {
+                                            "questionId":104,
+                                            "question":"test4"
+                                        },
+                                        {
+                                            "questionId":105,
+                                            "question":"test5"
+                                        }, 
+                                        {
+                                            "questionId":106,
+                                            "question":"test6"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Ruby",
-                                    "qnsId":3,
-									"qns":"Iterative"
+									"pathLevel":"Iterative",
+                                    "questionSet":[
+                                        {
+                                            "questionId":107,
+                                            "question":"test7"
+                                        },
+                                        {
+                                            "questionId":108,
+                                            "question":"test8"
+                                        }, 
+                                        {
+                                            "questionId":109,
+                                            "question":"test9"
+                                        }   
+
+                                    ]
 								},
 								{
 									"language":"Python",
-                                    "qnsId":4,
-									"qns":"Snake"
+									"pathLevel":"Snake",
+                                    "questionSet":[
+                                        {
+                                            "questionId":101,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":102,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":103,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Python",
-                                    "qnsId":5,
-									"qns":"Cobra"
+									"pathLevel":"Cobra",
+                                    "questionSet":[
+                                        {
+                                            "questionId":11,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":11,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":12,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Python",
-                                    "qnsId":6,
-									"qns":"Adder"
+									"pathLevel":"Adder",
+                                    "questionSet":[
+                                        {
+                                            "questionId":13,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":14,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":15,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Javascript",
-                                    "qnsId":7,
-									"qns":"Popup"
+									"pathLevel":"Popup",
+                                    "questionSet":[
+                                        {
+                                            "questionId":15,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":15,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":16,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Javascript",
-                                    "qnsId":8,
-									"qns":"Validation"
+									"pathLevel":"Validation",
+                                    "questionSet":[
+                                        {
+                                            "questionId":111,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":112,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":1314,
+                                            "question":"test3"
+                                        }   
+
+                                    ]
 								},
 								{
 									"language":"Javascript",
-                                    "qnsId":9,
-									"qns":"Animation"
+									"pathLevel":"Animation",
+                                    "questionSet":[
+                                        {
+                                            "questionId":134,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":142,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":142,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Java",
-                                    "qnsId":10,
-									"qns":"Easy"
+									"pathLevel":"Easy",
+                                    "questionSet":[
+                                        {
+                                            "questionId":413,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":153,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":253,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Java",
-                                    "qnsId":11,
-									"qns":"Medium"
+									"pathLevel":"Medium",
+                                    "questionSet":[
+                                        {
+                                            "questionId":253,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":25,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":231,
+                                            "question":"test3"
+                                        }    
+
+                                    ]
 								},
 								{
 									"language":"Java",
-                                    "qnsId":12,
-									"qns":"Hard"
+									"pathLevel":"Hard",
+                                    "questionSet":[
+                                        {
+                                            "questionId":235,
+                                            "question":"test1"
+                                        },
+                                        {
+                                            "questionId":253,
+                                            "question":"test2"
+                                        }, 
+                                        {
+                                            "questionId":53,
+                                            "question":"test3"
+                                        }   
+
+                                    ]
 								}
       						]}
       $httpBackend.whenGET('/jsonapi/list_tournamentQns/all').respond(list_tournamentQns);

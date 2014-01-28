@@ -10,6 +10,10 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
     3. Call fetch(gameID) to get the updated status of the game after correct solves. 
     4. Redirect the player to the proper page once the game is completed.
     */
+	
+	
+	$scope.currentAttempts = 1;
+	
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
     $scope.permutation = "12345"; 
@@ -171,7 +175,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
     }
     $scope.skip_problem = function(){
 	
-		$scope.counter = 0;  //reset timer
+		$scope.counter = 0;  //reset timer skip audio
 		$scope.randomAudioNum = Math.floor((Math.random()*2)+5);
 		$scope.words = $scope.audioText.speech[$scope.randomAudioNum].text
 		$scope.audio = "audio\\"+$scope.nameOfCoach+ "\\"+ $scope.randomAudioNum +".mp3";
@@ -223,14 +227,17 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 		  var item = new $scope.SaveResource($scope.theData);
 		  item.$save(function(response) { 
 			  $scope.solution_check_result = response;
-			  if($scope.solution_check_result.last_solved){
+			  if($scope.solution_check_result.last_solved){//check if last question was solved correctly
 				$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
 
 				$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
 					$scope.problems_progress = response;
-					$scope.current_level_progress = $scope.problems_progress.currentPlayerProgress;
+					$scope.currentAttempts = $scope.currentAttempts +1;  // added to overwrite orignal code
+					$scope.current_level_progress =$scope.currentAttempts//  $scope.problems_progress.currentPlayerProgress; // need to reduce this
 					$scope.total_level_progress = $scope.problems_progress.problemsInProblemset;
-					if($scope.problems_progress.problemsInProblemset<=$scope.problems_progress.currentPlayerProgress){
+					
+					//if($scope.problems_progress.problemsInProblemset<=$scope.problems_progress.currentPlayerProgress){
+					if($scope.problems_progress.currentPlayerProgress<=$scope.currentAttempts){
 					
 						//FINISH GAME AUDIO
 						var audioplayer = document.getElementsByTagName('audio')[0];
@@ -240,13 +247,13 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 						audioplayer.pause();
 						audioplayer.load();
 					
-					alert("Congrats! You have successfully complete this level!");
+					alert("Congrats! You have successfully complete this mastery!");
 					window.location.href="index.html#/practice";
 					}
 				});
 				//If you hardcode to the game, this will automatically advance the game to the next problem. 
 				
-				//
+				//assuming correct answer
 				$scope.fetch($scope.game.gameID);
 					$timeout(function(){
 					var audioplayer = document.getElementsByTagName('audio')[0];
