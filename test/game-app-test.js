@@ -631,7 +631,7 @@ myApp.run(function($httpBackend) {
 		{ 
 			"playerId":57754,
 			"playerName":"Chris", 
-			"Group":0
+			"Group":3
 		},
 		
 		{ 
@@ -705,7 +705,7 @@ myApp.run(function($httpBackend) {
 		{
 			"playerId":9379335,
 			"playerName":"Player 15", 
-			"Group":5
+			"Group":3
 		}],
 		
 	    "numRounds": 1,
