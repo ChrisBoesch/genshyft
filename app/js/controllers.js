@@ -287,6 +287,21 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
     };     
 }
 
+function AceController($scope){
+	$scope.modes=['javascript', 'XML', 'java'];
+	$scope.mode=$scope.modes[0];
+
+	$scope.aceOption = {
+		mode: $scope.mode.toLowerCase(),
+
+		onLoad: function (_ace){
+			$scope.modeChanged = function(){
+				_ace.getSession().setMode('ace/mode/' + $scope.mode.toLowerCase());
+			};
+		}
+	};
+}
+
 function InterfaceController($scope,$resource){
     $scope.interfaces = $resource('/jsonapi/interfaces').get();
 }
