@@ -91,11 +91,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.roundModel = $resource('/jsonapi/added_rounds');
     $scope.roundModel.query({}, function(response){
       $scope.roundModel = {};
-      //$scope.roundModel.id = tournamentID;
       $scope.roundModel.name = $scope.grpTourRoundName;
       $scope.roundModel.duration = $scope.grpTourRoundMins;
       $scope.roundModel.questions = $scope.grpTourRoundQuestions;
-
+      //console.log($scope.grpTourRoundName);
+      //console.log($scope.grpTourRoundMins);
       /*
       if($scope.roundModel.name==""){
         alert("The round name cannot be empty!");
@@ -161,15 +161,20 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     according to question language*/
   $scope.get_tournamentQns = function(qnsLanguage, pathLevel){
     console.log("get_tournamentQns");
-    //console.log(pathLevel);
-    $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
-      $scope.tournamentQns = response; 
-      $scope.roundQns = {};
-      $scope.roundQns.language = qnsLanguage;
-      $scope.roundQns.pathLevel = pathLevel;
-      $scope.list_questions($scope.roundQns.language, $scope.roundQns.pathLevel, $scope.tournamentQns);
-    });
-       
+    console.log(pathLevel);
+    if(pathLevel==undefined){
+      alert("Please choose a path level!");
+    }else{
+      //console.log(pathLevel);
+      $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
+        $scope.tournamentQns = response; 
+        $scope.roundQns = {};
+        $scope.roundQns.language = qnsLanguage;
+        $scope.roundQns.pathLevel = pathLevel;
+        $scope.list_questions($scope.roundQns.language, $scope.roundQns.pathLevel, $scope.tournamentQns);
+      });
+      $('#myModal').modal('show');
+    }   
   };
 
   /*method to filter questions based on language and pathLevel*/
