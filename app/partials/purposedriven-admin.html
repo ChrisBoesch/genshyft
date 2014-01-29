@@ -1,0 +1,52 @@
+
+
+
+<div data-ng-controller="PurposeDrivenAdminController" ng-init = "checkAdmin();get_videos();" > 
+<br><br><br>
+<div class ="container">
+<h3> Database Row Update :Purpose Driven Videos: Administrator Access </h3>
+
+	<table border = '1'width =100% cellpadding ="10" cellspacing ="10">
+		
+	<tr ng-repeat ="videos in purposeVideos.Videos">	
+		<td width = 5%> <center><b>{{videos.no}} </b></center></td>
+	
+		<td width = 35%>	
+			<b> Title </b> <br> 
+			<input type="text" ng-model ="videos.title" value ="{{videos.title}}" style="width: 350px;"  >
+			<br>
+			<b>Description </b><br>
+			<textarea rows="4" cols="100" ng-model = "videos.description" value = "{{videos.description}}" style="width: 350px;" >
+			{{videos.description}}
+			</textarea>
+			<b> Question </b> <br> 
+			<input type="text" ng-model ="videos.question" value ="{{videos.question}}" style="width: 350px;"  >
+	
+			
+		</td>
+		
+		<td width = 40%>	
+			<b> Youtube Link </b> <br>
+			<input type="text" ng-model = "videos.vlink" value ="{{videos.vlink}}"style="width: 250px;">  <a href ="{{videos.vlink}}" target ="_blank"> Watch </a> <br>
+			<b> Image Link </b> <br>
+			<input type="text" ng-model = "videos.image" value ="{{videos.image}}"style="width: 250px;"> <IMG ng-src="{{videos.image}}" width ='150'> <br> <br>	
+			<b> Thumbnail Link </b> <br>
+			<input type="text" ng-model = "videos.thumbnail" value ="{{videos.thumbnail}}"style="width: 250px;"><IMG ng-src="{{videos.thumbnail}}" width ='100'>	 <br> 
+			<!-- <input type="file" name="post_thumbnail" />			!-->
+		</td>
+		<td width = 15%>	
+		<b> Options </b> <br>
+		<input type="text" ng-model ="videos.option1" value ="{{videos.options[0].choice}} "style="width: 150px;"> <br> 
+		<input type="text" ng-model ="videos.option2" value ="{{videos.options[1].choice}} " style="width: 150px;" ><br> 
+		<input type="text" ng-model ="videos.option3" value ="{{videos.options[2].choice}}"  style="width: 150px;"><br> 
+		<input type="text" ng-model ="videos.option4" value ="{{videos.options[3].choice}}" style="width: 150px;" ><br> 
+		<input type="text" ng-model ="videos.option5" value ="{{videos.options[4].choice}}" style="width: 150px;" ><br> 
+	<button class ="btn btn-primary" ng-click = update_videos(videos.title,videos.image,videos.thumbnail,videos.vlink,videos.description,videos.option1,videos.option2,videos.option2,videos.option3,videos.question4,videos.question5,videos.no)> Save </button>
+		</td>		
+	</tr>
+
+	</table>
+
+
+</div>
+</div>

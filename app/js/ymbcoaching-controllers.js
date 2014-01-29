@@ -281,20 +281,20 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		$cookieStore.put("coach",coach);
 		
 		// to update the new path/mentor user has selected
-        $scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
+        $scope.masteryUpdate = $resource("/jsonapi/MasteryBased/UPDATE");
 		var data = 	{"pathId":pathid,
 					"pathName":pathname,
 					"coach":coach
 					}
-		$http.post('/jsonapi/MasteryBased/UPDATE', data)
-		.success(function (data, status, headers, config) {
-			window.console.log(data);
-
-		}).error(function (data, status, headers, config) {
-			$scope.status = status;
-		})
+          var item = new $scope.masteryUpdate(data);
+          item.$save(function(response) { 
+                  $scope.response = response;
+                  //Handle any errors
+                  console.log(response);
+                  
+          });	
 		
-		
+		$scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
         //Including details=1 returns the nested problemset progress.
         $scope.PathModel.get({"pathID":pathid,"details":1}, function(response){
             $scope.path_progress = response;
@@ -310,7 +310,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 					console.log("level "+$scope.path_progress.details[i].pathorder);
 				
 					$scope.create_prac($scope.path_progress.details[i].id,num,$scope.path_progress.details[i].pathorder);
-					console.log($scope.path_progress.details[i].id);D;D
+					console.log($scope.path_progress.details[i].id);
 					break;
 				}
 				else{

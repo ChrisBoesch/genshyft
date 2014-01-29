@@ -42,7 +42,7 @@
 <tr>
 <td>
 <select ng-model="videoArray" 
-ng-init = "videoArray = videoArray || purposeVideos.Videos[0].title "
+
 ng-options="video.title for video in purposeVideos.Videos"></select>
 <br><br>
 <div ng-show=" purposeVideosUnlocked.Unlocked[videoArray.no].status ">  

@@ -2,17 +2,20 @@
 
 function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$route){
 
-
+	$scope.videoArray ="Select";
     // this method gets the parameter , variables are declared as youtube and vno
     $scope.location = $location;
 	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
 
     $scope.$watch('location.search()', function() {
         $scope.you = ($location.search()).youtube;
-        $scope.tube = $scope.you.split("watch?v=");
-        $scope.youtube = $scope.tube[1].split("&list=");
-       // $scope.youtube = $scope.tube.split("list=");
-        console.log($scope.youtube);
+		
+		if($scope.you != null){
+			$scope.tube = $scope.you.split("watch?v=");
+			$scope.youtube = $scope.tube[1].split("&list=");
+		   // $scope.youtube = $scope.tube.split("list=");
+			console.log($scope.youtube);
+		}
     }, true);
 
 
@@ -42,7 +45,13 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
           console.log("get_purpose driven videos unlocked");
           $resource("/jsonapi/purposeVideos/CURRENT").get({},function(response){
               $scope.purposeVideosUnlocked = response;
-			  $scope.radioAns = $scope.purposeVideosUnlocked.Unlocked[$scope.vno].answer;
+			  
+			  if($scope.vno != null){
+				$scope.radioAns = $scope.purposeVideosUnlocked.Unlocked[$scope.vno].answer;
+			  }
+			  else{
+				$scope.radioAns = $scope.purposeVideosUnlocked.Unlocked[0].answer;
+			  }
 			  	
                console.log($scope.purposeVideosUnlocked);
         	 })
@@ -83,24 +92,23 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 
 
 		$scope.saveNewUnlock = function(videoNumber,radioAns){
-			console.log("saveNewUnlock is being executed");
+		console.log("saveNewUnlock is being executed");
+		
+		$scope.userCurrentVideo = $resource("/jsonapi/purposeVideos/CURRENT");
 			
 		var data = {"no": videoNumber,
 						  "status": "true",
 						  "answer": radioAns};
 						  
-		$http.post("/jsonapi/purposeVideos/UPDATE", data)
-            .success(function (data, status, headers, config) {
-                window.console.log(data);
-				
-
-            }).error(function (data, status, headers, config) {
-                $scope.status = status;
-            })
-				  
-		}
+           var item = new $scope.userCurrentVideo(data);
+           item.$save(function(response) { 
+                  $scope.response = response;
+                  //Handle any errors
+                  console.log(response);
+					
+			})
 		
-
+	}
 
 
 
