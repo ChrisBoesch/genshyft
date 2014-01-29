@@ -3,36 +3,52 @@
 //
 describe("E2E: Testing Controllers", function () {
 
+    var pauseAll = false;
+    //You can load the runner with runner.html?pauseAll=true to see each page after each test.
+    pauseAll = window.location.search.replace("?pauseAll=", "");
+
     beforeEach(function () {
         browser().navigateTo('/app/index.html?test_with=app-test.js');
     });
 
     /*
+     1. Practice Game
      Load /app/index.html?test_with=app-test.js
      Click on “practice” menu item
-     Click on “Python”
      Click on “Easy”
+     Click on “Python”
      Click on “Continue Level 1”
      Check that location is now practice_game_play.html
      Check that problem is loaded.
      On the page you should find: “Name: Functions” in the top box and “This is the first problem” in the examples box.
      */
-    describe('Practice Game Play', function () {
-        it('should go to the practice game play page when I click Practice button', function () {
+    describe('Practice Game', function () {
+        it('should be able to create a new practice game for python with easy difficulty', function () {
+
             expect(browser().location().path()).toBe("/home");
             element('.nav li a:contains("Practice")').click();
-            expect(browser().location().url()).toBe("/practice");
-        });
+            expect(browser().location().path()).toBe("/practice");
 
-        it('should should be able to create a new practice game for python with easy difficulty', function () {
-            var pyBtnSel = '#myCarousel .row input.pathImg[src*="Python"]';
+            var btnLvlEasy = element('#levels button[btn-radio="Easy"]');
+            expect(btnLvlEasy.hasClass('active')).toBeFalsy();
+            btnLvlEasy.click();
+            expect(btnLvlEasy.hasClass('active')).toBeTruthy();
 
-            browser().navigateTo('#practice');
-            expect(browser().location().url()).toBe("/practice");
+            var pyBtnSel = element('#myCarousel .row input.pathImg[src*="Python"]');
+            expect(pyBtnSel.hasClass('selected')).toBeFalsy();
+            pyBtnSel.click();
+            expect(pyBtnSel.hasClass('selected')).toBeTruthy();
 
-            expect(element(pyBtnSel).hasClass('selected')).toBeFalsy();
-            element(pyBtnSel).click();
-            expect(element(pyBtnSel).hasClass('selected')).toBeTruthy();
+            element('.btn-lvl').click();
+
+            // Couldn't come up with something better, because of some non-standard code
+            sleep(5);
+
+            expect(browser().location().url()).toBe("/practice_game_play.html");
+
+            // TODO: Need to complete
+
+            if (pauseAll) pause();
         });
     });
 

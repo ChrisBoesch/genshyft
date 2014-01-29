@@ -17,7 +17,7 @@
 
     <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
-    <script src="https://raw.github.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
     <script src="./js/fancybox-fire.js"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -736,7 +736,7 @@
     <script src="http://www.youtube.com/player_api"></script>
     <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
-    <script src="https://raw.github.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
     <script src="./lib/angular/angular.js"></script>
     <script src="js/analytics.js"></script>
     <script src="js/ui-ace.js"></script>
@@ -755,8 +755,8 @@
     <script src="assets/js/bootstrap-collapse.js"></script>
     <script src="assets/js/bootstrap-alert.js"></script> 
     <script type="text/javascript">
-      // Defaulting to staticly mock the API when not on port 80 for testing simplisity. 
-      if(document.location.port != 80){
+      // Defaulting to staticly mock the API when not on port 80 for testing simplicity.
+      if(document.location.port && document.location.port !== 80){
         console.log("loading test data from game-app-test.js");
         document.write('<script src="../test/game-app-test.js"> </' + 'script> ');
         document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </'+'script>  ');

@@ -687,7 +687,7 @@ function ProblemsetController($scope,$resource){
     };
 }
 
-function ProblemController($scope,$resource){
+function ProblemController($scope,$resource,$http){
     $scope.problemsetID = null;
     $scope.problems = null;
 
@@ -714,7 +714,69 @@ function ProblemController($scope,$resource){
             $scope.contributed_problems = response;
             //alert("There are "+$scope.contributed_problems.length+" contributed problems being under review.")
           });
-    }
+    };
+    $scope.verify_problem_solution = function() {
+      //The API is expecting a form post so this method is used. 
+      var theURL = '/jsonapi/check_code_with_interface';
+      
+      var source = {interface_id:$scope.the_current_problem.problem.interface_id, 
+        source_code:$scope.the_current_problem.problem.solution,
+        examples:$scope.the_current_problem.problem.examples,
+        tests:$scope.the_current_problem.problem.tests
+        };
+      var xsrf = $.param(source);
+      
+      $http({
+        method: 'POST',
+        url: theURL,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: xsrf
+      }).success(function (data, status, headers, config) {
+          $scope.solution_check_result = data;
+			    console.log(data);
+			    console.log("You have successfully submitted your problem");
+		   });
+            
+    };
+    $scope.get_problem = function(problemID){
+      $scope.the_current_problem = $resource('/jsonapi/get_problem?problem_id='+problemID).get()
+    };
+    $scope.save_problem = function() {
+      //The API is expecting a form post so this method is used. 
+      //if no id, then create problem, else edit problem. 
+      var theURL = "/jsonapi/new_problem";
+      if ($scope.the_current_problem.problem.problem_id){
+          theURL = "/jsonapi/edit_problem";        
+      }
+
+      var source = {problemset_id:$scope.the_current_problem.problem.problemset_id,
+        path_id:$scope.the_current_problem.problem.path_id,
+        interface_id:$scope.the_current_problem.problem.interface_id,
+        problem_id:$scope.the_current_problem.problem.problem_id,
+        level_id:$scope.the_current_problem.problem.problemset_id,
+        name:$scope.the_current_problem.problem.name,
+        details:$scope.the_current_problem.problem.description,             
+        solution_code:$scope.the_current_problem.problem.solution,
+        skeleton_code:$scope.the_current_problem.problem.skeleton,
+        examples:$scope.the_current_problem.problem.examples,
+        publicTests:$scope.the_current_problem.problem.tests, 
+        privateTests:$scope.the_current_problem.problem.other_tests
+        };
+      
+      var xsrf = $.param(source);
+      
+      $http({
+        method: 'POST',
+        url: theURL,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: xsrf
+      }).success(function (data, status, headers, config) {
+			    console.log(data);
+			    console.log("You have successfully submitted your problem");
+           $scope.result = data;
+		   });
+
+    };
 
 }
 
