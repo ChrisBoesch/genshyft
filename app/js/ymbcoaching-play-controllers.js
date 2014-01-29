@@ -85,10 +85,12 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 	
 	
 	$scope.coachText = function(){
-		$resource('/jsonapi/speech/'+$scope.nameOfCoach +'').get({},function(response){
+	
+		$scope.coachTextModel = $resource('/jsonapi/MasteryBased/speech/:coachName');
+		$scope.coachTextModel.get({"coachName":$scope.nameOfCoach},function(response){
               $scope.audioText = response;
 			  	$scope.words = $scope.audioText.speech[0].text;
-               console.log($scope.audiText);
+               console.log($scope.audioText);
         	 })
 	}
 

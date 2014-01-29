@@ -2,7 +2,7 @@
 
 function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$route){
 
-
+	$scope.videoArray ="Select";
     // this method gets the parameter , variables are declared as youtube and vno
     $scope.location = $location;
 	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 

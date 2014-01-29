@@ -16,7 +16,9 @@ myApp.run(function($httpBackend) {
 
       //$httpBackend.whenGET('schools.json').passThrough();
 
-      var purposeDrivenVideos = {"Videos":[
+    
+	//This is purpose driven videos data
+	var purposeDrivenVideos = {"Videos":[
 		{"title":"What Most School Don't Teach",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
@@ -106,7 +108,7 @@ myApp.run(function($httpBackend) {
 		]};
 	
 	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
-		$httpBackend.whenPOST('/jsonapi/purposeVideos/CURRENT').respond({"result":"user video status updated"});
+	$httpBackend.whenPOST('/jsonapi/purposeVideos/CURRENT').respond({"result":"user video status updated"});
 	
 	
 	//data on the mastery coaches
@@ -120,6 +122,7 @@ myApp.run(function($httpBackend) {
 	$httpBackend.whenGET('/jsonapi/MasteryBased/COACHES').respond(coachesData);
 	
 	
+	//the user current coach/path progress
 	var currentUserMasteryProgress = {"currentUserMastery":[
 	{"pathId":"2243213",
 	"pathName":"Java",
@@ -127,9 +130,11 @@ myApp.run(function($httpBackend) {
 	}
 	]};
 	$httpBackend.whenGET('/jsonapi/MasteryBased/CURRENT').respond(currentUserMasteryProgress);
-	$httpBackend.whenPOST('/jsonapi/MasteryBased/UPDATE').passThrough();
+	$httpBackend.whenPOST('/jsonapi/MasteryBased/UPDATE').respond({"result":"Mastery status updated"});
 	
 	
+	
+	//the following at the audio scripts for each coaches.
 	var zandar ={"speech":[
 	{"text": "Welcome back buddy, we had some have fun that last time. If you spend at least 5 minutes coding everyday, you'll be a pro like me in no time!"},
 	
@@ -137,20 +142,18 @@ myApp.run(function($httpBackend) {
 	{"text": "phenominial work buddy, let's keep up with this streak."},
 	{"text": "Amazing buddy, you have come so far.You are doing a great job. Keep going. "},
 	
-	
 	{"text": "That's ok buddy. Go to the compiler and see what's wrong. We can solve this problem sooner than you think."},
 	{"text": "Perhaps you can look at the compiler tab,It'll help you solve it quick. Let's do this !"},
 
 	{"text": "Not bad, but I think you can do even better. You know what, let's try that skip question again later."},
 	{"text": "Don't worry man. The more you code, the more you improve. We'll come back to that skip question later"},
-
 	
 	{"text": "Yes, you have solved the last question buddy!"},
 	
 	{"text": "where are you buddy, we can't stop now, Let's finish this !"}
 	
 	]};
-	$httpBackend.whenGET('/jsonapi/speech/Zandar').respond(zandar);
+	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/Zandar').respond(zandar);
 
 
 	var SGTMJR ={"speech":[
@@ -179,7 +182,7 @@ myApp.run(function($httpBackend) {
 	{"text": "Congratulation, you already master this"}
 	
 	]};
-	$httpBackend.whenGET('/jsonapi/speech/SGTMJR').respond(SGTMJR);
+	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/SGTMJR').respond(SGTMJR);
 	
 	var Sandra ={"speech":[
 	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
@@ -207,7 +210,7 @@ myApp.run(function($httpBackend) {
 	{"text": "Congratulation, you already master this"}
 	
 	]};
-	$httpBackend.whenGET('/jsonapi/speech/Sandra').respond(Sandra);
+	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/Sandra').respond(Sandra);
 	
 	var Shannon ={"speech":[
 	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
@@ -235,7 +238,7 @@ myApp.run(function($httpBackend) {
 	{"text": "Congratulation, you already master this"}
 	
 	]};
-	$httpBackend.whenGET('/jsonapi/speech/Shannon').respond(Shannon);
+	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/Shannon').respond(Shannon);
 	
 	var tournaments = {"Tournaments":[
 		{"tournamentId":"001",
