@@ -199,14 +199,14 @@ input:hover{
 										<td align="center">
 											</br>
 											</br>
-											<div  ng-hide="storyid && quest_difficulty && quest_pathid && player.nickname">
+											<div ng-hide="storyid && quest_difficulty && quest_pathid && player.nickname">
 											<!-- <form action="#storyboard"> -->
 												<button class="btn disabled" style="width: 145px"><h1>Go!</h1></button>
 											<!-- </form> -->
 											</div>
 											<div ng-show="storyid && quest_difficulty && quest_pathid && player.nickname">
 											<!-- <form action="#storyboard"> -->
-												<button class="btn btn-primary" ng-click="item.name='New Quest'; $parent.create_quest(storyid,quest_pathid,quest_difficulty)" style="width: 145px"><h1>Go!</h1></button>
+												<button class="btn btn-primary" ng-click="item.name='New Quest'; create_quest(storyid,quest_pathid,quest_difficulty)" style="width: 145px"><h1>Go!</h1></button>
 											<!-- </form> -->
 											</div>
 											<span class="label label-info" align="left">
@@ -322,7 +322,7 @@ input:hover{
 									
 									<div  ng-show="difficulty && $parent.$parent.path_ID && storyid && player.nickname">
 									<!-- <form action="#storyboard"> -->
-										<button class="btn btn-primary" ng-click="item.name='New Quest'; $parent.create_quest(storyid,$parent.$parent.path_ID,difficulty)" style="width: 100px"><h1>Go!</h1></button>
+										<button class="btn btn-primary" ng-click="item.name='New Quest'; create_quest(storyid,$parent.$parent.path_ID,difficulty)" style="width: 100px"><h1>Go!</h1></button>
 									<!-- </form> -->
 									</div>
 
