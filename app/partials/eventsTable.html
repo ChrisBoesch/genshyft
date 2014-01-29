@@ -1,0 +1,45 @@
+<style>
+.bootCamp{
+    color: #ffffff;
+    font-size: 22px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 20px;
+    padding: 8px 8px;
+}
+</style>
+</br>
+</br>
+
+  
+<div class="row-fluid">
+
+<div ng-controller="EventTableController" ng-init="get_jcParticipants();" class="container">
+<center><h2>{{eventsData.name}}</h2></center>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Player Name</th>
+        <th>School</th>
+        <th>School Type</th>
+        <th>Starting Year</th>
+        <th>Total Problems Solved</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-show="$index<=49" ng-hide = "participant.solvedproblems < 0">
+        <td>{{$index+1}}</td>
+        <td>{{participant.nickname}}</td>
+        <td>{{participant.schoolname}}</td>
+        <td>{{participant.subtype}}</td>
+        <td>{{participant.year}}</td>
+        <td>{{participant.solvedproblems}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+</div>

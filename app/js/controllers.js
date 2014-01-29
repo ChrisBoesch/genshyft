@@ -3879,3 +3879,39 @@ function EventController($scope, $resource){
         }
           
 }
+
+//By WC, in progress
+function EventTableController($scope, $resource){
+
+        //Gets registered jcParticipants.
+		$scope.get_jcParticipants = function(){
+	    console.log("get_mytournaments");
+
+	    	//current resource refers to just JC Comp
+		    $resource("/jsonapi/event/6095188913029120").get({},function(response){
+            	$scope.eventsData = response;
+            	$scope.predicate = '-solvedproblems';
+
+            console.log($scope.eventsData);
+        	 })
+
+	  	};
+
+		$scope.get_currentPlayerRanking = function(){
+	    console.log("get_currentPlayerRanking");
+
+	    	//current resource refers to just JC Comp
+		    $resource("/jsonapi/player").get({},function(response){
+            	$scope.currentPlayerData = response;
+
+            console.log($scope.eventsData);
+        	 })
+
+	  	};	  	
+        
+
+
+
+
+			
+}
