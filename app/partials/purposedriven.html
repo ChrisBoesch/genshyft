@@ -3,7 +3,7 @@
 
 
 
-  	<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked()" > 
+  	<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos();" > 
 
 	
 	
@@ -43,9 +43,10 @@
 <td>
 <select ng-model="videoArray" 
 
+
 ng-options="video.title for video in purposeVideos.Videos"></select>
 <br><br>
-<div ng-show=" purposeVideosUnlocked.Unlocked[videoArray.no].status ">  
+<div ng-show="videoArray.unlocked">  
 <button class="btn btn-inverse"  ng-click = "view_video(purposeVideos.Videos[videoArray.no].vlink,videoArray.no)">  Play  </button> 
 
 </div>
@@ -57,10 +58,19 @@ ng-options="video.title for video in purposeVideos.Videos"></select>
 
 <td>
 <IMG ng-src="{{ videoArray.image }}" >
-<div ng-show="videoArray==null">
+<div ng-show="videoArray==null ">
 <h3>PurposeDriven videos coming up soon! </h3>
 <IMG ng-src ="{{tempimage}}" width =50%>
 </div>
+
+<div ng-show="videoArray==null">
+<h3>PurposeDriven videos coming up soon! </h3>
+<IMG ng-src ="{{tempimage}}" width =30%>
+</div>				
+<div ng-show="videoArray.title==null" align ='right'>
+<h1>Select a video title ! </h1>
+</div>	
+
 </td>
 
 <td>
