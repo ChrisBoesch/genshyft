@@ -13,6 +13,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 	
 	
 	$scope.currentAttempts = 1;
+	$scope.currentDoneQuestions =[];
 	
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
@@ -140,9 +141,19 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
       $scope.remaining_problems = [];
       //loop through problems and find unsolved. Add to remaining_problems.
       for (var i = 0; i < $scope.game.problemIDs.length; i++) {
-        if($scope.game.solvedProblemIDs.indexOf($scope.game.problemIDs[i])<0){
-          $scope.remaining_problems.push($scope.game.problemIDs[i]);
-        }
+		
+		if($scope.currentDoneQuestions.length <0){
+			if($scope.game.solvedProblemIDs.indexOf($scope.game.problemIDs[i])<0){ // -1 problem not solved
+			$scope.remaining_problems.push($scope.game.problemIDs[i]);
+			}
+		}
+	  
+		 // if($scope.currentDoneQuestions.indexOf($scope.game.solvedProblemIDs[i]<0)
+	   else{
+			if($scope.currentDoneQuestions.indexOf($scope.game.solvedProblemIDs[i])<0){ // -1 problem not solved
+			  $scope.remaining_problems.push($scope.game.problemIDs[i]);
+			}
+		}	
       }
 
       if($scope.remaining_problems.length == 0){
@@ -225,7 +236,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 		  $scope.theData = {user_code:$scope.solution1,
 							problem_id:$scope.current_problem,
 							game_id:$scope.game.gameID};
-		  
+	
 		  var item = new $scope.SaveResource($scope.theData);
 		  item.$save(function(response) { 
 			  $scope.solution_check_result = response;
@@ -235,10 +246,11 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout){
 				$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
 					$scope.problems_progress = response;
 					$scope.currentAttempts = $scope.currentAttempts +1;  // added to overwrite orignal code
-					$scope.current_level_progress =$scope.currentAttempts//  $scope.problems_progress.currentPlayerProgress; // need to reduce this
+					$scope.current_level_progress =$scope.currentAttempts//  $scope.problems_progress.currentPlayerProgress; 
+					// need to reduce this
 					$scope.total_level_progress = $scope.problems_progress.problemsInProblemset;
-					
 					//if($scope.problems_progress.problemsInProblemset<=$scope.problems_progress.currentPlayerProgress){
+					//	  $scope.currentDoneQuestions.push($scope.current_problem);  current problem id done.
 					if($scope.problems_progress.currentPlayerProgress<=$scope.currentAttempts){
 					
 						//FINISH GAME AUDIO
