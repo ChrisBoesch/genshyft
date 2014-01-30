@@ -147,7 +147,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     console.log("list_pathlevels");
     for(var i = 0; i < tournamentQns.tourQns.length; i++){
       var language = tournamentQns.tourQns[i].language;
-      if(language===qnsLanguage){
+      if(language==qnsLanguage){
         var pathLevel = tournamentQns.tourQns[i].pathLevel;
         $scope.lvlArray.push(pathLevel);
       }
@@ -169,7 +169,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $scope.roundQns.pathLevel = pathLevel;
       $scope.list_questions($scope.roundQns.language, $scope.roundQns.pathLevel, $scope.tournamentQns);
     });
-    $('#myModal').modal('show'); 
+    //$('#myModal').modal('show'); 
   };
 
   /*method to filter questions based on language and pathLevel*/
@@ -181,15 +181,23 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     for(var i = 0; i < tournamentQns.tourQns.length; i++){
       var language = tournamentQns.tourQns[i].language;
       var level = tournamentQns.tourQns[i].pathLevel;
-      if(language===qnsLanguage && level===pathLevel){
-        var qns = tournamentQns.tourQns[i].questionSet;
+      if(language==qnsLanguage && level==pathLevel){
+        $scope.qnsArray = tournamentQns.tourQns[i].questionSet;
+        //var qns = tournamentQns.tourQns[i].questionSet;
+        /*
         for(var j = 0; j<qns.length;j++){
           $scope.qnsArray.push(qns[j].question);
-        }
+        }*/
       }
     }
     //console.log($scope.qnsArray);
   };
+
+  $scope.addToCart = function(question){
+    var addedQuestion = question;
+    $scope.cartQuestions.push(addedQuestion);
+    console.log($scope.cartQuestions);
+  }
 
   //Gets tournaments created by user.
 	$scope.get_mytournaments = function(){
@@ -584,6 +592,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
     $scope.fetch_tournaments = function(){
           $scope.TournamentModel.query({}, function(response){
               $scope.tournaments = response;
+              console.log($scope.tournaments.length);
           });
     };
 
