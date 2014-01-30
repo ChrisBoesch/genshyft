@@ -1,10 +1,8 @@
+'use strict';
+
 /**
- * Binds a ACE Ediitor widget
+ * Binds a ACE Editor widget
  */
-
-//TODO handle Could not load worker ace.js:1
-//DOMException {message: "SECURITY_ERR: DOM Exception 18", name: "SECURITY_ERR", code: 18, stack: "Error: An attempt was made to break through the sea€|cloudfront.net/src-min-noconflict/ace.js:1:76296)", INDEX_SIZE_ERR: 1a€|}
-
 angular.module('ui.ace', [])
   .constant('uiAceConfig', {})
   .directive('uiAce', ['uiAceConfig', function (uiAceConfig) {
@@ -26,7 +24,7 @@ angular.module('ui.ace', [])
         onChange = function (callback) {
           return function (e) {
             var newValue = session.getValue();
-            if (newValue !== scope.$eval(attrs.value) && !scope.$$phase) {
+            if (newValue !== scope.$eval(attrs.value) && !scope.$$phase && !scope.$root.$$phase) {
               if (angular.isDefined(ngModel)) {
                 scope.$apply(function () {
                   ngModel.$setViewValue(newValue);
@@ -66,16 +64,16 @@ angular.module('ui.ace', [])
 
         // Basic options
         if (angular.isString(opts.theme)) {
-          acee.setTheme("ace/theme/" + opts.theme);
+          acee.setTheme('ace/theme/' + opts.theme);
         }
         if (angular.isString(opts.mode)) {
-          session.setMode("ace/mode/" + opts.mode);
+          session.setMode('ace/mode/' + opts.mode);
         }
 
         attrs.$observe('readonly', function (value) {
           acee.setReadOnly(value === 'true');
         });
-        
+
         // Value Blind
         if (angular.isDefined(ngModel)) {
           ngModel.$formatters.push(function (value) {
@@ -96,6 +94,17 @@ angular.module('ui.ace', [])
         // EVENTS
         session.on('change', onChange(opts.onChange));
 
+        elm.on('$destroy', function() {
+          acee.session.$stopWorker();
+          acee.destroy();
+        });
+        
+        scope.$watch(function() {
+          return [elm[0].offsetWidth, elm[0].offsetHeight];
+        }, function() {
+          acee.resize();
+          acee.renderer.updateFull();
+        }, true);
       }
     };
   }]);
