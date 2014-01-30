@@ -67,7 +67,7 @@ myApp.run(function($httpBackend) {
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=J6oMG7u9HGE",
 		"description":"Bruce Feiler has a radical idea: To deal with the stress of modern family life, go agile. Inspired by agile software programming, Feiler introduces family practices which encourage flexibility, bottom-up idea flow, constant feedback and accountability. ","question":"How does this video make you feel?",
-		"feedback":2, 
+		"feedback":0, 
 		"unlocked":false
 		},
 
@@ -133,8 +133,11 @@ myApp.run(function($httpBackend) {
 		"no":"1"}]};
 	   // to retrieve instance : Video[1] of purposevideos		
 		$httpBackend.whenGET('/jsonapi/purposevideos/1').respond(video_no_1); // Calls a specific video base on "no" 1
+		
+		//payload for users -> {"no": videoNumber,"feedback":2,"unlocked":true};
 		$httpBackend.whenPOST('/jsonapi/purposevideos/1').respond({"result":"video 1 added/adjusted"});
-
+		//payload for admin ->{"title":title,"image": image,"thumbnail" : thumbnail,"vlink": vlink,"description": description,"question":question
+		$httpBackend.whenPOST('/jsonapi/purposevideos/admin/1').respond({"result":"video 1 added/adjusted"});
 		//new
 		$httpBackend.whenPOST('/jsonapi/purposevideos').respond({"result":"video added/adjusted"});
 
@@ -142,10 +145,6 @@ myApp.run(function($httpBackend) {
 	//Video Unlock determines the video each user has unlock.
 	// status determines if a video is unlocked for a particular user
 	// no refers to video no, status ask if a video is unlocked, answer refers to the option user chose
-
-	//payload -> {"feedback":3, "purposevideo":12345} 
-     	$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/123').respond({});
-	
 	
 	
 	//data on the mastery coaches

@@ -34,6 +34,11 @@
 		
 <h4 class="well well-small bootCamp" align="center" id="well-c" >1. Choose a video and get inspired ! </h4>	
 			<span class="span11">
+			
+<div ng-show="purposeVideos.Videos[0].title!=null" align ='right'>
+<h1>Select a video title ! </h1>
+</div>	
+			
 <table border="0"align ="center" cellpadding="11"cellspacing="11" >
 <th width =30%> </th>
 <th>  </th>
@@ -42,8 +47,6 @@
 <tr>
 <td>
 <select ng-model="videoArray" 
-
-
 ng-options="video.title for video in purposeVideos.Videos"></select>
 <br><br>
 <div ng-show="videoArray.unlocked">  
@@ -58,18 +61,14 @@ ng-options="video.title for video in purposeVideos.Videos"></select>
 
 <td>
 <IMG ng-src="{{ videoArray.image }}" >
-<div ng-show="videoArray==null ">
-<h3>PurposeDriven videos coming up soon! </h3>
-<IMG ng-src ="{{tempimage}}" width =50%>
-</div>
 
-<div ng-show="videoArray==null">
-<h3>PurposeDriven videos coming up soon! </h3>
-<IMG ng-src ="{{tempimage}}" width =30%>
-</div>				
-<div ng-show="videoArray.title==null" align ='right'>
-<h1>Select a video title ! </h1>
-</div>	
+
+		<div ng-show="purposeVideos.Videos[0].title==null">
+		 <h3>More Features coming up soon!</h3>
+		<IMG ng-src ="{{tempimage}}" width =40%>
+		</div>			
+		
+
 
 </td>
 

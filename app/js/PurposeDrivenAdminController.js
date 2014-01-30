@@ -23,7 +23,7 @@ function PurposeDrivenAdminController($scope,$resource,$location,$cookieStore,$h
 
 	$scope.update_videos =function(title,image,thumbnail,vlink,description,question,videoNo){
 	
-	$scope.allVideo = $resource("/jsonapi/purposevideos/"+videoNo);
+	$scope.allVideo = $resource("/jsonapi/purposevideos/admin_update_video/"+videoNo);
 		
 	var data = {
 		"title":title,
