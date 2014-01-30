@@ -592,6 +592,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
     $scope.fetch_tournaments = function(){
           $scope.TournamentModel.query({}, function(response){
               $scope.tournaments = response;
+              console.log($scope.tournaments.length);
           });
     };
 
