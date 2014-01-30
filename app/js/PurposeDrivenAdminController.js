@@ -15,15 +15,15 @@ function PurposeDrivenAdminController($scope,$resource,$location,$cookieStore,$h
 	
 	$scope.get_videos = function(){
           console.log("get_videos is being executed");
-          $resource("/jsonapi/purposeVideos/ALL").get({},function(response){
+          $resource("/jsonapi/purposevideos").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
                console.log($scope.purposeVideos);
         	 })
        }
 
-	$scope.update_videos =function(title,image,thumbnail,vlink,description,question,option1,option2,option3,option4,option5,videoNo){
+	$scope.update_videos =function(title,image,thumbnail,vlink,description,question,videoNo){
 	
-	$scope.allVideo = $resource("/jsonapi/purposeVideos/ALL");
+	$scope.allVideo = $resource("/jsonapi/purposevideos/"+videoNo);
 		
 	var data = {
 		"title":title,
@@ -31,22 +31,17 @@ function PurposeDrivenAdminController($scope,$resource,$location,$cookieStore,$h
 		"thumbnail" : thumbnail,
 		"vlink": vlink,
 		"description": description,
-		"question": question,
-		"options":[
-		{"choice": option1},
-		{"choice": option2},
-		{"choice": option3},
-		{"choice": option4},
-		{"choice": option5}]
+		"question": question
 		};
 						  
-          var item = new $scope.allVideo(data);
-          item.$save(function(response) { 
+           
+		   var item = new $scope.allVideo(data);
+           item.$save(function(response) { 
                   $scope.response = response;
                   //Handle any errors
                   console.log(response);
-                  
-          });	
+					
+			})
 	
 	}
 	

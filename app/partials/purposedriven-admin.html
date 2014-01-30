@@ -34,14 +34,8 @@
 			<input type="text" ng-model = "videos.thumbnail" value ="{{videos.thumbnail}}"style="width: 250px;"><IMG ng-src="{{videos.thumbnail}}" width ='100'>	 <br> 
 			<!-- <input type="file" name="post_thumbnail" />			!-->
 		</td>
-		<td width = 15%>	
-		<b> Options </b> <br>
-		<input type="text" ng-model ="videos.option1" value ="{{videos.options[0].choice}} "style="width: 150px;"> <br> 
-		<input type="text" ng-model ="videos.option2" value ="{{videos.options[1].choice}} " style="width: 150px;" ><br> 
-		<input type="text" ng-model ="videos.option3" value ="{{videos.options[2].choice}}"  style="width: 150px;"><br> 
-		<input type="text" ng-model ="videos.option4" value ="{{videos.options[3].choice}}" style="width: 150px;" ><br> 
-		<input type="text" ng-model ="videos.option5" value ="{{videos.options[4].choice}}" style="width: 150px;" ><br> 
-	<button class ="btn btn-primary" ng-click = update_videos(videos.title,videos.image,videos.thumbnail,videos.vlink,videos.description,videos.option1,videos.option2,videos.option2,videos.option3,videos.question4,videos.question5,videos.no)> Save </button>
+		<td width = 15%>	 
+	<button class ="btn btn-primary" ng-click = update_videos(videos.title,videos.image,videos.thumbnail,videos.vlink,videos.description,videos.question,videos.no)> Save </button>
 		</td>		
 	</tr>
 
