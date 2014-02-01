@@ -170,7 +170,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"a",
 					"dontgiveup":"a",
 					"correctanswer":"a",
-					"tryother":"a"
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
 				},
 	"audiotext":{
 					"greeting":"Hi im shannon, Im here to help you practice and resolve some of the problems you seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
@@ -179,7 +181,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"b",
 					"dontgiveup":"b",
 					"correctanswer":"b",
-					"tryother":"b"
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
 				},
 	"pictures":{
 					"greeting":"c",
@@ -188,7 +192,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"c",
 					"dontgiveup":"c",
 					"correctanswer":"c",
-					"tryother":"c"
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
 				}
 	
 	},
@@ -206,7 +212,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"a",
 					"dontgiveup":"a",
 					"correctanswer":"a",
-					"tryother":"a"
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
 				},
 	"audiotext":{
 					"greeting":"Welcome back ! Lets continue solving those question. By doing this everyday, youll be better prepared the next time you get together with your friends to do some coding. Lets start!",
@@ -215,7 +223,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"b",
 					"dontgiveup":"b",
 					"correctanswer":"b",
-					"tryother":"b"
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
 				},
 	"pictures":{
 					"greeting":"c",
@@ -224,7 +234,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"c",
 					"dontgiveup":"c",
 					"correctanswer":"c",
-					"tryother":"c"
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
 				}
 	
 	},
@@ -238,18 +250,22 @@ myApp.run(function($httpBackend) {
 					"welcomeback":"audio/Zandar/welcomeback.mp3",
 					"areyouthere":"audio/Zandar/areyouthere.mp3",
 					"letscompile":"a",
-					"dontgiveup":"a",
-					"correctanswer":"a",
-					"tryother":"a"
+					"dontgiveup":"audio/Zandar/dontgiveup.mp3",
+					"correctanswer":"audio/Zandar/correctanswer.mp3",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"audio/Zandar/lessattempts.mp3"
 				},
 	"audiotext":{
 					"greeting":"Hello, fellow coder, let me help you practice some of the problems you tried before. With my guidance, you be a pro in no time.",
-					"welcomeback":"welcome back text by zandar",
+					"welcomeback":"welcome back buddy, we had soo much fun the last time. If you keep coding everyday, you will be a pro in no time.",
 					"areyouthere":"Where are you buddy, we cant stop now, let's finish this ",
 					"letscompile":"b",
-					"dontgiveup":"b",
-					"correctanswer":"b",
-					"tryother":"b"
+					"dontgiveup":"Perhaps you should look the complier, it will help you solve it quick.",
+					"correctanswer":"Yes, you have solve the last question buddy, go try another question.",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"Nice work buddy, here's a problem that I think you can now solve in fewer attempts."
 				},
 	"pictures":{
 					"greeting":"c",
@@ -258,7 +274,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"c",
 					"dontgiveup":"c",
 					"correctanswer":"c",
-					"tryother":"c"
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
 				}
 	
 	},
@@ -274,7 +292,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"a",
 					"dontgiveup":"a",
 					"correctanswer":"a",
-					"tryother":"a"
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
 				},
 	"audiotext":{
 					"greeting":"Attention recruit !, I am your  SGT Major. I am going to make sure you solve this problem much better and improve your coding skill. Lets get to it !",
@@ -283,7 +303,9 @@ myApp.run(function($httpBackend) {
 					"letscompile":"b",
 					"dontgiveup":"b",
 					"correctanswer":"b",
-					"tryother":"b"
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
 				},
 	"pictures":{
 					"greeting":"c",
@@ -292,7 +314,10 @@ myApp.run(function($httpBackend) {
 					"letscompile":"c",
 					"dontgiveup":"c",
 					"correctanswer":"c",
-					"tryother":"c"
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+					
 				}
 	
 	}
@@ -308,7 +333,7 @@ myApp.run(function($httpBackend) {
 	"coach":"Zandar",
 	"nextProblemID": 52741,
 	"fromProblemSetID":10041,
-	"goal": "faster",
+	"goal": "lessattempts",
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
 	};
 	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);;
@@ -316,9 +341,17 @@ myApp.run(function($httpBackend) {
 	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }
 	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New Mentor, Path Id and Path Name has been recorded."});
 	
-	var gameID =101010;
+	var gameID ={"gameID":101010};
 	// payload -->{"problemId":11021,"problemSet":304232};   // will save <-- those values to get gameID;
-	$httpBackend.whenPOST('/jsonapi/play_coaching_game').respond({"gameID":gameID}) 
+	$httpBackend.whenPOST('/jsonapi/play_coaching_game').respond(function(method, url, data) {
+
+
+        var item = gameID;
+        return [200,item];
+        
+      })
+	
+	
 	
 //retrieve game details for mastery game base on the game Id;
 $httpBackend.whenGET('/jsonapi/game/101010').respond(
