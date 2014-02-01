@@ -118,10 +118,14 @@ myApp.run(function($httpBackend) {
 		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":2, 
 		"unlocked":true,
 		"no":"0"}]};
-		// to retrieve instance : Video[0] of purposevideos
+		
+// to retrieve instance : Video[0] of purposevideos // Calls a specific video base on "no" 0
 		$httpBackend.whenGET('/jsonapi/purposevideos/0').respond(video_no_0); // Calls a specific video base on "no" 0
-		//payload -> {"feedback":3, "purposevideo":0} 
-		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/0').respond({"result":"video 0 feedback adjusted"});		
+//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/0').respond({"result":"video 0 feedback adjusted"});	
+//payload -> 		//admin to update video
+//{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}		
+		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/0').respond({"result":"video 0 adjusted by admin"});		
 		
 
 		var video_no_1 = {"Videos":[{"title":"Art of Creative Coding",
@@ -131,12 +135,16 @@ myApp.run(function($httpBackend) {
 		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":2, 
 		"unlocked":true,
 		"no":"1"}]};
-	   // to retrieve instance : Video[1] of purposevideos		
-		$httpBackend.whenGET('/jsonapi/purposevideos/1').respond(video_no_1); // Calls a specific video base on "no" 1
-		//payload -> {"feedback":3, "purposevideo":1,"unlocked":true } 
+		
+// to retrieve instance : Video[1] of purposevideos		 // Calls a specific video base on "no" 1
+		$httpBackend.whenGET('/jsonapi/purposevideos/1').respond(video_no_1); 
+//payload -> {"feedback":3, "purposevideo":1,"unlocked":true }   //user to update the new feedback score and unlock next video
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/1').respond({"result":"video 1 unlocked and updated"});
-		//payload -> {"feedback":3, "purposevideo":1, }
+//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/1').respond({"result":"video 1 feedback adjusted"});
+//payload ->  //admin to update video
+//{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}
+		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/1').respond({"result":"video 1 adjusted by admin"});
 
 
 	
@@ -312,7 +320,7 @@ myApp.run(function($httpBackend) {
 	// payload -->{"problemId":11021,"problemSet":304232};   // will save <-- those values to get gameID;
 	$httpBackend.whenPOST('/jsonapi/play_coaching_game').respond({"gameID":gameID}) 
 	
-//Mastery game
+//retrieve game details for mastery game base on the game Id;
 $httpBackend.whenGET('/jsonapi/game/101010').respond(
 {"game_end": "2010-06-01 15:19:39.813685", "player": "Chris", "solvedProblemIDs": [52472], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2010-05-14 05:39:30.194936", "numProblems": 3, "numSolvedProblems": 1, "status": "ACCEPTING SOLUTIONS", "problemIDs": [52472, 57555, 52741], "problems": {"problems": [{"skeleton": "question=", "description": "Another sequential data type is the dictionary.  Create a dictionary with three different indexes as shown in the example.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> question['color']\r\n 'blue'\r\n>>> question[7]\r\n 'seven'\r\n>>> question[3.14]\r\n [3,1,4,6]", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52472, "name": "Dictionaries"}, {"skeleton": "def sortedList(d):", "description": "The dictionary method keys() returns a list of all the keys in a dictionary. Create the function sortedList that returns a sorted list of the keys for a dictionary that is passed in. ", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d = {'a':1, 'c':2, 'b':3}\n>>> sortedList(d)\n['a', 'b', 'c']", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 57555, "name": "List the keys of a dictionary"}, {"skeleton": "def lookup(d,v):\r\n    ", "description": "Create a function that takes a dictionary and a value.  It should return a list of all the keys that map to that value.  The list should be sorted.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d={'ta':4,8:'32',(5,3):'hi',(4,3,2):[4,3],'':4,73:8,839:234,34:857,'Hello':4}\r\n>>> lookup(d,4)\r\n ['', 'Hello', 'ta']\r\n>>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}\r\n>>> lookup(eng2sp,'uno')\r\n ['one']\r\n>>> lookup(eng2sp,'siete')\r\n []", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52741, "name": "Reverse Lookup"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "1423004", "tournamentID": null, "name": "Default Game", "roundID": null, "questID": null, "heatID": null, "game_start": "2010-05-14 05:39:30.194841", "currentTime": "2014-02-01 02:11:23.931950", "game_type": "Timed Interview", "timelimit": 3600});
 	
