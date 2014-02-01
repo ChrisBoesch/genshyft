@@ -109,6 +109,10 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http)
 				  $scope.gameID = $scope.response.gameID;
                   console.log("Game ID :" + $scope.gameID); 
 				  $scope.create_practice_game($scope.gameID);
+				  
+				  
+				  
+				  
           });	
 	}	  
 	/*
@@ -147,6 +151,18 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http)
          console.log("CALLED METHOD   $scope.create_practice_game = function(gameID) ");
 		$scope.GameModel.get({"gameID":gameID}, function(response){
         $scope.game = response;
+		
+		for(var i = 0; i<$scope.game.problems.problems.length-0; i++){
+			if($scope.game.problems.problems[i].id == $scope.nextProblemID){
+				$scope.current_problem_index = i;
+				$scope.solution1 = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
+				console.log("CURRENT PROBLEM INDEX IS " + i );
+				console.log($scope.game.problems.problems[$scope.current_problem_index].skeleton);
+				break;
+			}
+		
+		}		
+		
 		});
     };	
 	
@@ -271,7 +287,6 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http)
 		  $('#t21').addClass('active');
 		  $('#ta11').removeClass('active');
 		  $('#ta21').addClass('active');
-		  $scope.specialMessage = "Let's see !";
 
 		  $scope.SaveResource = $resource('/jsonapi/verify_for_game');
 		  //alert($scope.game.gameID);

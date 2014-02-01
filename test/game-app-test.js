@@ -295,11 +295,11 @@ myApp.run(function($httpBackend) {
 	
 	//the user current coach/path progress
 	var currentUserMasteryProgress = {
-	"pathId":"2243213",
-	"pathName":"Java",
+	"pathId":"10030",
+	"pathName":"python",
 	"coach":"Zandar",
-	"nextProblemID": 17155,
-	"fromProblemSetID":11021,
+	"nextProblemID": 52741,
+	"fromProblemSetID":10041,
 	"goal": "faster",
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
 	};
@@ -308,12 +308,13 @@ myApp.run(function($httpBackend) {
 	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }
 	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New Mentor, Path Id and Path Name has been recorded."});
 	
-	var gameID =3;
+	var gameID =101010;
 	// payload -->{"problemId":11021,"problemSet":304232};   // will save <-- those values to get gameID;
 	$httpBackend.whenPOST('/jsonapi/play_coaching_game').respond({"gameID":gameID}) 
 	
-
-	
+//Mastery game
+$httpBackend.whenGET('/jsonapi/game/101010').respond(
+{"game_end": "2010-06-01 15:19:39.813685", "player": "Chris", "solvedProblemIDs": [52472], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2010-05-14 05:39:30.194936", "numProblems": 3, "numSolvedProblems": 1, "status": "ACCEPTING SOLUTIONS", "problemIDs": [52472, 57555, 52741], "problems": {"problems": [{"skeleton": "question=", "description": "Another sequential data type is the dictionary.  Create a dictionary with three different indexes as shown in the example.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> question['color']\r\n 'blue'\r\n>>> question[7]\r\n 'seven'\r\n>>> question[3.14]\r\n [3,1,4,6]", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52472, "name": "Dictionaries"}, {"skeleton": "def sortedList(d):", "description": "The dictionary method keys() returns a list of all the keys in a dictionary. Create the function sortedList that returns a sorted list of the keys for a dictionary that is passed in. ", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d = {'a':1, 'c':2, 'b':3}\n>>> sortedList(d)\n['a', 'b', 'c']", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 57555, "name": "List the keys of a dictionary"}, {"skeleton": "def lookup(d,v):\r\n    ", "description": "Create a function that takes a dictionary and a value.  It should return a list of all the keys that map to that value.  The list should be sorted.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d={'ta':4,8:'32',(5,3):'hi',(4,3,2):[4,3],'':4,73:8,839:234,34:857,'Hello':4}\r\n>>> lookup(d,4)\r\n ['', 'Hello', 'ta']\r\n>>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}\r\n>>> lookup(eng2sp,'uno')\r\n ['one']\r\n>>> lookup(eng2sp,'siete')\r\n []", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52741, "name": "Reverse Lookup"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "1423004", "tournamentID": null, "name": "Default Game", "roundID": null, "questID": null, "heatID": null, "game_start": "2010-05-14 05:39:30.194841", "currentTime": "2014-02-01 02:11:23.931950", "game_type": "Timed Interview", "timelimit": 3600});
 	
 	//the following at the audio scripts for each coaches.
 	/*var zandar ={"speech":[

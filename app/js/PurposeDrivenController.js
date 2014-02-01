@@ -115,7 +115,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 
 
 		$scope.saveNewFeedback = function(videoNumber,feedback){
-			console.log("saveNewUnlock is being executed");
+			console.log("saveNewFeedback is being executed");
 			
 			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/" + videoNumber);
 				
