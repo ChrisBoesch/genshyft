@@ -138,12 +138,17 @@
                     <li>
                       <a ng-click="toVideos()">Learn about SingPath</a>
                     </li> 
-                    <li class="divider"></li>  
+                    <li class="divider" ng-show="player.countryCode=='SG'"></li> 
                     <li type="button" ng-show="player.countryCode=='SG'" class="nav-header">Singapore Schools</li>                    
                     
                     <li ng-show="player.countryCode=='SG'">
                       <a type="button" ng-click="checkSchoolRegistrationLogin()">Register Your School</a>
                     </li>
+
+                    <li ng-show="player.countryCode=='SG'">
+                      <a type="button" ng-click="checkSchoolsMapLogin()"> Schools Map</a>
+                    </li>
+                    
                     <li class="divider"></li> 
                     <li class="nav-header">Others</li>  
                                        

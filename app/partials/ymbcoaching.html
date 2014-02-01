@@ -112,17 +112,13 @@ float:left;
 
 
 		
-		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches();getCurrentMastery();
-		text = [{'name':'Shannon', 'word':'Hi im shannon, Im here to help you practice and resolve some of the problems you seen before.By resolving this problems, youll be a little better prepared the next time you get together with your friends to do some coding.'},
-		{'name':'Zandar', 'word':'Hello, fellow coder, let me help you practice some of the problems you tried before. With my guidance, you be a pro in no time.'},
-		{'name':'Sandra', 'word':'Welcome back ! Lets continue solving those question. By doing this everyday, youll be better prepared the next time you get together with your friends to do some coding. Lets start!'},
-		{'name':'SGTMJR', 'word':'Attention recruit !, I am your  SGT Major. I am going to make sure you solve this problem much better and improve your coding skill. Lets get to it !'}]">
+		<div class ="container" ng-controller="yMBCoachingController" ng-init="update_path_details();get_player_progress();list();getCoaches();getCurrentMastery();">
 		
 		
-		<div ng-show="allCoachesData.coachesData[0].coach==null">
+		<div ng-show="mastery.coach==null">
 		 <h3>More Features coming up soon!</h3>
-		<IMG ng-src ="{{tempimage}}" width =30%>
-		</div>
+		<IMG ng-src ="img/purposedrivenPlaceholder/wait.png" width =50%>
+		</div> 
 		
 		
 		
@@ -131,12 +127,12 @@ float:left;
 			<span class="span11">
 		<table>
 		<tr class = 'span11'ng-repeat ="coaches in allCoachesData.coachesData|filter:currentCoach" >
-			<td class="span3"> <IMG class ="Span3" ng-src=" {{coaches.link}}" width ='200'> </td> 
+			<td class="span3"> <IMG class ="Span3" ng-src=" {{coaches.image}}" width ='200'> </td> 
 			 <td class="span3">
 
 
 				<div id = "audioDiv">	
-					<audio src="audio/{{coaches.coach}}/welcome.mp3" autoplay controls></audio> <br> <br>
+					<audio src="audio/{{coaches.coach}}/greeting.mp3" autoplay controls></audio> <br> <br>
 				</div>
 			 
 			 	  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,coaches.coach)">Start Practising </button> <br>  <br>
@@ -146,9 +142,7 @@ float:left;
 			<br> Current Path :{{currentPathName}}
 			 </td>
 			 <td class = "span4"> 
-				 <div ng-repeat = "words in text | filter:currentCoach"> 
-					<h3> <br><br> <center> {{words.word}} </center>  </h3>
-				 </div>			
+				{{coaches.audiotext.greeting}}
 
 			</td> 
 		</tr>
@@ -169,7 +163,7 @@ float:left;
 			<center><table border = '1'>
 			<td ng-repeat ="coaches in allCoachesData.coachesData" align ='center'>
 			
-			<IMG ng-src=" {{coaches.link}}" width ='150'> <br>
+			<IMG ng-src=" {{coaches.image}}" width ='150'> <br>
 			<input type ="radio" name = "coachSelect" ng-model ="$parent.currentCoach" value ="{{coaches.coach}}"> 
 
 			<b><br>{{coaches.coach}}</b> <br><br> {{coaches.desc}}
@@ -241,9 +235,10 @@ float:left;
 				<div style="height:270px;overflow-y:auto;overflow-x:hidden" ng-model="filter">
 					<table class="table table-hover">
 						<tr ng-repeat="path in player_progress.paths" ng-init="count(0);">	   
-							<td class="name">{{path.name}}</td>
+							<td class="name">{{path.name}} : {{path.id}}</td>
 							<td class="myprogress">{{path.solvedProblems}}/{{path.problemsInPath}}
 								<div class="progress progress-success">
+								
 									<div class="bar" style="width:{{count = (path.solvedProblems/path.problemsInPath)*100 |number:0}}%"></div>
 								</div>
 							</td>
