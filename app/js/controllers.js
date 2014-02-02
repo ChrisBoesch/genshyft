@@ -3848,12 +3848,13 @@ function CountdownController($scope,$timeout) {
             
 }
 
-function EventController($scope, $resource){
+function EventController($scope, $resource, $location){
         $scope.event = {"name":"Default name", 
                             "description": "Default description",
                             "venue": "Default venue"};
         $scope.events = [];
-  
+  		$scope.location = $location;
+
         var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
                   
         // posting without and id should result in creating an object.
@@ -3885,6 +3886,11 @@ function EventController($scope, $resource){
                  $scope.registration = registration;
                  $scope.fetch_event();
             });
+        }
+
+        $scope.go_to_eventsRanking = function(id){
+          //to do: land at eventsTable.html and pass eventID over
+          $location.path("/eventsTable?eventID=" + id);
         }
           
 }
