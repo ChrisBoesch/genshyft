@@ -3918,6 +3918,9 @@ function EventTableController($scope, $resource){
 
 	  	};	  	
         
+        $scope.returnToPreviousPage = function() {
+  			window.history.back();
+		};
 
 
 
