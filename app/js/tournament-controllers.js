@@ -492,7 +492,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           $cookieStore.put("num", $scope.game.problemIDs.length);
           $cookieStore.put("type", "practiceGame");
         
-          window.location.href = "tournament_play_page.html";
+          //window.location.href = "tournament_play_page.html";
+          $location.path("tournament-grpplay");
         });
       }else{
         alert("Please join a group in order to Play!");
@@ -507,7 +508,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $cookieStore.put("num", $scope.game.problemIDs.length);
         $cookieStore.put("type", "practiceGame");
       
-        window.location.href = "tournament_play_page.html";
+        //window.location.href = "tournament_play_page.html";
+        $location.path("tournament-grpplay");
       });  
     }
   };

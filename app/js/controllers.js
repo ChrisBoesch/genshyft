@@ -227,6 +227,15 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 			alert("Please login with FaceBook or Google Account first!");
 		}
 	};
+
+	$scope.checkSchoolsMapLogin = function(){
+		if($scope.player.nickname){
+			$location.path("schoolsmap");
+		}
+		else{
+			alert("Please login with FaceBook or Google Account first!");
+		}
+	};
 	// End GENShYFT Code
 
 	
