@@ -92,7 +92,13 @@
 						</br>
 					</div>
 					<div class="span3">
-						</br><b>Status :</b> {{grpTournaments[0].status}}
+						</br><b>Status :</b> 
+						<select class="span7" ng-model="tourStatus">
+							<option>closed</option>
+							<option>open</option>
+							<option>archive</option>
+							<option>hide</option>
+						</select>
 							</br>
 							</br>
 							</br>
@@ -125,7 +131,37 @@
 			<div class="row-fluid">
 			<div class="span10 well well-small">
 				<button type="button" class="close" aria-hidden="true">×</button>
-				<div class="span2"><b>Round 1</b>
+				<div class="row-fluid">
+					<div class="span10">
+						<div class="span3">
+							Round Name:
+						</div>
+						<div class="span7">
+							{{grpTournaments[0].rounds.roundName}}
+						</div>
+					</div>	
+				</div>
+
+				<div class="row-fluid">
+					<div class="span10">
+						<div class="span3">
+							Round Time Limit:
+						</div>
+						<div class="span7">
+							{{grpTournaments[0].rounds.timeLimit}}
+						</div>
+					</div>	
+				</div>
+
+				<div class="row-fluid">
+					<div class="span10">
+						<div class="span3">
+							Number of Questions:
+						</div>
+						<div class="span7">
+							{{grpTournaments[0].rounds.problemIDs.length}}
+						</div>
+					</div>	
 				</div>
 			</div>
 		</div>
