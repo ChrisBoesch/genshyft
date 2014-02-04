@@ -32,6 +32,8 @@
     th.Rank_Progress, td.Rank_Progress						{width:10%;}
     th.Rank_AssignedTo, td.Rank_AssignedTo					{width:10%;}
     th.Rank_MentoredBy, td.Rank_MentoredBy					{width:10%;}
+
+    img.grav {width:25%;}
 		
 
 </style>
@@ -75,8 +77,8 @@
 								<tr ng-repeat="player in playerRanks">
 									<td class="Rank_Ranking">{{$index+1}}</td>
 									<td class="Rank_RankInGrp">{{player.rankingInGrp}}</td>
-									<td class="Rank_Grp">{{player.group}}</td>	
-									<td class="Rank_PlayerName">{{player.playerName}}</td>				
+									<td class="Rank_Grp">{{player.group}}</td>
+									<td class="Rank_PlayerName"><img class="grav"ng-src="{{player.playerImg}}"> &nbsp; &nbsp;{{player.playerName}}</td>				
 									<!-- Need to add in the questions associated to each round and the tick logo -->
 									<td class="Rank_Qns"></td>
 									<!-- -->

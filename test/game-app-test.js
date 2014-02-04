@@ -766,7 +766,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 57754,
 				"playerName": "Chris",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 1,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -782,7 +782,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 2739102,
 				"playerName": "Player 2",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 1,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -797,7 +797,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 9379339,
 				"playerName": "Player 3",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 1,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -812,7 +812,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 57753,
 				"playerName": "Player 4",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 2,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -827,7 +827,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 2739101,
 				"playerName": "Player 5",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 2,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -842,7 +842,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 9379338,
 				"playerName": "Player 6",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 2,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -857,7 +857,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 57752,
 				"playerName": "Player 7",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 3,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -872,7 +872,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 2739100,
 				"playerName": "Player 8",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 3,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -887,7 +887,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 9379337,
 				"playerName": "Player 9",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 4,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -902,7 +902,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 57751,
 				"playerName": "Player 10",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 4,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -917,7 +917,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 2739099,
 				"playerName": "Player 11",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 4,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -932,7 +932,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 9379336,
 				"playerName": "Player 12",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 4,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -947,7 +947,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 57750,
 				"playerName": "Player 13",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 5,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -962,7 +962,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 2739098,
 				"playerName": "Player 14",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 3,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -977,7 +977,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			{
 				"playerId": 9379335,
 				"playerName": "Player 15",
-				"playerImg":"URL",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
 				"group": 2,
 				"rankingInGrp":"",
 				"overallRanking":"",
@@ -1191,7 +1191,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	};
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076609').respond(tournamentGrpData);
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076608').respond(tournamentIndivData);
-	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076610').respond(IndTournData);
+	//$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076610').respond(IndTournData);
 	
 		
 
@@ -1764,7 +1764,256 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       //Generic Response to catch anything sent to the SingPath rest API
       //$httpBackend.whenGET(/^JSONP/).passThrough();
       
+      var RankingData = {
+    "status": "Open",
+    "currentPlayerID": 57754,
+    "description": "Tournament",
+    "directorID": 57754,
+    "tournType": "Group",
+    "tournamentID": 5060388987076610,
+    "maxNoPlayerPerGrp": 5,
+    "numberOfGrp": 5,
+    "mentorAssignInTeam": "Y",
+	"round":[{
+		"roundID":4912161075757056,
+		"currentHeatDetails": {
+			"heatID": 6144086545268736,
+			"description": "Heat 2",
+			"startTime": "2013-10-04 14:02:05.835670",
+			"currentTime": "2013-10-04 14:02:00.246270",
+		},
+		"registeredPlayers": [
+			{
+				"playerId": 57754,
+				"playerName": "Chris",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739102,
+				"playerName": "Player 2",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""	
+			},
+			{
+				"playerId": 9379339,
+				"playerName": "Player 3",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57753,
+				"playerName": "Player 4",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739101,
+				"playerName": "Player 5",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379338,
+				"playerName": "Player 6",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57752,
+				"playerName": "Player 7",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739100,
+				"playerName": "Player 8",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379337,
+				"playerName": "Player 9",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57751,
+				"playerName": "Player 10",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739099,
+				"playerName": "Player 11",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379336,
+				"playerName": "Player 12",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57750,
+				"playerName": "Player 13",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 5,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739098,
+				"playerName": "Player 14",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379335,
+				"playerName": "Player 15",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			}
+		]
+	}] 
+}
 
+
+		$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076610').respond(RankingData);
       //eventTables data
       var eventsTableDataJC = {
     "following": 1,
