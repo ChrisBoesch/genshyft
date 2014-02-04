@@ -16,141 +16,367 @@ myApp.run(function($httpBackend) {
 
       //$httpBackend.whenGET('schools.json').passThrough();
 
-      var purposeDrivenVideos = {"Videos":[
-		{"title":"What Most School Don't Teach",
+    
+	//This is purpose driven videos data
+	var purposeDrivenVideos = {
+		"Videos":[
+		{"no":0,"title":"What Most School Don't Teach",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
-		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"0"},
+		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":2, 
+		"unlocked":true
+		},
 
-		{"title":"Art of Creative Coding",
+		{"no":1,"title":"Art of Creative Coding",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
-		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"1"},
+		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":2, 
+		"unlocked":true
+		},
 
-		{"title":"Why Teach Coding",
+		{"no":2,"title":"Why Teach Coding",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
-		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"2"},
+		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?",
+		"feedback":0, 
+		"unlocked":false
+		},
 
-		{"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
+		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
-		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"3"},
+		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?","feedback":0, 
+		"unlocked":false
+		},
 
-		{"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
+		{"no":4,"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=LR8fQiskYII",
-		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ...Java is heavyweight, verbose, and everyone loves to hate it, but Wall still thinks you should know it.","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"4"},
+		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ...Java is heavyweight, verbose, and everyone loves to hate it, but Wall still thinks you should know it.","question":"How does this video make you feel?",
+		"feedback":0, 
+		"unlocked":false
+		},
 
-		{"title":"Bruce Feiler: Agile programming -- for your family",
+		{"no":5,"title":"Bruce Feiler: Agile programming -- for your family",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=J6oMG7u9HGE",
-		"description":"Bruce Feiler has a radical idea: To deal with the stress of modern family life, go agile. Inspired by agile software programming, Feiler introduces family practices which encourage flexibility, bottom-up idea flow, constant feedback and accountability. ","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"5"},
+		"description":"Bruce Feiler has a radical idea: To deal with the stress of modern family life, go agile. Inspired by agile software programming, Feiler introduces family practices which encourage flexibility, bottom-up idea flow, constant feedback and accountability. ","question":"How does this video make you feel?",
+		"feedback":2, 
+		"unlocked":false
+		},
 
-		{"title":"iPhone Application Developer... and 6th Grader: Thomas Suarez ",
+		{"no":6,"title":"iPhone Application Developer... and 6th Grader: Thomas Suarez ",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=ehDAP1OQ9Zw",
-		"description":"Thomas Suarez is a 6th grade student at a middle school in the South Bay of Los Angeles. When Apple released the Software Development Kit (SDK), he began to create and sell his own applications. ","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"6"},
+		"description":"Thomas Suarez is a 6th grade student at a middle school in the South Bay of Los Angeles. When Apple released the Software Development Kit (SDK), he began to create and sell his own applications. ","question":"How does this video make you feel?","feedback":0, 
+		"unlocked":false
+		},
 
-		{"title":"Mitch Resnick: Let's teach kids to code",
+		{"no":7,"title":"Mitch Resnick: Let's teach kids to code",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
-		"vlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
+		"tvlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
 		"description":"Coding isn't just for computer whizzes, says Mitch Resnick of MIT Media Lab -- it's for everyone. In a fun, demo-filled talk Resnick outlines the benefits of teaching kids to code, so they can do more than just read new technologies -- but also create them."
-		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"7"},
+		,"question":"How does this video make you feel?",
+		"feedback":0, 
+		"unlocked":false
+		},
 
-		{"title":"Code For Kids - Teaching our kids what our schools don't",
+		{"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
-		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],
-		"no":"8"},
+		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?","feedback":0, 
+		"unlocked":false
+		},
 
-		{"title":"NEW NEWS : Computer coding for kids",
+		{"no":9,"title":"NEW NEWS : Computer coding for kids",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
 		"description":"Teaching kids how to write computer programs, by Marshall Brain marshallbrain.com/kids-programming.htm - Traduzir esta página Let's say that you have children, and you would like to help them learn computer programming at a youngish age."
-		,"question":"How does this video make you feel?","options":[{"choice":"Really Good"},{"choice":"Somewhat Good"},{"choice":"No Comments"},{"choice":"Don't like it"},{"choice":"Hate it"}],"no":"9"}  		
-		]};
-		$httpBackend.whenGET('/jsonapi/purposeVideos/ALL').respond(purposeDrivenVideos);
-		$httpBackend.whenPOST('/jsonapi/purposeVideos/ALL').respond({"result":"video added/adjusted"});
+		,"question":"How does this video make you feel?","feedback":0, 
+		"unlocked":false
+		}  		
+		
+		]};		
+		$httpBackend.whenGET('/jsonapi/purposevideos').respond(purposeDrivenVideos);
+		
+		
+		
+		var video_no_0 ={"Videos":[{"title":"What Most School Don't Teach",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
+		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
+		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":2, 
+		"unlocked":true,
+		"no":"0"}]};
+		
+// to retrieve instance : Video[0] of purposevideos // Calls a specific video base on "no" 0
+		$httpBackend.whenGET('/jsonapi/purposevideos/0').respond(video_no_0); // Calls a specific video base on "no" 0
+//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/0').respond({"result":"video 0 feedback adjusted"});	
+//payload -> 		//admin to update video
+//{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}		
+		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/0').respond({"result":"video 0 adjusted by admin"});		
+		
+
+		var video_no_1 = {"Videos":[{"title":"Art of Creative Coding",
+		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
+		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
+		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
+		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":2, 
+		"unlocked":true,
+		"no":"1"}]};
+		
+// to retrieve instance : Video[1] of purposevideos		 // Calls a specific video base on "no" 1
+		$httpBackend.whenGET('/jsonapi/purposevideos/1').respond(video_no_1); 
+//payload -> {"feedback":3, "purposevideo":1,"unlocked":true }   //user to update the new feedback score and unlock next video
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/1').respond({"result":"video 1 unlocked and updated"});
+//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/1').respond({"result":"video 1 feedback adjusted"});
+//payload ->  //admin to update video
+//{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}
+		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/1').respond({"result":"video 1 adjusted by admin"});
+
+
 	
 	//Video Unlock determines the video each user has unlock.
 	// status determines if a video is unlocked for a particular user
 	// no refers to video no, status ask if a video is unlocked, answer refers to the option user chose
-		var videosUnlock = {"Unlocked":[
-		{"no":"0", "status":"true", "answer" : "Somewhat Good"},
-		{"no":"1", "status":"true", "answer" : "Don't like it"},
-		{"no":"2", "status":"false", "answer" : " "},
-		{"no":"3", "status":"false", "answer" : " "},
-		{"no":"4", "status":"false", "answer" : " "},
-		{"no":"5", "status":"false", "answer" : " "},
-		{"no":"6", "status":"false", "answer" : " "},
-		{"no":"7", "status":"false", "answer" : " "},
-		{"no":"8", "status":"false", "answer" : " "},
-		{"no":"9", "status":"false", "answer" : " "}		
-		]};
+
+	//payload -> {"feedback":3, "purposevideo":12345} 
+     	$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/123').respond({});
 	
-	$httpBackend.whenGET('/jsonapi/purposeVideos/CURRENT').respond(videosUnlock);
-		$httpBackend.whenPOST('/jsonapi/purposeVideos/CURRENT').respond({"result":"user video status updated"});
 	
 	
 	//data on the mastery coaches
-	var coachesData = {"coachesData":[
-	{'coach':'Shannon','link': 'img/mbcoach/Shannon/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
-	{'coach':'Sandra','link': 'img/mbcoach/Sandra/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview','show':'true' },
-	{'coach':'Zandar','link': 'img/mbcoach/Zandar/Zandar.jpg','desc':'Hacker that wants you to be more awesome','show':'true'},
-	{'coach':'SGTMJR','link': 'img/mbcoach/SGTMJR/SGTMJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}
-	]};
+	var coachesData = {"coachesData":[{
+	"coachId":1,
+	"coach":"Shannon",
+	"image": "img/mbcoach/Shannon/Shannon.jpg",
+	"desc":"Encourager that wants you to be ready to code with your friends",
+	"audiofile":{
+					"greeting":"audio/Shannon/greeting.mp3",
+					"welcomeback":"audio/Shannon/welcomeback.mp3",
+					"areyouthere":"audio/Shannon/areyouthere.mp3",
+					"letscompile":"a",
+					"dontgiveup":"a",
+					"correctanswer":"a",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"audiotext":{
+					"greeting":"Hi im shannon, Im here to help you practice and resolve some of the problems you seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
+					"welcomeback":"welcome back by shannon",
+					"areyouthere":"are you there text by shannon",
+					"letscompile":"b",
+					"dontgiveup":"b",
+					"correctanswer":"b",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"pictures":{
+					"greeting":"c",
+					"welcomeback":"c",
+					"areyouthere":"c",
+					"letscompile":"c",
+					"dontgiveup":"c",
+					"correctanswer":"c",
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+				}
 	
-	$httpBackend.whenGET('/jsonapi/MasteryBased/COACHES').respond(coachesData);
+	},
 	
 	
-	var currentUserMasteryProgress = {"currentUserMastery":[
-	{"pathId":"2243213",
-	"pathName":"Java",
-	"coach":"Zandar"
+	{
+	"coachId":2,
+	"coach":"Sandra",
+	"image": "img/mbcoach/Sandra/Sandra.jpg",
+	"desc":"Recruiter that wants you to be ready for your interview",
+	"audiofile":{
+					"greeting":"audio/Sandra/greeting.mp3",
+					"welcomeback":"audio/Sandra/welcomeback.mp3",
+					"areyouthere":"audio/Sandra/areyouthere.mp3",
+					"letscompile":"a",
+					"dontgiveup":"a",
+					"correctanswer":"a",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"audiotext":{
+					"greeting":"Welcome back ! Lets continue solving those question. By doing this everyday, youll be better prepared the next time you get together with your friends to do some coding. Lets start!",
+					"welcomeback":"welcome back text by sandra",
+					"areyouthere":"are you there text by sandra",
+					"letscompile":"b",
+					"dontgiveup":"b",
+					"correctanswer":"b",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"pictures":{
+					"greeting":"c",
+					"welcomeback":"c",
+					"areyouthere":"c",
+					"letscompile":"c",
+					"dontgiveup":"c",
+					"correctanswer":"c",
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+				}
+	
+	},
+	{
+	"coachId":3,
+	"coach":"Zandar",
+	"image": "img/mbcoach/Zandar/Zandar.jpg",
+	"desc":"Hacker that wants you to be more awesome",
+	"audiofile":{
+					"greeting":"audio/Zandar/greeting.mp3",
+					"welcomeback":"audio/Zandar/welcomeback.mp3",
+					"areyouthere":"audio/Zandar/areyouthere.mp3",
+					"letscompile":"a",
+					"dontgiveup":"audio/Zandar/dontgiveup.mp3",
+					"correctanswer":"audio/Zandar/correctanswer.mp3",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"audio/Zandar/lessattempts.mp3"
+				},
+	"audiotext":{
+					"greeting":"Hello, fellow coder, let me help you practice some of the problems you tried before. With my guidance, you be a pro in no time.",
+					"welcomeback":"welcome back buddy, we had soo much fun the last time. If you keep coding everyday, you will be a pro in no time.",
+					"areyouthere":"Where are you buddy, we cant stop now, let's finish this ",
+					"letscompile":"b",
+					"dontgiveup":"Perhaps you should look the complier, it will help you solve it quick.",
+					"correctanswer":"Yes, you have solve the last question buddy, go try another question.",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"Nice work buddy, here's a problem that I think you can now solve in fewer attempts."
+				},
+	"pictures":{
+					"greeting":"c",
+					"welcomeback":"c",
+					"areyouthere":"c",
+					"letscompile":"c",
+					"dontgiveup":"c",
+					"correctanswer":"c",
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+				}
+	
+	},
+	{
+	"coachId":4,
+	"coach":"SGTMJR",
+	"image": "img/mbcoach/SGTMJR/SGTMJR.jpg",
+	"desc":"Wants you to quit before you get someone killed",
+"audiofile":{
+					"greeting":"audio/SGTMJR/greeting.mp3",
+					"welcomeback":"audio/SGTMJR/welcomeback.mp3",
+					"areyouthere":"audio/SGTMJR/areyouthere.mp3",
+					"letscompile":"a",
+					"dontgiveup":"a",
+					"correctanswer":"a",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"audiotext":{
+					"greeting":"Attention recruit !, I am your  SGT Major. I am going to make sure you solve this problem much better and improve your coding skill. Lets get to it !",
+					"welcomeback":"welcoem back by stgmjr",
+					"areyouthere":"b",
+					"letscompile":"b",
+					"dontgiveup":"b",
+					"correctanswer":"b",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"pictures":{
+					"greeting":"c",
+					"welcomeback":"c",
+					"areyouthere":"c",
+					"letscompile":"c",
+					"dontgiveup":"c",
+					"correctanswer":"c",
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+					
+				}
+	
 	}
 	]};
-	$httpBackend.whenGET('/jsonapi/MasteryBased/CURRENT').respond(currentUserMasteryProgress);
-	$httpBackend.whenPOST('/jsonapi/MasteryBased/UPDATE').passThrough();
+	
+	$httpBackend.whenGET('/jsonapi/coach').respond(coachesData);
 	
 	
-	var zandar ={"speech":[
+	//the user current coach/path progress
+	var currentUserMasteryProgress = {
+	"pathId":"10030",
+	"pathName":"python",
+	"coach":"Zandar",
+	"nextProblemID": 52741,
+	"fromProblemSetID":10041,
+	"goal": "lessattempts",
+	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
+	};
+	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);;
+	
+	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }
+	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New Mentor, Path Id and Path Name has been recorded."});
+	
+	var gameID ={"gameID":101010};
+	// payload -->{"problemId":11021,"problemSet":304232};   // will save <-- those values to get gameID;
+	$httpBackend.whenPOST('/jsonapi/play_coaching_game').respond(function(method, url, data) {
+
+
+        var item = gameID;
+        return [200,item];
+        
+      })
+	
+	
+	
+//retrieve game details for mastery game base on the game Id;
+$httpBackend.whenGET('/jsonapi/game/101010').respond(
+{"game_end": "2010-06-01 15:19:39.813685", "player": "Chris", "solvedProblemIDs": [52472], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2010-05-14 05:39:30.194936", "numProblems": 3, "numSolvedProblems": 1, "status": "ACCEPTING SOLUTIONS", "problemIDs": [52472, 57555, 52741], "problems": {"problems": [{"skeleton": "question=", "description": "Another sequential data type is the dictionary.  Create a dictionary with three different indexes as shown in the example.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> question['color']\r\n 'blue'\r\n>>> question[7]\r\n 'seven'\r\n>>> question[3.14]\r\n [3,1,4,6]", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52472, "name": "Dictionaries"}, {"skeleton": "def sortedList(d):", "description": "The dictionary method keys() returns a list of all the keys in a dictionary. Create the function sortedList that returns a sorted list of the keys for a dictionary that is passed in. ", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d = {'a':1, 'c':2, 'b':3}\n>>> sortedList(d)\n['a', 'b', 'c']", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 57555, "name": "List the keys of a dictionary"}, {"skeleton": "def lookup(d,v):\r\n    ", "description": "Create a function that takes a dictionary and a value.  It should return a list of all the keys that map to that value.  The list should be sorted.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d={'ta':4,8:'32',(5,3):'hi',(4,3,2):[4,3],'':4,73:8,839:234,34:857,'Hello':4}\r\n>>> lookup(d,4)\r\n ['', 'Hello', 'ta']\r\n>>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}\r\n>>> lookup(eng2sp,'uno')\r\n ['one']\r\n>>> lookup(eng2sp,'siete')\r\n []", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52741, "name": "Reverse Lookup"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "1423004", "tournamentID": null, "name": "Default Game", "roundID": null, "questID": null, "heatID": null, "game_start": "2010-05-14 05:39:30.194841", "currentTime": "2014-02-01 02:11:23.931950", "game_type": "Timed Interview", "timelimit": 3600});
+	
+	//the following at the audio scripts for each coaches.
+	/*var zandar ={"speech":[
 	{"text": "Welcome back buddy, we had some have fun that last time. If you spend at least 5 minutes coding everyday, you'll be a pro like me in no time!"},
 	
 	{"text": "Mind blowing buddy, let's do another one. I think this is one problem that you can solve with less attempts than last time. "},
 	{"text": "phenominial work buddy, let's keep up with this streak."},
 	{"text": "Amazing buddy, you have come so far.You are doing a great job. Keep going. "},
 	
-	
 	{"text": "That's ok buddy. Go to the compiler and see what's wrong. We can solve this problem sooner than you think."},
 	{"text": "Perhaps you can look at the compiler tab,It'll help you solve it quick. Let's do this !"},
 
 	{"text": "Not bad, but I think you can do even better. You know what, let's try that skip question again later."},
 	{"text": "Don't worry man. The more you code, the more you improve. We'll come back to that skip question later"},
-
 	
 	{"text": "Yes, you have solved the last question buddy!"},
 	
 	{"text": "where are you buddy, we can't stop now, Let's finish this !"}
 	
 	]};
-	$httpBackend.whenGET('/jsonapi/speech/Zandar').respond(zandar);
+	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/Zandar').respond(zandar);
 
 
 	var SGTMJR ={"speech":[
@@ -179,7 +405,7 @@ myApp.run(function($httpBackend) {
 	{"text": "Congratulation, you already master this"}
 	
 	]};
-	$httpBackend.whenGET('/jsonapi/speech/SGTMJR').respond(SGTMJR);
+	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/SGTMJR').respond(SGTMJR);
 	
 	var Sandra ={"speech":[
 	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
@@ -207,7 +433,7 @@ myApp.run(function($httpBackend) {
 	{"text": "Congratulation, you already master this"}
 	
 	]};
-	$httpBackend.whenGET('/jsonapi/speech/Sandra').respond(Sandra);
+	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/Sandra').respond(Sandra);
 	
 	var Shannon ={"speech":[
 	{"text": "Hi, Let me help you with some of the problems you had done before, with my guidance, you will be a pro in no time"},
@@ -235,8 +461,8 @@ myApp.run(function($httpBackend) {
 	{"text": "Congratulation, you already master this"}
 	
 	]};
-	$httpBackend.whenGET('/jsonapi/speech/Shannon').respond(Shannon);
-	
+	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/Shannon').respond(Shannon);
+	*/
 	var tournaments = {"Tournaments":[
 		{"tournamentId":"001",
 		"title":"test",
@@ -1027,6 +1253,7 @@ myApp.run(function($httpBackend) {
       $httpBackend.whenGET('/jsonapi/quest/2').respond({"name":"Quest 2","image":"http://someimage.com/someimage.jpg"});
  
       $httpBackend.whenGET('/jsonapi/quest').respond([{"story": 14611860, "name": "The Spy Who Coded Javascript Easy", "videos": ["LL-9dh31lO8", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED"], "solvedProblems": [], "created": "2013-05-11T08:26:09.351890", "numSolved": 0, "player": 57754, "path": 2473247, "difficulty": "Easy", "id": 17380577, "numProblems": 50}, {"story": 14611860, "name": "The Spy Who Coded Javascript Easy", "videos": ["LL-9dh31lO8", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED"], "solvedProblems": [2497165], "created": "2013-05-08T03:32:02.773170", "numSolved": 1, "player": 57754, "path": 2473247, "difficulty": "Easy", "id": 17438699, "numProblems": 50}, {"story": 14611860, "name": "The Spy Who Coded Javascript Easy", "videos": ["LL-9dh31lO8", "wforb_EBcNc", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED"], "solvedProblems": [2452235, 2522028, 2500090, 2521055, 2516067], "created": "2013-05-08T04:54:11.458420", "numSolved": 5, "player": 57754, "path": 2473247, "difficulty": "Easy", "id": 17469578, "numProblems": 50}]);
+      $httpBackend.whenPOST('/jsonapi/quest').respond({"story": 14611860, "name": "The Spy Who Coded Python Easy", "videos": ["LL-9dh31lO8", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED", "LOCKED"], "solvedProblems": [], "created": "2013-12-21T12:50:19.399050", "archived": false, "numSolved": 0, "player": 57754, "path": 10030, "difficulty": "Easy", "id": 5173495541530624, "numProblems": 50});
 
       $httpBackend.whenGET('/jsonapi/create_quest_game/14744934').respond({"game_end": "None", "player": "Chris", "solvedProblemIDs": [], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-04-02 03:46:43.936750", "numProblems": 5, "numSolvedProblems": 0, "status": "ACCEPTING SOLUTIONS", "problemIDs": [10032, 10115, 18170, 37043, 17191], "problems": {"problems": [{"skeleton": "alpha=\r\npi=", "description": "Remember that the examples will show you the tests that will be run on your code to make sure you have accomplished the task.  If you are unsure exactly what you need to do, look at the examples.  For this problem create a variable named alpha that contains the alphabet, and a variable named pi that contains the value of pi, correct to 8 decimal places.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> alpha\r\n 'abcdefghijklmnopqrstuvwxyz'\r\n>>> pi\r\n 3.14159265", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 8, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10032, "name": "More Fun with Variables"}, {"skeleton": null, "description": "For this task you need to create two variables containing the values listed.  Check the examples to see what values they should have.  This time you don't get any help.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> quest\r\n'To seek the Holy Grail.'\r\n>>> airspeed\r\n43", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 9, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10115, "name": "Many Variables"}, {"skeleton": "perfect = (4+3", "description": "An essential skill of programming is finding and fixing errors.  Here is a simple example of a syntax error.  Look at the code that is given and fix the error. Syntax errors occur when you type something that python can't recognize.  \r\n\r\nIt could be a symbol that is in a weird place: \r\n  4+$ (You can't add 4 plus $)\r\n\r\nCorrect the code so that it no longer contains a syntax error", "path_id": 10030, "problemset_id": 11021, "examples": ">>> perfect\r\n7", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 10, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 18170, "name": "Syntax error"}, {"skeleton": "# This is where you will actually  be typing and testing your code. Click \"Run Code\".", "description": "Welcome to SingPath!  The first few questions will introduce you to the interface.  You do not need to type anything in the solution box below.  Just read the examples and the solution given.  When you are ready to go to the next question, click the \"Run\" button.", "path_id": 10030, "problemset_id": 11021, "examples": "This section will give you examples of code that SingPath will use to test your program solutions.  \r\n\r\n", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 37043, "name": "Welcome"}, {"skeleton": "greeting = 'hello world'", "description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> greeting\r\n'hello world'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 2, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17191, "name": "Your First Program"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": 15545585, "tournamentID": null, "name": "jsonapi created game", "roundID": null, "questID": 14744934, "heatID": null, "game_start": "2013-04-02 03:46:43.936780", "currentTime": "2013-04-02 03:46:45.722490", "game_type": "Timed Interview", "timelimit": 3600});
       $httpBackend.whenGET('/jsonapi/create_quest_game/5173495541530624').respond({"game_end": "None", "player": "Chris", "solvedProblemIDs": [], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-12-21 12:57:53.571960", "numProblems": 5, "numSolvedProblems": 0, "status": "ACCEPTING SOLUTIONS", "problemIDs": [10119, 10032, 10115, 18170, 18880568], "problems": {"problems": [{"skeleton": "name=\r\npigs=", "description": "You can create as many variables as you like. For this problem create two different variables: name which contains 4.27 and pigs which contains the phrase 'can fly'.\r\n\r\nNotice that the variable called name contains a number and not a name at all. Variable names DON'T have to describe their contents, but it is best to choose variable names that describe the contents.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> name\r\n4.27\r\n>>> pigs\r\n'can fly'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 7, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10119, "name": "Still more variables"}, {"skeleton": "alpha=\r\npi=", "description": "Remember that the examples will show you the tests that will be run on your code to make sure you have accomplished the task. If you are unsure exactly what you need to do, look at the examples. For this problem create a variable named alpha that contains the alphabet, and a variable named pi that contains the value of pi, correct to 8 decimal places.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> alpha\r\n 'abcdefghijklmnopqrstuvwxyz'\r\n>>> pi\r\n 3.14159265", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 8, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10032, "name": "More Fun with Variables"}, {"skeleton": null, "description": "For this task you need to create two variables containing the values listed. Check the examples to see what values they should have. This time you don't get any help.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> quest\r\n'To seek the Holy Grail.'\r\n>>> airspeed\r\n43", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 9, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10115, "name": "Many Variables"}, {"skeleton": "perfect = (4+3", "description": "An essential skill of programming is finding and fixing errors. Here is a simple example of a syntax error. Look at the code that is given and fix the error. Syntax errors occur when you type something that python can't recognize. \r\n\r\nIt could be a symbol that is in a weird place: \r\n 4+$ (You can't add 4 plus $)\r\n\r\nCorrect the code so that it no longer contains a syntax error", "path_id": 10030, "problemset_id": 11021, "examples": ">>> perfect\r\n7", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 10, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 18170, "name": "Syntax error"}, {"skeleton": "#wizard = ", "description": "Make the variable wizard = 'Oz' ", "path_id": 10030, "problemset_id": 11021, "examples": ">>> wizard\n \"Oz\"\n", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 11, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 18880568, "name": "Wizard"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": 5906111467094016, "tournamentID": null, "name": "jsonapi created game", "roundID": null, "questID": 5173495541530624, "heatID": null, "game_start": "2013-12-21 12:57:54.665140", "currentTime": "2013-12-21 12:57:54.949160", "game_type": "Quest", "timelimit": 3600});
@@ -1062,7 +1289,9 @@ myApp.run(function($httpBackend) {
 	  $httpBackend.whenGET('/jsonapi/problemsets/2462233').respond({"type": "problemsets", "problemsets": [{"id": 2311386, "numProblems": 10, "name": "Ruby Level 1", "description": "The way of SingPath"}, {"id": 2505145, "numProblems": 11, "name": "Ruby Level 2", "description": "Variables, keywords, and statements"}, {"id": 2459266, "numProblems": 15, "name": "Ruby Level 3", "description": "Functions"}, {"id": 2517162, "numProblems": 17, "name": "Ruby Level 4", "description": "Conditionals"}, {"id": 2491259, "numProblems": 11, "name": "Ruby Level 5", "description": "Recursion"}, {"id": 2476337, "numProblems": 18, "name": "Ruby Level 6", "description": "Iteration"}, {"id": 2475313, "numProblems": 21, "name": "Ruby Level 7", "description": "Strings"}, {"id": 2484269, "numProblems": 12, "name": "Ruby Level 8", "description": "Arrays"}, {"id": 2533056, "numProblems": 10, "name": "Ruby Level 9", "description": "Hashes"}, {"id": 2488242, "numProblems": 10, "name": "Ruby Level 10", "description": "Tuples"}, {"id": 2506158, "numProblems": 15, "name": "Ruby Level 11", "description": "Classes & Objects"}]});	  
 	  
       $httpBackend.whenGET('/jsonapi/get_problemset_progress/11021').respond({});
-
+    $httpBackend.whenGET(/^\/jsonapi\/get_problem/).respond({"problem": {"tests": ">>> greeting\r\n'hello world'", "description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.", "other_tests": null, "modified": "2010-12-13 01:10:53.287641", "problemset_id": 11021, "examples": ">>> greeting\r\n'hello world'", "problemsetorder": 2, "problem_id": 17191, "skeleton": "greeting = 'hello world'", "name": "Your First Program", "created": "2009-12-15 18:57:09.124678", "solution": "greeting='hello world'", "interface_id": 11020, "path_id": 10030, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}}, "type": "problem"});
+    $httpBackend.whenPOST('/jsonapi/new_problem').passThrough();
+    $httpBackend.whenPOST('/jsonapi/edit_problem').respond({"path_id": 4817382052724736, "problemset_id": 5165115624128512, "type": "new_problem", "problem_id": 4620597522857984, "interface_id": 11020});
       $httpBackend.whenGET(/^\/jsonapi\/problems/).respond({"problems": [{"skeleton": "# This is where you will actually  be typing and testing your code. Click \"Run Code\".", "description": "Welcome to SingPath!  The first few questions will introduce you to the interface.  You do not need to type anything in the solution box below.  Just read the examples and the solution given.  When you are ready to go to the next question, click the \"Run\" button.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": "This section will give you examples of code that SingPath will use to test your program solutions.  \r\n\r\n", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 37043, "name": "Welcome"}, {"skeleton": "greeting = 'hello world'", "description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> greeting\r\n'hello world'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 2, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17191, "name": "Your First Program"}, {"skeleton": "bob='Thanks for the ", "description": "Many of the questions will include starter code.  It helps you as you solve the problem.  For this problem create a variable named 'bob' that contains the text 'Thanks for the help'", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> bob\r\n'Thanks for the help'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 3, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 36066, "name": "Starter Code"}, {"skeleton": "oops=317", "description": "When you run your code, SingPath has certain tests that it checks to see if you did what you were supposed to do.  If incorrect you'll see a table with the results of the tests.  \r\n\r\nNotice that the starter code has the wrong value. Go ahead and run the code now so you can see the results (you can finish reading this after you run it).\r\n\r\nThe results tell you that SingPath looked at the variable named 'oops' expecting to find 713, but found 317 instead. Fix the error now and run it to advance to the next problem.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> oops\r\n 713", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10033, "name": "Expected Results"}, {"skeleton": "age = ", "description": "Variables are an important part of programming; they allow the you to store a value and reuse it later.  You are allowed to use just about anything you like as your variable name.\r\n\r\nFor this problem, create a variable named 'age' with the value 7.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> age\r\n7", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}, {"skeleton": "spam='", "description": "Variables can hold many different types of information.  Create a variable spam containing the word 'anxious'.  When you store words or phrases into a variable, you must enclose the text in quotation marks.  You can use single quotes or double quotes, either will work.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> spam\r\n'anxious'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 6, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 18156, "name": "Another Variable"}, {"skeleton": "name=\r\npigs=", "description": "You can create as many variables as you like.  For this problem create two different variables: name which contains 4.27 and pigs which contains the phrase 'can fly'.\r\n\r\nNotice that the variable called name contains a number and not a name at all. Variable names DON'T have to describe their contents, but it is best to choose variable names that describe the contents.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> name\r\n4.27\r\n>>> pigs\r\n'can fly'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 7, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10119, "name": "Still more variables"}, {"skeleton": "alpha=\r\npi=", "description": "Remember that the examples will show you the tests that will be run on your code to make sure you have accomplished the task.  If you are unsure exactly what you need to do, look at the examples.  For this problem create a variable named alpha that contains the alphabet, and a variable named pi that contains the value of pi, correct to 8 decimal places.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> alpha\r\n 'abcdefghijklmnopqrstuvwxyz'\r\n>>> pi\r\n 3.14159265", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 8, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10032, "name": "More Fun with Variables"}, {"skeleton": null, "description": "For this task you need to create two variables containing the values listed.  Check the examples to see what values they should have.  This time you don't get any help.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> quest\r\n'To seek the Holy Grail.'\r\n>>> airspeed\r\n43", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 9, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10115, "name": "Many Variables"}, {"skeleton": "perfect = (4+3", "description": "An essential skill of programming is finding and fixing errors.  Here is a simple example of a syntax error.  Look at the code that is given and fix the error. Syntax errors occur when you type something that python can't recognize.  \r\n\r\nIt could be a symbol that is in a weird place: \r\n  4+$ (You can't add 4 plus $)\r\n\r\nCorrect the code so that it no longer contains a syntax error", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> perfect\r\n7", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 10, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 18170, "name": "Syntax error"}, {"skeleton": "#wizard = ", "description": "Make the variable wizard = &quot;Oz&quot;.", "path_id": 10030, "solved": true, "problemset_id": 11021, "examples": ">>> wizard\n \"Oz\"\n", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 11, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 18880568, "name": "Wizard"}], "type": "problems", "required_badges": [], "problemset": {"pathorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 11021, "name": "Python Level 1", "description": "The way of SingPath"}});
 
       var python_5_problem_game = {"game_end": "None", "player": "Chris", "solvedProblemIDs": [], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-01-07 07:57:18.320949", "numProblems": 5, "numSolvedProblems": 0, "status": "ACCEPTING SOLUTIONS", "problemIDs": [18287, 11024, 18364, 8377, 11025], "problems": {"problems": [{"skeleton": "#def square(num):\r\n#    return num*num", "description": "As you create functions for SingPath, remember that they all will need to be fruitful functions.  This will allow SingPath to actually test your functions.  \r\n\r\nCreate the function square() that takes an integer or float as a parameter and returns the square of the parameter.\r\n\r\nI've given the complete function for this problem, you just need to remove the comment markings.", "path_id": 10030, "problemset_id": 11023, "examples": "This is the first problem where you will see multiple tests with multiple values.  You need to make sure your function works for all of these tests.\r\n\r\n>>> square(3) \r\n 9\r\n>>> square(8.5)\r\n 72.25\r\n>>> square(1.001)\r\n 1.002001", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 10, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 18287, "name": "Functions"}, {"skeleton": "def increment(num):\r\n    return ", "description": "Create a function named increment() that takes a number as a parameter and returns the number increased by one.  All you need to do is type in the expression after the word 'return'.", "path_id": 10030, "problemset_id": 11023, "examples": ">>> increment(2)\r\n 3\r\n>>> increment(2.35)\r\n 3.35\r\n>>> increment(2912)\r\n 2913", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 20, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 11024, "name": "Increment"}, {"skeleton": "def double_word(\r\n", "description": "Create a function called double_word() that takes a string as a parameter and returns the string duplicated.", "path_id": 10030, "problemset_id": 11023, "examples": ">>> double_word('fun')\r\n'funfun'\r\n>>> double_word('Mississippi')\r\n'MississippiMississippi'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 50, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 18364, "name": "Double String"}, {"skeleton": "def repeat_word(\r\n", "description": "You need to generalize the function double_word() so that it takes two parameters, a string and a number.  It should return the string repeated the given number of times.\r\n", "path_id": 10030, "problemset_id": 11023, "examples": ">>> repeat_word('a',4)\r\n'aaaa'\r\n>>> repeat_word('blob',5)\r\n'blobblobblobblobblob'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 60, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 18377, "name": "Repeat String"}, {"skeleton": "import math\r\ndef circle_area(r):\r\n    return math.pi", "description": "Python comes with many modules or libraries of functions and values.  You can access the functions and values in these modules by importing the module.  One of the modules you will often need is the math module.  It has many functions and values.  For this problem you will use the module to calculate the area of a circle given the radius.  You will notice that you can get the value of pi using the syntax math.pi.  Finish the formula.", "path_id": 10030, "problemset_id": 11023, "examples": ">>> circle_area(10) \r\n 314.15926535897933\r\n>>> circle_area(5)\r\n 78.539816339744831\r\n>>> circle_area(23.42)\r\n 1723.1522607604491", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 70, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 11025, "name": "Math Module"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "13791638", "tournamentID": null, "name": "jsonapi created game", "roundID": null, "heatID": null, "game_start": "2013-01-07 07:57:18.320977", "currentTime": "2013-01-07 07:57:42.582673", "game_type": "Timed Interview", "timelimit": 3600}
@@ -1116,7 +1345,8 @@ myApp.run(function($httpBackend) {
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
       var good_verify_result = {"solved": true, "verification_message": "Your solution passes all tests.", "printed": ""};
       $httpBackend.whenGET('/jsonapi/check_code_with_interface').respond(bad_verify_result); 
-      
+      $httpBackend.whenPOST('/jsonapi/check_code_with_interface').passThrough(); //respond(bad_verify_result); 
+
       //Analytics
       $httpBackend.whenGET('/jsonapi/get_expected_values?questionID=17155').respond({"status": "ok", "expectedSeconds": 28, "expectedAttempts": 1});
       $httpBackend.whenGET('/jsonapi/get_difficulty_setting').respond({"difficulty": "Medium"}); 
@@ -1156,15 +1386,15 @@ myApp.run(function($httpBackend) {
                                     "questionSet":[
                                         {
                                             "questionId":111,
-                                            "question":"test1"
+                                            "question":"Compare"
                                         },
                                         {
                                             "questionId":112,
-                                            "question":"test2"
+                                            "question":"Fibonnaci"
                                         }, 
                                         {
                                             "questionId":113,
-                                            "question":"test3"
+                                            "question":"Factorial"
                                         }  
 
                                     ]
@@ -1175,15 +1405,15 @@ myApp.run(function($httpBackend) {
                                     "questionSet":[
                                         {
                                             "questionId":104,
-                                            "question":"test4"
+                                            "question":"Hashes"
                                         },
                                         {
                                             "questionId":105,
-                                            "question":"test5"
+                                            "question":"Reverse Lookup"
                                         }, 
                                         {
                                             "questionId":106,
-                                            "question":"test6"
+                                            "question":"String Histogram"
                                         }    
 
                                     ]
@@ -1194,186 +1424,186 @@ myApp.run(function($httpBackend) {
                                     "questionSet":[
                                         {
                                             "questionId":107,
-                                            "question":"test7"
+                                            "question":"While loop"
                                         },
                                         {
                                             "questionId":108,
-                                            "question":"test8"
+                                            "question":"Sum range"
                                         }, 
                                         {
                                             "questionId":109,
-                                            "question":"test9"
+                                            "question":"Cubes"
                                         }   
 
                                     ]
 								},
 								{
 									"language":"Python",
-									"pathLevel":"Snake",
+									"pathLevel":"Strings",
                                     "questionSet":[
                                         {
                                             "questionId":101,
-                                            "question":"test1"
+                                            "question":"Strings"
                                         },
                                         {
                                             "questionId":102,
-                                            "question":"test2"
+                                            "question":"Hello"
                                         }, 
                                         {
                                             "questionId":103,
-                                            "question":"test3"
+                                            "question":"Upper Case"
                                         }    
 
                                     ]
 								},
 								{
 									"language":"Python",
-									"pathLevel":"Cobra",
+									"pathLevel":"Lists",
                                     "questionSet":[
                                         {
                                             "questionId":11,
-                                            "question":"test1"
+                                            "question":"Lists"
                                         },
                                         {
                                             "questionId":11,
-                                            "question":"test2"
+                                            "question":"List Head"
                                         }, 
                                         {
                                             "questionId":12,
-                                            "question":"test3"
+                                            "question":"Remove Item"
                                         }    
 
                                     ]
 								},
 								{
 									"language":"Python",
-									"pathLevel":"Adder",
+									"pathLevel":"Tuples",
                                     "questionSet":[
                                         {
                                             "questionId":13,
-                                            "question":"test1"
+                                            "question":"minMax"
                                         },
                                         {
                                             "questionId":14,
-                                            "question":"test2"
+                                            "question":"Sum"
                                         }, 
                                         {
                                             "questionId":15,
-                                            "question":"test3"
+                                            "question":"Zip"
                                         }    
 
                                     ]
 								},
 								{
 									"language":"Javascript",
-									"pathLevel":"Popup",
+									"pathLevel":"Dictionaries",
                                     "questionSet":[
                                         {
                                             "questionId":15,
-                                            "question":"test1"
+                                            "question":"Dictionaries"
                                         },
                                         {
                                             "questionId":15,
-                                            "question":"test2"
+                                            "question":"Reverse Lookup"
                                         }, 
                                         {
                                             "questionId":16,
-                                            "question":"test3"
+                                            "question":"String Building"
                                         }    
 
                                     ]
 								},
 								{
 									"language":"Javascript",
-									"pathLevel":"Validation",
+									"pathLevel":"More Functions",
                                     "questionSet":[
                                         {
                                             "questionId":111,
-                                            "question":"test1"
+                                            "question":"filter"
                                         },
                                         {
                                             "questionId":112,
-                                            "question":"test2"
+                                            "question":"map/reduce"
                                         }, 
                                         {
                                             "questionId":1314,
-                                            "question":"test3"
+                                            "question":"currying - challenging"
                                         }   
 
                                     ]
 								},
 								{
 									"language":"Javascript",
-									"pathLevel":"Animation",
+									"pathLevel":"Introduction",
                                     "questionSet":[
                                         {
                                             "questionId":134,
-                                            "question":"test1"
+                                            "question":"Hello World"
                                         },
                                         {
                                             "questionId":142,
-                                            "question":"test2"
+                                            "question":"Comments"
                                         }, 
                                         {
                                             "questionId":142,
-                                            "question":"test3"
+                                            "question":"Variables"
                                         }    
 
                                     ]
 								},
 								{
 									"language":"Java",
-									"pathLevel":"Easy",
+									"pathLevel":"Functions",
                                     "questionSet":[
                                         {
                                             "questionId":413,
-                                            "question":"test1"
+                                            "question":"Functions"
                                         },
                                         {
                                             "questionId":153,
-                                            "question":"test2"
+                                            "question":"Increment"
                                         }, 
                                         {
                                             "questionId":253,
-                                            "question":"test3"
+                                            "question":"Product"
                                         }    
 
                                     ]
 								},
 								{
 									"language":"Java",
-									"pathLevel":"Medium",
+									"pathLevel":"Conditionals",
                                     "questionSet":[
                                         {
                                             "questionId":253,
-                                            "question":"test1"
+                                            "question":"Sign"
                                         },
                                         {
                                             "questionId":25,
-                                            "question":"test2"
+                                            "question":"Alarm Clock"
                                         }, 
                                         {
                                             "questionId":231,
-                                            "question":"test3"
+                                            "question":"Date Fashion"
                                         }    
 
                                     ]
 								},
 								{
 									"language":"Java",
-									"pathLevel":"Hard",
+									"pathLevel":"Iteration and Recursion",
                                     "questionSet":[
                                         {
                                             "questionId":235,
-                                            "question":"test1"
+                                            "question":"Compare"
                                         },
                                         {
                                             "questionId":253,
-                                            "question":"test2"
+                                            "question":"Distance"
                                         }, 
                                         {
                                             "questionId":53,
-                                            "question":"test3"
+                                            "question":"Is Between"
                                         }   
 
                                     ]
@@ -1405,6 +1635,7 @@ myApp.run(function($httpBackend) {
       var player_stories = [{"archived": false, "name": "Introduction to Ruby", "videos": ["vHcmJ0jUiME", "R37t1v3_c9k"], "created": "2013-08-13T08:56:03.404090", "editor": 57754, "published": true, "id": 5625116520087552, "description": "Shannon introduces the basics of Ruby."}, {"archived": false, "name": "Introduction to Python", "videos": ["vHcmJ0jUiME", "R37t1v3_c9k"], "created": "2013-08-10T03:37:16.512790", "editor": 57754, "published": true, "id": 5786345297412096, "description": "Shannon introduces the basics of Python."}, {"archived": false, "name": "Introduction to Javascript", "videos": ["vHcmJ0jUiME", "R37t1v3_c9k"], "created": "2013-08-13T08:55:10.055810", "editor": 57754, "published": true, "id": 6245146588872704, "description": "Shannon introduces the basics of Javascript."}, {"archived": false, "name": "Python Tutorial", "videos": ["7IkZQyQ36Io"], "created": "2013-08-09T06:30:40.963960", "editor": 57754, "published": false, "id": 6462527768625152, "description": "Christian and Shannon introduce the basic concepts of Python"}, {"archived": false, "name": "Introduction to Java", "videos": ["vHcmJ0jUiME"], "created": "2013-08-14T05:57:32.639900", "editor": 57754, "published": true, "id": 6539480697667584, "description": "Introduction to Java"}];
 
       $httpBackend.whenGET('/jsonapi/story').respond(stories);
+      $httpBackend.whenGET('/jsonapi/story/14611860').respond(stories[0]);
       $httpBackend.whenGET('/jsonapi/player_stories').respond(player_stories);
 
 
@@ -1525,7 +1756,7 @@ myApp.run(function($httpBackend) {
       $httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4711778302820352').respond({"ranking": [{"status": "GAME CLOSED", "playerid": 2739102, "solved_problems": 2, "flagUrl": "/static/flags/sg_on.png", "finished": "0:08:05.316710", "gravatar": "http://www.gravatar.com/avatar/45db5a046daf286a8c901e958fdb384e/?default=&amp;s=30", "professional": true, "total_problems": 2, "nickname": "Prof Boesch"}, {"status": "ACCEPTING SOLUTIONS", "playerid": 57754, "solved_problems": 1, "flagUrl": "/static/flags/sg_on.png", "finished": "0:00:17.453800", "gravatar": "http://www.gravatar.com/avatar/6e64bb2cab5367fd6e201df2aa722512/?default=&amp;s=30", "professional": true, "total_problems": 2, "nickname": "Chris"}], "heatStopTime": "2013-10-07 12:31:57.142490", "heatDescription": "Heat 8", "tournamentID": 5060388987076608, "tournamentDescription": "No details", "roundID": 4912161075757056, "heatID": 4711778302820352, "heatStartTime": "2013-10-07 11:31:57.142490", "roundDescription": "test round 1", "currentTime": "2013-10-07 13:55:24.945290", "tournamentType": "Normal", "type": "heat ranking"});
 
       //Web game
-      $httpBackend.whenGET('/jsonapi/game/123456').respond({"game_end": "2013-09-29 09:27:03.104550", "player": "Chris", "solvedProblemIDs": [10033], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-09-29 08:27:02.906550", "numProblems": 2, "numSolvedProblems": 1, "status": "GAME CLOSED", "problemIDs": [10033, 17155], "problems": {"problems": [{"skeleton": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "description": "Make a page that says Hello World.", "path_id": 10030, "problemset_id": 11021, "examples": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "interface": {"codeHighlightKey": "html", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10033, "name": "Expected Results"}, {"skeleton": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "description": "Make a pagge that says Goodbye World.", "path_id": 10030, "problemset_id": 11021, "examples": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "interface": {"codeHighlightKey": "html", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "5817368383062016", "tournamentID": 5060388987076608, "name": "Tournament game", "roundID": 4912161075757056, "questID": null, "heatID": 4691468476219392, "game_start": "2013-09-29 08:27:03.040390", "currentTime": "2013-09-29 13:54:35.933410", "game_type": "Timed Interview", "timelimit": 3600});
+      $httpBackend.whenGET('/jsonapi/game/123456').respond({"game_end": "2013-09-29 09:27:03.104550", "player": "Chris", "solvedProblemIDs": [10033], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-09-29 08:27:02.906550", "numProblems": 2, "numSolvedProblems": 1, "status": "GAME CLOSED", "problemIDs": [10033, 17155], "problems": {"problems": [{"skeleton": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "description": "Make a page that says Hello World.", "path_id": 10030, "problemset_id": 11021, "examples": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "interface": {"codeHighlightKey": "html", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10033, "name": "Expected Results"}, {"skeleton": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "description": "Make a pagge that says Goodbye World.", "path_id": 10030, "problemset_id": 11021, "examples": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "interface": {"codeHighlightKey": "html", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "58173683830620165817368383062016", "tournamentID": 5060388987076608, "name": "Tournament game", "roundID": 4912161075757056, "questID": null, "heatID": 4691468476219392, "game_start": "2013-09-29 08:27:03.040390", "currentTime": "2013-09-29 13:54:35.933410", "game_type": "Timed Interview", "timelimit": 3600});
       
       //$httpBackend.whenGET('/jsonapi/create_game/heatID/:heatID').respond();
     
@@ -1533,4 +1764,513 @@ myApp.run(function($httpBackend) {
       //Generic Response to catch anything sent to the SingPath rest API
       //$httpBackend.whenGET(/^JSONP/).passThrough();
       
+
+      //eventTables data
+      var eventsTableDataJC = {
+    "following": 1,
+    "name": "National Singapore JC and High-school Coding Competition",
+    "ranking": [
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5226227371606016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 101,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5428208946118656,
+            "isCurrentPlayer": true,
+            "solvedproblems": 83,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "NC-12"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 6449477007179776,
+            "isCurrentPlayer": false,
+            "solvedproblems": 70,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Sui Dongchen"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4798855845511168,
+            "isCurrentPlayer": false,
+            "solvedproblems": 69,
+            "year": 2012,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Lin Rizhong James"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 6537241174212608,
+            "isCurrentPlayer": false,
+            "solvedproblems": 62,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6309974053486592,
+            "isCurrentPlayer": false,
+            "solvedproblems": 59,
+            "year": 2013,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Tan Tze Guang"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 8539593,
+            "isCurrentPlayer": false,
+            "solvedproblems": 41,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "tanjinyi"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 5417015456038912,
+            "isCurrentPlayer": false,
+            "solvedproblems": 27,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Yong Loong Ang"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5307015706443776,
+            "isCurrentPlayer": false,
+            "solvedproblems": 26,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 6542601293398016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 26,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5928418017280000,
+            "isCurrentPlayer": false,
+            "solvedproblems": 25,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "wcm"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6301682082250752,
+            "isCurrentPlayer": false,
+            "solvedproblems": 24,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Nala ;D"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 6249092355194880,
+            "isCurrentPlayer": false,
+            "solvedproblems": 24,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Tan Di Sheng"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5806483090440192,
+            "isCurrentPlayer": false,
+            "solvedproblems": 24,
+            "year": 2013,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Armordillo"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5323577100337152,
+            "isCurrentPlayer": false,
+            "solvedproblems": 19,
+            "year": 2015,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 5699766038036480,
+            "isCurrentPlayer": false,
+            "solvedproblems": 13,
+            "year": 2009,
+            "schoolname": "NUS High School of Mathematics and Science",
+            "nickname": "Moose"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4836948715765760,
+            "isCurrentPlayer": false,
+            "solvedproblems": 11,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6619269143986176,
+            "isCurrentPlayer": false,
+            "solvedproblems": 11,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Justin Leow"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 5862928355950592,
+            "isCurrentPlayer": false,
+            "solvedproblems": 11,
+            "year": 2009,
+            "schoolname": "Dunman High School",
+            "nickname": "Sam"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6437610817847296,
+            "isCurrentPlayer": false,
+            "solvedproblems": 5,
+            "year": 2014,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6273369120964608,
+            "isCurrentPlayer": false,
+            "solvedproblems": 4,
+            "year": 2013,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Thong Mien Mien"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5060571825176576,
+            "isCurrentPlayer": false,
+            "solvedproblems": 4,
+            "year": 2013,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5810523044052992,
+            "isCurrentPlayer": false,
+            "solvedproblems": 3,
+            "year": 2013,
+            "schoolname": "Hwa Chong Institution",
+            "nickname": "Lee Yan Hwa"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5205559720542208,
+            "isCurrentPlayer": false,
+            "solvedproblems": 1,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6476317599989760,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "playerid": 6604643169730560,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Song Kai",
+            "isCurrentPlayer": false
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5958130332598272,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2014,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Lai Wai Liang"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 5795639908630528,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6239605309308928,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Tan YuGin"
+        },
+        {
+            "playerid": 6356396207505408,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6609723444953088,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4899048842592256,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2009,
+            "schoolname": "Dunman High School",
+            "nickname": "yuansiang"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6022159168176128,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 4621759311511552,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "playerid": 6439117143408640,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 4826577711923200,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Yao Hong",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6678236763258880,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6604643169730560,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Song Kai",
+            "isCurrentPlayer": false
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4961583566422016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Wang Zexin"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4980996818599936,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2014,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Ng Zhen Yuan"
+        },
+        {
+            "playerid": 6622855978549248,
+            "solvedproblems": -3,
+            "schoolname": "No school registered",
+            "nickname": "Apocalypster",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 4539845695242240,
+            "solvedproblems": -6,
+            "schoolname": "No school registered",
+            "nickname": "Liang Yi",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 4569586733154304,
+            "solvedproblems": -10,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5536602377945088,
+            "solvedproblems": -11,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6661817774374912,
+            "solvedproblems": -13,
+            "schoolname": "No school registered",
+            "nickname": "Eileen",
+            "isCurrentPlayer": true
+        },
+        {
+            "playerid": 6101567476334592,
+            "solvedproblems": -16,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        }
+    ],
+    "created": "2014-01-10T15:41:36.848030",
+    "registered": 49,
+    "watching": 1,
+    "venue": null,
+    "longitude": null,
+    "participating": 47,
+    "start": "2014-01-10T15:41:36.848050",
+    "latitude": null,
+    "id": 6095188913029120,
+    "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
+}
+		
+		$httpBackend.whenGET('/jsonapi/event/6095188913029120').respond(eventsTableDataJC);
+
+		var eventsTableDataPoly = {
+    "following": 1,
+    "name": "National Polytechnic Coding Competition",
+    "ranking": [
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5226227371606016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 101,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+    ],
+    "created": "2014-01-10T15:41:36.848030",
+    "registered": 49,
+    "watching": 1,
+    "venue": null,
+    "longitude": null,
+    "participating": 47,
+    "start": "2014-01-10T15:41:36.848050",
+    "latitude": null,
+    "id": 6486660988534784,
+    "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
+}
+		
+		$httpBackend.whenGET('/jsonapi/event/6486660988534784').respond(eventsTableDataPoly);
+
+		var eventsTableDataSec = {
+    "following": 1,
+    "name": "IDA Secondary School Tournament",
+    "ranking": [
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5226227371606016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 101,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+    ],
+    "created": "2014-01-10T15:41:36.848030",
+    "registered": 49,
+    "watching": 1,
+    "venue": null,
+    "longitude": null,
+    "participating": 47,
+    "start": "2014-01-10T15:41:36.848050",
+    "latitude": null,
+    "id": 5308925893148672,
+    "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
+}
+		
+		$httpBackend.whenGET('/jsonapi/event/5308925893148672').respond(eventsTableDataSec);
+		
+		
 });
+

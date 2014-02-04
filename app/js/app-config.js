@@ -16,7 +16,9 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/tournaments', {templateUrl: 'partials/tournament.html', controller: IndexController});
 	  $routeProvider.when('/roundranking', {templateUrl: 'partials/roundranking.html', controller: IndexController});
     $routeProvider.when('/events', {templateUrl: 'partials/events.html', controller: IndexController});
+    $routeProvider.when('/eventsTable', {templateUrl: 'partials/eventsTable.html', controller: IndexController});
     $routeProvider.when('/create', {templateUrl: 'partials/create_paths_and_levels.html', controller: IndexController});
+    $routeProvider.when('/editproblem', {templateUrl: 'partials/editproblem.html', controller: IndexController});
     $routeProvider.when('/videos', {templateUrl: 'partials/videos.html', controller: IndexController});
     $routeProvider.when('/feedback', {templateUrl: 'partials/feedback.html', controller: IndexController});
     $routeProvider.when('/schoolregistration', {templateUrl: 'partials/schoolregistration.html', controller: IndexController});

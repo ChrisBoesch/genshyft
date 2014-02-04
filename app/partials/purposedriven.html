@@ -3,7 +3,7 @@
 
 
 
-  	<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos(); get_videos_unlocked()" > 
+  	<div data-ng-controller="PurposeDrivenController" ng-init = "get_videos();" > 
 
 	
 	
@@ -34,18 +34,23 @@
 		
 <h4 class="well well-small bootCamp" align="center" id="well-c" >1. Choose a video and get inspired ! </h4>	
 			<span class="span11">
+			
+<div ng-show="purposeVideos.Videos[0].title!=null" align ='right'>
+<h1>Select a video title ! </h1>
+</div>	
+			
 <table border="0"align ="center" cellpadding="11"cellspacing="11" >
 <th width =30%> </th>
 <th>  </th>
 
 
 <tr>
-<td>
-<select ng-model="videoArray" 
-ng-init = "videoArray = videoArray || purposeVideos.Videos[0].title "
+<td width = 30%>
+
+<select ng-show="purposeVideos.Videos[0].title!=null" ng-model="videoArray" 
 ng-options="video.title for video in purposeVideos.Videos"></select>
 <br><br>
-<div ng-show=" purposeVideosUnlocked.Unlocked[videoArray.no].status ">  
+<div ng-show="videoArray.unlocked">  
 <button class="btn btn-inverse"  ng-click = "view_video(purposeVideos.Videos[videoArray.no].vlink,videoArray.no)">  Play  </button> 
 
 </div>
@@ -55,12 +60,17 @@ ng-options="video.title for video in purposeVideos.Videos"></select>
 </td>
 
 
-<td>
+<td width = 70%>
 <IMG ng-src="{{ videoArray.image }}" >
-<div ng-show="videoArray==null">
-<h3>PurposeDriven videos coming up soon! </h3>
-<IMG ng-src ="{{tempimage}}" width =50%>
-</div>
+
+
+		<div ng-show="purposeVideos.Videos[0].title==null">
+		 <h3>More Features coming up soon!</h3>
+		<IMG ng-src ="img/purposedrivenPlaceholder/wait.png" width =50%>
+		</div>			
+		
+
+
 </td>
 
 <td>

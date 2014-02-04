@@ -1,0 +1,88 @@
+<style>
+.bootCamp{
+    color: #ffffff;
+    font-size: 22px;
+    border-bottom-color: #6b808d;
+    border-radius: 6px 6px 6px 6px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.7);
+    margin-top: 4px;
+    margin-bottom: 20px;
+    padding: 8px 8px;
+}
+</style>
+</br>
+</br>
+
+  
+<!-- Dynamically generate list of all events to view ranking -->
+<!-- Concat event id to url -->
+<!-- Render eventsTable page based on url parameter (event id) -->
+<div class="row-fluid">
+
+<div ng-controller="EventTableController" ng-init="get_jcParticipants(); get_eventID();" class="container">
+
+<button class="btn btn-primary" ng-click="returnToPreviousPage()">Return to Last Visited Page</button>
+
+<div style="float:right" class="fb-share-button" data-href="http://www.singpath.com/" data-type="button"></div>
+
+<center><h2>{{eventsData.name}}</h2></center>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <h4>
+        <th>Rank</th>
+        <th>Player Name</th>
+        <th>School</th>
+        <th>School Type</th>
+        <th>Starting Year</th>
+        <th>Total Problems Solved</th>
+    </h4>
+      </tr>
+    </thead>
+    <tbody>
+        <!-- Change index limit according to size of data. Max limit 50 requested by client. Current limit 40 due to insufficient data. -->
+        <span ng-if="participant.isCurrentPlayer">
+        <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=40 && !participant.isCurrentPlayer" style="background-color: #6B248E; color: #EFCFFE">
+        </span>
+
+        <span ng-if="!participant.isCurrentPlayer">
+      <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=40 && !participant.isCurrentPlayer">
+        </span>
+        <td>
+            <span ng-hide = "$index>=40 && participant.isCurrentPlayer">
+            <span ng-if="participant.isCurrentPlayer"><b>{{$index+1}}</b></span>
+            <span ng-show="$index==40"><b>Cutoff</b></span>
+            <span ng-if="!participant.isCurrentPlayer">{{$index+1}}</span>
+        </span>
+        </td>
+
+        <td class="info"><span ng-if="participant.isCurrentPlayer"><b>{{participant.nickname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname}}</span></td>
+
+        <td><span ng-if="participant.isCurrentPlayer"><b>{{participant.schoolname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.schoolname}}</span></td>
+
+        <td><span ng-if="participant.isCurrentPlayer"><b>{{participant.subtype}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.subtype}}</span></td>
+
+        <td><span ng-if="participant.isCurrentPlayer"><b>{{participant.year}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.year}}</span></td>
+
+        <!-- the following hack will display negative solved problems as zero; only affects currentPlayer because the other players with negative solved problems i.e. not registered schools, are hidden -->
+        <td><span ng-if="participant.isCurrentPlayer"><b><span ng-if="participant.solvedproblems<0">0</span><span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span></b></span>
+            <span ng-if="!participant.isCurrentPlayer"><span ng-if="participant.solvedproblems<0">0</span><span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span></span>
+
+        </td>
+
+    </span>
+      </tr>
+      </tbody>
+  </table>
+
+</div>
+</div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

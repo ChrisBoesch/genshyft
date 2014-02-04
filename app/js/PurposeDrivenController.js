@@ -2,7 +2,7 @@
 
 function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$route){
 
-
+	$scope.videoArray ="Select";
     // this method gets the parameter , variables are declared as youtube and vno
     $scope.location = $location;
 	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
@@ -32,13 +32,14 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 	// retrieve All purpose driven video available in databank.
 	$scope.get_videos = function(){
           console.log("get_videos is being executed");
-          $resource("/jsonapi/purposeVideos/ALL").get({},function(response){
+          $resource("/jsonapi/purposevideos").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
 			  $scope.videoArray = $scope.purposeVideos.Videos[0].title;
                console.log($scope.purposeVideos);
         	 })
         }
 
+		/*
 	// retrieve All purpose driven videos that user has unlocked. 
 	$scope.get_videos_unlocked = function(){
 	console.log("get_video_unlock is being executed");
@@ -56,6 +57,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
                console.log($scope.purposeVideosUnlocked);
         	 })
         }      
+*/
 
 	// hands over the youtube link and video number for next page viewing.
     $scope.view_video = function(address,no){
@@ -69,18 +71,19 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
         }  
 
 
-        $scope.nextVideo = function (vno,purposeVideo,videosUnlock){
+        $scope.nextVideo = function (vno,feedback){
 			var vnoNumber = parseInt(vno);
 			console.log("nextVideo is being executed");
-             if(purposeVideo.length-1 > vnoNumber)
-              {
-                if(videosUnlock[(vnoNumber+1)].status == "false"){
-                  alert ("You have unlock a new video!" );						 
+             if($scope.purposeVideos.Videos.length-1 > vnoNumber){
+                if($scope.purposeVideos.Videos[(vnoNumber+1)].unlocked == false){
+			     $scope.saveNewUnlock(vnoNumber+1);
+                  alert ("You have unlock a new video!" );		
+					
                 }
 		
                
-				$scope.saveNewUnlock(vnoNumber,$scope.radioAns); // unlock , resave answer into datastore.
-                $location.search({'youtube':purposeVideo[(vnoNumber+1)].vlink, 'vno':(vnoNumber+1)}).path('purposedriven-play') 
+				$scope.saveNewFeedback(vnoNumber,feedback); // unlock , resave answer into datastore.
+                $location.search({'youtube':$scope.purposeVideos.Videos[(vnoNumber+1)].vlink,'vno':(vnoNumber+1)}).path('purposedriven-play') 
 				
               }
               else{
@@ -91,27 +94,44 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 
 
 
-		$scope.saveNewUnlock = function(videoNumber,radioAns){
-		console.log("saveNewUnlock is being executed");
-		
-		$scope.userCurrentVideo = $resource("/jsonapi/purposeVideos/CURRENT");
+		$scope.saveNewUnlock = function(videoNumber){
+			console.log("saveNewUnlock is being executed");
 			
-		var data = {"no": videoNumber,
-						  "status": "true",
-						  "answer": radioAns};
-						  
-           var item = new $scope.userCurrentVideo(data);
-           item.$save(function(response) { 
-                  $scope.response = response;
-                  //Handle any errors
-                  console.log(response);
-					
-			})
+			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_unlock/" + videoNumber);
+				
+			var data = {"no": videoNumber,
+						"unlocked":true
+						};
+							  
+			   var item = new $scope.userCurrentVideo(data);
+			   item.$save(function(response) { 
+					  $scope.response = response;
+					  //Handle any errors
+					  console.log(response);
+						
+				})
 		
 	}
 
 
-
+		$scope.saveNewFeedback = function(videoNumber,feedback){
+			console.log("saveNewFeedback is being executed");
+			
+			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/" + videoNumber);
+				
+			var data = {"no": videoNumber,
+							"feedback":feedback, 
+						};
+							  
+			   var item = new $scope.userCurrentVideo(data);
+			   item.$save(function(response) { 
+					  $scope.response = response;
+					  //Handle any errors
+					  console.log(response);
+						
+				})
+		
+	}
 
 
 

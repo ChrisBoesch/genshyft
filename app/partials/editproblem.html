@@ -1,0 +1,131 @@
+</br>
+</br>
+<div class="container" id="editproblem" style="position:relative;">
+	<div class="row-fluid">
+
+<div>
+  <h3>Here is where we will load each controller to do simple static and integration tests.</h3>
+
+  <div ng-controller="PlayerController">
+   Update Player  
+   <input type="submit" value="Update Player Profile" ng-click="update_player_profile"><br>
+
+   <input 
+   <ul>
+    <li name="nickname">Current player nickname: {{player.nickname}}</li>
+   </ul>
+  </div>
+<hr>          
+  <div ng-controller="InterfaceController">
+   Interfaces Controller
+   <p>Interfaces Count = {{interfaces.interfaces.length}}</p>
+   Available Languages:
+    <ul>
+      <li ng-repeat="interface in interfaces.interfaces">
+          {{interface.name}}
+      </li>
+    </ul>
+  </div>
+
+  <hr>
+
+
+<div> 
+  
+  <div ng-controller="PathController" ng-init="update_path_details()">
+   Path Controller
+   <p>Path Count = {{paths.paths.length}}</p>
+   Available Game Paths:
+  
+    <ul>
+      <li ng-repeat="path in paths.paths">
+          {{path.name}} ({{path.id}}) <input type="submit" value="Play Path Game" ng-click="create_path_game(path.id,3)"> 
+      </li>
+    </ul>
+    
+    Beginner Paths {{mobile_paths.length}} 
+    <ul>
+      <li ng-repeat="path in mobile_paths">
+          {{path.name}} 
+      </li>
+    </ul>
+    
+    Click to fetch the paths the player has craeted, played, and other paths.<br>
+    The player should be able to edit their own paths. <br>
+    <input type="Submit" value="Update Path Details" ng-click="update_path_details()"><br><br>
+    
+    
+    The current player has created {{player_paths.paths.length}} paths. (Click the button above.)
+    <ul>
+      <li ng-repeat="path in player_paths.paths">
+          {{path.name}} 
+      </li>
+    </ul>
+ 
+         
+  </div>
+  
+  //You can list the problemsets for a path the player owns using get_problemsets(pathid)
+  <div ng-controller="ProblemsetController" ng-init="get_problemsets(10030);">
+    Problemsets for path 10030: 
+    <ul>
+      <li ng-repeat="level in problemsets.problemsets">
+        {{level.name}} ({{level.id}}) 
+      </li>
+    </ul>
+    
+  </div>
+  
+  <hr>
+    
+  </div>
+    
+  //and you can get the problems in a problemset by setting the problemset and calling get_problems()
+    <div ng-controller="ProblemController" ng-init="problemsetID=11021;get_progress();get_problems();">
+    
+    Problems in problemset 11021 with progress ({{progress.currentPlayerProgress}}/{{progress.problemsInProblemset}})
+
+    <ol>
+      <li ng-repeat="problem in problems.problems">
+        {{problem.name}} ({{problem.id}}) <font color="green" ng-show="problem.solved">solved</font>
+        <input type="Submit" value="Edit Problem" ng-click="get_problem(problem.id)">  
+      </li>
+      <li>Test problem with id: <input type="text" ng-model="temp.id">
+                            <input type="Submit" value="Edit Problem" ng-click="get_problem(temp.id)">  
+      </li>
+    </ol>
+      The current Problem: <pre>{{the_current_problem}}</pre>
+      Name: {{the_current_problem.problem.name}}<br>
+      Description: {{the_current_problem.problem.description}}<br>
+      Problem ID: {{the_current_problem.problem.problem_id}}<br>
+      Tests: <pre>{{the_current_problem.problem.tests}}</pre><br>
+    Solution: <input type="text" ng-model="the_current_problem.problem.solution"><br>
+    <br> Result: <pre>{{solution_check_result}}</pre>
+     <input type="Submit" value="Verify Solution" ng-click="verify_problem_solution()"> 
+     <input type="Submit" value="Save problem" ng-click="save_problem()">
+     
+     <input type="Submit" value="Clear ID" ng-click="the_current_problem.problem.problem_id=null;"><br>
+
+      <br>
+          Solved: <b>{{solution_check_result.solved}}</b><br>
+    Last_Solved: <b>{{solution_check_result.last_solved}}</b><br>
+    <table border=1 bgcolor=#FFFFFF>
+      <tr>   
+        <th>Called</th>
+        <th>Expected</th>
+        <th>Recieved</th>
+        <th>Correct</th>    
+      </tr>
+      <tr ng-repeat="line in solution_check_result.results">
+        <td>{{line.call}}</td>
+        <td>{{line.expected}}</td>
+        <td>{{line.received}}</td>
+        <td ng-show="line.correct" bgcolor=#00FF00>{{line.correct}}</td>
+        <td ng-show="!line.correct" bgcolor=#FF0000>{{line.correct}}</td>     
+      </tr>
+    </table>
+    Save problem result: <pre> {{result}}</pre>
+  </div>
+
+
+<div>

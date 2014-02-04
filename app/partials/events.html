@@ -29,6 +29,10 @@
               <button class="btn btn-primary" ng-click="register_for_event(event.id, 'participate')">I'd like to participate</button>
               <button class="btn btn-primary" ng-click="register_for_event(event.id, 'watch')">I'd like to come watch</button>
               <button class="btn btn-primary" ng-click="register_for_event(event.id, 'follow')">Keep me posted</button>
+              <!-- ng-href approach
+              <button class="btn btn-primary" ng-href="/eventsTable?eventID={{event.id}}">I'd like to view the rankings</button>
+            -->
+              <button class="btn btn-primary" ng-click="go_to_eventsRanking(event.id)">I'd like to view the rankings</button>
               <button class="btn btn-primary" ng-click="">+1</button>
               <!--input type="submit" value="I'd like to participate" ng-click="register_for_event(event.id, 'participate')">
               <input type="submit" value="I'd like to come watch" ng-click="register_for_event(event.id, 'watch')">
