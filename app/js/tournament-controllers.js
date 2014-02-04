@@ -131,6 +131,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 		}	
 	};
 
+  /*
   $scope.add_round = function(tournamentID){
     //$scope.roundDirty = false;
     $scope.questionCart = $resource('/jsonapi/added_rounds');
@@ -167,6 +168,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }); 
     //$location.path("mytournaments");
   };
+  */
 
   $scope.save_round = function(){      
       if($scope.grpTourRoundName == undefined){
@@ -193,10 +195,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         
         // Question Choice Model
         $scope.cartQuestions = [];
-      
+        console.log(roundQuestions);
+        $('#roundSaved').modal('show');
     }
-    console.log(roundQuestions);
-    $('#roundSaved').modal('show');
+    
+    
   }
 
 
@@ -329,11 +332,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $scope.newGrpTournament.noGroup = $scope.grpTourNoGroup;
       $scope.newGrpTournament.maxNoPlayer = $scope.grpTourMaxNoPlayer;
       $scope.newGrpTournament.rounds = $scope.newTournamentRounds;
+      //$scope.newGrpTournament.roundName = $scope.grpTourRoundName;
 
       //console.log($scope.grpTourTitle);
       if($scope.newGrpTournament.title==""){
         alert("The tournament title cannot be empty!");
       }
+      /*
+      else if($scope.newGrpTournament.roundName==""){
+        alert("sian");
+      }
+      */
       else if($scope.newGrpTournament.password==""){
         alert("The tournament password cannot be empty!");
       }
