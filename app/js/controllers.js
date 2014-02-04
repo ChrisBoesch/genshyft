@@ -296,6 +296,21 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
     };     
 }
 
+function AceController($scope){
+	$scope.modes=['javascript', 'XML', 'java'];
+	$scope.mode=$scope.modes[0];
+
+	$scope.aceOption = {
+		mode: $scope.mode.toLowerCase(),
+
+		onLoad: function (_ace){
+			$scope.modeChanged = function(){
+				_ace.getSession().setMode('ace/mode/' + $scope.mode.toLowerCase());
+			};
+		}
+	};
+}
+
 function InterfaceController($scope,$resource){
     $scope.interfaces = $resource('/jsonapi/interfaces').get();
 }
@@ -3848,12 +3863,13 @@ function CountdownController($scope,$timeout) {
             
 }
 
-function EventController($scope, $resource){
+function EventController($scope, $resource, $location){
         $scope.event = {"name":"Default name", 
                             "description": "Default description",
                             "venue": "Default venue"};
         $scope.events = [];
-  
+  		$scope.location = $location;
+
         var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
                   
         // posting without and id should result in creating an object.
@@ -3886,18 +3902,36 @@ function EventController($scope, $resource){
                  $scope.fetch_event();
             });
         }
+
+        $scope.go_to_eventsRanking = function(eventID){
+          //to do: land at eventsTable.html and pass eventID over
+          //$location.path("/eventsTable?eventID=" + id);
+          $location.search({"eventID":eventID}).path("eventsTable");
+          console.log(eventID);
+        }
           
 }
 
 //By WC, in progress
-function EventTableController($scope, $resource){
+function EventTableController($scope, $resource, $route, $location){
+
+		$scope.location = $location;  
+		
+		$scope.eventID = ($location.search()).eventID;
+		
+    	$scope.get_eventID = function(){
+    		$scope.eventID = ($location.search()).eventID;
+    		console.log($scope.eventID + "here2");
+
+
+
+    	}
 
         //Gets registered jcParticipants.
 		$scope.get_jcParticipants = function(){
 	    console.log("get_mytournaments");
-
 	    	//current resource refers to just JC Comp
-		    $resource("/jsonapi/event/6095188913029120").get({},function(response){
+		    $resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
             	$scope.eventsData = response;
             	$scope.predicate = '-solvedproblems';
 
@@ -3918,6 +3952,9 @@ function EventTableController($scope, $resource){
 
 	  	};	  	
         
+        $scope.returnToPreviousPage = function() {
+  			window.history.back();
+		};
 
 
 

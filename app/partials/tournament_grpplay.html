@@ -8,38 +8,43 @@
 </br>
 <div ng-controller="TournamentGameController" ng-init="" class="container">
     <div>  
-        <div class="row-fluid"> 
-            <div class="span12 well">
+        <div class="row-fluid">
+            <div class="span8 bootCamp" id="heading">Current Tournament Questions</div>
+            <div class="span4 bootCamp" id="heading">Round Details</div>
+        </div>
+        <div class="row-fluid">        
+            <div class="span8 well">            
                 <div class="row-fluid">
-                    <div class="span9">
-                    </div>
-                    <div class="span3" align="left">
-                        <font>
-                            <p>
-                                Game progress 
-                                &nbsp; <span ng-bind="game.numSolvedProblems"></span> of <span ng-bind="game.numProblems"></span>
-                            </p>
-                        </font>
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span9" style="border: 1px solid #DBDACB;">
+                    <div class="span12">
                         <div style="text-align: left;">
-                            <h5>&nbsp;Current Practice Question</h5>
-                                <font>                                
-                                    &nbsp;Name: <span ng-bind="game.problems.problems[current_problem_index].name"></span>
-                                    <br>&nbsp;Description: <span ng-bind="game.problems.problems[current_problem_index].description"></span>
-                                </font>
+                            <font>
+                                </br>                               
+                                <b>Name:</b> <span ng-bind="game.problems.problems[current_problem_index].name"></span>
+
+                                <br>
+                                <b>Description:</b> 
+                            	<br><span ng-bind="game.problems.problems[current_problem_index].description"></span>
+                            </font>
+                            </br> 
+                            </br>
+                            <div class="span12" style="text-align: center">   
+                            <button class="btn btn-primary" ng-click="skip_problem()" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="span3" >
-                        <div class="span12" align="center" style="padding-top: 5px">
-                            <p> 
-                                <button class="btn btn-primary" ng-click="skip_problem()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                            </p>
-                        </div>
-                    </div>  
                 </div>
+            </div>
+            <div class="span4 well">
+                <div class="row-fluid">
+                    <div class="span12">                  
+                        <b>Round :</b> {{}} 
+                        </br><b>Tournament progress: </b> <span ng-bind="game.numSolvedProblems"></span><b> / </b><span ng-bind="game.numProblems"></span> 
+                        </br><b>Current Rank :</b> {{}} 
+                        </br><b>Assigned To :</b> {{}}
+                        </br><b>Mentored By :</b> {{}} <button class="btn btn-danger" ng-hide="true">Arrived?</button>
+                        </br>
+                    </div>
+                </div>  
             </div>
         </div>
        

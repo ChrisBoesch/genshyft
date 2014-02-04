@@ -45,8 +45,9 @@
 
 
 <tr>
-<td>
-<select ng-model="videoArray" 
+<td width = 30%>
+
+<select ng-show="purposeVideos.Videos[0].title!=null" ng-model="videoArray" 
 ng-options="video.title for video in purposeVideos.Videos"></select>
 <br><br>
 <div ng-show="videoArray.unlocked">  
@@ -59,7 +60,7 @@ ng-options="video.title for video in purposeVideos.Videos"></select>
 </td>
 
 
-<td>
+<td width = 70%>
 <IMG ng-src="{{ videoArray.image }}" >
 
 
