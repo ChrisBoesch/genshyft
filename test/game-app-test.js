@@ -517,6 +517,256 @@ myApp.run(function($httpBackend) {
 		"winnerText": ""
 	};
 
+	var IndTournData= {
+    "status": "Close",
+    "currentPlayerID": 57754,
+    "description": "Tournament",
+    "directorID": 57754,
+    "tournType": "Group",
+    "tournamentID": 5060388987076610,
+    "maxNoPlayerPerGrp": 5,
+    "numberOfGrp": 5,
+    "mentorAssignInTeam": "Y/N",
+	"round":[{
+		"roundID":4912161075757056,
+		"description": "Round 1",
+		"currentHeatDetails": {
+			"heatID": 6144086545268736,
+			"description": "Heat 2",
+			"startTime": "2013-10-04 14:02:05.835670",
+			"currentTime": "2013-10-04 14:02:00.246270"
+		},
+		"registeredPlayers": [
+			{
+				"playerId": 57754,
+				"playerName": "Chris",
+				"playerImg":"URL",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739102,
+				"playerName": "Player 2",
+				"playerImg":"URL",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""	
+			},
+			{
+				"playerId": 9379339,
+				"playerName": "Player 3",
+				"playerImg":"URL",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57753,
+				"playerName": "Player 4",
+				"playerImg":"URL",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739101,
+				"playerName": "Player 5",
+				"playerImg":"URL",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379338,
+				"playerName": "Player 6",
+				"playerImg":"URL",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57752,
+				"playerName": "Player 7",
+				"playerImg":"URL",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739100,
+				"playerName": "Player 8",
+				"playerImg":"URL",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379337,
+				"playerName": "Player 9",
+				"playerImg":"URL",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57751,
+				"playerName": "Player 10",
+				"playerImg":"URL",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739099,
+				"playerName": "Player 11",
+				"playerImg":"URL",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379336,
+				"playerName": "Player 12",
+				"playerImg":"URL",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57750,
+				"playerName": "Player 13",
+				"playerImg":"URL",
+				"group": 5,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739098,
+				"playerName": "Player 14",
+				"playerImg":"URL",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379335,
+				"playerName": "Player 15",
+				"playerImg":"URL",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			}
+		]
+	}] 
+};
+
  	var tournamentGrpData = {
     "status": "Open for registration",
     "currentPlayerID": 57754,
@@ -715,6 +965,7 @@ myApp.run(function($httpBackend) {
 	};
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076609').respond(tournamentGrpData);
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076608').respond(tournamentIndivData);
+	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076610').respond(IndTournData);
 	
 		
 
