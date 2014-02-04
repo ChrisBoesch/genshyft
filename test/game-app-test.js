@@ -2389,13 +2389,12 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "nickname": "Wang Zexin"
         },
         {
-            "schooltype": "Tertiary",
-            "subtype": "JC",
+
             "playerid": 4980996818599936,
             "isCurrentPlayer": false,
-            "solvedproblems": 0,
+            "solvedproblems": -2,
             "year": 2014,
-            "schoolname": "Pioneer Junior College",
+            "schoolname": "No school registered",
             "nickname": "Ng Zhen Yuan"
         },
         {
@@ -2427,13 +2426,6 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "isCurrentPlayer": false
         },
         {
-            "playerid": 6661817774374912,
-            "solvedproblems": -13,
-            "schoolname": "No school registered",
-            "nickname": "Eileen",
-            "isCurrentPlayer": true
-        },
-        {
             "playerid": 6101567476334592,
             "solvedproblems": -16,
             "schoolname": "No school registered",
@@ -2446,6 +2438,55 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "schoolname": "No school registered",
             "nickname": "Secret Agent",
             "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6661817774374912,
+            "solvedproblems": -53,
+            "schoolname": "No school registered",
+            "nickname": "Eileen",
+            "isCurrentPlayer": true
         }
     ],
     "created": "2014-01-10T15:41:36.848030",
