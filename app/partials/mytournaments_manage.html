@@ -80,42 +80,36 @@
 			Tournament Details
 		</div>
 		<div class="row-fluid">
-			<div class="span12 well well-small">
+			<div class="span6 well well-small">
 				<div class="span12">
 					<div class="span8">
-						</br>
-						<b>Title :</b> {{grpTournaments[0].title}} </br>
-						<b>Type :</b> {{grpTournaments[0].type}} </br>
-						<b>Max no. of players per group :</b> {{grpTournaments[0].maxNoPlayer}}</br>
-						<b>No. of Registered Players :</b> {{grpTournaments[0].title}}
-						</br>
-						</br>
-					</div>
-					<div class="span3">
-						</br><b>Status :</b> 
-						<select class="span7" ng-model="tourStatus">
+						<b>Status :</b> 
+						<select class="span3" ng-model="tourStatus">
 							<option>closed</option>
 							<option>open</option>
 							<option>archive</option>
 							<option>hide</option>
-						</select>
-							</br>
-							</br>
-							</br>
-
+						</select></br>
+						<b>Title :</b> {{grpTournaments[0].title}} </br>
+						<b>Type :</b> {{grpTournaments[0].type}} </br>
+						<b>Max no. of players per group :</b> {{grpTournaments[0].maxNoPlayer}}</br>
+						<b>No. of Registered Players :</b> {{grpTournaments[0].title}}
+					</br>
 					</div>
 				</div>
 				<div class="span12">
-					<center>
-						<button class="btn btn-primary" type="button">Edit</button>
-						<button class="btn btn-danger" type="button">Delete </button>
-					</center>
+					<button class="btn btn-primary" type="button">Edit</button>
+					<button class="btn btn-danger" type="button">Delete </button>	
 					</br>
 				</div>		
 			</div>
+			<div class="span6 well well-small">
+				<div class="span12">
+					<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking >>></button>
+				</div>
+			</div>
 		</div>
 	</div>
-	</br>
 
 	<div class="row-fluid">
 		<div class="span12">
@@ -129,8 +123,7 @@
 	<div class="tab-content">
 		<div class="tab-pane active" id="Rounds">
 			<div class="row-fluid">
-			<div class="span10 well well-small">
-				<button type="button" class="close" aria-hidden="true">×</button>
+			<div class="span12 well well-small">
 				<div class="row-fluid">
 					<div class="span10">
 						<div class="span3">
@@ -163,8 +156,20 @@
 						</div>
 					</div>	
 				</div>
+				
+				<b>Start in</b></br>
+				<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">		<button type="button" class="btn btn-info">1 min</button>
+  					<button type="button" class="btn btn-info">2 min</button>
+  					<button type="button" class="btn btn-info">5 min</button>
+  					<button type="button" class="btn btn-info">30 min</button>
+  					<button type="button" class="btn btn-info">60 min</button>			
+				</div>
+
+				<button class="btn btn-primary" type="button" ng-model="start"><i class="icon-play icon-white"></i>Start</button>
+
+				<button class="btn btn-danger" type="button" ng-model="stop"><i class="icon-stop icon-white"></i>Stop</button>
 			</div>
-		</div>
+			</div>
 		</div>
 
   		<div class="tab-pane" id="Groups">
@@ -219,31 +224,5 @@
 				</div>	
 			</div>	
 		</div>
-
 	</div>
-
-	<div class="row-fluid">
-		<div class="span12">
-			</br>
-			<div class="span4">
-				</br>
-				<button class="btn btn-primary" type="button" ng-model="start">Start</button>
-				<button class="btn btn-danger" type="button" ng-model="activation">Deactivate</button> 
-				</br>
-				</br>
-				<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking >>></button>
-			</div>
-			<div class="span7">
-				<b>Start in</b></br>
-				<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">				<button type="button" class="btn btn-primary">1 min</button>
-  					<button type="button" class="btn btn-primary">2 min</button>
-  					<button type="button" class="btn btn-primary">5 min</button>
-  					<button type="button" class="btn btn-primary">30 min</button>
-  					<button type="button" class="btn btn-primary">60 min</button>			
-				</div>
-			</div>	
-		</div>
-	</div>
-
 </div>
-	
