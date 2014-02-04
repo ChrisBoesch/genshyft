@@ -3888,22 +3888,35 @@ function EventController($scope, $resource, $location){
             });
         }
 
-        $scope.go_to_eventsRanking = function(id){
+        $scope.go_to_eventsRanking = function(eventID){
           //to do: land at eventsTable.html and pass eventID over
-          $location.path("/eventsTable?eventID=" + id);
+          //$location.path("/eventsTable?eventID=" + id);
+          $location.search({"eventID":eventID}).path("eventsTable");
+          console.log(eventID);
         }
           
 }
 
 //By WC, in progress
-function EventTableController($scope, $resource){
+function EventTableController($scope, $resource, $route, $location){
+
+		$scope.location = $location;  
+		
+		$scope.eventID = ($location.search()).eventID;
+		
+    	$scope.get_eventID = function(){
+    		$scope.eventID = ($location.search()).eventID;
+    		console.log($scope.eventID + "here2");
+
+
+
+    	}
 
         //Gets registered jcParticipants.
 		$scope.get_jcParticipants = function(){
 	    console.log("get_mytournaments");
-
 	    	//current resource refers to just JC Comp
-		    $resource("/jsonapi/event/6095188913029120").get({},function(response){
+		    $resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
             	$scope.eventsData = response;
             	$scope.predicate = '-solvedproblems';
 

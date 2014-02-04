@@ -19,7 +19,7 @@
 <!-- Render eventsTable page based on url parameter (event id) -->
 <div class="row-fluid">
 
-<div ng-controller="EventTableController" ng-init="get_jcParticipants();" class="container">
+<div ng-controller="EventTableController" ng-init="get_jcParticipants(); get_eventID();" class="container">
 
 <button class="btn btn-primary" ng-click="returnToPreviousPage()">Return to Last Visited Page</button>
 

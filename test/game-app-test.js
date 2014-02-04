@@ -1515,7 +1515,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       
 
       //eventTables data
-      var eventsTableData = {
+      var eventsTableDataJC = {
     "following": 1,
     "name": "National Singapore JC and High-school Coding Competition",
     "ranking": [
@@ -1960,8 +1960,65 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
 }
 		
-		$httpBackend.whenGET('/jsonapi/event/6095188913029120').respond(eventsTableData);
+		$httpBackend.whenGET('/jsonapi/event/6095188913029120').respond(eventsTableDataJC);
 
+		var eventsTableDataPoly = {
+    "following": 1,
+    "name": "National Polytechnic Coding Competition",
+    "ranking": [
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5226227371606016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 101,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+    ],
+    "created": "2014-01-10T15:41:36.848030",
+    "registered": 49,
+    "watching": 1,
+    "venue": null,
+    "longitude": null,
+    "participating": 47,
+    "start": "2014-01-10T15:41:36.848050",
+    "latitude": null,
+    "id": 6486660988534784,
+    "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
+}
+		
+		$httpBackend.whenGET('/jsonapi/event/6486660988534784').respond(eventsTableDataPoly);
+
+		var eventsTableDataSec = {
+    "following": 1,
+    "name": "IDA Secondary School Tournament",
+    "ranking": [
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5226227371606016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 101,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+    ],
+    "created": "2014-01-10T15:41:36.848030",
+    "registered": 49,
+    "watching": 1,
+    "venue": null,
+    "longitude": null,
+    "participating": 47,
+    "start": "2014-01-10T15:41:36.848050",
+    "latitude": null,
+    "id": 5308925893148672,
+    "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
+}
+		
+		$httpBackend.whenGET('/jsonapi/event/5308925893148672').respond(eventsTableDataSec);
 		
 		
 });
