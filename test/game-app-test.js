@@ -186,15 +186,15 @@ myApp.run(function($httpBackend) {
 					"lessattempts":"a"
 				},
 	"pictures":{
-					"greeting":"c",
-					"welcomeback":"c",
-					"areyouthere":"c",
-					"letscompile":"c",
-					"dontgiveup":"c",
-					"correctanswer":"c",
-					"tryother":"c",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"img/mbcoach/Shannon/Shannon.jpg",
+					"welcomeback":"img/mbcoach/Shannon/Shannon.jpg",
+					"areyouthere":"img/mbcoach/Shannon/Shannon.jpg",
+					"letscompile":"img/mbcoach/Shannon/Shannon.jpg",
+					"dontgiveup":"img/mbcoach/Shannon/Shannon.jpg",
+					"correctanswer":"img/mbcoach/Shannon/Shannon.jpg",
+					"tryother":"img/mbcoach/Shannon/Shannon.jpg",
+					"faster":"img/mbcoach/Shannon/Shannon.jpg",
+					"lessattempts":"img/mbcoach/Shannon/Shannon.jpg"
 				}
 	
 	},
@@ -228,15 +228,15 @@ myApp.run(function($httpBackend) {
 					"lessattempts":"a"
 				},
 	"pictures":{
-					"greeting":"c",
-					"welcomeback":"c",
-					"areyouthere":"c",
-					"letscompile":"c",
-					"dontgiveup":"c",
-					"correctanswer":"c",
-					"tryother":"c",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"img/mbcoach/Sandra/Sandra.jpg",
+					"welcomeback":"img/mbcoach/Sandra/Sandra.jpg",
+					"areyouthere":"img/mbcoach/Sandra/Sandra.jpg",
+					"letscompile":"img/mbcoach/Sandra/Sandra.jpg",
+					"dontgiveup":"img/mbcoach/Sandra/Sandra.jpg",
+					"correctanswer":"img/mbcoach/Sandra/Sandra.jpg",
+					"tryother":"img/mbcoach/Sandra/Sandra.jpg",
+					"faster":"img/mbcoach/Sandra/Sandra.jpg",
+					"lessattempts":"img/mbcoach/Sandra/Sandra.jpg"
 				}
 	
 	},
@@ -268,15 +268,15 @@ myApp.run(function($httpBackend) {
 					"lessattempts":"Nice work buddy, here's a problem that I think you can now solve in fewer attempts."
 				},
 	"pictures":{
-					"greeting":"c",
-					"welcomeback":"c",
-					"areyouthere":"c",
-					"letscompile":"c",
-					"dontgiveup":"c",
-					"correctanswer":"c",
-					"tryother":"c",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"img/mbcoach/Zandar/Zandar.jpg",
+					"welcomeback":"img/mbcoach/Zandar/Zandar.jpg",
+					"areyouthere":"img/mbcoach/Zandar/Zandar.jpg",
+					"letscompile":"img/mbcoach/Zandar/Zandar.jpg",
+					"dontgiveup":"img/mbcoach/Zandar/Zandar.jpg",
+					"correctanswer":"img/mbcoach/Zandar/Zandar.jpg",
+					"tryother":"img/mbcoach/Zandar/Zandar.jpg",
+					"faster":"img/mbcoach/Zandar/Zandar.jpg",
+					"lessattempts":"img/mbcoach/Zandar/Zandar.jpg"
 				}
 	
 	},
@@ -308,15 +308,15 @@ myApp.run(function($httpBackend) {
 					"lessattempts":"a"
 				},
 	"pictures":{
-					"greeting":"c",
-					"welcomeback":"c",
-					"areyouthere":"c",
-					"letscompile":"c",
-					"dontgiveup":"c",
-					"correctanswer":"c",
-					"tryother":"c",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"img/mbcoach/SGTMJR/SGTMJR.jpg",
+					"welcomeback":"img/mbcoach/SGTMJR/SGTMJR.jpg",
+					"areyouthere":"img/mbcoach/SGTMJR/SGTMJR.jpg",
+					"letscompile":"img/mbcoach/SGTMJR/SGTMJR.jpg",
+					"dontgiveup":"img/mbcoach/SGTMJR/SGTMJR.jpg",
+					"correctanswer":"img/mbcoach/SGTMJR/SGTMJR.jpg",
+					"tryother":"img/mbcoach/SGTMJR/SGTMJR.jpg",
+					"faster":"img/mbcoach/SGTMJR/SGTMJR.jpg",
+					"lessattempts":"img/mbcoach/SGTMJR/SGTMJR.jpg"
 					
 				}
 	

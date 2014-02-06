@@ -40,7 +40,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			$scope.audio = $scope.audiofile.areyouthere;
 			var audioplayer = document.getElementsByTagName('audio')[0];
 			$scope.words = $scope.audiotext.areyouthere;
-			$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+			$scope.coachImage =$scope.pictures.areyouthere;
 			audioplayer.load()
 			$scope.counter = 0;
 		}
@@ -86,6 +86,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 				break;
 			}
 		  }
+			//WELCOMEBACK 
 			$scope.audio = $scope.audiofile.welcomeback;
 			var audioplayer = document.getElementsByTagName('audio')[0];
 			$scope.words = $scope.audiotext.welcomeback;
@@ -107,18 +108,25 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
                   console.log("Game ID :" + $scope.gameID); 
 				var audioplayer = document.getElementsByTagName('audio')[0];
 				
+				//PLAY GOAL OBJECTIVE AUDIO
 				$timeout(function(){
 					if($scope.goal=="faster"){
 						$scope.audio = $scope.audiofile.faster;
 						$scope.words = $scope.audiotext.faster;
+						$scope.coachImage =$scope.pictures.faster;
 					}
 					else if($scope.goal=="lessattempts"){
 						$scope.audio = $scope.audiofile.lessattempts;
-						$scope.words = $scope.audiotext.lessattempts;					
+						$scope.words = $scope.audiotext.lessattempts;
+						$scope.coachImage =$scope.pictures.lessattempts;						
 					}
 					//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 					audioplayer.load()	;	
-						$timeout(function(){ $scope.create_practice_game($scope.gameID);	}, 10000);	 	
+							//Execute Game
+							$timeout(function(){ 
+								$scope.create_practice_game($scope.gameID);
+								$scope.runButton = true;
+							}, 10000);	 	
 				}, 15000); 
 				
 
@@ -183,6 +191,14 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		
 
 		$timeout(function(){// 3sec delay for user to listen
+		
+		$scope.audio = $scope.audiofile.letscompile;
+		var audioplayer = document.getElementsByTagName('audio')[0];
+		$scope.words = $scope.audiotext.letscompile;
+		$scope.coachImage =$scope.pictures.letscompile;
+		//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
+		audioplayer.load();
+		
 
 		  $('#t11').removeClass('active');
 		  $('#t21').addClass('active');
@@ -199,19 +215,35 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		  item.$save(function(response) { 
 			  $scope.solution_check_result = response;
 			  if($scope.solution_check_result.last_solved){//check if last question was solved correctly
+					//CORRECT
 						$scope.audio = $scope.audiofile.correctanswer;
 						var audioplayer = document.getElementsByTagName('audio')[0];
 						$scope.words = $scope.audiotext.correctanswer;
 						//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-						audioplayer.load();
-						$scope.showNextQuestion = true;
+						
+						$timeout(function(){audioplayer.load();}, 5000);
+						
+						$timeout(function(){
+							$scope.audio = $scope.audiofile.tryother;
+							var audioplayer = document.getElementsByTagName('audio')[0];
+							$scope.words = $scope.audiotext.tryother;		
+							$scope.coachImage =$scope.pictures.tryother;
+							audioplayer.load();
+							$scope.showNextQuestion = true;
+						}, 10000);
+						
+						
 			  }
 			  else {
+					//WRONG
 					$scope.audio = $scope.audiofile.dontgiveup;
 					var audioplayer = document.getElementsByTagName('audio')[0];
 					$scope.words = $scope.audiotext.dontgiveup;
 					//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-					audioplayer.load();
+					$timeout(function(){
+						audioplayer.load();
+						$scope.coachImage =$scope.pictures.dontgiveup;
+					}, 5000);
 			  }
 			  
 			  
