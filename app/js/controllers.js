@@ -3911,7 +3911,8 @@ function EventTableController($scope, $resource){
 }
 
 
-function EditProblemController($scope, $resource, $http, $q) {
+function EditProblemController($scope, $resource, $http, $q, $window) {
+    var $ = $window.jQuery;
 
     $scope.interfaces = $resource('/jsonapi/interfaces').get(function(resp){
         $scope.interface = resp.interfaces[0];
@@ -4017,12 +4018,39 @@ function EditProblemController($scope, $resource, $http, $q) {
     $scope.$watch('problemDetails.examples', $scope.resetTestRun);
     $scope.$watch('problemDetails.tests', $scope.resetTestRun);
 
-    $scope.newPath = $scope.newLevel = $scope.newProblem = function(){
+    $scope.newLevel = $scope.newProblem = function(){
         alert('TODO');
     };
 
+    $scope.createNewPath = function(language) {
+        $scope.newPath = {
+            interface_id: language.id
+        };
+    };
+
+    $scope.saveNewPath = function(newPath) {
+        var param = $.param(newPath);
+
+        $http.post('/jsonapi/new_path', param).then(function(resp){
+            console.dir(resp);
+
+            if (!resp.data.path_id) {
+                // TODO: handle error
+                alert('error');
+                return;
+            }
+            newPath.id = resp.data.path_id;
+            $scope.paths.push(newPath);
+            $scope.path = newPath;
+            $scope.cancelNewPath();
+         });
+    };
+
+    $scope.cancelNewPath = function() {
+        $scope.newPath = null;
+    };
+ 
     $scope.save = function() {
-        // "/jsonapi/edit_problem";
 
         var data = 
             {

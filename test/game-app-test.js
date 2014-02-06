@@ -1328,7 +1328,14 @@ myApp.run(function($httpBackend) {
       //$httpBackend.whenGET(/^JSONP/).passThrough();
      
 	// New Path
-	$httpBackend.whenPOST('/jsonapi/new_path').respond(function(method, url, data){
+	$httpBackend.whenPOST('/jsonapi/new_path').respond(function(method, url, strData){
+		var data = {};
+
+		strData.split('&').forEach(function(arg){
+			var kv = arg.split('=');
+			data[kv[0]] = kv[1];
+		});
+
 		if (!data.interface_id || !data.description || !data.name) {
 			return [200, {'error': 'something is missing'}];
 		} else {
