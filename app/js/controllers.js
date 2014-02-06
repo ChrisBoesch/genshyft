@@ -3995,12 +3995,12 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
     };
 
     $scope.runTests = function () {
-        var data = {
-            interface_id: $scope.interface.id, 
-            source_code: $scope.problemDetails.solution,
-            examples: $scope.problemDetails.examples,
-            tests: $scope.problemDetails.tests
-        };
+        var data = $.param({
+                interface_id: $scope.interface.id, 
+                source_code: $scope.problemDetails.solution,
+                examples: $scope.problemDetails.examples,
+                tests: $scope.problemDetails.tests
+            });
 
         $scope.resetTestRun();
         $http.post('/jsonapi/check_code_with_interface', data).then(function(resp){
@@ -4018,7 +4018,7 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
     $scope.$watch('problemDetails.examples', $scope.resetTestRun);
     $scope.$watch('problemDetails.tests', $scope.resetTestRun);
 
-    $scope.newLevel = $scope.newProblem = function(){
+    $scope.newProblem = function(){
         alert('TODO');
     };
 
@@ -4032,7 +4032,6 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
         var param = $.param(newPath);
 
         $http.post('/jsonapi/new_path', param).then(function(resp){
-            console.dir(resp);
 
             if (!resp.data.path_id) {
                 // TODO: handle error
@@ -4048,6 +4047,33 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
 
     $scope.cancelNewPath = function() {
         $scope.newPath = null;
+    };
+
+    $scope.createNewLevel = function(path) {
+        $scope.newLevel = {
+            path_id: path.id
+        };
+    };
+
+    $scope.saveNewLevel = function(newLevel) {
+        var param = $.param(newLevel);
+
+        $http.post('/jsonapi/new_problemset', param).then(function(resp){
+
+            if (!resp.data.problemset_id) {
+                // TODO: handle error
+                alert('error');
+                return;
+            }
+            newLevel.id = resp.data.problemset_id;
+            $scope.problemSets.push(newLevel);
+            $scope.problemSet = newLevel;
+            $scope.cancelNewLevel();
+         });
+    };
+
+    $scope.cancelNewLevel = function() {
+        $scope.newLevel = null;
     };
  
     $scope.save = function() {

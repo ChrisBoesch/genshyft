@@ -1342,5 +1342,21 @@ myApp.run(function($httpBackend) {
 			return [200, {'path_id': 123456789}];
 		}
 	});
+
+	// New Level
+	$httpBackend.whenPOST('/jsonapi/new_problemset').respond(function(method, url, strData){
+		var data = {};
+
+		strData.split('&').forEach(function(arg){
+			var kv = arg.split('=');
+			data[kv[0]] = kv[1];
+		});
+
+		if (!data.path_id || !data.description || !data.name) {
+			return [200, {'error': 'something is missing'}];
+		} else {
+			return [200, {'problemset_id': 1234567890}];
+		}
+	});
       
 });

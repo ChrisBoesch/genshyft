@@ -32,7 +32,7 @@
                         <select id="problemSet" ng-model="problemSet" ng-options="l.name for l in problemSets" ng-change="getProblems(problemSet)">
                             <option value="">new level...</option>
                         </select> 
-                        <button class="btn" ng-click="newLevel(path)">new level</button>
+                        <button class="btn" ng-click="createNewLevel(path)" ng-if="!newLevel">new level</button>
                     </div>
                 </div>
 
@@ -71,6 +71,34 @@
                     <div class="controls">
                         <button class="btn btn-primary" ng-disabled="!createNewPath.$valid" ng-click="saveNewPath(newPath)">Create</button> 
                         <button class="btn" ng-click="cancelNewPath()">Cancel</button> 
+                    </div>
+                </div>                
+
+                </fieldset>
+            </form>
+
+            <form name="createNewLevel" class="form-horizontal" role="form" ng-if="newLevel">
+                <fieldset>
+                <legend>New Path</legend>
+
+                <div class="control-group">
+                    <label for="level-name" class="control-label">Name: </label>
+                    <div class="controls">
+                        <input type="text" id="level-name" ng-model="newLevel.name" required="true"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="level-desc" class="control-label">Description: </label>
+                    <div class="controls">
+                        <textarea id="level-desc" ng-model="newLevel.description" class="input-block-level" rows="4" required="true"></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button class="btn btn-primary" ng-disabled="!createNewLevel.$valid" ng-click="saveNewLevel(newLevel)">Create</button> 
+                        <button class="btn" ng-click="cancelNewLevel()">Cancel</button> 
                     </div>
                 </div>                
 
