@@ -420,9 +420,14 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Tournament Join page initialization - By Glen*/
   $scope.tournamentInit=function(){
-      console.log("tournamentInit ID");
-      $scope.tournamentID = ($location.search()).tournamentID;      
-      $scope.fetch_tournament_details(($location.search()).tournamentID);
+      //$scope.tournamentID = ($location.search()).tournamentID;
+      //$scope.fetch_tournament_details(($location.search()).tournamentID);
+      if($cookieStore.get("tournamentID")){
+          $scope.fetch_tournament_details($cookieStore.get("tournamentID"));
+      }else{
+        alert("No tournamentID passed to GenshyftTournamentController.")
+      }
+          
   }
 
   /*JSON API Call to retrieve tournament data - By Glen*/
@@ -498,8 +503,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           alert(data.failed);
         }
         else{
-          $scope.tournamentID = tournamentID;
-          $location.search({"tournamentID":tournamentID}).path("tournament-grpjoin");
+          //$scope.tournamentID = tournamentID;
+          //$location.search({"tournamentID":tournamentID}).path("tournament-grpjoin");
+          $cookieStore.put("tournamentID", tournamentID);
+          $location.path("tournament-grpjoin");
+          
         }
     }).error(function (data, status, headers, config) {
       console.log("Error");
