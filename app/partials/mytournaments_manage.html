@@ -132,18 +132,18 @@
 		<div class="tab-pane active" id="Rounds">
 			<div class="row-fluid">
 			<div class="span12 well well-small">
-				<div class="row-fluid">
-					<div class="span10">
-						<b>Round Name:</b>
-						{{grpTournaments[0].rounds.roundName}}</br>
-				
-						<b>Round Time Limit:</b>
-						{{grpTournaments[0].rounds.timeLimit}}</br>
-			
-						<b>Number of Questions:</b>
-						{{grpTournaments[0].rounds.problemIDs.length}}
-					</div>	
-				</div>
+				<table ng-grid id="grpTournRoundsTable" class="table table-bordered" width="100%">
+	                <tr class="roundTableHeaders">
+	                	<th class="roundTableHeader"><b>Round Title</b></th>
+	                	<th class="roundTableHeader"><b>Round Duration</b></th>
+	                	<th class="roundTableHeader"><b>Number of Questions in round</b></th>
+	 				</tr>
+	                <tr class="warning">
+	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].roundName}}</td>
+	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].timeLimit}}</td>
+	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].problemIDs.length}}</td>
+	                </tr>
+            	</table>
 				
 				</br><b>Start in</b></br>
 				<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">		<button type="button" class="btn btn-info">1 min</button>
