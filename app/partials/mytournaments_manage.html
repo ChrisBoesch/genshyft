@@ -113,7 +113,7 @@
 					<b>Round Duration:</b>{{grpTournaments[0].rounds.timeLimit}}</br>
 					<b>No. of Registered Players :</b>{{grpTournaments[0].registered}}
 					</br></br>
-					<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking >>></button>
+					<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking <i class="icon-chevron-right icon-white"></i></button>
 				</div>
 			</div>
 		</div>
@@ -153,9 +153,9 @@
   					<button type="button" class="btn btn-info">60 min</button>			
 				</div>
 
-				<button class="btn btn-primary" type="button" ng-model="start"><i class="icon-play icon-white"></i>Start</button>
+				<button class="btn btn-primary" type="button" ng-model="start">Start <i class="icon-play icon-white"></i></button>
 
-				<button class="btn btn-danger" type="button" ng-model="stop" ng-hide="true"><i class="icon-stop icon-white"></i>Stop</button>
+				<button class="btn btn-danger" type="button" ng-model="stop" ng-hide="true">Stop <i class="icon-stop icon-white"></i></button>
 			</div>
 			</div>
 		</div>
@@ -184,7 +184,7 @@
 					</div>
 				</div> 	
 
-	  			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%">
+	  			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%" ng-show="tournament.tournType=='Group'">
 					<div class="row-fluid">
 						<div class="span12 bootCamp" id="heading">Registered Groups</div>
 					</div>

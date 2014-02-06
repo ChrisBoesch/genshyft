@@ -406,8 +406,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*method to hide modal after successfully created tournament*/
   $scope.hideSuccessTournamentModal = function(){
-    $('#grpTournamentCreated').modal('hide');
     $location.path("mytournaments");
+    $('.modal-backdrop').remove();
+
     //window.location="index.html#/mytournaments";
   };
 
@@ -515,6 +516,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log(data);
     });
   };
+
+  $scope.manage_my_tournament = function(tournamentID){
+      $cookieStore.put("tournamentID", tournamentID);
+      $location.path("mytournaments-manage");
+  }
 
   /*Join Group or Leave Group for group tournament - by Glen*/
   $scope.join_grp = function(playerId, tournamentId, groupNo){
