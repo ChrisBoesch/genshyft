@@ -171,17 +171,14 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   */
 
   $scope.save_round = function(){      
-      if($scope.grpTourRoundName == undefined){
+      if($scope.grpTourRoundName == undefined || $scope.grpTourRoundName == ""){
         alert("The round name cannot be empty!");
       }
-      else if($scope.grpTourRoundMins == undefined){
+      else if($scope.grpTourRoundMins == undefined || $scope.grpTourRoundName == 0){
         alert("The round time limit cannot be empty!");
       }
       else if($scope.cartQuestions.length == 0){
         alert("You have not add any questions! Please add a question first!");
-      }
-      else if(parseInt($scope.grpTourRoundMins)){
-        alert("The round time limit must be an integer!");
       }
       else{
         var roundQuestions = [];
