@@ -3911,38 +3911,46 @@ function EventTableController($scope, $resource){
 }
 
 
-function EditProblemController($scope, $resource, $http, $q, $window) {
-    var $ = $window.jQuery;
+function EditProblemController($scope, $resource, $http, $q) {
 
     $scope.interfaces = $resource('/jsonapi/interfaces').get(function(resp){
         $scope.interface = resp.interfaces[0];
         $scope.getPaths($scope.interface);
     });
 
+    $scope.resetPaths = function() {
+        $scope.paths = [];
+        $scope.path = null;
+        $scope.resetLevels();
+    };
+
     $scope.getPaths = function(language) {
-         $scope.paths = [];
-         $scope.problemSets = [];
-         $scope.problems = [];
-         $scope.problemDetails = {};
 
-         if (!language || !language.id) {
+        $scope.resetPaths();
+
+        if (!language || !language.id) {
             return $q.reject('language is not set or has no id');
-         }
+        }
 
-         return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
+        return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
             if (!resp.data.paths) {
                 // TODO: handle error
                 return [];
             }
             $scope.paths = resp.data.paths;
             return $scope.paths;
-         });
+        });
+    };
+
+    $scope.resetLevels = function() {
+        $scope.problemSets = [];
+        $scope.problemSet = null;
+        $scope.resetProblems();
     };
 
     $scope.getLevels = function (path) {
-        $scope.problemSets = [];
-        $scope.problems = [];
-        $scope.problemDetails = {};
+
+        $scope.resetLevels();
 
         if (!path || !path.id) {
             return $q.reject('path is not set or has no id');
@@ -3958,9 +3966,15 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
         });
     };
 
-    $scope.getProblems = function(problemSet) {
+    $scope.resetProblems = function() {
         $scope.problems = [];
-        $scope.problemDetails = {};
+        $scope.problem = null;
+        $scope.resetProblemDetails();
+    };
+
+    $scope.getProblems = function(problemSet) {
+
+        $scope.resetProblems();
 
         if (!problemSet || !problemSet.id) {
             return $q.reject('problemSet is not set or has no id');
@@ -3976,8 +3990,13 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
         });
     };
 
-    $scope.getProblemDetails = function(problem) {
+    $scope.resetProblemDetails = function() {
         $scope.problemDetails = {};
+    };
+
+    $scope.getProblemDetails = function(problem) {
+        
+        $scope.resetProblemDetails();
 
         if (!problem || !problem.id) {
             return $q.reject('problem is not set or has no id');
@@ -3995,12 +4014,12 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
     };
 
     $scope.runTests = function () {
-        var data = $.param({
+        var data = {
                 interface_id: $scope.interface.id, 
                 source_code: $scope.problemDetails.solution,
                 examples: $scope.problemDetails.examples,
                 tests: $scope.problemDetails.tests
-            });
+            };
 
         $scope.resetTestRun();
         $http.post('/jsonapi/check_code_with_interface', data).then(function(resp){
@@ -4018,9 +4037,6 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
     $scope.$watch('problemDetails.examples', $scope.resetTestRun);
     $scope.$watch('problemDetails.tests', $scope.resetTestRun);
 
-    $scope.newProblem = function(){
-        alert('TODO');
-    };
 
     $scope.createNewPath = function(language) {
         $scope.newPath = {
@@ -4029,20 +4045,21 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
     };
 
     $scope.saveNewPath = function(newPath) {
-        var param = $.param(newPath);
 
-        $http.post('/jsonapi/new_path', param).then(function(resp){
+        $http.post('/jsonapi/new_path', newPath).then(function(resp){
 
             if (!resp.data.path_id) {
                 // TODO: handle error
                 alert('error');
                 return;
             }
+
             newPath.id = resp.data.path_id;
             $scope.paths.push(newPath);
             $scope.path = newPath;
             $scope.cancelNewPath();
-         });
+            $scope.resetLevels();
+        });
     };
 
     $scope.cancelNewPath = function() {
@@ -4056,9 +4073,8 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
     };
 
     $scope.saveNewLevel = function(newLevel) {
-        var param = $.param(newLevel);
 
-        $http.post('/jsonapi/new_problemset', param).then(function(resp){
+        $http.post('/jsonapi/new_problemset', newLevel).then(function(resp){
 
             if (!resp.data.problemset_id) {
                 // TODO: handle error
@@ -4069,21 +4085,39 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
             $scope.problemSets.push(newLevel);
             $scope.problemSet = newLevel;
             $scope.cancelNewLevel();
+            $scope.resetProblems();
          });
     };
 
     $scope.cancelNewLevel = function() {
         $scope.newLevel = null;
     };
+
+    $scope.createNewProblem = function(problemSet) {
+        $scope.newProblem = {
+            problemset_id: problemSet.id
+        };
+    };
+
+    $scope.StartNewProblem = function(newProblem){
+        $scope.problem = newProblem;
+        $scope.problems.push(newProblem);
+        $scope.cancelNewProblem();
+        $scope.resetProblemDetails();
+    };
+
+    $scope.cancelNewProblem = function() {
+        $scope.newProblem = null;
+    };
+
  
     $scope.save = function() {
 
-        var data = 
-            {
+        var url,
+            data = {
                 problemset_id: $scope.problemSet.id,
                 path_id: $scope.path.id,
                 interface_id: $scope.interface.id,
-                problem_id: $scope.problem.id,
                 level_id: $scope.problemSet.id,
                 // TODO: is it only necessary for new problem?
                 name: $scope.problem.name, 
@@ -4095,6 +4129,13 @@ function EditProblemController($scope, $resource, $http, $q, $window) {
                 // TODO: what are they for? 
                 privateTests:$scope.problem.other_tests
             };
+
+        if ($scope.problem.id) {
+            data.problem_id = $scope.problem.id;
+            url = '/jsonapi/edit_problem';
+        } else {
+            url = '/jsonapi/new_problem';
+        }
       
         $http.post('/jsonapi/edit_problem', data).then(function(resp){
             $scope.resetTestRun();

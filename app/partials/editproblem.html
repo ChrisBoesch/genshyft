@@ -42,14 +42,14 @@
                         <select id="problem" ng-model="problem" ng-options="p.name for p in problems" ng-change="getProblemDetails(problem)">
                             <option value="">new problem...</option>
                         </select> 
-                        <button class="btn" ng-click="newProblem(path)">new problem</button>
+                        <button class="btn" ng-click="createNewProblem(problemSet)" ng-if="!newProblem">new problem</button>
                     </div>
                 </div>
                 </fieldset>
             </form>
         </div>
         <div class="span6">
-            <form name="createNewPath" class="form-horizontal" role="form" ng-if="newPath">
+            <form name="newPathForm" class="form-horizontal" role="form" ng-if="newPath">
                 <fieldset>
                 <legend>New Path</legend>
 
@@ -69,7 +69,7 @@
 
                 <div class="control-group">
                     <div class="controls">
-                        <button class="btn btn-primary" ng-disabled="!createNewPath.$valid" ng-click="saveNewPath(newPath)">Create</button> 
+                        <button class="btn btn-primary" ng-disabled="!newPathForm.$valid" ng-click="saveNewPath(newPath)">Create</button> 
                         <button class="btn" ng-click="cancelNewPath()">Cancel</button> 
                     </div>
                 </div>                
@@ -77,9 +77,9 @@
                 </fieldset>
             </form>
 
-            <form name="createNewLevel" class="form-horizontal" role="form" ng-if="newLevel">
+            <form name="newLevelForm" class="form-horizontal" role="form" ng-if="newLevel">
                 <fieldset>
-                <legend>New Path</legend>
+                <legend>New Level</legend>
 
                 <div class="control-group">
                     <label for="level-name" class="control-label">Name: </label>
@@ -97,13 +97,35 @@
 
                 <div class="control-group">
                     <div class="controls">
-                        <button class="btn btn-primary" ng-disabled="!createNewLevel.$valid" ng-click="saveNewLevel(newLevel)">Create</button> 
+                        <button class="btn btn-primary" ng-disabled="!newLevelForm.$valid" ng-click="saveNewLevel(newLevel)">Create</button> 
                         <button class="btn" ng-click="cancelNewLevel()">Cancel</button> 
                     </div>
                 </div>                
 
                 </fieldset>
             </form>
+
+            <form name="newProblemForm" class="form-horizontal" role="form" ng-if="newProblem">
+                <fieldset>
+                <legend>New Problem</legend>
+
+                <div class="control-group">
+                    <label for="problem-name" class="control-label">Name: </label>
+                    <div class="controls">
+                        <input type="text" id="problem-name" ng-model="newProblem.name" required="true"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button class="btn btn-primary" ng-disabled="!newProblemForm.$valid" ng-click="StartNewProblem(newProblem)">Create</button> 
+                        <button class="btn" ng-click="cancelNewProblem()">Cancel</button> 
+                    </div>
+                </div>                
+
+                </fieldset>
+            </form>
+
         </div>
     </div>
 

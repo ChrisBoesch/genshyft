@@ -1329,12 +1329,7 @@ myApp.run(function($httpBackend) {
      
 	// New Path
 	$httpBackend.whenPOST('/jsonapi/new_path').respond(function(method, url, strData){
-		var data = {};
-
-		strData.split('&').forEach(function(arg){
-			var kv = arg.split('=');
-			data[kv[0]] = kv[1];
-		});
+		var data = JSON.parse(strData);
 
 		if (!data.interface_id || !data.description || !data.name) {
 			return [200, {'error': 'something is missing'}];
@@ -1345,12 +1340,7 @@ myApp.run(function($httpBackend) {
 
 	// New Level
 	$httpBackend.whenPOST('/jsonapi/new_problemset').respond(function(method, url, strData){
-		var data = {};
-
-		strData.split('&').forEach(function(arg){
-			var kv = arg.split('=');
-			data[kv[0]] = kv[1];
-		});
+		var data = JSON.parse(strData);
 
 		if (!data.path_id || !data.description || !data.name) {
 			return [200, {'error': 'something is missing'}];
