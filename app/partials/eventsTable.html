@@ -67,7 +67,7 @@
         <!-- the following hack will display negative solved problems as zero; only affects currentPlayer because the other players with negative solved problems i.e. not registered schools, are hidden -->
         <td><span ng-if="participant.isCurrentPlayer">
                 <b>
-                <span ng-if="participant.solvedproblems<0">No school ({{-participant.solvedproblems}})</span>
+                  <span ng-if="participant.solvedproblems<0"><a href="index.html#/schoolregistration">Register School ({{-participant.solvedproblems}})</a></span>
                 <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
                 </b>
             </span>
