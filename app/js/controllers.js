@@ -4013,16 +4013,34 @@ function EditProblemController($scope, $resource, $http, $q) {
     };
 
     $scope.runTests = function () {
-        var data = {
+        var publicData = {
                 interface_id: $scope.interface.id, 
                 source_code: $scope.problemDetails.solution,
                 examples: $scope.problemDetails.examples,
                 tests: $scope.problemDetails.tests
+            },
+            privateData = {
+                interface_id: $scope.interface.id, 
+                source_code: $scope.problemDetails.solution,
+                examples: $scope.problemDetails.examples,
+                tests: $scope.problemDetails.privateTests
             };
 
         $scope.resetTestRun();
-        $http.post('/jsonapi/check_code_with_interface', data).then(function(resp){
+        $http.post('/jsonapi/check_code_with_interface', publicData).then(function(resp) {
             $scope.testRun = resp.data;
+            
+            if (!resp.data.solved) {
+                return $q.reject(resp);
+            }
+
+            return $http.post('/jsonapi/check_code_with_interface', privateData);
+        }).then(function(resp) {
+            $scope.testRun = resp.data;
+
+            if (resp.data.error) {
+                return $q.reject(resp);
+            }
         });
     }
 
@@ -4035,6 +4053,7 @@ function EditProblemController($scope, $resource, $http, $q) {
     $scope.$watch('problemDetails.solution', $scope.resetTestRun);
     $scope.$watch('problemDetails.examples', $scope.resetTestRun);
     $scope.$watch('problemDetails.tests', $scope.resetTestRun);
+    $scope.$watch('problemDetails.privateTests', $scope.resetTestRun);
 
 
     $scope.createNewPath = function(language) {

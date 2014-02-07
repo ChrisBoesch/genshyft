@@ -191,13 +191,6 @@
 
                 <div class="control-group">
                     <div class="controls">
-                        <button class="btn btn-large btn-primary" ng-click="runTests()">Run</button> 
-                        <button ng-class="{'btn': true, 'btn-large': true, 'btn-success': testRun.solved}" ng-click="save()" ng-disabled="!testRun.solved">Save</button>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <div class="controls">
                         <h4>Test result:</h4>
                         <p ng-if="!testRun || !testRun.verification_message">
                             The tests have not run yet.
@@ -219,6 +212,13 @@
                                 <td>{{test.status}}</td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button class="btn btn-large btn-primary" ng-click="runTests()">Run</button> 
+                        <button ng-class="{'btn': true, 'btn-large': true, 'btn-success': testRun.solved}" ng-click="save()" ng-disabled="!testRun.solved">Save</button>
                     </div>
                 </div>
             </fieldset>
