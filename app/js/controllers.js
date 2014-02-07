@@ -4002,14 +4002,15 @@ function EditProblemController($scope, $resource, $http, $q) {
             return $q.reject('problem is not set or has no id');
         }
 
-        return $http.get('/jsonapi/get_problem?problem_id=' + problem.id).then(function(resp){
+        console.dir(problem);
 
+        return $http.get('/jsonapi/get_problem?problem_id=' + problem.id).then(function(resp){
             if (!resp.data.problem) {
                 return {};
             }
 
             $scope.problemDetails = resp.data.problem;
-            return $scope.problemDetails
+            return $scope.problemDetails;
         });
     };
 
@@ -4109,6 +4110,10 @@ function EditProblemController($scope, $resource, $http, $q) {
     $scope.cancelNewProblem = function() {
         $scope.newProblem = null;
     };
+
+    $scope.moveUp = $scope.moveDown = function () {
+        alert('TODO');
+    }
 
  
     $scope.save = function() {
