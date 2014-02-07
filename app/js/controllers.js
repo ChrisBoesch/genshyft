@@ -4002,8 +4002,6 @@ function EditProblemController($scope, $resource, $http, $q) {
             return $q.reject('problem is not set or has no id');
         }
 
-        console.dir(problem);
-
         return $http.get('/jsonapi/get_problem?problem_id=' + problem.id).then(function(resp){
             if (!resp.data.problem) {
                 return {};
@@ -4111,9 +4109,70 @@ function EditProblemController($scope, $resource, $http, $q) {
         $scope.newProblem = null;
     };
 
-    $scope.moveUp = $scope.moveDown = function () {
-        alert('TODO');
+    $scope.moveUp = function(problem) {
+        var data = {
+            problem_id: problem.id,
+        };
+
+        $http.post('/jsonapi/move_problem_up', data). then(function(resp) {
+            var next, target = problem.problemsetorder + 1;
+
+            if (!resp.data.success) {
+                alert('error');
+                return;
+            }
+
+            next = $scope.findProblem(target);
+            if (!next) {
+                return;
+            }
+
+            next.problemsetorder -= 1;
+            problem.problemsetorder = target;
+            $scope.sortProblems();
+        });
+    };
+
+
+    $scope.moveDown = function (problem) {
+        var data = {
+            problem_id: problem.id,
+        };
+
+        $http.post('/jsonapi/move_problem_down', data). then(function(resp) {
+            var prev, target = problem.problemsetorder - 1;
+
+            if (!resp.data.success) {
+                alert('error');
+                return;
+            }
+
+            prev = $scope.findProblem(target);
+            if (!prev) {
+                return;
+            }
+
+            prev.problemsetorder += 1;
+            problem.problemsetorder = target;
+            $scope.sortProblems();
+        });
     }
+
+    $scope.sortProblems = function() {
+        $scope.problems.sort(function(a, b) {return a.problemsetorder - b.problemsetorder;});
+    };
+
+    $scope.findProblem = function(position) {
+        if ($scope.problems[position-1] && $scope.problems[position-1].problemsetorder === position) {
+            return $scope.problems[position-1];
+        }
+
+        for (var i = 0; i < $scope.problems.length; i++) {
+            if ($scope.problems[i].problemsetorder === position) {
+                return $scope.problems[i];
+            }
+        };
+    };
 
  
     $scope.save = function() {
