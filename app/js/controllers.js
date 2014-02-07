@@ -3922,9 +3922,6 @@ function EventTableController($scope, $resource, $route, $location){
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
     		console.log($scope.eventID + "here2");
-
-
-
     	}
 
         //Gets registered jcParticipants.
