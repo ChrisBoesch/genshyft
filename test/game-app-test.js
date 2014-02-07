@@ -1386,15 +1386,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":111,
-                                            "question":"Compare"
+                                            "question":"Compare",
+                                            "questionDescription":"Level 5! Congratulations! We'll start with a couple warm-up questions. Create a function that compares two values, x and y. It should return 1 if x is greater, 0 if they are equal, and -1 if y is greater.",
+                                            "questionExamples":">>> compare(4,2)1>>> compare(4,21)-1>>> compare(4,4)0",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":112,
-                                            "question":"Fibonnaci"
+                                            "question":"Fibonnaci",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":113,
-                                            "question":"Factorial"
+                                            "question":"Factorial",
+                                            "questionDescription":"Recursive functions can be very powerful. We use them when a problem can be solved by breaking it into an easier version of the same problem. Factorials are a great example. The factorial of a n is simply the number multiplied by the factorial of (n-1). Create a recursive function to calculate the factorial of a number.",
+                                            "questionExamples":">> factorial(3)=> 6>> factorial(5)=> 120>> factorial(7)=> 5040",
+                                            "skeleton":""
                                         }  
 
                                     ]
@@ -1405,15 +1414,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":104,
-                                            "question":"Hashes"
+                                            "question":"Hashes",
+                                            "questionDescription":"Level 5! Congratulations! We'll start with a couple warm-up questions. Create a function that compares two values, x and y. It should return 1 if x is greater, 0 if they are equal, and -1 if y is greater.",
+                                            "questionExamples":">>> compare(4,2)1>>> compare(4,21)-1>>> compare(4,4)0",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":105,
-                                            "question":"Reverse Lookup"
+                                            "question":"Reverse Lookup",
+                                            "questionDescription":"Level 5! Congratulations! We'll start with a couple warm-up questions. Create a function that compares two values, x and y. It should return 1 if x is greater, 0 if they are equal, and -1 if y is greater.",
+                                            "questionExamples":">>> compare(4,2)1>>> compare(4,21)-1>>> compare(4,4)0",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":106,
-                                            "question":"String Histogram"
+                                            "question":"String Histogram",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }    
 
                                     ]
@@ -1424,15 +1442,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":107,
-                                            "question":"While loop"
+                                            "question":"While loop",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":108,
-                                            "question":"Sum range"
+                                            "question":"Sum range",
+                                            "questionDescription":"Level 5! Congratulations! We'll start with a couple warm-up questions. Create a function that compares two values, x and y. It should return 1 if x is greater, 0 if they are equal, and -1 if y is greater.",
+                                            "questionExamples":">>> compare(4,2)1>>> compare(4,21)-1>>> compare(4,4)0",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":109,
-                                            "question":"Cubes"
+                                            "question":"Cubes",
+                                            "questionDescription":"Level 5! Congratulations! We'll start with a couple warm-up questions. Create a function that compares two values, x and y. It should return 1 if x is greater, 0 if they are equal, and -1 if y is greater.",
+                                            "questionExamples":">>> compare(4,2)1>>> compare(4,21)-1>>> compare(4,4)0",
+                                            "skeleton":""
                                         }   
 
                                     ]
@@ -1443,15 +1470,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":101,
-                                            "question":"Strings"
+                                            "question":"Strings",
+                                            "questionDescription":"Level 5! Congratulations! We'll start with a couple warm-up questions. Create a function that compares two values, x and y. It should return 1 if x is greater, 0 if they are equal, and -1 if y is greater.",
+                                            "questionExamples":">>> compare(4,2)1>>> compare(4,21)-1>>> compare(4,4)0",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":102,
-                                            "question":"Hello"
+                                            "question":"Hello",
+                                            "questionDescription":"Level 5! Congratulations! We'll start with a couple warm-up questions. Create a function that compares two values, x and y. It should return 1 if x is greater, 0 if they are equal, and -1 if y is greater.",
+                                            "questionExamples":">>> compare(4,2)1>>> compare(4,21)-1>>> compare(4,4)0",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":103,
-                                            "question":"Upper Case"
+                                            "question":"Upper Case",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }    
 
                                     ]
@@ -1461,16 +1497,25 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 									"pathLevel":"Lists",
                                     "questionSet":[
                                         {
-                                            "questionId":11,
-                                            "question":"Lists"
+                                            "questionId":1231,
+                                            "question":"Lists",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":11,
-                                            "question":"List Head"
+                                            "question":"List Head",
+                                            "questionDescription":"Level 5! Congratulations! We'll start with a couple warm-up questions. Create a function that compares two values, x and y. It should return 1 if x is greater, 0 if they are equal, and -1 if y is greater.",
+                                            "questionExamples":">>> compare(4,2)1>>> compare(4,21)-1>>> compare(4,4)0",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":12,
-                                            "question":"Remove Item"
+                                            "question":"Remove Item",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }    
 
                                     ]
@@ -1481,15 +1526,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":13,
-                                            "question":"minMax"
+                                            "question":"minMax",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":14,
-                                            "question":"Sum"
+                                            "question":"Sum",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":15,
-                                            "question":"Zip"
+                                            "question":"Zip",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }    
 
                                     ]
@@ -1499,16 +1553,25 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 									"pathLevel":"Dictionaries",
                                     "questionSet":[
                                         {
-                                            "questionId":15,
-                                            "question":"Dictionaries"
+                                            "questionId":22,
+                                            "question":"Dictionaries",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
-                                            "questionId":15,
-                                            "question":"Reverse Lookup"
+                                            "questionId":234,
+                                            "question":"Reverse Lookup",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }, 
                                         {
-                                            "questionId":16,
-                                            "question":"String Building"
+                                            "questionId":5346,
+                                            "question":"String Building",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }    
 
                                     ]
@@ -1518,16 +1581,25 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 									"pathLevel":"More Functions",
                                     "questionSet":[
                                         {
-                                            "questionId":111,
-                                            "question":"filter"
+                                            "questionId":1122,
+                                            "question":"filter",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":112,
-                                            "question":"map/reduce"
+                                            "question":"map/reduce",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":1314,
-                                            "question":"currying - challenging"
+                                            "question":"currying - challenging",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }   
 
                                     ]
@@ -1538,15 +1610,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":134,
-                                            "question":"Hello World"
+                                            "question":"Hello World",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":142,
-                                            "question":"Comments"
+                                            "question":"Comments",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }, 
                                         {
-                                            "questionId":142,
-                                            "question":"Variables"
+                                            "questionId":144,
+                                            "question":"Variables",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }    
 
                                     ]
@@ -1557,15 +1638,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":413,
-                                            "question":"Functions"
+                                            "question":"Functions",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":153,
-                                            "question":"Increment"
+                                            "question":"Increment",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":253,
-                                            "question":"Product"
+                                            "question":"Product",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }    
 
                                     ]
@@ -1576,15 +1666,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":253,
-                                            "question":"Sign"
+                                            "question":"Sign",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":25,
-                                            "question":"Alarm Clock"
+                                            "question":"Alarm Clock",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":231,
-                                            "question":"Date Fashion"
+                                            "question":"Date Fashion",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }    
 
                                     ]
@@ -1595,15 +1694,24 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                     "questionSet":[
                                         {
                                             "questionId":235,
-                                            "question":"Compare"
+                                            "question":"Compare",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         },
                                         {
                                             "questionId":253,
-                                            "question":"Distance"
+                                            "question":"Distance",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }, 
                                         {
                                             "questionId":53,
-                                            "question":"Is Between"
+                                            "question":"Is Between",
+                                            "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
+                                            "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
+                                            "skeleton":""
                                         }   
 
                                     ]
