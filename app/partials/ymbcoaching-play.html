@@ -487,7 +487,7 @@
 
 		
 		
-<div ng-controller="yMBcoachingPlayController" ng-init="list();coachText();" class="container">
+<div ng-controller="yMBcoachingPlayController" ng-init="list();getCurrentMastery();timerFunction();" class="container">
             <div id = "allymbplay">
                 <!--<a class="janrainEngage" href="#"><input type="submit" value="Hyperlinked Sign In Button"></a>-->  
                 <div class="row-fluid"> 
@@ -527,13 +527,13 @@
 									
 									<div class = "span3">
 									
-									<img ng-src="{{image}}" width='150px'/>
+									<img ng-src="{{coachImage}}" width='150px'/>
 									</div>
 
 									<div class = "span9" id ="audioText">
                                     <font>
 
-											&nbsp;&nbsp;<b> {{nameOfCoach}} says </b> <br>
+											&nbsp;&nbsp;<b> {{currentCoach}} says {{counter}} </b> <br>
 											&nbsp;&nbsp;<div class ='span12'> {{words}} </div> <br>
 												
                                     </font>
@@ -567,16 +567,14 @@
                                   <a href="ymbcoaching-play/#t3" data-toggle="tab">Solution</a>
                                 </li>
                                 <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
-								<button class="btn btn-warning pull-right" ng-click="skip_problem()">&nbsp;Skip &nbsp;
+								<button class="btn btn-warning pull-right" ng-show="showNextQuestion" ng-click="nextQuestion();">&nbsp;Try another question &nbsp;
 								</button>
                             </ul>
                             <div  class="tab-content">
                                 <div class="tab-pane fade in active" id="t3" style="height:300px;">
                                     <div>
-                                        <section>
-                                            <div id="editorPractice" ui-ace="" ng-model="solution1">  
-											<span ng-bind="game.problems.problems[current_problem_index].skeleton">
-											</div>
+                                          <section>
+                                            <div id="editorPractice" ui-ace="" ng-model="solution1"><span ng-bind="game.problems.problems[current_problem_index].skeleton"></div>
                                         </section>
                                     </div>   
                                 </div>

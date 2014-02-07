@@ -118,10 +118,14 @@ myApp.run(function($httpBackend) {
 		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":2, 
 		"unlocked":true,
 		"no":"0"}]};
-		// to retrieve instance : Video[0] of purposevideos
-		$httpBackend.whenGET('/jsonapi/purposevideos/0').respond(video_no_0); // Calls a specific video base on "no" 0
-		$httpBackend.whenPOST('/jsonapi/purposevideos/0').respond({"result":"video 0 added/adjusted"});
 		
+// to retrieve instance : Video[0] of purposevideos // Calls a specific video base on "no" 0
+		$httpBackend.whenGET('/jsonapi/purposevideos/0').respond(video_no_0); // Calls a specific video base on "no" 0
+//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/0').respond({"result":"video 0 feedback adjusted"});	
+//payload -> 		//admin to update video
+//{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}		
+		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/0').respond({"result":"video 0 adjusted by admin"});		
 		
 
 		var video_no_1 = {"Videos":[{"title":"Art of Creative Coding",
@@ -131,12 +135,17 @@ myApp.run(function($httpBackend) {
 		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":2, 
 		"unlocked":true,
 		"no":"1"}]};
-	   // to retrieve instance : Video[1] of purposevideos		
-		$httpBackend.whenGET('/jsonapi/purposevideos/1').respond(video_no_1); // Calls a specific video base on "no" 1
-		$httpBackend.whenPOST('/jsonapi/purposevideos/1').respond({"result":"video 1 added/adjusted"});
+		
+// to retrieve instance : Video[1] of purposevideos		 // Calls a specific video base on "no" 1
+		$httpBackend.whenGET('/jsonapi/purposevideos/1').respond(video_no_1); 
+//payload -> {"feedback":3, "purposevideo":1,"unlocked":true }   //user to update the new feedback score and unlock next video
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/1').respond({"result":"video 1 unlocked and updated"});
+//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/1').respond({"result":"video 1 feedback adjusted"});
+//payload ->  //admin to update video
+//{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}
+		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/1').respond({"result":"video 1 adjusted by admin"});
 
-		//new
-		$httpBackend.whenPOST('/jsonapi/purposevideos').respond({"result":"video added/adjusted"});
 
 	
 	//Video Unlock determines the video each user has unlock.
@@ -149,30 +158,207 @@ myApp.run(function($httpBackend) {
 	
 	
 	//data on the mastery coaches
-	var coachesData = {"coachesData":[
-	{'coach':'Shannon','link': 'img/mbcoach/Shannon/Shannon.jpg','desc':'Encourager that wants you to be ready to code with your friends','show':'true'},
-	{'coach':'Sandra','link': 'img/mbcoach/Sandra/Sandra.jpg','desc':'Recruiter that wants you to be ready for your interview','show':'true' },
-	{'coach':'Zandar','link': 'img/mbcoach/Zandar/Zandar.jpg','desc':'Hacker that wants you to be more awesome','show':'true'},
-	{'coach':'SGTMJR','link': 'img/mbcoach/SGTMJR/SGTMJR.jpg','desc':'Wants you to quit before you get someone killed','show':'true'}
+	var coachesData = {"coachesData":[{
+	"coachId":1,
+	"coach":"Shannon",
+	"image": "img/mbcoach/Shannon/Shannon.jpg",
+	"desc":"Encourager that wants you to be ready to code with your friends",
+	"audiofile":{
+					"greeting":"audio/Shannon/greeting.mp3",
+					"welcomeback":"audio/Shannon/welcomeback.mp3",
+					"areyouthere":"audio/Shannon/areyouthere.mp3",
+					"letscompile":"a",
+					"dontgiveup":"a",
+					"correctanswer":"a",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"audiotext":{
+					"greeting":"Hi im shannon, Im here to help you practice and resolve some of the problems you seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
+					"welcomeback":"welcome back by shannon",
+					"areyouthere":"are you there text by shannon",
+					"letscompile":"b",
+					"dontgiveup":"b",
+					"correctanswer":"b",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"pictures":{
+					"greeting":"c",
+					"welcomeback":"c",
+					"areyouthere":"c",
+					"letscompile":"c",
+					"dontgiveup":"c",
+					"correctanswer":"c",
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+				}
+	
+	},
+	
+	
+	{
+	"coachId":2,
+	"coach":"Sandra",
+	"image": "img/mbcoach/Sandra/Sandra.jpg",
+	"desc":"Recruiter that wants you to be ready for your interview",
+	"audiofile":{
+					"greeting":"audio/Sandra/greeting.mp3",
+					"welcomeback":"audio/Sandra/welcomeback.mp3",
+					"areyouthere":"audio/Sandra/areyouthere.mp3",
+					"letscompile":"a",
+					"dontgiveup":"a",
+					"correctanswer":"a",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"audiotext":{
+					"greeting":"Welcome back ! Lets continue solving those question. By doing this everyday, youll be better prepared the next time you get together with your friends to do some coding. Lets start!",
+					"welcomeback":"welcome back text by sandra",
+					"areyouthere":"are you there text by sandra",
+					"letscompile":"b",
+					"dontgiveup":"b",
+					"correctanswer":"b",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"pictures":{
+					"greeting":"c",
+					"welcomeback":"c",
+					"areyouthere":"c",
+					"letscompile":"c",
+					"dontgiveup":"c",
+					"correctanswer":"c",
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+				}
+	
+	},
+	{
+	"coachId":3,
+	"coach":"Zandar",
+	"image": "img/mbcoach/Zandar/Zandar.jpg",
+	"desc":"Hacker that wants you to be more awesome",
+	"audiofile":{
+					"greeting":"audio/Zandar/greeting.mp3",
+					"welcomeback":"audio/Zandar/welcomeback.mp3",
+					"areyouthere":"audio/Zandar/areyouthere.mp3",
+					"letscompile":"a",
+					"dontgiveup":"audio/Zandar/dontgiveup.mp3",
+					"correctanswer":"audio/Zandar/correctanswer.mp3",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"audio/Zandar/lessattempts.mp3"
+				},
+	"audiotext":{
+					"greeting":"Hello, fellow coder, let me help you practice some of the problems you tried before. With my guidance, you be a pro in no time.",
+					"welcomeback":"welcome back buddy, we had soo much fun the last time. If you keep coding everyday, you will be a pro in no time.",
+					"areyouthere":"Where are you buddy, we cant stop now, let's finish this ",
+					"letscompile":"b",
+					"dontgiveup":"Perhaps you should look the complier, it will help you solve it quick.",
+					"correctanswer":"Yes, you have solve the last question buddy, go try another question.",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"Nice work buddy, here's a problem that I think you can now solve in fewer attempts."
+				},
+	"pictures":{
+					"greeting":"c",
+					"welcomeback":"c",
+					"areyouthere":"c",
+					"letscompile":"c",
+					"dontgiveup":"c",
+					"correctanswer":"c",
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+				}
+	
+	},
+	{
+	"coachId":4,
+	"coach":"SGTMJR",
+	"image": "img/mbcoach/SGTMJR/SGTMJR.jpg",
+	"desc":"Wants you to quit before you get someone killed",
+"audiofile":{
+					"greeting":"audio/SGTMJR/greeting.mp3",
+					"welcomeback":"audio/SGTMJR/welcomeback.mp3",
+					"areyouthere":"audio/SGTMJR/areyouthere.mp3",
+					"letscompile":"a",
+					"dontgiveup":"a",
+					"correctanswer":"a",
+					"tryother":"a",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"audiotext":{
+					"greeting":"Attention recruit !, I am your  SGT Major. I am going to make sure you solve this problem much better and improve your coding skill. Lets get to it !",
+					"welcomeback":"welcoem back by stgmjr",
+					"areyouthere":"b",
+					"letscompile":"b",
+					"dontgiveup":"b",
+					"correctanswer":"b",
+					"tryother":"b",
+					"faster":"a",
+					"lessattempts":"a"
+				},
+	"pictures":{
+					"greeting":"c",
+					"welcomeback":"c",
+					"areyouthere":"c",
+					"letscompile":"c",
+					"dontgiveup":"c",
+					"correctanswer":"c",
+					"tryother":"c",
+					"faster":"a",
+					"lessattempts":"a"
+					
+				}
+	
+	}
 	]};
 	
-	$httpBackend.whenGET('/jsonapi/MasteryBased/COACHES').respond(coachesData);
+	$httpBackend.whenGET('/jsonapi/coach').respond(coachesData);
 	
 	
 	//the user current coach/path progress
-	var currentUserMasteryProgress = {"currentUserMastery":[
-	{"pathId":"2243213",
-	"pathName":"Java",
-	"coach":"Zandar"
-	}
-	]};
-	$httpBackend.whenGET('/jsonapi/MasteryBased/CURRENT').respond(currentUserMasteryProgress);
-	$httpBackend.whenPOST('/jsonapi/MasteryBased/UPDATE').respond({"result":"Mastery status updated"});
+	var currentUserMasteryProgress = {
+	"pathId":"10030",
+	"pathName":"python",
+	"coach":"Zandar",
+	"nextProblemID": 52741,
+	"fromProblemSetID":10041,
+	"goal": "lessattempts",
+	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
+	};
+	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);;
+	
+	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }
+	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New Mentor, Path Id and Path Name has been recorded."});
+	
+	var gameID ={"gameID":101010};
+	// payload -->{"problemId":11021,"problemSet":304232};   // will save <-- those values to get gameID;
+	$httpBackend.whenPOST('/jsonapi/play_coaching_game').respond(function(method, url, data) {
+
+
+        var item = gameID;
+        return [200,item];
+        
+      })
 	
 	
+	
+//retrieve game details for mastery game base on the game Id;
+$httpBackend.whenGET('/jsonapi/game/101010').respond(
+{"game_end": "2010-06-01 15:19:39.813685", "player": "Chris", "solvedProblemIDs": [52472], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2010-05-14 05:39:30.194936", "numProblems": 3, "numSolvedProblems": 1, "status": "ACCEPTING SOLUTIONS", "problemIDs": [52472, 57555, 52741], "problems": {"problems": [{"skeleton": "question=", "description": "Another sequential data type is the dictionary.  Create a dictionary with three different indexes as shown in the example.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> question['color']\r\n 'blue'\r\n>>> question[7]\r\n 'seven'\r\n>>> question[3.14]\r\n [3,1,4,6]", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52472, "name": "Dictionaries"}, {"skeleton": "def sortedList(d):", "description": "The dictionary method keys() returns a list of all the keys in a dictionary. Create the function sortedList that returns a sorted list of the keys for a dictionary that is passed in. ", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d = {'a':1, 'c':2, 'b':3}\n>>> sortedList(d)\n['a', 'b', 'c']", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 57555, "name": "List the keys of a dictionary"}, {"skeleton": "def lookup(d,v):\r\n    ", "description": "Create a function that takes a dictionary and a value.  It should return a list of all the keys that map to that value.  The list should be sorted.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d={'ta':4,8:'32',(5,3):'hi',(4,3,2):[4,3],'':4,73:8,839:234,34:857,'Hello':4}\r\n>>> lookup(d,4)\r\n ['', 'Hello', 'ta']\r\n>>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}\r\n>>> lookup(eng2sp,'uno')\r\n ['one']\r\n>>> lookup(eng2sp,'siete')\r\n []", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52741, "name": "Reverse Lookup"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "1423004", "tournamentID": null, "name": "Default Game", "roundID": null, "questID": null, "heatID": null, "game_start": "2010-05-14 05:39:30.194841", "currentTime": "2014-02-01 02:11:23.931950", "game_type": "Timed Interview", "timelimit": 3600});
 	
 	//the following at the audio scripts for each coaches.
-	var zandar ={"speech":[
+	/*var zandar ={"speech":[
 	{"text": "Welcome back buddy, we had some have fun that last time. If you spend at least 5 minutes coding everyday, you'll be a pro like me in no time!"},
 	
 	{"text": "Mind blowing buddy, let's do another one. I think this is one problem that you can solve with less attempts than last time. "},
@@ -276,7 +462,7 @@ myApp.run(function($httpBackend) {
 	
 	]};
 	$httpBackend.whenGET('/jsonapi/MasteryBased/speech/Shannon').respond(Shannon);
-	
+	*/
 	var tournaments = {"Tournaments":[
 		{"tournamentId":"001",
 		"title":"test",
@@ -557,6 +743,256 @@ myApp.run(function($httpBackend) {
 		"winnerText": ""
 	};
 
+	var IndTournData= {
+    "status": "Close",
+    "currentPlayerID": 57754,
+    "description": "Tournament",
+    "directorID": 57754,
+    "tournType": "Group",
+    "tournamentID": 5060388987076610,
+    "maxNoPlayerPerGrp": 5,
+    "numberOfGrp": 5,
+    "mentorAssignInTeam": "Y/N",
+	"round":[{
+		"roundID":4912161075757056,
+		"description": "Round 1",
+		"currentHeatDetails": {
+			"heatID": 6144086545268736,
+			"description": "Heat 2",
+			"startTime": "2013-10-04 14:02:05.835670",
+			"currentTime": "2013-10-04 14:02:00.246270"
+		},
+		"registeredPlayers": [
+			{
+				"playerId": 57754,
+				"playerName": "Chris",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739102,
+				"playerName": "Player 2",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""	
+			},
+			{
+				"playerId": 9379339,
+				"playerName": "Player 3",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57753,
+				"playerName": "Player 4",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739101,
+				"playerName": "Player 5",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379338,
+				"playerName": "Player 6",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57752,
+				"playerName": "Player 7",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739100,
+				"playerName": "Player 8",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379337,
+				"playerName": "Player 9",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57751,
+				"playerName": "Player 10",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739099,
+				"playerName": "Player 11",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379336,
+				"playerName": "Player 12",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57750,
+				"playerName": "Player 13",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 5,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739098,
+				"playerName": "Player 14",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379335,
+				"playerName": "Player 15",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			}
+		]
+	}] 
+};
+
  	var tournamentGrpData = {
     "status": "Open for registration",
     "currentPlayerID": 57754,
@@ -755,12 +1191,13 @@ myApp.run(function($httpBackend) {
 	};
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076609').respond(tournamentGrpData);
 	$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076608').respond(tournamentIndivData);
+	//$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076610').respond(IndTournData);
 	
 		
 
 
 
-      var events = {"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};
+  var events = {"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};
       $httpBackend.whenGET('/jsonapi/event').respond(events);
       
 
@@ -1319,7 +1756,7 @@ myApp.run(function($httpBackend) {
       $httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4711778302820352').respond({"ranking": [{"status": "GAME CLOSED", "playerid": 2739102, "solved_problems": 2, "flagUrl": "/static/flags/sg_on.png", "finished": "0:08:05.316710", "gravatar": "http://www.gravatar.com/avatar/45db5a046daf286a8c901e958fdb384e/?default=&amp;s=30", "professional": true, "total_problems": 2, "nickname": "Prof Boesch"}, {"status": "ACCEPTING SOLUTIONS", "playerid": 57754, "solved_problems": 1, "flagUrl": "/static/flags/sg_on.png", "finished": "0:00:17.453800", "gravatar": "http://www.gravatar.com/avatar/6e64bb2cab5367fd6e201df2aa722512/?default=&amp;s=30", "professional": true, "total_problems": 2, "nickname": "Chris"}], "heatStopTime": "2013-10-07 12:31:57.142490", "heatDescription": "Heat 8", "tournamentID": 5060388987076608, "tournamentDescription": "No details", "roundID": 4912161075757056, "heatID": 4711778302820352, "heatStartTime": "2013-10-07 11:31:57.142490", "roundDescription": "test round 1", "currentTime": "2013-10-07 13:55:24.945290", "tournamentType": "Normal", "type": "heat ranking"});
 
       //Web game
-      $httpBackend.whenGET('/jsonapi/game/123456').respond({"game_end": "2013-09-29 09:27:03.104550", "player": "Chris", "solvedProblemIDs": [10033], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-09-29 08:27:02.906550", "numProblems": 2, "numSolvedProblems": 1, "status": "GAME CLOSED", "problemIDs": [10033, 17155], "problems": {"problems": [{"skeleton": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "description": "Make a page that says Hello World.", "path_id": 10030, "problemset_id": 11021, "examples": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "interface": {"codeHighlightKey": "html", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10033, "name": "Expected Results"}, {"skeleton": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "description": "Make a pagge that says Goodbye World.", "path_id": 10030, "problemset_id": 11021, "examples": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "interface": {"codeHighlightKey": "html", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "5817368383062016", "tournamentID": 5060388987076608, "name": "Tournament game", "roundID": 4912161075757056, "questID": null, "heatID": 4691468476219392, "game_start": "2013-09-29 08:27:03.040390", "currentTime": "2013-09-29 13:54:35.933410", "game_type": "Timed Interview", "timelimit": 3600});
+      $httpBackend.whenGET('/jsonapi/game/123456').respond({"game_end": "2013-09-29 09:27:03.104550", "player": "Chris", "solvedProblemIDs": [10033], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-09-29 08:27:02.906550", "numProblems": 2, "numSolvedProblems": 1, "status": "GAME CLOSED", "problemIDs": [10033, 17155], "problems": {"problems": [{"skeleton": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "description": "Make a page that says Hello World.", "path_id": 10030, "problemset_id": 11021, "examples": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "interface": {"codeHighlightKey": "html", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10033, "name": "Expected Results"}, {"skeleton": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "description": "Make a pagge that says Goodbye World.", "path_id": 10030, "problemset_id": 11021, "examples": "<html>\n  <body>\n    <b>Goodbye World</b>\n  </body>\n</html>", "interface": {"codeHighlightKey": "html", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "58173683830620165817368383062016", "tournamentID": 5060388987076608, "name": "Tournament game", "roundID": 4912161075757056, "questID": null, "heatID": 4691468476219392, "game_start": "2013-09-29 08:27:03.040390", "currentTime": "2013-09-29 13:54:35.933410", "game_type": "Timed Interview", "timelimit": 3600});
       
       //$httpBackend.whenGET('/jsonapi/create_game/heatID/:heatID').respond();
     
@@ -1351,4 +1788,781 @@ myApp.run(function($httpBackend) {
 
 	$httpBackend.whenPOST('/jsonapi/move_problem_up').respond({'success': true});
 	$httpBackend.whenPOST('/jsonapi/move_problem_down').respond({'success': true});
+      
+    var RankingData = {
+    "status": "Open",
+    "currentPlayerID": 57754,
+    "description": "Tournament",
+    "directorID": 57754,
+    "tournType": "Group",
+    "tournamentID": 5060388987076610,
+    "maxNoPlayerPerGrp": 5,
+    "numberOfGrp": 5,
+    "mentorAssignInTeam": "Y",
+	"round":[{
+		"roundID":4912161075757056,
+		"currentHeatDetails": {
+			"heatID": 6144086545268736,
+			"description": "Heat 2",
+			"startTime": "2013-10-04 14:02:05.835670",
+			"currentTime": "2013-10-04 14:02:00.246270",
+		},
+		"registeredPlayers": [
+			{
+				"playerId": 57754,
+				"playerName": "Chris",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739102,
+				"playerName": "Player 2",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""	
+			},
+			{
+				"playerId": 9379339,
+				"playerName": "Player 3",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 1,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57753,
+				"playerName": "Player 4",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739101,
+				"playerName": "Player 5",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379338,
+				"playerName": "Player 6",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57752,
+				"playerName": "Player 7",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739100,
+				"playerName": "Player 8",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379337,
+				"playerName": "Player 9",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57751,
+				"playerName": "Player 10",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739099,
+				"playerName": "Player 11",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379336,
+				"playerName": "Player 12",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 4,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 57750,
+				"playerName": "Player 13",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 5,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 2739098,
+				"playerName": "Player 14",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 3,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			},
+			{
+				"playerId": 9379335,
+				"playerName": "Player 15",
+				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
+				"group": 2,
+				"rankingInGrp":"",
+				"overallRanking":"",
+				"problemsSolved":[
+					"/problem_is_solved_for_game/6096747415732224/10033",
+					"/problem_is_solved_for_game/6096747415732224/17155"
+				],
+				"progress":"",
+				"mentoredBy":"",
+				"assignedMentorName":""
+			}
+		]
+	}] 
+}
+
+
+		$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076610').respond(RankingData);
+      //eventTables data
+      var eventsTableDataJC = {
+    "following": 1,
+    "name": "National Singapore JC and High-school Coding Competition",
+    "ranking": [
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5226227371606016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 101,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5428208946118656,
+            "isCurrentPlayer": true,
+            "solvedproblems": 83,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "NC-12"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 6449477007179776,
+            "isCurrentPlayer": false,
+            "solvedproblems": 70,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Sui Dongchen"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4798855845511168,
+            "isCurrentPlayer": false,
+            "solvedproblems": 69,
+            "year": 2012,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Lin Rizhong James"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 6537241174212608,
+            "isCurrentPlayer": false,
+            "solvedproblems": 62,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6309974053486592,
+            "isCurrentPlayer": false,
+            "solvedproblems": 59,
+            "year": 2013,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Tan Tze Guang"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 8539593,
+            "isCurrentPlayer": false,
+            "solvedproblems": 41,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "tanjinyi"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 5417015456038912,
+            "isCurrentPlayer": false,
+            "solvedproblems": 27,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Yong Loong Ang"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5307015706443776,
+            "isCurrentPlayer": false,
+            "solvedproblems": 26,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 6542601293398016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 26,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5928418017280000,
+            "isCurrentPlayer": false,
+            "solvedproblems": 25,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "wcm"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6301682082250752,
+            "isCurrentPlayer": false,
+            "solvedproblems": 24,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Nala ;D"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 6249092355194880,
+            "isCurrentPlayer": false,
+            "solvedproblems": 24,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Tan Di Sheng"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5806483090440192,
+            "isCurrentPlayer": false,
+            "solvedproblems": 24,
+            "year": 2013,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Armordillo"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5323577100337152,
+            "isCurrentPlayer": false,
+            "solvedproblems": 19,
+            "year": 2015,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 5699766038036480,
+            "isCurrentPlayer": false,
+            "solvedproblems": 13,
+            "year": 2009,
+            "schoolname": "NUS High School of Mathematics and Science",
+            "nickname": "Moose"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4836948715765760,
+            "isCurrentPlayer": false,
+            "solvedproblems": 11,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6619269143986176,
+            "isCurrentPlayer": false,
+            "solvedproblems": 11,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Justin Leow"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 5862928355950592,
+            "isCurrentPlayer": false,
+            "solvedproblems": 11,
+            "year": 2009,
+            "schoolname": "Dunman High School",
+            "nickname": "Sam"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6437610817847296,
+            "isCurrentPlayer": false,
+            "solvedproblems": 5,
+            "year": 2014,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6273369120964608,
+            "isCurrentPlayer": false,
+            "solvedproblems": 4,
+            "year": 2013,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Thong Mien Mien"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5060571825176576,
+            "isCurrentPlayer": false,
+            "solvedproblems": 4,
+            "year": 2013,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5810523044052992,
+            "isCurrentPlayer": false,
+            "solvedproblems": 3,
+            "year": 2013,
+            "schoolname": "Hwa Chong Institution",
+            "nickname": "Lee Yan Hwa"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5205559720542208,
+            "isCurrentPlayer": false,
+            "solvedproblems": 1,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6476317599989760,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "playerid": 6604643169730560,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Song Kai",
+            "isCurrentPlayer": false
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5958130332598272,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2014,
+            "schoolname": "Pioneer Junior College",
+            "nickname": "Lai Wai Liang"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 5795639908630528,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6239605309308928,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Tan YuGin"
+        },
+        {
+            "playerid": 6356396207505408,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6609723444953088,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4899048842592256,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2009,
+            "schoolname": "Dunman High School",
+            "nickname": "yuansiang"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 6022159168176128,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "Highschool",
+            "playerid": 4621759311511552,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+        {
+            "playerid": 6439117143408640,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 4826577711923200,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Yao Hong",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6678236763258880,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6604643169730560,
+            "solvedproblems": 0,
+            "schoolname": "No school registered",
+            "nickname": "Song Kai",
+            "isCurrentPlayer": false
+        },
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 4961583566422016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 0,
+            "year": 2013,
+            "schoolname": "Dunman High School",
+            "nickname": "Wang Zexin"
+        },
+        {
+
+            "playerid": 4980996818599936,
+            "isCurrentPlayer": false,
+            "solvedproblems": -2,
+            "year": 2014,
+            "schoolname": "No school registered",
+            "nickname": "Ng Zhen Yuan"
+        },
+        {
+            "playerid": 6622855978549248,
+            "solvedproblems": -3,
+            "schoolname": "No school registered",
+            "nickname": "Apocalypster",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 4539845695242240,
+            "solvedproblems": -6,
+            "schoolname": "No school registered",
+            "nickname": "Liang Yi",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 4569586733154304,
+            "solvedproblems": -10,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5536602377945088,
+            "solvedproblems": -11,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6101567476334592,
+            "solvedproblems": -16,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 5950332819472384,
+            "solvedproblems": -37,
+            "schoolname": "No school registered",
+            "nickname": "Secret Agent",
+            "isCurrentPlayer": false
+        },
+        {
+            "playerid": 6661817774374912,
+            "solvedproblems": -53,
+            "schoolname": "No school registered",
+            "nickname": "Eileen",
+            "isCurrentPlayer": true
+        }
+    ],
+    "created": "2014-01-10T15:41:36.848030",
+    "registered": 49,
+    "watching": 1,
+    "venue": null,
+    "longitude": null,
+    "participating": 47,
+    "start": "2014-01-10T15:41:36.848050",
+    "latitude": null,
+    "id": 6095188913029120,
+    "path":"Python",
+    "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
+}
+		
+		$httpBackend.whenGET('/jsonapi/event/6095188913029120').respond(eventsTableDataJC);
+
+		var eventsTableDataPoly = {
+    "following": 1,
+    "name": "National Polytechnic Coding Competition",
+    "ranking": [
+        {
+            "schooltype": "Tertiary",
+            "subtype": "JC",
+            "playerid": 5226227371606016,
+            "isCurrentPlayer": false,
+            "solvedproblems": 101,
+            "year": 2014,
+            "schoolname": "Dunman High School",
+            "nickname": "Secret Agent"
+        },
+    ],
+    "created": "2014-01-10T15:41:36.848030",
+    "registered": 49,
+    "watching": 1,
+    "venue": null,
+    "longitude": null,
+    "participating": 47,
+    "start": "2014-01-10T15:41:36.848050",
+    "latitude": null,
+    "id": 6486660988534784,
+    "path":"Python",
+    "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
+}
+		
+		$httpBackend.whenGET('/jsonapi/event/6486660988534784').respond(eventsTableDataPoly);
+
+    var eventsTableDataSec = {"path":"Javascript","following": 2, "name": "Secondary Test Ranking", "ranking": [{"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "Highschool", "playerid": 5428208946118656, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 103, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Dunman High School", "nickname": "NC-12"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "Highschool", "playerid": 5226227371606016, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 103, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Dunman High School", "nickname": "Leong Xuhua"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "JC", "playerid": 5950332819472384, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 91, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Hwa Chong Institution", "nickname": "Nirvana"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 5205559720542208, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 76, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6449477007179776, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 75, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Sui Dongchen"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "JC", "playerid": 6309974053486592, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 74, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Pioneer Junior College", "nickname": "Tan Tze Guang"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "JC", "playerid": 4798855845511168, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 69, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Pioneer Junior College", "nickname": "Lin Rizhong James"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6537241174212608, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 62, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6619269143986176, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 59, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Justin Leow"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 6542601293398016, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 53, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 8539593, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 41, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "tanjinyi"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "JC", "playerid": 5806483090440192, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 39, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Pioneer Junior College", "nickname": "Armordillo"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 5323577100337152, "isCurrentPlayer": false, "year": 2015, "solvedproblems": 35, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5417015456038912, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 27, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Yong Loong Ang"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5307015706443776, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 26, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5928418017280000, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 25, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "wcm"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6476317599989760, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Tomato"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6301682082250752, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Nala ;D"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6249092355194880, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Tan Di Sheng"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 5699766038036480, "isCurrentPlayer": false, "year": 2009, "solvedproblems": 13, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "NUS High School of Mathematics and Science", "nickname": "Moose"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 4836948715765760, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 5862928355950592, "isCurrentPlayer": false, "year": 2009, "solvedproblems": 11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "Dunman High School", "nickname": "Sam"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 6437610817847296, "isCurrentPlayer": false, "solvedproblems": 5, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 6273369120964608, "isCurrentPlayer": false, "solvedproblems": 4, "year": 2013, "schoolname": "Pioneer Junior College", "nickname": "Thong Mien Mien"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5060571825176576, "isCurrentPlayer": false, "solvedproblems": 4, "year": 2013, "schoolname": "Pioneer Junior College", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5810523044052992, "isCurrentPlayer": false, "solvedproblems": 3, "year": 2013, "schoolname": "Hwa Chong Institution", "nickname": "Lee Yan Hwa"}, {"playerid": 5605421578452992, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6604643169730560, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Song Kai", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5958130332598272, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Lai Wai Liang"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 5795639908630528, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Dunman High School", "nickname": "Thng JX"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 6239605309308928, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Tan YuGin"}, {"playerid": 6356396207505408, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6609723444953088, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4899048842592256, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2009, "schoolname": "Dunman High School", "nickname": "yuansiang"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 6022159168176128, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4621759311511552, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"playerid": 6439117143408640, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 4826577711923200, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Yao Hong", "isCurrentPlayer": false}, {"playerid": 6678236763258880, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6604643169730560, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Song Kai", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4961583566422016, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Wang Zexin"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 4980996818599936, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Ng Zhen Yuan"}, {"playerid": 6622855978549248, "solvedproblems": -3, "schoolname": "No school registered", "nickname": "Apocalypster", "isCurrentPlayer": false}, {"playerid": 4539845695242240, "solvedproblems": -6, "schoolname": "No school registered", "nickname": "Liang Yi", "isCurrentPlayer": false}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 4569586733154304, "isCurrentPlayer": false, "solvedproblems": -10, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 5536602377945088, "isCurrentPlayer": false, "solvedproblems": -11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 6661817774374912, "isCurrentPlayer": false, "solvedproblems": -13, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Eileen"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 6101567476334592, "isCurrentPlayer": false, "solvedproblems": -16, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}], "created": "2014-01-10T15:41:36.848030", "registered": 51, "watching": 1, "venue": null, "longitude": null, "participating": 48, "start": "2014-01-10T15:41:36.848050", "latitude": null, "id": 6095188913029120, "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on the morning of March 29th, at 9am, at SMU. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."};
+      
+      
+		$httpBackend.whenGET('/jsonapi/event/5308925893148672').respond(eventsTableDataSec);
+		
 });
+
