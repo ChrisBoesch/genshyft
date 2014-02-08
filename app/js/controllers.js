@@ -3950,14 +3950,328 @@ function EventTableController($scope, $resource, $route, $location){
             console.log($scope.eventsData);
         	 })
 
-	  	};	  	
-        
+	  	};
+
         $scope.returnToPreviousPage = function() {
-  			window.history.back();
-		};
+            window.history.back();
+        };
+}
 
 
+function EditProblemController($scope, $resource, $http, $q) {
+
+    $scope.interfaces = $resource('/jsonapi/interfaces').get(function(resp){
+        $scope.interface = resp.interfaces[0];
+        $scope.getPaths($scope.interface);
+    });
+
+    $scope.resetPaths = function() {
+        $scope.paths = [];
+        $scope.path = null;
+        $scope.resetLevels();
+    };
+
+    $scope.getPaths = function(language) {
+
+        $scope.resetPaths();
+
+        if (!language || !language.id) {
+            return $q.reject('language is not set or has no id');
+        }
+
+        return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
+            if (!resp.data.paths) {
+                // TODO: handle error
+                return [];
+            }
+            $scope.paths = resp.data.paths;
+            return $scope.paths;
+        });
+    };
+
+    $scope.resetLevels = function() {
+        $scope.problemSets = [];
+        $scope.problemSet = null;
+        $scope.resetProblems();
+    };
+
+    $scope.getLevels = function (path) {
+
+        $scope.resetLevels();
+
+        if (!path || !path.id) {
+            return $q.reject('path is not set or has no id');
+        }
+
+        return $http.get('/jsonapi/problemsets/' + path.id).then(function(resp){
+            if (!resp.data.problemsets) {
+                return [];
+            }
+
+            $scope.problemSets = resp.data.problemsets;
+            return $scope.problemSets;
+        });
+    };
+
+    $scope.resetProblems = function() {
+        $scope.problems = [];
+        $scope.problem = null;
+        $scope.resetProblemDetails();
+    };
+
+    $scope.getProblems = function(problemSet) {
+
+        $scope.resetProblems();
+
+        if (!problemSet || !problemSet.id) {
+            return $q.reject('problemSet is not set or has no id');
+        }
+
+        return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
+            if (!resp.data.problems) {
+                return [];
+            }
+
+            $scope.problems = resp.data.problems;
+            return $scope.problems;
+        });
+    };
+
+    $scope.resetProblemDetails = function() {
+        $scope.problemDetails = {};
+    };
+
+    $scope.getProblemDetails = function(problem) {
+        
+        $scope.resetProblemDetails();
+
+        if (!problem || !problem.id) {
+            return $q.reject('problem is not set or has no id');
+        }
+
+        return $http.get('/jsonapi/get_problem?problem_id=' + problem.id).then(function(resp){
+            if (!resp.data.problem) {
+                return {};
+            }
+
+            $scope.problemDetails = resp.data.problem;
+            return $scope.problemDetails;
+        });
+    };
+
+    $scope.runTests = function () {
+        var publicData = {
+                interface_id: $scope.interface.id, 
+                source_code: $scope.problemDetails.solution,
+                examples: $scope.problemDetails.examples,
+                tests: $scope.problemDetails.tests
+            },
+            privateData = {
+                interface_id: $scope.interface.id, 
+                source_code: $scope.problemDetails.solution,
+                examples: $scope.problemDetails.examples,
+                tests: $scope.problemDetails.privateTests
+            };
+
+        $scope.resetTestRun();
+        $http.post('/jsonapi/check_code_with_interface', publicData).then(function(resp) {
+            $scope.testRun = resp.data;
+            
+            if (!resp.data.solved) {
+                return $q.reject(resp);
+            }
+
+            return $http.post('/jsonapi/check_code_with_interface', privateData);
+        }).then(function(resp) {
+            $scope.testRun = resp.data;
+
+            if (resp.data.error) {
+                return $q.reject(resp);
+            }
+        });
+    }
+
+    $scope.resetTestRun = function() {
+        $scope.testRun = {};
+    };
+
+    // The tests need to be run again if those expressions change.
+    $scope.$watch('interface', $scope.resetTestRun);
+    $scope.$watch('problemDetails.solution', $scope.resetTestRun);
+    $scope.$watch('problemDetails.examples', $scope.resetTestRun);
+    $scope.$watch('problemDetails.tests', $scope.resetTestRun);
+    $scope.$watch('problemDetails.privateTests', $scope.resetTestRun);
 
 
-			
+    $scope.createNewPath = function(language) {
+        $scope.newPath = {
+            interface_id: language.id
+        };
+    };
+
+    $scope.saveNewPath = function(newPath) {
+
+        $http.post('/jsonapi/new_path', newPath).then(function(resp){
+
+            if (!resp.data.path_id) {
+                // TODO: handle error
+                alert('error');
+                return;
+            }
+
+            newPath.id = resp.data.path_id;
+            $scope.paths.push(newPath);
+            $scope.path = newPath;
+            $scope.cancelNewPath();
+            $scope.resetLevels();
+        });
+    };
+
+    $scope.cancelNewPath = function() {
+        $scope.newPath = null;
+    };
+
+    $scope.createNewLevel = function(path) {
+        $scope.newLevel = {
+            path_id: path.id
+        };
+    };
+
+    $scope.saveNewLevel = function(newLevel) {
+
+        $http.post('/jsonapi/new_problemset', newLevel).then(function(resp){
+
+            if (!resp.data.problemset_id) {
+                // TODO: handle error
+                alert('error');
+                return;
+            }
+            newLevel.id = resp.data.problemset_id;
+            $scope.problemSets.push(newLevel);
+            $scope.problemSet = newLevel;
+            $scope.cancelNewLevel();
+            $scope.resetProblems();
+         });
+    };
+
+    $scope.cancelNewLevel = function() {
+        $scope.newLevel = null;
+    };
+
+    $scope.createNewProblem = function(problemSet) {
+        $scope.newProblem = {
+            problemset_id: problemSet.id
+        };
+    };
+
+    $scope.StartNewProblem = function(newProblem){
+        $scope.problem = newProblem;
+        $scope.problems.push(newProblem);
+        $scope.cancelNewProblem();
+        $scope.resetProblemDetails();
+    };
+
+    $scope.cancelNewProblem = function() {
+        $scope.newProblem = null;
+    };
+
+    $scope.moveUp = function(problem) {
+        var data = {
+            problem_id: problem.id,
+        };
+
+        $http.post('/jsonapi/move_problem_up', data). then(function(resp) {
+            var next, target = problem.problemsetorder + 1;
+
+            if (!resp.data.success) {
+                alert('error');
+                return;
+            }
+
+            next = $scope.findProblem(target);
+            if (!next) {
+                return;
+            }
+
+            next.problemsetorder -= 1;
+            problem.problemsetorder = target;
+            $scope.sortProblems();
+        });
+    };
+
+
+    $scope.moveDown = function (problem) {
+        var data = {
+            problem_id: problem.id,
+        };
+
+        $http.post('/jsonapi/move_problem_down', data). then(function(resp) {
+            var prev, target = problem.problemsetorder - 1;
+
+            if (!resp.data.success) {
+                alert('error');
+                return;
+            }
+
+            prev = $scope.findProblem(target);
+            if (!prev) {
+                return;
+            }
+
+            prev.problemsetorder += 1;
+            problem.problemsetorder = target;
+            $scope.sortProblems();
+        });
+    }
+
+    $scope.sortProblems = function() {
+        $scope.problems.sort(function(a, b) {return a.problemsetorder - b.problemsetorder;});
+    };
+
+    $scope.findProblem = function(position) {
+        if ($scope.problems[position-1] && $scope.problems[position-1].problemsetorder === position) {
+            return $scope.problems[position-1];
+        }
+
+        for (var i = 0; i < $scope.problems.length; i++) {
+            if ($scope.problems[i].problemsetorder === position) {
+                return $scope.problems[i];
+            }
+        };
+    };
+
+ 
+    $scope.save = function() {
+
+        var url,
+            data = {
+                problemset_id: $scope.problemSet.id,
+                path_id: $scope.path.id,
+                interface_id: $scope.interface.id,
+                level_id: $scope.problemSet.id,
+                // TODO: is it only necessary for new problem?
+                name: $scope.problem.name, 
+                details: $scope.problem.description,             
+                solution_code: $scope.problem.solution,
+                skeleton_code: $scope.problem.skeleton,
+                examples: $scope.problem.examples,
+                publicTests: $scope.problem.tests,
+                // TODO: what are they for? 
+                privateTests:$scope.problem.other_tests
+            };
+
+        if ($scope.problem.id) {
+            data.problem_id = $scope.problem.id;
+            url = '/jsonapi/edit_problem';
+        } else {
+            url = '/jsonapi/new_problem';
+        }
+      
+        $http.post('/jsonapi/edit_problem', data).then(function(resp){
+            $scope.resetTestRun();
+            // TODO: give feedback
+            alert('saved');
+        });
+    };
+
 }
