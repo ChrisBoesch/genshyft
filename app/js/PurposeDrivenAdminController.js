@@ -15,7 +15,7 @@ function PurposeDrivenAdminController($scope,$resource,$location,$cookieStore,$h
 	
 	$scope.get_videos = function(){
           console.log("get_videos is being executed");
-          $resource("/jsonapi/purposevideos").get({},function(response){
+          $resource("/jsonapi/purposevideos/admin").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
                console.log($scope.purposeVideos);
         	 })
