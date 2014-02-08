@@ -3988,7 +3988,7 @@ function EventTableController($scope, $resource, $route, $location){
  * TODO: should process of requests.
  * 
  */
-function EditProblemController($scope, $resource, $http, $q) {
+function EditProblemController($scope, $http, $q) {
 
     /**
      * Fetch the list of language and the set the 1st one.
@@ -3996,11 +3996,17 @@ function EditProblemController($scope, $resource, $http, $q) {
      * The result sill be saved in $scope.interfaces
      * 
      */
-    $scope.interfaces = $resource('/jsonapi/interfaces').get(function(resp){
-        $scope.interface = resp.interfaces[0];
+    $http.get('/jsonapi/interfaces').then(function(resp) {
+        
+        if (!resp.data.interfaces) {
+            alert('error');
+            return $.reject(resp.data);
+        }
+
+        $scope.interfaces = resp.data.interfaces;
+        $scope.interface = $scope.interfaces[0];
         $scope.getPaths($scope.interface);
     });
-
 
     /**
      * Reset the list of paths (`$scope.paths`).
