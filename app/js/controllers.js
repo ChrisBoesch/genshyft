@@ -3904,8 +3904,6 @@ function EventController($scope, $resource, $location){
         }
 
         $scope.go_to_eventsRanking = function(eventID){
-          //to do: land at eventsTable.html and pass eventID over
-          //$location.path("/eventsTable?eventID=" + id);
           $location.search({"eventID":eventID}).path("eventsTable");
           console.log(eventID);
         }
@@ -3950,11 +3948,16 @@ function EventTableController($scope, $resource, $route, $location){
             console.log($scope.eventsData);
         	 })
 
-	  	};
-
+	  	};	  	
+        
         $scope.returnToPreviousPage = function() {
-            window.history.back();
-        };
+  			window.history.back();
+		};
+
+
+
+
+			
 }
 
 
