@@ -504,6 +504,60 @@
             expect(scope.problems).toEqual(problems.problems);
         });
 
+        it('should move problems up', function() {
+            var last, params;
+
+            scope.path = scope.paths[0];
+            scope.getLevels(scope.path);
+            httpBackend.whenGET('/jsonapi/problemsets/302013').respond(levels);
+            httpBackend.flush();
+
+            scope.problemSet = scope.problemSets[0];
+            scope.getProblems(scope.problemSet);
+            httpBackend.whenGET('/jsonapi/problems/11021').respond(problems);
+            httpBackend.flush();
+
+            last = scope.problems.slice(-1)[0];
+            scope.moveUp(last);
+            httpBackend.expectPOST('/jsonapi/move_problem_up').respond(function(method, url, strData) {
+                params = strData;
+                return [200, {'success': true}];
+            });
+            httpBackend.flush();
+
+            expect(params).toBe('problem_id=18880568');
+            expect(last.problemsetorder).toBe(10);
+            expect(scope.problems.slice(-1)[0].problemsetorder).toBe(11);
+            expect(scope.problems.slice(-1)[0].id).toBe(18170);
+        });
+
+        it('should move problems down', function() {
+            var first, params;
+
+            scope.path = scope.paths[0];
+            scope.getLevels(scope.path);
+            httpBackend.whenGET('/jsonapi/problemsets/302013').respond(levels);
+            httpBackend.flush();
+
+            scope.problemSet = scope.problemSets[0];
+            scope.getProblems(scope.problemSet);
+            httpBackend.whenGET('/jsonapi/problems/11021').respond(problems);
+            httpBackend.flush();
+
+            first = scope.problems[0];
+            scope.moveDown(first);
+            httpBackend.expectPOST('/jsonapi/move_problem_down').respond(function(method, url, strData) {
+                params = strData;
+                return [200, {'success': true}];
+            });
+            httpBackend.flush();
+
+            expect(params).toBe('problem_id=37043');
+            expect(first.problemsetorder).toBe(2);
+            expect(scope.problems[0].problemsetorder).toBe(1);
+            expect(scope.problems[0].id).toBe(17191);
+        });
+
     });
 
     function parseParam(params) {

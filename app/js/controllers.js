@@ -4251,9 +4251,12 @@ function EditProblemController($scope, $http, $q, $window) {
     };
 
     /**
-     * Increse the problem position in the level.
+     * Move up problem in the level and decrease its problemsetorder 
+     * property (position 1 being the top position).
      *
      * Should update the problem list order after a successful change.
+     *
+     * TODO: fix, shouldn't assume consecutive positions.
      * 
      */
     $scope.moveUp = function(problem) {
@@ -4262,28 +4265,31 @@ function EditProblemController($scope, $http, $q, $window) {
         };
 
         $http.post('/jsonapi/move_problem_up', data, postConfig). then(function(resp) {
-            var next, target = problem.problemsetorder + 1;
+            var next, target = problem.problemsetorder - 1;
 
             if (!resp.data.success) {
                 alert('error');
-                return;
+                return $.reject(resp.data);
             }
 
             next = $scope.findProblem(target);
+            problem.problemsetorder = target;
+            
             if (!next) {
                 return;
             }
-
-            next.problemsetorder -= 1;
-            problem.problemsetorder = target;
+            next.problemsetorder += 1;
             $scope.sortProblems();
         });
     };
 
     /**
-     * Decrease the problem position in the level.
+     * Move down the problem in the level and increase its problemsetorder 
+     * property (position 1 being the top position).
      *
      * Should update the problem list order after a successful change.
+     *
+     * TODO: fix, shouldn't assume consecutive positions.
      * 
      */
     $scope.moveDown = function (problem) {
@@ -4292,20 +4298,20 @@ function EditProblemController($scope, $http, $q, $window) {
         };
 
         $http.post('/jsonapi/move_problem_down', data, postConfig). then(function(resp) {
-            var prev, target = problem.problemsetorder - 1;
+            var prev, target = problem.problemsetorder + 1;
 
             if (!resp.data.success) {
                 alert('error');
-                return;
+                return $.reject(resp.data);
             }
 
             prev = $scope.findProblem(target);
+            problem.problemsetorder = target;
+
             if (!prev) {
                 return;
             }
-
-            prev.problemsetorder += 1;
-            problem.problemsetorder = target;
+            prev.problemsetorder -= 1;
             $scope.sortProblems();
         });
     }
