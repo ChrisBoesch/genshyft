@@ -4210,7 +4210,8 @@ function EditProblemController($scope, $http, $q, $window) {
 
         return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
             if (!resp.data.problems) {
-                return [];
+                alert('error');
+                return $.reject(resp.data);
             }
 
             $scope.problems = resp.data.problems;
