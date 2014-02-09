@@ -2,6 +2,26 @@
 
 //var myApp = angular.module('myApp', ['ngResource', 'analytics']);
 var myApp = angular.module('myApp', ['myAppConfig','ngMockE2E','google-maps']);
+myApp.config(function($provide) {
+	// delay the mocked response
+	// see http://endlessindirection.wordpress.com/2013/05/18/angularjs-delay-response-from-httpbackend/
+    $provide.decorator('$httpBackend', function($delegate) {
+        var proxy = function(method, url, data, callback, headers) {
+            var interceptor = function() {
+                var _this = this,
+                    _arguments = arguments;
+                setTimeout(function() {
+                    callback.apply(_this, _arguments);
+                }, 700);
+            };
+            return $delegate.call(this, method, url, data, interceptor, headers);
+        };
+        for(var key in $delegate) {
+            proxy[key] = $delegate[key];
+        }
+        return proxy;
+    });
+});
 
 myApp.run(function($httpBackend) {
       
@@ -1400,7 +1420,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       var good_verify_result = {"solved": true, "verification_message": "Your solution passes all tests.", "printed": ""};
       $httpBackend.whenGET('/jsonapi/check_code_with_interface').respond(bad_verify_result); 
       $httpBackend.whenPOST('/jsonapi/check_code_with_interface').respond(function(method, url, rawData){
-      	var data = JSON.parse(rawData);
+      	var data = parseParam(rawData);
 
       	if (data.source_code === "greeting='hello world'") {
       		return [200, good_verify_result, {}];
@@ -2025,7 +2045,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
      
 	// New Path
 	$httpBackend.whenPOST('/jsonapi/new_path').respond(function(method, url, strData){
-		var data = JSON.parse(strData);
+		var data = parseParam(strData);
 
 		if (!data.interface_id || !data.description || !data.name) {
 			return [200, {'error': 'something is missing'}];
@@ -2036,7 +2056,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 
 	// New Level
 	$httpBackend.whenPOST('/jsonapi/new_problemset').respond(function(method, url, strData){
-		var data = JSON.parse(strData);
+		var data = parseParam(strData);
 
 		if (!data.path_id || !data.description || !data.name) {
 			return [200, {'error': 'something is missing'}];
@@ -2825,3 +2845,19 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		
 });
 
+
+function parseParam(params) {
+	var result = {};
+
+	params.split('&').forEach(function(pair){
+		var kv = pair.split('=');
+		
+		if (kv.length !== 2) {
+			return;
+		}
+
+		result[kv[0]] = decodeURIComponent(kv[1].replace(/\+/g, ' '));
+	});
+
+	return result;
+}
