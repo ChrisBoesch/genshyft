@@ -30,26 +30,39 @@
     <thead>
       <tr>
         <h4>
+<<<<<<< HEAD
         <td><b>Rank</b></td>
         <td><b>Player Name</b></td>
         <td><b>School</b></td>
         <td><b>School Type</b></td>
         <td><b>Starting Year</b></td>
         <td><b>Total Problems Solved</b></td>
+=======
+        <th>Rank</th>
+        <th>Player Name</th>
+        <th>School</th>
+        <th>School Type</th>
+        <th>Starting Year</th>
+        <th>{{eventsData.path}} Problems Solved</th>
+>>>>>>> upstream2/master
     </h4>
       </tr>
     </thead>
     <tbody>
         <!-- Change index limit according to size of data. Max limit 50 requested by client. Current limit 40 due to insufficient data. -->
         <span ng-if="participant.isCurrentPlayer">
+<<<<<<< HEAD
         <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=40 && !participant.isCurrentPlayer" bgcolor = red>
+=======
+        <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=50 && !participant.isCurrentPlayer" style="background-color: #6B248E; color: #EFCFFE">
+>>>>>>> upstream2/master
         </span>
 
         <span ng-if="!participant.isCurrentPlayer">
-      <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=40 && !participant.isCurrentPlayer">
+      <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=50 && !participant.isCurrentPlayer">
         </span>
         <td>
-            <span ng-hide = "$index>=40 && participant.isCurrentPlayer">
+            <span ng-hide = "$index>=50 && participant.isCurrentPlayer">
             <span ng-if="participant.isCurrentPlayer"><b>{{$index+1}}</b></span>
             <span ng-show="$index==40"><b>Cutoff</b></span>
             <span ng-if="!participant.isCurrentPlayer">{{$index+1}}</span>
@@ -65,9 +78,20 @@
         <td><span ng-if="participant.isCurrentPlayer"><b>{{participant.year}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.year}}</span></td>
 
         <!-- the following hack will display negative solved problems as zero; only affects currentPlayer because the other players with negative solved problems i.e. not registered schools, are hidden -->
-        <td><span ng-if="participant.isCurrentPlayer"><b><span ng-if="participant.solvedproblems<0">0</span><span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span></b></span>
-            <span ng-if="!participant.isCurrentPlayer"><span ng-if="participant.solvedproblems<0">0</span><span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span></span>
+        <td><span ng-if="participant.isCurrentPlayer">
+                <b>
+                  <span ng-if="participant.solvedproblems<0"><a href="index.html#/schoolregistration">Register School ({{-participant.solvedproblems}})</a></span>
+                <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
+                </b>
+            </span>
+            <span ng-if="!participant.isCurrentPlayer">
+              <span ng-if="participant.solvedproblems<0">No school</span>
+                <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
+          </span>
 
+        </td>
+        <td>
+          <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
         </td>
 
     </span>
