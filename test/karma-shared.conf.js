@@ -13,6 +13,7 @@ module.exports = function () {
 
         files: [
             // 3rd Party Code
+            'app/js/jquery-1.7.2.js',
             'bower_components/angular-unstable/angular.js',
 
             'bower_components/angular-resource-unstable/angular-resource.js',

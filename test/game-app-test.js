@@ -1358,7 +1358,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       var good_verify_result = {"solved": true, "verification_message": "Your solution passes all tests.", "printed": ""};
       $httpBackend.whenGET('/jsonapi/check_code_with_interface').respond(bad_verify_result); 
       $httpBackend.whenPOST('/jsonapi/check_code_with_interface').respond(function(method, url, rawData){
-      	var data = JSON.parse(rawData);
+      	var data = parseParam(rawData);
 
       	if (data.source_code === "greeting='hello world'") {
       		return [200, good_verify_result, {}];
@@ -1786,7 +1786,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
      
 	// New Path
 	$httpBackend.whenPOST('/jsonapi/new_path').respond(function(method, url, strData){
-		var data = JSON.parse(strData);
+		var data = parseParam(strData);
 
 		if (!data.interface_id || !data.description || !data.name) {
 			return [200, {'error': 'something is missing'}];
@@ -1797,7 +1797,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 
 	// New Level
 	$httpBackend.whenPOST('/jsonapi/new_problemset').respond(function(method, url, strData){
-		var data = JSON.parse(strData);
+		var data = parseParam(strData);
 
 		if (!data.path_id || !data.description || !data.name) {
 			return [200, {'error': 'something is missing'}];
@@ -2586,3 +2586,19 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		
 });
 
+
+function parseParam(params) {
+	var result = {};
+
+	params.split('&').forEach(function(pair){
+		var kv = pair.split('=');
+		
+		if (kv.length !== 2) {
+			return;
+		}
+
+		result[kv[0]] = decodeURIComponent(kv[1].replace(/\+/g, ' '));
+	});
+
+	return result;
+}

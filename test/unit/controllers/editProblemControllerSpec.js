@@ -106,17 +106,33 @@
             scope.newPath.description = 'bar';
             scope.saveNewPath(scope.newPath);
             httpBackend.expectPOST('/jsonapi/new_path').respond(function(method, url, strData){
-                data = JSON.parse(strData);
+                data = parseParam(strData);
                 return [200, {'path_id': 1234}];
             });
 
             httpBackend.flush();
-            expect(data).toEqual({interface_id: 11020, name: 'foo', description: 'bar'});
+            expect(data).toEqual({interface_id: '11020', name: 'foo', description: 'bar'});
             expect(scope.paths.length).toBe(2);
             expect(scope.path.id).toBe(1234);
             expect(scope.newPath).toBe(null);
         });
 
     });
+
+    function parseParam(params) {
+        var result = {};
+
+        params.split('&').forEach(function(pair){
+            var kv = pair.split('=');
+            
+            if (kv.length !== 2) {
+                return;
+            }
+
+            result[kv[0]] = decodeURIComponent(kv[1].replace(/\+/g, ' '));
+        });
+
+        return result;
+    }
 
 })();

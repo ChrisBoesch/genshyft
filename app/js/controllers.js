@@ -3988,7 +3988,17 @@ function EventTableController($scope, $resource, $route, $location){
  * TODO: should process of requests.
  * 
  */
-function EditProblemController($scope, $http, $q) {
+function EditProblemController($scope, $http, $q, $window) {
+    var postConfig = {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        transformRequest: function (data) {
+            if (!data) {
+                return;
+            }
+
+            return $window.jQuery.param(data);
+        }
+    };
 
     /**
      * Fetch the list of language and the set the 1st one.
@@ -4066,7 +4076,7 @@ function EditProblemController($scope, $http, $q) {
      */
     $scope.saveNewPath = function(newPath) {
 
-        $http.post('/jsonapi/new_path', newPath).then(function(resp){
+        $http.post('/jsonapi/new_path', newPath, postConfig).then(function(resp){
 
             if (!resp.data.path_id) {
                 alert('error');
@@ -4148,7 +4158,7 @@ function EditProblemController($scope, $http, $q) {
      */
     $scope.saveNewLevel = function(newLevel) {
 
-        $http.post('/jsonapi/new_problemset', newLevel).then(function(resp){
+        $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
 
             if (!resp.data.problemset_id) {
                 alert('error');
@@ -4250,7 +4260,7 @@ function EditProblemController($scope, $http, $q) {
             problem_id: problem.id,
         };
 
-        $http.post('/jsonapi/move_problem_up', data). then(function(resp) {
+        $http.post('/jsonapi/move_problem_up', data, postConfig). then(function(resp) {
             var next, target = problem.problemsetorder + 1;
 
             if (!resp.data.success) {
@@ -4280,7 +4290,7 @@ function EditProblemController($scope, $http, $q) {
             problem_id: problem.id,
         };
 
-        $http.post('/jsonapi/move_problem_down', data). then(function(resp) {
+        $http.post('/jsonapi/move_problem_down', data, postConfig). then(function(resp) {
             var prev, target = problem.problemsetorder - 1;
 
             if (!resp.data.success) {
@@ -4380,14 +4390,14 @@ function EditProblemController($scope, $http, $q) {
             };
 
         $scope.resetTestRun();
-        $http.post('/jsonapi/check_code_with_interface', publicData).then(function(resp) {
+        $http.post('/jsonapi/check_code_with_interface', publicData, postConfig).then(function(resp) {
             $scope.testRun = resp.data;
             
             if (!resp.data.solved) {
                 return $q.reject(resp);
             }
 
-            return $http.post('/jsonapi/check_code_with_interface', privateData);
+            return $http.post('/jsonapi/check_code_with_interface', privateData, postConfig);
         }).then(function(resp) {
             $scope.testRun = resp.data;
 
@@ -4440,7 +4450,7 @@ function EditProblemController($scope, $http, $q) {
             url = '/jsonapi/new_problem';
         }
       
-        $http.post('/jsonapi/edit_problem', data).then(function(resp){
+        $http.post('/jsonapi/edit_problem', data, postConfig).then(function(resp){
             $scope.resetTestRun();
             alert('saved');
         });
