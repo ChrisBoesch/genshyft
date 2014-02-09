@@ -3913,15 +3913,18 @@ function EventController($scope, $resource, $location){
 }
 
 //By WC, in progress
-function EventTableController($scope, $resource, $route, $location){
-
-		$scope.location = $location;  
-		
+function EventTableController($scope, $resource, $route, $location){ 
+		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
     		console.log($scope.eventID + "here2");
+    	}
+
+    	$scope.get_currentUrl = function(){
+    		$scope.currentUrl = $location.absUrl();
+    		console.log($scope.currentUrl);
     	}
 
         //Gets registered jcParticipants.
