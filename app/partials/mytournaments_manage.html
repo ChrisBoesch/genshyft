@@ -76,46 +76,48 @@
 </br>
 <div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="tournamentInit();get_mytournaments()">
 	<div class="row-fluid">
-		<div class="span12 bootCamp" id="heading">
+		<div class="span6 bootCamp" id="heading">
 			Tournament Details
 		</div>
+		<div class="span6 bootCamp" id="heading">
+			Tournament Progress
+		</div>
 		<div class="row-fluid">
-			<div class="span12 well well-small">
+			<div class="span6 well well-small">
 				<div class="span12">
 					<div class="span8">
-						</br>
+						<b>Status :</b> 
+						<select class="span4" ng-model="tourStatus">
+							<option>Closed</option>
+							<option>Open</option>
+							<option>Archive</option>
+							<option>Hide</option>
+						</select></br>
 						<b>Title :</b> {{grpTournaments[0].title}} </br>
-						<b>Type :</b> {{grpTournaments[0].type}} </br>
-						<b>Max no. of players per group :</b> {{grpTournaments[0].maxNoPlayer}}</br>
-						<b>No. of Registered Players :</b> {{grpTournaments[0].title}}
-						</br>
-						</br>
-					</div>
-					<div class="span3">
-						</br><b>Status :</b> 
-						<select class="span7" ng-model="tourStatus">
-							<option>closed</option>
-							<option>open</option>
-							<option>archive</option>
-							<option>hide</option>
-						</select>
-							</br>
-							</br>
-							</br>
-
+						<b>No. of groups :</b>{{grpTournaments[0].maxNoGroup}}</br>
+						<b>No. of players per group :</b> {{grpTournaments[0].maxNoPlayer}}			   </br>
 					</div>
 				</div>
-				<div class="span12">
-					<center>
-						<button class="btn btn-primary" type="button">Edit</button>
-						<button class="btn btn-danger" type="button">Delete </button>
-					</center>
+				<div class="span12" align="center">
+					<button class="btn btn-primary" type="button" ng-hide="">Edit</button>
+					<button class="btn btn-primary" type="button" ng-hide="true">Save</button>
+					<button class="btn btn-danger" type="button">Delete </button>	
 					</br>
 				</div>		
 			</div>
+			<div class="span6 well well-small">
+				<div class="span12">
+					<b>Tournament Round Starting in:</b> {insert time here}
+				</br>
+					<b>Round Name:</b> {{grpTournaments[0].rounds.name}} </br>
+					<b>Round Duration:</b>{{grpTournaments[0].rounds.timeLimit}}</br>
+					<b>No. of Registered Players :</b>{{grpTournaments[0].registered}}
+					</br></br>
+					<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking <i class="icon-chevron-right icon-white"></i></button>
+				</div>
+			</div>
 		</div>
 	</div>
-	</br>
 
 	<div class="row-fluid">
 		<div class="span12">
@@ -129,42 +131,33 @@
 	<div class="tab-content">
 		<div class="tab-pane active" id="Rounds">
 			<div class="row-fluid">
-			<div class="span10 well well-small">
-				<button type="button" class="close" aria-hidden="true">×</button>
-				<div class="row-fluid">
-					<div class="span10">
-						<div class="span3">
-							Round Name:
-						</div>
-						<div class="span7">
-							{{grpTournaments[0].rounds.roundName}}
-						</div>
-					</div>	
+			<div class="span12 well well-small">
+				<table ng-grid id="grpTournRoundsTable" class="table table-bordered" width="100%">
+	                <tr class="roundTableHeaders">
+	                	<th class="roundTableHeader"><b>Round Title</b></th>
+	                	<th class="roundTableHeader"><b>Round Duration</b></th>
+	                	<th class="roundTableHeader"><b>Number of Questions in round</b></th>
+	 				</tr>
+	                <tr class="warning">
+	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].roundName}}</td>
+	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].timeLimit}}</td>
+	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].problemIDs.length}}</td>
+	                </tr>
+            	</table>
+				
+				</br><b>Start in</b></br>
+				<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">		<button type="button" class="btn btn-info">1 min</button>
+  					<button type="button" class="btn btn-info">2 min</button>
+  					<button type="button" class="btn btn-info">5 min</button>
+  					<button type="button" class="btn btn-info">30 min</button>
+  					<button type="button" class="btn btn-info">60 min</button>			
 				</div>
 
-				<div class="row-fluid">
-					<div class="span10">
-						<div class="span3">
-							Round Time Limit:
-						</div>
-						<div class="span7">
-							{{grpTournaments[0].rounds.timeLimit}}
-						</div>
-					</div>	
-				</div>
+				<button class="btn btn-primary" type="button" ng-model="start">Start <i class="icon-play icon-white"></i></button>
 
-				<div class="row-fluid">
-					<div class="span10">
-						<div class="span3">
-							Number of Questions:
-						</div>
-						<div class="span7">
-							{{grpTournaments[0].rounds.problemIDs.length}}
-						</div>
-					</div>	
-				</div>
+				<button class="btn btn-danger" type="button" ng-model="stop" ng-hide="true">Stop <i class="icon-stop icon-white"></i></button>
 			</div>
-		</div>
+			</div>
 		</div>
 
   		<div class="tab-pane" id="Groups">
@@ -191,7 +184,7 @@
 					</div>
 				</div> 	
 
-	  			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%">
+	  			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%" ng-show="tournament.tournType=='Group'">
 					<div class="row-fluid">
 						<div class="span12 bootCamp" id="heading">Registered Groups</div>
 					</div>
@@ -219,31 +212,5 @@
 				</div>	
 			</div>	
 		</div>
-
 	</div>
-
-	<div class="row-fluid">
-		<div class="span12">
-			</br>
-			<div class="span4">
-				</br>
-				<button class="btn btn-primary" type="button" ng-model="start">Start</button>
-				<button class="btn btn-danger" type="button" ng-model="activation">Deactivate</button> 
-				</br>
-				</br>
-				<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking >>></button>
-			</div>
-			<div class="span7">
-				<b>Start in</b></br>
-				<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">				<button type="button" class="btn btn-primary">1 min</button>
-  					<button type="button" class="btn btn-primary">2 min</button>
-  					<button type="button" class="btn btn-primary">5 min</button>
-  					<button type="button" class="btn btn-primary">30 min</button>
-  					<button type="button" class="btn btn-primary">60 min</button>			
-				</div>
-			</div>	
-		</div>
-	</div>
-
 </div>
-	

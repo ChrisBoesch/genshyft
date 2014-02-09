@@ -3904,8 +3904,6 @@ function EventController($scope, $resource, $location){
         }
 
         $scope.go_to_eventsRanking = function(eventID){
-          //to do: land at eventsTable.html and pass eventID over
-          //$location.path("/eventsTable?eventID=" + id);
           $location.search({"eventID":eventID}).path("eventsTable");
           console.log(eventID);
         }
@@ -3913,18 +3911,18 @@ function EventController($scope, $resource, $location){
 }
 
 //By WC, in progress
-function EventTableController($scope, $resource, $route, $location){
-
-		$scope.location = $location;  
-		
+function EventTableController($scope, $resource, $route, $location){ 
+		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
     		console.log($scope.eventID + "here2");
+    	}
 
-
-
+    	$scope.get_currentUrl = function(){
+    		$scope.currentUrl = $location.absUrl();
+    		console.log($scope.currentUrl);
     	}
 
         //Gets registered jcParticipants.
@@ -3950,11 +3948,16 @@ function EventTableController($scope, $resource, $route, $location){
             console.log($scope.eventsData);
         	 })
 
-	  	};
-
+	  	};	  	
+        
         $scope.returnToPreviousPage = function() {
-            window.history.back();
-        };
+  			window.history.back();
+		};
+
+
+
+
+			
 }
 
 

@@ -1,4 +1,4 @@
-function TournamentGameController($scope,$resource,$cookieStore,$timeout){
+function TournamentGameController($scope,$resource,$cookieStore,$timeout,$location){
     //$scope.currentProblem
     //$scope.game = $resource('test_data/python_game.json').get();
     //$scope.mobile_game = $resource('test_data/mobile_python_game.json').get();
@@ -38,17 +38,45 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout){
       //loop through problems and find unsolved. Add to remaining_problems.
       for (var i = 0; i < $scope.game.problemIDs.length; i++) {
         if($scope.game.solvedProblemIDs.indexOf($scope.game.problemIDs[i])<0){
+          console.log($scope.game.problemIDs[i]);
           $scope.remaining_problems.push($scope.game.problemIDs[i]);
         }
       }
 
       if($scope.remaining_problems.length == 0){
-				alert("Congrats! You have solved all the problems in this round.");
-        window.location.href="index.html#/roundranking?heatID="+$scope.game.heatID;
+        $scope.mentee_assignment($scope.game.heatID);
+        $("#finish_all_info").modal();
+				//alert("Congrats! You have solved all the problems in this round.");
+        //$location.search({"heatID":$scope.game.heatID}).path("tournament-ranking");
+        //window.location.href="index.html#/roundranking?heatID="+$scope.game.heatID;
 
       }
       //Update the current problem index based on remaining problems and items skipped. 
       $scope.move_to_next_unsolved_problem();
+    };
+
+    //GENShYFT - Added menteer assignment
+    $scope.mentee_assignment= function(heatID){
+      $resource('/jsonapi/mentee_assignment/:heatID').get({"heatID":heatID}, function(response){
+        $scope.mentee_details = response;     
+      });
+    }
+
+    //GENShYFT - Round to Ranking Redirection
+    $scope.round_end_ranking = function(heatID){
+      $location.search({"heatID":$scope.game.heatID}).path("tournament-ranking");
+      $('.modal-backdrop').remove();
+    };
+
+    //GENShYFT - Round to Join Tournament Redirection
+    $scope.round_end_tournament_lobby = function(heatID){
+      $location.path("tournaments");
+      $('.modal-backdrop').remove();
+    };
+
+    //GENShYFT - Provide round and check whether a mentor have been assigned to player
+    $scope.round_details = function(){
+      //$scope.details_round=
     };
 
     $scope.move_to_next_unsolved_problem = function(){
@@ -72,7 +100,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout){
         $scope.solution_check_result = null;
       }
 
-    }
+    };
+
     $scope.skip_problem = function(){
       $('#t11').addClass('active');
       $('#t21').removeClass('active');
@@ -83,7 +112,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout){
         $scope.move_to_next_unsolved_problem();
       }
       console.log("Skipping problem. count="+$scope.skip_problem_count+" remaining "+$scope.remaining_problems.length);
-    }
+    };
 
 
     $scope.check_solution_for_game = function() {
@@ -150,7 +179,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout){
       }
     };
     
-	
+
 	//Check for a roundID to see if this is a tournament game. 
 	if($cookieStore.get("roundID")){
       $scope.roundID = $cookieStore.get("roundID"); 
