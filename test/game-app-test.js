@@ -2,6 +2,26 @@
 
 //var myApp = angular.module('myApp', ['ngResource', 'analytics']);
 var myApp = angular.module('myApp', ['myAppConfig','ngMockE2E','google-maps']);
+myApp.config(function($provide) {
+	// delay the mocked response
+	// see http://endlessindirection.wordpress.com/2013/05/18/angularjs-delay-response-from-httpbackend/
+    $provide.decorator('$httpBackend', function($delegate) {
+        var proxy = function(method, url, data, callback, headers) {
+            var interceptor = function() {
+                var _this = this,
+                    _arguments = arguments;
+                setTimeout(function() {
+                    callback.apply(_this, _arguments);
+                }, 700);
+            };
+            return $delegate.call(this, method, url, data, interceptor, headers);
+        };
+        for(var key in $delegate) {
+            proxy[key] = $delegate[key];
+        }
+        return proxy;
+    });
+});
 
 myApp.run(function($httpBackend) {
       
