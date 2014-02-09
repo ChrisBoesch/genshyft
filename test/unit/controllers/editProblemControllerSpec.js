@@ -218,7 +218,34 @@
             expect(scope.problemSets).toEqual(levels.problemsets);
         });
 
-        
+        it('should create new levels', function() {
+            var data;
+
+            scope.path = scope.paths[0];
+            scope.getLevels(scope.path);
+            httpBackend.whenGET('/jsonapi/problemsets/302013').respond(levels);
+
+            scope.createNewLevel(scope.path);
+            expect(scope.newLevel.path_id).toBe(scope.path.id);
+
+            scope.newLevel.name = 'foo';
+            scope.newLevel.description = 'bar';
+
+            scope.saveNewLevel(scope.newLevel);
+            httpBackend.expectPOST('/jsonapi/new_problemset').respond(function(method, url, strData) {
+                data = parseParam(strData);
+                return [200, {'problemset_id': 12345}];
+            });
+
+            httpBackend.flush();
+            expect(data.path_id).toBe(scope.path.id.toString());
+            expect(data.name).toBe('foo');
+            expect(data.description).toBe('bar');
+
+            expect(scope.newLevel).toBe(null);
+            expect(scope.problemSets.slice(-1)[0].id).toBe(12345);
+            expect(scope.problemSets.slice(-1)[0].name).toBe('foo');
+        });
 
     });
 
