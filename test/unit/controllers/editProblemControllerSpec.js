@@ -3,7 +3,7 @@
 
     describe('EditProblemController', function() {
 
-        var ctrl, scope, httpBackend;
+        var ctrl, scope, httpBackend, levels;
 
         beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
             scope = $rootScope.$new();
@@ -11,6 +11,90 @@
             ctrl = $controller('EditProblemController', {
                 $scope: scope
             });
+            levels = {
+                "type": "problemsets",
+                "problemsets": [{
+                    "id": 11021,
+                    "numProblems": 10,
+                    "name": "Python Level 1",
+                    "description": "The way of SingPath"
+                }, {
+                    "id": 10034,
+                    "numProblems": 13,
+                    "name": "Python Level 2",
+                    "description": "Variables, keywords, and statements"
+                }, {
+                    "id": 11023,
+                    "numProblems": 24,
+                    "name": "Python Level 3",
+                    "description": "Functions"
+                }, {
+                    "id": 11026,
+                    "numProblems": 28,
+                    "name": "Python Level 4",
+                    "description": "Conditionals"
+                }, {
+                    "id": 11029,
+                    "numProblems": 23,
+                    "name": "Python Level 5",
+                    "description": "Iteration"
+                }, {
+                    "id": 10040,
+                    "numProblems": 33,
+                    "name": "Python Level 6",
+                    "description": "Strings"
+                }, {
+                    "id": 11031,
+                    "numProblems": 36,
+                    "name": "Python Level 7",
+                    "description": "Lists"
+                }, {
+                    "id": 10041,
+                    "numProblems": 13,
+                    "name": "Python Level 8",
+                    "description": "Dictionaries"
+                }, {
+                    "id": 11032,
+                    "numProblems": 16,
+                    "name": "Python Level 9",
+                    "description": "Tuples"
+                }, {
+                    "id": 38394,
+                    "numProblems": 19,
+                    "name": "Python Level 10",
+                    "description": "Classes & Objects"
+                }, {
+                    "id": 11028,
+                    "numProblems": 17,
+                    "name": "Python Level 11",
+                    "description": "Recursion"
+                }, {
+                    "id": 41101,
+                    "numProblems": 2,
+                    "name": "Python Level 12",
+                    "description": "Games & Puzzles"
+                }, {
+                    "id": 6603407,
+                    "numProblems": 9,
+                    "name": "Python Level 13",
+                    "description": "List Comprehensions"
+                }, {
+                    "id": 6598750,
+                    "numProblems": 6,
+                    "name": "Python Level 14",
+                    "description": "Python Built-In Library"
+                }, {
+                    "id": 6771183,
+                    "numProblems": 5,
+                    "name": "Python Level 15",
+                    "description": "Exceptions"
+                }, {
+                    "id": 11155,
+                    "numProblems": 2,
+                    "name": "New Problem Storage",
+                    "description": "Miscellaneous Problems"
+                }]
+            };
 
             httpBackend.expectGET('/jsonapi/interfaces').respond({
                 "interfaces": [{
@@ -101,30 +185,49 @@
 
             scope.createNewPath(scope.interface);
             expect(scope.newPath.interface_id).toBe(11020);
-            
+
             scope.newPath.name = 'foo';
             scope.newPath.description = 'bar';
             scope.saveNewPath(scope.newPath);
-            httpBackend.expectPOST('/jsonapi/new_path').respond(function(method, url, strData){
+            httpBackend.expectPOST('/jsonapi/new_path').respond(function(method, url, strData) {
                 data = parseParam(strData);
-                return [200, {'path_id': 1234}];
+                return [200, {
+                    'path_id': 1234
+                }];
             });
 
             httpBackend.flush();
-            expect(data).toEqual({interface_id: '11020', name: 'foo', description: 'bar'});
+            expect(data).toEqual({
+                interface_id: '11020',
+                name: 'foo',
+                description: 'bar'
+            });
             expect(scope.paths.length).toBe(2);
             expect(scope.path.id).toBe(1234);
             expect(scope.newPath).toBe(null);
         });
+
+        it('should update the list of level when the selected path changes', function() {
+            scope.path = scope.paths[0];
+            scope.getLevels(scope.path);
+
+            expect(scope.problemSets).toEqual([]);
+            httpBackend.expectGET('/jsonapi/problemsets/302013').respond(levels);
+            httpBackend.flush();
+
+            expect(scope.problemSets).toEqual(levels.problemsets);
+        });
+
+        
 
     });
 
     function parseParam(params) {
         var result = {};
 
-        params.split('&').forEach(function(pair){
+        params.split('&').forEach(function(pair) {
             var kv = pair.split('=');
-            
+
             if (kv.length !== 2) {
                 return;
             }
