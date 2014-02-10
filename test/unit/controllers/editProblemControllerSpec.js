@@ -616,6 +616,40 @@
             expect(data[1].tests).toBe("");
         });
 
+        it('should create a new problem.', function() {
+            var data;
+
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = {
+                problemset_id: scope.problemSet.id,
+                name: 'foo'
+            };
+            scope.problemDetails = {
+                description: 'bar',
+                solution: 'a=1',
+                tests: '>>> a\r\n1'
+            };
+            
+            scope.save();
+            httpBackend.expectPOST('/jsonapi/new_problem').respond(function(method, url, strData) {
+                data = parseParam(strData);
+                
+                return [200, {problem_id: 1234}];
+            });
+            httpBackend.flush();
+
+            expect(data.interface_id).toBe('11020');
+            expect(data.path_id).toBe('302013');
+            expect(data.level_id).toBe(levels.problemsets[0].id + '');
+            expect(data.name).toBe('foo');
+            expect(data.solution_code).toBe('a=1');
+            expect(data.publicTests).toBe('>>> a\r\n1');
+
+            expect(scope.problem.id).toBe(1234);
+            expect(scope.problemDetails.problem_id).toBe(1234);
+        });
+
     });
 
     function parseParam(params) {

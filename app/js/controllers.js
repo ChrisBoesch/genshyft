@@ -4437,28 +4437,35 @@ function EditProblemController($scope, $http, $q, $window) {
 
         var url,
             data = {
-                problemset_id: $scope.problemSet.id,
                 path_id: $scope.path.id,
                 interface_id: $scope.interface.id,
                 level_id: $scope.problemSet.id,
                 name: $scope.problem.name, 
-                details: $scope.problem.description,             
-                solution_code: $scope.problem.solution,
-                skeleton_code: $scope.problem.skeleton,
-                examples: $scope.problem.examples,
-                publicTests: $scope.problem.tests,
-                privateTests:$scope.problem.other_tests
+                details: $scope.problemDetails.description,             
+                solution_code: $scope.problemDetails.solution,
+                skeleton_code: $scope.problemDetails.skeleton,
+                examples: $scope.problemDetails.examples,
+                publicTests: $scope.problemDetails.tests,
+                privateTests:$scope.problemDetails.other_tests
             };
 
-        if ($scope.problem.id) {
-            data.problem_id = $scope.problem.id;
+        if ($scope.problemDetails.problem_id) {
+            data.problem_id = $scope.problemDetails.problem_id;
             url = '/jsonapi/edit_problem';
         } else {
             url = '/jsonapi/new_problem';
         }
       
-        $http.post('/jsonapi/edit_problem', data, postConfig).then(function(resp){
+        $http.post(url, data, postConfig).then(function(resp){
             $scope.resetTestRun();
+
+            if (!resp.data.problem_id) {
+                alert('error');
+                return $q.reject(resp);
+            }
+
+            $scope.problemDetails.problem_id = resp.data.problem_id;
+            $scope.problem.id = resp.data.problem_id;
             alert('saved');
         });
     };
