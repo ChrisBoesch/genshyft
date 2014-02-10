@@ -4387,13 +4387,13 @@ function EditProblemController($scope, $http, $q, $window) {
                 interface_id: $scope.interface.id, 
                 source_code: $scope.problemDetails.solution,
                 examples: $scope.problemDetails.examples,
-                tests: $scope.problemDetails.tests
+                tests: $scope.problemDetails.tests || ""
             },
             privateData = {
                 interface_id: $scope.interface.id, 
                 source_code: $scope.problemDetails.solution,
                 examples: $scope.problemDetails.examples,
-                tests: $scope.problemDetails.privateTests
+                tests: $scope.problemDetails.privateTests || ""
             };
 
         $scope.resetTestRun();

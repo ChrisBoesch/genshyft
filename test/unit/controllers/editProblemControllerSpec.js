@@ -3,7 +3,7 @@
 
     describe('EditProblemController', function() {
 
-        var ctrl, scope, httpBackend, levels, problems;
+        var ctrl, scope, httpBackend, levels, problems, problemDetails;
 
         beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
             scope = $rootScope.$new();
@@ -333,6 +333,31 @@
                 }
             };
 
+            problemDetails = {
+                "problem": {
+                    "tests": ">>> greeting\r\n'hello world'",
+                    "description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.",
+                    "other_tests": null,
+                    "modified": "2010-12-13 01:10:53.287641",
+                    "problemset_id": 11021,
+                    "examples": ">>> greeting\r\n'hello world'",
+                    "problemsetorder": 2,
+                    "problem_id": 37043,
+                    "skeleton": "greeting = 'hello world'",
+                    "name": "Your First Program",
+                    "created": "2009-12-15 18:57:09.124678",
+                    "solution": "greeting='hello world'",
+                    "interface_id": 11020,
+                    "path_id": 10030,
+                    "editor": {
+                        "player_id": 57754,
+                        "nickname": "Chris",
+                        "email": "PRIVATE"
+                    }
+                },
+                "type": "problem"
+            };
+
             httpBackend.expectGET('/jsonapi/interfaces').respond({
                 "interfaces": [{
                     "singpathSupported": true,
@@ -560,33 +585,35 @@
 
         it('should get a problem details', function() {
             scope.getProblemDetails(problems.problems[0]);
-            httpBackend.expectGET('/jsonapi/get_problem?problem_id=37043').respond({
-                "problem": {
-                    "tests": ">>> greeting\r\n'hello world'",
-                    "description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.",
-                    "other_tests": null,
-                    "modified": "2010-12-13 01:10:53.287641",
-                    "problemset_id": 11021,
-                    "examples": ">>> greeting\r\n'hello world'",
-                    "problemsetorder": 2,
-                    "problem_id": 37043,
-                    "skeleton": "greeting = 'hello world'",
-                    "name": "Your First Program",
-                    "created": "2009-12-15 18:57:09.124678",
-                    "solution": "greeting='hello world'",
-                    "interface_id": 11020,
-                    "path_id": 10030,
-                    "editor": {
-                        "player_id": 57754,
-                        "nickname": "Chris",
-                        "email": "PRIVATE"
-                    }
-                },
-                "type": "problem"
-            });
+            httpBackend.expectGET('/jsonapi/get_problem?problem_id=37043').respond(problemDetails);
 
             httpBackend.flush();
             expect(scope.problemDetails.problem_id).toBe(37043);
+        });
+
+        it('should run private and public test against the solution', function() {
+            var data = [];
+
+            scope.problemDetails = problemDetails.problem;
+            scope.runTests();
+
+            expect(scope.testRun).toEqual({});
+
+            httpBackend.whenPOST('/jsonapi/check_code_with_interface').respond(function(method, url, strData) {
+                data.push(parseParam(strData));
+                return [200, {'solved': true}];
+            });
+
+            httpBackend.flush();
+            expect(data.length).toBe(2);
+            expect(data[0].interface_id).toBe('11020');
+            expect(data[0].source_code).toBe("greeting='hello world'");
+            expect(data[0].examples).toBe(">>> greeting\r\n'hello world'");
+            expect(data[0].tests).toBe(">>> greeting\r\n'hello world'");
+            expect(data[1].interface_id).toBe('11020');
+            expect(data[1].source_code).toBe("greeting='hello world'");
+            expect(data[1].examples).toBe(">>> greeting\r\n'hello world'");
+            expect(data[1].tests).toBe("");
         });
 
     });
