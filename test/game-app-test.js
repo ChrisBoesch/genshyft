@@ -1931,7 +1931,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       var tournamentGame = {
 	    "game_end": "2013-09-29 09:27:03.104550",
 	    "player": "Chris",
-	    "solvedProblemIDs": [10033, 17155],
+	    "solvedProblemIDs": [10033],
 	    "currentProblem_id": "TBD",
 	    "playerID": 57754,
 	    "allSolved": false,
@@ -1999,7 +1999,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	    "currentTime": "2013-09-29 13:54:35.933410",
 	    "game_type": "Timed Interview",
 	    "timelimit": 3600,
-	    "mentor":"",
+	    "mentor":"Glen",
 	    "mentorID": 12345,
 	    "hasArrived": false
 	};
