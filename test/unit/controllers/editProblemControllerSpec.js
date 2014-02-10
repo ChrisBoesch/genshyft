@@ -344,7 +344,7 @@
                     "problemsetorder": 2,
                     "problem_id": 37043,
                     "skeleton": "greeting = 'hello world'",
-                    "name": "Your First Program",
+                    "name": "Welcome",
                     "created": "2009-12-15 18:57:09.124678",
                     "solution": "greeting='hello world'",
                     "interface_id": 11020,
@@ -641,13 +641,40 @@
 
             expect(data.interface_id).toBe('11020');
             expect(data.path_id).toBe('302013');
-            expect(data.level_id).toBe(levels.problemsets[0].id + '');
+            expect(data.level_id).toBe('11021');
             expect(data.name).toBe('foo');
             expect(data.solution_code).toBe('a=1');
             expect(data.publicTests).toBe('>>> a\r\n1');
 
             expect(scope.problem.id).toBe(1234);
             expect(scope.problemDetails.problem_id).toBe(1234);
+        });
+
+        it('should save changes to problems', function() {
+            var data;
+
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+
+            scope.save();
+            httpBackend.expectPOST('/jsonapi/edit_problem').respond(function(method, url, strData) {
+                data = parseParam(strData);
+                
+                return [200, {problem_id: 37043}];
+            });
+            httpBackend.flush();
+
+            expect(data.interface_id).toBe('11020');
+            expect(data.path_id).toBe('302013');
+            expect(data.level_id).toBe('11021');
+            expect(data.name).toBe('Welcome');
+            expect(data.solution_code).toBe("greeting='hello world'");
+            expect(data.publicTests).toBe(">>> greeting\r\n'hello world'");
+
+            expect(scope.problem.id).toBe(37043);
+            expect(scope.problemDetails.problem_id).toBe(37043);
         });
 
     });
