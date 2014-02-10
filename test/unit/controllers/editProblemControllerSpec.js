@@ -558,6 +558,37 @@
             expect(scope.problems[0].id).toBe(17191);
         });
 
+        it('should get a problem details', function() {
+            scope.getProblemDetails(problems.problems[0]);
+            httpBackend.expectGET('/jsonapi/get_problem?problem_id=37043').respond({
+                "problem": {
+                    "tests": ">>> greeting\r\n'hello world'",
+                    "description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.",
+                    "other_tests": null,
+                    "modified": "2010-12-13 01:10:53.287641",
+                    "problemset_id": 11021,
+                    "examples": ">>> greeting\r\n'hello world'",
+                    "problemsetorder": 2,
+                    "problem_id": 37043,
+                    "skeleton": "greeting = 'hello world'",
+                    "name": "Your First Program",
+                    "created": "2009-12-15 18:57:09.124678",
+                    "solution": "greeting='hello world'",
+                    "interface_id": 11020,
+                    "path_id": 10030,
+                    "editor": {
+                        "player_id": 57754,
+                        "nickname": "Chris",
+                        "email": "PRIVATE"
+                    }
+                },
+                "type": "problem"
+            });
+
+            httpBackend.flush();
+            expect(scope.problemDetails.problem_id).toBe(37043);
+        });
+
     });
 
     function parseParam(params) {
