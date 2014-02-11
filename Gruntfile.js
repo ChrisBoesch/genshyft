@@ -77,7 +77,8 @@ module.exports = function (grunt) {
         singleRun: true
       },
       unit_auto: {
-        configFile: './test/karma-unit.conf.js'
+        configFile: './test/karma-unit.conf.js',
+        autoWatch: true,
       },
       midway: {
         configFile: './test/karma-midway.conf.js',

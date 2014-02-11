@@ -3960,20 +3960,88 @@ function EventTableController($scope, $resource, $route, $location){
 			
 }
 
+/**
+ * Should fetch:
+ *
+ * - the list of language (aka interfaces) availables
+ * - the list of path avialable for a language once one is selected
+ * - the list of levels (aka problemSets) for a path once a path is selected
+ * - the list of problems for a level once one is selected.
+ * - the details of a problem once a problem is selected
+ *
+ * The controller should be able to test a solution against private
+ * and public tests and to save any changes.
+ * 
+ * Intead of using an existing path, level or problem, the controller should
+ * be able the create new ones.
+ *
+ * Paths and levels require a name and a description to be create. A path 
+ * requires an interface_id. A level requires path_id
+ * 
+ * A problem require an interface_id, a name, some details (aka descriptions), 
+ * a solution_code and a publicTests. It may also have a path_id and 
+ * a level_id (default ones will be used otherwise), privatesTest,
+ * a skeleton and some examples.
+ *
+ * If a problem is being edited it should have a problem_id.
+ *
+ * TODO: allow to edit names of an existing problem.
+ * TODO: allow the set the problem to be edited via route paramter.
+ * TODO: handle success and error message.
+ * 
+ */
+function EditProblemController($scope, $http, $q, $window) {
+    var postConfig = {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        transformRequest: function (data) {
+            if (!data) {
+                return;
+            }
 
-function EditProblemController($scope, $resource, $http, $q) {
+            return $window.jQuery.param(data);
+        }
+    };
 
-    $scope.interfaces = $resource('/jsonapi/interfaces').get(function(resp){
-        $scope.interface = resp.interfaces[0];
+    /**
+     * Fetch the list of language and the set the 1st one.
+     *
+     * The result sill be saved in $scope.interfaces
+     * 
+     */
+    $scope.loadingInterfaces = true;
+    $http.get('/jsonapi/interfaces').then(function(resp) {
+
+        if (!resp.data.interfaces) {
+            alert('error');
+            return $.reject(resp.data);
+        }
+
+        $scope.interfaces = resp.data.interfaces;
+        $scope.interface = $scope.interfaces[0];
         $scope.getPaths($scope.interface);
+    }).always(function(){
+        $scope.loadingInterfaces = false;
     });
 
+    /**
+     * Reset the list of paths (`$scope.paths`).
+     *
+     * Reset, no path can be selected and the list of levels should be reset 
+     * as a result.
+     * 
+     */
     $scope.resetPaths = function() {
         $scope.paths = [];
         $scope.path = null;
         $scope.resetLevels();
     };
 
+    /**
+     * Fetch the list of path available for language (that the editor can edit)
+     *
+     * The result will be saved into `$scope.paths` .
+     * 
+     */
     $scope.getPaths = function(language) {
 
         $scope.resetPaths();
@@ -3982,22 +4050,83 @@ function EditProblemController($scope, $resource, $http, $q) {
             return $q.reject('language is not set or has no id');
         }
 
+        $scope.loadingPaths = true;
         return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
             if (!resp.data.paths) {
-                // TODO: handle error
-                return [];
+                alert('error');
+                return $.reject(resp.data);
             }
             $scope.paths = resp.data.paths;
             return $scope.paths;
+        }).always(function(){
+            $scope.loadingPaths = false;
         });
     };
 
+    /**
+     * Initiate a new path (`$scope.newPath`)
+     * 
+     */
+    $scope.createNewPath = function(language) {
+        $scope.newPath = {
+            interface_id: language.id
+        };
+    };
+
+    /**
+     * Save a new path
+     *
+     * newPath should have an interface_id, a name and a description.
+     *
+     * If a new path is successfully created the path should be added to the
+     * list of path and the list of levels should be reset.
+     * 
+     */
+    $scope.saveNewPath = function(newPath) {
+        $scope.creatingPath = true;
+        $http.post('/jsonapi/new_path', newPath, postConfig).then(function(resp){
+            if (!resp.data.path_id) {
+                alert('error');
+                return $.reject(resp.data);
+            }
+
+            newPath.id = resp.data.path_id;
+            $scope.paths.push(newPath);
+            $scope.path = newPath;
+            $scope.cancelNewPath();
+            $scope.resetLevels();
+        }).always(function(){
+            $scope.creatingPath = false;
+        });
+    };
+
+    /**
+     * reset `$scope.newPath`
+     * 
+     */
+    $scope.cancelNewPath = function() {
+        $scope.newPath = null;
+    };
+
+
+    /**
+     * Reset the list of levels (`$scope.problemSets`)
+     *
+     * Reset, no level can be selected and the list of problems should be reset 
+     * as a result.
+     */
     $scope.resetLevels = function() {
         $scope.problemSets = [];
         $scope.problemSet = null;
         $scope.resetProblems();
     };
 
+    /**
+     * Fetch the list of level available for a path.
+     *
+     * The list will be saved in `$scope.problemSets`.
+     * 
+     */
     $scope.getLevels = function (path) {
 
         $scope.resetLevels();
@@ -4006,22 +4135,85 @@ function EditProblemController($scope, $resource, $http, $q) {
             return $q.reject('path is not set or has no id');
         }
 
+        $scope.loadingLevels = true;
         return $http.get('/jsonapi/problemsets/' + path.id).then(function(resp){
             if (!resp.data.problemsets) {
-                return [];
+                alert('error');
+                return $.reject(resp.data);
             }
 
             $scope.problemSets = resp.data.problemsets;
             return $scope.problemSets;
+        }).always(function(){
+            $scope.loadingLevels = false;
         });
     };
 
+    /**
+     * Initiate new level for a path (`$scope.newLevel`).
+     * 
+     */
+    $scope.createNewLevel = function(path) {
+        $scope.newLevel = {
+            path_id: path.id
+        };
+    };
+
+    /**
+     * Save the new level
+     *
+     * a level should have a path_id, a name and a description.
+     *
+     * If the level is create, it should be added to level list and the list 
+     * of problems should be reset.
+     * 
+     */
+    $scope.saveNewLevel = function(newLevel) {
+
+        $scope.creatingLevel = true;
+        $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
+            if (!resp.data.problemset_id) {
+                alert('error');
+                return $.reject(resp.data);
+            }
+
+            newLevel.id = resp.data.problemset_id;
+            $scope.problemSets.push(newLevel);
+            $scope.problemSet = newLevel;
+            $scope.cancelNewLevel();
+            $scope.resetProblems();
+        }).always(function(){
+            $scope.creatingLevel = false;
+        });
+    };
+
+    /**
+     * Reset `$scope.newLevel`.
+     */
+    $scope.cancelNewLevel = function() {
+        $scope.newLevel = null;
+    };
+
+
+    /**
+     * Reset the list of problem (`$scope.problems`)
+     *
+     * Since no problem can be selected at that point, the problem details
+     * should be reset.
+     * 
+     */
     $scope.resetProblems = function() {
         $scope.problems = [];
         $scope.problem = null;
         $scope.resetProblemDetails();
     };
 
+    /**
+     * Fetch the list of problems for the a level.
+     *
+     * The problems will be saved into `$scope.problems`
+     * 
+     */
     $scope.getProblems = function(problemSet) {
 
         $scope.resetProblems();
@@ -4030,20 +4222,163 @@ function EditProblemController($scope, $resource, $http, $q) {
             return $q.reject('problemSet is not set or has no id');
         }
 
+        $scope.loadingProblems = true;
         return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
             if (!resp.data.problems) {
-                return [];
+                alert('error');
+                return $.reject(resp.data);
             }
 
             $scope.problems = resp.data.problems;
             return $scope.problems;
+        }).always(function(){
+            $scope.loadingProblems = false;
         });
     };
 
+    /**
+     * Initiate a new problem (`$scope.newProblem`) for a level.
+     * 
+     */
+    $scope.createNewProblem = function(problemSet) {
+        $scope.newProblem = {
+            problemset_id: problemSet.id
+        };
+    };
+
+    /**
+     * Add the new problem to the list of problems.
+     *
+     * It should have a name.
+     *
+     * TODO: set problemorder attribute
+     */
+    $scope.StartNewProblem = function(newProblem){
+        $scope.problem = newProblem;
+        $scope.problems.push(newProblem);
+        $scope.cancelNewProblem();
+        $scope.resetProblemDetails();
+    };
+
+    /**
+     * Reset `$scope.newProblem`.
+     */
+    $scope.cancelNewProblem = function() {
+        $scope.newProblem = null;
+    };
+
+    /**
+     * Move up problem in the level and decrease its problemsetorder 
+     * property (position 1 being the top position).
+     *
+     * Should update the problem list order after a successful change.
+     *
+     * TODO: fix, shouldn't assume consecutive positions.
+     * 
+     */
+    $scope.moveUp = function(problem) {
+        var data = {
+            problem_id: problem.id,
+        };
+
+        $scope.movingProblem = true;
+        $http.post('/jsonapi/move_problem_up', data, postConfig). then(function(resp) {
+            var next, target = problem.problemsetorder - 1;
+
+            if (!resp.data.success) {
+                alert('error');
+                return $.reject(resp.data);
+            }
+
+            next = $scope.findProblem(target);
+            problem.problemsetorder = target;
+            
+            if (!next) {
+                return;
+            }
+            next.problemsetorder += 1;
+            $scope.sortProblems();
+        }).always(function(){
+            $scope.movingProblem = false;
+        });
+    };
+
+    /**
+     * Move down the problem in the level and increase its problemsetorder 
+     * property (position 1 being the top position).
+     *
+     * Should update the problem list order after a successful change.
+     *
+     * TODO: fix, shouldn't assume consecutive positions.
+     * 
+     */
+    $scope.moveDown = function (problem) {
+        var data = {
+            problem_id: problem.id,
+        };
+
+        $scope.movingProblem = true;
+        $http.post('/jsonapi/move_problem_down', data, postConfig). then(function(resp) {
+            var prev, target = problem.problemsetorder + 1;
+
+            if (!resp.data.success) {
+                alert('error');
+                return $.reject(resp.data);
+            }
+
+            prev = $scope.findProblem(target);
+            problem.problemsetorder = target;
+
+            if (!prev) {
+                return;
+            }
+            prev.problemsetorder -= 1;
+            $scope.sortProblems();
+        }).always(function(){
+            $scope.movingProblem = false;
+        });
+    }
+
+    /**
+     * Sort problems by their position
+     *
+     * TODO: handle problem without order.
+     */
+    $scope.sortProblems = function() {
+        $scope.problems.sort(function(a, b) {
+            return a.problemsetorder - b.problemsetorder;
+        });
+    };
+
+    /**
+     * Find a problem by its position.
+     * 
+     */
+    $scope.findProblem = function(position) {
+        if ($scope.problems[position-1] && $scope.problems[position-1].problemsetorder === position) {
+            return $scope.problems[position-1];
+        }
+
+        for (var i = 0; i < $scope.problems.length; i++) {
+            if ($scope.problems[i].problemsetorder === position) {
+                return $scope.problems[i];
+            }
+        };
+    };
+
+
+    /**
+     * Reset the problem details (`$scope.problemDetails`)
+     * 
+     */
     $scope.resetProblemDetails = function() {
         $scope.problemDetails = {};
     };
 
+    /**
+     * Fetch the details of a problem
+     * 
+     */
     $scope.getProblemDetails = function(problem) {
         
         $scope.resetProblemDetails();
@@ -4062,29 +4397,37 @@ function EditProblemController($scope, $resource, $http, $q) {
         });
     };
 
+    /**
+     * Test problem solution against its public and private tests.
+     *
+     * The test result will saved into $scope.testRun.
+     *
+     * $scope.testRun.solved will indicate if the solution successfully run.
+     *
+     */
     $scope.runTests = function () {
         var publicData = {
                 interface_id: $scope.interface.id, 
                 source_code: $scope.problemDetails.solution,
                 examples: $scope.problemDetails.examples,
-                tests: $scope.problemDetails.tests
+                tests: $scope.problemDetails.tests || ""
             },
             privateData = {
                 interface_id: $scope.interface.id, 
                 source_code: $scope.problemDetails.solution,
                 examples: $scope.problemDetails.examples,
-                tests: $scope.problemDetails.privateTests
+                tests: $scope.problemDetails.privateTests || ""
             };
 
         $scope.resetTestRun();
-        $http.post('/jsonapi/check_code_with_interface', publicData).then(function(resp) {
+        $http.post('/jsonapi/check_code_with_interface', publicData, postConfig).then(function(resp) {
             $scope.testRun = resp.data;
             
             if (!resp.data.solved) {
                 return $q.reject(resp);
             }
 
-            return $http.post('/jsonapi/check_code_with_interface', privateData);
+            return $http.post('/jsonapi/check_code_with_interface', privateData, postConfig);
         }).then(function(resp) {
             $scope.testRun = resp.data;
 
@@ -4094,6 +4437,10 @@ function EditProblemController($scope, $resource, $http, $q) {
         });
     }
 
+    /**
+     * reset `$scope.resetTestRun`
+     * 
+     */
     $scope.resetTestRun = function() {
         $scope.testRun = {};
     };
@@ -4105,175 +4452,47 @@ function EditProblemController($scope, $resource, $http, $q) {
     $scope.$watch('problemDetails.tests', $scope.resetTestRun);
     $scope.$watch('problemDetails.privateTests', $scope.resetTestRun);
 
-
-    $scope.createNewPath = function(language) {
-        $scope.newPath = {
-            interface_id: language.id
-        };
-    };
-
-    $scope.saveNewPath = function(newPath) {
-
-        $http.post('/jsonapi/new_path', newPath).then(function(resp){
-
-            if (!resp.data.path_id) {
-                // TODO: handle error
-                alert('error');
-                return;
-            }
-
-            newPath.id = resp.data.path_id;
-            $scope.paths.push(newPath);
-            $scope.path = newPath;
-            $scope.cancelNewPath();
-            $scope.resetLevels();
-        });
-    };
-
-    $scope.cancelNewPath = function() {
-        $scope.newPath = null;
-    };
-
-    $scope.createNewLevel = function(path) {
-        $scope.newLevel = {
-            path_id: path.id
-        };
-    };
-
-    $scope.saveNewLevel = function(newLevel) {
-
-        $http.post('/jsonapi/new_problemset', newLevel).then(function(resp){
-
-            if (!resp.data.problemset_id) {
-                // TODO: handle error
-                alert('error');
-                return;
-            }
-            newLevel.id = resp.data.problemset_id;
-            $scope.problemSets.push(newLevel);
-            $scope.problemSet = newLevel;
-            $scope.cancelNewLevel();
-            $scope.resetProblems();
-         });
-    };
-
-    $scope.cancelNewLevel = function() {
-        $scope.newLevel = null;
-    };
-
-    $scope.createNewProblem = function(problemSet) {
-        $scope.newProblem = {
-            problemset_id: problemSet.id
-        };
-    };
-
-    $scope.StartNewProblem = function(newProblem){
-        $scope.problem = newProblem;
-        $scope.problems.push(newProblem);
-        $scope.cancelNewProblem();
-        $scope.resetProblemDetails();
-    };
-
-    $scope.cancelNewProblem = function() {
-        $scope.newProblem = null;
-    };
-
-    $scope.moveUp = function(problem) {
-        var data = {
-            problem_id: problem.id,
-        };
-
-        $http.post('/jsonapi/move_problem_up', data). then(function(resp) {
-            var next, target = problem.problemsetorder + 1;
-
-            if (!resp.data.success) {
-                alert('error');
-                return;
-            }
-
-            next = $scope.findProblem(target);
-            if (!next) {
-                return;
-            }
-
-            next.problemsetorder -= 1;
-            problem.problemsetorder = target;
-            $scope.sortProblems();
-        });
-    };
-
-
-    $scope.moveDown = function (problem) {
-        var data = {
-            problem_id: problem.id,
-        };
-
-        $http.post('/jsonapi/move_problem_down', data). then(function(resp) {
-            var prev, target = problem.problemsetorder - 1;
-
-            if (!resp.data.success) {
-                alert('error');
-                return;
-            }
-
-            prev = $scope.findProblem(target);
-            if (!prev) {
-                return;
-            }
-
-            prev.problemsetorder += 1;
-            problem.problemsetorder = target;
-            $scope.sortProblems();
-        });
-    }
-
-    $scope.sortProblems = function() {
-        $scope.problems.sort(function(a, b) {return a.problemsetorder - b.problemsetorder;});
-    };
-
-    $scope.findProblem = function(position) {
-        if ($scope.problems[position-1] && $scope.problems[position-1].problemsetorder === position) {
-            return $scope.problems[position-1];
-        }
-
-        for (var i = 0; i < $scope.problems.length; i++) {
-            if ($scope.problems[i].problemsetorder === position) {
-                return $scope.problems[i];
-            }
-        };
-    };
-
- 
+    /**
+     * Save changes or create a problem
+     * 
+     */
     $scope.save = function() {
 
         var url,
             data = {
-                problemset_id: $scope.problemSet.id,
                 path_id: $scope.path.id,
                 interface_id: $scope.interface.id,
                 level_id: $scope.problemSet.id,
-                // TODO: is it only necessary for new problem?
                 name: $scope.problem.name, 
-                details: $scope.problem.description,             
-                solution_code: $scope.problem.solution,
-                skeleton_code: $scope.problem.skeleton,
-                examples: $scope.problem.examples,
-                publicTests: $scope.problem.tests,
-                // TODO: what are they for? 
-                privateTests:$scope.problem.other_tests
+                details: $scope.problemDetails.description,             
+                solution_code: $scope.problemDetails.solution,
+                skeleton_code: $scope.problemDetails.skeleton,
+                examples: $scope.problemDetails.examples,
+                publicTests: $scope.problemDetails.tests,
+                privateTests:$scope.problemDetails.other_tests
             };
 
-        if ($scope.problem.id) {
-            data.problem_id = $scope.problem.id;
+        if ($scope.problemDetails.problem_id) {
+            data.problem_id = $scope.problemDetails.problem_id;
             url = '/jsonapi/edit_problem';
         } else {
             url = '/jsonapi/new_problem';
         }
-      
-        $http.post('/jsonapi/edit_problem', data).then(function(resp){
+        
+        $scope.savingProblem = true;
+        $http.post(url, data, postConfig).then(function(resp){
             $scope.resetTestRun();
-            // TODO: give feedback
+
+            if (!resp.data.problem_id) {
+                alert('error');
+                return $q.reject(resp);
+            }
+
+            $scope.problemDetails.problem_id = resp.data.problem_id;
+            $scope.problem.id = resp.data.problem_id;
             alert('saved');
+        }).always(function(){
+            $scope.savingProblem = false;
         });
     };
 

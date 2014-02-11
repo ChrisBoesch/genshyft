@@ -508,3 +508,13 @@ body{
 .black {
     color:black;
 }
+
+/* Edit form */
+
+.form-horizontal .controls .progress {
+  margin-top: 5px;
+}
+
+.form-horizontal .controls .progress .bar {
+  width: 100%;
+}
