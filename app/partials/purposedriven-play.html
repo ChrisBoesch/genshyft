@@ -16,7 +16,7 @@
 						<td width =25%> <h3><center> {{purposeVideos.Videos[vno].title}} <center></h3>
 						 <center> {{purposeVideos.Videos[vno].description}} <center>
 						 <br><br>
-							Do this survey to proceed: <input type="checkbox" ng-model="value1"> <br/>	
+							<button ng-click="value1=true;" class = "btn btn-primary"> Click here to Proceed </button>
 							<br><br> * Refresh page if video is not loading 
 						</td>
 					
@@ -79,7 +79,11 @@
 										  
 										  
 										  
-											<center> <button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos[vno].feedback)"> Next  </button>  
+											<center> 
+											
+											<button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos[vno].feedback)" ng-show="purposeVideos.Videos[vno].feedback==0"> Next  </button>  
+											<button id="" class ="btn btn-primary"  ng-click = "nextVideo(vno,purposeVideos.Videos[vno].feedback)" ng-show="purposeVideos.Videos[vno].feedback!=0"> Next  </button>  											
+											
 											 <br>
 											<font size="2" color="red" ng-show="value1">Please do the survey to proceed.</font>
 											  </center> 	
