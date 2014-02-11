@@ -12,41 +12,51 @@
                 <div class="control-group">
                     <label class="control-label" for="interface">Choose language: </label>
                     <div class="controls">
-                        <select id="interface" ng-model="interface" ng-options="i.name for i in interfaces" ng-change="getPaths(interface)"></select>
+                        <div class="progress progress-striped active" ng-show="loadingInterfaces"><div class="bar"></div></div>
+                        <select id="interface" ng-model="interface" ng-options="i.name for i in interfaces" ng-change="getPaths(interface)" ng-hide="loadingInterfaces"></select>
                     </div>
                 </div>
 
                 <div class="control-group" ng-show="interface">
                     <label class="control-label" for="path">Path: </label>
                     <div class="controls">
-                        <select id="path" ng-model="path" ng-options="p.name for p in paths" ng-change="getLevels(path)">
-                            <option value="">new path...</option>
-                        </select> 
-                        <button class="btn" ng-click="createNewPath(interface)" ng-if="!path && !newPath">new path</button>
+                        <div class="progress progress-striped active" ng-show="loadingPaths"><div class="bar"></div></div>
+                        <span ng-hide="loadingPaths">
+                            <select id="path" ng-model="path" ng-options="p.name for p in paths" ng-change="getLevels(path)">
+                                <option value="">new path...</option>
+                            </select> 
+                            <button class="btn" ng-click="createNewPath(interface)" ng-if="!path && !newPath">new path</button>
+                        </span>
                     </div>
                 </div>
 
                 <div class="control-group" ng-show="path">
                     <label class="control-label" for="problemSet">Level: </label>
                     <div class="controls">
-                        <select id="problemSet" ng-model="problemSet" ng-options="l.name for l in problemSets" ng-change="getProblems(problemSet)">
-                            <option value="">new level...</option>
-                        </select> 
-                        <button class="btn" ng-click="createNewLevel(path)" ng-if="!problemSet && !newLevel">new level</button>
+                        <div class="progress progress-striped active" ng-show="loadingLevels"><div class="bar"></div></div>
+                        <span ng-hide="loadingLevels">
+                            <select id="problemSet" ng-model="problemSet" ng-options="l.name for l in problemSets" ng-change="getProblems(problemSet)">
+                                <option value="">new level...</option>
+                            </select> 
+                            <button class="btn" ng-click="createNewLevel(path)" ng-if="!problemSet && !newLevel">new level</button>
+                        </span>
                     </div>
                 </div>
 
                 <div class="control-group" ng-show="problemSet">
                     <label class="control-label" for="problem">Problems: </label>
                     <div class="controls">
-                        <select id="problem" ng-model="problem" ng-options="p.name for p in problems" ng-change="getProblemDetails(problem)">
-                            <option value="">new problem...</option>
-                        </select> 
-                        <button class="btn" ng-click="createNewProblem(problemSet)" ng-if="!problem && !newProblem">new problem</button>
-                        <span ng-if="problem">
-                            position: {{problem.problemsetorder}} 
-                            <button ng-class="{'btn': true, 'btn-mini': true, 'disabled': problem.problemsetorder >= problems.length}" ng-click="moveDown(problem)"><i class="icon-arrow-down"></i></button>
-                            <button ng-class="{'btn': true, 'btn-mini': true, 'disabled': problem.problemsetorder <= 1}" ng-click="moveUp(problem)"><i class="icon-arrow-up"></i></button>
+                        <div class="progress progress-striped active" ng-show="loadingProblems"><div class="bar"></div></div>
+                        <span ng-hide="loadingProblems">
+                            <select id="problem" ng-model="problem" ng-options="p.name for p in problems" ng-change="getProblemDetails(problem)">
+                                <option value="">new problem...</option>
+                            </select> 
+                            <button class="btn" ng-click="createNewProblem(problemSet)" ng-if="!problem && !newProblem">new problem</button>
+                            <span ng-if="problem">
+                                position: {{problem.problemsetorder}} 
+                                <button class="btn btn-mini" ng-disabled="(problem.problemsetorder >= problems.length) || movingProblem" ng-click="moveDown(problem)"><i class="icon-arrow-down"></i></button>
+                                <button class="btn btn-mini" ng-disabled="(problem.problemsetorder <= 1) || movingProblem" ng-click="moveUp(problem)"><i class="icon-arrow-up"></i></button>
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -72,11 +82,9 @@
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <button class="btn btn-primary" ng-disabled="!newPathForm.$valid" ng-click="saveNewPath(newPath)">Create</button> 
-                        <button class="btn" ng-click="cancelNewPath()">Cancel</button> 
-                    </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" ng-disabled="!newPathForm.$valid || creatingPath" ng-click="saveNewPath(newPath)">Create</button> 
+                    <button class="btn" ng-click="cancelNewPath()">Cancel</button>
                 </div>                
 
                 </fieldset>
@@ -100,14 +108,12 @@
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <button class="btn btn-primary" ng-disabled="!newLevelForm.$valid" ng-click="saveNewLevel(newLevel)">Create</button> 
-                        <button class="btn" ng-click="cancelNewLevel()">Cancel</button> 
-                    </div>
-                </div>                
-
                 </fieldset>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" ng-disabled="!newLevelForm.$valid || creatingLevel" ng-click="saveNewLevel(newLevel)">Create</button> 
+                    <button class="btn" ng-click="cancelNewLevel()">Cancel</button> 
+                </div>
             </form>
 
             <form name="newProblemForm" class="form-horizontal" role="form" ng-if="newProblem">
@@ -121,12 +127,10 @@
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <button class="btn btn-primary" ng-disabled="!newProblemForm.$valid" ng-click="StartNewProblem(newProblem)">Create</button> 
-                        <button class="btn" ng-click="cancelNewProblem()">Cancel</button> 
-                    </div>
-                </div>                
+                <div class="form-actions">
+                    <button class="btn btn-primary" ng-disabled="!newProblemForm.$valid" ng-click="StartNewProblem(newProblem)">Create</button> 
+                    <button class="btn" ng-click="cancelNewProblem()">Cancel</button> 
+                </div>
 
                 </fieldset>
             </form>
@@ -215,11 +219,9 @@
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <button class="btn btn-large btn-primary" ng-click="runTests()">Run</button> 
-                        <button ng-class="{'btn': true, 'btn-large': true, 'btn-success': testRun.solved}" ng-click="save()" ng-disabled="!testRun.solved">Save</button>
-                    </div>
+                <div class="form-actions">
+                    <button class="btn btn-large btn-primary" ng-click="runTests()" ng-disabled="savingProblem">Run</button> 
+                    <button ng-class="{'btn': true, 'btn-large': true, 'btn-success': testRun.solved}" ng-click="save()" ng-disabled="!testRun.solved || savingProblem">Save</button>
                 </div>
             </fieldset>
             </div>

@@ -3985,7 +3985,6 @@ function EventTableController($scope, $resource, $route, $location){
  * TODO: allow to edit names of an existing problem.
  * TODO: allow the set the problem to be edited via route paramter.
  * TODO: handle success and error message.
- * TODO: should process of requests.
  * 
  */
 function EditProblemController($scope, $http, $q, $window) {
@@ -4006,8 +4005,9 @@ function EditProblemController($scope, $http, $q, $window) {
      * The result sill be saved in $scope.interfaces
      * 
      */
+    $scope.loadingInterfaces = true;
     $http.get('/jsonapi/interfaces').then(function(resp) {
-        
+
         if (!resp.data.interfaces) {
             alert('error');
             return $.reject(resp.data);
@@ -4016,6 +4016,8 @@ function EditProblemController($scope, $http, $q, $window) {
         $scope.interfaces = resp.data.interfaces;
         $scope.interface = $scope.interfaces[0];
         $scope.getPaths($scope.interface);
+    }).always(function(){
+        $scope.loadingInterfaces = false;
     });
 
     /**
@@ -4045,6 +4047,7 @@ function EditProblemController($scope, $http, $q, $window) {
             return $q.reject('language is not set or has no id');
         }
 
+        $scope.loadingPaths = true;
         return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
             if (!resp.data.paths) {
                 alert('error');
@@ -4052,6 +4055,8 @@ function EditProblemController($scope, $http, $q, $window) {
             }
             $scope.paths = resp.data.paths;
             return $scope.paths;
+        }).always(function(){
+            $scope.loadingPaths = false;
         });
     };
 
@@ -4075,9 +4080,8 @@ function EditProblemController($scope, $http, $q, $window) {
      * 
      */
     $scope.saveNewPath = function(newPath) {
-
+        $scope.creatingPath = true;
         $http.post('/jsonapi/new_path', newPath, postConfig).then(function(resp){
-
             if (!resp.data.path_id) {
                 alert('error');
                 return $.reject(resp.data);
@@ -4088,6 +4092,8 @@ function EditProblemController($scope, $http, $q, $window) {
             $scope.path = newPath;
             $scope.cancelNewPath();
             $scope.resetLevels();
+        }).always(function(){
+            $scope.creatingPath = false;
         });
     };
 
@@ -4126,6 +4132,7 @@ function EditProblemController($scope, $http, $q, $window) {
             return $q.reject('path is not set or has no id');
         }
 
+        $scope.loadingLevels = true;
         return $http.get('/jsonapi/problemsets/' + path.id).then(function(resp){
             if (!resp.data.problemsets) {
                 alert('error');
@@ -4134,6 +4141,8 @@ function EditProblemController($scope, $http, $q, $window) {
 
             $scope.problemSets = resp.data.problemsets;
             return $scope.problemSets;
+        }).always(function(){
+            $scope.loadingLevels = false;
         });
     };
 
@@ -4158,8 +4167,8 @@ function EditProblemController($scope, $http, $q, $window) {
      */
     $scope.saveNewLevel = function(newLevel) {
 
+        $scope.creatingLevel = true;
         $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
-
             if (!resp.data.problemset_id) {
                 alert('error');
                 return $.reject(resp.data);
@@ -4170,7 +4179,9 @@ function EditProblemController($scope, $http, $q, $window) {
             $scope.problemSet = newLevel;
             $scope.cancelNewLevel();
             $scope.resetProblems();
-         });
+        }).always(function(){
+            $scope.creatingLevel = false;
+        });
     };
 
     /**
@@ -4208,6 +4219,7 @@ function EditProblemController($scope, $http, $q, $window) {
             return $q.reject('problemSet is not set or has no id');
         }
 
+        $scope.loadingProblems = true;
         return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
             if (!resp.data.problems) {
                 alert('error');
@@ -4216,6 +4228,8 @@ function EditProblemController($scope, $http, $q, $window) {
 
             $scope.problems = resp.data.problems;
             return $scope.problems;
+        }).always(function(){
+            $scope.loadingProblems = false;
         });
     };
 
@@ -4264,6 +4278,7 @@ function EditProblemController($scope, $http, $q, $window) {
             problem_id: problem.id,
         };
 
+        $scope.movingProblem = true;
         $http.post('/jsonapi/move_problem_up', data, postConfig). then(function(resp) {
             var next, target = problem.problemsetorder - 1;
 
@@ -4280,6 +4295,8 @@ function EditProblemController($scope, $http, $q, $window) {
             }
             next.problemsetorder += 1;
             $scope.sortProblems();
+        }).always(function(){
+            $scope.movingProblem = false;
         });
     };
 
@@ -4297,6 +4314,7 @@ function EditProblemController($scope, $http, $q, $window) {
             problem_id: problem.id,
         };
 
+        $scope.movingProblem = true;
         $http.post('/jsonapi/move_problem_down', data, postConfig). then(function(resp) {
             var prev, target = problem.problemsetorder + 1;
 
@@ -4313,6 +4331,8 @@ function EditProblemController($scope, $http, $q, $window) {
             }
             prev.problemsetorder -= 1;
             $scope.sortProblems();
+        }).always(function(){
+            $scope.movingProblem = false;
         });
     }
 
@@ -4455,7 +4475,8 @@ function EditProblemController($scope, $http, $q, $window) {
         } else {
             url = '/jsonapi/new_problem';
         }
-      
+        
+        $scope.savingProblem = true;
         $http.post(url, data, postConfig).then(function(resp){
             $scope.resetTestRun();
 
@@ -4467,6 +4488,8 @@ function EditProblemController($scope, $http, $q, $window) {
             $scope.problemDetails.problem_id = resp.data.problem_id;
             $scope.problem.id = resp.data.problem_id;
             alert('saved');
+        }).always(function(){
+            $scope.savingProblem = false;
         });
     };
 
