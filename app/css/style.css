@@ -518,3 +518,7 @@ body{
 .form-horizontal .controls .progress .bar {
   width: 100%;
 }
+
+.ace_editor {
+    min-height: 300px;
+}

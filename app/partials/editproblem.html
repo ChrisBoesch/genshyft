@@ -155,15 +155,15 @@
                         </div>
 
                         <div class="tab-pane" id="t2">
-                            <textarea id="solution" rows="10" ng-model="problemDetails.solution" class="input-block-level" required="true"></textarea>
+                            <div id="solution" ng-model="problemDetails.solution" required="true" ui-ace="{mode: interface.codeHighlightKey}"></div>
                         </div>
 
                         <div class="tab-pane" id="t3">
-                            <textarea id="skeleton" rows="10" ng-model="problemDetails.skeleton" class="input-block-level"></textarea>
+                            <div id="skeleton" ng-model="problemDetails.skeleton" ui-ace="{mode: interface.codeHighlightKey}"></div>
                         </div>
 
                         <div class="tab-pane" id="t4">
-                            <textarea id="examples" rows="10" ng-model="problemDetails.examples" class="input-block-level"></textarea>
+                            <div id="examples" ng-model="problemDetails.examples" ui-ace="{mode: interface.codeHighlightKey}"></div>
                         </div>
                     </div>
 
@@ -181,11 +181,11 @@
                     <div class="tab-content">
                         
                         <div class="tab-pane active" id="t5">
-                            <textarea id="tests" rows="10" ng-model="problemDetails.tests" class="input-block-level" required="true"></textarea>
+                            <div id="tests" ng-model="problemDetails.tests" required="true" ui-ace="{mode: interface.codeHighlightKey}"></div>
                         </div>
 
                         <div class="tab-pane" id="t6">
-                            <textarea id="privateTests" rows="10" ng-model="problemDetails.privateTests" class="input-block-level"></textarea>
+                            <div id="privateTests" ng-model="problemDetails.privateTests" ui-ace="{mode: interface.codeHighlightKey}"></div>
                         </div>
 
                         <div class="tab-pane" id="t7">
