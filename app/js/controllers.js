@@ -3982,8 +3982,8 @@ function EventTableController($scope, $resource, $route, $location){
  *
  * If a problem is being edited it should have a problem_id.
  *
- * TODO: allow to edit names of an existing problem.
- * TODO: allow the set the problem to be edited via route paramter.
+ * TODO: allow to edit names of existing problem.
+ * TODO: allow the set the problem to be edited via a route parameter.
  * TODO: handle success and error message.
  * 
  */
@@ -4415,7 +4415,7 @@ function EditProblemController($scope, $http, $q, $window) {
                 examples: $scope.problemDetails.examples,
                 tests: $scope.problemDetails.privateTests || ""
             };
-
+        console.log('foo');
         $scope.resetTestRun();
         $http.post('/jsonapi/check_code_with_interface', publicData, postConfig).then(function(resp) {
             $scope.testRun = resp.data;
@@ -4454,7 +4454,6 @@ function EditProblemController($scope, $http, $q, $window) {
      * 
      */
     $scope.save = function() {
-
         var url,
             data = {
                 path_id: $scope.path.id,

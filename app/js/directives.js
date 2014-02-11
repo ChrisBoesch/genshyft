@@ -10,6 +10,17 @@ angular.module('myApp.directives', []).
         };
     }])
 
+    .directive('genToggle', ['$window', function(window) {
+        var $ = window.jQuery;
+        return {
+            link: function(_, element, attr) {
+                $(element).on('click', function(){
+                    $(attr.genToggle).tab('show');
+                });
+            }
+        };
+    }])
+
     .directive('bsButtonsRadio', function ($timeout) {
 
         var type = 'button',

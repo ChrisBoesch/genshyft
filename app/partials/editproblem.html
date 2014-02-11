@@ -1,13 +1,12 @@
 <!-- Work in progress... will replace editproblem.html when completed -->
-
+<br />
 <div class="container" ng-controller="EditProblemController">
 
-    <div class="row">
-        <div class="span6">
+    <div class="row-fluid">
+        <div class="span6 well">
             <form name="SelectProblem" class="form-horizontal" role="form">
                 
                 <fieldset>
-                <legend>Select a problems</legend>
 
                 <div class="control-group">
                     <label class="control-label" for="interface">Choose language: </label>
@@ -53,7 +52,7 @@
                             </select> 
                             <button class="btn" ng-click="createNewProblem(problemSet)" ng-if="!problem && !newProblem">new problem</button>
                             <span ng-if="problem">
-                                position: {{problem.problemsetorder}} 
+                                #: {{problem.problemsetorder}} 
                                 <button class="btn btn-mini" ng-disabled="(problem.problemsetorder >= problems.length) || movingProblem" ng-click="moveDown(problem)"><i class="icon-arrow-down"></i></button>
                                 <button class="btn btn-mini" ng-disabled="(problem.problemsetorder <= 1) || movingProblem" ng-click="moveUp(problem)"><i class="icon-arrow-up"></i></button>
                             </span>
@@ -63,7 +62,7 @@
                 </fieldset>
             </form>
         </div>
-        <div class="span6">
+        <div class="span6 well" ng-show="newPath || newLevel || newProblem">
             <form name="newPathForm" class="form-horizontal" role="form" ng-if="newPath">
                 <fieldset>
                 <legend>New Path</legend>
@@ -138,92 +137,87 @@
         </div>
     </div>
 
-    <form name="editProblem" class="form-horizontal" role="form">
-        <div class="row" ng-show="problem">
-            <div class="span6">
-                <fieldset>
-                <legend>Edit details</legend>
+    <form name="editProblem" role="form">
+        <div class="row-fluid" ng-show="problem">
+            <div class="span6 well">
+                <div class="tabbable">
+                
+                    <ul class="nav nav-tabs">
+                        <li class="tabspacing active"><a href="./#t1" data-toggle="tab">Decription</a></li>
+                        <li class="tabspacing"><a href="./#t2" data-toggle="tab">Solution</a></li>
+                        <li class="tabspacing"><a href="./#t3" data-toggle="tab">Skeleton</a></li>
+                        <li class="tabspacing"><a href="./#t4" data-toggle="tab">Example</a></li>
+                    </ul>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="t1">
+                            <textarea id="desc" rows="10" ng-model="problemDetails.description" class="input-block-level" required="true"></textarea>
+                        </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="desc">Description: </label>
-                    <div class="controls">
-                        <textarea id="desc" rows="4" ng-model="problemDetails.description" class="input-block-level"></textarea>
+                        <div class="tab-pane" id="t2">
+                            <textarea id="solution" rows="10" ng-model="problemDetails.solution" class="input-block-level" required="true"></textarea>
+                        </div>
+
+                        <div class="tab-pane" id="t3">
+                            <textarea id="skeleton" rows="10" ng-model="problemDetails.skeleton" class="input-block-level"></textarea>
+                        </div>
+
+                        <div class="tab-pane" id="t4">
+                            <textarea id="examples" rows="10" ng-model="problemDetails.examples" class="input-block-level"></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="solution">Solution: </label>
-                    <div class="controls">
-                        <textarea id="solution" rows="4" ng-model="problemDetails.solution" class="input-block-level"></textarea>
-                    </div>
                 </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="skeleton">Skeleton: </label>
-                    <div class="controls">
-                        <textarea id="skeleton" rows="4" ng-model="problemDetails.skeleton" class="input-block-level"></textarea>
-                    </div>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="examples">Examples: </label>
-                    <div class="controls">
-                        <textarea id="examples" rows="4" ng-model="problemDetails.examples" class="input-block-level"></textarea>
-                    </div>
-                </div>
-
-                </fieldset>  
             </div>
 
-            <div class="span6">
-                <fieldset>
-                <legend>Tests</legend>
+            <div class="span6 well">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="tabspacing active"><a data-target="#t5" data-toggle="tab">Tests</a></li>
+                        <li class="tabspacing"><a data-target="#t6" data-toggle="tab">Private tests</a></li>
+                        <li class="tabspacing"><a id="result-tab" data-target="#t7" data-toggle="tab">Test results</a></li>
+                    </ul>
 
-                <div class="control-group">
-                    <label class="control-label" for="tests">Test: </label>
-                    <div class="controls">
-                        <textarea id="tests" rows="4" ng-model="problemDetails.tests" class="input-block-level"></textarea>
+                    <div class="tab-content">
+                        
+                        <div class="tab-pane active" id="t5">
+                            <textarea id="tests" rows="10" ng-model="problemDetails.tests" class="input-block-level" required="true"></textarea>
+                        </div>
+
+                        <div class="tab-pane" id="t6">
+                            <textarea id="privateTests" rows="10" ng-model="problemDetails.privateTests" class="input-block-level"></textarea>
+                        </div>
+
+                        <div class="tab-pane" id="t7">
+                            <p ng-if="!testRun || !testRun.verification_message">
+                                The tests have not run yet.
+                            </p>
+                            <p ng-if="testRun.solved" class="alert alert-success">
+                                {{testRun.verification_message}}
+                            </p>
+                            <table class="table" ng-if="testRun.verification_message && !testRun.solved">
+                                <tr>
+                                    <th>call</th>
+                                    <th>expected</th>
+                                    <th>received</th>
+                                    <th>status</th>
+                                </tr>
+                                <tr ng-repeat="test in testRun.results" ng-class="{'alert': true, 'alert-success': test.status, 'alert-error': !test.status}">
+                                    <td>{{test.call}}</td>
+                                    <td>{{test.expected}}</td>
+                                    <td>{{test.received}}</td>
+                                    <td>{{test.status}}</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="privateTests">Private Tests: </label>
-                    <div class="controls">
-                        <textarea id="privateTests" rows="4" ng-model="problemDetails.privateTests" class="input-block-level"></textarea>
+                    <div class="form-actions">
+                        <button class="btn btn-large btn-primary" ng-click="runTests()" ng-disabled="savingProblem" gen-toggle="#result-tab">Run</button> 
+                        <button ng-class="{'btn': true, 'btn-large': true, 'btn-success': testRun.solved}" ng-click="save()" ng-disabled="!testRun.solved || savingProblem">Save</button>
                     </div>
-                </div>
 
-                <div class="control-group">
-                    <div class="controls">
-                        <h4>Test result:</h4>
-                        <p ng-if="!testRun || !testRun.verification_message">
-                            The tests have not run yet.
-                        </p>
-                        <p ng-if="testRun.solved" class="alert alert-success">
-                            {{testRun.verification_message}}
-                        </p>
-                        <table class="table" ng-if="testRun.verification_message && !testRun.solved">
-                            <tr>
-                                <th>call</th>
-                                <th>expected</th>
-                                <th>received</th>
-                                <th>status</th>
-                            </tr>
-                            <tr ng-repeat="test in testRun.results" ng-class="{'alert': true, 'alert-success': test.status, 'alert-error': !test.status}">
-                                <td>{{test.call}}</td>
-                                <td>{{test.expected}}</td>
-                                <td>{{test.received}}</td>
-                                <td>{{test.status}}</td>
-                            </tr>
-                        </table>
-                    </div>
                 </div>
-
-                <div class="form-actions">
-                    <button class="btn btn-large btn-primary" ng-click="runTests()" ng-disabled="savingProblem">Run</button> 
-                    <button ng-class="{'btn': true, 'btn-large': true, 'btn-success': testRun.solved}" ng-click="save()" ng-disabled="!testRun.solved || savingProblem">Save</button>
-                </div>
-            </fieldset>
             </div>
         </div>
     </form>
