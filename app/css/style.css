@@ -526,3 +526,8 @@ body{
 a[data-toggle="tab"]:hover {
     cursor: pointer;
 }
+
+.tabspacing.error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+}

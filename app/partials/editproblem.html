@@ -136,34 +136,37 @@
 
         </div>
     </div>
-
+    
     <form name="editProblem" role="form">
+
         <div class="row-fluid" ng-show="problem">
             <div class="span6 well">
                 <div class="tabbable">
                 
                     <ul class="nav nav-tabs">
-                        <li class="tabspacing active"><a data-target="#t1" data-toggle="tab">Decription</a></li>
-                        <li class="tabspacing"><a data-target="#t2" data-toggle="tab">Solution</a></li>
-                        <li class="tabspacing"><a data-target="#t3" data-toggle="tab">Skeleton</a></li>
-                        <li class="tabspacing"><a data-target="#t4" data-toggle="tab">Example</a></li>
+                        <li ng-class="{'error': !editProblem.desc.$valid, 'tabspacing': true, 'active': true}"><a data-target="#t1" data-toggle="tab">Decription</a></li>
+                        <li ng-class="{'error': !editProblem.solution.$valid, 'tabspacing': true}"><a data-target="#t2" data-toggle="tab">Solution</a></li>
+                        <li ng-class="{'error': !editProblem.skeleton.$valid, 'tabspacing': true}"><a data-target="#t3" data-toggle="tab">Skeleton</a></li>
+                        <li ng-class="{'error': !editProblem.examples.$valid, 'tabspacing': true}"><a data-target="#t4" data-toggle="tab">Example</a></li>
                     </ul>
                     
                     <div class="tab-content">
                         <div class="tab-pane active" id="t1">
-                            <textarea id="desc" rows="10" ng-model="problemDetails.description" class="input-block-level" required="true"></textarea>
+                            <p class="alert alert-error" ng-show="editProblem.desc.$error.required">A problem needs a description.</p>
+                            <textarea id="desc" name="desc" rows="10" ng-model="problemDetails.description" class="input-block-level" required="true"></textarea>
                         </div>
 
                         <div class="tab-pane" id="t2">
-                            <div id="solution" ng-model="problemDetails.solution" required="true" gen-ace="interface.codeHighlightKey"></div>
+                            <p class="alert alert-error" ng-show="editProblem.solution.$error.required">A problem needs a solution.</p>
+                            <div id="solution" name="solution" ng-model="problemDetails.solution" required="true" gen-ace="interface.codeHighlightKey"></div>
                         </div>
 
                         <div class="tab-pane" id="t3">
-                            <div id="skeleton" ng-model="problemDetails.skeleton" gen-ace="interface.codeHighlightKey"></div>
+                            <div id="skeleton" name="skeleton" ng-model="problemDetails.skeleton" gen-ace="interface.codeHighlightKey"></div>
                         </div>
 
                         <div class="tab-pane" id="t4">
-                            <div id="examples" ng-model="problemDetails.examples" gen-ace="interface.codeHighlightKey"></div>
+                            <div id="examples" name="examples" ng-model="problemDetails.examples" gen-ace="interface.codeHighlightKey"></div>
                         </div>
                     </div>
 
@@ -173,19 +176,20 @@
             <div class="span6 well">
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
-                        <li class="tabspacing active"><a data-target="#t5" data-toggle="tab">Tests</a></li>
-                        <li class="tabspacing"><a data-target="#t6" data-toggle="tab">Private tests</a></li>
-                        <li class="tabspacing"><a id="result-tab" data-target="#t7" data-toggle="tab">Test results</a></li>
+                        <li ng-class="{'error': !editProblem.tests.$valid, 'tabspacing': true, 'active': true}"><a data-target="#t5" data-toggle="tab">Tests</a></li>
+                        <li ng-class="{'error': !editProblem.privateTests.$valid, 'tabspacing': true}"><a data-target="#t6" data-toggle="tab">Private tests</a></li>
+                        <li class="'tabspacing"><a id="result-tab" data-target="#t7" data-toggle="tab">Test results</a></li>
                     </ul>
 
                     <div class="tab-content">
                         
                         <div class="tab-pane active" id="t5">
-                            <div id="tests" ng-model="problemDetails.tests" required="true" gen-ace="interface.codeHighlightKey"></div>
+                            <p class="alert alert-error" ng-show="editProblem.tests.$error.required">A problem needs a test.</p>
+                            <div id="tests" name="tests" ng-model="problemDetails.tests" required="true" gen-ace="interface.codeHighlightKey"></div>
                         </div>
 
                         <div class="tab-pane" id="t6">
-                            <div id="privateTests" ng-model="problemDetails.privateTests" gen-ace="interface.codeHighlightKey"></div>
+                            <div id="privateTests" name="privateTests" ng-model="problemDetails.privateTests" gen-ace="interface.codeHighlightKey"></div>
                         </div>
 
                         <div class="tab-pane" id="t7">
