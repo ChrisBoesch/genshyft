@@ -317,7 +317,7 @@ myApp.run(function($httpBackend) {
 					"areyouthere":"Where are you buddy, we cant stop now, let's finish this ",
 					"dontgiveup":"Perhaps you should look the complier, it will help you solve it quick.",
 					"correctanswer":"Yes, you have solve the last question buddy, go try another question.",
-					"tryother":"b",
+					"tryother":"Try another",
 					"faster":"a",
 					"lessattempts":"Nice work buddy, here's a problem that I think you can now solve in fewer attempts."
 				},

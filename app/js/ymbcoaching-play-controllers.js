@@ -227,7 +227,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 									$scope.showNewQuestion = true;
 								}
 								
-						}, 4000);
+						}, 6000);
 						
 						
 			  }
