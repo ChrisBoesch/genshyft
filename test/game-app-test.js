@@ -380,7 +380,7 @@ myApp.run(function($httpBackend) {
 	var currentUserMasteryProgress = {
 	"pathId":"10030",
 	"pathName":"python",
-	"coach":"Zandar",
+	"coach":"Zandar", //there will almost be a defaulted coach
 	"nextProblemID": 52741,
 	"fromProblemSetID":10041,
 	"showNewProblems":true,
