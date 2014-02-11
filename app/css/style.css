@@ -522,3 +522,7 @@ body{
 .ace_editor {
     min-height: 300px;
 }
+
+a[data-toggle="tab"]:hover {
+    cursor: pointer;
+}
