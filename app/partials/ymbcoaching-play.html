@@ -534,13 +534,13 @@
                                     <font>
 
 											&nbsp;&nbsp;<b> {{currentCoach}} says  </b> <br>
-											&nbsp;&nbsp;<div class ='span12'> {{words}} </div> <br>
+											&nbsp;&nbsp;<div class ='span10'> <br> {{words}} </div> <br>
 												
                                     </font>
 									</div>
                                 </div>
 										<div id = "audioDiv">	
-											<audio src="{{audio}}" autoplay controls></audio>
+											<audio src="{{audio}}" autoplay ></audio>
 										
 										
 										</div>
@@ -567,8 +567,11 @@
                                   <a href="ymbcoaching-play/#t3" data-toggle="tab">Solution</a>
                                 </li>
                                 <button class="btn btn-primary pull-right" ng-show ="runButton" ng-click="check_solution_for_game();">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
-								<button class="btn btn-warning pull-right" ng-show="showNextQuestion" ng-click="nextQuestion();">&nbsp;Try another question &nbsp;
+								<button class="btn btn-warning pull-right" ng-show="showNextQuestion" ng-click="nextQuestion();">&nbsp;Next Question &nbsp;
 								</button>
+								<button class="btn btn-warning pull-right" ng-show="showNewQuestion" ng-click="nextQuestion();">&nbsp;New Question &nbsp;
+								</button>								
+								
                             </ul>
                             <div  class="tab-content">
                                 <div class="tab-pane fade in active" id="t3" style="height:300px;">

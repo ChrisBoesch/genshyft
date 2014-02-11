@@ -63,6 +63,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			   $scope.currentPathName = $scope.mastery.pathName;
 			   $scope.nextProblemID = $scope.mastery.nextProblemID;
 			   $scope.fromProblemSetID = $scope.mastery.fromProblemSetID;
+			   $scope.showUserNewProblem = $scope.mastery.showNewProblems;
 			   $scope.goal = $scope.mastery.goal;
 			   console.log("coach name : " + $scope.mastery.coach);
 			   $scope.getCoaches($scope.currentCoach);
@@ -190,16 +191,6 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		$scope.counter = 0; //reset timer
 		
 
-		$timeout(function(){// 3sec delay for user to listen
-		
-		$scope.audio = $scope.audiofile.letscompile;
-		var audioplayer = document.getElementsByTagName('audio')[0];
-		$scope.words = $scope.audiotext.letscompile;
-		$scope.coachImage =$scope.pictures.letscompile;
-		//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-		audioplayer.load();
-		
-
 		  $('#t11').removeClass('active');
 		  $('#t21').addClass('active');
 		  $('#ta11').removeClass('active');
@@ -220,8 +211,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 						var audioplayer = document.getElementsByTagName('audio')[0];
 						$scope.words = $scope.audiotext.correctanswer;
 						//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-						
-						$timeout(function(){audioplayer.load();}, 5000);
+						audioplayer.load();
 						
 						$timeout(function(){
 							$scope.audio = $scope.audiofile.tryother;
@@ -229,8 +219,15 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							$scope.words = $scope.audiotext.tryother;		
 							$scope.coachImage =$scope.pictures.tryother;
 							audioplayer.load();
-							$scope.showNextQuestion = true;
-						}, 10000);
+							
+							if($scope.showUserNewProblem == false){
+									$scope.showNextQuestion = true;
+								}
+							else{
+									$scope.showNewQuestion = true;
+								}
+								
+						}, 4000);
 						
 						
 			  }
@@ -243,14 +240,14 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 					$timeout(function(){
 						audioplayer.load();
 						$scope.coachImage =$scope.pictures.dontgiveup;
-					}, 5000);
+					}, 4000);
 			  }
 			  
 			  
 			  
 			  
 			});
-		},5000); 
+
 		  
 
 
