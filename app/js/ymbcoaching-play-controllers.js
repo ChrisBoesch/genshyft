@@ -35,7 +35,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
     $scope.onTimeout = function(){
         $scope.counter++;
         mytimeout = $timeout($scope.onTimeout,1000);
-		if($scope.counter > 100 ){
+		if($scope.counter > 40 ){
 			$scope.counter = 0;
 			$scope.audio = $scope.audiofile.areyouthere;
 			var audioplayer = document.getElementsByTagName('audio')[0];

@@ -1395,7 +1395,12 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
         
       });
 
-
+	  
+	  
+	  
+	  
+	  
+	  
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
       var good_verify_result = {"solved": true, "verification_message": "Your solution passes all tests.", "printed": ""};
       $httpBackend.whenGET('/jsonapi/check_code_with_interface').respond(bad_verify_result); 
