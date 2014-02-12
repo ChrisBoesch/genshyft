@@ -353,6 +353,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         var data = {"tournamentId":tournamentID,
                     "description":$scope.newGrpTournament.description,
                      "password": $scope.newGrpTournament.password,
+                     "passwordConfirm": $scope.newGrpTournament.passwordConfirm,
+                     "addDetails":$scope.newGrpTournament.addDetails,
                      "title":$scope.newGrpTournament.title,
                      "status": $scope.newGrpTournament.status,
                      "type": $scope.newGrpTournament.type,

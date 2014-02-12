@@ -73,7 +73,7 @@
 </br>
 <div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="tournamentInit();get_mytournaments()">
 	<div class="row-fluid">
-		<div class="pull-right"><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments'">Back To My Tournaments </button></div>
+		<div class="pull-right"><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments'"><i class="icon-home icon-white"></i> Back To My Tournaments </button></div>
 	</div>
 </br>
 	<div class="row-fluid">
@@ -87,13 +87,15 @@
 			<div class="span6 well well-small">
 				<div class="span12">
 					<div class="span8">
-						<b>Status :</b> 
+						<b>Status :</b>  {{grpTournaments[0].status}} </br> 
+						<!--
 						<select class="span4" ng-model="tourStatus">
 							<option>Closed</option>
 							<option>Open</option>
 							<option>Archive</option>
 							<option>Hide</option>
 						</select></br>
+						-->
 						<b>Title :</b> {{grpTournaments[0].title}} </br>
 						<b>Description :</b> {{grpTournaments[0].description}} </br>
 						<b>Additional Details :</b> {{grpTournaments[0].addDetails}} </br>
@@ -104,9 +106,8 @@
 					</div>
 				</div>
 				<div class="span12" align="center">
-					<button class="btn btn-primary" type="button" ng-hide="">Edit</button>
-					<button class="btn btn-primary" type="button" ng-hide="true">Save</button>
-					<button class="btn btn-danger" type="button">Delete </button>	
+					<button class="btn btn-primary" type="button"><i class="icon-edit icon-white"></i> Edit</button>
+					<button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i> Delete </button>	
 					</br>
 				</div>		
 			</div>
@@ -150,12 +151,12 @@
 	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
 	                    <td>
 	                    	<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">		
-	                    		<button type="button" class="btn btn-info">1 min<i class="icon-play icon-white"></i></button>
-	  							<button type="button" class="btn btn-info">2 min<i class="icon-play icon-white"></i></button>
-	  							<button type="button" class="btn btn-info">5 min<i class="icon-play icon-white"></i></button>
-	  							<button type="button" class="btn btn-info">30 min<i class="icon-play icon-white"></i></button>
-	  							<button type="button" class="btn btn-info">60 min<i class="icon-play icon-white"></i></button>	
-	  							<button class="btn btn-danger" type="button" ng-model="stop">Stop <i class="icon-stop icon-white"></i></button>		
+	                    		<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 1 min</button>
+	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 2 min</button>
+	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 5 min</button>
+	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 30 min</button>
+	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 60 min</button>	
+	  							<button class="btn btn-danger" type="button" ng-model="stop"><i class="icon-stop icon-white"></i> Stop </button>	
 							</div>
 	                    </td>
 	                </tr>
