@@ -7,7 +7,7 @@
 </br>
 <div ng-controller="GenshyftTournamentController" ng-init="loading()" class="container" id="tourncreate"style="position:relative;" >
 	<center><h2>Create Tournament</h2></center>
-
+	<div class="pull-right"><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments'">Back To My Tournaments </button></div>
 	<div class="row-fluid">
 		<div class="span12">
 			<ul class="nav nav-tabs">
@@ -228,6 +228,7 @@
                     <td class="roundInfo">{{grpTourRoundName}}</td>
                     <td class="roundInfo">{{grpTourRoundMins}}</td>
                     <td class="roundInfo">{{cartQuestions.length}}</td>
+                    <td></td>
                 </tr>
             </table>
 		<!--Finalize Tournament-->
@@ -369,22 +370,73 @@
 	<div class="modal fade" id="questionsInCart" style="display:none">
 		<div class="modal-body" style="color:black">
 			<h3>Questions inside current round</h3>
-	        <table ng-grid id="questionCartTable" class="table table-bordered" width="100%">
-            	<tr class"questionTableTitle">
-            		<th class"questionTitle">Question Title</th>
-            		<th class"questionTitle"> </th>
-            	</tr>
-                <tr ng-repeat="question in cartQuestions track by $index" class="questionTableRows">
-                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionInfo(question.questionId)">{{question.question}}</button></td>
-                    <td class="questionTableCells">
-                    	<button name="deleteQuestions" ng-click="deleteFromCart($index)" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-        	</table>
+			<div ng-show="cartQuestions.length==0">
+				<center><b> You have not added any questions! </b></center>
+			</div>
+			<div ng-show="cartQuestions.length!=0">
+		        <table ng-grid id="questionCartTable" class="table table-bordered" width="100%">
+	            	<tr class"questionTableTitle">
+	            		<th class"questionTitle">Question Title</th>
+	            		<th class"questionTitle">Actions</th>
+	            	</tr>
+	                <tr ng-repeat="question in cartQuestions track by $index" class="questionTableRows">
+	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question.questionId)">{{question.question}}</button></td>
+	                    <td class="questionTableCells">
+	                    	<button name="deleteQuestions" ng-click="deleteFromCart($index)" class="btn btn-danger">Delete</button>
+	                    </td>
+	                    <td class="questionTableCells">
+	                    	<button name="moveUp" ng-click="moveQuestionUp($index)" class="btn btn-warning">Move Up</button>
+	                    </td>
+	                    <td class="questionTableCells">
+	                    	<button name="moveDown" ng-click="moveQuestionDown($index)" class="btn btn-warning">Move Down</button>
+	                    </td>
+	                </tr>
+	        	</table>
+	        </div>	
 	    </div>
 	    <div class="modal-footer">
 	        <a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click="hideQuestionsInCart()">Done</button></a>
 	    </div>
 	</div>
 
+	<div class="modal fade" id="questionInfoInCart" style="display:none">
+		<div class="modal-body" style="color:black">
+			<h3>Question Information</h3>
+	        <div class="row-fluid">
+				<div class="span10">
+					<b>Question Title:</b>
+					</br>
+					{{questionName}}
+				</div>	
+			</div>
+			</br>
+			<div class="row-fluid">
+				<div class="span10">
+					<b>Description:</b>
+					</br>
+					{{questionDescription}}
+				</div>	
+			</div>
+			</br>
+			<div class="row-fluid">
+				<div class="span10">
+					<b>Example:</b>
+					</br>
+					{{questionExamples}}
+				</div>	
+			</div>
+			</br>
+			<div class="row-fluid">
+				<div class="span10">
+					<b>Starting Code:</b>
+					</br>
+					{{skeleton}}
+				</div>	
+			</div>
+			</br>
+	    </div>
+	    <div class="modal-footer">
+	        <a href="#" data-dismiss="modal"><button name="gotit" class="btn btn-primary" ng-click="hideQuestionsInfoInCart()">Ok</button></a>
+	    </div>
+	</div>
 </div>
