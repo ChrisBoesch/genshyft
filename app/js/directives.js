@@ -8,6 +8,84 @@ angular.module('myApp.directives', []).
         return function (scope, elm, attrs) {
             elm.text(version);
         };
+    }]).
+
+    directive('genToggle', ['$window', function(window) {
+        var $ = window.jQuery;
+        return {
+            link: function(_, element, attr) {
+                $(element).on('click', function(){
+                    $(attr.genToggle).tab('show');
+                });
+            }
+        };
+    }]).
+
+    /**
+     * Create a ace editor
+     *
+     * Usage:
+     *
+     *     <div ng-model="code" gen-ace="codeSyntax"></div>
+     *
+     * where $scope.code should be a string and $scope.codeLanguage should be
+     * the syntax mode use to highlight the code (edito mode).
+     *
+     * unlike the uiAce directive, this directive can dynamically change the 
+     * editor mode.
+     * 
+     */
+    directive('genAce', ['$window', function(window) {
+        var ace = window.ace;
+        return {
+            require: '?ngModel',
+            link: function (scope, elm, attrs, ngModel) {
+                var editor = window.ace.edit(elm[0]),
+                    session = editor.getSession();
+
+                scope.$watch(attrs.genAce, function(newVal) {
+                    if (newVal) {
+                        session.setMode('ace/mode/' + newVal);
+                    }
+                });
+
+                elm.on('$destroy', function() {
+                  editor.session.$stopWorker();
+                  editor.destroy();
+                });
+
+                if (!ngModel) {
+                    return;
+                }
+
+                session.on('change', function (callback) {
+                    var newValue = session.getValue();
+
+                    if (newValue === scope.$eval(attrs.value) ||
+                        scope.$$phase  ||
+                        scope.$root.$$phase
+                    ) {
+                        return;
+                    }
+
+                    scope.$apply(function () {
+                        ngModel.$setViewValue(newValue);
+                    });
+                });
+
+                ngModel.$render = function () {
+                    session.setValue(ngModel.$viewValue);
+                };
+
+                ngModel.$formatters.push(function (value) {
+                    if (!value) {
+                        return '';
+                    }
+
+                    return value.toString();
+                });
+            }
+        };
     }])
 
     .directive('bsButtonsRadio', function ($timeout) {
