@@ -138,7 +138,6 @@
     </div>
     
     <form name="editProblem" role="form">
-
         <div class="row-fluid" ng-show="problem">
             <div class="span6 well">
                 <div class="tabbable">
@@ -221,6 +220,36 @@
                         <button ng-class="{'btn': true, 'btn-large': true, 'btn-success': testRun.solved}" ng-click="save()" ng-disabled="!testRun.solved || savingProblem">Save</button>
                     </div>
 
+                </div>
+            </div>
+        </div>
+
+        <div class="row-fluid" ng-if="problemMobile">
+            <div class="span12 well">
+                <div ng-repeat="(permutation, result) in problemMobile.nonErrorResults">
+                    
+                    <h3>Permutation {{permutation}}</h3>
+                    <pre><code>{{problemMobile.lines|renderPermutation:permutation}}</code></pre>
+                    
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Call</th>
+                                <th>Expected</th>
+                                <th>Received</th>
+                                <th>Correct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="r in result.results">
+                                <td>{{r.call}}</td>
+                                <td>{{r.expected}}</td>
+                                <td>{{r.received}}</td>
+                                <td>{{r.correct}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
                 </div>
             </div>
         </div>

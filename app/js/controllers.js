@@ -4010,7 +4010,7 @@ function EditProblemController($scope, $http, $q, $window) {
 
         if (!resp.data.interfaces) {
             alert('error');
-            return $.reject(resp.data);
+            return $q.reject(resp.data);
         }
 
         $scope.interfaces = resp.data.interfaces;
@@ -4051,7 +4051,7 @@ function EditProblemController($scope, $http, $q, $window) {
         return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
             if (!resp.data.paths) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
             $scope.paths = resp.data.paths;
             return $scope.paths;
@@ -4084,7 +4084,7 @@ function EditProblemController($scope, $http, $q, $window) {
         $http.post('/jsonapi/new_path', newPath, postConfig).then(function(resp){
             if (!resp.data.path_id) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             newPath.id = resp.data.path_id;
@@ -4136,7 +4136,7 @@ function EditProblemController($scope, $http, $q, $window) {
         return $http.get('/jsonapi/problemsets/' + path.id).then(function(resp){
             if (!resp.data.problemsets) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             $scope.problemSets = resp.data.problemsets;
@@ -4171,7 +4171,7 @@ function EditProblemController($scope, $http, $q, $window) {
         $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
             if (!resp.data.problemset_id) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             newLevel.id = resp.data.problemset_id;
@@ -4223,7 +4223,7 @@ function EditProblemController($scope, $http, $q, $window) {
         return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
             if (!resp.data.problems) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             $scope.problems = resp.data.problems;
@@ -4284,7 +4284,7 @@ function EditProblemController($scope, $http, $q, $window) {
 
             if (!resp.data.success) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             next = $scope.findProblem(target);
@@ -4320,7 +4320,7 @@ function EditProblemController($scope, $http, $q, $window) {
 
             if (!resp.data.success) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             prev = $scope.findProblem(target);
@@ -4365,11 +4365,13 @@ function EditProblemController($scope, $http, $q, $window) {
 
 
     /**
-     * Reset the problem details (`$scope.problemDetails`)
+     * Reset the problem details 
+     * (`$scope.problemDetails` and `$scope.problemMobile`)
      * 
      */
     $scope.resetProblemDetails = function() {
         $scope.problemDetails = {};
+        $scope.problemMobile = null;
     };
 
     /**
@@ -4377,6 +4379,7 @@ function EditProblemController($scope, $http, $q, $window) {
      * 
      */
     $scope.getProblemDetails = function(problem) {
+        var details, mobile;
         
         $scope.resetProblemDetails();
 
@@ -4384,13 +4387,27 @@ function EditProblemController($scope, $http, $q, $window) {
             return $q.reject('problem is not set or has no id');
         }
 
-        return $http.get('/jsonapi/get_problem?problem_id=' + problem.id).then(function(resp){
+        details = $http.get('/jsonapi/get_problem?problem_id=' + problem.id).then(function(resp){
             if (!resp.data.problem) {
                 return {};
             }
 
             $scope.problemDetails = resp.data.problem;
             return $scope.problemDetails;
+        });
+
+        mobile = $http.get('/jsonapi/mobile_problem/' + problem.id).then(function(resp) {
+            if (resp.data.error) {
+                return {};
+            }
+
+            $scope.problemMobile = resp.data;
+            return $scope.problemMobile;
+        });
+
+        return $q.all({
+            'problemDetails': details,
+            'problemMobile': mobile
         });
     };
 
