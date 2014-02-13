@@ -24,7 +24,7 @@ myApp.run(function($httpBackend) {
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
-		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":2, 
+		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":1, 
 		"unlocked":true
 		},
 
@@ -32,7 +32,7 @@ myApp.run(function($httpBackend) {
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
-		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":2, 
+		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":3, 
 		"unlocked":true
 		},
 
@@ -41,16 +41,16 @@ myApp.run(function($httpBackend) {
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
 		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?",
-		"feedback":0, 
-		"unlocked":false
+		"feedback":2, 
+		"unlocked":true
 		},
 
 		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
 		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
-		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?","feedback":0, 
-		"unlocked":false
+		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?","feedback":4, 
+		"unlocked":true
 		},
 
 		{"no":4,"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
