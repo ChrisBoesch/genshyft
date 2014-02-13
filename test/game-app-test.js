@@ -236,14 +236,14 @@ myApp.run(function($httpBackend) {
 					"lessattempts":"a"
 				},
 	"audiotext":{
-					"greeting":"Hi im shannon, Im here to help you practice and resolve some of the problems you seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
-					"welcomeback":"welcome back by shannon",
-					"areyouthere":"are you there text by shannon",
-					"dontgiveup":"b",
-					"correctanswer":"b",
-					"tryother":"b",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"Hi I am Shannon, I am here to help you practice and resolve some of the problems you have seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
+					"welcomeback":"Welcome back! You were on a roll the last time. If you keep coding like this every day, your friends are going to come to you for help! Now, let’s start on this question!",
+					"areyouthere":"Hey – are you there? I hope you are not giving up! Let’s finish these problems together! ",
+					"dontgiveup":"Hmm…there seems to be an error. Check the compiler. It will help you solve it quicker.",
+					"correctanswer":"Alright! That was a good one! Let’s move onto the next one!",
+					"tryother":"You are on a roll! Here, try another question!",
+					"faster":"This question shouldn’t take you so long – I believe in you!",
+					"lessattempts":"Now here’s a problem that I think you can do in fewer attempts. "
 				},
 	"pictures":{
 					"greeting":"img/mbcoach/Shannon/Shannon.jpg",
@@ -275,14 +275,14 @@ myApp.run(function($httpBackend) {
 					"lessattempts":"a"
 				},
 	"audiotext":{
-					"greeting":"Welcome back ! Lets continue solving those question. By doing this everyday, youll be better prepared the next time you get together with your friends to do some coding. Lets start!",
-					"welcomeback":"welcome back text by sandra",
-					"areyouthere":"are you there text by sandra",
-					"dontgiveup":"b",
-					"correctanswer":"b",
-					"tryother":"b",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"Hi I am Sandra, I am a recruiter and I know how to prepare you for that coding interview. By practicing these problems over and over again, you will not only be prepared for that interview but you will ace it! ",
+					"welcomeback":"Welcome back! You were really consistent in your practice the last time. If you keep coding like this every day and master this language – head hunters will be impressed and might even get you a job! Now, let’s begin!",
+					"areyouthere":"Hey – are you there? Don’t stop now! We can do these questions together!",
+					"dontgiveup":"Hmm…there seems to be an error. Check the compiler. It will help you solve it quicker.",
+					"correctanswer":"Excellent job! You are getting a hang of this! Let’s move onto the next one!",
+					"tryother":"You are getting really good at this, huh? Hmm, why not try another question?",
+					"faster":"I am sure this question will not take you so long! Come on, let’s do this!",
+					"lessattempts":"Now here’s a problem that I think you can do in fewer attempts than the last time."
 				},
 	"pictures":{
 					"greeting":"img/mbcoach/Sandra/Sandra.jpg",
@@ -380,7 +380,7 @@ myApp.run(function($httpBackend) {
 	var currentUserMasteryProgress = {
 	"pathId":"10030",
 	"pathName":"python",
-	"coach":"SGTMJR", //there will almost be a defaulted coach
+	"coach":"Shannon", //there will almost be a defaulted coach
 	"nextProblemID": 52741,
 	"fromProblemSetID":10041,
 	"showNewProblems":true,
