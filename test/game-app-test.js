@@ -41,40 +41,40 @@ myApp.run(function($httpBackend) {
 	var purposeDrivenVideos = {
 		"Videos":[
 		{"no":0,"title":"What Most School Don't Teach",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
-		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":2, 
+		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":1, 
 		"unlocked":true
 		},
 
 		{"no":1,"title":"Art of Creative Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
-		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":2, 
+		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":3, 
 		"unlocked":true
 		},
 
 		{"no":2,"title":"Why Teach Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
 		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?",
-		"feedback":0, 
-		"unlocked":false
+		"feedback":2, 
+		"unlocked":true
 		},
 
 		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
-		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?","feedback":0, 
-		"unlocked":false
+		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?","feedback":4, 
+		"unlocked":true
 		},
 
 		{"no":4,"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=LR8fQiskYII",
 		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ...Java is heavyweight, verbose, and everyone loves to hate it, but Wall still thinks you should know it.","question":"How does this video make you feel?",
@@ -83,7 +83,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":5,"title":"Bruce Feiler: Agile programming -- for your family",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=J6oMG7u9HGE",
 		"description":"Bruce Feiler has a radical idea: To deal with the stress of modern family life, go agile. Inspired by agile software programming, Feiler introduces family practices which encourage flexibility, bottom-up idea flow, constant feedback and accountability. ","question":"How does this video make you feel?",
@@ -92,7 +92,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":6,"title":"iPhone Application Developer... and 6th Grader: Thomas Suarez ",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=ehDAP1OQ9Zw",
 		"description":"Thomas Suarez is a 6th grade student at a middle school in the South Bay of Los Angeles. When Apple released the Software Development Kit (SDK), he began to create and sell his own applications. ","question":"How does this video make you feel?","feedback":0, 
@@ -100,7 +100,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":7,"title":"Mitch Resnick: Let's teach kids to code",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"tvlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
 		"description":"Coding isn't just for computer whizzes, says Mitch Resnick of MIT Media Lab -- it's for everyone. In a fun, demo-filled talk Resnick outlines the benefits of teaching kids to code, so they can do more than just read new technologies -- but also create them."
@@ -110,7 +110,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
 		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?","feedback":0, 
@@ -118,7 +118,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":9,"title":"NEW NEWS : Computer coding for kids",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
 		"description":"Teaching kids how to write computer programs, by Marshall Brain marshallbrain.com/kids-programming.htm - Traduzir esta página Let's say that you have children, and you would like to help them learn computer programming at a youngish age."
@@ -133,35 +133,35 @@ myApp.run(function($httpBackend) {
 	var purposeDrivenVideosADMIN = {
 		"Videos":[
 		{"no":0,"title":"What Most School Don't Teach",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
 		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?"
 		},
 
 		{"no":1,"title":"Art of Creative Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
 		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?"
 		},
 
 		{"no":2,"title":"Why Teach Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
 		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?"
 		},
 
 		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
 		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?"
 		},
 
 		{"no":4,"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=LR8fQiskYII",
 		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ...Java is heavyweight, verbose, and everyone loves to hate it, but Wall still thinks you should know it.","question":"How does this video make you feel?"
@@ -182,7 +182,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":7,"title":"Mitch Resnick: Let's teach kids to code",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"tvlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
 		"description":"Coding isn't just for computer whizzes, says Mitch Resnick of MIT Media Lab -- it's for everyone. In a fun, demo-filled talk Resnick outlines the benefits of teaching kids to code, so they can do more than just read new technologies -- but also create them."
@@ -190,14 +190,14 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
 		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?"
 		},
 
 		{"no":9,"title":"NEW NEWS : Computer coding for kids",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
 		"description":"Teaching kids how to write computer programs, by Marshall Brain marshallbrain.com/kids-programming.htm - Traduzir esta página Let's say that you have children, and you would like to help them learn computer programming at a youngish age."
@@ -218,7 +218,7 @@ myApp.run(function($httpBackend) {
 
 
 //payload -> {"feedback":3, "purposevideo":2,"unlocked":true }   //user to update the new feedback score and unlock next video
-		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/2').respond({"result":"video 2 unlocked and updated"});
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/2').respond({"results":"video 2 unlocked and updated"});
 //payload -> {"feedback":3, "purposevideo":3,"unlocked":true }   //user to update the new feedback score and unlock next video
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/3').respond({"result":"video 3 unlocked and updated"});
 		
@@ -249,7 +249,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"audio/Shannon/greeting.mp3",
 					"welcomeback":"audio/Shannon/welcomeback.mp3",
 					"areyouthere":"audio/Shannon/areyouthere.mp3",
-					"letscompile":"a",
 					"dontgiveup":"a",
 					"correctanswer":"a",
 					"tryother":"a",
@@ -260,7 +259,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"Hi im shannon, Im here to help you practice and resolve some of the problems you seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
 					"welcomeback":"welcome back by shannon",
 					"areyouthere":"are you there text by shannon",
-					"letscompile":"b",
 					"dontgiveup":"b",
 					"correctanswer":"b",
 					"tryother":"b",
@@ -271,7 +269,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"img/mbcoach/Shannon/Shannon.jpg",
 					"welcomeback":"img/mbcoach/Shannon/Shannon.jpg",
 					"areyouthere":"img/mbcoach/Shannon/Shannon.jpg",
-					"letscompile":"img/mbcoach/Shannon/Shannon.jpg",
 					"dontgiveup":"img/mbcoach/Shannon/Shannon.jpg",
 					"correctanswer":"img/mbcoach/Shannon/Shannon.jpg",
 					"tryother":"img/mbcoach/Shannon/Shannon.jpg",
@@ -291,7 +288,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"audio/Sandra/greeting.mp3",
 					"welcomeback":"audio/Sandra/welcomeback.mp3",
 					"areyouthere":"audio/Sandra/areyouthere.mp3",
-					"letscompile":"a",
 					"dontgiveup":"a",
 					"correctanswer":"a",
 					"tryother":"a",
@@ -302,7 +298,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"Welcome back ! Lets continue solving those question. By doing this everyday, youll be better prepared the next time you get together with your friends to do some coding. Lets start!",
 					"welcomeback":"welcome back text by sandra",
 					"areyouthere":"are you there text by sandra",
-					"letscompile":"b",
 					"dontgiveup":"b",
 					"correctanswer":"b",
 					"tryother":"b",
@@ -313,7 +308,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"img/mbcoach/Sandra/Sandra.jpg",
 					"welcomeback":"img/mbcoach/Sandra/Sandra.jpg",
 					"areyouthere":"img/mbcoach/Sandra/Sandra.jpg",
-					"letscompile":"img/mbcoach/Sandra/Sandra.jpg",
 					"dontgiveup":"img/mbcoach/Sandra/Sandra.jpg",
 					"correctanswer":"img/mbcoach/Sandra/Sandra.jpg",
 					"tryother":"img/mbcoach/Sandra/Sandra.jpg",
@@ -331,7 +325,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"audio/Zandar/greeting.mp3",
 					"welcomeback":"audio/Zandar/welcomeback.mp3",
 					"areyouthere":"audio/Zandar/areyouthere.mp3",
-					"letscompile":"a",
 					"dontgiveup":"audio/Zandar/dontgiveup.mp3",
 					"correctanswer":"audio/Zandar/correctanswer.mp3",
 					"tryother":"a",
@@ -342,10 +335,9 @@ myApp.run(function($httpBackend) {
 					"greeting":"Hello, fellow coder, let me help you practice some of the problems you tried before. With my guidance, you be a pro in no time.",
 					"welcomeback":"welcome back buddy, we had soo much fun the last time. If you keep coding everyday, you will be a pro in no time.",
 					"areyouthere":"Where are you buddy, we cant stop now, let's finish this ",
-					"letscompile":"b",
 					"dontgiveup":"Perhaps you should look the complier, it will help you solve it quick.",
 					"correctanswer":"Yes, you have solve the last question buddy, go try another question.",
-					"tryother":"b",
+					"tryother":"Try another",
 					"faster":"a",
 					"lessattempts":"Nice work buddy, here's a problem that I think you can now solve in fewer attempts."
 				},
@@ -353,7 +345,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"img/mbcoach/Zandar/Zandar.jpg",
 					"welcomeback":"img/mbcoach/Zandar/Zandar.jpg",
 					"areyouthere":"img/mbcoach/Zandar/Zandar.jpg",
-					"letscompile":"img/mbcoach/Zandar/Zandar.jpg",
 					"dontgiveup":"img/mbcoach/Zandar/Zandar.jpg",
 					"correctanswer":"img/mbcoach/Zandar/Zandar.jpg",
 					"tryother":"img/mbcoach/Zandar/Zandar.jpg",
@@ -371,7 +362,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"audio/SGTMJR/greeting.mp3",
 					"welcomeback":"audio/SGTMJR/welcomeback.mp3",
 					"areyouthere":"audio/SGTMJR/areyouthere.mp3",
-					"letscompile":"a",
 					"dontgiveup":"a",
 					"correctanswer":"a",
 					"tryother":"a",
@@ -382,7 +372,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"Attention recruit !, I am your  SGT Major. I am going to make sure you solve this problem much better and improve your coding skill. Lets get to it !",
 					"welcomeback":"welcoem back by stgmjr",
 					"areyouthere":"b",
-					"letscompile":"b",
 					"dontgiveup":"b",
 					"correctanswer":"b",
 					"tryother":"b",
@@ -393,7 +382,6 @@ myApp.run(function($httpBackend) {
 					"greeting":"img/mbcoach/SGTMJR/SGTMJR.jpg",
 					"welcomeback":"img/mbcoach/SGTMJR/SGTMJR.jpg",
 					"areyouthere":"img/mbcoach/SGTMJR/SGTMJR.jpg",
-					"letscompile":"img/mbcoach/SGTMJR/SGTMJR.jpg",
 					"dontgiveup":"img/mbcoach/SGTMJR/SGTMJR.jpg",
 					"correctanswer":"img/mbcoach/SGTMJR/SGTMJR.jpg",
 					"tryother":"img/mbcoach/SGTMJR/SGTMJR.jpg",
@@ -412,9 +400,10 @@ myApp.run(function($httpBackend) {
 	var currentUserMasteryProgress = {
 	"pathId":"10030",
 	"pathName":"python",
-	"coach":"Zandar",
+	"coach":"Zandar", //there will almost be a defaulted coach
 	"nextProblemID": 52741,
 	"fromProblemSetID":10041,
+	"showNewProblems":true,
 	"goal": "lessattempts",
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
 	};
@@ -1403,7 +1392,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       //Game 14096557 returned for games 0, 2, and 3 as examples. 
       $httpBackend.whenGET('/jsonapi/game/0').respond({"game_end": "None", "player": "Chris", "solvedProblemIDs": [], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-02-19 04:03:37.859629", "numProblems": 3, "numSolvedProblems": 0, "status": "ACCEPTING SOLUTIONS", "problemIDs": [17155, 18156, 10119], "problems": {"problems": [{"skeleton": "age = ", "description": "Variables are an important part of programming; they allow the you to store a value and reuse it later.  You are allowed to use just about anything you like as your variable name.\r\n\r\nFor this problem, create a variable named 'age' with the value 7.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> age\r\n7", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}, {"skeleton": "spam='", "description": "Variables can hold many different types of information.  Create a variable spam containing the word 'anxious'.  When you store words or phrases into a variable, you must enclose the text in quotation marks.  You can use single quotes or double quotes, either will work.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> spam\r\n'anxious'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 6, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 18156, "name": "Another Variable"}, {"skeleton": "name=\r\npigs=", "description": "You can create as many variables as you like.  For this problem create two different variables: name which contains 4.27 and pigs which contains the phrase 'can fly'.\r\n\r\nNotice that the variable called name contains a number and not a name at all. Variable names DON'T have to describe their contents, but it is best to choose variable names that describe the contents.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> name\r\n4.27\r\n>>> pigs\r\n'can fly'", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 7, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10119, "name": "Still more variables"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "14096557", "tournamentID": null, "name": "jsonapi created game", "roundID": null, "heatID": null, "game_start": "2013-02-19 04:03:37.859655", "currentTime": "2013-02-19 04:03:48.534844", "game_type": "Timed Interview", "timelimit": 3600}); 
       //After 2 solvescheck_code_with_interface
-      var bad_check_soluion_for_game_result = {"last_solved": false, "results": [{"status": false, "expected": 713, "call": "oops", "received": "317"}], "printed": "", "other_tests_result": null, "game_id": "14101372", "next_problem_id": 10033, "problem_id": "10033"};
+	  
+      var bad_check_soluion_for_game_result = {"last_solved": true, "results": [{"status": true, "expected": 317, "call": "oops", "received": "317"}], "printed": "", "other_tests_result": null, "game_id": "14101372", "next_problem_id": 10033, "problem_id": "10033"};
       
       //$httpBackend.whenPOST('/jsonapi/verify_for_game').respond(bad_check_soluion_for_game_result); 
       
@@ -1415,7 +1405,12 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
         
       });
 
-
+	  
+	  
+	  
+	  
+	  
+	  
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
       var good_verify_result = {"solved": true, "verification_message": "Your solution passes all tests.", "printed": ""};
       $httpBackend.whenGET('/jsonapi/check_code_with_interface').respond(bad_verify_result); 
@@ -1951,7 +1946,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       var tournamentGame = {
 	    "game_end": "2013-09-29 09:27:03.104550",
 	    "player": "Chris",
-	    "solvedProblemIDs": [10033, 17155],
+	    "solvedProblemIDs": [10033],
 	    "currentProblem_id": "TBD",
 	    "playerID": 57754,
 	    "allSolved": false,
@@ -2019,7 +2014,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	    "currentTime": "2013-09-29 13:54:35.933410",
 	    "game_type": "Timed Interview",
 	    "timelimit": 3600,
-	    "mentor":"",
+	    "mentor":"Glen",
 	    "mentorID": 12345,
 	    "hasArrived": false
 	};
