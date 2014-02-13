@@ -307,8 +307,8 @@ myApp.run(function($httpBackend) {
 					"areyouthere":"audio/Zandar/areyouthere.mp3",
 					"dontgiveup":"audio/Zandar/dontgiveup.mp3",
 					"correctanswer":"audio/Zandar/correctanswer.mp3",
-					"tryother":"a",
-					"faster":"a",
+					"tryother":"audio/Zandar/tryother.mp3",
+					"faster":"audio/Zandar/faster.mp3",
 					"lessattempts":"audio/Zandar/lessattempts.mp3"
 				},
 	"audiotext":{
@@ -317,9 +317,9 @@ myApp.run(function($httpBackend) {
 					"areyouthere":"Where are you buddy, we cant stop now, let's finish this ",
 					"dontgiveup":"Perhaps you should look the complier, it will help you solve it quick.",
 					"correctanswer":"Yes, you have solve the last question buddy, go try another question.",
-					"tryother":"Try another",
-					"faster":"a",
-					"lessattempts":"Nice work buddy, here's a problem that I think you can now solve in fewer attempts."
+					"tryother":"You have proven yourself. I am proud of you buddy. Try another question.",
+					"faster":"I am confident that you are able to code this question faster than last time.",
+					"lessattempts":"Here's a problem that I think you can do in less attempts."
 				},
 	"pictures":{
 					"greeting":"img/mbcoach/Zandar/Zandar.jpg",
@@ -342,21 +342,21 @@ myApp.run(function($httpBackend) {
 					"greeting":"audio/SGTMJR/greeting.mp3",
 					"welcomeback":"audio/SGTMJR/welcomeback.mp3",
 					"areyouthere":"audio/SGTMJR/areyouthere.mp3",
-					"dontgiveup":"a",
-					"correctanswer":"a",
-					"tryother":"a",
-					"faster":"a",
-					"lessattempts":"a"
+					"dontgiveup":"audio/SGTMJR/dontgiveup.mp3",
+					"correctanswer":"audio/SGTMJR/correctanswer.mp3",
+					"tryother":"audio/SGTMJR/tryother.mp3",
+					"faster":"audio/SGTMJR/faster.mp3",
+					"lessattempts":"audio/SGTMJR/lessattempts.mp3"
 				},
 	"audiotext":{
-					"greeting":"Attention recruit !, I am your  SGT Major. I am going to make sure you solve this problem much better and improve your coding skill. Lets get to it !",
-					"welcomeback":"welcoem back by stgmjr",
-					"areyouthere":"b",
-					"dontgiveup":"b",
-					"correctanswer":"b",
-					"tryother":"b",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"Attention recruit !, I am your  SGT Major. I am going to improve your coding. Do you understand !",
+					"welcomeback":"Good, I see you are brave enough to endure my training.",
+					"areyouthere":"Where did you go recruit?! Come back and give me 20 !",
+					"dontgiveup":"Is there the best you can do? Even I can code with my hands tied !",
+					"correctanswer":"Impressive recruit. There is hope for you after all",
+					"tryother":"I think you are ready to move on to your next challenge. GO!",
+					"faster":"Based on your last performance recruit, I think you can code alot faster. Prove me right! ",
+					"lessattempts":"I'm right about you. You will be able to solve this problem in less attempts. Now , do it !"
 				},
 	"pictures":{
 					"greeting":"img/mbcoach/SGTMJR/SGTMJR.jpg",
@@ -380,11 +380,11 @@ myApp.run(function($httpBackend) {
 	var currentUserMasteryProgress = {
 	"pathId":"10030",
 	"pathName":"python",
-	"coach":"Zandar", //there will almost be a defaulted coach
+	"coach":"SGTMJR", //there will almost be a defaulted coach
 	"nextProblemID": 52741,
 	"fromProblemSetID":10041,
 	"showNewProblems":true,
-	"goal": "lessattempts",
+	"goal": "faster", // or lessattempts
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
 	};
 	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);;
