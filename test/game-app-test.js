@@ -21,7 +21,7 @@ myApp.run(function($httpBackend) {
 	var purposeDrivenVideos = {
 		"Videos":[
 		{"no":0,"title":"What Most School Don't Teach",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
 		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":1, 
@@ -29,7 +29,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":1,"title":"Art of Creative Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
 		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?","feedback":3, 
@@ -37,7 +37,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":2,"title":"Why Teach Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
 		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?",
@@ -46,7 +46,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
 		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?","feedback":4, 
@@ -54,7 +54,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":4,"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=LR8fQiskYII",
 		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ...Java is heavyweight, verbose, and everyone loves to hate it, but Wall still thinks you should know it.","question":"How does this video make you feel?",
@@ -63,7 +63,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":5,"title":"Bruce Feiler: Agile programming -- for your family",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=J6oMG7u9HGE",
 		"description":"Bruce Feiler has a radical idea: To deal with the stress of modern family life, go agile. Inspired by agile software programming, Feiler introduces family practices which encourage flexibility, bottom-up idea flow, constant feedback and accountability. ","question":"How does this video make you feel?",
@@ -72,7 +72,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":6,"title":"iPhone Application Developer... and 6th Grader: Thomas Suarez ",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=ehDAP1OQ9Zw",
 		"description":"Thomas Suarez is a 6th grade student at a middle school in the South Bay of Los Angeles. When Apple released the Software Development Kit (SDK), he began to create and sell his own applications. ","question":"How does this video make you feel?","feedback":0, 
@@ -80,7 +80,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":7,"title":"Mitch Resnick: Let's teach kids to code",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"tvlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
 		"description":"Coding isn't just for computer whizzes, says Mitch Resnick of MIT Media Lab -- it's for everyone. In a fun, demo-filled talk Resnick outlines the benefits of teaching kids to code, so they can do more than just read new technologies -- but also create them."
@@ -90,7 +90,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
 		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?","feedback":0, 
@@ -98,7 +98,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":9,"title":"NEW NEWS : Computer coding for kids",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
 		"description":"Teaching kids how to write computer programs, by Marshall Brain marshallbrain.com/kids-programming.htm - Traduzir esta página Let's say that you have children, and you would like to help them learn computer programming at a youngish age."
@@ -113,35 +113,35 @@ myApp.run(function($httpBackend) {
 	var purposeDrivenVideosADMIN = {
 		"Videos":[
 		{"no":0,"title":"What Most School Don't Teach",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
 		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?"
 		},
 
 		{"no":1,"title":"Art of Creative Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 1.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
 		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?"
 		},
 
 		{"no":2,"title":"Why Teach Coding",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 2.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
 		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?"
 		},
 
 		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 3.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
 		"description":"This week on Lifehacker, we're all about programming. We'll help show you some of the basics of coding, as well as how to pick a language, a first project, and how to continue your studies.","question":"How does this video make you feel?"
 		},
 
 		{"no":4,"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=LR8fQiskYII",
 		"description":"0 Days in the Word, 40 Days of Purpose. 40 Days of Community, 40 Days of Building Relationships, Recovery Courses. Small Groups, Church Growth and ...Java is heavyweight, verbose, and everyone loves to hate it, but Wall still thinks you should know it.","question":"How does this video make you feel?"
@@ -162,7 +162,7 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":7,"title":"Mitch Resnick: Let's teach kids to code",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"tvlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
 		"description":"Coding isn't just for computer whizzes, says Mitch Resnick of MIT Media Lab -- it's for everyone. In a fun, demo-filled talk Resnick outlines the benefits of teaching kids to code, so they can do more than just read new technologies -- but also create them."
@@ -170,14 +170,14 @@ myApp.run(function($httpBackend) {
 		},
 
 		{"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
 		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?"
 		},
 
 		{"no":9,"title":"NEW NEWS : Computer coding for kids",
-		"image":"img/purposedrivenPlaceholder/Purpose Driven 4.jpg",
+		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
 		"description":"Teaching kids how to write computer programs, by Marshall Brain marshallbrain.com/kids-programming.htm - Traduzir esta página Let's say that you have children, and you would like to help them learn computer programming at a youngish age."
