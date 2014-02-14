@@ -13,14 +13,26 @@
 	</div>
 
 	<div ng-show="grpTournaments.length!=0">
-		<div class="row-fluid" ng-repeat="grpTournament in grpTournaments track by $index">	
+		<div class="row-fluid">	
 			<div class="span12 well well-small" >
-				Title : {{grpTournaments[$index].title}}
-				</br>Description: {{grpTournaments[$index].description}}
-				</br>Status : {{grpTournaments[$index].status}}
-				</br>Type : {{grpTournaments[$index].type}}
-				</br><button class="btn btn-primary" type="button" ng-click="manage_my_tournament(grpTournaments[$index].tournamentId)"><i class="icon-edit icon-white"></i> Manage</button>
-				<span style="float: right">Last Changes Made: {{grpTournaments[$index].lastDateChanged}}</span>
+				<table ng-grid id="grpTournTable" class="table table-bordered" width="100%">
+	                <tr class="tournTableHeaders">
+	                	<th class="tournTableHeader"><b>Tournament Title</b></th>
+	                	<th class="tournTableHeader"><b>Date Created</b></th>
+	                	<th class="tournTableHeader"><b>Status</b></th>
+	                	<th class="tournTableHeader"></th>
+	 				</tr>
+	                <tr class="warning" ng-repeat="grpTournament in grpTournaments track by $index">
+	                    <td class="tournInfo">{{grpTournaments[$index].title}}</td>
+	                    <td class="tournInfo">{{grpTournaments[$index].dateCreated}}</td>
+	                    <td class="tournInfo">{{grpTournaments[$index].status}}</td>
+	                    <td>
+	                    	<button class="btn btn-primary" type="button" ng-click="manage_my_tournament(grpTournaments[$index].tournamentId)"><i class="icon-edit icon-white"></i> Manage</button>
+	                    </td>
+	                </tr>
+            	</table>
+				
+				
 			</div>
 		</div>
 	</div>
