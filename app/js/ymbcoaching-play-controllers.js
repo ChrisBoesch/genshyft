@@ -127,8 +127,8 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							$timeout(function(){ 
 								$scope.create_practice_game($scope.gameID);
 								$scope.runButton = true;
-							}, 10000);	 	
-				}, 15000); 
+							}, 8000);	 	
+				}, 10000); 
 				
 
           });	
@@ -227,7 +227,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 									$scope.showNewQuestion = true;
 								}
 								
-						}, 6000);
+						}, 8000);
 						
 						
 			  }
@@ -240,7 +240,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 					$timeout(function(){
 						audioplayer.load();
 						$scope.coachImage =$scope.pictures.dontgiveup;
-					}, 4000);
+					}, 1000);
 			  }
 			  
 			  

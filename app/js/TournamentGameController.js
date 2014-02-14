@@ -44,7 +44,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       }
 
       if($scope.remaining_problems.length == 0){
-        $scope.mentee_assignment($scope.game.heatID);
+        $scope.get_mentee($scope.game.heatID, $scope.game.playerID);
         $("#finish_all_info").modal();
 				//alert("Congrats! You have solved all the problems in this round.");
         //$location.search({"heatID":$scope.game.heatID}).path("tournament-ranking");
@@ -55,12 +55,33 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       $scope.move_to_next_unsolved_problem();
     };
 
-    //GENShYFT - Added menteer assignment
-    $scope.mentee_assignment= function(heatID){
-      $resource('/jsonapi/mentee_assignment/:heatID').get({"heatID":heatID}, function(response){
-        $scope.mentee_details = response;     
-      });
-    }
+    //GENShYFT - Getting Mentee
+    $scope.get_mentee = function(heatID, playerID){
+      $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
+        $scope.current_heat = response;
+        for(var i =0;i< $scope.current_heat.ranking.length;i++){
+          if($scope.current_heat.ranking[i].playerid === playerID){
+            $scope.mentee_name = $scope.current_heat.ranking[i].mentee;
+            break;
+          }
+        }
+      }); 
+    };
+
+    //GENShYFT - Getting Mentor
+    $scope.get_mentor = function(heatID, playerID){
+      $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
+        $scope.current_heat = response;
+        for(var i =0;i< $scope.current_heat.ranking.length;i++){
+          if($scope.current_heat.ranking[i].playerid === playerID){
+            $scope.mentor_id = $scope.current_heat.ranking[i].mentorID;
+            $scope.mentor_hasArrived = $scope.current_heat.ranking[i].mentorHasArrived;
+            break;
+          }
+        }
+      }); 
+    };
+
 
     //GENShYFT - Round to Ranking Redirection
     $scope.round_end_ranking = function(heatID){

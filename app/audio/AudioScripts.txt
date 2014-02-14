@@ -1,0 +1,62 @@
+
+Each keyword is assosiated with a .mp3 audiofile and a .jpg image.
+Example. "greeting" has the text below it.  
+The file that plays it will have an Audio object with attribute called greeting with value "greeting.mp3".
+The Picture Object will have an attribute called greeting with the value of the image's url.
+
+
+
+
+**Zandar**
+
+"greeting": audio/Zandar/greeting.mp3
+"Hello, fellow coder, let me help you practice some of the problems you tried before. With my guidance, you be a pro in no time.",
+
+"welcomeback": audio/Zandar/welcomeback.mp3
+"welcome back buddy, we had soo much fun the last time. If you keep coding everyday, you will be a pro in no time.",
+
+"areyouthere": audio/Zandar/areyouthere.mp3
+"Where are you buddy, we cant stop now, let's finish this ",
+
+"dontgiveup": audio/Zandar/dontgiveup.mp3
+"Perhaps you should look the complier, it will help you solve it quick.",
+
+"correctanswer": audio/Zandar/correctanswer.mp3
+"Yes, you have solve the last question buddy, go try another question.",
+
+"tryother": audio/Zandar/tryother.mp3
+"You have proven yourself. I am proud of you buddy. Try another question.",
+
+"faster":" audio/Zandar/faster.mp3
+I am confident that you are able to code this question faster than last time.",
+
+"lessattempts": audio/Zandar/lessattempts.mp3
+"Here's a problem that I think you can do in less attempts."
+
+
+
+
+**SGT MJR**
+"greeting": audio/SGTMJR/greeting.mp3
+"Attention recruit !, I am your  SGT Major. I am going to improve your coding. Do you understand !",
+
+"welcomeback": audio/SGTMJR/welcomeback.mp3
+"Good, I see you are brave enough to endure my training.",
+
+"areyouthere": audio/SGTMJR/areyouthere.mp3
+"Where did you go recruit?! Come back and give me 20 !",
+
+"dontgiveup": audio/SGTMJR/dontgiveup.mp3
+"Is there the best you can do? Even I can code with my hands tied !",
+
+"correctanswer": audio/SGTMJR/correctanswer.mp3
+"Impressive recruit. There is hope for you after all",
+
+"tryother": audio/SGTMJR/tryother.mp3
+"I think you are ready to move on to your next challenge. GO!",
+
+"faster": audio/SGTMJR/faster.mp3
+"Based on your last performance recruit, I think you can code alot faster. Prove me right! ",
+
+"lessattempts": audio/SGTMJR/lessattempts.mp3
+"I'm right about you. You will be able to solve this problem in less attempts. Now , do it !"

@@ -256,14 +256,14 @@ myApp.run(function($httpBackend) {
 					"lessattempts":"a"
 				},
 	"audiotext":{
-					"greeting":"Hi im shannon, Im here to help you practice and resolve some of the problems you seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
-					"welcomeback":"welcome back by shannon",
-					"areyouthere":"are you there text by shannon",
-					"dontgiveup":"b",
-					"correctanswer":"b",
-					"tryother":"b",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"Hi I am Shannon, I am here to help you practice and resolve some of the problems you have seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
+					"welcomeback":"Welcome back! You were on a roll the last time. If you keep coding like this every day, your friends are going to come to you for help! Now, let’s start on this question!",
+					"areyouthere":"Hey – are you there? I hope you are not giving up! Let’s finish these problems together! ",
+					"dontgiveup":"Hmm…there seems to be an error. Check the compiler. It will help you solve it quicker.",
+					"correctanswer":"Alright! That was a good one! Let’s move onto the next one!",
+					"tryother":"You are on a roll! Here, try another question!",
+					"faster":"This question shouldn’t take you so long – I believe in you!",
+					"lessattempts":"Now here’s a problem that I think you can do in fewer attempts. "
 				},
 	"pictures":{
 					"greeting":"img/mbcoach/Shannon/Shannon.jpg",
@@ -295,14 +295,14 @@ myApp.run(function($httpBackend) {
 					"lessattempts":"a"
 				},
 	"audiotext":{
-					"greeting":"Welcome back ! Lets continue solving those question. By doing this everyday, youll be better prepared the next time you get together with your friends to do some coding. Lets start!",
-					"welcomeback":"welcome back text by sandra",
-					"areyouthere":"are you there text by sandra",
-					"dontgiveup":"b",
-					"correctanswer":"b",
-					"tryother":"b",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"Hi I am Sandra, I am a recruiter and I know how to prepare you for that coding interview. By practicing these problems over and over again, you will not only be prepared for that interview but you will ace it! ",
+					"welcomeback":"Welcome back! You were really consistent in your practice the last time. If you keep coding like this every day and master this language – head hunters will be impressed and might even get you a job! Now, let’s begin!",
+					"areyouthere":"Hey – are you there? Don’t stop now! We can do these questions together!",
+					"dontgiveup":"Hmm…there seems to be an error. Check the compiler. It will help you solve it quicker.",
+					"correctanswer":"Excellent job! You are getting a hang of this! Let’s move onto the next one!",
+					"tryother":"You are getting really good at this, huh? Hmm, why not try another question?",
+					"faster":"I am sure this question will not take you so long! Come on, let’s do this!",
+					"lessattempts":"Now here’s a problem that I think you can do in fewer attempts than the last time."
 				},
 	"pictures":{
 					"greeting":"img/mbcoach/Sandra/Sandra.jpg",
@@ -327,8 +327,8 @@ myApp.run(function($httpBackend) {
 					"areyouthere":"audio/Zandar/areyouthere.mp3",
 					"dontgiveup":"audio/Zandar/dontgiveup.mp3",
 					"correctanswer":"audio/Zandar/correctanswer.mp3",
-					"tryother":"a",
-					"faster":"a",
+					"tryother":"audio/Zandar/tryother.mp3",
+					"faster":"audio/Zandar/faster.mp3",
 					"lessattempts":"audio/Zandar/lessattempts.mp3"
 				},
 	"audiotext":{
@@ -337,9 +337,9 @@ myApp.run(function($httpBackend) {
 					"areyouthere":"Where are you buddy, we cant stop now, let's finish this ",
 					"dontgiveup":"Perhaps you should look the complier, it will help you solve it quick.",
 					"correctanswer":"Yes, you have solve the last question buddy, go try another question.",
-					"tryother":"Try another",
-					"faster":"a",
-					"lessattempts":"Nice work buddy, here's a problem that I think you can now solve in fewer attempts."
+					"tryother":"You have proven yourself. I am proud of you buddy. Try another question.",
+					"faster":"I am confident that you are able to code this question faster than last time.",
+					"lessattempts":"Here's a problem that I think you can do in less attempts."
 				},
 	"pictures":{
 					"greeting":"img/mbcoach/Zandar/Zandar.jpg",
@@ -362,21 +362,21 @@ myApp.run(function($httpBackend) {
 					"greeting":"audio/SGTMJR/greeting.mp3",
 					"welcomeback":"audio/SGTMJR/welcomeback.mp3",
 					"areyouthere":"audio/SGTMJR/areyouthere.mp3",
-					"dontgiveup":"a",
-					"correctanswer":"a",
-					"tryother":"a",
-					"faster":"a",
-					"lessattempts":"a"
+					"dontgiveup":"audio/SGTMJR/dontgiveup.mp3",
+					"correctanswer":"audio/SGTMJR/correctanswer.mp3",
+					"tryother":"audio/SGTMJR/tryother.mp3",
+					"faster":"audio/SGTMJR/faster.mp3",
+					"lessattempts":"audio/SGTMJR/lessattempts.mp3"
 				},
 	"audiotext":{
-					"greeting":"Attention recruit !, I am your  SGT Major. I am going to make sure you solve this problem much better and improve your coding skill. Lets get to it !",
-					"welcomeback":"welcoem back by stgmjr",
-					"areyouthere":"b",
-					"dontgiveup":"b",
-					"correctanswer":"b",
-					"tryother":"b",
-					"faster":"a",
-					"lessattempts":"a"
+					"greeting":"Attention recruit !, I am your  SGT Major. I am going to improve your coding. Do you understand !",
+					"welcomeback":"Good, I see you are brave enough to endure my training.",
+					"areyouthere":"Where did you go recruit?! Come back and give me 20 !",
+					"dontgiveup":"Is there the best you can do? Even I can code with my hands tied !",
+					"correctanswer":"Impressive recruit. There is hope for you after all",
+					"tryother":"I think you are ready to move on to your next challenge. GO!",
+					"faster":"Based on your last performance recruit, I think you can code alot faster. Prove me right! ",
+					"lessattempts":"I'm right about you. You will be able to solve this problem in less attempts. Now , do it !"
 				},
 	"pictures":{
 					"greeting":"img/mbcoach/SGTMJR/SGTMJR.jpg",
@@ -400,11 +400,11 @@ myApp.run(function($httpBackend) {
 	var currentUserMasteryProgress = {
 	"pathId":"10030",
 	"pathName":"python",
-	"coach":"Zandar", //there will almost be a defaulted coach
+	"coach":"Shannon", //there will almost be a defaulted coach
 	"nextProblemID": 52741,
 	"fromProblemSetID":10041,
 	"showNewProblems":true,
-	"goal": "lessattempts",
+	"goal": "faster", // or lessattempts
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
 	};
 	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);;
@@ -1872,7 +1872,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     $httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=1&time=0:13:27.311930').respond(with_mentorship_and_time);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
                                                                                                                                                                                                                                                                                                                                        
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-      //$httpBackend.whenGET('/jsonapi/list_open_tournaments').respond([{"status": "Finished", "registeredPlayerIDs": [12504946, 12507702, 12599886, 12578654, 12599866, 12534569, 12527646, 12501771, 12612865, 12600824, 12520004, 12524721, 12598903, 12598896, 12510697, 12503899, 12602717, 12489523, 12507823, 12503844, 57754, 12603844, 12489532, 12503714, 12635425, 12599860, 12501024, 12504740, 12611675, 12524245, 12733959, 12508767, 12521719, 12511662, 9612762, 9589805, 13488617, 57504, 9567070, 10039607, 13801956, 13885853, 13787658, 14097932, 14092210, 14089335, 14090396], "numRounds": 1, "description": "IS605 Class 9", "shortTitle": "One more", "created": "2012-09-27 09:32", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "Here we go", "tournamentID": 12877002, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12875021, "description": "Fun Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12883052, "description": "First heat", "currentTime": "2013-02-20 12:52:19.254236", "stopTime": "2012-09-27 12:07:33.856394", "startTime": "2012-09-27 11:07:33.856394", "heatNumber": 1}], "currentHeatID": 12883052, "heatIDs": [12883052]}]}, {"status": "Finished", "registeredPlayerIDs": [12504946, 57754, 12508767, 12489532, 12489523, 12733959, 12524245, 12637607, 12599886, 12635425, 12507702, 12501771, 12578654, 12503714, 12521719, 12510697, 12599866, 12612865, 12524721, 12503844, 12503899, 12607918, 12598903, 12520004, 12603844, 12600824, 12611675, 12504740, 12599860, 12534569, 12527646, 12507823, 12501024, 12598896, 9612762, 9567070], "numRounds": 1, "description": "IS605 Class 7", "shortTitle": "IS605 Class 7", "created": "2012-09-19 09:46", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS605 Class 7", "tournamentID": 12788893, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12791933, "description": "Fun Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12844631, "description": "First heat", "currentTime": "2013-02-20 12:52:20.502554", "stopTime": "2012-09-20 12:04:52.061677", "startTime": "2012-09-20 11:04:52.061677", "heatNumber": 1}], "currentHeatID": 12844631, "heatIDs": [12844631]}]}, {"status": "Finished", "registeredPlayerIDs": [57754, 12679083, 12634531, 12733594, 12705618, 12635537, 12635535, 12638556, 12711587, 12711577, 12707603, 12734579, 12733567, 12634534, 12705616, 12707607, 12718576, 12710577, 12717566, 12703622, 12679108, 12679095, 12704632, 12730580, 12634523, 12728578, 12722567, 11438372, 12638552, 12638554, 12704635, 12635546, 12709609, 12638549, 12746633, 9927060, 12634535, 12711573, 12616538, 13545709, 4971048, 13546846, 9933027, 9567070, 9612762, 13600821], "numRounds": 1, "description": "IS203 G3 Week 5", "shortTitle": "IS203 G3 Week 5", "created": "2012-09-18 00:31", "largePicture": "http://www.smu.edu.sg/images/common/smu_logo.gif", "smallPicture": "http://www.smu.edu.sg/images/common/smu_logo.gif", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS203 G3 Week 5", "tournamentID": 12785568, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12788569, "description": "Round 1", "currentHeat": 2, "timelimit": 0, "heats": [{"heatID": 12781681, "description": "New heat", "currentTime": "2013-02-20 12:52:20.585138", "stopTime": "2012-09-18 07:37:48.177116", "startTime": "2012-09-18 06:37:48.177116", "heatNumber": 2}, {"heatID": 12789599, "description": "First heat", "currentTime": "2013-02-20 12:52:20.614578", "stopTime": "2012-09-18 05:09:49.197396", "startTime": "2012-09-18 04:09:49.197396", "heatNumber": 1}], "currentHeatID": 12781681, "heatIDs": [12781681, 12789599]}]}, {"status": "Finished", "registeredPlayerIDs": [57754, 12501771, 12598903, 12524245, 12607918, 12733959, 12637607, 12508767, 12599866, 12489523, 12602717, 12612865, 12503899, 12503844, 12578654, 12598896, 12503714, 12524721, 12489532, 12599886, 12510697, 12534569, 12521719, 12504946, 12635425, 12520004, 12600824, 12611675, 12527646, 12507823, 12599860, 12501024, 12607840, 12507702, 9567070], "numRounds": 1, "description": "IS605 Class 6", "shortTitle": "IS605 Class 6", "created": "2012-09-17 09:53", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS605 Class 6", "tournamentID": 12760596, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12740557, "description": "Round 1", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12766608, "description": "First heat", "currentTime": "2013-02-20 12:52:20.731952", "stopTime": "2012-09-17 12:08:32.784182", "startTime": "2012-09-17 11:08:32.784182", "heatNumber": 1}], "currentHeatID": 12766608, "heatIDs": [12766608]}]}, {"status": "Finished", "registeredPlayerIDs": [57754, 2739102, 12501771, 12598896, 12521719, 12599866, 12508767, 12504946, 12510697, 12524721, 12611675, 12504740, 12520004, 12602717, 12507823, 12503714, 12599886, 12489532, 12599860, 12534569, 12489523, 12503899, 12607918, 12578654, 12612865, 12600824, 12733959, 12637607, 12524245, 12598903, 12503844, 12530840, 12603844, 9589805, 14089335], "numRounds": 1, "description": "IS605 Class 5", "shortTitle": "IS605 Class 5", "created": "2012-09-06 13:21", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS605 Class 5", "tournamentID": 12645124, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12643145, "description": "Round 1", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12728994, "description": "First heat", "currentTime": "2013-02-20 12:52:20.847514", "stopTime": "2012-09-13 12:12:04.911940", "startTime": "2012-09-13 11:12:04.911940", "heatNumber": 1}], "currentHeatID": 12728994, "heatIDs": [12728994]}]}, {"status": "Finished", "registeredPlayerIDs": [57754, 7572288, 3485017, 12138233, 8281943, 12103262, 2142076, 2007002, 12139227, 11826629, 11371568, 12164700, 11833901, 1869079, 1325012, 12166598, 11789588, 12139216, 12164706, 10255912, 12106364, 12129138, 12140206, 12127087, 2488141, 12124974, 12143018, 7648711, 12165687, 12173608, 12180587, 57504], "numRounds": 2, "description": "PyCon Asia 2012", "shortTitle": "PyConAsia 2012", "created": "2012-06-09 04:28", "largePicture": "https://dl.dropbox.com/u/4972572/lucasfilm.jpg", "smallPicture": "https://dl.dropbox.com/u/4972572/lucasfilm.jpg", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "Sponsored by LucasFilm", "tournamentID": 12166569, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12136399, "description": "Fun Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12166632, "description": "First heat", "currentTime": "2013-02-20 12:52:21.595626", "stopTime": "2012-06-09 09:52:50.464622", "startTime": "2012-06-09 08:52:50.464622", "heatNumber": 1}], "currentHeatID": 12166632, "heatIDs": [12166632]}, {"roundID": 12133523, "description": "Prize Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12180634, "description": "First heat", "currentTime": "2013-02-20 12:52:21.692792", "stopTime": "2012-06-09 10:14:08.659223", "startTime": "2012-06-09 09:14:08.659223", "heatNumber": 1}], "currentHeatID": 12180634, "heatIDs": [12180634]}]}]);
+     //$httpBackend.whenGET('/jsonapi/list_open_tournaments').respond([{"status": "Finished", "registeredPlayerIDs": [12504946, 12507702, 12599886, 12578654, 12599866, 12534569, 12527646, 12501771, 12612865, 12600824, 12520004, 12524721, 12598903, 12598896, 12510697, 12503899, 12602717, 12489523, 12507823, 12503844, 57754, 12603844, 12489532, 12503714, 12635425, 12599860, 12501024, 12504740, 12611675, 12524245, 12733959, 12508767, 12521719, 12511662, 9612762, 9589805, 13488617, 57504, 9567070, 10039607, 13801956, 13885853, 13787658, 14097932, 14092210, 14089335, 14090396], "numRounds": 1, "description": "IS605 Class 9", "shortTitle": "One more", "created": "2012-09-27 09:32", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "Here we go", "tournamentID": 12877002, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12875021, "description": "Fun Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12883052, "description": "First heat", "currentTime": "2013-02-20 12:52:19.254236", "stopTime": "2012-09-27 12:07:33.856394", "startTime": "2012-09-27 11:07:33.856394", "heatNumber": 1}], "currentHeatID": 12883052, "heatIDs": [12883052]}]}, {"status": "Finished", "registeredPlayerIDs": [12504946, 57754, 12508767, 12489532, 12489523, 12733959, 12524245, 12637607, 12599886, 12635425, 12507702, 12501771, 12578654, 12503714, 12521719, 12510697, 12599866, 12612865, 12524721, 12503844, 12503899, 12607918, 12598903, 12520004, 12603844, 12600824, 12611675, 12504740, 12599860, 12534569, 12527646, 12507823, 12501024, 12598896, 9612762, 9567070], "numRounds": 1, "description": "IS605 Class 7", "shortTitle": "IS605 Class 7", "created": "2012-09-19 09:46", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS605 Class 7", "tournamentID": 12788893, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12791933, "description": "Fun Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12844631, "description": "First heat", "currentTime": "2013-02-20 12:52:20.502554", "stopTime": "2012-09-20 12:04:52.061677", "startTime": "2012-09-20 11:04:52.061677", "heatNumber": 1}], "currentHeatID": 12844631, "heatIDs": [12844631]}]}, {"status": "Finished", "registeredPlayerIDs": [57754, 12679083, 12634531, 12733594, 12705618, 12635537, 12635535, 12638556, 12711587, 12711577, 12707603, 12734579, 12733567, 12634534, 12705616, 12707607, 12718576, 12710577, 12717566, 12703622, 12679108, 12679095, 12704632, 12730580, 12634523, 12728578, 12722567, 11438372, 12638552, 12638554, 12704635, 12635546, 12709609, 12638549, 12746633, 9927060, 12634535, 12711573, 12616538, 13545709, 4971048, 13546846, 9933027, 9567070, 9612762, 13600821], "numRounds": 1, "description": "IS203 G3 Week 5", "shortTitle": "IS203 G3 Week 5", "created": "2012-09-18 00:31", "largePicture": "http://www.smu.edu.sg/images/common/smu_logo.gif", "smallPicture": "http://www.smu.edu.sg/images/common/smu_logo.gif", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS203 G3 Week 5", "tournamentID": 12785568, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12788569, "description": "Round 1", "currentHeat": 2, "timelimit": 0, "heats": [{"heatID": 12781681, "description": "New heat", "currentTime": "2013-02-20 12:52:20.585138", "stopTime": "2012-09-18 07:37:48.177116", "startTime": "2012-09-18 06:37:48.177116", "heatNumber": 2}, {"heatID": 12789599, "description": "First heat", "currentTime": "2013-02-20 12:52:20.614578", "stopTime": "2012-09-18 05:09:49.197396", "startTime": "2012-09-18 04:09:49.197396", "heatNumber": 1}], "currentHeatID": 12781681, "heatIDs": [12781681, 12789599]}]}, {"status": "Finished", "registeredPlayerIDs": [57754, 12501771, 12598903, 12524245, 12607918, 12733959, 12637607, 12508767, 12599866, 12489523, 12602717, 12612865, 12503899, 12503844, 12578654, 12598896, 12503714, 12524721, 12489532, 12599886, 12510697, 12534569, 12521719, 12504946, 12635425, 12520004, 12600824, 12611675, 12527646, 12507823, 12599860, 12501024, 12607840, 12507702, 9567070], "numRounds": 1, "description": "IS605 Class 6", "shortTitle": "IS605 Class 6", "created": "2012-09-17 09:53", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS605 Class 6", "tournamentID": 12760596, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12740557, "description": "Round 1", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12766608, "description": "First heat", "currentTime": "2013-02-20 12:52:20.731952", "stopTime": "2012-09-17 12:08:32.784182", "startTime": "2012-09-17 11:08:32.784182", "heatNumber": 1}], "currentHeatID": 12766608, "heatIDs": [12766608]}]}, {"status": "Finished", "registeredPlayerIDs": [57754, 2739102, 12501771, 12598896, 12521719, 12599866, 12508767, 12504946, 12510697, 12524721, 12611675, 12504740, 12520004, 12602717, 12507823, 12503714, 12599886, 12489532, 12599860, 12534569, 12489523, 12503899, 12607918, 12578654, 12612865, 12600824, 12733959, 12637607, 12524245, 12598903, 12503844, 12530840, 12603844, 9589805, 14089335], "numRounds": 1, "description": "IS605 Class 5", "shortTitle": "IS605 Class 5", "created": "2012-09-06 13:21", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS605 Class 5", "tournamentID": 12645124, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12643145, "description": "Round 1", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12728994, "description": "First heat", "currentTime": "2013-02-20 12:52:20.847514", "stopTime": "2012-09-13 12:12:04.911940", "startTime": "2012-09-13 11:12:04.911940", "heatNumber": 1}], "currentHeatID": 12728994, "heatIDs": [12728994]}]}, {"status": "Finished", "registeredPlayerIDs": [57754, 7572288, 3485017, 12138233, 8281943, 12103262, 2142076, 2007002, 12139227, 11826629, 11371568, 12164700, 11833901, 1869079, 1325012, 12166598, 11789588, 12139216, 12164706, 10255912, 12106364, 12129138, 12140206, 12127087, 2488141, 12124974, 12143018, 7648711, 12165687, 12173608, 12180587, 57504], "numRounds": 2, "description": "PyCon Asia 2012", "shortTitle": "PyConAsia 2012", "created": "2012-06-09 04:28", "largePicture": "https://dl.dropbox.com/u/4972572/lucasfilm.jpg", "smallPicture": "https://dl.dropbox.com/u/4972572/lucasfilm.jpg", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "Sponsored by LucasFilm", "tournamentID": 12166569, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12136399, "description": "Fun Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12166632, "description": "First heat", "currentTime": "2013-02-20 12:52:21.595626", "stopTime": "2012-06-09 09:52:50.464622", "startTime": "2012-06-09 08:52:50.464622", "heatNumber": 1}], "currentHeatID": 12166632, "heatIDs": [12166632]}, {"roundID": 12133523, "description": "Prize Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12180634, "description": "First heat", "currentTime": "2013-02-20 12:52:21.692792", "stopTime": "2012-06-09 10:14:08.659223", "startTime": "2012-06-09 09:14:08.659223", "heatNumber": 1}], "currentHeatID": 12180634, "heatIDs": [12180634]}]}]);
     $httpBackend.whenGET('/jsonapi/list_open_tournaments').respond([{"status": "Open", "registeredPlayerIDs": [57754, 10593473, 9257713, 10340184, 8584445, 10599383, 10647230, 9270688, 10519977, 10646972, 10582519, 10575480, 10593372, 5919046, 10599534, 6058531, 9269699, 10593441, 10585539, 10551594, 9547952, 9258217, 10599401, 9318579, 10475591, 10582443, 9268693, 10598340, 9254274, 6070521, 10598426, 6611581387407360, 6692468506492928, 9615823, 12715771, 2148037, 5880983291166720], "numRounds": 1, "description": "IS429 - Class 4", "shortTitle": "IS429 - Class 4", "created": "2012-02-04 01:15", "largePicture": "http://www.smu.edu.sg/images/common/smu_logo.gif", "smallPicture": "http://www.smu.edu.sg/images/common/smu_logo.gif", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "Class Meeting 4 Tournament", "tournamentID": 10855728, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 10857741, "description": "Javascript 4-5", "currentHeat": 2, "timelimit": 0, "heats": [{"heatID": 10855735, "description": "First heat", "currentTime": "2013-09-29 11:34:53.668910", "stopTime": "2012-02-04 02:50:18.578508", "startTime": "2012-02-04 01:50:18.578508", "heatNumber": 1}, {"heatID": 10860712, "description": "New heat", "currentTime": "2013-09-29 11:34:53.679580", "stopTime": "2012-02-04 05:08:12.144524", "startTime": "2012-02-04 04:08:12.144524", "heatNumber": 2}], "currentHeatID": 10860712, "heatIDs": [10855735, 10860712]}]}, {"status": "Open", "registeredPlayerIDs": [57754, 16944594, 16947593, 16328669, 16494612, 16408622, 16491602, 16458612, 16496618, 16945593, 16408625, 16458608, 16125731, 16301630, 16946588, 16376682, 16125728, 16328664, 16125732, 16837667, 16189634, 16328663, 16301624, 16496601, 16189626, 16469630, 16408616, 16328675, 16458621, 16301635, 16946599, 16491597, 16189640, 16496603, 16491603, 16947600, 16494610, 16946627, 16328673, 16944593, 16125734, 16944606, 16469657, 16301621, 10520402, 16947588, 16469632, 16750629, 12733755, 13157049, 7538361, 17243683, 12005583, 16491618, 17969576, 6611581387407360, 5880983291166720], "numRounds": 2, "description": "UPR Workshop Update", "shortTitle": "UPR Javascript Tournament", "created": "2013-04-27 12:55", "largePicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "smallPicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "", "tournamentID": 16741726, "winnerText": "", "currentPlayerID": 57754, "rounds": [{"roundID": 16875600, "description": "Fun Round", "currentHeat": 0, "timelimit": 60, "heats": [{"heatID": 16101630, "description": "Heat 1", "currentTime": "2013-09-29 11:34:53.769860", "stopTime": "2013-04-27 17:36:00.539370", "startTime": "2013-04-27 16:36:00.539370", "heatNumber": 1}], "currentHeatID": null, "heatIDs": [16101630]}, {"roundID": 16843751, "description": "Prize Round", "currentHeat": 1, "timelimit": 60, "heats": [{"heatID": 16152658, "description": "Heat 1", "currentTime": "2013-09-29 11:34:53.796310", "stopTime": "2013-04-27 18:11:38.916790", "startTime": "2013-04-27 17:11:38.916790", "heatNumber": 1}], "currentHeatID": 16152658, "heatIDs": [16152658]}]}, {"status": "Open", "registeredPlayerIDs": [57754, 57754, 2739102], "numRounds": 1, "description": "No details", "shortTitle": "Test tournament", "created": "2013-09-29 08:14", "largePicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "smallPicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "", "tournamentID": 5060388987076608, "winnerText": "", "currentPlayerID": 57754, "rounds": [{"roundID": 4912161075757056, "description": "test round 1", "currentHeat": 1, "timelimit": 60, "heats": [{"heatID": 4691468476219392, "description": "Heat 1", "currentTime": "2013-09-29 11:34:53.901910", "stopTime": "2013-09-29 09:24:46.840830", "startTime": "2013-09-29 08:24:46.840830", "heatNumber": 1}], "currentHeatID": 4691468476219392, "heatIDs": [4691468476219392]}]}, {"status": "Open", "registeredPlayerIDs": [10520402, 16301635, 6611581387407360, 12715771, 5880983291166720], "numRounds": 1, "description": "", "shortTitle": "raarce-testing", "created": "2013-08-08 19:18", "largePicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "smallPicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "tournamentType": "Normal", "directorID": 10520402, "hasPassword": true, "longTitle": "", "tournamentID": 6388957126328320, "winnerText": "", "currentPlayerID": 57754, "rounds": [{"roundID": 5736929551187968, "description": "bacalau", "currentHeat": 0, "timelimit": 180, "heats": [], "currentHeatID": null, "heatIDs": []}]}, {"status": "Closed", "registeredPlayerIDs": [57754, 12803828, 12715771], "numRounds": 1, "description": "We are going to", "shortTitle": "new tournament", "created": "2013-08-07 08:16", "largePicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "smallPicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "", "tournamentID": 6554493755850752, "winnerText": "", "currentPlayerID": 57754, "rounds": [{"roundID": 6580744595963904, "description": "round", "currentHeat": 0, "timelimit": 60, "heats": [{"heatID": 4751157247344640, "description": "Heat 1", "currentTime": "2013-09-29 11:34:54.190150", "stopTime": "2013-08-07 09:48:35.527130", "startTime": "2013-08-07 08:48:35.527130", "heatNumber": 1}], "currentHeatID": null, "heatIDs": [4751157247344640]}]}, {"status": "Closed", "registeredPlayerIDs": [5779079, 57754, 14479617, 12715771, 12733755, 13157116, 14905825, 15638666, 14633641, 7227181, 9745922, 11564650, 10340184, 14683604, 9615823, 14635603, 15872574, 14596609, 14981657, 16457575, 14965591, 16947599, 16328663, 16376682, 1469076, 18448612], "numRounds": 2, "description": "Softlayer sponsored Java tournament", "shortTitle": "SISS Java Tournament", "created": "2013-04-05 06:45", "largePicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "smallPicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "", "tournamentID": 15858600, "winnerText": "", "currentPlayerID": 57754, "rounds": [{"roundID": 15853613, "description": "Fun Round", "currentHeat": 0, "timelimit": 45, "heats": [{"heatID": 15857652, "description": "Heat 1", "currentTime": "2013-09-29 11:34:54.286760", "stopTime": "2013-04-05 10:24:11.048640", "startTime": "2013-04-05 09:39:11.048640", "heatNumber": 1}], "currentHeatID": null, "heatIDs": [15857652]}, {"roundID": 15797608, "description": "Prize Round", "currentHeat": 1, "timelimit": 60, "heats": [{"heatID": 15814761, "description": "Heat 1", "currentTime": "2013-09-29 11:34:54.357080", "stopTime": "2013-04-05 11:02:40.812690", "startTime": "2013-04-05 10:02:40.812690", "heatNumber": 1}], "currentHeatID": 15814761, "heatIDs": [15814761]}]}, {"status": "Closed", "registeredPlayerIDs": [2739102, 5779079, 8289134, 5852053, 12715771, 14633641, 12127087, 14592725, 11564650, 7227181, 14714689, 13500628, 7599306, 12638549, 14777633, 14519759, 57754, 11774589, 16317571, 16746567, 17969576], "numRounds": 2, "description": "Softlayer sponsored Ruby tournament", "shortTitle": "SISS Ruby Tournament", "created": "2013-03-21 01:47", "largePicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "smallPicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "", "tournamentID": 14811798, "winnerText": "", "currentPlayerID": 57754, "rounds": [{"roundID": 14618914, "description": "Fun Round", "currentHeat": 0, "timelimit": 60, "heats": [{"heatID": 14802885, "description": "Heat 2", "currentTime": "2013-09-29 11:34:54.470950", "stopTime": "2013-03-22 09:41:42.140200", "startTime": "2013-03-22 08:41:42.140200", "heatNumber": 2}, {"heatID": 14859696, "description": "Heat 1", "currentTime": "2013-09-29 11:34:54.480880", "stopTime": "2013-03-22 08:34:24.654720", "startTime": "2013-03-22 07:34:24.654720", "heatNumber": 1}], "currentHeatID": null, "heatIDs": [14802885, 14859696]}, {"roundID": 14550846, "description": "Prize Round", "currentHeat": 1, "timelimit": 60, "heats": [{"heatID": 14692704, "description": "Heat 1", "currentTime": "2013-09-29 11:34:54.550810", "stopTime": "2013-03-22 10:09:24.763770", "startTime": "2013-03-22 09:09:24.763770", "heatNumber": 1}], "currentHeatID": 14692704, "heatIDs": [14692704]}]}, {"status": "Closed", "registeredPlayerIDs": [2739102, 57754, 12715771, 3398017, 7599306, 8584445, 9615823, 5852053, 14634677, 13500628, 9272716, 14485599, 14469608, 12139717, 5779079, 14635603, 12127087, 14499640, 14633641, 8289134, 9759582, 10574434, 13500628, 9318579, 4971048, 11564650, 7227181, 14920648, 14948594, 9615380, 14709599, 11737713, 15964580, 17243683, 19072571], "numRounds": 2, "description": "Softlayer sponsored Javascript tournament", "shortTitle": "SISS Javascript Tournament", "created": "2013-03-15 06:19", "largePicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "smallPicture": "_images/tournamentPages/tournamentMgmt/tournament_logo.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "", "tournamentID": 14938747, "winnerText": "", "currentPlayerID": 57754, "rounds": [{"roundID": 14628705, "description": "Fun Round", "currentHeat": 0, "timelimit": 0, "heats": [{"heatID": 14591787, "description": "Heat 2", "currentTime": "2013-09-29 11:34:54.650900", "stopTime": "2013-03-15 08:02:18.694960", "startTime": "2013-03-15 07:02:18.694960", "heatNumber": 2}, {"heatID": 14591823, "description": "Heat 4", "currentTime": "2013-09-29 11:34:54.667570", "stopTime": "2013-03-15 09:08:22.683370", "startTime": "2013-03-15 08:08:22.683370", "heatNumber": 4}, {"heatID": 14710808, "description": "Heat 3", "currentTime": "2013-09-29 11:34:54.677850", "stopTime": "2013-03-15 09:05:47.563350", "startTime": "2013-03-15 08:05:47.563350", "heatNumber": 3}, {"heatID": 14886659, "description": "Heat 5", "currentTime": "2013-09-29 11:34:54.688870", "stopTime": "2013-03-15 10:19:35.203960", "startTime": "2013-03-15 09:19:35.203960", "heatNumber": 5}, {"heatID": 14900590, "description": "Heat 7", "currentTime": "2013-09-29 11:34:54.702960", "stopTime": "2013-03-15 10:19:53.150780", "startTime": "2013-03-15 09:19:53.150780", "heatNumber": 7}, {"heatID": 14902582, "description": "Heat 6", "currentTime": "2013-09-29 11:34:54.714020", "stopTime": "2013-03-15 10:19:44.147900", "startTime": "2013-03-15 09:19:44.147900", "heatNumber": 6}, {"heatID": 14987766, "description": "Heat 1", "currentTime": "2013-09-29 11:34:54.762950", "stopTime": "2013-03-15 08:02:06.708660", "startTime": "2013-03-15 07:02:06.708660", "heatNumber": 1}], "currentHeatID": null, "heatIDs": [14591787, 14591823, 14710808, 14886659, 14900590, 14902582, 14987766]}, {"roundID": 15035656, "description": "Prize Round", "currentHeat": 5, "timelimit": 60, "heats": [{"heatID": 14752887, "description": "Heat 3", "currentTime": "2013-09-29 11:34:54.798780", "stopTime": "2013-03-15 10:34:23.933740", "startTime": "2013-03-15 09:34:23.933740", "heatNumber": 3}, {"heatID": 14804702, "description": "Heat 4", "currentTime": "2013-09-29 11:34:54.808710", "stopTime": "2013-03-15 10:34:34.200010", "startTime": "2013-03-15 09:34:34.200010", "heatNumber": 4}, {"heatID": 14872733, "description": "Heat 2", "currentTime": "2013-09-29 11:34:54.856130", "stopTime": "2013-03-15 10:34:14.730460", "startTime": "2013-03-15 09:34:14.730460", "heatNumber": 2}, {"heatID": 14902697, "description": "Heat 1", "currentTime": "2013-09-29 11:34:54.865150", "stopTime": "2013-03-15 10:34:05.533690", "startTime": "2013-03-15 09:34:05.533690", "heatNumber": 1}, {"heatID": 14922866, "description": "Heat 5", "currentTime": "2013-09-29 11:34:54.875110", "stopTime": "2013-03-15 10:07:43.044400", "startTime": "2013-03-15 09:07:43.044400", "heatNumber": 5}], "currentHeatID": 14922866, "heatIDs": [14752887, 14804702, 14872733, 14902697, 14922866]}]}, {"status": "Closed", "registeredPlayerIDs": [12504946, 12507702, 12599886, 12578654, 12599866, 12534569, 12527646, 12501771, 12612865, 12600824, 12520004, 12524721, 12598903, 12598896, 12510697, 12503899, 12602717, 12489523, 12507823, 12503844, 57754, 12603844, 12489532, 12503714, 12635425, 12599860, 12501024, 12504740, 12611675, 12524245, 12733959, 12508767, 12521719, 12511662, 9612762, 9589805, 13488617, 57504, 9567070, 10039607, 13801956, 13885853, 13787658, 14097932, 14092210, 14089335, 14090396, 14283743, 14282813, 14323702, 14313761, 14318836, 14319844, 14530590, 14633641, 14797567, 14714689, 17776568], "numRounds": 1, "description": "IS605 Class 9", "shortTitle": "One more", "created": "2012-09-27 09:32", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "Here we go", "tournamentID": 12877002, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12875021, "description": "Fun Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12883052, "description": "First heat", "currentTime": "2013-09-29 11:34:54.969850", "stopTime": "2012-09-27 12:07:33.856394", "startTime": "2012-09-27 11:07:33.856394", "heatNumber": 1}], "currentHeatID": 12883052, "heatIDs": [12883052]}]}, {"status": "Finished", "registeredPlayerIDs": [12504946, 57754, 12508767, 12489532, 12489523, 12733959, 12524245, 12637607, 12599886, 12635425, 12507702, 12501771, 12578654, 12503714, 12521719, 12510697, 12599866, 12612865, 12524721, 12503844, 12503899, 12607918, 12598903, 12520004, 12603844, 12600824, 12611675, 12504740, 12599860, 12534569, 12527646, 12507823, 12501024, 12598896, 9612762, 9567070, 14797567, 14315694, 18847736], "numRounds": 1, "description": "IS605 Class 7", "shortTitle": "IS605 Class 7", "created": "2012-09-19 09:46", "largePicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "smallPicture": "http://4.bp.blogspot.com/-L6v3vXhedLk/T8wJcH1xEMI/AAAAAAAAA_A/SCUfiKVs9uk/s1600/Rlogo-1.png", "tournamentType": "Normal", "directorID": 57754, "hasPassword": true, "longTitle": "IS605 Class 7", "tournamentID": 12788893, "winnerText": null, "currentPlayerID": 57754, "rounds": [{"roundID": 12791933, "description": "Fun Round", "currentHeat": 1, "timelimit": 0, "heats": [{"heatID": 12844631, "description": "First heat", "currentTime": "2013-09-29 11:34:55.067590", "stopTime": "2012-09-20 12:04:52.061677", "startTime": "2012-09-20 11:04:52.061677", "heatNumber": 1}], "currentHeatID": 12844631, "heatIDs": [12844631]}]},{
         "status": "Open",
         "registeredPlayerIDs": [
@@ -1930,23 +1930,302 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 
       $httpBackend.whenGET('/jsonapi/launch_game_for_round?round_id=4912161075757056').respond({"game_end": "2013-09-29 09:27:03.104550", "player": "Chris", "solvedProblemIDs": [10033], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-09-29 08:27:02.906550", "numProblems": 2, "numSolvedProblems": 1, "status": "GAME CLOSED", "problemIDs": [10033, 17155], "problems": {"problems": [{"skeleton": "oops=317", "description": "When you run your code, SingPath has certain tests that it checks to see if you did what you were supposed to do.  If incorrect you'll see a table with the results of the tests.  \r\n\r\nNotice that the starter code has the wrong value. Go ahead and run the code now so you can see the results (you can finish reading this after you run it).\r\n\r\nThe results tell you that SingPath looked at the variable named 'oops' expecting to find 713, but found 317 instead. Fix the error now and run it to advance to the next problem.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> oops\r\n 713", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10033, "name": "Expected Results"}, {"skeleton": "age = ", "description": "Variables are an important part of programming; they allow the you to store a value and reuse it later.  You are allowed to use just about anything you like as your variable name.\r\n\r\nFor this problem, create a variable named 'age' with the value 7.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> age\r\n7", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": 5817368383062016, "tournamentID": 5060388987076608, "name": "Tournament game", "roundID": 4912161075757056, "questID": null, "heatID": 4691468476219392, "game_start": "2013-09-29 08:27:03.040390", "currentTime": "2013-09-29 13:23:19.175880", "game_type": "Timed Interview", "timelimit": 3600});
 
+      var menteeVal = {
+		    "ranking": [
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "Fu Mei",
+		            "playerid": 57754,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:13:27.311930",
+		            "gravatar": "http://www.gravatar.com/avatar/3f0dd6b43fe16552168c919acfbf140d/?default=&amp;s=30",
+		            "mentor": "",
+		            "mentorID": null,
+		            "professional": null,
+		            "total_problems": 10,
+		            "nickname": "Chris",
+		            "menteeID": 6474597901795328,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "Mrchamp",
+		            "playerid": 6147204892852224,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:15:26.809400",
+		            "gravatar": "http://www.gravatar.com/avatar/949ba044f4d170b60c31461607e8cb99/?default=&amp;s=30",
+		            "mentor": "",
+		            "mentorID": null,
+		            "professional": null,
+		            "total_problems": 10,
+		            "nickname": "Ronald",
+		            "menteeID": 6715360346636288,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "Cheuk",
+		            "playerid": 21354567,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/jp_on.png",
+		            "finished": "0:19:10.168820",
+		            "gravatar": "http://www.gravatar.com/avatar/2e141f02eb0fc1b80d90c3546e4aa3e1/?default=&amp;s=30",
+		            "mentor": "",
+		            "mentorID": null,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Jifei",
+		            "menteeID": 4685146485686272,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "Zoey",
+		            "playerid": 5802887565279232,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:21:53.351620",
+		            "gravatar": "http://www.gravatar.com/avatar/bc6a8b2060d57f8df5177778c7f85cb7/?default=&amp;s=30",
+		            "mentor": "",
+		            "mentorID": null,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Ben Chan",
+		            "menteeID": 5170357531049984,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "Secret Agent",
+		            "playerid": 6474597901795328,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:26:12.243730",
+		            "gravatar": "http://www.gravatar.com/avatar/4d3eb83a5c5fa7cad14139e260863e5e/?default=&amp;s=30",
+		            "mentor": "Bear",
+		            "mentorID": 5918386215190528,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Fu Mei",
+		            "menteeID": 6561842646220800,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "jinzaw",
+		            "playerid": 6715360346636288,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:27:46.708640",
+		            "gravatar": "http://www.gravatar.com/avatar/415d8da6d4915549247c051f3fd27d9a/?default=&amp;s=30",
+		            "mentor": "Ronald",
+		            "mentorID": 6147204892852224,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Mrchamp",
+		            "menteeID": 4874949680431104,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "Xin Yi",
+		            "playerid": 5798305372045312,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:28:25.828780",
+		            "gravatar": "http://www.gravatar.com/avatar/bf3a31387d2130eb945af3301a079919/?default=&amp;s=30",
+		            "mentor": "",
+		            "mentorID": null,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "iPython",
+		            "menteeID": 6689212585738240,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "Melvin",
+		            "playerid": 5977670856736768,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:28:31.527830",
+		            "gravatar": "http://www.gravatar.com/avatar/299a63aeb3cdf93465e195142636f54e/?default=&amp;s=30",
+		            "mentor": "",
+		            "mentorID": null,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Erwin",
+		            "menteeID": 4545551458631680,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "sara",
+		            "playerid": 5659310029799424,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:28:47.245890",
+		            "gravatar": "http://www.gravatar.com/avatar/bcf204b3d6af665031041bd14f5271b4/?default=&amp;s=30",
+		            "mentor": "",
+		            "mentorID": null,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Binh",
+		            "menteeID": 6177510182092800,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "Wei Song",
+		            "playerid": 4545551458631680,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:30:08.183220",
+		            "gravatar": "http://www.gravatar.com/avatar/142bebe18474cada12a8bd467912df0b/?default=&amp;s=30",
+		            "mentor": "Erwin",
+		            "mentorID": 5977670856736768,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Melvin",
+		            "menteeID": 17331653,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "",
+		            "playerid": 17331653,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:30:09.666320",
+		            "gravatar": "http://www.gravatar.com/avatar/6c92083eb78e66fb728b68d14b0f93c1/?default=&amp;s=30",
+		            "mentor": "Melvin",
+		            "mentorID": 4545551458631680,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Wei Song",
+		            "menteeID": null,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "",
+		            "playerid": 6177510182092800,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:31:05.767130",
+		            "gravatar": "http://www.gravatar.com/avatar/e5a4c033b75ab91837aad1a386f1c906/?default=&amp;s=30",
+		            "mentor": "Binh",
+		            "mentorID": 5659310029799424,
+		            "professional": null,
+		            "total_problems": 10,
+		            "nickname": "sara",
+		            "menteeID": null,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "",
+		            "playerid": 4685146485686272,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:33:43.953290",
+		            "gravatar": "http://www.gravatar.com/avatar/d86745c49f9f0d23bc5614633503641d/?default=&amp;s=30",
+		            "mentor": "Jifei",
+		            "mentorID": 21354567,
+		            "professional": null,
+		            "total_problems": 10,
+		            "nickname": "Cheuk",
+		            "menteeID": null,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "",
+		            "playerid": 5170357531049984,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:34:12.700020",
+		            "gravatar": "http://www.gravatar.com/avatar/30b73603a35e9677562550e238bea2f4/?default=&amp;s=30",
+		            "mentor": "Ben Chan",
+		            "mentorID": 5802887565279232,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "Zoey",
+		            "menteeID": null,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "",
+		            "playerid": 6689212585738240,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:38:15.761100",
+		            "gravatar": "http://www.gravatar.com/avatar/3629300439875a358cb6ee2559617183/?default=&amp;s=30",
+		            "mentor": "iPython",
+		            "mentorID": 5798305372045312,
+		            "professional": null,
+		            "total_problems": 10,
+		            "nickname": "Xin Yi",
+		            "menteeID": null,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "",
+		            "playerid": 4874949680431104,
+		            "solved_problems": 10,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:41:14.570620",
+		            "gravatar": "http://www.gravatar.com/avatar/b5974938491d0c3c3505f1b5519af4a8/?default=&amp;s=30",
+		            "mentor": "Mrchamp",
+		            "mentorID": 6715360346636288,
+		            "professional": false,
+		            "total_problems": 10,
+		            "nickname": "jinzaw",
+		            "menteeID": null,
+		            "mentorHasArrived": false
+		        },
+		        {
+		            "status": "GAME CLOSED",
+		            "mentee": "",
+		            "playerid": 6561842646220800,
+		            "solved_problems": 4,
+		            "flagUrl": "/static/flags/sg_on.png",
+		            "finished": "0:03:16.234780",
+		            "gravatar": "http://www.gravatar.com/avatar/c9a95657cc1845f3febf3acbbccad954/?default=&amp;s=30",
+		            "mentor": "Fu Mei",
+		            "mentorID": 6474597901795328,
+		            "professional": null,
+		            "total_problems": 10,
+		            "nickname": "Secret Agent",
+		            "menteeID": null,
+		            "mentorHasArrived": false
+		        }
+		    ],
+		    "heatStopTime": "2013-12-11 19:31:21.814470",
+		    "heatDescription": "Heat 2",
+		    "tournamentID": 5060388987076608,
+		    "tournamentDescription": "Prize round for Python Enrichment December 2013",
+		    "roundID": 4912161075757056,
+		    "heatID": 4691468476219392,
+		    "heatStartTime": "2013-12-09 07:31:21.814470",
+		    "roundDescription": "prize round",
+		    "currentTime": "2014-01-09 09:38:59.184880",
+		    "tournamentType": "Normal",
+		    "type": "heat ranking"
+		};
 
-      var menteeAssigned = {
-      	"tournamentID": 5060388987076608,
-      	"roundID": 4912161075757056,
-      	"heatID": 4691468476219392,
-      	"player":"Chris",
-      	"playerID": 57754,
-      	"mentee":"Shanaaz",
-      	"menteeID": 12345,
-      };
-      $httpBackend.whenGET('/jsonapi/mentee_assignment/4691468476219392').respond(menteeAssigned);
+	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);
+
       //$httpBackend.whenGET('/jsonapi/game/5817368383062016').respond({"game_end": "2013-09-29 09:27:03.104550", "player": "Chris", "solvedProblemIDs": [], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-09-29 08:27:02.906550", "numProblems": 2, "numSolvedProblems": 1, "status": "GAME CLOSED", "problemIDs": [10033, 17155], "problems": {"problems": [{"skeleton": "oops=317", "description": "When you run your code, SingPath has certain tests that it checks to see if you did what you were supposed to do.  If incorrect you'll see a table with the results of the tests.  \r\n\r\nNotice that the starter code has the wrong value. Go ahead and run the code now so you can see the results (you can finish reading this after you run it).\r\n\r\nThe results tell you that SingPath looked at the variable named 'oops' expecting to find 713, but found 317 instead. Fix the error now and run it to advance to the next problem.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> oops\r\n 713", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10033, "name": "Expected Results"}, {"skeleton": "age = ", "description": "Variables are an important part of programming; they allow the you to store a value and reuse it later.  You are allowed to use just about anything you like as your variable name.\r\n\r\nFor this problem, create a variable named 'age' with the value 7.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> age\r\n7", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "5817368383062016", "tournamentID": 5060388987076608, "name": "Tournament game", "roundID": 4912161075757056, "questID": null, "heatID": 4691468476219392, "game_start": "2013-09-29 08:27:03.040390", "currentTime": "2013-09-29 13:54:35.933410", "game_type": "Timed Interview", "timelimit": 3600});
 
       var tournamentGame = {
 	    "game_end": "2013-09-29 09:27:03.104550",
 	    "player": "Chris",
-	    "solvedProblemIDs": [10033],
+	    "solvedProblemIDs": [10033, 17155],
 	    "currentProblem_id": "TBD",
 	    "playerID": 57754,
 	    "allSolved": false,
@@ -2014,7 +2293,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	    "currentTime": "2013-09-29 13:54:35.933410",
 	    "game_type": "Timed Interview",
 	    "timelimit": 3600,
-	    "mentor":"Glen",
+	    "mentor": "",
 	    "mentorID": 12345,
 	    "hasArrived": false
 	};
