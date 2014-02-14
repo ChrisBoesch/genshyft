@@ -467,9 +467,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   /*JSON API Call to retrieve tournament data once - By Glen*/
-  $scope.fetch_tournament_details_once = function(){
-    $scope.tournamentID = ($location.search()).tournamentID;      
-    $resource('/jsonapi/tournament_progress/:tournamentID').get({"tournamentID": $scope.tournamentID}, function(response){
+  $scope.fetch_tournament_details_once = function(tournamentID){  
+    $resource('/jsonapi/tournament_progress/:tournamentID').get({"tournamentID": tournamentID}, function(response){
         $scope.tournament = response;
         console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
         $scope.get_indivNoGrpPlayers($scope.tournament);
@@ -563,7 +562,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
             $scope.joinGrpingVal = response;
            console.log("joinGrpingVal = " + $scope.joinGrpingVal.length);
           }); 
-          $scope.fetch_tournament_details_once();
+          $scope.fetch_tournament_details_once(tournamentId);
         }
     }).error(function (data, status, headers, config) {
       console.log("Error");
