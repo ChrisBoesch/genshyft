@@ -5,6 +5,8 @@
 
         var ctrl, scope, httpBackend, levels, problems, problemDetails, problemMobile;
 
+        beforeEach(angular.mock.module('myApp'));
+
         beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
             scope = $rootScope.$new();
             httpBackend = _$httpBackend_;
