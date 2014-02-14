@@ -1366,7 +1366,15 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       	} else {
       		return [200, bad_verify_result, {}];
       	}
-      }); 
+      });
+
+    $httpBackend.whenJSONP(/^http:\/\/example.com\/verify/).respond({
+    	'solved': true, 
+    	'results': [
+    		{'correct': true, 'call': "greeting", 'expected': "'hello world'", 'received': "'hello world'"}
+    	]
+    });
+    $httpBackend.whenPOST('/jsonapi/update_mobile_problem').respond({"tests": ">>> greeting\r\n'hello world'","description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.","current_solution": "greeting='hello world'","lines": ["greeting='hello world'"],"solution": "greeting='hello world'","path_id": 10030,"depth": 1,"problemset_id": 11021,"examples": ">>> greeting\r\n'hello world'","current_tests": ">>> greeting\r\n'hello world'","problemsetorder": 2,"id": 17191,"nonErrorResults": {"1": {"solved": "true","results": [{"expected": "hello world","received": "hello world", "call": "greeting","correct": true}]}}, "name": "Your First Program"});
 
       //Analytics
       $httpBackend.whenGET('/jsonapi/get_expected_values?questionID=17155').respond({"status": "ok", "expectedSeconds": 28, "expectedAttempts": 1});

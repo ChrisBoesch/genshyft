@@ -13,8 +13,6 @@
 
     module.filter("renderPermutation", function() {
         return function (lines, permutations) {
-            console.dir(lines);
-            console.dir(permutations);
             return permutations.
                 toString().
                 split('').
