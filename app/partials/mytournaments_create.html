@@ -281,7 +281,7 @@
 			            <div class="span3"><b>Round Name: </b>{{grpTourRoundName}}</div>
 			            <div class="span3" id="questionDuration"><b>Duration: </b>{{grpTourRoundMins}} mins</div>
 			            <div class="span2" id="questionCount"><b>Questions: </b>{{cartQuestions.length}}</div>
-			            <div class="span4"><button class="btn btn-info" id="create" type="button" ng-click="viewQuestionsInCart()"><i class="icon-eye-open icon-white"></i> View Added Questions</button></div>
+			            <div class="span4"><button class="btn btn-info" id="create" type="button" ng-click="viewQuestionsInCart()"><i class="icon-eye-open icon-white"></i> Manage Added Questions</button></div>
 	        	</div>
 	            </br>
 	        </br>
@@ -382,10 +382,14 @@
 	                <tr ng-repeat="question in cartQuestions track by $index" class="questionTableRows">
 	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question.questionId)">{{question.question}}</button></td>
 	                    <td class="questionTableCells">
-	                    	<button name="moveUp" ng-click="moveQuestionUp($index)" class="btn btn-warning"><i class="icon-arrow-up icon-white"></i> Move Up</button>
+	                    	<div ng-hide="$index==0">
+	                    		<button name="moveUp" ng-click="moveQuestionUp($index)" class="btn btn-warning"><i class="icon-arrow-up icon-white"></i> Move Up</button>
+	                    	</div>
 	                    </td>
 	                    <td class="questionTableCells">
-	                    	<button name="moveDown" ng-click="moveQuestionDown($index)" class="btn btn-warning"><i class="icon-arrow-down icon-white"></i> Move Down</button>
+	                    	<div ng-hide="$index==cartQuestions.length-1">
+	                    		<button name="moveDown" ng-click="moveQuestionDown($index)" class="btn btn-warning"><i class="icon-arrow-down icon-white"></i> Move Down</button>
+	                   		</div>
 	                    </td>
 	                    <td class="questionTableCells">
 	                    	<button name="deleteQuestions" ng-click="deleteFromCart($index)" class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>

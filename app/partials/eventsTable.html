@@ -19,11 +19,11 @@
 <!-- Render eventsTable page based on url parameter (event id) -->
 <div class="row-fluid">
 
-<div ng-controller="EventTableController" ng-init="get_jcParticipants(); get_eventID();" class="container">
+<div ng-controller="EventTableController" ng-init="get_jcParticipants(); get_eventID(); get_currentUrl();" class="container">
 
 <button class="btn btn-primary" ng-click="returnToPreviousPage()">Return to Last Visited Page</button>
 
-<div style="float:right" class="fb-share-button" data-href="currentUrl" data-type="button"></div>
+<div style="float:right" class="fb-share-button" data-href="{{currentUrl}}" data-type="button"></div>
 
 <center><h2>{{eventsData.name}}</h2></center>
   <table class="table table-striped table-hover">
