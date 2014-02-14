@@ -3,6 +3,7 @@
 function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$route){
 
 	$scope.videoArray ="Select";
+	$scope.purposeVideos= "";
     // this method gets the parameter , variables are declared as youtube and vno
     $scope.location = $location;
 	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
@@ -38,7 +39,31 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
                console.log($scope.purposeVideos);
         	 })
         }
+		
+		
+	$scope.last_watched = function(){
+          console.log("get_videos is being executed");
+          $resource("/jsonapi/purposevideos").get({},function(response){
+              $scope.purposeVideos = response; // purposeVideos stores the Json files
+			  $scope.videoArray = $scope.purposeVideos.Videos[0].title;
+               console.log($scope.purposeVideos);
+			   
+			   
+			for(var i = 0; i < $scope.purposeVideos.Videos.length-1; i++){
+				if($scope.purposeVideos.Videos[i].unlocked ==false){
+					 $location.search({'youtube':$scope.purposeVideos.Videos[i].vlink,'vno':i}).path('purposedriven-play') ;
+					 break;
+				}
+				if( i== $scope.purposeVideos.Videos.length){
+					$location.search({'youtube':$scope.purposeVideos.Videos[0].vlink,'vno':0}).path('purposedriven-play') ;
+				}
+				
+			}			   
+        })
+     }
 
+
+	
 		/*
 	// retrieve All purpose driven videos that user has unlocked. 
 	$scope.get_videos_unlocked = function(){
@@ -128,6 +153,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 					  $scope.response = response;
 					  //Handle any errors
 					  console.log(response);
+					  console.log("Feedback : " + feedback);
 						
 				})
 		

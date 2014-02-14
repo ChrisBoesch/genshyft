@@ -114,64 +114,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $timeout.cancel($scope.fetch_ranks(tournamentID));
     };
 
-  /*not in use anymore
-  $scope.add_tournaments = function(){
-		$scope.tournament_title = {};
-		$scope.tournament_type = {};
-		$scope.tournament_rounds = {};
-	};
-
-  
-	$scope.add_rounds= function(){
-		if($scope.rounds.length < 5){
-      $scope.rounds.push("1");
-    } 
-	};
-
-	$scope.delete_rounds = function(index){
-		if(index!=0){
-			$scope.rounds.splice(index, 1);
-		}	
-	};
-
-  $scope.add_round = function(tournamentID){
-    //$scope.roundDirty = false;
-    $scope.questionCart = $resource('/jsonapi/added_rounds');
-    $scope.questionCart.query({}, function(response){
-      $scope.questionCart = {};
-
-      
-      if($scope.roundModel.name==""){
-        alert("The round name cannot be empty!");
-      }
-      else if($scope.roundModel.duration==""){
-        alert("The round duration cannot be empty!");
-      }
-      else{
-        var data = {"name":$scope.roundModel.name,
-                "timelimit":$scope.roundModel.duration,
-                "description":'Update this description',
-                "problemIDs":$scope.roundModel.questions,
-                "tournamentID":tournamentID}
-        $scope.NewRound = $resource('/jsonapi/add_round');
-        var new_round = new $scope.NewRound(data);
-        new_round.$save(function(response){
-          if(response.error) {
-            console.log(response.error)
-          }
-          else{
-            $scope.round = response;
-          }
-        });
-        //$('#myModal').modal('hide');
-        console.log("new_round_added");
-        console.log(new_round);
-      }
-    }); 
-    //$location.path("mytournaments");
-  };
-  */
-
   //Save each created round into an array 
   $scope.save_round = function(){      
     if($scope.grpTourRoundName == undefined || $scope.grpTourRoundName == ""){
@@ -411,6 +353,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         var data = {"tournamentId":tournamentID,
                     "description":$scope.newGrpTournament.description,
                      "password": $scope.newGrpTournament.password,
+                     "passwordConfirm": $scope.newGrpTournament.passwordConfirm,
+                     "addDetails":$scope.newGrpTournament.addDetails,
                      "title":$scope.newGrpTournament.title,
                      "status": $scope.newGrpTournament.status,
                      "type": $scope.newGrpTournament.type,
@@ -459,9 +403,31 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $('#questionsInCart').modal('show');
   };
 
-  $scope.viewQuestionsInfoInCart = function(){
+  $scope.viewQuestionsInfoInCart = function(id){
+    $scope.questionName = "-";
+    $scope.questionDescription = "-";
+    $scope.questionExamples = "-";
+    $scope.skeleton = "-";
+      // Searches both questionBank and questionCart for the clicked question
+    for(var j = 0; j < $scope.bankQuestions.length; j++){
+      if($scope.bankQuestions[j].questionId == id){
+        $scope.questionName = $scope.bankQuestions[j].question;
+        $scope.questionDescription = $scope.bankQuestions[j].questionDescription;
+        $scope.questionExamples = $scope.bankQuestions[j].questionExamples;
+        $scope.skeleton = $scope.bankQuestions[j].skeleton;      
+      }
+    }
+    console.log($scope.bankQuestions);
+    for(var i = 0; i < $scope.cartQuestions.length; i++){
+      if($scope.cartQuestions[i].id == id){
+        $scope.questionName = $scope.cartQuestions[i].question;
+        $scope.questionDescription = $scope.cartQuestions[i].questionDescription;
+        $scope.questionExamples = $scope.cartQuestions[i].questionExamples;
+        $scope.skeleton = $scope.cartQuestions[i].skeleton;     
+      }
+    }
     $('#questionsInCart').modal('hide');
-    $('#questionInfo').modal('show');
+    $('#questionInfoInCart').modal('show');
   };
 
   /*method to hide modal after seeing questions in questions cart information*/
@@ -470,7 +436,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.hideQuestionsInfoInCart = function(){
-    $('#questionsInfo').modal('hide');
+    $('#questionsInfoInCart').modal('hide');
     $('#questionsInCart').modal('show');
   };
 

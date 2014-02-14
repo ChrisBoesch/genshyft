@@ -1,8 +1,5 @@
 <style>
    
-    .table td, .table th {
-        border: none;
-    }
     .table tbody tr:hover td,
     .table tbody tr:hover th {
         background-color: #eeeeee;
@@ -76,6 +73,10 @@
 </br>
 <div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="tournamentInit();get_mytournaments()">
 	<div class="row-fluid">
+		<div class="pull-right"><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments'"><i class="icon-home icon-white"></i> Back To My Tournaments </button></div>
+	</div>
+</br>
+	<div class="row-fluid">
 		<div class="span6 bootCamp" id="heading">
 			Tournament Details
 		</div>
@@ -86,22 +87,27 @@
 			<div class="span6 well well-small">
 				<div class="span12">
 					<div class="span8">
-						<b>Status :</b> 
+						<b>Status :</b>  {{grpTournaments[0].status}} </br> 
+						<!--
 						<select class="span4" ng-model="tourStatus">
 							<option>Closed</option>
 							<option>Open</option>
 							<option>Archive</option>
 							<option>Hide</option>
 						</select></br>
+						-->
 						<b>Title :</b> {{grpTournaments[0].title}} </br>
-						<b>No. of groups :</b>{{grpTournaments[0].maxNoGroup}}</br>
-						<b>No. of players per group :</b> {{grpTournaments[0].maxNoPlayer}}			   </br>
+						<b>Description :</b> {{grpTournaments[0].description}} </br>
+						<b>Additional Details :</b> {{grpTournaments[0].addDetails}} </br>
+						<div ng-show="grpTournaments[0].noGroup!=undefined">
+							<b>No. of groups :</b>{{grpTournaments[0].noGroup}}</br>
+							<b>No. of players per group :</b> {{grpTournaments[0].maxNoPlayer}}			   </br>
+						</div>
 					</div>
 				</div>
 				<div class="span12" align="center">
-					<button class="btn btn-primary" type="button" ng-hide="">Edit</button>
-					<button class="btn btn-primary" type="button" ng-hide="true">Save</button>
-					<button class="btn btn-danger" type="button">Delete </button>	
+					<button class="btn btn-primary" type="button"><i class="icon-edit icon-white"></i> Edit</button>
+					<button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i> Delete </button>	
 					</br>
 				</div>		
 			</div>
@@ -110,7 +116,7 @@
 					<b>Tournament Round Starting in:</b> {insert time here}
 				</br>
 					<b>Round Name:</b> {{grpTournaments[0].rounds.name}} </br>
-					<b>Round Duration:</b>{{grpTournaments[0].rounds.timeLimit}}</br>
+					<b>Round Duration (mins):</b>{{grpTournaments[0].rounds.timeLimit}}</br>
 					<b>No. of Registered Players :</b>{{grpTournaments[0].registered}}
 					</br></br>
 					<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking <i class="icon-chevron-right icon-white"></i></button>
@@ -135,27 +141,26 @@
 				<table ng-grid id="grpTournRoundsTable" class="table table-bordered" width="100%">
 	                <tr class="roundTableHeaders">
 	                	<th class="roundTableHeader"><b>Round Title</b></th>
-	                	<th class="roundTableHeader"><b>Round Duration</b></th>
-	                	<th class="roundTableHeader"><b>Number of Questions in round</b></th>
+	                	<th class="roundTableHeader"><b>Round Duration (mins)</b></th>
+	                	<th class="roundTableHeader"><b>Number of Questions</b></th>
+	                	<th class="roundTableHeader"><b>Start round in:</b></th>
 	 				</tr>
-	                <tr class="warning">
-	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].roundName}}</td>
-	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].timeLimit}}</td>
-	                    <td class="roundInfo">{{grpTournaments[0].rounds[0].problemIDs.length}}</td>
+	                <tr class="warning" ng-repeat="tournamentRound in grpTournaments[0].rounds track by $index">
+	                    <td class="roundInfo">{{tournamentRound.roundName}}</td>
+	                    <td class="roundInfo">{{tournamentRound.timeLimit}}</td>
+	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
+	                    <td>
+	                    	<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">		
+	                    		<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 1 min</button>
+	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 2 min</button>
+	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 5 min</button>
+	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 30 min</button>
+	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 60 min</button>	
+	  							<button class="btn btn-danger" type="button" ng-model="stop"><i class="icon-stop icon-white"></i> Stop </button>	
+							</div>
+	                    </td>
 	                </tr>
             	</table>
-				
-				</br><b>Start in</b></br>
-				<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">		<button type="button" class="btn btn-info">1 min</button>
-  					<button type="button" class="btn btn-info">2 min</button>
-  					<button type="button" class="btn btn-info">5 min</button>
-  					<button type="button" class="btn btn-info">30 min</button>
-  					<button type="button" class="btn btn-info">60 min</button>			
-				</div>
-
-				<button class="btn btn-primary" type="button" ng-model="start">Start <i class="icon-play icon-white"></i></button>
-
-				<button class="btn btn-danger" type="button" ng-model="stop" ng-hide="true">Stop <i class="icon-stop icon-white"></i></button>
 			</div>
 			</div>
 		</div>

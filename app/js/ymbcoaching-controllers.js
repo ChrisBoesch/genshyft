@@ -10,23 +10,21 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			  $scope.mastery = response;
 			   console.log($scope.mastery.coach);
 
-			if($scope.mastery.coach == null ){
-				console.log("remain on page");
-				$scope.mastercache = "false";
-				$scope.masterselect ="true";
-				$scope.masterpath ="true";
-				
-			}
-			else{
+
 				console.log("will forward to cache page");
 				$scope.mastercache = "true";
 				$scope.masterselect ="false";
-			   $scope.currentCoach = $scope.mastery.coach;
+			   if($scope.mastery.coach == null){
+					$scope.currentCoach = "Zandar"
+			   }
+			   else{
+					$scope.currentCoach = $scope.mastery.coach;
+				}
 			   $scope.currentPathId = $scope.mastery.pathId;
 			   $scope.currentPathName = $scope.mastery.pathName;
 				
 				
-			}
+			
 			   });	   		
 
 

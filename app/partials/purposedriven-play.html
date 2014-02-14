@@ -1,3 +1,17 @@
+<style>
+#myImage {
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* msie */
+}
+
+/* or */
+
+#wrapper {
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* msie */
+    background-color: #000;
+}
+</style>
 <div data-ng-controller="PurposeDrivenController" ng-init = "get_videos();"  > 
 <div class="container" style="position:relative;">
 	<div class="row-fluid">
@@ -11,14 +25,45 @@
 		
 		<div class = 'container'>
 				<table border = '1' align = 'center' width ='1000'>
-
+			
 					<tr>
 						<td width =25%> <h3><center> {{purposeVideos.Videos[vno].title}} <center></h3>
-						 <center> {{purposeVideos.Videos[vno].description}} <center>
-						 <br><br>
-							Do this survey to proceed: <input type="checkbox" ng-model="value1"> <br/>	
-							<br><br> * Refresh page if video is not loading 
-						</td>
+
+						 <br>
+						 <table cellpadding ='5' cellspacing ='5' align ='center'>
+						 <tr><td>
+						 <button class ="btn btn-primary" ng-model="purposeVideos.Videos[vno].feedback" value ="1" 
+						 ng-click = "nextVideo(vno,1)" style="width:200px" > This is totally me. </button> <br>
+						 </td>
+						 <td><label ng-show="purposeVideos.Videos[vno].feedback==1"> OK </label></td>
+
+						 
+						 </tr> <tr><td>
+						 <button class ="btn btn-primary" ng-model="purposeVideos.Videos[vno].feedback" value ="2"
+						ng-click = "nextVideo(vno,2)" style="width:200px" > I think this is me. </button> <br>
+						 <td><label ng-show="purposeVideos.Videos[vno].feedback==2"> OK </label></td>
+						</td></tr> <tr><td>
+						
+
+						 <button class ="btn btn-primary" ng-model="purposeVideos.Videos[vno].feedback" value ="3" 
+						 ng-click = "nextVideo(vno,3)" style="width:200px" > Meh.. Maybe? </button> <br>
+						 <td><label ng-show="purposeVideos.Videos[vno].feedback==3"> OK </label></td>
+						 </td></tr> <tr><td>
+						 
+						 <button class ="btn btn-primary" ng-model="purposeVideos.Videos[vno].feedback" value ="4"
+						ng-click = "nextVideo(vno,4)" style="width:200px" > I don't know .. </button> <br>
+						 <td><label ng-show="purposeVideos.Videos[vno].feedback==4"> OK </label></td>
+						</td></tr> <tr><td>
+						
+						 <button class ="btn btn-primary" ng-model="purposeVideos.Videos[vno].feedback" value ="5" 
+						 ng-click = "nextVideo(vno,5)" style="width:200px"> I doubt this is me. </button> <br>
+						 <td><label ng-show="purposeVideos.Videos[vno].feedback==5"> OK </label></td>
+						 
+						 
+						 </td></tr> 
+						
+						
+						</table>
 					
 
 						<td>
@@ -30,82 +75,12 @@
 						</td>
 							
 					</tr>
-					<td colspan ='2' align ='center'>
-						
-							<div ng-show="value1">
-								<br>
+				
+			</table>
 								
-									<table cellspacing ="5" cellpadding ="5" border ='0'> 
-									
-										<tr>
-											<td colspan ='5'>
-											<center>
-											<b> {{purposeVideos.Videos[vno].question}} </b>
-											</center>
-											</td>
-										</tr>
-										<tr>
-										<form>
-										<td> 
-											
-								
-										  <input
-										  type="radio" name="answer" ng-model="purposeVideos.Videos[vno].feedback" value ="1" 
-										  onclick="enableButton2()"> This is very like me.<br>	
-										  
-										  <input
-										  type="radio" name="answer" ng-model="purposeVideos.Videos[vno].feedback" " value ="2" 
-										  onclick="enableButton2()"> This is somewhat like me. <br>	
-										  
-										  <input
-										  type="radio" name="answer" ng-model="purposeVideos.Videos[vno].feedback" value ="3" 
-										  onclick="enableButton2()"> Maybe I am a little like this.<br>	
-										  
-										  <input
-										  type="radio" name="answer" ng-model="purposeVideos.Videos[vno].feedback" value ="4" 
-										  onclick="enableButton2()"> I'm not sure if this is like me.<br>	
-										  
-										  <input
-										  type="radio" name="answer" ng-model="purposeVideos.Videos[vno].feedback" value ="5" 
-										  onclick="enableButton2()"> This doesn't sound much like me.<br>
-										  
-										  <input
-										  type="radio" name="answer" ng-model="purposeVideos.Videos[vno].feedback" value ="6" 
-										  onclick="enableButton2()"> This is totally not me			<br>							  
-										
-										
-										
-
-										  
-										  
-										  
-											<center> <button id="nextVideo" class ="btn btn-primary" disabled ng-click = "nextVideo(vno,purposeVideos.Videos[vno].feedback)"> Next  </button>  
-											 <br>
-											<font size="2" color="red" ng-show="value1">Please do the survey to proceed.</font>
-											  </center> 	
-
-											  
-										  </div>
-										 </td>
-										
-										  </form>
-										</tr>
-										<tr>
-										<td colspan='5'>
-										 
-
-											
-											
-										 </td>
-										</tr>
-												
-											<!-- value= "{{purposeVideosUnlocked.Unlocked[vno].v}}"; !-->	
-									</table>
-								
-							</div> 
+		</div> 
 		</div>
-		</table>
-	</div>
+		</div>
 
 	
 	
@@ -117,13 +92,12 @@
 									
 									
 											<center> <IMG ng-src="{{vids.thumbnail}}" width =70%
-											ng-click = "view_video(vids.vlink,vids.no)"></center>			
+											ng-click = "view_video(vids.vlink,vids.no)" style="cursor: hand;cursor: pointer;" > </center>			
 									</div>	
 
 									<div ng-hide ="vids.unlocked"> 
 										
-											<center> <IMG ng-src="img/purposedrivenPlaceholder/thumb/lock.jpg" width =50%>
-											<br> </center>
+											<center> <IMG ng-src="{{vids.thumbnail}}" width =70% id="myImage"> </center>
 											
 									</div>									
 
@@ -155,9 +129,6 @@
 </div>
 </div>
 <script>
-        function enableButton2() {
-            document.getElementById("nextVideo").disabled = false;
-        }
 
         function getParam(){
         var myParam = location.search.split('xyz=')[1]
