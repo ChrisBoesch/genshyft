@@ -229,11 +229,11 @@ myApp.run(function($httpBackend) {
 					"greeting":"audio/Shannon/greeting.mp3",
 					"welcomeback":"audio/Shannon/welcomeback.mp3",
 					"areyouthere":"audio/Shannon/areyouthere.mp3",
-					"dontgiveup":"a",
-					"correctanswer":"a",
-					"tryother":"a",
-					"faster":"a",
-					"lessattempts":"a"
+					"dontgiveup":"audio/Shannon/dontgiveup.mp3",
+					"correctanswer":"audio/Shannon/correctanswer.mp3",
+					"tryother":"audio/Shannon/tryother.mp3",
+					"faster":"audio/Shannon/faster.mp3",
+					"lessattempts":"audio/Shannon/lessattempts.mp3"
 				},
 	"audiotext":{
 					"greeting":"Hi I am Shannon, I am here to help you practice and resolve some of the problems you have seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
@@ -268,11 +268,11 @@ myApp.run(function($httpBackend) {
 					"greeting":"audio/Sandra/greeting.mp3",
 					"welcomeback":"audio/Sandra/welcomeback.mp3",
 					"areyouthere":"audio/Sandra/areyouthere.mp3",
-					"dontgiveup":"a",
-					"correctanswer":"a",
-					"tryother":"a",
-					"faster":"a",
-					"lessattempts":"a"
+					"dontgiveup":"audio/Sandra/dontgiveup.mp3",
+					"correctanswer":"audio/Sandra/correctanswer.mp3",
+					"tryother":"audio/Sandra/tryother.mp3",
+					"faster":"audio/Sandra/faster.mp3",
+					"lessattempts":"audio/Sandra/lessattempts.mp3"
 				},
 	"audiotext":{
 					"greeting":"Hi I am Sandra, I am a recruiter and I know how to prepare you for that coding interview. By practicing these problems over and over again, you will not only be prepared for that interview but you will ace it! ",

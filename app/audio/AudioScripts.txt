@@ -4,6 +4,57 @@ Example. "greeting" has the text below it.
 The file that plays it will have an Audio object with attribute called greeting with value "greeting.mp3".
 The Picture Object will have an attribute called greeting with the value of the image's url.
 
+**Shannon**
+"greeting":"audio/Shannon/greeting.mp3",
+"Hi I am Shannon, I am here to help you practice and resolve some of the problems you have seen before.By resolving this problems, you'll be a little better prepared the next time you get together with your friends to do some coding.",
+
+"welcomeback":"audio/Shannon/welcomeback.mp3",
+"Welcome back! You were on a roll the last time. If you keep coding like this every day, your friends are going to come to you for help! Now, let’s start on this question!",
+
+"areyouthere":"audio/Shannon/areyouthere.mp3",
+"Hey – are you there? I hope you are not giving up! Let’s finish these problems together! ",
+
+"dontgiveup":"audio/Shannon/dontgiveup.mp3",
+"Hmm…there seems to be an error. Check the compiler. It will help you solve it quicker.",
+
+"correctanswer":"audio/Shannon/correctanswer.mp3",
+"Alright! That was a good one! Let’s move onto the next one!",
+
+"tryother":"audio/Shannon/tryother.mp3",
+"You are on a roll! Here, try another question!",
+
+"faster":"audio/Shannon/faster.mp3",
+"This question shouldn’t take you so long – I believe in you!",
+
+"lessattempts":"audio/Shannon/lessattempts.mp3",
+"Now here’s a problem that I think you can do in fewer attempts. "
+
+
+**Sandra**
+"greeting":"audio/Sandra/greeting.mp3",
+"Hi I am Sandra, I am a recruiter and I know how to prepare you for that coding interview. By practicing these problems over and over again, you will not only be prepared for that interview but you will ace it! ",
+
+"welcomeback":"audio/Sandra/welcomeback.mp3",
+"Welcome back! You were really consistent in your practice the last time. If you keep coding like this every day and master this language – head hunters will be impressed and might even get you a job! Now, let’s begin!",
+
+"areyouthere":"audio/Sandra/areyouthere.mp3",
+"Hey – are you there? Don’t stop now! We can do these questions together!",
+
+"dontgiveup":"audio/Sandra/dontgiveup.mp3",
+"Hmm…there seems to be an error. Check the compiler. It will help you solve it quicker.",
+
+"correctanswer":"audio/Sandra/correctanswer.mp3",
+"Excellent job! You are getting a hang of this! Let’s move onto the next one!",
+
+"tryother":"audio/Sandra/tryother.mp3",
+"You are getting really good at this, huh? Hmm, why not try another question?",
+
+"faster":"audio/Sandra/faster.mp3",
+"I am sure this question will not take you so long! Come on, let’s do this!",
+
+"lessattempts":"audio/Sandra/lessattempts.mp3"
+"Now here’s a problem that I think you can do in fewer attempts than the last time."
+
 
 
 
