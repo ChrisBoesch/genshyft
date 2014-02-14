@@ -3921,7 +3921,7 @@ function EventTableController($scope, $resource, $route, $location){
     	}
 
     	$scope.get_currentUrl = function(){
-    		$scope.currentUrl = $location.absUrl();
+    		$scope.currentUrl =$location.absUrl();
     		console.log($scope.currentUrl);
     	}
 
