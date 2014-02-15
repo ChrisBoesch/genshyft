@@ -138,7 +138,6 @@
     </div>
     
     <form name="editProblem" role="form">
-
         <div class="row-fluid" ng-show="problem">
             <div class="span6 well">
                 <div class="tabbable">
@@ -199,6 +198,9 @@
                             <p ng-if="testRun.solved" class="alert alert-success">
                                 {{testRun.verification_message}}
                             </p>
+                            <p ng-if="testRun.solved && build.required()" class="alert alert-info">
+                                Mobile results need to be rebuilt.
+                            </p>
                             <table class="table" ng-if="testRun.verification_message && !testRun.solved">
                                 <tr>
                                     <th>call</th>
@@ -216,13 +218,91 @@
                         </div>
                     </div>
 
-                    <div class="form-actions">
-                        <button class="btn btn-large btn-primary" ng-click="runTests()" ng-disabled="savingProblem" gen-toggle="#result-tab">Run</button> 
-                        <button ng-class="{'btn': true, 'btn-large': true, 'btn-success': testRun.solved}" ng-click="save()" ng-disabled="!testRun.solved || savingProblem">Save</button>
+                    <div class="form-actions controls controls-row">
+                        <button class="btn btn-primary span4" ng-click="runTests()" ng-disabled="savingProblem" gen-toggle="#result-tab">Run</button> 
+                        <button ng-class="{'btn': true, 'btn-success': testRun.solved, 'span4': true}" ng-click="save()" ng-disabled="!testRun.solved || savingProblem || build.required()">Save</button>
                     </div>
 
                 </div>
             </div>
         </div>
     </form>
+
+    <div class="row-fluid" ng-if="problemMobile && testRun.solved">
+        <div class="span12 well">
+            <h3>Drag-n-Drop Build</h3>
+
+            <form name="buildPermutationResults" role="form" class="form-inline">
+                <div class="controls controls-row">
+                    <input type="url" class="span8" required="true" ng-model="build.verificationUrl" placeholder="Verification URL"/> 
+                    <input type="submit" class="btn btn-primary span2" ng-disabled="!testRun.solved || savingProblem || !buildPermutationResults.$valid" value="Build" ng-click="build.start(problemDetails, build.verificationUrl)"/>
+                    <input type="submit" class="btn span2" ng-disabled="!build.running()" value="Stop build" ng-click="build.stop()"/>
+                </div>
+            </form>
+            
+            <table class="table table-build" ng-if="build.started">
+                <tr>
+                    <th>Number of permutation checked</th>
+                    <td>{{build.permutations.passing + build.permutations.failing + build.permutations.errors}}</td>
+                </tr>
+                <tr>
+                    <th>Number of permutation still to checked</th>
+                    <td>{{build.permutations.remaining.length}}</td>
+                </tr>
+                <tr>
+                    <th>Number of passing permutation</th>
+                    <td>{{build.permutations.passing}}</td>
+                </tr>
+                <tr>
+                    <th>Number of error permutation</th>
+                    <td>{{build.permutations.errors}}</td>
+                </tr>
+                <tr ng-class="{'warning': build.permutations.failing > 0}">
+                    <th>Number of failed permutation</th>
+                    <td>{{build.permutations.failing}}</td>
+                </tr>
+                <tr ng-class="{'warning': build.permutations.retries > 0}">
+                    <th>Number of permutation retried</th>
+                    <td>{{build.permutations.retries}}</td>
+                </tr>
+                <tr>
+                    <th>Total permutation</th>
+                    <td>{{build.permutations.total}}</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="row-fluid" ng-if="problemMobile">
+        <div class="span12 well">
+            <h3>Drag-n-Drop permutations</h3>
+
+            <div ng-repeat="(permutation, result) in problemMobile.nonErrorResults">
+                
+                <h4>Permutation {{permutation}}</h4>
+                <pre><code>{{problemMobile.lines|renderPermutation:permutation}}</code></pre>
+                
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Call</th>
+                            <th>Expected</th>
+                            <th>Received</th>
+                            <th>Correct</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="r in result.results">
+                            <td>{{r.call}}</td>
+                            <td>{{r.expected}}</td>
+                            <td>{{r.received}}</td>
+                            <td>{{r.correct}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </div>

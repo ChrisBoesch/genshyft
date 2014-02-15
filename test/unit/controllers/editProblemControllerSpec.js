@@ -3,7 +3,9 @@
 
     describe('EditProblemController', function() {
 
-        var ctrl, scope, httpBackend, levels, problems, problemDetails;
+        var ctrl, scope, httpBackend, levels, problems, problemDetails, problemMobile;
+
+        beforeEach(angular.mock.module('myApp'));
 
         beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
             scope = $rootScope.$new();
@@ -358,6 +360,33 @@
                 "type": "problem"
             };
 
+            problemMobile = {
+                "tests": ">>> greeting\r\n'hello world'",
+                "description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.",
+                "current_solution": "greeting='hello world'",
+                "lines": ["greeting='hello world'"],
+                "solution": "greeting='hello world'",
+                "path_id": 10030,
+                "depth": 1,
+                "problemset_id": 11021,
+                "examples": ">>> greeting\r\n'hello world'",
+                "current_tests": ">>> greeting\r\n'hello world'",
+                "problemsetorder": 2,
+                "id": 37043,
+                "nonErrorResults": {
+                    "1": {
+                        "solved": "true",
+                        "results": [{
+                            "expected": "Not built yet",
+                            "received": "Not built yet",
+                            "call": "Not built yet",
+                            "correct": true
+                        }]
+                    }
+                },
+                "name": "Welcome"
+            };
+
             httpBackend.expectGET('/jsonapi/interfaces').respond({
                 "interfaces": [{
                     "singpathSupported": true,
@@ -586,9 +615,11 @@
         it('should get a problem details', function() {
             scope.getProblemDetails(problems.problems[0]);
             httpBackend.expectGET('/jsonapi/get_problem?problem_id=37043').respond(problemDetails);
+            httpBackend.expectGET('/jsonapi/mobile_problem/37043').respond(problemMobile);
 
             httpBackend.flush();
             expect(scope.problemDetails.problem_id).toBe(37043);
+            expect(scope.problemMobile.id).toBe(37043);
         });
 
         it('should run private and public test against the solution', function() {
