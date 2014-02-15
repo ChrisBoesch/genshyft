@@ -71,7 +71,7 @@
 	
 </style>
 </br>
-<div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="tournamentInit();get_mytournaments()">
+<div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="tournamentInit();manageSelectedTournament()">
 	<div class="row-fluid">
 		<div class="pull-right"><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments'"><i class="icon-home icon-white"></i> Back To My Tournaments </button></div>
 	</div>
@@ -87,7 +87,7 @@
 			<div class="span6 well well-small">
 				<div class="span12">
 					<div class="span8">
-						<b>Status :</b>  {{grpTournaments[0].status}} </br> 
+						<b>Status :</b>  {{selectedTournament.status}} </br> 
 						<!--
 						<select class="span4" ng-model="tourStatus">
 							<option>Closed</option>
@@ -96,28 +96,26 @@
 							<option>Hide</option>
 						</select></br>
 						-->
-						<b>Title :</b> {{grpTournaments[0].title}} </br>
-						<b>Description :</b> {{grpTournaments[0].description}} </br>
-						<b>Additional Details :</b> {{grpTournaments[0].addDetails}} </br>
-						<div ng-show="grpTournaments[0].noGroup!=undefined">
-							<b>No. of groups :</b>{{grpTournaments[0].noGroup}}</br>
-							<b>No. of players per group :</b> {{grpTournaments[0].maxNoPlayer}}			   </br>
+						<b>Title :</b> {{selectedTournament.title}} </br>
+						<b>Description :</b> {{selectedTournament.description}} </br>
+						<b>Additional Details :</b> {{selectedTournament.addDetails}} </br>
+						<div ng-show="selectedTournament.noGroup!=undefined">
+							<b>No. of groups :</b>{{selectedTournament.noGroup}}</br>
+							<b>No. of players per group :</b> {{selectedTournament.maxNoPlayer}}			   </br>
 						</div>
 					</div>
 				</div>
-				<div class="span12" align="center">
-					<button class="btn btn-primary" type="button"><i class="icon-edit icon-white"></i> Edit</button>
-					<button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i> Delete </button>	
-					</br>
+				<div class="span12" align="right">
+					<button class="btn btn-primary" type="button" ng-click=""><i class="icon-edit icon-white"></i> Edit</button>
 				</div>		
 			</div>
 			<div class="span6 well well-small">
 				<div class="span12">
 					<b>Tournament Round Starting in:</b> {insert time here}
 				</br>
-					<b>Round Name:</b> {{grpTournaments[0].rounds.name}} </br>
-					<b>Round Duration (mins):</b>{{grpTournaments[0].rounds.timeLimit}}</br>
-					<b>No. of Registered Players :</b>{{grpTournaments[0].registered}}
+					<b>Round Name:</b> {{selectedTournament.rounds.name}} </br>
+					<b>Round Duration (mins):</b>{{selectedTournament.rounds.timeLimit}}</br>
+					<b>No. of Registered Players :</b>{{selectedTournament.registered}}
 					</br></br>
 					<button class="btn btn-inverse" type="button" onClick="parent.location='#/tournament-ranking'">Go to Ranking <i class="icon-chevron-right icon-white"></i></button>
 				</div>
@@ -145,7 +143,7 @@
 	                	<th class="roundTableHeader"><b>Number of Questions</b></th>
 	                	<th class="roundTableHeader"><b>Start round in:</b></th>
 	 				</tr>
-	                <tr class="warning" ng-repeat="tournamentRound in grpTournaments[0].rounds track by $index">
+	                <tr class="warning" ng-repeat="tournamentRound in selectedTournament.rounds track by $index">
 	                    <td class="roundInfo">{{tournamentRound.roundName}}</td>
 	                    <td class="roundInfo">{{tournamentRound.timeLimit}}</td>
 	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
