@@ -4578,7 +4578,10 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         },
 
         running: function () {
-            return !$scope.build.runInterval;
+            return (
+                angular.isDefined($scope.build.runInterval) &&
+                $scope.build.runInterval !== null
+            );
         },
 
         built: function () {
