@@ -4701,9 +4701,14 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             $scope.problemDetails.problem_id = resp.data.problem_id;
             $scope.problem.id = resp.data.problem_id;
             alert('problem saved');
-            return $scope.build.save();
-        }).then(function() {
-            alert('mobile problem saved');
+            
+            if ($scope.problemMobile) {
+                return $scope.build.save();
+            }
+        }).then(function (problemMobile) {
+            if (problemMobile) {
+                alert('mobile problem saved');
+            }
         }).always(function(){
             $scope.savingProblem = false;
         });
