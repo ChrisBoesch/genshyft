@@ -20,7 +20,7 @@
                     var index = parseInt(lineNumber, 10) - 1;
                     return lines[index];
                 }).
-                join('/n');
+                join('\n');
         };
     });
 

@@ -4581,7 +4581,10 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         },
 
         running: function () {
-            return !$scope.build.runInterval;
+            return (
+                angular.isDefined($scope.build.runInterval) &&
+                $scope.build.runInterval !== null
+            );
         },
 
         built: function () {
@@ -4690,6 +4693,11 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             url = '/jsonapi/edit_problem';
         } else {
             url = '/jsonapi/new_problem';
+        }
+
+        // Mobile problem cannot have private test.
+        if ($scope.problemMobile) {
+            data.privateTests = "";
         }
         
         $scope.savingProblem = true;
