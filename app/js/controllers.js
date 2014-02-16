@@ -4549,6 +4549,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                 var perm;
 
                 if ($scope.build.token === 0) {
+                    $scope.$digest();
                     return;
                 }
 
@@ -4556,6 +4557,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                 if (!perm) {
                     if (!$scope.build.pending()) {
                         $scope.build.stop();
+                        $scope.$digest();
                     }
                     return;
                 }
