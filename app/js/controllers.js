@@ -4691,6 +4691,11 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         } else {
             url = '/jsonapi/new_problem';
         }
+
+        // Mobile problem cannot have private test.
+        if ($scope.problemMobile) {
+            data.privateTests = "";
+        }
         
         $scope.savingProblem = true;
         $http.post(url, data, postConfig).then(function(resp){

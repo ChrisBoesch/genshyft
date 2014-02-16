@@ -176,7 +176,7 @@
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
                         <li ng-class="{'error': !editProblem.tests.$valid, 'tabspacing': true, 'active': true}"><a data-target="#t5" data-toggle="tab">Tests</a></li>
-                        <li ng-class="{'error': !editProblem.privateTests.$valid, 'tabspacing': true}"><a data-target="#t6" data-toggle="tab">Private tests</a></li>
+                        <li ng-class="{'error': !editProblem.privateTests.$valid, 'tabspacing': true}" ng-if="!problemMobile"><a data-target="#t6" data-toggle="tab">Private tests</a></li>
                         <li class="'tabspacing"><a id="result-tab" data-target="#t7" data-toggle="tab">Test results</a></li>
                     </ul>
 
@@ -187,7 +187,7 @@
                             <div id="tests" name="tests" ng-model="problemDetails.tests" required="true" gen-ace="interface.codeHighlightKey"></div>
                         </div>
 
-                        <div class="tab-pane" id="t6">
+                        <div class="tab-pane" id="t6" ng-if="!problemMobile">
                             <div id="privateTests" name="privateTests" ng-model="problemDetails.other_tests" gen-ace="interface.codeHighlightKey"></div>
                         </div>
 

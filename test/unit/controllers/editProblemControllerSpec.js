@@ -688,6 +688,7 @@
             scope.problemSet = levels.problemsets[0];
             scope.problem = problems.problems[0];
             scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.other_tests = ">>> greeting + '!'\r\n'hello world!'";
 
             scope.save();
             httpBackend.expectPOST('/jsonapi/edit_problem').respond(function(method, url, strData) {
@@ -703,9 +704,42 @@
             expect(data.name).toBe('Welcome');
             expect(data.solution_code).toBe("greeting='hello world'");
             expect(data.publicTests).toBe(">>> greeting\r\n'hello world'");
+            expect(data.privateTests).toBe(">>> greeting + '!'\r\n'hello world!'");
 
             expect(scope.problem.id).toBe(37043);
             expect(scope.problemDetails.problem_id).toBe(37043);
+        });
+
+        it('should save changes to mobile problems', function() {
+            var data = [];
+
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.other_tests = ">>> greeting + '!'\r\n'hello world!'";
+            scope.problemMobile = problemMobile;
+
+            scope.save();
+            httpBackend.whenPOST('/jsonapi/edit_problem').respond(function(method, url, strData) {
+                data.push(parseParam(strData));
+                
+                return [200, {problem_id: 37043}];
+            });
+
+            httpBackend.expectPOST('/jsonapi/update_mobile_problem').respond(function(method, url, strData) {
+                data.push(JSON.parse(strData));
+                return [200, problemMobile];
+            });
+
+            httpBackend.flush();
+            expect(data[0].privateTests).toBe("");
+
+            expect(data[1]).toEqual({
+                problem_id: problemMobile.problem_id,
+                nonErrorResults: problemMobile.nonErrorResults
+            });
+
         });
 
     });
