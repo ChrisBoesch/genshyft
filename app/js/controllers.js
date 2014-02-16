@@ -4523,7 +4523,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         sortResults: function (resp) {
             var permKey;
 
-            if (resp.error) {
+            if (resp.errors) {
                 $scope.build.permutations.errors +=1;
                 return;
             }

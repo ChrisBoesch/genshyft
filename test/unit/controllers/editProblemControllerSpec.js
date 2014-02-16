@@ -3,15 +3,32 @@
 
     describe('EditProblemController', function() {
 
-        var ctrl, scope, httpBackend, levels, problems, problemDetails, problemMobile;
+        var ctrl, scope, httpBackend, levels, problems, problemDetails, problemMobile, interval;
 
         beforeEach(angular.mock.module('myApp'));
 
-        beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
+        beforeEach(inject(function($rootScope, $controller, _$httpBackend_, $window) {
+            interval = {
+                cbs: [],
+                setInterval: function(cb, rate) {
+                    interval.cbs.push({cb: cb, rate: rate});
+                    return interval.cbs.length;
+                },
+                clearInterval: function(intervalId) {
+                    interval.cbs[intervalId - 1] = null;
+                }
+            };
+            interval.cb = [];
             scope = $rootScope.$new();
             httpBackend = _$httpBackend_;
             ctrl = $controller('EditProblemController', {
-                $scope: scope
+                $scope: scope,
+                '$window': {
+                    'setInterval': interval.setInterval,
+                    'clearInterval': interval.clearInterval,
+                    '$': $window['$'],
+                    'jQuery': $window['jQuery']
+                }
             });
             levels = {
                 "type": "problemsets",
@@ -739,6 +756,96 @@
                 problem_id: problemMobile.problem_id,
                 nonErrorResults: problemMobile.nonErrorResults
             });
+
+        });
+
+        it('should build mobile problems solutions', function() {
+            var data = [], url;
+
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.solution = "greeting='Hello Jasmine'";
+            scope.problemDetails.tests = ">>> greeting\n'Hello Jasmine'";
+            scope.problemMobile = problemMobile;
+
+            scope.build.start(scope.problemDetails, 'http://example.com/verify');
+
+            expect(scope.build.running()).toBe(true);
+            expect(scope.build.token).toBe(scope.build.maxToken);
+            expect(scope.build.token).toBeGreaterThan(0);
+            expect(scope.build.permutations.remaining).toEqual([[1]]);
+            expect(scope.build.permutations.total).toBe(1);
+
+            expect(interval.cbs.length).toBe(1);
+            expect(scope.build.runInterval).toBe(1);
+            expect(interval.cbs[0].rate).toBe(scope.build.rate);
+
+            httpBackend.expectJSONP(/http:\/\/example.com\/verify\?vcallback=JSON_CALLBACK/).respond(function(method, url) {
+                var search = url.split('?')[1],
+                    params = parseParam(search),
+                    jsonrequest = JSON.parse(atob(params['jsonrequest']));
+
+                data.push(jsonrequest);
+
+                return [200, {
+                    'solved': true,
+                    'results': [
+                        {
+                            'correct': true,
+                            'call': 'greeting',
+                            'expected': 'Hello Jasmine',
+                            'received': 'Hello Jasmine'
+                        }
+                    ]
+                }];
+            });
+            interval.cbs[0].cb();
+            httpBackend.flush();
+
+            expect(data.length).toBe(1);
+            expect(data[0]['solution']).toBe("greeting='Hello Jasmine'");
+            expect(data[0]['tests']).toBe(">>> greeting\n'Hello Jasmine'");
+
+            expect(scope.build.running()).toBe(false);
+
+            expect(scope.problemMobile.nonErrorResults).toEqual({
+                '1': {
+                    'solved': true,
+                    'results': [
+                        {
+                            'correct': true,
+                            'call': 'greeting',
+                            'expected': 'Hello Jasmine',
+                            'received': 'Hello Jasmine'
+                        }
+                    ]
+                }
+            });
+        });
+
+        it('should filter error built result', function() {
+
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.solution = "greeting='Hello Jasmine'";
+            scope.problemDetails.tests = ">>> greeting\n'Hello Jasmine'";
+            scope.problemMobile = problemMobile;
+
+            scope.build.start(scope.problemDetails, 'http://example.com/verify');
+
+            httpBackend.expectJSONP(/http:\/\/example.com\/verify\?vcallback=JSON_CALLBACK/).respond(function(method, url) {
+                return [200, {
+                    'errors': 'bad request',
+                }];
+            });
+            interval.cbs[0].cb();
+            httpBackend.flush();
+
+            expect(scope.problemMobile.nonErrorResults).toEqual({});
 
         });
 
