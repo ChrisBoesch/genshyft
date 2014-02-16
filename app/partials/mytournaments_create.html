@@ -1,8 +1,14 @@
 <style>
-.modal-body{position: relative;
-    overflow-y: auto;
-    max-height: 16000px;
-    padding: 15px;}
+	.modal-body{position: relative;
+	    overflow-y: auto;
+	    max-height: 16000px;
+	    padding: 15px;
+	}
+
+    .modal-large {
+	    width: 50%; /* responsive width */
+	    margin-left:-25%;/*  width/2) */ 
+	}
 </style>
 </br>
 <div ng-controller="GenshyftTournamentController" ng-init="loading()" class="container" id="tourncreate"style="position:relative;" >
@@ -55,8 +61,8 @@
 					<div class="span2">
 						Password*:
 					</div>
-					<div class="span6">
-						 <input class="span5" type="password" required ng-model="grpTourPassword" placeholder="Enter tournament password here" ></input>
+					<div class="span7">
+						 <input class="span6" type="password" required ng-model="grpTourPassword" placeholder="Enter tournament password here" ></input>
 						 <span class="alert-error" ng-show="grpTourPassword==''">Required!
 						 </span>
 					</div>
@@ -69,8 +75,8 @@
 					<div class="span2">
 						Password Confirm*:
 					</div>
-					<div class="span6">
-						 <input class="span5" type="password" required ng-model="grpTourPasswordConfirm" placeholder="Confirm tournament password here" ></input>
+					<div class="span7">
+						 <input class="span6" type="password" required ng-model="grpTourPasswordConfirm" placeholder="Confirm tournament password here" ></input>
 						 <span class="alert-error" ng-show="grpTourPasswordConfirm!=grpTourPassword||grpTourPasswordConfirm==''">Password doesn't match!
 						 </span>
 					</div>
@@ -141,7 +147,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="span2">
-							Max no. of players per group:
+							No. of players per group:
 						</div>
 						<div class="span9">
 							 <select class="span2" ng-model="grpTourMaxNoPlayer" ng-options="maxnumplayers for maxnumplayers in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
@@ -308,9 +314,9 @@
 		</div><!--end of choose questions tab-->
 	</div>
 	<!-- Tournament Creation Success Modal -->
-	<div class="modal fade" id="grpTournamentCreated" style="display:none">         
+	<div class="modal fade modal-large" id="grpTournamentCreated" style="display:none">         
 	    <div class="modal-body" style="color:black">
-	        <center><h2>You have successfully created a tournament!</h2></center>
+	        <center><h2>Tournament Created Successfully!</h2></center>
 	    </div>
 	    <div class="modal-footer">
 	        <button name="gotit" class="btn btn-success" ng-click="hideSuccessTournamentModal()"><i class="icon-ok icon-white"></i> Ok</button>
@@ -327,8 +333,10 @@
 	</div>
 
 	<div class="modal fade" id="questionInfo" style="display:none">
+		<div class="modal-header">
+			<center><h3 class="modal-title">Question Information</h3></center>
+		</div>
 		<div class="modal-body" style="color:black">
-			<h3>Question Information</h3>
 	        <div class="row-fluid">
 				<div class="span10">
 					<b>Question Title:</b>
@@ -368,8 +376,10 @@
 	</div>
 
 	<div class="modal fade" id="questionsInCart" style="display:none">
+		<div class="modal-header">
+			<center><h3 class="modal-title">Current Round Questions</h3></center>
+		</div>
 		<div class="modal-body" style="color:black">
-			<center><h3>Current Round Questions</h3></center>
 			<div ng-show="cartQuestions.length==0">
 				<center><b> You have not added any questions! </b></center>
 			</div>
@@ -404,8 +414,10 @@
 	</div>
 
 	<div class="modal fade" id="questionInfoInCart" style="display:none">
+		<div class="modal-header">
+			<center><h3 class="modal-title">Question Information</h3></center>
+		</div>
 		<div class="modal-body" style="color:black">
-			<h3>Question Information</h3>
 	        <div class="row-fluid">
 				<div class="span10">
 					<b>Question Title:</b>
