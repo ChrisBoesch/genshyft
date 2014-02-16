@@ -240,37 +240,63 @@
                 </div>
             </form>
             
-            <table class="table table-build" ng-if="build.started">
-                <tr>
-                    <th>Number of permutation checked</th>
-                    <td>{{build.permutations.passing + build.permutations.failing + build.permutations.errors}}</td>
-                </tr>
-                <tr>
-                    <th>Number of permutation still to checked</th>
-                    <td>{{build.permutations.remaining.length}}</td>
-                </tr>
-                <tr>
-                    <th>Number of passing permutation</th>
-                    <td>{{build.permutations.passing}}</td>
-                </tr>
-                <tr>
-                    <th>Number of error permutation</th>
-                    <td>{{build.permutations.errors}}</td>
-                </tr>
-                <tr ng-class="{'warning': build.permutations.failing > 0}">
-                    <th>Number of failed permutation</th>
-                    <td>{{build.permutations.failing}}</td>
-                </tr>
-                <tr ng-class="{'warning': build.permutations.retries > 0}">
-                    <th>Number of permutation retried</th>
-                    <td>{{build.permutations.retries}}</td>
-                </tr>
-                <tr>
-                    <th>Total permutation</th>
-                    <td>{{build.permutations.total}}</td>
-                </tr>
-            </table>
+            <div ng-if="build.started">
+                <h4>Progress</h4>
 
+                <div class="progress progress-striped active" ng-show="build.running()">
+                      <div class="bar" ng-attr-style="width: {{build.permutations.progress()}}%;"></div>
+                </div>
+
+                <table class="table table-build">
+                    <tr>
+                        <th>Rebuilding time</th>
+                        <td>{{build.timer.delta()|renderMs}}</td>
+                    </tr>
+                    <tr>
+                        <th>Remaining time</th>
+                        <td>{{build.timer.rate(build.permutations.checked()) * build.permutations.remaining.length|renderMs}}</td>
+                    </tr>
+                    <tr>
+                        <th>Average time per permutation</th>
+                        <td>{{build.timer.rate(build.permutations.checked())|renderMs}}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div ng-if="build.started">
+                <h4>Build Details</h4>
+                <table class="table table-build">
+                    <tr>
+                        <th>Number of permutation checked</th>
+                        <td>{{build.permutations.checked()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Number of permutation still to checked</th>
+                        <td>{{build.permutations.remaining.length}}</td>
+                    </tr>
+                    <tr>
+                        <th>Number of passing permutation</th>
+                        <td>{{build.permutations.passing}}</td>
+                    </tr>
+                    <tr>
+                        <th>Number of error permutation</th>
+                        <td>{{build.permutations.errors}}</td>
+                    </tr>
+                    <tr ng-class="{'warning': build.permutations.failing > 0}">
+                        <th>Number of failed permutation</th>
+                        <td>{{build.permutations.failing}}</td>
+                    </tr>
+                    <tr ng-class="{'warning': build.permutations.retries > 0}">
+                        <th>Number of permutation retried</th>
+                        <td>{{build.permutations.retries}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total permutation</th>
+                        <td>{{build.permutations.total}}</td>
+                    </tr>
+                </table>    
+            </div>
+            
         </div>
     </div>
 

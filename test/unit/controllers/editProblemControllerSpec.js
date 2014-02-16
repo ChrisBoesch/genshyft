@@ -27,7 +27,8 @@
                     'setInterval': interval.setInterval,
                     'clearInterval': interval.clearInterval,
                     '$': $window['$'],
-                    'jQuery': $window['jQuery']
+                    'jQuery': $window['jQuery'],
+                    'Date': $window.Date
                 }
             });
             levels = {
@@ -773,10 +774,13 @@
             scope.build.start(scope.problemDetails, 'http://example.com/verify');
 
             expect(scope.build.running()).toBe(true);
+            expect(scope.build.timer.running()).toBe(true);
             expect(scope.build.token).toBe(scope.build.maxToken);
             expect(scope.build.token).toBeGreaterThan(0);
             expect(scope.build.permutations.remaining).toEqual([[1]]);
             expect(scope.build.permutations.total).toBe(1);
+            expect(scope.build.permutations.checked()).toBe(0);
+            expect(scope.build.permutations.progress()).toBe(0);
 
             expect(interval.cbs.length).toBe(1);
             expect(scope.build.runInterval).toBe(1);
@@ -809,6 +813,7 @@
             expect(data[0]['tests']).toBe(">>> greeting\n'Hello Jasmine'");
 
             expect(scope.build.running()).toBe(false);
+            expect(scope.build.timer.running()).toBe(false);
 
             expect(scope.problemMobile.nonErrorResults).toEqual({
                 '1': {
