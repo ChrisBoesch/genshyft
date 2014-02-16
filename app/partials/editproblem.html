@@ -297,7 +297,9 @@
                             <td>{{r.call}}</td>
                             <td>{{r.expected}}</td>
                             <td>{{r.received}}</td>
-                            <td>{{r.correct}}</td>
+                            <td ng-class="{'alert': true, 'alert-error': !r.correct, 'alert-success': r.correct }">
+                                {{r.correct}}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
