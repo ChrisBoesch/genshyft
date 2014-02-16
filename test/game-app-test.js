@@ -3077,6 +3077,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "latitude": null,
     "id": 6095188913029120,
     "path":"Python",
+    "cutoff":35, //testing
     "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
 }
 		

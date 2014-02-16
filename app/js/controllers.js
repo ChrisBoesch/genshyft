@@ -3910,7 +3910,6 @@ function EventController($scope, $resource, $location){
           
 }
 
-//By WC, in progress
 function EventTableController($scope, $resource, $route, $location){ 
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
@@ -3926,24 +3925,12 @@ function EventTableController($scope, $resource, $route, $location){
     	}
 
         //Gets registered jcParticipants.
-		$scope.get_jcParticipants = function(){
+		$scope.get_participants = function(){
 	    console.log("get_mytournaments");
 	    	//current resource refers to just JC Comp
 		    $resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
             	$scope.eventsData = response;
             	$scope.predicate = '-solvedproblems';
-
-            console.log($scope.eventsData);
-        	 })
-
-	  	};
-
-		$scope.get_currentPlayerRanking = function(){
-	    console.log("get_currentPlayerRanking");
-
-	    	//current resource refers to just JC Comp
-		    $resource("/jsonapi/player").get({},function(response){
-            	$scope.currentPlayerData = response;
 
             console.log($scope.eventsData);
         	 })
