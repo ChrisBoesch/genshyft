@@ -1949,8 +1949,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "flagUrl": "/static/flags/sg_on.png",
 		            "finished": "0:13:27.311930",
 		            "gravatar": "http://www.gravatar.com/avatar/3f0dd6b43fe16552168c919acfbf140d/?default=&amp;s=30",
-		            "mentor": "",
-		            "mentorID": null,
+		            "mentor": "Glen",
+		            "mentorID": 1111,
 		            "professional": null,
 		            "total_problems": 10,
 		            "nickname": "Chris",
@@ -2303,7 +2303,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	    "game_type": "Timed Interview",
 	    "timelimit": 3600,
 	    "mentor": "",
-	    "mentorID": 12345,
+	    "mentorID": null,
 	    "hasArrived": false
 	};
 		

@@ -30,6 +30,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 		$scope.GameModel.get({"gameID":gameID}, function(response){
         $scope.game = response;
         $scope.update_remaining_problems();
+        //Added by GENShYFT - Glen
+        $scope.get_mentor($scope.game.heatID, $scope.game.playerID);
 		});
     };
 
@@ -75,11 +77,15 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
         for(var i =0;i< $scope.current_heat.ranking.length;i++){
           if($scope.current_heat.ranking[i].playerid === playerID){
             $scope.mentor_id = $scope.current_heat.ranking[i].mentorID;
+            $scope.mentor_name= $scope.current_heat.ranking[i].mentor;
             $scope.mentor_hasArrived = $scope.current_heat.ranking[i].mentorHasArrived;
             break;
           }
         }
-      }); 
+      });
+      console.log("get_mentor")
+      
+      $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 5000); 
     };
 
 
