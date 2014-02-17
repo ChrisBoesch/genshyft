@@ -232,45 +232,78 @@
         <div class="span12 well">
             <h3>Drag-n-Drop Build</h3>
 
-            <form name="buildPermutationResults" role="form" class="form-inline">
+            <form name="buildPermutationResults" role="form" class="form">
+                <div class="controls controls-row" ng-repeat="url in build.verificationUrls">
+                    <input type="url" class="span8" ng-model="url" placeholder="Verification URL" readonly="true"/> 
+                    <input type="submit" class="btn btn-danger span4" value="remove" ng-click="build.verificationUrls.splice($index, 1)"/>
+                </div>
                 <div class="controls controls-row">
-                    <input type="url" class="span8" required="true" ng-model="build.verificationUrl" placeholder="Verification URL"/> 
-                    <input type="submit" class="btn btn-primary span2" ng-disabled="!testRun.solved || savingProblem || !buildPermutationResults.$valid" value="Build" ng-click="build.start(problemDetails, build.verificationUrl)"/>
-                    <input type="submit" class="btn span2" ng-disabled="!build.running()" value="Stop build" ng-click="build.stop()"/>
+                    <input type="url" class="span8" ng-model="newVerificationUrl" placeholder="Verification URL"/> 
+                    <input type="submit" class="btn span4" value="add" ng-click="build.verificationUrls.push(newVerificationUrl); newVerificationUrl = ''"/>
+                </div>
+                <div class="controls controls-row">
+                    <input type="submit" class="btn btn-success span8" ng-disabled="!testRun.solved || savingProblem || build.verificationUrls.length < 1" value="Build" ng-click="build.start(problemDetails, build.verificationUrls)"/>
+                    <input type="submit" class="btn span4" ng-disabled="!build.running()" value="Stop build" ng-click="build.stop()"/>
                 </div>
             </form>
             
-            <table class="table table-build" ng-if="build.started">
-                <tr>
-                    <th>Number of permutation checked</th>
-                    <td>{{build.permutations.passing + build.permutations.failing + build.permutations.errors}}</td>
-                </tr>
-                <tr>
-                    <th>Number of permutation still to checked</th>
-                    <td>{{build.permutations.remaining.length}}</td>
-                </tr>
-                <tr>
-                    <th>Number of passing permutation</th>
-                    <td>{{build.permutations.passing}}</td>
-                </tr>
-                <tr>
-                    <th>Number of error permutation</th>
-                    <td>{{build.permutations.errors}}</td>
-                </tr>
-                <tr ng-class="{'warning': build.permutations.failing > 0}">
-                    <th>Number of failed permutation</th>
-                    <td>{{build.permutations.failing}}</td>
-                </tr>
-                <tr ng-class="{'warning': build.permutations.retries > 0}">
-                    <th>Number of permutation retried</th>
-                    <td>{{build.permutations.retries}}</td>
-                </tr>
-                <tr>
-                    <th>Total permutation</th>
-                    <td>{{build.permutations.total}}</td>
-                </tr>
-            </table>
+            <div ng-if="build.started">
+                <h4>Progress</h4>
 
+                <div class="progress progress-striped active" ng-show="build.running()">
+                      <div class="bar" ng-attr-style="width: {{build.permutations.progress()}}%;"></div>
+                </div>
+
+                <table class="table table-build">
+                    <tr>
+                        <th>Rebuilding time</th>
+                        <td>{{build.timer.delta()|renderMs}}</td>
+                    </tr>
+                    <tr>
+                        <th>Remaining time</th>
+                        <td>{{build.timer.rate(build.permutations.checked()) * build.permutations.remaining.length|renderMs}}</td>
+                    </tr>
+                    <tr>
+                        <th>Average time per permutation</th>
+                        <td>{{build.timer.rate(build.permutations.checked())|renderMs}}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div ng-if="build.started">
+                <h4>Build Details</h4>
+                <table class="table table-build">
+                    <tr>
+                        <th>Number of permutation checked</th>
+                        <td>{{build.permutations.checked()}}</td>
+                    </tr>
+                    <tr>
+                        <th>Number of permutation still to checked</th>
+                        <td>{{build.permutations.remaining.length}}</td>
+                    </tr>
+                    <tr>
+                        <th>Number of passing permutation</th>
+                        <td>{{build.permutations.passing}}</td>
+                    </tr>
+                    <tr>
+                        <th>Number of error permutation</th>
+                        <td>{{build.permutations.errors}}</td>
+                    </tr>
+                    <tr ng-class="{'warning': build.permutations.failing > 0}">
+                        <th>Number of failed permutation</th>
+                        <td>{{build.permutations.failing}}</td>
+                    </tr>
+                    <tr ng-class="{'warning': build.permutations.retries > 0}">
+                        <th>Number of permutation retried</th>
+                        <td>{{build.permutations.retries}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total permutation</th>
+                        <td>{{build.permutations.total}}</td>
+                    </tr>
+                </table>    
+            </div>
+            
         </div>
     </div>
 

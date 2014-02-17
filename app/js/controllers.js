@@ -3990,7 +3990,7 @@ function EventTableController($scope, $resource, $route, $location){
  * TODO: handle success and error message.
  * 
  */
-function EditProblemController($scope, $http, $q, $window, permutations) {
+function EditProblemController($scope, $http, $q, $window, permutations, Timer) {
     var postConfig = {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         transformRequest: function (data) {
@@ -4470,26 +4470,54 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
     $scope.$watch('problemDetails.tests', $scope.resetTestRun);
     $scope.$watch('problemDetails.privateTests', $scope.resetTestRun);
 
+
     $scope.build = {
         rate: 200,
         maxToken: 5,
+        permutations: {
+            remaining: [],
+            passing: 0,
+            failing: 0,
+            errors: 0,
+            total: 0,
+            retries: 0,
+
+            reset: function (argument) {
+                this.remaining = [];
+                this.passing = 0;
+                this.failing = 0;
+                this.errors = 0;
+                this.total = 0;
+                this.retries = 0;
+            },
+
+            checked: function() {
+                return this.passing + this.failing + this.errors;
+            },
+
+            progress: function() {
+                if (!this.total) {
+                    return 100;
+                }
+
+                return (this.checked() * 100 / this.total);
+            }
+        },
 
         required: function () {
             return $scope.problemMobile && !$scope.build.built();
         },
 
         reset: function() {
+            $scope.timer = null;
             $scope.build.stop();
             $scope.build.token = $scope.build.maxToken;
             $scope.build.started = false;
-            $scope.build.permutations = {
-                remaining: [],
-                passing: 0,
-                failing: 0,
-                errors: 0,
-                total: 0,
-                retries: 0
-            };
+            $scope.build.permutations.reset();
+            
+            if (!$scope.build.verificationUrls) {
+                $scope.build.verificationUrls = [];
+            }
         },
 
         sync: function (problemDetails) {
@@ -4504,7 +4532,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             $scope.problemMobile.depth = $scope.problemMobile.lines.length;
         },
 
-        start: function (problemDetails, verificationUrl) {
+        start: function (problemDetails, verificationUrls) {
             $scope.build.reset();
             $scope.build.sync(problemDetails);
 
@@ -4512,7 +4540,8 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             $scope.build.permutations.remaining = permutations($scope.problemMobile.depth);
             $scope.build.permutations.total = $scope.build.permutations.remaining.length;
 
-            $scope.build.run(verificationUrl);
+            $scope.build.timer = new Timer();
+            $scope.build.run(verificationUrls);
         },
 
         stop: function (argument) {
@@ -4520,13 +4549,14 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                 return;
             }
             $window.clearInterval($scope.build.runInterval);
+            $scope.build.timer.stop();
             $scope.build.runInterval = null;
         },
 
         sortResults: function (resp) {
             var permKey;
 
-            if (resp.error) {
+            if (resp.errors) {
                 $scope.build.permutations.errors +=1;
                 return;
             }
@@ -4547,11 +4577,15 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             $scope.build.permutations.remaining.push(perm);
         },
 
-        run: function (verificationUrl) {
+        run: function (verificationUrls) {
+            var i = 0;
+
             $scope.build.runInterval = $window.setInterval(function () {
-                var perm;
+                var perm,
+                    url = verificationUrls[i++ % verificationUrls.length];
 
                 if ($scope.build.token === 0) {
+                    $scope.$digest();
                     return;
                 }
 
@@ -4559,6 +4593,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                 if (!perm) {
                     if (!$scope.build.pending()) {
                         $scope.build.stop();
+                        $scope.$digest();
                     }
                     return;
                 }
@@ -4568,7 +4603,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                     perm,
                     $scope.problemMobile.lines,
                     $scope.problemMobile.tests,
-                    verificationUrl
+                    url
                 ).then(
                     $scope.build.sortResults,
                     $scope.build.retry

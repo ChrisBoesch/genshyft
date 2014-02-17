@@ -535,3 +535,7 @@ a[data-toggle="tab"]:hover {
 .table-build th {
     text-align: left;
 }
+
+.table-build td {
+    text-align: right;
+}
