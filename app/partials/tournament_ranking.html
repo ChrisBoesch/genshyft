@@ -24,10 +24,10 @@
 	
 	
 	<!--All Rankings : Rankings-->
-	th.Rank_Ranking, td.Rank_Ranking						{width:10%;}
+	th.Rank_Ranking, td.Rank_Ranking						{width:5%;}
 	th.Rank_RankInGrp, td.Rank_RankInGrp					{width:10%;}
     th.Rank_Grp, td.Rank_Grp								{width:10%;}
-    th.Rank_PlayerName, td.Rank_PlayerName					{width:15%;}
+    th.Rank_PlayerName, td.Rank_PlayerName					{width:20%;}
     th.Rank_Qns, td.Rank_Qns								{width:20%;}
     th.Rank_Progress, td.Rank_Progress						{width:10%;}
     th.Rank_AssignedTo, td.Rank_AssignedTo					{width:10%;}
@@ -80,9 +80,9 @@
 									<td class="Rank_Grp">{{player.group}}</td>
 									<td class="Rank_PlayerName"><img class="grav"ng-src="{{player.playerImg}}"> &nbsp; &nbsp;{{player.playerName}}</td>				
 									<!-- Need to add in the questions associated to each round and the tick logo -->
-									<td class="Rank_Qns"></td>
+									<td class="Rank_Qns"><img ng-repeat="i in my_range(player.problemsSolved.length)" src="http://www.singpath.com/ender/static/badges/ticks_on.png"><img ng-repeat="i in my_range(round.currentHeatDetails.numQns-player.problemsSolved.length)"src="http://www.singpath.com/ender/static/badges/ticks_off.png"></td>
 									<!-- -->
-									<td class="Rank_Progress">{{player.problemsSolved.length}}</td>
+									<td class="Rank_Progress"></td>
 									<td class="Rank_AssignedTo"></td>
 									<td class="Rank_MentoredBy"></td>
 								</tr>           

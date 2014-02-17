@@ -2,6 +2,7 @@
 </br>
 <div ng-controller="SchoolController" ng-init="get_marker()"class="container" id="registration" style="position:relative;">
 	School type: <select ng-model="filter_schooltype" ng-change="get_marker()" ng-options="schooltype for schooltype in supported_schooltypes | orderBy:'schooltype'"></select>
+        Event: <select ng-model="filter_event" ng-change="" ng-options="name for events in event_array | orderBy:'name'"></select>
 	<div class="google-map" 
                 center="position.coords"
                 zoom="zoomProperty" 

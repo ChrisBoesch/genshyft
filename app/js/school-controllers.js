@@ -10,6 +10,8 @@ function SchoolController($scope,$resource){
         $scope.filtered_count = {};
         $scope.schoolMarkers = [];
         $scope.school_registrations = {};
+        $scope.all_events = {};
+        $scope.event_array = [];
         
         $scope.filter_year = "ALL";
         $scope.filter_schooltype = "ALL";
@@ -188,6 +190,21 @@ function SchoolController($scope,$resource){
             $scope.school_registrations = response;
           });
 
+          console.log($scope.school_registrations);
+
+          //Get all event data
+          $resource('/jsonapi/mapEvent').query({}, function(response){
+            $scope.all_events = response;
+          });
+
+          $scope.event_array = $scope.all_events;
+          console.log($scope.event_array.length);
+          // for (var i = $scope.all_events.events.length - 1; i >= 0; i--) {
+          //   console.log($scope.all_events[i]);
+          // };
+          $scope.toPlaceInDDB = [];
+
+          //for(var i = 0; i <scop)
 
           $resource('/jsonapi/schools/SG').get({},function(response){
               $scope.schools = response;
