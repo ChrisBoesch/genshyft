@@ -3977,7 +3977,7 @@ function EventTableController($scope, $resource, $route, $location){
  * TODO: handle success and error message.
  * 
  */
-function EditProblemController($scope, $http, $q, $window) {
+function EditProblemController($scope, $http, $q, $window, permutations) {
     var postConfig = {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         transformRequest: function (data) {
@@ -4000,7 +4000,7 @@ function EditProblemController($scope, $http, $q, $window) {
 
         if (!resp.data.interfaces) {
             alert('error');
-            return $.reject(resp.data);
+            return $q.reject(resp.data);
         }
 
         $scope.interfaces = resp.data.interfaces;
@@ -4041,7 +4041,7 @@ function EditProblemController($scope, $http, $q, $window) {
         return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
             if (!resp.data.paths) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
             $scope.paths = resp.data.paths;
             return $scope.paths;
@@ -4074,7 +4074,7 @@ function EditProblemController($scope, $http, $q, $window) {
         $http.post('/jsonapi/new_path', newPath, postConfig).then(function(resp){
             if (!resp.data.path_id) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             newPath.id = resp.data.path_id;
@@ -4126,7 +4126,7 @@ function EditProblemController($scope, $http, $q, $window) {
         return $http.get('/jsonapi/problemsets/' + path.id).then(function(resp){
             if (!resp.data.problemsets) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             $scope.problemSets = resp.data.problemsets;
@@ -4161,7 +4161,7 @@ function EditProblemController($scope, $http, $q, $window) {
         $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
             if (!resp.data.problemset_id) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             newLevel.id = resp.data.problemset_id;
@@ -4213,7 +4213,7 @@ function EditProblemController($scope, $http, $q, $window) {
         return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
             if (!resp.data.problems) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             $scope.problems = resp.data.problems;
@@ -4274,7 +4274,7 @@ function EditProblemController($scope, $http, $q, $window) {
 
             if (!resp.data.success) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             next = $scope.findProblem(target);
@@ -4310,7 +4310,7 @@ function EditProblemController($scope, $http, $q, $window) {
 
             if (!resp.data.success) {
                 alert('error');
-                return $.reject(resp.data);
+                return $q.reject(resp.data);
             }
 
             prev = $scope.findProblem(target);
@@ -4355,11 +4355,13 @@ function EditProblemController($scope, $http, $q, $window) {
 
 
     /**
-     * Reset the problem details (`$scope.problemDetails`)
+     * Reset the problem details 
+     * (`$scope.problemDetails` and `$scope.problemMobile`)
      * 
      */
     $scope.resetProblemDetails = function() {
         $scope.problemDetails = {};
+        $scope.problemMobile = null;
     };
 
     /**
@@ -4367,6 +4369,7 @@ function EditProblemController($scope, $http, $q, $window) {
      * 
      */
     $scope.getProblemDetails = function(problem) {
+        var details, mobile;
         
         $scope.resetProblemDetails();
 
@@ -4374,13 +4377,27 @@ function EditProblemController($scope, $http, $q, $window) {
             return $q.reject('problem is not set or has no id');
         }
 
-        return $http.get('/jsonapi/get_problem?problem_id=' + problem.id).then(function(resp){
+        details = $http.get('/jsonapi/get_problem?problem_id=' + problem.id).then(function(resp){
             if (!resp.data.problem) {
                 return {};
             }
 
             $scope.problemDetails = resp.data.problem;
             return $scope.problemDetails;
+        });
+
+        mobile = $http.get('/jsonapi/mobile_problem/' + problem.id).then(function(resp) {
+            if (resp.data.error) {
+                return {};
+            }
+
+            $scope.problemMobile = resp.data;
+            return $scope.problemMobile;
+        });
+
+        return $q.all({
+            'problemDetails': details,
+            'problemMobile': mobile
         });
     };
 
@@ -4430,6 +4447,7 @@ function EditProblemController($scope, $http, $q, $window) {
      */
     $scope.resetTestRun = function() {
         $scope.testRun = {};
+        $scope.build.reset();
     };
 
     // The tests need to be run again if those expressions change.
@@ -4438,6 +4456,205 @@ function EditProblemController($scope, $http, $q, $window) {
     $scope.$watch('problemDetails.examples', $scope.resetTestRun);
     $scope.$watch('problemDetails.tests', $scope.resetTestRun);
     $scope.$watch('problemDetails.privateTests', $scope.resetTestRun);
+
+    $scope.build = {
+        rate: 200,
+        maxToken: 5,
+
+        required: function () {
+            return $scope.problemMobile && !$scope.build.built();
+        },
+
+        reset: function() {
+            $scope.build.stop();
+            $scope.build.token = $scope.build.maxToken;
+            $scope.build.started = false;
+            $scope.build.permutations = {
+                remaining: [],
+                passing: 0,
+                failing: 0,
+                errors: 0,
+                total: 0,
+                retries: 0
+            };
+        },
+
+        sync: function (problemDetails) {
+            $scope.problemMobile.tests = problemDetails.tests;
+            $scope.problemMobile.current_solution = problemDetails.solution;
+            $scope.problemMobile.solution = problemDetails.solution;
+            $scope.problemMobile.lines = problemDetails.solution.match(/[^\r\n]+/g);
+            $scope.problemMobile.examples = problemDetails.examples;
+            $scope.problemMobile.name = problemDetails.name;
+            $scope.problemMobile.nonErrorResults = {};
+            // TODO: what is depth?
+            $scope.problemMobile.depth = $scope.problemMobile.lines.length;
+        },
+
+        start: function (problemDetails, verificationUrl) {
+            $scope.build.reset();
+            $scope.build.sync(problemDetails);
+
+            $scope.build.started = true;
+            $scope.build.permutations.remaining = permutations($scope.problemMobile.depth);
+            $scope.build.permutations.total = $scope.build.permutations.remaining.length;
+
+            $scope.build.run(verificationUrl);
+        },
+
+        stop: function (argument) {
+            if (!$scope.build.runInterval) {
+                return;
+            }
+            $window.clearInterval($scope.build.runInterval);
+            $scope.build.runInterval = null;
+        },
+
+        sortResults: function (resp) {
+            var permKey;
+
+            if (resp.error) {
+                $scope.build.permutations.errors +=1;
+                return;
+            }
+
+            permKey = resp.permutation.join('');
+            delete resp.permutation;
+
+            $scope.problemMobile.nonErrorResults[permKey] = resp;
+            if (resp.solved === true) {
+                $scope.build.permutations.passing +=1;
+            } else {
+                $scope.build.permutations.failing +=1;
+            }
+        },
+
+        retry: function (perm) {
+            $scope.build.permutations.retries += 1;
+            $scope.build.permutations.remaining.push(perm);
+        },
+
+        run: function (verificationUrl) {
+            $scope.build.runInterval = $window.setInterval(function () {
+                var perm;
+
+                if ($scope.build.token === 0) {
+                    return;
+                }
+
+                perm = $scope.build.permutations.remaining.pop();
+                if (!perm) {
+                    if (!$scope.build.pending()) {
+                        $scope.build.stop();
+                    }
+                    return;
+                }
+
+                $scope.build.token -= 1;
+                $scope.build.verify(
+                    perm,
+                    $scope.problemMobile.lines,
+                    $scope.problemMobile.tests,
+                    verificationUrl
+                ).then(
+                    $scope.build.sortResults,
+                    $scope.build.retry
+                ).always(function () {
+                    $scope.build.token += 1;
+                });
+
+                $scope.$digest();
+            }, $scope.build.rate);
+        },
+
+        running: function () {
+            return (
+                angular.isDefined($scope.build.runInterval) &&
+                $scope.build.runInterval !== null
+            );
+        },
+
+        built: function () {
+            var permLeft = (
+                    $scope.build.permutations.remaining && 
+                    $scope.build.permutations.remaining.length > 0
+                );
+
+            return $scope.build.started && !permLeft && !$scope.build.pending();
+        },
+
+        pending: function() {
+            return $scope.build.token < $scope.build.maxToken;
+        },
+
+        verify: function (perm, lines, tests, url) {
+            var solution, jsonRequest;
+
+            try {
+                solution = perm.map(function(lineNumber) {
+                    return lines[lineNumber-1];
+                }).join('\n');
+
+                jsonRequest={
+                    'solution': solution,
+                    'tests': tests
+                };
+
+                url += url.indexOf('?') > -1 ? '&vcallback=JSON_CALLBACK' : '?vcallback=JSON_CALLBACK';
+            } catch(e) {
+                // TODO: reject instead
+                return $q.when('Something went very wrong...');
+            }
+
+            return $http.jsonp(
+                url,
+                {
+                    params: {
+                        'jsonrequest': btoa(JSON.stringify(jsonRequest)),
+                        'key': perm.join('')
+                    }
+                }
+            ).then(function(resp) {
+                    var result = {
+                        permutation: perm
+                    };
+
+                    if (resp.data.errors) {
+                        result.errors = resp.data.errors;
+                    } else if ('solved' in resp.data) {
+                        result.solved = resp.data.solved;
+                        result.results = resp.data.results;
+                    } else {
+                        return $q.reject(perm);
+                    }
+
+                    return result;
+
+                }, 
+                function() {
+                    return perm;
+                }
+            );
+        },
+
+        save: function () {
+            var data = {
+                'problem_id': $scope.problemMobile.problem_id,
+                'nonErrorResults': $scope.problemMobile.nonErrorResults
+            };
+
+            return $http.post('/jsonapi/update_mobile_problem', data).then(function(resp) {
+                if ('error' in resp.data) {
+                    alert('error saving mobile problem');
+                    console.log(resp.data.error);
+                    return $q.reject(resp.data);
+                }
+
+                $scope.problemMobile = resp.data;
+                return $scope.problemMobile;
+            });
+        }
+    };
 
     /**
      * Save changes or create a problem
@@ -4464,6 +4681,11 @@ function EditProblemController($scope, $http, $q, $window) {
         } else {
             url = '/jsonapi/new_problem';
         }
+
+        // Mobile problem cannot have private test.
+        if ($scope.problemMobile) {
+            data.privateTests = "";
+        }
         
         $scope.savingProblem = true;
         $http.post(url, data, postConfig).then(function(resp){
@@ -4476,7 +4698,15 @@ function EditProblemController($scope, $http, $q, $window) {
 
             $scope.problemDetails.problem_id = resp.data.problem_id;
             $scope.problem.id = resp.data.problem_id;
-            alert('saved');
+            alert('problem saved');
+            
+            if ($scope.problemMobile) {
+                return $scope.build.save();
+            }
+        }).then(function (problemMobile) {
+            if (problemMobile) {
+                alert('mobile problem saved');
+            }
         }).always(function(){
             $scope.savingProblem = false;
         });

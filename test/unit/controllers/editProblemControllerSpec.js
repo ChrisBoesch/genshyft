@@ -3,7 +3,9 @@
 
     describe('EditProblemController', function() {
 
-        var ctrl, scope, httpBackend, levels, problems, problemDetails;
+        var ctrl, scope, httpBackend, levels, problems, problemDetails, problemMobile;
+
+        beforeEach(angular.mock.module('myApp'));
 
         beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
             scope = $rootScope.$new();
@@ -358,6 +360,33 @@
                 "type": "problem"
             };
 
+            problemMobile = {
+                "tests": ">>> greeting\r\n'hello world'",
+                "description": "In keeping with tradition, the first program you will create is a greeting to the world.  Create a variable named 'greeting' that contains the string 'hello world'.  The code is given already, you just need to hit 'Run' again.",
+                "current_solution": "greeting='hello world'",
+                "lines": ["greeting='hello world'"],
+                "solution": "greeting='hello world'",
+                "path_id": 10030,
+                "depth": 1,
+                "problemset_id": 11021,
+                "examples": ">>> greeting\r\n'hello world'",
+                "current_tests": ">>> greeting\r\n'hello world'",
+                "problemsetorder": 2,
+                "id": 37043,
+                "nonErrorResults": {
+                    "1": {
+                        "solved": "true",
+                        "results": [{
+                            "expected": "Not built yet",
+                            "received": "Not built yet",
+                            "call": "Not built yet",
+                            "correct": true
+                        }]
+                    }
+                },
+                "name": "Welcome"
+            };
+
             httpBackend.expectGET('/jsonapi/interfaces').respond({
                 "interfaces": [{
                     "singpathSupported": true,
@@ -586,9 +615,11 @@
         it('should get a problem details', function() {
             scope.getProblemDetails(problems.problems[0]);
             httpBackend.expectGET('/jsonapi/get_problem?problem_id=37043').respond(problemDetails);
+            httpBackend.expectGET('/jsonapi/mobile_problem/37043').respond(problemMobile);
 
             httpBackend.flush();
             expect(scope.problemDetails.problem_id).toBe(37043);
+            expect(scope.problemMobile.id).toBe(37043);
         });
 
         it('should run private and public test against the solution', function() {
@@ -657,6 +688,7 @@
             scope.problemSet = levels.problemsets[0];
             scope.problem = problems.problems[0];
             scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.other_tests = ">>> greeting + '!'\r\n'hello world!'";
 
             scope.save();
             httpBackend.expectPOST('/jsonapi/edit_problem').respond(function(method, url, strData) {
@@ -672,9 +704,42 @@
             expect(data.name).toBe('Welcome');
             expect(data.solution_code).toBe("greeting='hello world'");
             expect(data.publicTests).toBe(">>> greeting\r\n'hello world'");
+            expect(data.privateTests).toBe(">>> greeting + '!'\r\n'hello world!'");
 
             expect(scope.problem.id).toBe(37043);
             expect(scope.problemDetails.problem_id).toBe(37043);
+        });
+
+        it('should save changes to mobile problems', function() {
+            var data = [];
+
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.other_tests = ">>> greeting + '!'\r\n'hello world!'";
+            scope.problemMobile = problemMobile;
+
+            scope.save();
+            httpBackend.whenPOST('/jsonapi/edit_problem').respond(function(method, url, strData) {
+                data.push(parseParam(strData));
+                
+                return [200, {problem_id: 37043}];
+            });
+
+            httpBackend.expectPOST('/jsonapi/update_mobile_problem').respond(function(method, url, strData) {
+                data.push(JSON.parse(strData));
+                return [200, problemMobile];
+            });
+
+            httpBackend.flush();
+            expect(data[0].privateTests).toBe("");
+
+            expect(data[1]).toEqual({
+                problem_id: problemMobile.problem_id,
+                nonErrorResults: problemMobile.nonErrorResults
+            });
+
         });
 
     });

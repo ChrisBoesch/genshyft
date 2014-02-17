@@ -17,7 +17,7 @@ angular.module('myApp.services', []).
             getUser: function () {
                 return _user;
             }
-        }
+        };
     })
 
     // Todo: Make it a provider so that _basePath can be configured from app.config
@@ -36,9 +36,103 @@ angular.module('myApp.services', []).
                     });
                     return deferred.promise;
                 };
-            }
+            };
         return {
             getGamePaths: _promiseWrapper('get_game_paths'),
             getMobilePaths: _promiseWrapper('mobile_paths', 'query')
+        };
+    })
+
+    .factory('permutations', function(){
+        function permute(a, b) {
+            var ret = [],
+                sub_ret = {},
+                element,
+                P1,
+                P2,
+                P1_JOIN,
+                P2_JOIN;
+
+            for (var element_a in a) {
+                for (var element_b in b) {
+                    if (b[element_b].indexOf(a[element_a][0]) >= 0) {
+                        continue;
+                    }
+                    P1 = a[element_a].concat(b[element_b]);
+                    P2 = b[element_b].concat(a[element_a]);
+                    P1_JOIN = P1.join('');
+                    if (P1_JOIN in sub_ret) {
+                        continue;
+                    } else {
+
+                        ret.push(P1);
+                        sub_ret[P1_JOIN] = true;
+
+                    }
+                    P2_JOIN = P2.join('');
+                    if (P2_JOIN in sub_ret) {
+                        continue;
+                    } else {
+
+                        ret.push(P2);
+                        sub_ret[P2_JOIN] = true;
+                    }
+
+                }
+            }
+            return ret;
         }
+
+        return function (n) {
+            var i,
+                range = [],
+                permute_elementes,
+                ret2,
+                both,
+                topadditional = 0,
+                top = [],
+                bottom = [],
+                limit = n;
+
+            if (n > 7) {
+                both = parseInt((n - 7) / 2, 10);
+                topadditional = (n - 7) % 2 + both;
+                limit = topadditional + 7;
+            }
+
+            i = 1 + topadditional;
+            while (i <= limit) {
+                range.push([i]);
+                i = i + 1;
+            }
+
+            i = 1;
+            while (i <= topadditional) {
+                top.push(i);
+                i = i + 1;
+            }
+
+            i = limit + 1;
+            while (i <= n) {
+                bottom.push(i);
+                i = i + 1;
+            }
+
+            ret2 = JSON.parse(JSON.stringify(range));
+            permute_elementes = JSON.parse(JSON.stringify(range));
+
+            i = 0;
+            while (i < (range.length - 1)) {
+                permute_elementes = JSON.parse(JSON.stringify(permute(range, permute_elementes)));
+                ret2 = ret2.concat(permute_elementes);
+                i = i + 1;
+            }
+
+            for (i in ret2) {
+                ret2[i] = top.concat(ret2[i]);
+                ret2[i] = ret2[i].concat(bottom);
+            }
+
+            return ret2;
+        };
     });

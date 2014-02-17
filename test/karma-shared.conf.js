@@ -26,6 +26,7 @@ module.exports = function () {
             'app/js/controllers.js',
             'app/js/directives.js',
             'app/js/services.js',
+            'app/js/filters.js',
             'app/js/app.js',
             'app/js/app-config.js',
 
