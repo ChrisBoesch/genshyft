@@ -411,14 +411,111 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   /*Method to save edited tournament details-EngSen*/
-  $scope.editTournamentDetails = function(){
-    $('#changesSaved').modal('show');
+  $scope.updateTournament = function(){
+    if($scope.selectedTournament.title=="" || $scope.selectedTournament.title==undefined){
+      alert("The tournament title cannot be empty!");
+    }
+    else if($scope.selectedTournament.password=="" || $scope.selectedTournament.password==undefined){
+      alert("The tournament password cannot be empty!");
+    }
+    else if($scope.selectedTournament.password!=$scope.selectedTournament.passwordConfirm){
+      alert("The tournament password does not match!");
+    }
+    else if($scope.selectedTournament.isGroup==true){
+      var updatedTournament = {"tournamentId":$scope.selectedTournament.tournamentID,
+                  "description":$scope.selectedTournament.description,
+                   "password": $scope.selectedTournament.password,
+                   "passwordConfirm": $scope.selectedTournament.passwordConfirm,
+                   "addDetails":$scope.selectedTournament.addDetails,
+                   "title":$scope.selectedTournament.title,
+                   "status": $scope.selectedTournament.status,
+                   "isGroup": $scope.selectedTournament.isGroup,
+                   "mentorAssignment": $scope.selectedTournament.mentorAssignment,
+                   "noGroup": $scope.selectedTournament.noGroup,
+                   "maxNoPlayer": $scope.selectedTournament.maxNoPlayer,
+                   "dateCreated": $scope.selectedTournament.dateCreated,
+                   "rounds": $scope.selectedTournament.rounds
+                 }
+      $.ajax({
+        url: '../jsonapi/updateTournament',
+        type: 'POST',
+        async: false,
+        data: updatedTournament,
+        dataType: "text",
+        success: function(){
+          $('#editTournInfo').modal('hide');
+          $('#changesSaved').modal('show');
+        },
+        error: function(jqXHR, textStatus) {
+          alert( "Request failed: " + textStatus );
+        }
+      });
+      $('#editTournInfo').modal('hide');
+      $('#changesSaved').modal('show');
+    }
+    else{
+      var updatedTournament = {"tournamentId":$scope.selectedTournament.tournamentID,
+                  "description":$scope.selectedTournament.description,
+                   "password": $scope.selectedTournament.password,
+                   "passwordConfirm": $scope.selectedTournament.passwordConfirm,
+                   "addDetails":$scope.selectedTournament.addDetails,
+                   "title":$scope.selectedTournament.title,
+                   "status": $scope.selectedTournament.status,
+                   "isGroup": $scope.selectedTournament.isGroup,
+                   "dateCreated": $scope.selectedTournament.dateCreated,
+                   "rounds": $scope.selectedTournament.rounds
+                 }
+      $.ajax({
+        url: '../jsonapi/updateTournament',
+        type: 'POST',
+        async: false,
+        data: updatedTournament,
+        dataType: "text",
+        success: function(){
+          $('#editTournInfo').modal('hide');
+          $('#changesSaved').modal('show');
+        },
+        error: function(jqXHR, textStatus) {
+          alert( "Request failed: " + textStatus );
+        }
+      });
+      $('#editTournInfo').modal('hide');
+      $('#changesSaved').modal('show');
+    }
   };
 
   /*Method to save edited tournament round details-EngSen*/
-  $scope.save_editedRound = function(){
-    $scope.cartQuestions = [];
-    $('#changesSaved').modal('show');
+  $scope.updateRound = function(){
+    if($scope.selectedRound.roundName == undefined || $scope.selectedRound.roundName == ""){
+      alert("The round name cannot be empty!");
+    }
+    else if($scope.selectedRound.timeLimit == undefined || $scope.selectedRound.timeLimit == 0){
+      alert("The round time limit cannot be empty!");
+    }
+    else{
+      var roundQuestions = [];
+      for(var j = 0; j < $scope.cartQuestions.length; j++){
+        roundQuestions.push($scope.cartQuestions[j].questionId);
+      }
+      var updatedRound = {"roundId":$scope.selectedRound.roundId,"roundName":$scope.selectedRound.roundName,"timeLimit":$scope.selectedRound.timeLimit,"problemIDs":roundQuestions,"description":$scope.selectedRound.description};    
+      $.ajax({
+        url: '../jsonapi/updateRound',
+        type: 'POST',
+        async: false,
+        data: updatedRound,
+        dataType: "text",
+        success: function(){
+          $scope.cartQuestions = [];
+          $('#changesSaved').modal('show');
+        },
+        error: function(jqXHR, textStatus) {
+          alert( "Request failed: " + textStatus );
+        }
+      });
+      $scope.cartQuestions = [];
+      $('#editTournRound').modal('hide');
+      $('#changesSaved').modal('show');
+    }
   };
 
   /*Method to load retrieve details of selected round with Round ID*/
