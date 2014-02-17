@@ -490,7 +490,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
         $scope.get_indivNoGrpPlayers($scope.tournament);
         console.log("tournType : " + $scope.tournament.tournType );
-        if($scope.tournament.tournType == "Group"){
+        if($scope.tournament.isGroup){
           $scope.get_grpPlayers($scope.tournament);
         }       
     });
@@ -504,7 +504,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
         $scope.get_indivNoGrpPlayers($scope.tournament);
         console.log("tournType : " + $scope.tournament.tournType );
-        if($scope.tournament.tournType == "Group"){
+        if($scope.tournament.isGroup){
           $scope.get_grpPlayers($scope.tournament);
         }       
     });
@@ -665,7 +665,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.create_tournament_round_game_new = function(roundID, grpHave, tournamentType){
-    if(tournamentType==="Group"){
+    if(tournamentType){
       if(grpHave==true){
         $scope.CreateGameModel = $resource('/jsonapi/launch_game_for_round?round_id='+roundID);
         $scope.CreateGameModel.get({}, function(response){

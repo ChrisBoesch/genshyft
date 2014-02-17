@@ -684,11 +684,11 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "currentPlayerID": 57754,
     "description": "Test Individual Tournament",
     "directorID": 57754,
-    "tournType": "Individual",
+    "isGroup": false,
     "tournamentID": 5060388987076608,
 	"maxNoPlayerPerGrp":0,
 	"maxNoGrp":0,
-    "mentorAssignInTeam":"N",
+    "mentorAssignInTeam": false,
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -1069,11 +1069,11 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "currentPlayerID": 57754,
     "description": "Test Group Tournament",
     "directorID": 57754,
-    "tournType": "Group",
+    "isGroup": true,
     "tournamentID": 5060388987076609,
 	"maxNoPlayerPerGrp":5,
 	"maxNoGrp":5,
-    "mentorAssignInTeam":"Y",
+    "mentorAssignInTeam": true,
     "rounds": [
         {
             "roundID": 4912161075757056,
