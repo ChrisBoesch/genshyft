@@ -771,7 +771,7 @@
             scope.problemDetails.tests = ">>> greeting\n'Hello Jasmine'";
             scope.problemMobile = problemMobile;
 
-            scope.build.start(scope.problemDetails, 'http://example.com/verify');
+            scope.build.start(scope.problemDetails, ['http://example.com/verify']);
 
             expect(scope.build.running()).toBe(true);
             expect(scope.build.timer.running()).toBe(true);
@@ -840,7 +840,7 @@
             scope.problemDetails.tests = ">>> greeting\n'Hello Jasmine'";
             scope.problemMobile = problemMobile;
 
-            scope.build.start(scope.problemDetails, 'http://example.com/verify');
+            scope.build.start(scope.problemDetails, ['http://example.com/verify']);
 
             httpBackend.expectJSONP(/http:\/\/example.com\/verify\?vcallback=JSON_CALLBACK/).respond(function(method, url) {
                 return [200, {

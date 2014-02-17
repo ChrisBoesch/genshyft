@@ -232,11 +232,18 @@
         <div class="span12 well">
             <h3>Drag-n-Drop Build</h3>
 
-            <form name="buildPermutationResults" role="form" class="form-inline">
+            <form name="buildPermutationResults" role="form" class="form">
+                <div class="controls controls-row" ng-repeat="url in build.verificationUrls">
+                    <input type="url" class="span8" ng-model="url" placeholder="Verification URL" readonly="true"/> 
+                    <input type="submit" class="btn btn-danger span4" value="remove" ng-click="build.verificationUrls.splice($index, 1)"/>
+                </div>
                 <div class="controls controls-row">
-                    <input type="url" class="span8" required="true" ng-model="build.verificationUrl" placeholder="Verification URL"/> 
-                    <input type="submit" class="btn btn-primary span2" ng-disabled="!testRun.solved || savingProblem || !buildPermutationResults.$valid" value="Build" ng-click="build.start(problemDetails, build.verificationUrl)"/>
-                    <input type="submit" class="btn span2" ng-disabled="!build.running()" value="Stop build" ng-click="build.stop()"/>
+                    <input type="url" class="span8" ng-model="newVerificationUrl" placeholder="Verification URL"/> 
+                    <input type="submit" class="btn span4" value="add" ng-click="build.verificationUrls.push(newVerificationUrl); newVerificationUrl = ''"/>
+                </div>
+                <div class="controls controls-row">
+                    <input type="submit" class="btn btn-success span8" ng-disabled="!testRun.solved || savingProblem || build.verificationUrls.length < 1" value="Build" ng-click="build.start(problemDetails, build.verificationUrls)"/>
+                    <input type="submit" class="btn span4" ng-disabled="!build.running()" value="Stop build" ng-click="build.stop()"/>
                 </div>
             </form>
             

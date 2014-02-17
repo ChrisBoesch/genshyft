@@ -4511,6 +4511,10 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             $scope.build.token = $scope.build.maxToken;
             $scope.build.started = false;
             $scope.build.permutations.reset();
+            
+            if (!$scope.build.verificationUrls) {
+                $scope.build.verificationUrls = [];
+            }
         },
 
         sync: function (problemDetails) {
@@ -4525,7 +4529,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             $scope.problemMobile.depth = $scope.problemMobile.lines.length;
         },
 
-        start: function (problemDetails, verificationUrl) {
+        start: function (problemDetails, verificationUrls) {
             $scope.build.reset();
             $scope.build.sync(problemDetails);
 
@@ -4534,7 +4538,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             $scope.build.permutations.total = $scope.build.permutations.remaining.length;
 
             $scope.build.timer = new Timer();
-            $scope.build.run(verificationUrl);
+            $scope.build.run(verificationUrls);
         },
 
         stop: function (argument) {
@@ -4570,9 +4574,12 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             $scope.build.permutations.remaining.push(perm);
         },
 
-        run: function (verificationUrl) {
+        run: function (verificationUrls) {
+            var i = 0;
+
             $scope.build.runInterval = $window.setInterval(function () {
-                var perm;
+                var perm,
+                    url = verificationUrls[i++ % verificationUrls.length];
 
                 if ($scope.build.token === 0) {
                     $scope.$digest();
@@ -4593,7 +4600,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
                     perm,
                     $scope.problemMobile.lines,
                     $scope.problemMobile.tests,
-                    verificationUrl
+                    url
                 ).then(
                     $scope.build.sortResults,
                     $scope.build.retry
