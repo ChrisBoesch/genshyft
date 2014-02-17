@@ -2377,7 +2377,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Chris",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 1,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2392,7 +2392,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 2",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 1,
-				"rankingInGrp":"",
+				"rankingInGrp":2,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2407,7 +2407,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 3",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 1,
-				"rankingInGrp":"",
+				"rankingInGrp":3,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2422,7 +2422,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 4",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 2,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2437,7 +2437,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 5",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 2,
-				"rankingInGrp":"",
+				"rankingInGrp":2,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2452,7 +2452,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 6",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 2,
-				"rankingInGrp":"",
+				"rankingInGrp":3,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2467,7 +2467,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 7",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 3,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2482,7 +2482,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 8",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 3,
-				"rankingInGrp":"",
+				"rankingInGrp":2,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2497,7 +2497,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 9",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 4,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2512,7 +2512,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 10",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 4,
-				"rankingInGrp":"",
+				"rankingInGrp":2,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2527,7 +2527,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 11",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 4,
-				"rankingInGrp":"",
+				"rankingInGrp":3,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2542,7 +2542,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 12",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 4,
-				"rankingInGrp":"",
+				"rankingInGrp":4,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2557,7 +2557,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 13",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 5,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2572,7 +2572,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 14",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 3,
-				"rankingInGrp":"",
+				"rankingInGrp":3,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2587,7 +2587,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 15",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 2,
-				"rankingInGrp":"",
+				"rankingInGrp":4,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",

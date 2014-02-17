@@ -95,10 +95,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log("test");
         //console.log($scope.tournament.round[0].registeredPlayers);
         $scope.playerRanks = $scope.tournament.round[0].registeredPlayers;
-        //console.log($scope.playerRanks);
+        //Code here continually refreshes every 10 seconds
         $timeout(function() {
         $scope.fetch_ranks($scope.tournamentID)
-      }, 1000);
+      }, 10000);
       });
   };
 
