@@ -2,7 +2,7 @@
 
 /* Admin Controllers */
 
-function SchoolController($scope,$resource){
+function SchoolController($scope,$resource,$location){
         $scope.schools = {};
         $scope.school_lookup = {};
         $scope.school_statistics = {};
@@ -12,6 +12,11 @@ function SchoolController($scope,$resource){
         $scope.school_registrations = {};
         $scope.all_events = {};
         $scope.event_array = [];
+        $scope.event = {"name":"Default name", 
+                        "description": "Default description",
+                        "venue": "Default venue"};
+        $scope.events = [];
+        $scope.location = $location;
         
         $scope.filter_year = "ALL";
         $scope.filter_schooltype = "ALL";
@@ -181,6 +186,22 @@ function SchoolController($scope,$resource){
           
         };
 
+        var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
+
+        $scope.fetch_event = function(id){
+          var event = Event.get({eventId:id}, function() {
+            $scope.last_result = event;
+            //If id return event
+            if(id){
+                 $scope.event = event;
+            }
+            else{
+                 $scope.events = event.events; 
+            }
+            
+          console.log($scope.events);
+          });
+        },
 
         //function to add markers from schools
         $scope.get_marker = function(){
@@ -189,20 +210,6 @@ function SchoolController($scope,$resource){
           $resource('/jsonapi/school_registration').query({}, function(response){
             $scope.school_registrations = response;
           });
-
-          console.log($scope.school_registrations);
-
-          //Get all event data
-          $resource('/jsonapi/mapEvent').query({}, function(response){
-            $scope.all_events = response;
-          });
-
-          $scope.event_array = $scope.all_events;
-          console.log($scope.event_array.length);
-          // for (var i = $scope.all_events.events.length - 1; i >= 0; i--) {
-          //   console.log($scope.all_events[i]);
-          // };
-          $scope.toPlaceInDDB = [];
 
           //for(var i = 0; i <scop)
 
