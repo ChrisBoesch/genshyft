@@ -286,12 +286,12 @@
                         <td>{{build.permutations.passing}}</td>
                     </tr>
                     <tr>
-                        <th>Number of error permutation</th>
-                        <td>{{build.permutations.errors}}</td>
-                    </tr>
-                    <tr ng-class="{'warning': build.permutations.failing > 0}">
                         <th>Number of failed permutation</th>
                         <td>{{build.permutations.failing}}</td>
+                    </tr>
+                    <tr ng-class="{'warning': build.permutations.errors > 0}">
+                        <th>Number of error permutation</th>
+                        <td>{{build.permutations.errors}}</td>
                     </tr>
                     <tr ng-class="{'warning': build.permutations.retries > 0}">
                         <th>Number of permutation retried</th>
