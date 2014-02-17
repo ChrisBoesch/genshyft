@@ -83,7 +83,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
           }
         }
       });
-      console.log("get_mentor")
+      console.log("get_mentor");
       
       $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 5000); 
     };
