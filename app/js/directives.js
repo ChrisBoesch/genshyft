@@ -20,15 +20,22 @@ angular.module('myApp.directives', []).
      *         <li class="'tabspacing"><a id="result-tab" data-target="#pane2" data-toggle="tab">results</a></li>
      *     </ul>
      *     [...]
-     *     <button ng-click="runTests()" gen-toggle="#result-tab">Run test</button>
+     *     <button ng-click="runTests()" gen-switch-tab="#result-tab">Run test</button>
      */
-    directive('genToggle', ['$window', function(window) {
+    directive('genSwitchTab', ['$window', function(window) {
         var $ = window.jQuery;
         return {
             link: function(_, element, attr) {
-                $(element).on('click', function(){
-                    $(attr.genToggle).tab('show');
+                var doSwitch = function(){
+                    $(attr.genSwitchTab).tab('show');
+                };
+
+                $(element).on('click', doSwitch);
+
+                element.on('$destroy', function() {
+                    $(element).off('click', doSwitch);
                 });
+
             }
         };
     }]).
