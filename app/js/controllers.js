@@ -3983,11 +3983,10 @@ function EventTableController($scope, $resource, $route, $location){
  * If a problem is being edited it should have a problem_id.
  *
  * TODO: allow to edit names of existing problem.
- * TODO: allow the set the problem to be edited via a route parameter.
  * TODO: handle success and error message.
  * 
  */
-function EditProblemController($scope, $http, $q, $window, permutations, Timer) {
+function EditProblemController($scope, $http, $q, $routeParams, $window, permutations, Timer) {
     var postConfig = {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         transformRequest: function (data) {
@@ -4000,25 +3999,25 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
     };
 
     /**
-     * Fetch the list of language and the set the 1st one.
-     *
-     * The result sill be saved in $scope.interfaces
-     * 
+     * Get the list of interface
      */
-    $scope.loadingInterfaces = true;
-    $http.get('/jsonapi/interfaces').then(function(resp) {
+    $scope.getInterfaces = function() {
+        $scope.loadingInterfaces = true;
+        return $http.get('/jsonapi/interfaces').then(function(resp) {
 
-        if (!resp.data.interfaces) {
-            alert('error');
-            return $q.reject(resp.data);
-        }
+            if (!resp.data.interfaces) {
+                alert('error: Could not fetch the interface');
+                return $q.reject(resp.data);
+            }
 
-        $scope.interfaces = resp.data.interfaces;
-        $scope.interface = $scope.interfaces[0];
-        $scope.getPaths($scope.interface);
-    }).always(function(){
-        $scope.loadingInterfaces = false;
-    });
+            $scope.interfaces = resp.data.interfaces;
+
+            return $scope.interfaces;
+        }).always(function(){
+            $scope.loadingInterfaces = false;
+        });
+    }
+    
 
     /**
      * Reset the list of paths (`$scope.paths`).
@@ -4050,7 +4049,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
         $scope.loadingPaths = true;
         return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
             if (!resp.data.paths) {
-                alert('error');
+                alert('error: could not fetch paths.');
                 return $q.reject(resp.data);
             }
             $scope.paths = resp.data.paths;
@@ -4083,7 +4082,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
         $scope.creatingPath = true;
         $http.post('/jsonapi/new_path', newPath, postConfig).then(function(resp){
             if (!resp.data.path_id) {
-                alert('error');
+                alert('error: could not not save the new path');
                 return $q.reject(resp.data);
             }
 
@@ -4135,7 +4134,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
         $scope.loadingLevels = true;
         return $http.get('/jsonapi/problemsets/' + path.id).then(function(resp){
             if (!resp.data.problemsets) {
-                alert('error');
+                alert('error: could not get the levels.');
                 return $q.reject(resp.data);
             }
 
@@ -4170,7 +4169,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
         $scope.creatingLevel = true;
         $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
             if (!resp.data.problemset_id) {
-                alert('error');
+                alert('error: could not save the new level.');
                 return $q.reject(resp.data);
             }
 
@@ -4222,7 +4221,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
         $scope.loadingProblems = true;
         return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
             if (!resp.data.problems) {
-                alert('error');
+                alert('error: could not get the new level.');
                 return $q.reject(resp.data);
             }
 
@@ -4283,7 +4282,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             var next, target = problem.problemsetorder - 1;
 
             if (!resp.data.success) {
-                alert('error');
+                alert('error: could not move problem up.');
                 return $q.reject(resp.data);
             }
 
@@ -4319,7 +4318,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             var prev, target = problem.problemsetorder + 1;
 
             if (!resp.data.success) {
-                alert('error');
+                alert('error: could not move problem down.');
                 return $q.reject(resp.data);
             }
 
@@ -4691,7 +4690,6 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             return $http.post('/jsonapi/update_mobile_problem', data).then(function(resp) {
                 if ('error' in resp.data) {
                     alert('error saving mobile problem');
-                    console.log(resp.data.error);
                     return $q.reject(resp.data);
                 }
 
@@ -4737,7 +4735,7 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             $scope.resetTestRun();
 
             if (!resp.data.problem_id) {
-                alert('error');
+                alert('error: could not save problem.');
                 return $q.reject(resp);
             }
 
@@ -4756,5 +4754,80 @@ function EditProblemController($scope, $http, $q, $window, permutations, Timer) 
             $scope.savingProblem = false;
         });
     };
+
+    /** init **/
+
+    var interfacePromise = $scope.getInterfaces();
+
+    if ($routeParams.problemId) {
+        var problem;
+        
+        $q.all({
+            interfaces: interfacePromise,
+            problem: $scope.getProblemDetails({'id': $routeParams.problemId})
+        }).then(function(results) {
+            problem = results.problem;
+
+            for (var i = 0; i < results.interfaces.length; i++) {
+                if (results.interfaces[i].id === problem.problemDetails.interface_id) {
+                    $scope.interface = results.interfaces[i];
+                    return $scope.getPaths(results.interfaces[i]);
+                }
+            }
+
+            var msg = 'Interface not found. It does not exist or you cannot edit it';
+            alert(msg);
+            return $q.reject(msg);
+        }).then(function(paths) {
+            for (var i = 0; i < paths.length; i++) {
+                if (paths[i].id === problem.problemDetails.path_id) {
+                    $scope.path = paths[i];
+                    return $scope.getLevels(paths[i]);
+                }
+            }
+
+            var msg = 'Path not found. It does not exist or you cannot edit it';
+            alert(msg);
+            return $q.reject(msg);
+        }).then(function(levels) {
+            for (var i = 0; i < levels.length; i++) {
+                if (levels[i].id === problem.problemDetails.problemset_id) {
+                    $scope.problemSet = levels[i];
+                    return $scope.getProblems(levels[i]);
+                }
+            }
+
+            var msg = 'Level not found. It does not exist or you cannot edit it';
+            alert(msg);
+            return $q.reject(msg);
+        }).then(function(problems) {
+            for (var i = 0; i < problems.length; i++) {
+                if (problems[i].id === problem.problemDetails.problem_id) {
+                    $scope.problem = problems[i];
+                    return problems[i]
+                }
+            }
+            var msg = 'Problem not found. It does not exist or you cannot edit it';
+            alert(msg);
+            return $q.reject(msg);
+        }).then(
+            function() {
+                $scope.problemDetails = problem.problemDetails;
+                $scope.problemMobile = problem.problemMobile;
+            },
+            function() {
+                alert('failed to found the problem.');
+            }
+        );
+    }
+
+    if ($scope.interface) {
+        return;
+    }
+
+    interfacePromise.then(function(interfaces) {
+        $scope.interface = interfaces[0];
+        $scope.getPaths($scope.interface);
+    });
 
 }
