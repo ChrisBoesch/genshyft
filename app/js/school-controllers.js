@@ -163,9 +163,6 @@ function SchoolController($scope,$resource,$location){
             }
 
           });
-          
-          
-
         };
 
         $scope.add_or_update_school = function(schoolID, year){
@@ -203,6 +200,14 @@ function SchoolController($scope,$resource,$location){
           });
         },
 
+        $scope.onRadioChange = function(){
+          if($scope.searchOption == 'school'){
+            $scope.get_marker();
+          }else{
+            console.log("changed");
+          }
+
+        }
         //function to add markers from schools
         $scope.get_marker = function(){
           $scope.schoolMarkers.length = 0;

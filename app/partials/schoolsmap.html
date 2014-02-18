@@ -1,10 +1,10 @@
 </br>
 </br>
-<div ng-controller="SchoolController" ng-init="get_marker()"class="container" id="registration" style="position:relative;">
+<div ng-controller="SchoolController" class="container" id="registration" style="position:relative;">
 
         Select an option to search by:
-        <input type="radio" name="searchType" value="school" ng-model="searchOption"/>&nbsp;Search by School &nbsp;&nbsp;&nbsp; 
-        <input type="radio" name="searchType" value="event" ng-model="searchOption"/>&nbsp;Search by Event
+        <input type="radio" name="searchType" value="school" ng-model="searchOption" ng-change="onRadioChange()"/>&nbsp;Search by School &nbsp;&nbsp;&nbsp; 
+        <input type="radio" name="searchType" value="event" ng-model="searchOption" ng-change="onRadioChange()"/>&nbsp;Search by Event
         
         <!-- <select ng-model="searchDD">
           <option value="none"></option>
