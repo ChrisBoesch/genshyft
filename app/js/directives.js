@@ -10,6 +10,18 @@ angular.module('myApp.directives', []).
         };
     }]).
 
+    /**
+     * Switch the a tab when the element is clicked
+     *
+     * Usage:
+     *
+     *     <ul class="nav nav-tabs">
+     *         <li class="tabspacing active"><a data-target="#pane1" data-toggle="tab">Tests</a></li>
+     *         <li class="'tabspacing"><a id="result-tab" data-target="#pane2" data-toggle="tab">results</a></li>
+     *     </ul>
+     *     [...]
+     *     <button ng-click="runTests()" gen-toggle="#result-tab">Run test</button>
+     */
     directive('genToggle', ['$window', function(window) {
         var $ = window.jQuery;
         return {
