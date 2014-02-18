@@ -558,125 +558,26 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		]};
 		$httpBackend.whenGET('/jsonapi/mytournaments/all').respond(tournaments);
 
-	var unregisteredPlayers = {"UnregisteredPlayers":[
-		{"tournamentId":"12345",
-		"playerId":"01",
-		"name":"Stacker"},
-		
-		{"tournamentId":"12345",
-		"playerId":"02",
-		"name":"Crimson Typhoon"},
-		
-		{"tournamentId":"12345",
-		"playerId":"03",
-		"name":"Gipsy Danger"}
-		
-		]};
-		$httpBackend.whenGET('/jsonapi/unregisteredPlayersTest/ALL').respond(unregisteredPlayers);
-		
-	var registeredPlayers = {
-	    "TournamentID": "12345",
-	    "Groups": [{
-	       "grpNum": "1",
-	        "Players": [{
-	            "playerId": "123",
-	            "playerName": "Thor"},
-	        	{
-	            "playerId": "234",
-	            "playerName": "Loki"},
-	        	{
-	            "playerId": "345",
-	            "playerName": "Algor"}]},
-	    	{
-            "grpNum": "2",
-            "Players": [{
-                "playerId": "678",
-                "playerName": "Peter"},
-            	{
-                "playerId": "789",
-                "playerName": "Mary"},
-            	{
-                "playerId": "890",
-                "playerName": "May"},
-           		{
-                "playerId": "901",
-                "playerName": "Harry"},
-            	{
-                "playerId": "012",
-                "playerName": "Oct"}]},
-	        {
-            "grpNum": "3",
-            "Players": [{
-                "playerId": "110",
-                "playerName": "Tony"},
-           	 	{
-                "playerId": "111",
-                "playerName": "Rhody" },
-            	{
-                "playerId": "112",
-                "playerName": "Mandarin"},
-            	{
-                "playerId": "113",
-                "playerName": "Jarvis"},
-           	 	{
-                "playerId": "114",
-                "playerName": "Pepper"}]},
-	        {
-            "grpNum": "4",
-            "Players": [{
-                "playerId": "221",
-                "playerName": "Logan"},
-           	 	{
-                "playerId": "222",
-                "playerName": "Xavier"},
-            	{
-                "playerId": "223",
-                "playerName": "Jean" },
-            	{
-                "playerId": "224",
-                "playerName": "Scott"},
-            	{
-                "playerId": "225",
-                "playerName": "Gambit"}]},
-	        {
-            "grpNum": "5",
-            "Players": [{
-                "playerId": "331",
-                "playerName": "Sky"},
-            	{
-                "playerId": "332",
-                "playerName": "May"},
-            	{
-                "playerId": "333",
-                "playerName": "Phil"},
-            	{
-                "playerId": "334",
-                "playerName": "Feeks"},
-            	{
-                "playerId": "335",
-                "playerName": "Fury"}]}]
-	};
-
-	$httpBackend.whenGET('/jsonapi/registeredPlayersTest/ALL').respond(registeredPlayers);
+	
 
 	var grpPlayers = [];
 
-  	$httpBackend.whenPOST('/jsonapi/joinGroup/join').respond(function(method, url, data) {
+  	$httpBackend.whenPOST('/jsonapi/join_group/join').respond(function(method, url, data) {
         var item = JSON.parse(data);
 	    grpPlayers.push(item);
 	    return [200,item];
  	});
 
-    $httpBackend.whenGET('/jsonapi/joinGroup/check').respond(grpPlayers);
+    $httpBackend.whenGET('/jsonapi/join_group/check').respond(grpPlayers);
 
     var removedPlayersFromTourn =[];
 
-    $httpBackend.whenPOST('/jsonapi/removePlayer/tournament').respond(function(method, url, data) {
+    $httpBackend.whenPOST('/jsonapi/remove_player/tournament').respond(function(method, url, data) {
         var item = JSON.parse(data);
         removedPlayersFromTourn.push(item);
         return [200,item];
     });
-    $httpBackend.whenGET('/jsonapi/removePlayer/check').respond(removedPlayersFromTourn);
+    $httpBackend.whenGET('/jsonapi/remove_player/check').respond(removedPlayersFromTourn);
 
  	//New Tournament Join Page Data
  	var tournamentIndivData={
@@ -1956,7 +1857,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Chris",
 		            "menteeID": 6474597901795328,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -1972,7 +1875,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Ronald",
 		            "menteeID": 6715360346636288,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -1988,7 +1893,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Jifei",
 		            "menteeID": 4685146485686272,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2004,7 +1911,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Ben Chan",
 		            "menteeID": 5170357531049984,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2020,7 +1929,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Fu Mei",
 		            "menteeID": 6561842646220800,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2036,7 +1947,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Mrchamp",
 		            "menteeID": 4874949680431104,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2052,7 +1965,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "iPython",
 		            "menteeID": 6689212585738240,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2068,7 +1983,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Erwin",
 		            "menteeID": 4545551458631680,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2084,7 +2001,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Binh",
 		            "menteeID": 6177510182092800,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2100,7 +2019,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Melvin",
 		            "menteeID": 17331653,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2116,7 +2037,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Wei Song",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2132,7 +2055,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "sara",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2148,7 +2073,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Cheuk",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2164,7 +2091,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Zoey",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2180,7 +2109,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Xin Yi",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2196,7 +2127,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "jinzaw",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2212,7 +2145,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Secret Agent",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        }
 		    ],
 		    "heatStopTime": "2013-12-11 19:31:21.814470",
@@ -2225,7 +2160,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		    "roundDescription": "prize round",
 		    "currentTime": "2014-01-09 09:38:59.184880",
 		    "tournamentType": "Normal",
-		    "type": "heat ranking"
+		    "type": "heat ranking",
+		    "isGroup":true
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);
@@ -2303,9 +2239,6 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	    "currentTime": "2013-09-29 13:54:35.933410",
 	    "game_type": "Timed Interview",
 	    "timelimit": 3600,
-	    "mentor": "",
-	    "mentorID": null,
-	    "hasArrived": false
 	};
 		
 	$httpBackend.whenGET('/jsonapi/game/5817368383062016').respond(tournamentGame);
