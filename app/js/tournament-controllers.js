@@ -289,7 +289,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.registeredPlayersArray =[];
     console.log("fetchRegisteredUser: " + tournament.tournamentID);
     for(var i =0; i < tournament.registeredPlayers.length; i++){
-      if(tournament.registeredPlayers[i].Group===0){
+      if(tournament.registeredPlayers[i].group===0){
         var playerDetails = {"playerName":tournament.registeredPlayers[i].playerName,"playerId":tournament.registeredPlayers[i].playerId};
         $scope.registeredPlayersArray.push(playerDetails);
       }
@@ -623,18 +623,18 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $scope.numGrp = [];
       $scope.currentUserGrping = 0;
 
-      for(var i=0; i < tournament.maxNoGrp ; i++){
+      for(var i=0; i < tournament.numberOfGrp ; i++){
         var grouping = [];
         grouping.push("Group "+(i+1));
         
         for(var j=0; j < tournament.registeredPlayers.length ;j++){
-          if(tournament.registeredPlayers[j].Group == (i+1)){
+          if(tournament.registeredPlayers[j].group == (i+1)){
             var player = {"playerName":tournament.registeredPlayers[j].playerName,"playerId":tournament.registeredPlayers[j].playerId};
             grouping.push(player);      
            }
 
            if(tournament.registeredPlayers[j].playerId === tournament.currentPlayerID){
-              $scope.currentUserGrping = tournament.registeredPlayers[j].Group;
+              $scope.currentUserGrping = tournament.registeredPlayers[j].group;
               $scope.have_grp($scope.currentUserGrping);
            }
         }

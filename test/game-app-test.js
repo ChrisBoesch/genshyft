@@ -588,7 +588,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "isGroup": false,
     "tournamentID": 5060388987076608,
 	"maxNoPlayerPerGrp":0,
-	"maxNoGrp":0,
+	"numberOfGrp":0,
     "mentorAssignInTeam": false,
     "rounds": [
         {
@@ -973,7 +973,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "isGroup": true,
     "tournamentID": 5060388987076609,
 	"maxNoPlayerPerGrp":5,
-	"maxNoGrp":5,
+	"numberOfGrp":5,
     "mentorAssignInTeam": true,
     "rounds": [
         {
@@ -1079,81 +1079,81 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{ 
 			"playerId":57754,
 			"playerName":"Chris", 
-			"Group":3
+			"group":3
 		},
 		
 		{ 
 			"playerId":2739102,
 			"playerName":"Player 2", 
-			"Group":0
+			"group":0
 		},
 		{
 			"playerId":9379339,
 			"playerName":"Player 3", 
-			"Group":1
+			"group":1
 		},{ 
 			"playerId":57753,
 			"playerName":"Player 4", 
-			"Group": 1
+			"group": 1
 		},
 		
 		{ 
 			"playerId":2739101,
 			"playerName":"Player 5", 
-			"Group":1
+			"group":1
 		},
 		{
 			"playerId":9379338,
 			"playerName":"Player 6", 
-			"Group":2
+			"group":2
 		},
 		{ 
 			"playerId":57752,
 			"playerName":"Player 7", 
-			"Group": 2
+			"group": 2
 		},
 		
 		{ 
 			"playerId":2739100,
 			"playerName":"Player 8", 
-			"Group":0
+			"group":0
 		},
 		{
 			"playerId":9379337,
 			"playerName":"Player 9", 
-			"Group":4
+			"group":4
 		},
 		{ 
 			"playerId":57751,
 			"playerName":"Player 10", 
-			"Group": 4
+			"group": 4
 		},
 		
 		{ 
 			"playerId":2739099,
 			"playerName":"Player 11", 
-			"Group":4
+			"group":4
 		},
 		{
 			"playerId":9379336,
 			"playerName":"Player 12", 
-			"Group":5
+			"group":5
 		},
 		{ 
 			"playerId":57750,
 			"playerName":"Player 13", 
-			"Group": 5
+			"group": 5
 		},
 		
 		{ 
 			"playerId":2739098,
 			"playerName":"Player 14", 
-			"Group":5
+			"group":5
 		},
 		{
 			"playerId":9379335,
 			"playerName":"Player 15", 
-			"Group":3
+			"group":3
 		}],
 		
 	    "numRounds": 1,
