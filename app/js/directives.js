@@ -17,7 +17,7 @@ angular.module('myApp.directives', []).
      *
      *     <ul class="nav nav-tabs">
      *         <li class="tabspacing active"><a data-target="#pane1" data-toggle="tab">Tests</a></li>
-     *         <li class="'tabspacing"><a id="result-tab" data-target="#pane2" data-toggle="tab">results</a></li>
+     *         <li class="tabspacing"><a id="result-tab" data-target="#pane2" data-toggle="tab">results</a></li>
      *     </ul>
      *     [...]
      *     <button ng-click="runTests()" gen-switch-tab="#result-tab">Run test</button>
@@ -41,6 +41,28 @@ angular.module('myApp.directives', []).
     }]).
 
     /**
+     * Set the first tab as active if none is active
+     *
+     * Usage:
+     *
+     *     <ul class="nav nav-tabs" gen-init-tab="true">
+     *         <li class="tabspacing active"><a data-target="#pane1" data-toggle="tab">Tests</a></li>
+     *         <li class="tabspacing"><a id="result-tab" data-target="#pane2" data-toggle="tab">results</a></li>
+     *     </ul>
+     */
+    directive('genInitTab', function() {
+        return {
+            link: function(_, element) {
+                if (element.find('li.active').length > 0) {
+                    return;
+                }
+                
+                element.find('li:eq(0)').addClass('active');
+            }
+        };
+    }).
+
+    /**
      * Create a ace editor
      *
      * Usage:
@@ -54,8 +76,7 @@ angular.module('myApp.directives', []).
      * editor mode.
      * 
      */
-    directive('genAce', ['$window', function(window) {
-        var ace = window.ace;
+    directive('genAce', ['ace', function(ace) {
         return {
             require: '?ngModel',
             link: function (scope, elm, attrs, ngModel) {

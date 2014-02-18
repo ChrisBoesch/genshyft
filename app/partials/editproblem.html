@@ -142,8 +142,8 @@
             <div class="span6 well">
                 <div class="tabbable">
                 
-                    <ul class="nav nav-tabs">
-                        <li ng-class="{'error': !editProblem.desc.$valid, 'tabspacing': true, 'active': true}"><a data-target="#t1" data-toggle="tab">Decription</a></li>
+                    <ul class="nav nav-tabs" gen-init-tab="true">
+                        <li ng-class="{'error': !editProblem.desc.$valid, 'tabspacing': true}"><a data-target="#t1" data-toggle="tab">Decription</a></li>
                         <li ng-class="{'error': !editProblem.solution.$valid, 'tabspacing': true}"><a data-target="#t2" data-toggle="tab">Solution</a></li>
                         <li ng-class="{'error': !editProblem.skeleton.$valid, 'tabspacing': true}"><a data-target="#t3" data-toggle="tab">Skeleton</a></li>
                         <li ng-class="{'error': !editProblem.examples.$valid, 'tabspacing': true}"><a data-target="#t4" data-toggle="tab">Example</a></li>
@@ -174,8 +174,8 @@
 
             <div class="span6 well">
                 <div class="tabbable">
-                    <ul class="nav nav-tabs">
-                        <li ng-class="{'error': !editProblem.tests.$valid, 'tabspacing': true, 'active': true}"><a data-target="#t5" data-toggle="tab">Tests</a></li>
+                    <ul class="nav nav-tabs" gen-init-tab="true">
+                        <li ng-class="{'error': !editProblem.tests.$valid, 'tabspacing': true}"><a data-target="#t5" data-toggle="tab">Tests</a></li>
                         <li ng-class="{'error': !editProblem.privateTests.$valid, 'tabspacing': true}" ng-if="!problemMobile"><a data-target="#t6" data-toggle="tab">Private tests</a></li>
                         <li class="'tabspacing"><a id="result-tab" data-target="#t7" data-toggle="tab">Test results</a></li>
                     </ul>
