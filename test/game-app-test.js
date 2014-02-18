@@ -217,18 +217,25 @@ myApp.run(function($httpBackend) {
 		"no":"0"}]};
 
 
-//payload -> {"feedback":3, "purposevideo":2,"unlocked":true }   //user to update the new feedback score and unlock next video
+//payload -> {"feedback":0, "purposevideo":2,"unlocked":true }   //user to update the new feedback score and unlock next video - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/2').respond({"results":"video 2 unlocked and updated"});
-//payload -> {"feedback":3, "purposevideo":3,"unlocked":true }   //user to update the new feedback score and unlock next video
+//payload -> {"feedback":0, "purposevideo":3,"unlocked":true }   //user to update the new feedback score and unlock next video - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/3').respond({"result":"video 3 unlocked and updated"});
+//payload -> {"feedback":0, "purposevideo":3 }   //user to update the new feedback score and unlock next video UPDATED AS OF LAST EMAIL BY PROF CHRIS 18-2-14
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock').respond({"result":"video 3 unlocked and updated"})
 		
-//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score
+		
+//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/0').respond({"result":"video 0 feedback adjusted"});			
-//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score
+//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score - old 
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/1').respond({"result":"video 1 feedback adjusted"});
-//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score
-		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/2').respond({"result":"video 2 feedback adjusted"});		
-
+//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score - old
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/2').respond({"result":"video 2 feedback adjusted"});	
+//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score UPDATED AS OF LAST EMAIL BY PROF CHRIS 18-2-14
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback').respond({"result":"video  feedback adjusted"});	
+		
+		
+		
 //payload -> 		//admin to update video
 //{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}		
 		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/0').respond({"result":"video 0 adjusted by admin"});					
@@ -407,9 +414,9 @@ myApp.run(function($httpBackend) {
 	"goal": "faster", // or lessattempts
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
 	};
-	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);;
+	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);
 	
-	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }
+	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }   // backend will determine the nextProblemID to solve 
 	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New Mentor, Path Id and Path Name has been recorded."});
 	
 	var gameID ={"gameID":101010};
@@ -558,125 +565,26 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		]};
 		$httpBackend.whenGET('/jsonapi/mytournaments/all').respond(tournaments);
 
-	var unregisteredPlayers = {"UnregisteredPlayers":[
-		{"tournamentId":"12345",
-		"playerId":"01",
-		"name":"Stacker"},
-		
-		{"tournamentId":"12345",
-		"playerId":"02",
-		"name":"Crimson Typhoon"},
-		
-		{"tournamentId":"12345",
-		"playerId":"03",
-		"name":"Gipsy Danger"}
-		
-		]};
-		$httpBackend.whenGET('/jsonapi/unregisteredPlayersTest/ALL').respond(unregisteredPlayers);
-		
-	var registeredPlayers = {
-	    "TournamentID": "12345",
-	    "Groups": [{
-	       "grpNum": "1",
-	        "Players": [{
-	            "playerId": "123",
-	            "playerName": "Thor"},
-	        	{
-	            "playerId": "234",
-	            "playerName": "Loki"},
-	        	{
-	            "playerId": "345",
-	            "playerName": "Algor"}]},
-	    	{
-            "grpNum": "2",
-            "Players": [{
-                "playerId": "678",
-                "playerName": "Peter"},
-            	{
-                "playerId": "789",
-                "playerName": "Mary"},
-            	{
-                "playerId": "890",
-                "playerName": "May"},
-           		{
-                "playerId": "901",
-                "playerName": "Harry"},
-            	{
-                "playerId": "012",
-                "playerName": "Oct"}]},
-	        {
-            "grpNum": "3",
-            "Players": [{
-                "playerId": "110",
-                "playerName": "Tony"},
-           	 	{
-                "playerId": "111",
-                "playerName": "Rhody" },
-            	{
-                "playerId": "112",
-                "playerName": "Mandarin"},
-            	{
-                "playerId": "113",
-                "playerName": "Jarvis"},
-           	 	{
-                "playerId": "114",
-                "playerName": "Pepper"}]},
-	        {
-            "grpNum": "4",
-            "Players": [{
-                "playerId": "221",
-                "playerName": "Logan"},
-           	 	{
-                "playerId": "222",
-                "playerName": "Xavier"},
-            	{
-                "playerId": "223",
-                "playerName": "Jean" },
-            	{
-                "playerId": "224",
-                "playerName": "Scott"},
-            	{
-                "playerId": "225",
-                "playerName": "Gambit"}]},
-	        {
-            "grpNum": "5",
-            "Players": [{
-                "playerId": "331",
-                "playerName": "Sky"},
-            	{
-                "playerId": "332",
-                "playerName": "May"},
-            	{
-                "playerId": "333",
-                "playerName": "Phil"},
-            	{
-                "playerId": "334",
-                "playerName": "Feeks"},
-            	{
-                "playerId": "335",
-                "playerName": "Fury"}]}]
-	};
-
-	$httpBackend.whenGET('/jsonapi/registeredPlayersTest/ALL').respond(registeredPlayers);
+	
 
 	var grpPlayers = [];
 
-  	$httpBackend.whenPOST('/jsonapi/joinGroup/join').respond(function(method, url, data) {
+  	$httpBackend.whenPOST('/jsonapi/join_group/join').respond(function(method, url, data) {
         var item = JSON.parse(data);
 	    grpPlayers.push(item);
 	    return [200,item];
  	});
 
-    $httpBackend.whenGET('/jsonapi/joinGroup/check').respond(grpPlayers);
+    $httpBackend.whenGET('/jsonapi/join_group/check').respond(grpPlayers);
 
     var removedPlayersFromTourn =[];
 
-    $httpBackend.whenPOST('/jsonapi/removePlayer/tournament').respond(function(method, url, data) {
+    $httpBackend.whenPOST('/jsonapi/remove_player/tournament').respond(function(method, url, data) {
         var item = JSON.parse(data);
         removedPlayersFromTourn.push(item);
         return [200,item];
     });
-    $httpBackend.whenGET('/jsonapi/removePlayer/check').respond(removedPlayersFromTourn);
+    $httpBackend.whenGET('/jsonapi/remove_player/check').respond(removedPlayersFromTourn);
 
  	//New Tournament Join Page Data
  	var tournamentIndivData={
@@ -684,11 +592,11 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "currentPlayerID": 57754,
     "description": "Test Individual Tournament",
     "directorID": 57754,
-    "tournType": "Individual",
+    "isGroup": false,
     "tournamentID": 5060388987076608,
 	"maxNoPlayerPerGrp":0,
-	"maxNoGrp":0,
-    "mentorAssignInTeam":"N",
+	"numberOfGrp":0,
+    "mentorAssignInTeam": false,
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -1069,11 +977,11 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "currentPlayerID": 57754,
     "description": "Test Group Tournament",
     "directorID": 57754,
-    "tournType": "Group",
+    "isGroup": true,
     "tournamentID": 5060388987076609,
 	"maxNoPlayerPerGrp":5,
-	"maxNoGrp":5,
-    "mentorAssignInTeam":"Y",
+	"numberOfGrp":5,
+    "mentorAssignInTeam": true,
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -1178,81 +1086,81 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{ 
 			"playerId":57754,
 			"playerName":"Chris", 
-			"Group":3
+			"group":3
 		},
 		
 		{ 
 			"playerId":2739102,
 			"playerName":"Player 2", 
-			"Group":0
+			"group":0
 		},
 		{
 			"playerId":9379339,
 			"playerName":"Player 3", 
-			"Group":1
+			"group":1
 		},{ 
 			"playerId":57753,
 			"playerName":"Player 4", 
-			"Group": 1
+			"group": 1
 		},
 		
 		{ 
 			"playerId":2739101,
 			"playerName":"Player 5", 
-			"Group":1
+			"group":1
 		},
 		{
 			"playerId":9379338,
 			"playerName":"Player 6", 
-			"Group":2
+			"group":2
 		},
 		{ 
 			"playerId":57752,
 			"playerName":"Player 7", 
-			"Group": 2
+			"group": 2
 		},
 		
 		{ 
 			"playerId":2739100,
 			"playerName":"Player 8", 
-			"Group":0
+			"group":0
 		},
 		{
 			"playerId":9379337,
 			"playerName":"Player 9", 
-			"Group":4
+			"group":4
 		},
 		{ 
 			"playerId":57751,
 			"playerName":"Player 10", 
-			"Group": 4
+			"group": 4
 		},
 		
 		{ 
 			"playerId":2739099,
 			"playerName":"Player 11", 
-			"Group":4
+			"group":4
 		},
 		{
 			"playerId":9379336,
 			"playerName":"Player 12", 
-			"Group":5
+			"group":5
 		},
 		{ 
 			"playerId":57750,
 			"playerName":"Player 13", 
-			"Group": 5
+			"group": 5
 		},
 		
 		{ 
 			"playerId":2739098,
 			"playerName":"Player 14", 
-			"Group":5
+			"group":5
 		},
 		{
 			"playerId":9379335,
 			"playerName":"Player 15", 
-			"Group":3
+			"group":3
 		}],
 		
 	    "numRounds": 1,
@@ -1270,6 +1178,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 
   var events = {"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};
       $httpBackend.whenGET('/jsonapi/event').respond(events);
+      $httpBackend.whenGET('/jsonapi/mapEvent').respond(events.events);
       
 
       //var schools = {"University": [{"name": "Singapore Management University", "schooltype": "University", "created": "2013-10-18T06:52:15.473820", "longitude": null, "subtype": "Local", "latitude": null, "id": 4838709618802688}, {"name": "Singapore University of Technology and Design", "schooltype": "University", "created": "2013-10-18T06:52:15.563320", "longitude": null, "subtype": "Local", "latitude": null, "id": 5033984601882624}, {"name": "National University of Singapore", "schooltype": "University", "created": "2013-10-18T06:52:15.369270", "longitude": null, "subtype": "Local", "latitude": null, "id": 5445803246092288}, {"name": "SIM University", "schooltype": "University", "created": "2013-10-18T06:52:15.772720", "longitude": null, "subtype": "Local", "latitude": null, "id": 5560500347731968}, {"name": "Singapore Institute of Technology", "schooltype": "University", "created": "2013-10-18T06:52:15.675140", "longitude": null, "subtype": "Local", "latitude": null, "id": 6324287266881536}, {"name": "Nanyang Technical Univeristy", "schooltype": "University", "created": "2013-10-18T06:52:15.197620", "longitude": null, "subtype": "Local", "latitude": null, "id": 6555038679826432}], "Tertiary": [{"name": "Temasek Polytechnic", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.942220", "longitude": null, "subtype": "Poly", "latitude": null, "id": 4588879961128960}, {"name": "Nan Hua High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.716910", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 4664797803053056}, {"name": "Anderson Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.253880", "longitude": null, "subtype": "JC", "latitude": null, "id": 4667228754542592}, {"name": "Raffles Institution", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.761520", "longitude": null, "subtype": "JC", "latitude": null, "id": 4725451331207168}, {"name": "Presbyterian High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.015860", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 4732340458749952}, {"name": "Nanyang Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.335930", "longitude": null, "subtype": "JC", "latitude": null, "id": 4789076976730112}, {"name": "Meridian Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.138390", "longitude": null, "subtype": "JC", "latitude": null, "id": 4861966866710528}, {"name": "National Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.468420", "longitude": null, "subtype": "JC", "latitude": null, "id": 4916912383328256}, {"name": "Pioneer Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.659360", "longitude": null, "subtype": "JC", "latitude": null, "id": 4976483579723776}, {"name": "Bukit Panjang Govt. High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:15.963480", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5078884189995008}, {"name": "Victoria Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.380970", "longitude": null, "subtype": "JC", "latitude": null, "id": 5081366681092096}, {"name": "Dunman High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.372890", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5127202572075008}, {"name": "Nan Chiau High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.630090", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5183878960513024}, {"name": "Ngee Ann Polytechnic", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.660880", "longitude": null, "subtype": "Poly", "latitude": null, "id": 5277509247565824}, {"name": "Anglican High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:15.869330", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5390363808235520}, {"name": "Chung Cheng High School (Yishun)", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.279460", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5460363185225728}, {"name": "Catholic High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.058840", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5469932372361216}, {"name": "Serangoon Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.006030", "longitude": null, "subtype": "JC", "latitude": null, "id": 5605310546837504}, {"name": "Nanyang Girls' High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.800110", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5624861237968896}, {"name": "Holy Innocents' High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.460390", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5644316634513408}, {"name": "Dunman High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.782460", "longitude": null, "subtype": "JC", "latitude": null, "id": 5756604259500032}, {"name": "River Valley High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.110240", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5764756107427840}, {"name": "Republic Polytechnic", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.760740", "longitude": null, "subtype": "Poly", "latitude": null, "id": 5790697709895680}, {"name": "Catholic Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.612980", "longitude": null, "subtype": "JC", "latitude": null, "id": 5807568341434368}, {"name": "Hwa Chong Institution", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.869680", "longitude": null, "subtype": "JC", "latitude": null, "id": 5815797498773504}, {"name": "Maris Stella High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.545350", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 5840459200987136}, {"name": "Anglo-Chinese School (Independent) IB World School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.358470", "longitude": null, "subtype": "JC", "latitude": null, "id": 5942095307079680}, {"name": "Jurong Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.032770", "longitude": null, "subtype": "JC", "latitude": null, "id": 5964609525645312}, {"name": "River Valley High School", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.841960", "longitude": null, "subtype": "JC", "latitude": null, "id": 6159884508725248}, {"name": "Chung Cheng High School (Main)", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.181440", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 6168260500258816}, {"name": "Autonomous", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.922410", "longitude": null, "subtype": "JC", "latitude": null, "id": 6204784096837632}, {"name": "Saint Andrew's Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.088470", "longitude": null, "subtype": "JC", "latitude": null, "id": 6253102478917632}, {"name": "Anglo-Chinese Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.444380", "longitude": null, "subtype": "JC", "latitude": null, "id": 6268676030332928}, {"name": "Yishun Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.467740", "longitude": null, "subtype": "JC", "latitude": null, "id": 6309778867355648}, {"name": "NUS High School of Mathematics and Science", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.558400", "longitude": null, "subtype": "JC", "latitude": null, "id": 6516263715078144}, {"name": "Innova Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:17.949560", "longitude": null, "subtype": "JC", "latitude": null, "id": 6571703152934912}, {"name": "Nanyang Polytechnic", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.571490", "longitude": null, "subtype": "Poly", "latitude": null, "id": 6586263092068352}, {"name": "Temasek Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.299480", "longitude": null, "subtype": "JC", "latitude": null, "id": 6595832279203840}, {"name": "NUS High School of Mathematics and Science", "schooltype": "Tertiary", "created": "2013-10-18T06:52:16.901830", "longitude": null, "subtype": "Highschool", "latitude": null, "id": 6629573542281216}, {"name": "Tampines Junior College", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.196800", "longitude": null, "subtype": "JC", "latitude": null, "id": 6686400254574592}, {"name": "Millennia Institute", "schooltype": "Tertiary", "created": "2013-10-18T06:52:18.233400", "longitude": null, "subtype": "JC", "latitude": null, "id": 6707552968507392}, {"name": "Singapore Polytechnic", "schooltype": "Tertiary", "created": "2013-10-18T06:52:19.841750", "longitude": null, "subtype": "Poly", "latitude": null, "id": 6750761144811520}], "Secondary": [{"name": "CHIJ Secondary (Toa Payoh)", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.678760", "longitude": null, "subtype": "", "latitude": null, "id": 4512155470659584}, {"name": "Greenview Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.671540", "longitude": null, "subtype": "", "latitude": null, "id": 4523811206594560}, {"name": "Hua Yi Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.355980", "longitude": null, "subtype": "", "latitude": null, "id": 4532187198128128}, {"name": "Bukit Merah Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.971760", "longitude": null, "subtype": "", "latitude": null, "id": 4540153557155840}, {"name": "School of Science and Technology, Singapore", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.771790", "longitude": null, "subtype": "", "latitude": null, "id": 4556418598305792}, {"name": "Bedok North Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.071280", "longitude": null, "subtype": "", "latitude": null, "id": 4561306271088640}, {"name": "Woodgrove Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.748750", "longitude": null, "subtype": "", "latitude": null, "id": 4594429058875392}, {"name": "Queenstown Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.952910", "longitude": null, "subtype": "", "latitude": null, "id": 4619528847753216}, {"name": "Juying Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.893610", "longitude": null, "subtype": "", "latitude": null, "id": 4624639858835456}, {"name": "Woodlands Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.923750", "longitude": null, "subtype": "", "latitude": null, "id": 4644190549966848}, {"name": "Mayflower Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.733260", "longitude": null, "subtype": "", "latitude": null, "id": 4648339488374784}, {"name": "St. Andrew's Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.539530", "longitude": null, "subtype": "", "latitude": null, "id": 4675457911881728}, {"name": "Bedok View Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.342380", "longitude": null, "subtype": "", "latitude": null, "id": 4686676366458880}, {"name": "Yishun Town Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.343160", "longitude": null, "subtype": "", "latitude": null, "id": 4697972130447360}, {"name": "Yuhua Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.522700", "longitude": null, "subtype": "", "latitude": null, "id": 4704990107009024}, {"name": "Singapore Chinese Girls' School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.605240", "longitude": null, "subtype": "", "latitude": null, "id": 4721229378355200}, {"name": "Beatty Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.891390", "longitude": null, "subtype": "", "latitude": null, "id": 4742115804315648}, {"name": "Changkat Changi Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.334130", "longitude": null, "subtype": "", "latitude": null, "id": 4756675743449088}, {"name": "Yishun Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.195210", "longitude": null, "subtype": "", "latitude": null, "id": 4761666495447040}, {"name": "Bukit View Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.053770", "longitude": null, "subtype": "", "latitude": null, "id": 4766244930584576}, {"name": "Singapore Sports School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.694680", "longitude": null, "subtype": "", "latitude": null, "id": 4776174894972928}, {"name": "Bowen Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.719120", "longitude": null, "subtype": "", "latitude": null, "id": 4797409213284352}, {"name": "Hwa Chong Institution", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.443220", "longitude": null, "subtype": "", "latitude": null, "id": 4799891704381440}, {"name": "Outram Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.025980", "longitude": null, "subtype": "", "latitude": null, "id": 4821628533866496}, {"name": "St. Anthony's Canossian Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.861360", "longitude": null, "subtype": "", "latitude": null, "id": 4842781247799296}, {"name": "Bukit Batok Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.886810", "longitude": null, "subtype": "", "latitude": null, "id": 4845727595364352}, {"name": "Anglo-Chinese School (Independent)", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.439510", "longitude": null, "subtype": "", "latitude": null, "id": 4861301146779648}, {"name": "Yuan Ching Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.431070", "longitude": null, "subtype": "", "latitude": null, "id": 4901003824463872}, {"name": "Cedar Girls' Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.240920", "longitude": null, "subtype": "", "latitude": null, "id": 4902403983802368}, {"name": "Northbrooks Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.725200", "longitude": null, "subtype": "", "latitude": null, "id": 4912179329368064}, {"name": "Jurong West Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.705460", "longitude": null, "subtype": "", "latitude": null, "id": 4920331177295872}, {"name": "Hong Kah Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.171260", "longitude": null, "subtype": "", "latitude": null, "id": 4946272779763712}, {"name": "Springfield Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.776260", "longitude": null, "subtype": "", "latitude": null, "id": 4948703731253248}, {"name": "Fuchun Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.032700", "longitude": null, "subtype": "", "latitude": null, "id": 4963143411302400}, {"name": "Fuhua Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.119130", "longitude": null, "subtype": "", "latitude": null, "id": 4971372568641536}, {"name": "Edgefield Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:25.501970", "longitude": null, "subtype": "", "latitude": null, "id": 4996034270855168}, {"name": "Kent Ridge Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.978390", "longitude": null, "subtype": "", "latitude": null, "id": 5006926307917824}, {"name": "Hougang Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.256080", "longitude": null, "subtype": "", "latitude": null, "id": 5013815435460608}, {"name": "Yuying Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.727770", "longitude": null, "subtype": "", "latitude": null, "id": 5038150720159744}, {"name": "North View Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.555140", "longitude": null, "subtype": "", "latitude": null, "id": 5047719907295232}, {"name": "Sembawang Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.939750", "longitude": null, "subtype": "", "latitude": null, "id": 5075105424080896}, {"name": "Si Ling Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.412700", "longitude": null, "subtype": "", "latitude": null, "id": 5086761160015872}, {"name": "Hai Sing Catholic School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.856080", "longitude": null, "subtype": "", "latitude": null, "id": 5103103510577152}, {"name": "Tanjong Katong Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.888600", "longitude": null, "subtype": "", "latitude": null, "id": 5119368551727104}, {"name": "Geylang Methodist School (Secondary)", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.315450", "longitude": null, "subtype": "", "latitude": null, "id": 5124256224509952}, {"name": "National Junior College", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.076840", "longitude": null, "subtype": "", "latitude": null, "id": 5151829914550272}, {"name": "Teck Whye Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.970230", "longitude": null, "subtype": "", "latitude": null, "id": 5182478801174528}, {"name": "St. Patrick's School", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.657770", "longitude": null, "subtype": "", "latitude": null, "id": 5187589812256768}, {"name": "Bartley Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.808390", "longitude": null, "subtype": "", "latitude": null, "id": 5193654306078720}, {"name": "Admiralty Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.026000", "longitude": null, "subtype": "", "latitude": null, "id": 5201806154006528}, {"name": "Victoria School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.404760", "longitude": null, "subtype": "", "latitude": null, "id": 5211289441796096}, {"name": "CHIJ Katong Convent", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.546520", "longitude": null, "subtype": "", "latitude": null, "id": 5227747756474368}, {"name": "Chong Boon Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:23.202900", "longitude": null, "subtype": "", "latitude": null, "id": 5230178707963904}, {"name": "Tampines Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.478170", "longitude": null, "subtype": "", "latitude": null, "id": 5238407865303040}, {"name": "Ang Mo Kio Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.528080", "longitude": null, "subtype": "", "latitude": null, "id": 5244618388013056}, {"name": "St. Margaret's Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.161300", "longitude": null, "subtype": "", "latitude": null, "id": 5249626319880192}, {"name": "Assumption English School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.614980", "longitude": null, "subtype": "", "latitude": null, "id": 5252847545352192}, {"name": "St. Joseph's Institution", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.295000", "longitude": null, "subtype": "", "latitude": null, "id": 5284179331776512}, {"name": "Damai Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:24.520450", "longitude": null, "subtype": "", "latitude": null, "id": 5288401284628480}, {"name": "CHIJ St. Theresa's Convent", "schooltype": "Secondary", "created": "2013-10-18T06:52:23.043540", "longitude": null, "subtype": "", "latitude": null, "id": 5295290412171264}, {"name": "Kuo Chuan Presbyterian Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.207210", "longitude": null, "subtype": "", "latitude": null, "id": 5305065757736960}, {"name": "Hillgrove Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.080810", "longitude": null, "subtype": "", "latitude": null, "id": 5319625696870400}, {"name": "Henderson Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.968270", "longitude": null, "subtype": "", "latitude": null, "id": 5329194884005888}, {"name": "Compassvale Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:24.109370", "longitude": null, "subtype": "", "latitude": null, "id": 5352026930151424}, {"name": "School of the Arts, Singapore", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.856470", "longitude": null, "subtype": "", "latitude": null, "id": 5362841657802752}, {"name": "Anglo-Chinese School (Barker Road)", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.311820", "longitude": null, "subtype": "", "latitude": null, "id": 5379145353658368}, {"name": "Ping Yi Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.662280", "longitude": null, "subtype": "", "latitude": null, "id": 5384578487287808}, {"name": "Bedok Green Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.984100", "longitude": null, "subtype": "", "latitude": null, "id": 5401659572224000}, {"name": "Peirce Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.576690", "longitude": null, "subtype": "", "latitude": null, "id": 5408677548785664}, {"name": "Woodlands Ring Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.838370", "longitude": null, "subtype": "", "latitude": null, "id": 5424251100200960}, {"name": "Clementi Woods Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:23.712980", "longitude": null, "subtype": "", "latitude": null, "id": 5424916820131840}, {"name": "Paya Lebar Methodist Girls' School (Secondary)", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.297290", "longitude": null, "subtype": "", "latitude": null, "id": 5465353937223680}, {"name": "Guangyang Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.752920", "longitude": null, "subtype": "", "latitude": null, "id": 5479862336749568}, {"name": "St. Gabriel's Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.980190", "longitude": null, "subtype": "", "latitude": null, "id": 5509222733185024}, {"name": "Pasir Ris Crest Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.129200", "longitude": null, "subtype": "", "latitude": null, "id": 5526093364723712}, {"name": "Marsiling Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.651010", "longitude": null, "subtype": "", "latitude": null, "id": 5534322522062848}, {"name": "Crescent Girls' School", "schooltype": "Secondary", "created": "2013-10-18T06:52:24.436800", "longitude": null, "subtype": "", "latitude": null, "id": 5539433533145088}, {"name": "Serangoon Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.218380", "longitude": null, "subtype": "", "latitude": null, "id": 5558984224276480}, {"name": "North Vista Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.636860", "longitude": null, "subtype": "", "latitude": null, "id": 5576765388881920}, {"name": "Boon Lay Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.618450", "longitude": null, "subtype": "", "latitude": null, "id": 5596934555303936}, {"name": "Queensway Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.046790", "longitude": null, "subtype": "", "latitude": null, "id": 5638055377502208}, {"name": "Junyuan Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.528560", "longitude": null, "subtype": "", "latitude": null, "id": 5649711113437184}, {"name": "Whitley Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.666500", "longitude": null, "subtype": "", "latitude": null, "id": 5658087104970752}, {"name": "Dunearn Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:24.846800", "longitude": null, "subtype": "", "latitude": null, "id": 5666053463998464}, {"name": "Siglap Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.522600", "longitude": null, "subtype": "", "latitude": null, "id": 5682318505148416}, {"name": "Commonwealth Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:23.933130", "longitude": null, "subtype": "", "latitude": null, "id": 5687206177931264}, {"name": "CHIJ St. Joseph's Convent", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.780150", "longitude": null, "subtype": "", "latitude": null, "id": 5714779867971584}, {"name": "Raffles Girls' School (Secondary)", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.156760", "longitude": null, "subtype": "", "latitude": null, "id": 5745428754595840}, {"name": "Riverside Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.426330", "longitude": null, "subtype": "", "latitude": null, "id": 5750539765678080}, {"name": "Yio Chu Kang Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.098210", "longitude": null, "subtype": "", "latitude": null, "id": 5770090456809472}, {"name": "Orchid Park Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.935490", "longitude": null, "subtype": "", "latitude": null, "id": 5774239395217408}, {"name": "Anderson Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.197030", "longitude": null, "subtype": "", "latitude": null, "id": 5793128661385216}, {"name": "Seng Kang Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.023130", "longitude": null, "subtype": "", "latitude": null, "id": 5801357818724352}, {"name": "Raffles Institution", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.253930", "longitude": null, "subtype": "", "latitude": null, "id": 5812576273301504}, {"name": "St. Hilda's Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.081910", "longitude": null, "subtype": "", "latitude": null, "id": 5847129285197824}, {"name": "Bishan Park Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.534280", "longitude": null, "subtype": "", "latitude": null, "id": 5851351238049792}, {"name": "Ahmad Ibrahim Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.110970", "longitude": null, "subtype": "", "latitude": null, "id": 5858240365592576}, {"name": "Fajar Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:25.853980", "longitude": null, "subtype": "", "latitude": null, "id": 5868015711158272}, {"name": "East View Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:25.395400", "longitude": null, "subtype": "", "latitude": null, "id": 5882575650291712}, {"name": "Dunman Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:25.019130", "longitude": null, "subtype": "", "latitude": null, "id": 5892144837427200}, {"name": "Bedok South Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.172140", "longitude": null, "subtype": "", "latitude": null, "id": 5914976883572736}, {"name": "Temasek Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.140870", "longitude": null, "subtype": "", "latitude": null, "id": 5923309120126976}, {"name": "Northlight School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.445110", "longitude": null, "subtype": "", "latitude": null, "id": 5925791611224064}, {"name": "Pasir Ris Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.217300", "longitude": null, "subtype": "", "latitude": null, "id": 5947528440709120}, {"name": "Yusof Ishak Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.626380", "longitude": null, "subtype": "", "latitude": null, "id": 5968681154641920}, {"name": "Methodist Girls' School (Secondary)", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.904600", "longitude": null, "subtype": "", "latitude": null, "id": 5971627502206976}, {"name": "Coral Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:24.282260", "longitude": null, "subtype": "", "latitude": null, "id": 5987201053622272}, {"name": "Balestier Hill Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:20.696830", "longitude": null, "subtype": "", "latitude": null, "id": 5987866773553152}, {"name": "Montfort Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.989660", "longitude": null, "subtype": "", "latitude": null, "id": 6028303890644992}, {"name": "Pioneer Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.778920", "longitude": null, "subtype": "", "latitude": null, "id": 6038079236210688}, {"name": "Bedok Town Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.257060", "longitude": null, "subtype": "", "latitude": null, "id": 6042812290170880}, {"name": "Manjusri Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.563320", "longitude": null, "subtype": "", "latitude": null, "id": 6046231084138496}, {"name": "Pei Hwa Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.385870", "longitude": null, "subtype": "", "latitude": null, "id": 6072172686606336}, {"name": "MacPherson Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.372300", "longitude": null, "subtype": "", "latitude": null, "id": 6089043318145024}, {"name": "Jurong Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.613500", "longitude": null, "subtype": "", "latitude": null, "id": 6097272475484160}, {"name": "Bendemeer Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.427510", "longitude": null, "subtype": "", "latitude": null, "id": 6102383486566400}, {"name": "Northland Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.831970", "longitude": null, "subtype": "", "latitude": null, "id": 6121934177697792}, {"name": "Kranji Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.064990", "longitude": null, "subtype": "", "latitude": null, "id": 6139715342303232}, {"name": "Punggol Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.868180", "longitude": null, "subtype": "", "latitude": null, "id": 6173619814137856}, {"name": "Canberra Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.157330", "longitude": null, "subtype": "", "latitude": null, "id": 6207266587934720}, {"name": "Loyang Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:28.291130", "longitude": null, "subtype": "", "latitude": null, "id": 6229003417419776}, {"name": "Victoria Junior College", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.326070", "longitude": null, "subtype": "", "latitude": null, "id": 6245268458569728}, {"name": "New Town Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.262100", "longitude": null, "subtype": "", "latitude": null, "id": 6250156131352576}, {"name": "Xinmin Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.007620", "longitude": null, "subtype": "", "latitude": null, "id": 6308378708017152}, {"name": "Westwood Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.584250", "longitude": null, "subtype": "", "latitude": null, "id": 6313489719099392}, {"name": "East Spring Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:25.191610", "longitude": null, "subtype": "", "latitude": null, "id": 6319554212921344}, {"name": "CHIJ St. Nicholas Girls' School", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.955700", "longitude": null, "subtype": "", "latitude": null, "id": 6327706060849152}, {"name": "Evergreen Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:25.674790", "longitude": null, "subtype": "", "latitude": null, "id": 6353647663316992}, {"name": "First Toa Payoh Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:25.942490", "longitude": null, "subtype": "", "latitude": null, "id": 6356078614806528}, {"name": "Chua Chu Kang Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:23.325270", "longitude": null, "subtype": "", "latitude": null, "id": 6370518294855680}, {"name": "Tanglin Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.589450", "longitude": null, "subtype": "", "latitude": null, "id": 6375526226722816}, {"name": "Clementi Town Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:23.551140", "longitude": null, "subtype": "", "latitude": null, "id": 6378747452194816}, {"name": "Chestnut Drive Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:22.435460", "longitude": null, "subtype": "", "latitude": null, "id": 6403409154408448}, {"name": "Greenridge Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.550020", "longitude": null, "subtype": "", "latitude": null, "id": 6414301191471104}, {"name": "Fairfield Methodist Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:25.760970", "longitude": null, "subtype": "", "latitude": null, "id": 6421190319013888}, {"name": "Zhenghua Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.823670", "longitude": null, "subtype": "", "latitude": null, "id": 6430965664579584}, {"name": "Temasek Academy", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.050730", "longitude": null, "subtype": "", "latitude": null, "id": 6445525603713024}, {"name": "Ngee Ann Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.344730", "longitude": null, "subtype": "", "latitude": null, "id": 6455094790848512}, {"name": "Jurongville Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:27.792110", "longitude": null, "subtype": "", "latitude": null, "id": 6477926836994048}, {"name": "Zhonghua Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:35.982380", "longitude": null, "subtype": "", "latitude": null, "id": 6488741564645376}, {"name": "Church Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:23.463640", "longitude": null, "subtype": "", "latitude": null, "id": 6505045260500992}, {"name": "Serangoon Garden Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.129020", "longitude": null, "subtype": "", "latitude": null, "id": 6527559479066624}, {"name": "Shuqun Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:32.301430", "longitude": null, "subtype": "", "latitude": null, "id": 6534577455628288}, {"name": "Gan Eng Seng School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.212600", "longitude": null, "subtype": "", "latitude": null, "id": 6550816726974464}, {"name": "Unity Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.223010", "longitude": null, "subtype": "", "latitude": null, "id": 6591253844066304}, {"name": "Peicai Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:30.469660", "longitude": null, "subtype": "", "latitude": null, "id": 6605762243592192}, {"name": "Swiss Cottage Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.396450", "longitude": null, "subtype": "", "latitude": null, "id": 6635122640027648}, {"name": "Tanjong Katong Girls' School", "schooltype": "Secondary", "created": "2013-10-18T06:52:33.701960", "longitude": null, "subtype": "", "latitude": null, "id": 6651993271566336}, {"name": "Naval Base Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:29.180150", "longitude": null, "subtype": "", "latitude": null, "id": 6660222428905472}, {"name": "Greendale Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:26.466620", "longitude": null, "subtype": "", "latitude": null, "id": 6665333439987712}, {"name": "West Spring Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:34.486750", "longitude": null, "subtype": "", "latitude": null, "id": 6684884131119104}, {"name": "Regent Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:31.336100", "longitude": null, "subtype": "", "latitude": null, "id": 6702665295724544}, {"name": "Deyi Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:24.674210", "longitude": null, "subtype": "", "latitude": null, "id": 6722834462146560}, {"name": "Broadrick Secondary School", "schooltype": "Secondary", "created": "2013-10-18T06:52:21.804330", "longitude": null, "subtype": "", "latitude": null, "id": 6731210453680128}]};
@@ -1583,7 +1492,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 									"pathLevel":"Lists",
                                     "questionSet":[
                                         {
-                                            "questionId":1231,
+                                            "questionId":1231555,
                                             "question":"Lists",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
@@ -1674,7 +1583,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                                             "skeleton":""
                                         },
                                         {
-                                            "questionId":112,
+                                            "questionId":11212,
                                             "question":"map/reduce",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
@@ -1695,14 +1604,14 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 									"pathLevel":"Introduction",
                                     "questionSet":[
                                         {
-                                            "questionId":134,
+                                            "questionId":13453,
                                             "question":"Hello World",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
                                             "skeleton":""
                                         },
                                         {
-                                            "questionId":142,
+                                            "questionId":145342,
                                             "question":"Comments",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
@@ -1723,21 +1632,21 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 									"pathLevel":"Functions",
                                     "questionSet":[
                                         {
-                                            "questionId":413,
+                                            "questionId":45323,
                                             "question":"Functions",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
                                             "skeleton":""
                                         },
                                         {
-                                            "questionId":153,
+                                            "questionId":15533,
                                             "question":"Increment",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
                                             "skeleton":""
                                         }, 
                                         {
-                                            "questionId":253,
+                                            "questionId":253453,
                                             "question":"Product",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
@@ -1751,21 +1660,21 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 									"pathLevel":"Conditionals",
                                     "questionSet":[
                                         {
-                                            "questionId":253,
+                                            "questionId":25433,
                                             "question":"Sign",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
                                             "skeleton":""
                                         },
                                         {
-                                            "questionId":25,
+                                            "questionId":25133,
                                             "question":"Alarm Clock",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
                                             "skeleton":""
                                         }, 
                                         {
-                                            "questionId":231,
+                                            "questionId":231313,
                                             "question":"Date Fashion",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
@@ -1779,21 +1688,21 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 									"pathLevel":"Iteration and Recursion",
                                     "questionSet":[
                                         {
-                                            "questionId":235,
+                                            "questionId":2353124,
                                             "question":"Compare",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
                                             "skeleton":""
                                         },
                                         {
-                                            "questionId":253,
+                                            "questionId":2543123,
                                             "question":"Distance",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
                                             "skeleton":""
                                         }, 
                                         {
-                                            "questionId":53,
+                                            "questionId":55463,
                                             "question":"Is Between",
                                             "questionDescription":"Another great recursive function is the Fibonacci Series. A Fibonacci number is found by adding the two terms directly before it. The first few terms are:1,1,2,3,5,8,13,21,34. . .Create a function that uses recursion to calculate a given term of the Fibonacci series.",
                                             "questionExamples":">> fibonacci(1)=> 1>> fibonacci(4)=> 3>> fibonacci(8)=> 21>> fibonacci(20)=> 6765",
@@ -1949,13 +1858,15 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "flagUrl": "/static/flags/sg_on.png",
 		            "finished": "0:13:27.311930",
 		            "gravatar": "http://www.gravatar.com/avatar/3f0dd6b43fe16552168c919acfbf140d/?default=&amp;s=30",
-		            "mentor": "",
-		            "mentorID": null,
+		            "mentor": "Glen",
+		            "mentorID": 1111,
 		            "professional": null,
 		            "total_problems": 10,
 		            "nickname": "Chris",
 		            "menteeID": 6474597901795328,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -1971,7 +1882,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Ronald",
 		            "menteeID": 6715360346636288,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -1987,7 +1900,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Jifei",
 		            "menteeID": 4685146485686272,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2003,7 +1918,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Ben Chan",
 		            "menteeID": 5170357531049984,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2019,7 +1936,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Fu Mei",
 		            "menteeID": 6561842646220800,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2035,7 +1954,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Mrchamp",
 		            "menteeID": 4874949680431104,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2051,7 +1972,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "iPython",
 		            "menteeID": 6689212585738240,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2067,7 +1990,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Erwin",
 		            "menteeID": 4545551458631680,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2083,7 +2008,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Binh",
 		            "menteeID": 6177510182092800,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2099,7 +2026,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Melvin",
 		            "menteeID": 17331653,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2115,7 +2044,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Wei Song",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2131,7 +2062,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "sara",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2147,7 +2080,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Cheuk",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2163,7 +2098,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Zoey",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2179,7 +2116,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Xin Yi",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2195,7 +2134,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "jinzaw",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2211,7 +2152,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Secret Agent",
 		            "menteeID": null,
-		            "mentorHasArrived": false
+		            "mentorHasArrived": false,
+		            "rankingInGrp":1,
+		            "group": 1
 		        }
 		    ],
 		    "heatStopTime": "2013-12-11 19:31:21.814470",
@@ -2224,7 +2167,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		    "roundDescription": "prize round",
 		    "currentTime": "2014-01-09 09:38:59.184880",
 		    "tournamentType": "Normal",
-		    "type": "heat ranking"
+		    "type": "heat ranking",
+		    "isGroup":true
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);
@@ -2302,9 +2246,6 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	    "currentTime": "2013-09-29 13:54:35.933410",
 	    "game_type": "Timed Interview",
 	    "timelimit": 3600,
-	    "mentor": "",
-	    "mentorID": 12345,
-	    "hasArrived": false
 	};
 		
 	$httpBackend.whenGET('/jsonapi/game/5817368383062016').respond(tournamentGame);
@@ -2366,8 +2307,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		"currentHeatDetails": {
 			"heatID": 6144086545268736,
 			"description": "Heat 2",
+			"numQns" : 5,
 			"startTime": "2013-10-04 14:02:05.835670",
-			"currentTime": "2013-10-04 14:02:00.246270",
+			"currentTime": "2013-10-04 14:07:00.246270",
 		},
 		"registeredPlayers": [
 			{
@@ -2375,7 +2317,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Chris",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 1,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2390,7 +2332,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 2",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 1,
-				"rankingInGrp":"",
+				"rankingInGrp":2,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2405,7 +2347,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 3",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 1,
-				"rankingInGrp":"",
+				"rankingInGrp":3,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2420,7 +2362,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 4",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 2,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2435,7 +2377,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 5",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 2,
-				"rankingInGrp":"",
+				"rankingInGrp":2,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2450,7 +2392,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 6",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 2,
-				"rankingInGrp":"",
+				"rankingInGrp":3,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2465,7 +2407,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 7",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 3,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2480,7 +2422,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 8",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 3,
-				"rankingInGrp":"",
+				"rankingInGrp":2,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2495,7 +2437,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 9",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 4,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2510,7 +2452,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 10",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 4,
-				"rankingInGrp":"",
+				"rankingInGrp":2,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2525,7 +2467,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 11",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 4,
-				"rankingInGrp":"",
+				"rankingInGrp":3,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2540,7 +2482,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 12",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 4,
-				"rankingInGrp":"",
+				"rankingInGrp":4,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2555,7 +2497,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 13",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 5,
-				"rankingInGrp":"",
+				"rankingInGrp":1,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2570,7 +2512,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 14",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 3,
-				"rankingInGrp":"",
+				"rankingInGrp":3,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -2585,7 +2527,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 				"playerName": "Player 15",
 				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=5",
 				"group": 2,
-				"rankingInGrp":"",
+				"rankingInGrp":4,
 				"overallRanking":"",
 				"problemsSolved":[
 					"/problem_is_solved_for_game/6096747415732224/10033",
@@ -3086,6 +3028,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "latitude": null,
     "id": 6095188913029120,
     "path":"Python",
+    "cutoff":35, //testing
     "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
 }
 		

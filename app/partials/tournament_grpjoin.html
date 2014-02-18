@@ -67,7 +67,7 @@
 	    					Number of problems : <b>{{round.problemIDs.length}}</b><br>
 								<div ng-controller="CountdownController" ng-init="start_timer(get_seconds_to_start(round.currentHeatDetails.startTime, round.currentHeatDetails.currentTime))">
 									<font ng-show="counter>0">Round starting in <b> {{counter}} seconds </b> </font><font ng-show="counter==0"><b>Round have started, Let's </b></font><font ng-show="counter<0"><b>Round have not started</b> </font>
-									<button class="btn btn-primary" type="button" ng-show="counter==0" ng-click="create_tournament_round_game_new(round.roundID, isInGrp, tournament.tournType)">Play </button>
+									<button class="btn btn-primary" type="button" ng-show="counter==0" ng-click="create_tournament_round_game_new(round.roundID, isInGrp, tournament.isGroup)"><i class="icon-play icon-white"></i> Play </button>
 									</br>
 									</br>
 								</div>
@@ -86,10 +86,10 @@
 			<div class="span4" id="unregisteredUsers" style="overflow:auto;" width="100%">
 				<div class="row-fluid">
 					<div class="span12 bootCamp" id="heading"> 
-						<div ng-hide="tournament.tournType=='Individual'">
+						<div ng-show="tournament.isGroup">
 							Registered Users Without Groups
 						</div>
-						<div ng-hide="tournament.tournType=='Group'">
+						<div ng-hide="tournament.isGroup">
 							Registered Users
 						</div>		
 					</div>
@@ -103,7 +103,7 @@
 				</div>
 			</div> 	
 
-			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%" ng-hide="tournament.tournType=='Individual'">
+			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%" ng-show="tournament.isGroup">
 				<div class="row-fluid">
 					<div class="span12 bootCamp" id="heading">Registered Groups</div>
 				</div>
@@ -131,8 +131,8 @@
 											<!-- 1. To make button dynamic, lock buttons after player has joined -->
 											<!-- 2. To update the teams with new player after clicking join, page has to be refreshed to show updated team list -->
 
-											<button class="btn btn-primary" ng-click="join_grp(tournament.currentPlayerID, tournament.tournamentID, $index+1)" ng-show="currentUserGrping == 0" style="">Join</button>
-											<button class="btn btn-danger" ng-click="join_grp(tournament.currentPlayerID, tournament.tournamentID, 0)" ng-show="currentUserGrping == $index+1" style="">Leave Team</button>
+											<button class="btn btn-primary" ng-click="join_grp(tournament.currentPlayerID, tournament.tournamentID, $index+1)" ng-show="currentUserGrping == 0" style=""><i class="icon-plus icon-white"></i> Join</button>
+											<button class="btn btn-danger" ng-click="join_grp(tournament.currentPlayerID, tournament.tournamentID, 0)" ng-show="currentUserGrping == $index+1" style=""><i class="icon-remove icon-white"></i> Leave Team</button>
 										</td>
 									</tr>
 									</br>

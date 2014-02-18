@@ -2,7 +2,7 @@
 
 /* Admin Controllers */
 
-function SchoolController($scope,$resource){
+function SchoolController($scope,$resource,$location){
         $scope.schools = {};
         $scope.school_lookup = {};
         $scope.school_statistics = {};
@@ -10,6 +10,13 @@ function SchoolController($scope,$resource){
         $scope.filtered_count = {};
         $scope.schoolMarkers = [];
         $scope.school_registrations = {};
+        $scope.all_events = {};
+        $scope.event_array = [];
+        $scope.event = {"name":"Default name", 
+                        "description": "Default description",
+                        "venue": "Default venue"};
+        $scope.events = [];
+        $scope.location = $location;
         
         $scope.filter_year = "ALL";
         $scope.filter_schooltype = "ALL";
@@ -156,9 +163,6 @@ function SchoolController($scope,$resource){
             }
 
           });
-          
-          
-
         };
 
         $scope.add_or_update_school = function(schoolID, year){
@@ -179,7 +183,31 @@ function SchoolController($scope,$resource){
           
         };
 
+        var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
 
+        $scope.fetch_event = function(id){
+          var event = Event.get({eventId:id}, function() {
+            $scope.last_result = event;
+            //If id return event
+            if(id){
+                 $scope.event = event;
+            }
+            else{
+                 $scope.events = event.events; 
+            }
+            
+          console.log($scope.events);
+          });
+        },
+
+        $scope.onRadioChange = function(){
+          if($scope.searchOption == 'school'){
+            $scope.get_marker();
+          }else{
+            console.log("changed");
+          }
+
+        }
         //function to add markers from schools
         $scope.get_marker = function(){
           $scope.schoolMarkers.length = 0;
@@ -188,6 +216,7 @@ function SchoolController($scope,$resource){
             $scope.school_registrations = response;
           });
 
+          //for(var i = 0; i <scop)
 
           $resource('/jsonapi/schools/SG').get({},function(response){
               $scope.schools = response;

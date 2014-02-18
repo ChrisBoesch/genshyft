@@ -33,7 +33,7 @@
                             </br>
                             <div class="span12" style="text-align: center">   
                             <button class="btn btn-primary" ng-hide="remaining_problems.length == 0" ng-click="skip_problem()" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                            <button class="btn btn-inverse" ng-click="round_end_tournament_lobby()" ng-show="remaining_problems.length == 0" align="right">Tournament Lobby <i class="icon-home icon-white"></i></button>
+                            <button class="btn btn-inverse" ng-click="round_end_tournament_lobby()" ng-show="remaining_problems.length == 0" align="right"><i class="icon-home icon-white"></i> Tournament Lobby </button>
                             <button class="btn btn-inverse" ng-click="round_end_ranking(game.heatID)" ng-show="remaining_problems.length == 0" align="right">Go To Ranking <i class="icon-chevron-right icon-white"></i></button>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                 <div class="row-fluid">
                     <div class="span12">                  
                         <b>Round progress: </b> <span ng-bind="game.numSolvedProblems"></span><b> / </b><span ng-bind="game.numProblems"></span> 
-                        </br><b>Mentor :</b> <b><font color='blue'><span ng-bind="game.mentor"></span></font></b> <button class="btn btn-danger" ng-show="game.mentor.trim().length!=0 && game.hasArrived==false">Arrived ?</button>
+                        </br><b>Mentor :</b> <b><font color='blue'><span ng-bind="mentor_name"></span></font></b> <button class="btn btn-danger" ng-show="mentor_id!=null && mentor_hasArrived==false"> <b>Arrived ? </b></button>
                         </br><b ng-show="remaining_problems.length == 0">Assigned To :</b> <font color='red'><b><span ng-bind="mentee_name"></span></b></font>
                         </br>
                     </div>
@@ -126,7 +126,7 @@
             </div>
             <div class="modal-footer">
                 <div style="text-align: center">
-                    <button class="btn btn-inverse" ng-click="round_end_tournament_lobby()" ng-show="remaining_problems.length == 0" align="right">Tournament Lobby <i class="icon-home icon-white"></i></button>
+                    <button class="btn btn-inverse" ng-click="round_end_tournament_lobby()" ng-show="remaining_problems.length == 0" align="right"><i class="icon-home icon-white"></i> Tournament Lobby</button>
                     <button type="button" ng-click="round_end_ranking(game.heatID)" data-dismiss="modal" class="btn btn-inverse">Go To Ranking <i class="icon-chevron-right icon-white"></i></button>
                 </div>
             </div>

@@ -30,6 +30,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 		$scope.GameModel.get({"gameID":gameID}, function(response){
         $scope.game = response;
         $scope.update_remaining_problems();
+        //Added by GENShYFT - Glen
+        $scope.get_mentor($scope.game.heatID, $scope.game.playerID);
 		});
     };
 
@@ -55,7 +57,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       $scope.move_to_next_unsolved_problem();
     };
 
-    //GENShYFT - Getting Mentee
+    //By GENShYFT - Getting Mentee
     $scope.get_mentee = function(heatID, playerID){
       $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
         $scope.current_heat = response;
@@ -68,36 +70,42 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       }); 
     };
 
-    //GENShYFT - Getting Mentor
+    //By GENShYFT - Getting Mentor
     $scope.get_mentor = function(heatID, playerID){
+      $scope.mentor_id = null;
+      $scope.mentor_hasArrived = false;
+
       $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
         $scope.current_heat = response;
         for(var i =0;i< $scope.current_heat.ranking.length;i++){
           if($scope.current_heat.ranking[i].playerid === playerID){
             $scope.mentor_id = $scope.current_heat.ranking[i].mentorID;
+            $scope.mentor_name= $scope.current_heat.ranking[i].mentor;
             $scope.mentor_hasArrived = $scope.current_heat.ranking[i].mentorHasArrived;
             break;
           }
         }
-      }); 
+      });
+      console.log("get_mentor()");
+      
+      //if($scope.mentor_id == null && $scope.mentor_hasArrived == false){
+        $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 30000); 
+      //}
+
+      //$timeout(function(){ $scope.get_mentor(heatID, playerID); }, 5000); 
     };
 
 
-    //GENShYFT - Round to Ranking Redirection
+    //By GENShYFT - Round to Ranking Redirection
     $scope.round_end_ranking = function(heatID){
       $location.search({"heatID":$scope.game.heatID}).path("tournament-ranking");
       $('.modal-backdrop').remove();
     };
 
-    //GENShYFT - Round to Join Tournament Redirection
+    //By GENShYFT - Round to Join Tournament Redirection
     $scope.round_end_tournament_lobby = function(heatID){
       $location.path("tournaments");
       $('.modal-backdrop').remove();
-    };
-
-    //GENShYFT - Provide round and check whether a mentor have been assigned to player
-    $scope.round_details = function(){
-      //$scope.details_round=
     };
 
     $scope.move_to_next_unsolved_problem = function(){
