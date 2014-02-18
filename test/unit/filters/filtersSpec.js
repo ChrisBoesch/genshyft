@@ -10,8 +10,27 @@ describe("Unit: Testing Filters", function() {
         filter = $filter;
     }));
 
+    it('should have a renderPermutation filter', function() {
+        expect(filter('renderPermutation')).toBeTruthy();
+    });
+
     it('should have a renderMs filter', function() {
         expect(filter('renderMs')).toBeTruthy();
+    });
+
+    describe('renderPermutation', function() {
+        var renderPermutation, lines;
+
+        beforeEach(function() {
+            renderPermutation = filter('renderPermutation');
+            lines = ['a', 'b', 'c', 'd'];
+        });
+
+        it('should render permutation code', function() {
+            expect(renderPermutation(lines, '1')).toBe('a');
+            expect(renderPermutation(lines, '14')).toBe('a\nd');
+            expect(renderPermutation(lines, '32')).toBe('c\nb');
+        });
     });
 
     describe('renderMs', function() {
