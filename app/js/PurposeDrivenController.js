@@ -122,10 +122,11 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 		$scope.saveNewUnlock = function(videoNumber){
 			console.log("saveNewUnlock is being executed");
 			
-			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_unlock/" + videoNumber);
+			//$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_unlock/" + videoNumber);
+			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_unlock/");
 				
-			var data = {"no": videoNumber,
-						"unlocked":true
+			var data = {"purposevideo": videoNumber,
+						"feedback":0
 						};
 							  
 			   var item = new $scope.userCurrentVideo(data);
@@ -142,10 +143,12 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 		$scope.saveNewFeedback = function(videoNumber,feedback){
 			console.log("saveNewFeedback is being executed");
 			
-			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/" + videoNumber);
+			//$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/" + videoNumber);
+			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/");
 				
-			var data = {"no": videoNumber,
+			var data = {
 							"feedback":feedback, 
+							"purposevideo": videoNumber
 						};
 							  
 			   var item = new $scope.userCurrentVideo(data);

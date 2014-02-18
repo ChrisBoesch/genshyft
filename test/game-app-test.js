@@ -217,18 +217,25 @@ myApp.run(function($httpBackend) {
 		"no":"0"}]};
 
 
-//payload -> {"feedback":3, "purposevideo":2,"unlocked":true }   //user to update the new feedback score and unlock next video
+//payload -> {"feedback":0, "purposevideo":2,"unlocked":true }   //user to update the new feedback score and unlock next video - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/2').respond({"results":"video 2 unlocked and updated"});
-//payload -> {"feedback":3, "purposevideo":3,"unlocked":true }   //user to update the new feedback score and unlock next video
+//payload -> {"feedback":0, "purposevideo":3,"unlocked":true }   //user to update the new feedback score and unlock next video - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/3').respond({"result":"video 3 unlocked and updated"});
+//payload -> {"feedback":0, "purposevideo":3 }   //user to update the new feedback score and unlock next video UPDATED AS OF LAST EMAIL BY PROF CHRIS 18-2-14
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock').respond({"result":"video 3 unlocked and updated"})
 		
-//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score
+		
+//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/0').respond({"result":"video 0 feedback adjusted"});			
-//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score
+//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score - old 
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/1').respond({"result":"video 1 feedback adjusted"});
-//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score
-		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/2').respond({"result":"video 2 feedback adjusted"});		
-
+//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score - old
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/2').respond({"result":"video 2 feedback adjusted"});	
+//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score UPDATED AS OF LAST EMAIL BY PROF CHRIS 18-2-14
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback').respond({"result":"video  feedback adjusted"});	
+		
+		
+		
 //payload -> 		//admin to update video
 //{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}		
 		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/0').respond({"result":"video 0 adjusted by admin"});					
@@ -407,9 +414,9 @@ myApp.run(function($httpBackend) {
 	"goal": "faster", // or lessattempts
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
 	};
-	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);;
+	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);
 	
-	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }
+	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }   // backend will determine the nextProblemID to solve 
 	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New Mentor, Path Id and Path Name has been recorded."});
 	
 	var gameID ={"gameID":101010};
