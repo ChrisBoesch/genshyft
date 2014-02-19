@@ -218,9 +218,10 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			$scope.counter = 0;
 			$scope.audio = $scope.audiofile.areyouthere;
 			var audioplayer = document.getElementsByTagName('audio')[0];
+			audioplayer.load();
 			$scope.words = $scope.audiotext.areyouthere;
 			$scope.coachImage =$scope.pictures.areyouthere;
-			audioplayer.load()
+
 			$scope.counter = 0;
 		}
 		

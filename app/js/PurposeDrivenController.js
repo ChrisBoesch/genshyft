@@ -7,6 +7,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
     // this method gets the parameter , variables are declared as youtube and vno
     $scope.location = $location;
 	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
+	$scope.numOfVideos = 0;
 
     $scope.$watch('location.search()', function() {
         $scope.you = ($location.search()).youtube;
@@ -36,6 +37,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
           $resource("/jsonapi/purposevideos").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
 			  $scope.videoArray = $scope.purposeVideos.Videos[0].title;
+			  $scope.numOfVideos = $scope.purposeVideos.Videos.length;
                console.log($scope.purposeVideos);
         	 })
         }
@@ -111,7 +113,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 
 				
 
-          if($scope.purposeVideos.Videos.length-1 > vnoNumber){			
+          if($scope.numOfVideos-1 > vnoNumber){			
 				if($scope.purposeVideos.Videos[(vnoNumber+1)].unlocked == false){				
 					 //$scope.saveNewUnlock(vnoNumber+1);
 					 var id = $scope.purposeVideos.Videos[vnoNumber+1].id;
