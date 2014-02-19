@@ -142,7 +142,7 @@
 								<b>No. of groups:</b>  
 							</div>
 							<div class="span6">	
-								{{selectedTournament.noGroup}} 
+								{{selectedTournament.numberOfGrp}} 
 							</div>
 						</div>	
 					</div>	
@@ -152,7 +152,7 @@
 								<b>No. of players per group:</b>  
 							</div>
 							<div class="span6">	
-								{{selectedTournament.maxNoPlayer}} 
+								{{selectedTournament.numPlayerPerGrp}} 
 							</div>
 						</div>	
 					</div>	
@@ -386,7 +386,7 @@
 							<b>No. of groups:</b>
 						</div>
 						<div class="span9">
-							 <select class="span2" ng-model="selectedTournament.noGroup" ng-options="numgrp for numgrp in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+							 <select class="span2" ng-model="selectedTournament.numberOfGrp" ng-options="numgrp for numgrp in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 						</div>
 					</div>	
 				</div>
@@ -398,7 +398,7 @@
 							<b>No. of players per group:</b>
 						</div>
 						<div class="span9">
-							 <select class="span2" ng-model="selectedTournament.maxNoPlayer" ng-options="maxnumplayers for maxnumplayers in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+							 <select class="span2" ng-model="selectedTournament.numPlayerPerGrp" ng-options="maxnumplayers for maxnumplayers in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 						</div>
 					</div>	
 				</div>
