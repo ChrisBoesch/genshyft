@@ -20,7 +20,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			   else{
 					$scope.currentCoach = $scope.mastery.coach;
 				}
-			   $scope.currentPathId = $scope.mastery.pathId;
+			   $scope.currentPathId = $scope.mastery.pathID;
 			   $scope.currentPathName = $scope.mastery.pathName;
 				
 				
@@ -54,7 +54,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	  $resource('/jsonapi/coach').get({},function(response){
 		  $scope.allCoachesData = response;
 		  
-		   console.log($scope.allCoachesData.coachesData[0].coach);
+		   console.log($scope.allCoachesData.coachesData[0].name);
 		   });	   			   
 	}
 	
@@ -74,22 +74,21 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	
 	
 	//resume game from profile page
-    $scope.resumePracticeGame=function(pathid,pathname,num,coach){
+    $scope.resumePracticeGame=function(pathID,pathName,num,coach){
 		$scope.path_progress = null;
-		$cookieStore.put("pid", pathid);
+		$cookieStore.put("pid", pathID);
 		$cookieStore.put("coach",coach);
 		
 		// to update the new path/mentor user has selected
         $scope.masteryUpdate = $resource("/jsonapi/update_current_coaching_status");
-		var data = 	{"pathId":pathid,
-					"pathName":pathname,
-					"coach":coach
+		var data = 	{"pathID":pathID,
+					"coachID":coach
 					}
           var item = new $scope.masteryUpdate(data);
           item.$save(function(response) { 
                   $scope.response = response;
                   //Handle any errors
-				  console.log("storing data "  + pathid + " " +pathname+  " " +  coach);
+				  console.log("storing data "  + pathID + " " +pathName+  " " +  coach);
                   console.log(response);
 				 
 
@@ -99,10 +98,10 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		
 		$scope.PathModel = $resource('/jsonapi/get_path_progress/:pathID');
         //Including details=1 returns the nested problemset progress.
-        $scope.PathModel.get({"pathID":pathid,"details":1}, function(response){
+        $scope.PathModel.get({"pathID":pathID,"details":1}, function(response){
             $scope.path_progress = response;
 			
-			if(pathname.substring(0,5).trim() == "Begin"){
+			if(pathName.substring(0,5).trim() == "Begin"){
 				$scope.difficulty = "Drag-n-Drop";
 				console.log("Difficulty : " + $scope.difficulty );
 			}
