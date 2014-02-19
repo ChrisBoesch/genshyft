@@ -3019,46 +3019,41 @@ function QuestController($scope,$resource,$location,$routeParams,$cookieStore){
     //Create quest
     $scope.create_quest = function(storyID,path_id,difficulty){
 	  
-      $scope.$watch('location.search()', function() {
-        $scope.target = ($location.search()).target;
-      }, true);
+        $scope.$watch('location.search()', function() {
+            $scope.target = ($location.search()).target;
+        }, true);
 
-      for(var i=0;i<$scope.quests.length;i++){
-		//adding the filter on supported path logic. 
-		if(storyID==$scope.quests[i].story && path_id==$scope.quests[i].path && difficulty==$scope.quests[i].difficulty){
-		    $cookieStore.put("name", $scope.quests[i]);
-		  	$cookieStore.put("type", "questGame");
-		    $scope.list();
-		    $location.search('storyID', null);
-			$location.search('difficulty', null);
-			$location.search('path_ID', null);
-		    $location.path('storyboard');
-		    break;
-		}
-		else{
-			$scope.createNewQuestFlag = true;
-		}			
-	  }	
+        for(var i=0;i<$scope.quests.length;i++){
+            //adding the filter on supported path logic.
+            if(storyID==$scope.quests[i].story && path_id==$scope.quests[i].path && difficulty==$scope.quests[i].difficulty){
+                $cookieStore.put("name", $scope.quests[i]);
+                $cookieStore.put("type", "questGame");
+                $scope.list();
+                $location.search('storyID', null);
+                $location.search('difficulty', null);
+                $location.search('path_ID', null);
+                $location.path('storyboard');
+                return;
+            }
+        }
 
-	  if($scope.createNewQuestFlag){
-	  	$scope.newQuest = {}
-	    $scope.newQuest.storyID = storyID;
-		$scope.newQuest.pathID = path_id;
-	    $scope.newQuest.difficulty = difficulty;
-	    $scope.NewQuest = $resource('/jsonapi/quest');
-	    var new_quest = new $scope.NewQuest($scope.newQuest);
-	      
-	    new_quest.$save(function(response){
-	      $scope.quest = response;
-	      $cookieStore.put("name", response);
-	  	  $cookieStore.put("type", "questGame");
-	      $scope.list();
-	      $location.search('storyID', null);
-		  $location.search('difficulty', null);
-		  $location.search('path_ID', null);
-	      $location.path('storyboard');
-	    });
-	  }
+        $scope.newQuest = {}
+        $scope.newQuest.storyID = storyID;
+        $scope.newQuest.pathID = path_id;
+        $scope.newQuest.difficulty = difficulty;
+        $scope.NewQuest = $resource('/jsonapi/quest');
+        var new_quest = new $scope.NewQuest($scope.newQuest);
+
+        new_quest.$save(function(response){
+            $scope.quest = response;
+            $cookieStore.put("name", response);
+            $cookieStore.put("type", "questGame");
+            $scope.list();
+            $location.search('storyID', null);
+            $location.search('difficulty', null);
+            $location.search('path_ID', null);
+            $location.path('storyboard');
+        });
 
     };
     
