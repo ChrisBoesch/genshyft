@@ -395,6 +395,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "tournamentId":$scope.selectedTournament.tournamentID,
                    "addDetails":$scope.selectedTournament.addDetails,
                    "status": $scope.selectedTournament.status,
+                   "mentorAssignment": $scope.selectedTournament.mentorAssignment,
+                   "numberOfGrp": $scope.selectedTournament.numberOfGrp,
+                   "numPlayerPerGrp": $scope.selectedTournament.numPlayerPerGrp
+
                  }
       //codes copied from managetournament.js, updateTournament() in SingPath Ender codes
       $.ajax({
