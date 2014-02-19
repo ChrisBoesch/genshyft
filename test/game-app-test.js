@@ -217,18 +217,25 @@ myApp.run(function($httpBackend) {
 		"no":"0"}]};
 
 
-//payload -> {"feedback":3, "purposevideo":2,"unlocked":true }   //user to update the new feedback score and unlock next video
+//payload -> {"feedback":0, "purposevideo":2,"unlocked":true }   //user to update the new feedback score and unlock next video - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/2').respond({"results":"video 2 unlocked and updated"});
-//payload -> {"feedback":3, "purposevideo":3,"unlocked":true }   //user to update the new feedback score and unlock next video
+//payload -> {"feedback":0, "purposevideo":3,"unlocked":true }   //user to update the new feedback score and unlock next video - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/3').respond({"result":"video 3 unlocked and updated"});
+//payload -> {"feedback":0, "purposevideo":3 }   //user to update the new feedback score and unlock next video UPDATED AS OF LAST EMAIL BY PROF CHRIS 18-2-14
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock').respond({"result":"video 3 unlocked and updated"})
 		
-//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score
+		
+//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score - old
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/0').respond({"result":"video 0 feedback adjusted"});			
-//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score
+//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score - old 
 		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/1').respond({"result":"video 1 feedback adjusted"});
-//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score
-		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/2').respond({"result":"video 2 feedback adjusted"});		
-
+//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score - old
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/2').respond({"result":"video 2 feedback adjusted"});	
+//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score UPDATED AS OF LAST EMAIL BY PROF CHRIS 18-2-14
+		$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback').respond({"result":"video  feedback adjusted"});	
+		
+		
+		
 //payload -> 		//admin to update video
 //{"title":title1,"image": image,jpg,"thumbnail" : thumbnail.jpg,"vlink": www.youtube?hv=1234xd.com,"description": description123,"question": question}		
 		$httpBackend.whenPOST('/jsonapi/purposevideos/admin_update_video/0').respond({"result":"video 0 adjusted by admin"});					
@@ -407,9 +414,9 @@ myApp.run(function($httpBackend) {
 	"goal": "faster", // or lessattempts
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
 	};
-	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);;
+	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);
 	
-	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }
+	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }   // backend will determine the nextProblemID to solve 
 	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New Mentor, Path Id and Path Name has been recorded."});
 	
 	var gameID ={"gameID":101010};
@@ -588,7 +595,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "isGroup": false,
     "tournamentID": 5060388987076608,
 	"maxNoPlayerPerGrp":0,
-	"maxNoGrp":0,
+	"numberOfGrp":0,
     "mentorAssignInTeam": false,
     "rounds": [
         {
@@ -973,7 +980,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "isGroup": true,
     "tournamentID": 5060388987076609,
 	"maxNoPlayerPerGrp":5,
-	"maxNoGrp":5,
+	"numberOfGrp":5,
     "mentorAssignInTeam": true,
     "rounds": [
         {
@@ -1079,81 +1086,81 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{ 
 			"playerId":57754,
 			"playerName":"Chris", 
-			"Group":3
+			"group":3
 		},
 		
 		{ 
 			"playerId":2739102,
 			"playerName":"Player 2", 
-			"Group":0
+			"group":0
 		},
 		{
 			"playerId":9379339,
 			"playerName":"Player 3", 
-			"Group":1
+			"group":1
 		},{ 
 			"playerId":57753,
 			"playerName":"Player 4", 
-			"Group": 1
+			"group": 1
 		},
 		
 		{ 
 			"playerId":2739101,
 			"playerName":"Player 5", 
-			"Group":1
+			"group":1
 		},
 		{
 			"playerId":9379338,
 			"playerName":"Player 6", 
-			"Group":2
+			"group":2
 		},
 		{ 
 			"playerId":57752,
 			"playerName":"Player 7", 
-			"Group": 2
+			"group": 2
 		},
 		
 		{ 
 			"playerId":2739100,
 			"playerName":"Player 8", 
-			"Group":0
+			"group":0
 		},
 		{
 			"playerId":9379337,
 			"playerName":"Player 9", 
-			"Group":4
+			"group":4
 		},
 		{ 
 			"playerId":57751,
 			"playerName":"Player 10", 
-			"Group": 4
+			"group": 4
 		},
 		
 		{ 
 			"playerId":2739099,
 			"playerName":"Player 11", 
-			"Group":4
+			"group":4
 		},
 		{
 			"playerId":9379336,
 			"playerName":"Player 12", 
-			"Group":5
+			"group":5
 		},
 		{ 
 			"playerId":57750,
 			"playerName":"Player 13", 
-			"Group": 5
+			"group": 5
 		},
 		
 		{ 
 			"playerId":2739098,
 			"playerName":"Player 14", 
-			"Group":5
+			"group":5
 		},
 		{
 			"playerId":9379335,
 			"playerName":"Player 15", 
-			"Group":3
+			"group":3
 		}],
 		
 	    "numRounds": 1,
