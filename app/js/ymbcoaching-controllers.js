@@ -14,20 +14,25 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 				console.log("will forward to cache page");
 				$scope.mastercache = "true";
 				$scope.masterselect ="false";
+				$scope.player_progress = $resource('/jsonapi/get_player_progress').get();
 				
 				try{
 				   if($scope.mastery.coach == null){
 						$scope.currentCoach = "Zandar"
-					   $scope.currentPathId = $scope.mastery.pathID;
-					   $scope.currentPathName = $scope.mastery.pathName;						
+						if($scope.player_progress.paths.length > 0){
+						   $scope.currentPathId = $scope.player_progress.paths.id;
+						   $scope.currentPathName = $scope.player_progress.paths.name;		
+						}					
 				   }
 				   else{
 						$scope.currentCoach = $scope.mastery.coach;
+					    $scope.currentPathId = $scope.mastery.pathID;
+					    $scope.currentPathName = $scope.mastery.pathName;	
 					}
 				}
 				catch(err){
 					
-					$scope.player_progress = $resource('/jsonapi/get_player_progress').get();
+
 					if($scope.player_progress.paths.length > 0){
 					   $scope.currentPathId = $scope.player_progress.paths.id;
 					   $scope.currentPathName = $scope.player_progress.paths.name;		
