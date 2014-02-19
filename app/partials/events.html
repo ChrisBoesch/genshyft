@@ -14,22 +14,22 @@
 </br>
 <div ng-controller="EventController" ng-init="fetch_event()" class="container">
   
-	<div class="row-fluid">
+  <div class="row-fluid">
 
          
 
           <div class="span12 well">
-			      <h1 class="well well-small bootCamp" align="center">- UPCOMING EVENTS -</h1>
+            <h1 class="well well-small bootCamp" align="center">- UPCOMING EVENTS -</h1>
           <div class="container">  
           <ol>
-			      <li ng-repeat="event in events">
-			        <h4>{{event.name}}</h4><br>
+            <li ng-repeat="event in events">
+              <h4>{{event.name}}</h4><br>
               {{event.description}}<br>
               Registration Status: {{event.currentPlayerStatus}}<br><br>
-              <button class="btn btn-primary" data-toggle="modal" data-target="#participateModal" ng-click="register_for_event(event.id, 'participate')">I'd like to participate</button>
-              <button class="btn btn-primary" data-toggle="modal" data-target="#watchModal"ng-click="register_for_event(event.id, 'watch')">I'd like to come watch</button>
-              <button class="btn btn-primary" data-toggle="modal" data-target="#postModal"ng-click="register_for_event(event.id, 'follow')">Keep me posted</button>
-              <button class="btn btn-primary" ng-click="go_to_eventsRanking(event.id)">I'd like to view the rankings</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#participateModal" ng-click="register_for_event(event.id, 'participate')"><i class="icon-check icon-white"></i> I'd like to participate</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#watchModal"ng-click="register_for_event(event.id, 'watch')"><i class="icon-eye-open icon-white"></i> I'd like to come watch</button>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#postModal"ng-click="register_for_event(event.id, 'follow')"><i class="icon-bell icon-white"></i> Keep me posted</button>
+              <button class="btn btn-primary" ng-click="go_to_eventsRanking(event.id)"><i class="icon-list icon-white"></i> I'd like to view the rankings</button>
               <!--
               <button class="btn btn-primary" ng-click="">+1</button>
             -->
@@ -41,11 +41,11 @@
               <br><br>
             </li>
             <br>
-			    </ol>
+          </ol>
           </div>
           </div>
 
-	</div>
+  </div>
 
 <div ng-repeat="event in events">
 <div class="modal fade" id="participateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
