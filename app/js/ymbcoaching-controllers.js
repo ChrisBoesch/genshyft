@@ -14,17 +14,38 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 				console.log("will forward to cache page");
 				$scope.mastercache = "true";
 				$scope.masterselect ="false";
-			   if($scope.mastery.coach == null){
-					$scope.currentCoach = "Zandar"
-			   }
-			   else{
-					$scope.currentCoach = $scope.mastery.coach;
+				$scope.player_progress = $resource('/jsonapi/get_player_progress').get();
+				
+				try{
+				   if($scope.mastery.coach == null){
+						$scope.currentCoach = "Zandar"
+						if($scope.player_progress.paths.length > 0){
+						   $scope.currentPathId = $scope.player_progress.paths.id;
+						   $scope.currentPathName = $scope.player_progress.paths.name;		
+						}					
+				   }
+				   else{
+						$scope.currentCoach = $scope.mastery.coach;
+					    $scope.currentPathId = $scope.mastery.pathID;
+					    $scope.currentPathName = $scope.mastery.pathName;	
+					}
 				}
-			   $scope.currentPathId = $scope.mastery.pathID;
-			   $scope.currentPathName = $scope.mastery.pathName;
-				
-				
-			
+				catch(err){
+					
+
+					if($scope.player_progress.paths.length > 0){
+					   $scope.currentPathId = $scope.player_progress.paths.id;
+					   $scope.currentPathName = $scope.player_progress.paths.name;		
+					   $scope.currentCoach = "Zandar"
+					}
+					else{
+						alert("You need to complete at least 1 path");
+						$location.path("#/home");
+					}
+					
+
+				}
+
 			   });	   		
 
 

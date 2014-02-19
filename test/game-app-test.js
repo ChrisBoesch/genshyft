@@ -139,7 +139,7 @@ myApp.run(function($httpBackend) {
 		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?"
 		},
 
-		{"no":1,"title":"Art of Creative Coding",
+		{"no":12,"title":"Art of Creative Coding",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
@@ -407,7 +407,7 @@ myApp.run(function($httpBackend) {
 	var currentUserMasteryProgress = {
 	"showNewProblems":true,
 	"nextProblemID": 52741,	
-	"coach":"Shannon", //there will almost be a defaulted coach
+	"coach":"SGTMJR", //there will almost be a defaulted coach
 	"goal": "faster", // or lessattempts
 	"next_ten": 
 	[ {"percentile_time":0.1,"percentile_attempts":0.2,"problemId":52741},
@@ -422,7 +422,7 @@ myApp.run(function($httpBackend) {
 	  {"percentile_time":0.001,"percentile_attempts":0.0023,"problemId":52740},
 	],
 	"fromProblemSetID":10041,	
-	"coachID":1,
+	"coachID":4,
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22},	
 	"pathName":"python",
 	"pathId":"10030"
@@ -2184,7 +2184,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Secret Agent",
 		            "menteeID": null,
-		            "mentorHasArrived": false,
+		            "mentorHasArrived": true,
 		            "rankingInGrp":1,
 		            "group": 1
 		        }
@@ -2200,7 +2200,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		    "currentTime": "2014-01-09 09:38:59.184880",
 		    "tournamentType": "Normal",
 		    "type": "heat ranking",
-		    "isGroup":true
+		    "isGroup":false
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);
