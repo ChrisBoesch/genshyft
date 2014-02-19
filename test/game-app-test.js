@@ -2152,7 +2152,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Secret Agent",
 		            "menteeID": null,
-		            "mentorHasArrived": false,
+		            "mentorHasArrived": true,
 		            "rankingInGrp":1,
 		            "group": 1
 		        }
@@ -2168,7 +2168,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		    "currentTime": "2014-01-09 09:38:59.184880",
 		    "tournamentType": "Normal",
 		    "type": "heat ranking",
-		    "isGroup":true
+		    "isGroup":false
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);

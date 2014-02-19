@@ -1,9 +1,17 @@
 <style>
    
     .table td, .table th {
-        border: solid 1px #000000;
+        border: none;
+    }
+
+    .table tbody tr:hover td {
+        background-color: #eeeeee;
     }
     
+    .table tbody tr:hover th{
+    	background-color: #666666;
+    }
+
     .table th{
     	background-color: #666666;
     	color: #FFFFFF;
@@ -70,8 +78,8 @@
 								<tr>
 									<th class="Rank_Ranking">Overall Ranking</th>
 									<th class="Rank_PlayerName">Player Name</th>
-									<th class="Rank_RankInGrp">Rank in Group</th>
-									<th class="Rank_Grp">Group Number</th>								
+									<th class="Rank_RankInGrp" ng-show="tournament.isGroup == true">Rank in Group</th>
+									<th class="Rank_Grp" ng-show="tournament.isGroup == true">Group Number</th>								
 									
 									<th class="Rank_Qns"ng-repeat="i in my_range(tournament.ranking[0].total_problems)" width="15">{{i}}</th>
 									<th class="Rank_Progress">Progress</th>
@@ -81,8 +89,8 @@
 								<tr ng-repeat="player in playerRanks">
 									<td class="Rank_Ranking">{{$index+1}}</td>
 									<td class="Rank_PlayerName"><img class="grav"ng-src="{{player.gravatar}}"> &nbsp; &nbsp;{{player.nickname}}</td>
-									<td class="Rank_RankInGrp">{{player.rankingInGrp}}</td>
-									<td class="Rank_Grp">{{player.group}}</td>
+									<td class="Rank_RankInGrp" ng-show="tournament.isGroup == true">{{player.rankingInGrp}}</td>
+									<td class="Rank_Grp" ng-show="tournament.isGroup == true">{{player.group}}</td>
 													
 									<!-- Need to add in the questions associated to each round and the tick logo -->
 									<td class="Rank_Qns" ng-repeat="i in my_range(player.solved_problems)"><img src="http://www.singpath.com/ender/static/badges/ticks_on.png"></td>
@@ -90,7 +98,7 @@
 									<!-- -->
 									<td class="Rank_Progress">{{player.finished}}</td>
 									<td class="Rank_AssignedTo">{{player.mentee}}</td>
-									<td class="Rank_MentoredBy">{{player.mentor}}</td>
+									<td class="Rank_MentoredBy"><p ng-hide="player.mentorID == null"><font ng-show="player.mentorHasArrived == false">Waiting for </font>{{player.mentor}}</p></td>
 								</tr>           
 							</table>
 						
