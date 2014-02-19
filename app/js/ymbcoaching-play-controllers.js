@@ -32,26 +32,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 	
 	
 	
-    $scope.onTimeout = function(){
-        $scope.counter++;
-        mytimeout = $timeout($scope.onTimeout,1000);
-		if($scope.counter > 40 ){
-			$scope.counter = 0;
-			$scope.audio = $scope.audiofile.areyouthere;
-			var audioplayer = document.getElementsByTagName('audio')[0];
-			$scope.words = $scope.audiotext.areyouthere;
-			$scope.coachImage =$scope.pictures.areyouthere;
-			audioplayer.load()
-			$scope.counter = 0;
-		}
-		
-    }
-    var mytimeout = $timeout($scope.onTimeout,1000);
-    
-    $scope.stop = function(){
-        $timeout.cancel(mytimeout);
-    }
-	
+
 	
 	
 		$scope.getCurrentMastery = function(){
@@ -65,7 +46,9 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			   $scope.fromProblemSetID = $scope.mastery.fromProblemSetID;
 			   $scope.showUserNewProblem = $scope.mastery.showNewProblems;
 			   $scope.problemsToDo =[];
-			   for(var i = 0;i<$scope.mastery.next_ten.length;i++){
+			   $scope.problemsToDo.push($scope.nextProblemID);
+			   
+			   for(var i = 1;i<$scope.mastery.next_ten.length;i++){
 					$scope.problemsToDo.push($scope.mastery.next_ten[i].problemId);
 					console.log("Problems added into list are " + $scope.mastery.next_ten[i].problemId);
 			   }
@@ -101,9 +84,9 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			//WELCOMEBACK 
 			$scope.audio = $scope.audiofile.welcomeback;
 			var audioplayer = document.getElementsByTagName('audio')[0];
+			audioplayer.load();
 			$scope.words = $scope.audiotext.welcomeback;
 			//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-			audioplayer.load()	;
 			$scope.getGameID();
 	  });	   			   
 	}
@@ -123,7 +106,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							$timeout(function(){ 
 								$scope.create_practice_game($scope.gameDetails);
 								$scope.runButton = true;
-							}, 8000);	 		 
+							}, 12000);	 		 
           });	
 	}	
 	
@@ -170,7 +153,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		
 		$timeout(function(){
 			$scope.solution1 = $scope.solutionToProblem;
-		},5000);
+		},10000);
 		
     };
 	
@@ -226,6 +209,29 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		}
 	}
 
+	
+	
+    $scope.onTimeout = function(){
+        $scope.counter++;
+        mytimeout = $timeout($scope.onTimeout,1000);
+		if($scope.counter > 40 ){
+			$scope.counter = 0;
+			$scope.audio = $scope.audiofile.areyouthere;
+			var audioplayer = document.getElementsByTagName('audio')[0];
+			$scope.words = $scope.audiotext.areyouthere;
+			$scope.coachImage =$scope.pictures.areyouthere;
+			audioplayer.load()
+			$scope.counter = 0;
+		}
+		
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+    
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
+		
+	
 	
     //alert($scope.qid);
   /*  $scope.create_practice_game = function(problemSetID,numProblems){

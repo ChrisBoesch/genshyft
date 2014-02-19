@@ -106,31 +106,20 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 
 
         $scope.nextVideo = function (vno,feedback){
-			var vnoNumber = parseInt(vno);
+			var vnoNumber = parseInt(vno);//array value
 			console.log("nextVideo is being executed");
 
 				
-     
-				
-				
-			for(var i = 0; i<$scope.purposeVideos.Videos.length;i++){
-				if($scope.purposeVideos.Videos[i].no == vnoNumber){
-					vnoNumber = i;
-					break;
-				}
-			}				
-			
-
 
           if($scope.purposeVideos.Videos.length-1 > vnoNumber){			
-           if($scope.purposeVideos.Videos[(vnoNumber+1)].unlocked == false){				
-			     //$scope.saveNewUnlock(vnoNumber+1);
-				 var id = $scope.purposeVideos.Videos[vnoNumber+1].id;
-			     $scope.saveNewUnlock(id);
-			    // $scope.saveNewUnlock(vnoNumber+1);
-                  alert ("You have unlock a new video! with video " );		
-					
-                }
+				if($scope.purposeVideos.Videos[(vnoNumber+1)].unlocked == false){				
+					 //$scope.saveNewUnlock(vnoNumber+1);
+					 var id = $scope.purposeVideos.Videos[vnoNumber+1].id;
+					 $scope.saveNewUnlock(id);
+					// $scope.saveNewUnlock(vnoNumber+1);
+					  alert ("You have unlock a new video! with video " );		
+						
+				}
 		
                	var id = $scope.purposeVideos.Videos[vnoNumber].id;
 				$scope.saveNewFeedback(id,feedback); // unlock , resave answer into datastore.

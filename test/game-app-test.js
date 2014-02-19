@@ -132,7 +132,7 @@ myApp.run(function($httpBackend) {
 		//This is purpose driven videos data
 	var purposeDrivenVideosADMIN = {
 		"Videos":[
-		{"no":0,"title":"What Most School Don't Teach",
+		{"no":9,"title":"What Most School Don't Teach",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
@@ -146,14 +146,14 @@ myApp.run(function($httpBackend) {
 		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?"
 		},
 
-		{"no":2,"title":"Why Teach Coding",
+		{"no":8,"title":"Why Teach Coding",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
 		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?"
 		},
 
-		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
+		{"no":7,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
@@ -181,7 +181,7 @@ myApp.run(function($httpBackend) {
 		"description":"Thomas Suarez is a 6th grade student at a middle school in the South Bay of Los Angeles. When Apple released the Software Development Kit (SDK), he began to create and sell his own applications. ","question":"How does this video make you feel?"
 		},
 
-		{"no":7,"title":"Mitch Resnick: Let's teach kids to code",
+		{"no":3,"title":"Mitch Resnick: Let's teach kids to code",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"tvlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
@@ -189,14 +189,14 @@ myApp.run(function($httpBackend) {
 		,"question":"How does this video make you feel?"
 		},
 
-		{"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
+		{"no":2,"title":"Code For Kids - Teaching our kids what our schools don't",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
 		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?"
 		},
 
-		{"no":9,"title":"NEW NEWS : Computer coding for kids",
+		{"no":21,"title":"NEW NEWS : Computer coding for kids",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
@@ -407,7 +407,7 @@ myApp.run(function($httpBackend) {
 	var currentUserMasteryProgress = {
 	"showNewProblems":true,
 	"nextProblemID": 52741,	
-	"coach":"SGTMJR", //there will almost be a defaulted coach
+	"coach":"Shannon", //there will almost be a defaulted coach
 	"goal": "faster", // or lessattempts
 	"next_ten": 
 	[ {"percentile_time":0.1,"percentile_attempts":0.2,"problemId":52741},
