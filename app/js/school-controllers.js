@@ -212,10 +212,11 @@ function SchoolController($scope,$resource,$location){
         };
 
         $scope.get_marker_events = function(eventID){
+          $scope.schoolMarkers.length = 0;
           $scope.allEventsCall = $resource('/jsonapi/event/:eventID');
           //$scope.eventId = null;
           if(eventID!=null){
-          $scope.allEventsCall.get({"eventid":eventID}, function(response){
+          $scope.allEventsCall.get({"eventID":eventID}, function(response){
             $scope.eventRetrieved = response;
             $scope.eventRetrievedRanking = $scope.eventRetrieved.ranking;
             console.log($scope.eventRetrievedRanking);
@@ -228,10 +229,11 @@ function SchoolController($scope,$resource,$location){
 
             for (var i = 0; i < $scope.supported_schools.length; i++) {
                   var temp = $scope.supported_schools[i].name;
+                  var tempType = $scope.supported_schools[i].schooltype;
                   var schTotal = 0;
-                  console.log(temp);
+                  
                   for (var j = 0; j < $scope.eventRetrievedRanking.length; j++) {
-                    if (temp == $scope.eventRetrievedRanking[j].schoolname){
+                    if (temp == $scope.eventRetrievedRanking[j].schoolname && tempType == $scope.eventRetrievedRanking[j].schooltype){
                       console.log($scope.eventRetrievedRanking[j].schoolname);
                       schTotal++;
                     }
