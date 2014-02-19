@@ -9,8 +9,8 @@ $('#myTab a').click(function (e) {
 
 /*GENShYFT's TournamentController*/
 function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route){
-  $scope.GTournModel = $resource('/jsonapi/tournament_progress/:tournamentID');
-  $scope.tournamentID = null;
+  $scope.GHeatModel = $resource('/jsonapi/get_heat_ranking');
+  $scope.heatID = null;
   $scope.location = $location;
   $scope.playerRanks = [];
   //$scope.$watch('location.search()', function() {
@@ -81,27 +81,28 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       return counter = timeLimit - timeDifference;
     }
   };*/
-
+/*Ranking codes by Fariq*/
   $scope.check_location = function(){
-    $scope.tournamentID = ($location.search()).tournamentID;
-    if (!$scope.tournamentID){
-      alert("No Tournament ID passed via URL.");
+    $scope.heatID = ($location.search()).heatID;
+    if (!$scope.heatID){
+      alert("No Heat ID passed via URL.");
     }
     else{
       //console.log("Fetching heat "+$scope.heatID);
-      $scope.fetch_ranks($scope.tournamentID);
+      $scope.fetch_ranks($scope.heatID);
     };
   };
 
-  $scope.fetch_ranks = function(tournamentID){
-      $scope.GTournModel.get({"tournamentID":tournamentID}, function(response){
+  $scope.fetch_ranks = function(heatID){
+      $scope.GHeatModel.get({"heatID":heatID}, function(response){
         $scope.tournament = response;
-        console.log("test");
+        //console.log("test");
         //console.log($scope.tournament.round[0].registeredPlayers);
-        $scope.playerRanks = $scope.tournament.round[0].registeredPlayers;
+        $scope.playerRanks = $scope.tournament.ranking;
+        
         //Code here continually refreshes every 10 seconds
         $timeout(function() {
-        $scope.fetch_ranks($scope.tournamentID)
+        $scope.fetch_ranks($scope.heatID)
       }, 10000);
       });
   };
@@ -118,7 +119,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     };
 
   $scope.startRef = function(){
-    $timeout.cancel($scope.fetch_ranks(tournamentID));
+    $timeout.cancel($scope.fetch_ranks(heatID));
   };
 
   //Save each created round into an array 

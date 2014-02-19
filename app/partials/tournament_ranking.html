@@ -1,11 +1,13 @@
 <style>
    
     .table td, .table th {
-        border: none;
+        border: solid 1px #000000;
     }
-    .table tbody tr:hover td,
-    .table tbody tr:hover th {
-        background-color: #DCD9CD;
+    
+    .table th{
+    	background-color: #666666;
+    	color: #FFFFFF;
+    	vertical-align: middle;
     }
     
     .tabspacing{
@@ -27,13 +29,14 @@
 	th.Rank_Ranking, td.Rank_Ranking						{width:5%;}
 	th.Rank_RankInGrp, td.Rank_RankInGrp					{width:10%;}
     th.Rank_Grp, td.Rank_Grp								{width:10%;}
-    th.Rank_PlayerName, td.Rank_PlayerName					{width:20%;}
-    th.Rank_Qns, td.Rank_Qns								{width:20%;}
+    th.Rank_PlayerName										{width:20%;}
+    td.Rank_PlayerName										{width:20%;text-align: left;}
+    th.Rank_Qns, td.Rank_Qns								{width:4%;}
     th.Rank_Progress, td.Rank_Progress						{width:10%;}
     th.Rank_AssignedTo, td.Rank_AssignedTo					{width:10%;}
     th.Rank_MentoredBy, td.Rank_MentoredBy					{width:10%;}
 
-    img.grav {width:25%;}
+    img.grav {width:15%;float:left;}
 		
 
 </style>
@@ -60,31 +63,34 @@
 					<div class="tab-pane active" align="left" id="Ranking">
 						<div style="width:99.8%; height:{{window_Height_challenge}}px;overflow-y:auto;overflow-x:hidden">						
 
-						<div ng-repeat="round in tournament.round">
-						<h4>{{round.description}}</h4>
-						<h5>{{round.currentHeatDetails.description}}</h5>
+						<div>
+						<h4>{{tournament.roundDescription}}</h4>
+						<h5>{{tournament.heatDescription}}</h5>
 							<table class="table table-hover">	
 								<tr>
 									<th class="Rank_Ranking">Overall Ranking</th>
+									<th class="Rank_PlayerName">Player Name</th>
 									<th class="Rank_RankInGrp">Rank in Group</th>
 									<th class="Rank_Grp">Group Number</th>								
-									<th class="Rank_PlayerName">Player Name</th>
-									<th class="Rank_Qns">Questions</th>
+									
+									<th class="Rank_Qns"ng-repeat="i in my_range(tournament.ranking[0].total_problems)" width="15">{{i}}</th>
 									<th class="Rank_Progress">Progress</th>
 									<th class="Rank_AssignedTo">Assigned To</th>
 									<th class="Rank_MentoredBy">Mentored By</th>
 								</tr>  							
 								<tr ng-repeat="player in playerRanks">
 									<td class="Rank_Ranking">{{$index+1}}</td>
+									<td class="Rank_PlayerName"><img class="grav"ng-src="{{player.gravatar}}"> &nbsp; &nbsp;{{player.nickname}}</td>
 									<td class="Rank_RankInGrp">{{player.rankingInGrp}}</td>
 									<td class="Rank_Grp">{{player.group}}</td>
-									<td class="Rank_PlayerName"><img class="grav"ng-src="{{player.playerImg}}"> &nbsp; &nbsp;{{player.playerName}}</td>				
+													
 									<!-- Need to add in the questions associated to each round and the tick logo -->
-									<td class="Rank_Qns"><img ng-repeat="i in my_range(player.problemsSolved.length)" src="http://www.singpath.com/ender/static/badges/ticks_on.png"><img ng-repeat="i in my_range(round.currentHeatDetails.numQns-player.problemsSolved.length)"src="http://www.singpath.com/ender/static/badges/ticks_off.png"></td>
+									<td class="Rank_Qns" ng-repeat="i in my_range(player.solved_problems)"><img src="http://www.singpath.com/ender/static/badges/ticks_on.png"></td>
+            						<td class="Rank_Qns" ng-repeat="i in my_range(player.total_problems - player.solved_problems)"><img src="http://www.singpath.com/ender/static/badges/ticks_off.png"></td>
 									<!-- -->
-									<td class="Rank_Progress"></td>
-									<td class="Rank_AssignedTo"></td>
-									<td class="Rank_MentoredBy"></td>
+									<td class="Rank_Progress">{{player.finished}}</td>
+									<td class="Rank_AssignedTo">{{player.mentee}}</td>
+									<td class="Rank_MentoredBy">{{player.mentor}}</td>
 								</tr>           
 							</table>
 						
