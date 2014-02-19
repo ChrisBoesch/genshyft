@@ -145,13 +145,13 @@ float:left;
 
 
 				<div id = "audioDiv">	
-					<audio src="audio/{{coaches.coach}}/greeting.mp3" autoplay controls></audio> <br> <br>
+					<audio src="audio/{{coaches.name}}/greeting.mp3" autoplay controls></audio> <br> <br>
 				</div>
 			 
-			 	  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,coaches.coach)">Start Practising </button> <br>  <br>
+			 	  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,coaches.coachID)">Start Practising </button> <br>  <br>
 			 <button id="reset" class="btn btn-warning" ng-click ="resetMentor()">  New Mentor </button> 
 			 <button id="reset" class="btn btn-warning" ng-click ="resetPath()">  New Path </button> 
-			<br> <br> Current Mentor :  {{coaches.coach}}
+			<br> <br> Current Mentor :  {{coaches.name}}
 			<br> Current Path :{{currentPathName}}
 			 </td>
 			 <td class = "span4"> 
@@ -177,9 +177,9 @@ float:left;
 			<td ng-repeat ="coaches in allCoachesData.coachesData" align ='center'>
 			
 			<IMG ng-src=" {{coaches.image}}" width ='150'> <br>
-			<input type ="radio" name = "coachSelect" ng-model ="$parent.currentCoach" value ="{{coaches.coach}}"> 
+			<input type ="radio" name = "coachSelect" ng-model ="$parent.currentCoach" value ="{{coaches.name}}"> 
 
-			<b><br>{{coaches.coach}}</b> <br><br> {{coaches.desc}}
+			<b><br>{{coaches.name}}</b> <br><br> {{coaches.description}} <br>
 			<br>
 			</td>
 			</table>
