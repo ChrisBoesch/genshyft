@@ -3930,6 +3930,7 @@ function EventTableController($scope, $resource, $route, $location){
 	    	//current resource refers to just JC Comp
 		    $resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
             	$scope.eventsData = response;
+ 
             	$scope.predicate = '-solvedproblems';
 
             console.log($scope.eventsData);

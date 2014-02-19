@@ -100,14 +100,22 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 			var vnoNumber = parseInt(vno);
 			console.log("nextVideo is being executed");
              if($scope.purposeVideos.Videos.length-1 > vnoNumber){
+				
                 if($scope.purposeVideos.Videos[(vnoNumber+1)].unlocked == false){
-			     $scope.saveNewUnlock(vnoNumber+1);
-                  alert ("You have unlock a new video!" );		
+				
+					
+				
+			     //$scope.saveNewUnlock(vnoNumber+1);
+				 var id = $scope.purposeVideos.Videos[vnoNumber+1].id;
+			     $scope.saveNewUnlock(id);
+			    // $scope.saveNewUnlock(vnoNumber+1);
+                  alert ("You have unlock a new video! with video " );		
 					
                 }
 		
-               
-				$scope.saveNewFeedback(vnoNumber,feedback); // unlock , resave answer into datastore.
+               	var id = $scope.purposeVideos.Videos[vnoNumber].id;
+				$scope.saveNewFeedback(id,feedback); // unlock , resave answer into datastore.
+				//$scope.saveNewFeedback(vnoNumber,feedback); // unlock , resave answer into datastore.
                 $location.search({'youtube':$scope.purposeVideos.Videos[(vnoNumber+1)].vlink,'vno':(vnoNumber+1)}).path('purposedriven-play') 
 				
               }
@@ -136,6 +144,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 					  console.log(response);
 						
 				})
+				console.log("video unlocked with Id " + videoNumber);
 		
 	}
 

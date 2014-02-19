@@ -14,7 +14,7 @@
         <br/><br/>
 	
         <span ng-show="searchOption=='school'" >School type: <select ng-model="filter_schooltype" ng-change="get_marker()" ng-options="schooltype for schooltype in supported_schooltypes | orderBy:'schooltype'"></select></span>       
-        <span ng-show="searchOption=='event'">Event: <select ng-model="filter_event"  ng-init="fetch_event()" ng-options="event.id as event.name for event in events"></select></span>
+        <span ng-show="searchOption=='event'">Event: <select ng-model="filter_event"  ng-init="fetch_event()" ng-change="get_marker_events(filter_event)" ng-options="event.id as event.name for event in events"></select></span>
 	
         <div class="google-map" 
                 center="position.coords"
