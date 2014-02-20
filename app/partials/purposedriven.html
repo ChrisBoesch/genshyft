@@ -32,7 +32,7 @@
   	<!-- <select ng-model="videoID" ng-options= "video.id as video.title for video in purposeVideos.Videos | orderBy:'title'"></select !-->
 <div class="container" style="position:relative;">
 		
-<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Choose a video and get inspired ! </h4>	
+<h4 class="well well-small bootCamp" align="center" id="well-c" > <center> 1. Choose a video and get inspired ! </center> </h4>	
 			<span class="span11">
 						
 <table border="0"align ="center" cellpadding="11"cellspacing="11" >
@@ -48,7 +48,7 @@ ng-options="video.title for video in purposeVideos.Videos"></select>
 
 <br><br>
 <div ng-show="videoArray.unlocked">  
-<button class="btn btn-inverse"  ng-click = "view_video(purposeVideos.Videos[videoArray.no].vlink,videoArray.no)">  Play  </button> 
+<button class="btn btn-inverse"  ng-click = "view_video_old(purposeVideos.Videos[videoArray.no].vlink,videoArray.no)">  Play  </button> 
 
 </div>
 <br><br>

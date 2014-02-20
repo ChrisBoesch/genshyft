@@ -48,12 +48,14 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
           $resource("/jsonapi/purposevideos").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
 			  $scope.videoArray = $scope.purposeVideos.Videos[0].title;
+			  
                console.log($scope.purposeVideos);
 			   
 			   
 			for(var i = 0; i < $scope.purposeVideos.Videos.length-1; i++){
 				if($scope.purposeVideos.Videos[i].unlocked ==false){
 					 $location.search({'youtube':$scope.purposeVideos.Videos[i].vlink,'vno':i}).path('purposedriven-play') ;
+					 console.log("JUMP TO NEXT VIDEO  :" + i );
 					 break;
 				}
 				if( i== $scope.purposeVideos.Videos.length){
@@ -106,6 +108,29 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
   			 $location.search({'youtube':address,'vno':vno}).path('purposedriven-play')
         }  
 
+		
+		
+	// hands over the youtube link and video number for next page viewing.
+    $scope.view_video_old = function(address,vno){
+	console.log("view_video is being executed");
+        	//$scope.videotoWatch = address;
+        	//window.location.replace('#/purposedriven-play?v=' +value);
+        	//$location.path('purposedriven-play')
+  			//alert(document.URL);
+  			//alert(value);
+			
+			for(var i = 0; i<$scope.purposeVideos.Videos.length;i++){
+				if($scope.purposeVideos.Videos[i].no == vno){
+					vno = i;
+					break;
+				}
+
+			}
+			
+  			 $location.search({'youtube':$scope.purposeVideos.Videos[i].vlink,'vno':vno}).path('purposedriven-play')
+        } 		
+		
+		
 
         $scope.nextVideo = function (vno,feedback){
 			var vnoNumber = parseInt(vno);//array value
