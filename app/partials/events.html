@@ -25,7 +25,7 @@
             <li ng-repeat="event in events">
               <h4>{{event.name}}</h4><br>
               {{event.description}}<br>
-              Registration Status: {{event.currentPlayerStatus}}<br><br>
+              Registration Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}</strong><br><br>
               <button class="btn btn-primary" data-toggle="modal" data-target="#participateModal" ng-click="register_for_event(event.id, 'participate')"><i class="icon-check icon-white"></i> I'd like to participate</button>
               <button class="btn btn-primary" data-toggle="modal" data-target="#watchModal"ng-click="register_for_event(event.id, 'watch')"><i class="icon-eye-open icon-white"></i> I'd like to come watch</button>
               <button class="btn btn-primary" data-toggle="modal" data-target="#postModal"ng-click="register_for_event(event.id, 'follow')"><i class="icon-bell icon-white"></i> Keep me posted</button>
