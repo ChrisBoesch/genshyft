@@ -425,7 +425,7 @@ myApp.run(function($httpBackend) {
 	"coachID":4,
 	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22},	
 	"pathName":"python",
-	"pathId":"10030"
+	"pathID":"10030"
 	};
 	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);
 	

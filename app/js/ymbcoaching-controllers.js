@@ -4,7 +4,18 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	//check if the user had select a mentor before.
 	$scope.currentCoach = "";
 	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
-	$scope.allCoachesData= "";
+	
+	 $resource('/jsonapi/get_player_progress').get({},function(response){
+		$scope.player_progress = response;
+		$scope.currentPathId = $scope.player_progress.paths[0].id;
+	   $scope.currentPathName = $scope.player_progress.paths[0].name;		
+	 });
+
+	$resource('/jsonapi/coach').get({},function(response){
+		$scope.allCoachesData = response;
+
+	});
+		
 	
 	$scope.getCurrentMastery = function(){
 
@@ -16,72 +27,48 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 				console.log("will forward to cache page");
 				$scope.mastercache = "true";
 				$scope.masterselect ="false";
-				$scope.player_progress = $resource('/jsonapi/get_player_progress').get();
 				
-				try{
+			
 				   if($scope.mastery.coach == null){
+						console.log("mastery.coach is null");
 						$scope.currentCoach = "Shannon"
-						if($scope.player_progress.paths.length > 0){
-						   $scope.currentPathId = $scope.player_progress.paths.id;
-						   $scope.currentPathName = $scope.player_progress.paths.name;	
-
+						console.log("A");
+						if($scope.player_progress.paths.length > 0){		   
+						   console.log("B");
+						   
 							// to update the new path/mentor user has selected
 							$scope.masteryUpdate = $resource("/jsonapi/update_current_coaching_status");
-							$scope.allCoachesData= $resource('/jsonapi/coach');
-							var data = 	{"pathID":currentPathId,
-										"coachID":$scope.allCoachesData.coachesData[0].id
+							console.log("C");
+							
+							var data = 	{"pathID":$scope.currentPathId,
+										"coachID":$scope.allCoachesData.coachesData[0].coachID
 										}
+							console.log("D");	
+								
+										
 							  var item = new $scope.masteryUpdate(data);
 							  item.$save(function(response) { 
 								  $scope.response = response;
 								  //Handle any errors
-								  console.log("storing data "  + pathID + " " +pathName+  " " +  coach);
+								  console.log("storing data "  + $scope.currentPathId, + " - " +$scope.currentPathName+  "- " +  $scope.currentCoach);
 								  console.log(response);
-									$route.reload();
+									
 								});  
 						}					
 				   }
 				   else{
-						$scope.currentCoach = $scope.mastery.coach;
+						console.log("mastery.coach is not null");
+						$scope.currentCoach = $scope.mastery.coach
+							console.log($scope.currentCoach + " E");
 					    $scope.currentPathId = $scope.mastery.pathID;
+						console.log("currentpathId value is" + $scope.currentPathId);
 					    $scope.currentPathName = $scope.mastery.pathName;	
+						console.log("currentpathName value is" + $scope.currentPathName);
 					}
-				}
-				catch(err){
-					
-						$scope.player_progress = $resource('/jsonapi/get_player_progress').get();
-						$scope.currentCoach = "Shannon"
-						if($scope.player_progress.paths.length > 0){
-						   $scope.currentPathId = $scope.player_progress.paths.id;
-						   $scope.currentPathName = $scope.player_progress.paths.name;	
-
-							// to update the new path/mentor user has selected
-							$scope.masteryUpdate = $resource("/jsonapi/update_current_coaching_status");
-							$scope.allCoachesData= $resource('/jsonapi/coach');
-							var data = 	{"pathID":currentPathId,
-										"coachID":$scope.allCoachesData.coachesData[0].id
-										}
-							  var item = new $scope.masteryUpdate(data);
-							  item.$save(function(response) { 
-								  $scope.response = response;
-								  //Handle any errors
-								  console.log("storing data "  + pathID + " " +pathName+  " " +  coach);
-								  console.log(response);
-									$route.reload();
-								});  
-						}
-					else{
-						alert("You need to complete at least 1 path");
-						$location.path("#/home");
-					}
-					
-
-				}
-
-			   });	   		
+  		
 
 
-			   
+		});	   
     } 
 	
 	 
@@ -141,7 +128,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
           item.$save(function(response) { 
                   $scope.response = response;
                   //Handle any errors
-				  console.log("storing data "  + pathID + " " +pathName+  " " +  coach);
+				  console.log("storing data "  + pathID + " " +pathName+  " " +  coachID);
                   console.log(response);
 				 
 
