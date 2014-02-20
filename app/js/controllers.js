@@ -39,14 +39,20 @@ function Ctrl($scope) {
 }
 
 function PlayerController($scope,$resource,$location,$cookieStore,$http,currentUserService){
+    var resetSearch = function() {
+        $location.search('storyID', null);
+        $location.search('difficulty', null);
+        $location.search('path_ID', null);
+    };
+
 	$scope.list=function(){
-		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
-	  $scope.player = $resource('/jsonapi/player').get();
-		$scope.tags = $resource('/jsonapi/tags').get();
-	    $scope.$watch('player', function() {
-	    	$scope.current_country = $scope.player.country;
-        currentUserService.setUser($scope.player);
-	    },true);
+        $scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
+        $scope.player = $resource('/jsonapi/player').get();
+        $scope.tags = $resource('/jsonapi/tags').get();
+        $scope.$watch('player', function() {
+            $scope.current_country = $scope.player.country;
+            currentUserService.setUser($scope.player);
+        }, true);
 	};
 	
 	$scope.addTag = function(addedTag){
@@ -60,182 +66,60 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 			}
 		}
 		$scope.taglist=[];
-  	};
+    };
+
+    $scope.firstLoad=function(paid){
+        if($scope.player.nickname){
+            resetSearch();
+            $cookieStore.put("pid", paid);
+            $location.path("practice");
+        } else {
+            alert("Please login with FaceBook or Google Account first!");
+        }
+    };
 	
-	$scope.firstLoad=function(paid){
-		if($scope.player.nickname){
-   			$location.search('storyID', null);
-   			$location.search('difficulty', null);
-   			$location.search('path_ID', null);
-			$cookieStore.put("pid", paid);
-			$location.path("practice");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
+    $scope.login = function() {};
+
+    var checkLogin = function(path) {
+        if($scope.player.nickname){
+            $location.path(path);
+        }
+        else{
+            alert("Please login with FaceBook or Google Account first!");
+        }
+    };
+
+    var checkLoginResetSearch = function (path) {
+        if($scope.player.nickname){
+            resetSearch();
+            $location.path(path);
+        } else {
+            alert("Please login with FaceBook or Google Account first!");
+        }
+    };
 	
-    $scope.login=function(){
-  
-    }; 
-	
-	$scope.checkQuestLogin = function(){
-		if($scope.player.nickname){
-			$location.search('storyID', null);
-   			$location.search('difficulty', null);
-   			$location.search('path_ID', null);
-			$location.path("quests");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkPracticeLogin = function(){
-		if($scope.player.nickname){
-			$location.path("practice");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkStoryLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("story");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkChallengesLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("challenges");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkRankingLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("ranking");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkFeedbackLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("feedback");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkProfileLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("profile");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
+    $scope.checkQuestLogin = checkLoginResetSearch.bind($scope, 'quests');
+    $scope.checkStoryLogin = checkLoginResetSearch.bind($scope, 'story');
+    $scope.checkChallengesLogin = checkLoginResetSearch.bind($scope, 'challenges');
+    $scope.checkRankingLogin = checkLoginResetSearch.bind($scope, 'ranking');
+    $scope.checkFeedbackLogin = checkLoginResetSearch.bind($scope, 'feedback');
+    $scope.checkProfileLogin = checkLoginResetSearch.bind($scope, 'profile');
 
 //GENShYFT Codes
-	$scope.toVideos = function(){
-		$location.path("videos");
-	}
+    $scope.toVideos = function(){
+        $location.path("videos");
+    };
 
-	$scope.checkCreatePathorLevelLogin = function(){
-		if($scope.player.nickname){
-			$location.path("create");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
+    $scope.checkPracticeLogin = checkLogin.bind($scope, 'practice');
+    $scope.checkCreatePathorLevelLogin = checkLogin.bind($scope, 'create');
+	$scope.checkSchoolRegistrationLogin = checkLogin.bind($scope, 'schoolregistration');
+    $scope.checkMasteryLogin = checkLogin.bind($scope, 'ymbcoaching');
+    $scope.checkPurposeDrivenLogin = checkLogin.bind($scope, 'purposedriven');
+    $scope.checkTournamentLogin = checkLogin.bind($scope, 'tournaments');
+    $scope.checkCreateTournamentLogin = checkLogin.bind($scope, 'mytournaments');
+    $scope.checkEventsLogin = checkLogin.bind($scope, 'events');
+    $scope.checkSchoolsMapLogin = checkLogin.bind($scope, 'schoolsmap');
 
-	$scope.checkSchoolRegistrationLogin = function(){
-		if($scope.player.nickname){
-			$location.path("schoolregistration");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkMasteryLogin = function(){
-		if($scope.player.nickname){
-			$location.path("ymbcoaching");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkPurposeDrivenLogin = function(){
-		if($scope.player.nickname){
-			$location.path("purposedriven");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkTournamentLogin = function(){
-		if($scope.player.nickname){
-			$location.path("tournaments");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkCreateTournamentLogin = function(){
-		if($scope.player.nickname){
-			$location.path("mytournaments");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkEventsLogin = function(){
-		if($scope.player.nickname){
-			$location.path("events");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkSchoolsMapLogin = function(){
-		if($scope.player.nickname){
-			$location.path("schoolsmap");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
 	// End GENShYFT Code
 
 	
