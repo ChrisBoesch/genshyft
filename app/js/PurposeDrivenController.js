@@ -163,8 +163,9 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 			console.log("saveNewFeedback is being executed");
 			
 			//$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/" + videoNumber);
-			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/");
-				
+			//$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/");
+			// the code here is not modular,due to merging of 2 api.
+			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_unlock/");	
 			var data = {
 							"feedback":feedback, 
 							"purposevideo": videoNumber

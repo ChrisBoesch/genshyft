@@ -38,6 +38,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		$scope.getCurrentMastery = function(){
           $resource('/jsonapi/current_coaching_status').get({},function(response){
 			  $scope.mastery = response;
+			  console.log("Response for current_coaching_stats \n\n" + JSON.stringify($scope.mastery));
 			   
 			   $scope.currentCoach = $scope.mastery.coach;
 			   $scope.currentPathId = $scope.mastery.pathId;
@@ -47,9 +48,12 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			   $scope.showUserNewProblem = $scope.mastery.showNewProblems;
 			   $scope.problemsToDo =[];
 			   $scope.problemsToDo.push($scope.nextProblemID);
+			   $scope.master_next_ten_qn = $scope.mastery.next_ten;
+			   console.log("Array for next ten  :  " + $scope.master_next_ten_qn );
 			   
-			   for(var i = 1;i<$scope.mastery.next_ten.length;i++){
-					$scope.problemsToDo.push($scope.mastery.next_ten[i].problemId);
+			   
+			   for(var i = 1;i<$scope.master_next_ten_qn.length;i++){
+					$scope.problemsToDo.push($scope.master_next_ten_qn[i].problemId);
 					console.log("Problems added into list are " + $scope.mastery.next_ten[i].problemId);
 			   }
 			   $scope.problemsInSequence = 0;
