@@ -8,7 +8,7 @@ describe("E2E: Testing Controllers", function () {
     pauseAll = window.location.search.replace("?pauseAll=", "");
 
     beforeEach(function () {
-        browser().navigateTo('/app/index.html?test_with=app-test.js');
+        browser().navigateTo('/app/index.html');
     });
 
     /*
@@ -52,11 +52,41 @@ describe("E2E: Testing Controllers", function () {
         });
     });
 
-    /*
-     it('should have a working video page controller that applies the video to the scope', function() {
-     browser().navigateTo('#/videos/WuiHuZq_cg4');
-     expect(browser().location().path()).toBe("/videos/WuiHuZq_cg4");
-     expect(element('#ng-view').html()).toContain('app-youtube-embed');
-     });
-     */
+    
+    describe('Quest', function() {
+        
+
+        it('should create a new quest', function() {
+            element('.nav li a:contains("Quests")').click();
+            expect(browser().location().path()).toBe("/quests");
+
+            sleep(5); // wait for carousel to load (create outside angular framework).
+
+            var story = element('#myCarousel input[src*="The_Spy_Who_Coded.jpg"]'),
+                level = element('#levels button:contains("Easy")'),
+                path = element('#pathSel input[src*="Python_game_path"]');
+
+            story.click();
+            level.click();
+            path.click();
+
+            expect(story.hasClass('selected')).toBe(true);
+            expect(level.hasClass('active')).toBe(true);
+            expect(path.hasClass('selected')).toBe(true);
+
+            element('*:contains("Go")').click();
+            expect(browser().location().path()).toBe("/storyboard");
+
+            element('*:contains("Continue")').click();
+
+            sleep(5);
+            expect(browser().location().url()).toBe("/normal_play_page.html");
+        });
+
+        it('should restart an existing quest', function() {
+            // TODO: I am not sure how I would be able to differenciate 
+            // between a new and an existing story.
+        });
+
+    });
 });
