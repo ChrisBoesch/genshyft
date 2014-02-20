@@ -21,10 +21,11 @@
 
 <div ng-controller="EventTableController" ng-init="get_participants(); get_eventID(); get_currentUrl();" class="container">
 
-<button class="btn btn-primary" ng-click="returnToPreviousPage()">Return to Last Visited Page</button>
+<button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
 
 <div style="float:right" class="fb-share-button" data-href="{{currentUrl}}" data-type="button"></div>
 
+<div class="table-responsive">
 <center><h2>{{eventsData.name}}</h2></center>
   <table class="table table-striped table-hover">
     <thead>
@@ -44,71 +45,10 @@
       -->
 
 <!-- tentative hardcoded cutoff set at 50 -->
-<tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=50">
-
-        <td>
-            <span ng-if="participant.isCurrentPlayer"><b>{{$index+1}}</b></span>
-            <span ng-if="!participant.isCurrentPlayer">{{$index+1}}</span>
-        </span>
-        </td>
-
-        <td><span ng-if="participant.isCurrentPlayer"><b>{{participant.nickname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname}}</span></td>
-
-        <td><span ng-if="participant.isCurrentPlayer"><b>{{participant.schoolname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.schoolname}}</span></td>
-
-        <td><span ng-if="participant.isCurrentPlayer"><b>{{participant.subtype}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.subtype}}</span></td>
-
-        <td><span ng-if="participant.isCurrentPlayer"><b>{{participant.year}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.year}}</span></td>
-
-        <!-- the following hack will display negative solved problems as zero; only affects currentPlayer because the other players with negative solved problems i.e. not registered schools, are hidden -->
-        <td><span ng-if="participant.isCurrentPlayer">
-                <b>
-                  <span ng-if="participant.solvedproblems<0"><a href="index.html#/schoolregistration">Register School ({{-participant.solvedproblems}})</a></span>
-                <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
-                </b>
-            </span>
-            <span ng-if="!participant.isCurrentPlayer">
-              <span ng-if="participant.solvedproblems<0">No school</span>
-                <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
-          </span>
-
-        </td>
-        <td>
-          <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
-        </td>
-
-    </span>
-      </tr>
-      </tbody>
-    </table>
-<table class="table">
-    
-<tbody>
-  <tr bgcolor="black">
-    <td>
-      <font color = "white"><b>CUTOFF LINE</b></font>
-    </td>
-
-  </tr>
-
-</tbody>
-</table>
-
-<table class="table table-striped table-hover">
-
-<tbody>
-
-<!-- dynamic cutoff ready
-      <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index<={{eventsData.cutoff-1}}">
-
-      -->
-
-<!-- tenative hardcoded cutoff at 50-->
-        <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index<={{50-1}}">
+<tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=40">
 
         <td class = "span1">
-            <!-- hide current player ranking if ranking exceeds cutoff -->
-            <span ng-hide = "participant.isCurrentPlayer">
+            <span ng-if="participant.isCurrentPlayer"><b>{{$index+1}}</b></span>
             <span ng-if="!participant.isCurrentPlayer">{{$index+1}}</span>
         </span>
         </td>
@@ -141,8 +81,74 @@
     </span>
       </tr>
       </tbody>
+    </table>
+  </div>
+  <div class="table-responsive">
+<table class="table">
+    
+<tbody>
+  <tr bgcolor="black">
+    <td>
+      <font color = "white"><b>INVITATION CUTOFF</b></font>
+    </td>
+
+  </tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped table-hover">
+
+<tbody>
+
+<!-- dynamic cutoff ready
+      <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index<={{eventsData.cutoff-1}}">
+
+      -->
+
+<!-- tenative hardcoded cutoff at 50-->
+        <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index<={{40-1}}||$index>=50&&!participant.isCurrentPlayer">
+
+        <td class = "span1">
+            <!-- hide current player ranking if ranking exceeds cutoff -->
+            <span ng-hide = "participant.isCurrentPlayer">
+            <span ng-if="!participant.isCurrentPlayer">{{$index+1}}</span>
+        </span>
+        </td>
+
+        <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>&nbsp;{{participant.nickname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname}}</span></td>
+
+        <td class = "span6"><span ng-if="participant.isCurrentPlayer"><b>{{participant.schoolname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.schoolname}}</span></td>
+
+        <td class = "span2"><span ng-if="participant.isCurrentPlayer"><b>{{participant.subtype}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.subtype}}</span></td>
+
+        <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>{{participant.year}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.year}}</span></td>
+
+        <!-- the following hack will display negative solved problems as zero; only affects currentPlayer because the other players with negative solved problems i.e. not registered schools, are hidden -->
+        <td class = "span4"><span ng-if="participant.isCurrentPlayer">
+                <b>
+                  <span ng-if="participant.solvedproblems<0"><a href="index.html#/schoolregistration">Register School ({{-participant.solvedproblems}})</a></span>
+                <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
+                </b>
+            </span>
+            <span ng-if="!participant.isCurrentPlayer">
+              <span ng-if="participant.solvedproblems<0">No school</span>
+                <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
+          </span>
+
+        </td>
+        <td>
+          <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
+        </td>
+
+    </span>
+      </tr>
+      </tbody>
 
   </table>
+</div>
 
 </div>
 </div>

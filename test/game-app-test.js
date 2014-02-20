@@ -40,7 +40,7 @@ myApp.run(function($httpBackend) {
 	//This is purpose driven videos data
 	var purposeDrivenVideos = {
 		"Videos":[
-		{"no":0,"title":"What Most School Don't Teach",
+		{"id":0,"no":0,"title":"What Most School Don't Teach",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
@@ -48,7 +48,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":true
 		},
 
-		{"no":1,"title":"Art of Creative Coding",
+		{"id":111,"no":1,"title":"Art of Creative Coding",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
@@ -56,7 +56,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":true
 		},
 
-		{"no":2,"title":"Why Teach Coding",
+		{"id":222,"no":2,"title":"Why Teach Coding",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
@@ -65,7 +65,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":true
 		},
 
-		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
+		{"id":333,"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
@@ -73,7 +73,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":true
 		},
 
-		{"no":4,"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
+		{"id":444,"no":4,"title":"Larry Wall: 5 Programming Languages Everyone Should Know",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=LR8fQiskYII",
@@ -82,7 +82,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":false
 		},
 
-		{"no":5,"title":"Bruce Feiler: Agile programming -- for your family",
+		{"id":555,"no":5,"title":"Bruce Feiler: Agile programming -- for your family",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=J6oMG7u9HGE",
@@ -91,7 +91,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":false
 		},
 
-		{"no":6,"title":"iPhone Application Developer... and 6th Grader: Thomas Suarez ",
+		{"id":606,"no":6,"title":"iPhone Application Developer... and 6th Grader: Thomas Suarez ",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=ehDAP1OQ9Zw",
@@ -99,7 +99,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":false
 		},
 
-		{"no":7,"title":"Mitch Resnick: Let's teach kids to code",
+		{"id":707,"no":7,"title":"Mitch Resnick: Let's teach kids to code",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"tvlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
@@ -109,7 +109,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":false
 		},
 
-		{"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
+		{"id":888,"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
@@ -117,7 +117,7 @@ myApp.run(function($httpBackend) {
 		"unlocked":false
 		},
 
-		{"no":9,"title":"NEW NEWS : Computer coding for kids",
+		{"id":900,"no":9,"title":"NEW NEWS : Computer coding for kids",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
@@ -132,28 +132,28 @@ myApp.run(function($httpBackend) {
 		//This is purpose driven videos data
 	var purposeDrivenVideosADMIN = {
 		"Videos":[
-		{"no":0,"title":"What Most School Don't Teach",
+		{"no":9,"title":"What Most School Don't Teach",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven0.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/0.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc",
 		"description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?"
 		},
 
-		{"no":1,"title":"Art of Creative Coding",
+		{"no":12,"title":"Art of Creative Coding",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven1.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/1.jpg",
 		"vlink":"http://www.youtube.com/watch?v=eBV14-3LT-g",
 		"description":"Programming plays a huge role in the world that surrounds us, and though its uses are often purely functional, there is a growing community of artists who use the language of code as their medium.","question":"How does this video make you feel?"
 		},
 
-		{"no":2,"title":"Why Teach Coding",
+		{"no":8,"title":"Why Teach Coding",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven2.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/2.jpg",
 		"vlink":"http://www.youtube.com/watch?v=nrHISboa11k",
 		"description":"A short video we produced for Open Evening 2013, focussing on why we think it is important for students to learn coding and giving a brief overview of where we teach it","question":"How does this video make you feel?"
 		},
 
-		{"no":3,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
+		{"no":7,"title":"Lifehacker : Programming! Learn the Basics of Coding, How to Pick a language.",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven3.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=3fyvJcSMrVw",
@@ -181,7 +181,7 @@ myApp.run(function($httpBackend) {
 		"description":"Thomas Suarez is a 6th grade student at a middle school in the South Bay of Los Angeles. When Apple released the Software Development Kit (SDK), he began to create and sell his own applications. ","question":"How does this video make you feel?"
 		},
 
-		{"no":7,"title":"Mitch Resnick: Let's teach kids to code",
+		{"no":3,"title":"Mitch Resnick: Let's teach kids to code",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"tvlink":"http://www.youtube.com/watch?v=Ok6LbV6bqaE",
@@ -189,14 +189,14 @@ myApp.run(function($httpBackend) {
 		,"question":"How does this video make you feel?"
 		},
 
-		{"no":8,"title":"Code For Kids - Teaching our kids what our schools don't",
+		{"no":2,"title":"Code For Kids - Teaching our kids what our schools don't",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/3.jpg",
 		"vlink":"http://www.youtube.com/watch?v=6OIs6qyps_E&hd=1",
 		"description":"Kids interested in computers and learning more about what goes into the creation of video games, websites, and other cool programs are invited to come out and experience how much fun programming can be!","question":"How does this video make you feel?"
 		},
 
-		{"no":9,"title":"NEW NEWS : Computer coding for kids",
+		{"no":21,"title":"NEW NEWS : Computer coding for kids",
 		"image":"img/purposedrivenPlaceholder/PurposeDriven4.jpg",
 		"thumbnail" :"img/purposedrivenPlaceholder/thumb/4.jpg",
 		"vlink":"http://www.youtube.com/watch?v=WGZioLhbZ6g",
@@ -248,10 +248,10 @@ myApp.run(function($httpBackend) {
 	
 	//data on the mastery coaches
 	var coachesData = {"coachesData":[{
-	"coachId":1,
-	"coach":"Shannon",
+	"coachID":1,
+	"name":"Shannon",
 	"image": "img/mbcoach/Shannon/Shannon.jpg",
-	"desc":"Encourager that wants you to be ready to code with your friends",
+	"description":"Encourager that wants you to be ready to code with your friends",
 	"audiofile":{
 					"greeting":"audio/Shannon/greeting.mp3",
 					"welcomeback":"audio/Shannon/welcomeback.mp3",
@@ -287,10 +287,10 @@ myApp.run(function($httpBackend) {
 	
 	
 	{
-	"coachId":2,
-	"coach":"Sandra",
+	"coachID":2,
+	"name":"Sandra",
 	"image": "img/mbcoach/Sandra/Sandra.jpg",
-	"desc":"Recruiter that wants you to be ready for your interview",
+	"description":"Recruiter that wants you to be ready for your interview",
 	"audiofile":{
 					"greeting":"audio/Sandra/greeting.mp3",
 					"welcomeback":"audio/Sandra/welcomeback.mp3",
@@ -324,10 +324,10 @@ myApp.run(function($httpBackend) {
 	
 	},
 	{
-	"coachId":3,
-	"coach":"Zandar",
+	"coachID":3,
+	"name":"Zandar",
 	"image": "img/mbcoach/Zandar/Zandar.jpg",
-	"desc":"Hacker that wants you to be more awesome",
+	"description":"Hacker that wants you to be more awesome",
 	"audiofile":{
 					"greeting":"audio/Zandar/greeting.mp3",
 					"welcomeback":"audio/Zandar/welcomeback.mp3",
@@ -361,10 +361,10 @@ myApp.run(function($httpBackend) {
 	
 	},
 	{
-	"coachId":4,
-	"coach":"SGTMJR",
+	"coachID":4,
+	"name":"SGTMJR",
 	"image": "img/mbcoach/SGTMJR/SGTMJR.jpg",
-	"desc":"Wants you to quit before you get someone killed",
+	"description":"Wants you to quit before you get someone killed",
 "audiofile":{
 					"greeting":"audio/SGTMJR/greeting.mp3",
 					"welcomeback":"audio/SGTMJR/welcomeback.mp3",
@@ -405,19 +405,32 @@ myApp.run(function($httpBackend) {
 	
 	//the user current coach/path progress
 	var currentUserMasteryProgress = {
-	"pathId":"10030",
-	"pathName":"python",
-	"coach":"Shannon", //there will almost be a defaulted coach
-	"nextProblemID": 52741,
-	"fromProblemSetID":10041,
 	"showNewProblems":true,
+	"nextProblemID": 52741,	
+	"coach":"Shannon", //there will almost be a defaulted coach
 	"goal": "faster", // or lessattempts
-	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22}
+	"next_ten": 
+	[ {"percentile_time":0.1,"percentile_attempts":0.2,"problemId":52741},
+	  {"percentile_time":0.2,"percentile_attempts":0.1,"problemId":52472},
+      {"percentile_time":0.2,"percentile_attempts":0.1,"problemId":57555},
+      {"percentile_time":0.11,"percentile_attempts":0.0023,"problemId":52747},
+      {"percentile_time":0.001,"percentile_attempts":0.0023,"problemId":52748},
+	  {"percentile_time":0.001,"percentile_attempts":0.0023,"problemId":52749},
+	  {"percentile_time":0.001,"percentile_attempts":0.0023,"problemId":52747},
+	  {"percentile_time":0.001,"percentile_attempts":0.0023,"problemId":52748},
+	  {"percentile_time":0.001,"percentile_attempts":0.0023,"problemId":52749},
+	  {"percentile_time":0.001,"percentile_attempts":0.0023,"problemId":52740},
+	],
+	"fromProblemSetID":10041,	
+	"coachID":4,
+	"past_result":{"problemID":10033, "name":"Expected Results", "goal":"faster", "percent_improvement":22},	
+	"pathName":"python",
+	"pathID":"10030"
 	};
 	$httpBackend.whenGET('/jsonapi/current_coaching_status').respond(currentUserMasteryProgress);
 	
-	// payload -> { pathId:"123","pathName":"phython","coach":"Shannon" }   // backend will determine the nextProblemID to solve 
-	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New Mentor, Path Id and Path Name has been recorded."});
+	// payload -> { pathId:"123","coachID":"123" }   // backend will determine the nextProblemID to solve 
+	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New coach and path have been recorded.", "pathID":123, "coachID":123});
 	
 	var gameID ={"gameID":101010};
 	// payload -->{"problemId":11021,"problemSet":304232};   // will save <-- those values to get gameID;
@@ -432,6 +445,25 @@ myApp.run(function($httpBackend) {
 	
 	
 //retrieve game details for mastery game base on the game Id;
+//Payload => {"problemIDs":[]} 
+$httpBackend.whenPOST('/jsonapi/create_game_for_problems').respond(function(method, url, data){
+var gameMastery = {"game_end": "2010-06-01 15:19:39.813685", "player": "Chris", "solvedProblemIDs": [52472], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2010-05-14 05:39:30.194936", "numProblems": 3, "numSolvedProblems": 1, "status": "ACCEPTING SOLUTIONS", "problemIDs": [52472, 57555, 52741], "problems": {"problems": [
+
+{"skeleton": "question=", "description": "1.Another sequential data type is the dictionary.  Create a dictionary with three different indexes as shown in the example.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> question['color']\r\n 'blue'\r\n>>> question[7]\r\n 'seven'\r\n>>> question[3.14]\r\n [3,1,4,6]", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52741, "name": "Dictionaries"}, 
+
+{"skeleton": "def sortedList(d):", "description": "2.The dictionary method keys() returns a list of all the keys in a dictionary. Create the function sortedList that returns a sorted list of the keys for a dictionary that is passed in. ", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d = {'a':1, 'c':2, 'b':3}\n>>> sortedList(d)\n['a', 'b', 'c']", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52472, "name": "List the keys of a dictionary"}, 
+
+{"skeleton": "def lookupQuestion3(d,v):\r\n    ", "description": "3.Create a function that takes a dictionary that starts with a VOWEL and a value.  It should return a list of all the keys that map to that value.  The list should be sorted.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d={'ta':4,8:'32',(5,3):'hi',(4,3,2):[4,3],'':4,73:8,839:234,34:857,'Hello':4}\r\n>>> lookup(d,4)\r\n ['', 'Hello', 'ta']\r\n>>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}\r\n>>> lookup(eng2sp,'uno')\r\n ['one']\r\n>>> lookup(eng2sp,'siete')\r\n []", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 57555, "nickname": "Danny", "email": "PRIVATE"}, "id": 52749, "name": "Reverse Lookup"},
+
+{"skeleton": "def functionDictionary(d,v):\r\n    ", "description": "4.Create a function that takes a dictionary and EVEN value.  It should return a list of all the keys that map to that value.  The list should be sorted.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d={'ta':4,8:'32',(5,3):'hi',(4,3,2):[4,3],'':4,73:8,839:234,34:857,'Hello':4}\r\n>>> lookup(d,4)\r\n ['', 'Hello', 'ta']\r\n>>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}\r\n>>> lookup(eng2sp,'uno')\r\n ['one']\r\n>>> lookup(eng2sp,'siete')\r\n []", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 52747, "nickname": "Danny", "email": "PRIVATE"}, "id": 52748, "name": "Reverse Lookup"},
+
+{"skeleton": "def lookupValue(d,v):\r\n    ", "description": "5.Create a function that takes a dictionary and ODD value.  It should return a list of all the keys that map to that value.  The list should be sorted.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d={'ta':4,8:'32',(5,3):'hi',(4,3,2):[4,3],'':4,73:8,839:234,34:857,'Hello':4}\r\n>>> lookup(d,4)\r\n ['', 'Hello', 'ta']\r\n>>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}\r\n>>> lookup(eng2sp,'uno')\r\n ['one']\r\n>>> lookup(eng2sp,'siete')\r\n []", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52748, "name": "Reverse Lookup"},
+
+
+], "type": "problems"}, "nextProblemID": "TBD", "gameID": "1423004", "tournamentID": null, "name": "Default Game", "roundID": null, "questID": null, "heatID": null, "game_start": "2010-05-14 05:39:30.194841", "currentTime": "2014-02-01 02:11:23.931950", "game_type": "Timed Interview", "timelimit": 3600}
+return [200,gameMastery];
+});
+
 $httpBackend.whenGET('/jsonapi/game/101010').respond(
 {"game_end": "2010-06-01 15:19:39.813685", "player": "Chris", "solvedProblemIDs": [52472], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2010-05-14 05:39:30.194936", "numProblems": 3, "numSolvedProblems": 1, "status": "ACCEPTING SOLUTIONS", "problemIDs": [52472, 57555, 52741], "problems": {"problems": [{"skeleton": "question=", "description": "Another sequential data type is the dictionary.  Create a dictionary with three different indexes as shown in the example.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> question['color']\r\n 'blue'\r\n>>> question[7]\r\n 'seven'\r\n>>> question[3.14]\r\n [3,1,4,6]", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 1, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52472, "name": "Dictionaries"}, {"skeleton": "def sortedList(d):", "description": "The dictionary method keys() returns a list of all the keys in a dictionary. Create the function sortedList that returns a sorted list of the keys for a dictionary that is passed in. ", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d = {'a':1, 'c':2, 'b':3}\n>>> sortedList(d)\n['a', 'b', 'c']", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 57555, "name": "List the keys of a dictionary"}, {"skeleton": "def lookup(d,v):\r\n    ", "description": "Create a function that takes a dictionary and a value.  It should return a list of all the keys that map to that value.  The list should be sorted.", "path_id": 10030, "problemset_id": 10041, "examples": ">>> d={'ta':4,8:'32',(5,3):'hi',(4,3,2):[4,3],'':4,73:8,839:234,34:857,'Hello':4}\r\n>>> lookup(d,4)\r\n ['', 'Hello', 'ta']\r\n>>> eng2sp = {'one': 'uno', 'two': 'dos', 'three': 'tres'}\r\n>>> lookup(eng2sp,'uno')\r\n ['one']\r\n>>> lookup(eng2sp,'siete')\r\n []", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 52741, "name": "Reverse Lookup"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "1423004", "tournamentID": null, "name": "Default Game", "roundID": null, "questID": null, "heatID": null, "game_start": "2010-05-14 05:39:30.194841", "currentTime": "2014-02-01 02:11:23.931950", "game_type": "Timed Interview", "timelimit": 3600});
 	
@@ -1282,7 +1314,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       $httpBackend.whenGET('/jsonapi/mobile_paths').respond([{"pathModified": "2011-05-18 08:40:46.845609", "name": "Beginner Obj-C", "price": 0.0, "free": true, "number_of_problemsets": 6, "path_id": 7520056, "purchased": false, "number_of_problems": 4, "number_of_solved_problems": 3, "description": "Beginner Path for Objective-C"}, {"pathModified": "2012-05-22 03:51:12.291919", "name": "Beginner Python", "price": 0.0, "free": true, "number_of_problemsets": 9, "path_id": 6920762, "purchased": false, "number_of_problems": 101, "number_of_solved_problems": 101, "description": "Beginner Python"}, {"pathModified": "2012-08-29 02:45:43.079114", "name": "Beginner Javascript", "price": 0.0, "free": true, "number_of_problemsets": 6, "path_id": 12605566, "purchased": false, "number_of_problems": 58, "number_of_solved_problems": 0, "description": "Beginner Javascript Path"}, {"pathModified": "2012-08-29 07:40:01.039161", "name": "Beginner Ruby", "price": 0.0, "free": true, "number_of_problemsets": 6, "path_id": 8277128, "purchased": false, "number_of_problems": 73, "number_of_solved_problems": 1, "description": "Beginner Ruby Path"}, {"pathModified": "2012-08-29 02:53:32.616533", "name": "Beginner Java", "price": 0.0, "free": true, "number_of_problemsets": 6, "path_id": 8113761, "purchased": false, "number_of_problems": 65, "number_of_solved_problems": 22, "description": "Beginner Java Path"}]);
 
       $httpBackend.whenGET('/jsonapi/get_my_paths').respond({"paths": [{"description": "API Game Path", "isGamePath": true, "interface_id": 2292151, "editor": {"player_id": 5852053, "nickname": "Daniel Tsou", "email": "PRIVATE"}, "id": 10515351, "name": "API"}, {"description": "C++ Game Path", "isGamePath": false, "interface_id": 10518303, "editor": {"player_id": 10470244, "nickname": "Secret Agent", "email": "PRIVATE"}, "id": 10516458, "name": "C++"}, {"description": "Chris' new problems", "isGamePath": false, "interface_id": 11020, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 302013, "name": "Default Path for Chris"}, {"description": "Experimental Javascript Path based on Java GAE", "isGamePath": false, "interface_id": 6023053, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 6039048, "name": "Experimental Javascript Path"}, {"description": "Experimental URL Game Path", "isGamePath": false, "interface_id": 2292151, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 10542007, "name": "Experimental URL Path"}, {"description": "Java Server Pages Game Path", "isGamePath": true, "interface_id": 8680122, "editor": {"player_id": 12715820, "nickname": "Jocelyn Tan", "email": "PRIVATE"}, "id": 8675564, "name": "HTML + JSP"}, {"description": "Javascript Game Path", "isGamePath": true, "interface_id": 2293311, "editor": {"player_id": 9256769, "nickname": "Kai Lin", "email": "PRIVATE"}, "id": 2473247, "name": "Javascript"}, {"description": "Default Path for Chris", "isGamePath": false, "interface_id": 2447229, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 4826041, "name": "New Ruby Path"}, {"description": "PHP Game Path", "isGamePath": false, "interface_id": 6842348, "editor": {"player_id": 6556466, "nickname": "backseat", "email": "PRIVATE"}, "id": 7040573, "name": "PHP"}, {"description": "R Game Path", "isGamePath": true, "interface_id": 11831829, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 11835808, "name": "R"}, {"description": "Scheme Game Path", "isGamePath": false, "interface_id": 10668207, "editor": {"player_id": 10651038, "nickname": "Minh", "email": "PRIVATE"}, "id": 10662535, "name": "Scheme"}, {"description": "The SciPy Game Path", "isGamePath": false, "interface_id": 11722897, "editor": {"player_id": 11737713, "nickname": "Cristian", "email": "PRIVATE"}, "id": 11772903, "name": "SciPy"}, {"description": "T Time", "isGamePath": false, "interface_id": 11020, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 6825803, "name": "T Time"}, {"description": "UML Sequence Path", "isGamePath": false, "interface_id": 12605785, "editor": {"player_id": 12607838, "nickname": "Prof Kevin", "email": "PRIVATE"}, "id": 12734244, "name": "UML"}, {"description": "__path_for_deleted_problems__", "isGamePath": false, "interface_id": 11020, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 8429349, "name": "__path_for_deleted_problems__"}, {"description": "__path_for_deleted_problems__", "isGamePath": false, "interface_id": 11020, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 11154710, "name": "__path_for_deleted_problems__"}, {"description": "__path_for_deleted_problems__", "isGamePath": false, "interface_id": 11020, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 5518175, "name": "__path_for_deleted_problems__"}, {"description": "aetaset", "isGamePath": false, "interface_id": 2276166, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 8514618, "name": "asdtas"}], "type": "my_paths", "interface_id": null});
-      $httpBackend.whenGET('/jsonapi/get_my_paths?interface_id=11020').respond({"paths": [{"description": "Chris' new problems", "isGamePath": false, "interface_id": 11020, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 302013, "name": "Default Path for Chris"}, ], "type": "my_paths", "interface_id": 11020});
+      $httpBackend.whenGET('/jsonapi/get_my_paths?interface_id=11020').respond({"paths": [{"description": "Chris' new problems", "isGamePath": false, "interface_id": 11020, "editor": {"player_id": 57754, "nickname": "Chris", "email": "PRIVATE"}, "id": 10030, "name": "Default Path for Chris"}, ], "type": "my_paths", "interface_id": 11020});
       $httpBackend.whenGET('/jsonapi/get_path_progress/10030?details=1').respond({"currentProblemsetID": 10034, "currentProblemsetOrder": 2, "currentProblemsetDesc": "Variables, keywords, and statements", "currentProblemsetName": "Python Level 2", "problemsInPath": 256, "currentPlayerProgress": 13, "details": [{"description": "The way of SingPath", "pathorder": 1, "problemsInProblemset": 10, "currentPlayerProgress": 10, "id": 11021, "badges": [{"url": "http://www.singpath.com/static/badges/python/p001_on.png", "required_badges": [], "problemsetid": 11021, "description": "Python Level 1 Badge", "name": "Level 1", "pathid": 10030, "awardOrder": 1, "id": 87572, "class": ["Badge", "Level_Badge"]}], "name": "Python Level 1"}, {"description": "Variables, keywords, and statements", "pathorder": 2, "problemsInProblemset": 13, "currentPlayerProgress": 3, "id": 10034, "badges": [], "name": "Python Level 2"}, {"description": "Functions", "pathorder": 3, "problemsInProblemset": 24, "currentPlayerProgress": 0, "id": 11023, "badges": [], "name": "Python Level 3"}, {"description": "Conditionals", "pathorder": 4, "problemsInProblemset": 28, "currentPlayerProgress": 0, "id": 11026, "badges": [], "name": "Python Level 4"}, {"description": "Iteration", "pathorder": 5, "problemsInProblemset": 23, "currentPlayerProgress": 0, "id": 11029, "badges": [], "name": "Python Level 5"}, {"description": "Strings", "pathorder": 6, "problemsInProblemset": 33, "currentPlayerProgress": 0, "id": 10040, "badges": [], "name": "Python Level 6"}, {"description": "Lists", "pathorder": 7, "problemsInProblemset": 36, "currentPlayerProgress": 0, "id": 11031, "badges": [], "name": "Python Level 7"}, {"description": "Dictionaries", "pathorder": 8, "problemsInProblemset": 13, "currentPlayerProgress": 0, "id": 10041, "badges": [], "name": "Python Level 8"}, {"description": "Tuples", "pathorder": 9, "problemsInProblemset": 16, "currentPlayerProgress": 0, "id": 11032, "badges": [], "name": "Python Level 9"}, {"description": "Classes & Objects", "pathorder": 10, "problemsInProblemset": 19, "currentPlayerProgress": 0, "id": 38394, "badges": [], "name": "Python Level 10"}, {"description": "Recursion", "pathorder": 11, "problemsInProblemset": 17, "currentPlayerProgress": 0, "id": 11028, "badges": [], "name": "Python Level 11"}, {"description": "Games & Puzzles", "pathorder": 12, "problemsInProblemset": 2, "currentPlayerProgress": 0, "id": 41101, "badges": [], "name": "Python Level 12"}, {"description": "List Comprehensions", "pathorder": 13, "problemsInProblemset": 9, "currentPlayerProgress": 0, "id": 6603407, "badges": [], "name": "Python Level 13"}, {"description": "Python Built-In Library", "pathorder": 14, "problemsInProblemset": 6, "currentPlayerProgress": 0, "id": 6598750, "badges": [], "name": "Python Level 14"}, {"description": "Exceptions", "pathorder": 15, "problemsInProblemset": 5, "currentPlayerProgress": 0, "id": 6771183, "badges": [], "name": "Python Level 15"}, {"description": "Miscellaneous Problems", "pathorder": 16, "problemsInProblemset": 2, "currentPlayerProgress": 0, "id": 11155, "badges": [], "name": "New Problem Storage"}], "path": {"isGamePath": true, "description": "Python game path", "editor_id": 58546, "id": 10030, "name": "Python"}});
       $httpBackend.whenGET('/jsonapi/get_path_progress/2243213?details=1').respond({"currentProblemsetID": 2317033, "currentProblemsetOrder": 2, "currentProblemsetDesc": "Variables, keywords, and statements", "currentProblemsetName": "Java Level 2", "problemsInPath": 155, "currentPlayerProgress": 28, "details": [{"description": "Introduction", "pathorder": 1, "problemsInProblemset": 11, "currentPlayerProgress": 10, "id": 2285202, "badges": [{"url": "http://www.singpath.com/static/badges/java/j001_on.png", "required_badges": [], "problemsetid": 2285202, "description": "Java Level 1 Badge", "name": "Level 1", "pathid": 2243213, "awardOrder": 1, "id": 2595052, "class": ["Badge", "Level_Badge"]}], "name": "Java Level 1"}, {"description": "Variables, keywords, and statements", "pathorder": 2, "problemsInProblemset": 11, "currentPlayerProgress": 0, "id": 2317033, "badges": [], "name": "Java Level 2"}, {"description": "Functions", "pathorder": 3, "problemsInProblemset": 15, "currentPlayerProgress": 5, "id": 2240364, "badges": [], "name": "Java Level 3"}, {"description": "Conditionals", "pathorder": 4, "problemsInProblemset": 16, "currentPlayerProgress": 4, "id": 2460116, "badges": [], "name": "Java Level 4"}, {"description": "Iteration and Recursion", "pathorder": 5, "problemsInProblemset": 17, "currentPlayerProgress": 2, "id": 2456109, "badges": [], "name": "Java Level 5"}, {"description": "Strings", "pathorder": 6, "problemsInProblemset": 21, "currentPlayerProgress": 7, "id": 2457253, "badges": [], "name": "Java Level 6"}, {"description": "Exception Handling", "pathorder": 7, "problemsInProblemset": 11, "currentPlayerProgress": 0, "id": 2492222, "badges": [], "name": "Java Level 7"}, {"description": "Array", "pathorder": 8, "problemsInProblemset": 14, "currentPlayerProgress": 0, "id": 2479285, "badges": [], "name": "Java Level 8"}, {"description": "HashMaps", "pathorder": 9, "problemsInProblemset": 10, "currentPlayerProgress": 0, "id": 2506152, "badges": [], "name": "Java Level 9"}, {"description": "Classes & Objects", "pathorder": 10, "problemsInProblemset": 18, "currentPlayerProgress": 0, "id": 2280527, "badges": [], "name": "Java Level 10"}, {"description": "Inheritance", "pathorder": 11, "problemsInProblemset": 10, "currentPlayerProgress": 0, "id": 2525090, "badges": [], "name": "Java Level 11"}, {"description": "Polymorphism", "pathorder": 12, "problemsInProblemset": 0, "currentPlayerProgress": 0, "id": 6118361, "badges": [], "name": "Java Level 12"}, {"description": "Mapreduce", "pathorder": 13, "problemsInProblemset": 1, "currentPlayerProgress": 0, "id": 15753604, "badges": [], "name": "Java Level 13"}], "path": {"isGamePath": true, "description": "Java game path", "editor_id": 57754, "id": 2243213, "name": "Java"}});
       $httpBackend.whenGET('/jsonapi/get_path_progress/2473247?details=1').respond({"currentProblemsetID": 2520051, "currentProblemsetOrder": 1, "currentProblemsetDesc": "Introduction", "currentProblemsetName": "Javascript Level 1", "problemsInPath": 160, "currentPlayerProgress": 2, "details": [{"description": "Introduction", "pathorder": 1, "problemsInProblemset": 11, "currentPlayerProgress": 2, "id": 2520051, "badges": [], "name": "Javascript Level 1"}, {"description": "Keywords and Data Types", "pathorder": 2, "problemsInProblemset": 11, "currentPlayerProgress": 0, "id": 2476335, "badges": [], "name": "Javascript Level 2"}, {"description": "Functions", "pathorder": 3, "problemsInProblemset": 14, "currentPlayerProgress": 0, "id": 2537030, "badges": [], "name": "Javascript Level 3"}, {"description": "Conditionals", "pathorder": 4, "problemsInProblemset": 18, "currentPlayerProgress": 0, "id": 2536044, "badges": [], "name": "Javascript Level 4"}, {"description": "Iteration", "pathorder": 5, "problemsInProblemset": 13, "currentPlayerProgress": 0, "id": 2473326, "badges": [], "name": "Javascript Level 5"}, {"description": "Strings", "pathorder": 6, "problemsInProblemset": 21, "currentPlayerProgress": 0, "id": 2488240, "badges": [], "name": "Javascript Level 6"}, {"description": "Recursion", "pathorder": 7, "problemsInProblemset": 11, "currentPlayerProgress": 0, "id": 2475311, "badges": [], "name": "Javascript Level 7"}, {"description": "Lists", "pathorder": 8, "problemsInProblemset": 13, "currentPlayerProgress": 0, "id": 2526078, "badges": [], "name": "Javascript Level 8"}, {"description": "Dictionaries", "pathorder": 9, "problemsInProblemset": 10, "currentPlayerProgress": 0, "id": 2477306, "badges": [], "name": "Javascript Level 9"}, {"description": "More functions", "pathorder": 10, "problemsInProblemset": 12, "currentPlayerProgress": 0, "id": 3456075, "badges": [], "name": "Javascript Level 10"}, {"description": "Tuples", "pathorder": 11, "problemsInProblemset": 10, "currentPlayerProgress": 0, "id": 2514140, "badges": [], "name": "Javascript Level 11"}, {"description": "Classes & Objects", "pathorder": 12, "problemsInProblemset": 16, "currentPlayerProgress": 0, "id": 2509130, "badges": [], "name": "Javascript Level 12"}], "path": {"isGamePath": true, "description": "Javascript Game Path", "editor_id": 9256769, "id": 2473247, "name": "Javascript"}});
@@ -2178,7 +2210,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "total_problems": 10,
 		            "nickname": "Secret Agent",
 		            "menteeID": null,
-		            "mentorHasArrived": false,
+		            "mentorHasArrived": true,
 		            "rankingInGrp":1,
 		            "group": 1
 		        }
@@ -2190,11 +2222,11 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		    "roundID": 4912161075757056,
 		    "heatID": 4691468476219392,
 		    "heatStartTime": "2013-12-09 07:31:21.814470",
-		    "roundDescription": "prize round",
+		    "roundDescription": "Prize Round",
 		    "currentTime": "2014-01-09 09:38:59.184880",
 		    "tournamentType": "Normal",
 		    "type": "heat ranking",
-		    "isGroup":true
+		    "isGroup":false
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);
@@ -3059,6 +3091,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 }
 		
 		$httpBackend.whenGET('/jsonapi/event/6095188913029120').respond(eventsTableDataJC);
+		$httpBackend.whenGET('/jsonapi/event?eventid=6095188913029120').respond(eventsTableDataJC);
 
 		var eventsTableDataPoly = {
     "following": 1,
@@ -3066,12 +3099,12 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "ranking": [
         {
             "schooltype": "Tertiary",
-            "subtype": "JC",
+            "subtype": "Poly",
             "playerid": 5226227371606016,
             "isCurrentPlayer": false,
             "solvedproblems": 101,
             "year": 2014,
-            "schoolname": "Dunman High School",
+            "schoolname": "Nanyang Polytechnic",
             "nickname": "Secret Agent"
         },
     ],
@@ -3089,6 +3122,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 }
 		
 		$httpBackend.whenGET('/jsonapi/event/6486660988534784').respond(eventsTableDataPoly);
+		//call for events for map
+		//$httpBackend.whenGET('/jsonapi/event?eventid=6486660988534784').respond(eventsTableDataPoly);
 
     var eventsTableDataSec = {"path":"Javascript","following": 2, "name": "Secondary Test Ranking", "ranking": [{"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "Highschool", "playerid": 5428208946118656, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 103, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Dunman High School", "nickname": "NC-12"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "Highschool", "playerid": 5226227371606016, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 103, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Dunman High School", "nickname": "Leong Xuhua"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "JC", "playerid": 5950332819472384, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 91, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Hwa Chong Institution", "nickname": "Nirvana"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 5205559720542208, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 76, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6449477007179776, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 75, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Sui Dongchen"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "JC", "playerid": 6309974053486592, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 74, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Pioneer Junior College", "nickname": "Tan Tze Guang"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "JC", "playerid": 4798855845511168, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 69, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Pioneer Junior College", "nickname": "Lin Rizhong James"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6537241174212608, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 62, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6619269143986176, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 59, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Justin Leow"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 6542601293398016, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 53, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 8539593, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 41, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "tanjinyi"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "JC", "playerid": 5806483090440192, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 39, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Pioneer Junior College", "nickname": "Armordillo"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 5323577100337152, "isCurrentPlayer": false, "year": 2015, "solvedproblems": 35, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5417015456038912, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 27, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Yong Loong Ang"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5307015706443776, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 26, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5928418017280000, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 25, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "wcm"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6476317599989760, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Tomato"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6301682082250752, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Nala ;D"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6249092355194880, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Tan Di Sheng"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 5699766038036480, "isCurrentPlayer": false, "year": 2009, "solvedproblems": 13, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "NUS High School of Mathematics and Science", "nickname": "Moose"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 4836948715765760, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 5862928355950592, "isCurrentPlayer": false, "year": 2009, "solvedproblems": 11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "Dunman High School", "nickname": "Sam"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 6437610817847296, "isCurrentPlayer": false, "solvedproblems": 5, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 6273369120964608, "isCurrentPlayer": false, "solvedproblems": 4, "year": 2013, "schoolname": "Pioneer Junior College", "nickname": "Thong Mien Mien"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5060571825176576, "isCurrentPlayer": false, "solvedproblems": 4, "year": 2013, "schoolname": "Pioneer Junior College", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5810523044052992, "isCurrentPlayer": false, "solvedproblems": 3, "year": 2013, "schoolname": "Hwa Chong Institution", "nickname": "Lee Yan Hwa"}, {"playerid": 5605421578452992, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6604643169730560, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Song Kai", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5958130332598272, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Lai Wai Liang"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 5795639908630528, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Dunman High School", "nickname": "Thng JX"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 6239605309308928, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Tan YuGin"}, {"playerid": 6356396207505408, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6609723444953088, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4899048842592256, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2009, "schoolname": "Dunman High School", "nickname": "yuansiang"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 6022159168176128, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4621759311511552, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"playerid": 6439117143408640, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 4826577711923200, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Yao Hong", "isCurrentPlayer": false}, {"playerid": 6678236763258880, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6604643169730560, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Song Kai", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4961583566422016, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Wang Zexin"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 4980996818599936, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Ng Zhen Yuan"}, {"playerid": 6622855978549248, "solvedproblems": -3, "schoolname": "No school registered", "nickname": "Apocalypster", "isCurrentPlayer": false}, {"playerid": 4539845695242240, "solvedproblems": -6, "schoolname": "No school registered", "nickname": "Liang Yi", "isCurrentPlayer": false}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 4569586733154304, "isCurrentPlayer": false, "solvedproblems": -10, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 5536602377945088, "isCurrentPlayer": false, "solvedproblems": -11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 6661817774374912, "isCurrentPlayer": false, "solvedproblems": -13, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Eileen"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 6101567476334592, "isCurrentPlayer": false, "solvedproblems": -16, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}], "created": "2014-01-10T15:41:36.848030", "registered": 51, "watching": 1, "venue": null, "longitude": null, "participating": 48, "start": "2014-01-10T15:41:36.848050", "latitude": null, "id": 6095188913029120, "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on the morning of March 29th, at 9am, at SMU. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."};
       

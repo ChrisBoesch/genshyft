@@ -23,8 +23,8 @@
 	                	<th class="tournTableHeader"></th>
 	 				</tr>
 	                <tr class="warning" ng-repeat="grpTournament in grpTournaments track by $index">
-	                    <td class="tournInfo">{{grpTournaments[$index].title}}</td>
-	                    <td class="tournInfo">{{grpTournaments[$index].dateCreated}}</td>
+	                    <td class="tournInfo">{{grpTournaments[$index].shortTitle}}</td>
+	                    <td class="tournInfo">{{grpTournaments[$index].utcOffset}}</td>
 	                    <td class="tournInfo">{{grpTournaments[$index].status}}</td>
 	                    <td>
 	                    	<button class="btn btn-primary" type="button" ng-click="manage_my_tournament(grpTournaments[$index].tournamentId)"><i class="icon-edit icon-white"></i> Manage</button>

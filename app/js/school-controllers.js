@@ -17,6 +17,8 @@ function SchoolController($scope,$resource,$location){
                         "venue": "Default venue"};
         $scope.events = [];
         $scope.location = $location;
+        $scope.eventRetrieved = {};
+        $scope.eventRetrievedRanking = [];
         
         $scope.filter_year = "ALL";
         $scope.filter_schooltype = "ALL";
@@ -196,7 +198,7 @@ function SchoolController($scope,$resource,$location){
                  $scope.events = event.events; 
             }
             
-          console.log($scope.events);
+          //console.log($scope.events);
           });
         },
 
@@ -204,10 +206,52 @@ function SchoolController($scope,$resource,$location){
           if($scope.searchOption == 'school'){
             $scope.get_marker();
           }else{
-            console.log("changed");
+            $scope.get_marker_events();
           }
 
-        }
+        };
+
+        $scope.get_marker_events = function(eventID){
+          $scope.schoolMarkers.length = 0;
+          $scope.allEventsCall = $resource('/jsonapi/event/:eventID');
+          //$scope.eventId = null;
+          if(eventID!=null){
+          $scope.allEventsCall.get({"eventID":eventID}, function(response){
+            $scope.eventRetrieved = response;
+            $scope.eventRetrievedRanking = $scope.eventRetrieved.ranking;
+            console.log($scope.eventRetrievedRanking);
+          });
+
+          $resource('/jsonapi/schools/SG').get({}, function(response){
+            console.log("testout");
+            $scope.schools = response;
+            $scope.supported_schools = $scope.schools.Secondary.concat($scope.schools.Tertiary).concat($scope.schools.University);
+
+            for (var i = 0; i < $scope.supported_schools.length; i++) {
+                  var temp = $scope.supported_schools[i].name;
+                  var tempType = $scope.supported_schools[i].schooltype;
+                  var schTotal = 0;
+                  
+                  for (var j = 0; j < $scope.eventRetrievedRanking.length; j++) {
+                    if (temp == $scope.eventRetrievedRanking[j].schoolname && tempType == $scope.eventRetrievedRanking[j].schooltype){
+                      console.log($scope.eventRetrievedRanking[j].schoolname);
+                      schTotal++;
+                    }
+                  };
+                  
+                  
+                  var schMsg = $scope.supported_schools[i].name + "<br/> Total registrations: " + schTotal;
+
+                  var marker = {latitude:$scope.supported_schools[i].latitude, longitude:$scope.supported_schools[i].longitude, infoWindow:schMsg};
+                  if(schTotal>0){
+                    $scope.schoolMarkers.push(marker);
+                  }
+                  
+            };
+
+          });
+          }
+        };
         //function to add markers from schools
         $scope.get_marker = function(){
           $scope.schoolMarkers.length = 0;

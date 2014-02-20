@@ -2,21 +2,27 @@
 // test/unit/directives/directivesSpec.js
 //
 describe("Unit: Testing Directives", function() {
- /*
-  var $compile, $rootScope;
+    var scope, compile;
 
-  beforeEach(angular.mock.module('App'));
+    beforeEach(angular.mock.module('myApp.directives'));
 
-  beforeEach(inject(
-    ['$compile','$rootScope', function($c, $r) {
-      $compile = $c;
-      $rootScope = $r;
-    }]
-  ));
+    beforeEach(inject(function($compile, $rootScope) {
+        scope = $rootScope.$new();
+        compile = $compile;
+    }));
 
-  it("should display the welcome text properly", function() {
-    var element = $compile('<div data-app-welcome>User</div>')($rootScope);
-    expect(element.html()).to.match(/Welcome/i);
-  })
-*/
+    describe('genInitTab', function() {
+
+        it('should set a tab a active', function() {
+            var element = compile('<ul gen-init-tab="true"><li class="tabspacing"></li><li class="tabspacing"></li></ul>')(scope);
+
+            expect(element.find('li:eq(0)').hasClass('active')).toBe(true);
+        });
+
+        it('should not set a tab a active if one is already active', function() {
+            var element = compile('<ul gen-init-tab="true"><li class="tabspacing"></li><li class="tabspacing active"></li></ul>')(scope);
+
+            expect(element.find('li:eq(0)').hasClass('active')).toBe(false);
+        });
+    });
 });

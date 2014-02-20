@@ -7,6 +7,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
     // this method gets the parameter , variables are declared as youtube and vno
     $scope.location = $location;
 	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
+	$scope.numOfVideos = 0;
 
     $scope.$watch('location.search()', function() {
         $scope.you = ($location.search()).youtube;
@@ -36,6 +37,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
           $resource("/jsonapi/purposevideos").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
 			  $scope.videoArray = $scope.purposeVideos.Videos[0].title;
+			  $scope.numOfVideos = $scope.purposeVideos.Videos.length;
                console.log($scope.purposeVideos);
         	 })
         }
@@ -46,12 +48,14 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
           $resource("/jsonapi/purposevideos").get({},function(response){
               $scope.purposeVideos = response; // purposeVideos stores the Json files
 			  $scope.videoArray = $scope.purposeVideos.Videos[0].title;
+			  
                console.log($scope.purposeVideos);
 			   
 			   
 			for(var i = 0; i < $scope.purposeVideos.Videos.length-1; i++){
 				if($scope.purposeVideos.Videos[i].unlocked ==false){
 					 $location.search({'youtube':$scope.purposeVideos.Videos[i].vlink,'vno':i}).path('purposedriven-play') ;
+					 console.log("JUMP TO NEXT VIDEO  :" + i );
 					 break;
 				}
 				if( i== $scope.purposeVideos.Videos.length){
@@ -85,29 +89,68 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 */
 
 	// hands over the youtube link and video number for next page viewing.
-    $scope.view_video = function(address,no){
+    $scope.view_video = function(address,vno){
 	console.log("view_video is being executed");
         	$scope.videotoWatch = address;
         	//window.location.replace('#/purposedriven-play?v=' +value);
         	//$location.path('purposedriven-play')
   			//alert(document.URL);
   			//alert(value);
-  			 $location.search({'youtube':address,'vno':no}).path('purposedriven-play')
+			
+			for(var i = 0; i<$scope.purposeVideos.Videos.length;i++){
+				if($scope.purposeVideos.Videos[i].no == vno){
+					vno = i;
+					break;
+				}
+
+			}
+			
+  			 $location.search({'youtube':address,'vno':vno}).path('purposedriven-play')
         }  
 
+		
+		
+	// hands over the youtube link and video number for next page viewing.
+    $scope.view_video_old = function(address,vno){
+	console.log("view_video is being executed");
+        	//$scope.videotoWatch = address;
+        	//window.location.replace('#/purposedriven-play?v=' +value);
+        	//$location.path('purposedriven-play')
+  			//alert(document.URL);
+  			//alert(value);
+			
+			for(var i = 0; i<$scope.purposeVideos.Videos.length;i++){
+				if($scope.purposeVideos.Videos[i].no == vno){
+					vno = i;
+					break;
+				}
+
+			}
+			
+  			 $location.search({'youtube':$scope.purposeVideos.Videos[i].vlink,'vno':vno}).path('purposedriven-play')
+        } 		
+		
+		
 
         $scope.nextVideo = function (vno,feedback){
-			var vnoNumber = parseInt(vno);
+			var vnoNumber = parseInt(vno);//array value
 			console.log("nextVideo is being executed");
-             if($scope.purposeVideos.Videos.length-1 > vnoNumber){
-                if($scope.purposeVideos.Videos[(vnoNumber+1)].unlocked == false){
-			     $scope.saveNewUnlock(vnoNumber+1);
-                  alert ("You have unlock a new video!" );		
-					
-                }
+
+				
+
+          if($scope.numOfVideos-1 > vnoNumber){			
+				if($scope.purposeVideos.Videos[(vnoNumber+1)].unlocked == false){				
+					 //$scope.saveNewUnlock(vnoNumber+1);
+					 var id = $scope.purposeVideos.Videos[vnoNumber+1].id;
+					 $scope.saveNewUnlock(id);
+					// $scope.saveNewUnlock(vnoNumber+1);
+					  alert ("You have unlock a new video! with video " );		
+						
+				}
 		
-               
-				$scope.saveNewFeedback(vnoNumber,feedback); // unlock , resave answer into datastore.
+               	var id = $scope.purposeVideos.Videos[vnoNumber].id;
+				$scope.saveNewFeedback(id,feedback); // unlock , resave answer into datastore.
+				//$scope.saveNewFeedback(vnoNumber,feedback); // unlock , resave answer into datastore.
                 $location.search({'youtube':$scope.purposeVideos.Videos[(vnoNumber+1)].vlink,'vno':(vnoNumber+1)}).path('purposedriven-play') 
 				
               }
@@ -136,6 +179,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 					  console.log(response);
 						
 				})
+				console.log("video unlocked with Id " + videoNumber);
 		
 	}
 
@@ -144,8 +188,9 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 			console.log("saveNewFeedback is being executed");
 			
 			//$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/" + videoNumber);
-			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/");
-				
+			//$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_feedback/");
+			// the code here is not modular,due to merging of 2 api.
+			$scope.userCurrentVideo = $resource("/jsonapi/record_purpose_video_unlock/");	
 			var data = {
 							"feedback":feedback, 
 							"purposevideo": videoNumber

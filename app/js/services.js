@@ -20,6 +20,10 @@ angular.module('myApp.services', []).
         };
     })
 
+    .factory('ace', function($window){
+        return $window.ace;
+    })
+
     .factory('now', function($window) {
         if ($window.Date.now) {
             return $window.Date.now;

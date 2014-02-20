@@ -29,7 +29,7 @@
             // delta = parseInt(delta, 10);
 
             if (delta < 1000) {
-                return delta + 'ms';
+                return Math.round(delta) + 'ms';
             } else {
                 return (Math.round(delta / 10) / 100) + 's';
             }
