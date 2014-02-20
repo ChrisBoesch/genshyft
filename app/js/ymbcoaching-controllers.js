@@ -4,13 +4,22 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	//check if the user had select a mentor before.
 	$scope.currentCoach = "";
 	$scope.tempimage = "img//purposedrivenPlaceholder//wait.png"; 
+	$scope.player_progress ="";
+	$scope.currentPathId="";
+	$scope.currentPathName ="";
 	
 	 $resource('/jsonapi/get_player_progress').get({},function(response){
 		$scope.player_progress = response;
 		$scope.currentPathId = $scope.player_progress.paths[0].id;
 	   $scope.currentPathName = $scope.player_progress.paths[0].name;		
-	 });
-
+	 });	
+	
+	
+    $scope.get_player_progress = function(){			
+			$scope.player_progress = $resource('/jsonapi/get_player_progress').get();
+    };
+    //$scope.get_player_progress();	
+	
 	$resource('/jsonapi/coach').get({},function(response){
 		$scope.allCoachesData = response;
 
@@ -216,12 +225,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		$('#levelBlock').modal('hide');
 	};
 			
-    $scope.get_player_progress = function(){
-    	setTimeout(function () {			
-			$scope.player_progress = $resource('/jsonapi/get_player_progress').get();
-		}, 500);
-    };
-    //$scope.get_player_progress();
+
 
     $scope.update_path_details = function(){
         $scope.player_paths = $resource('/jsonapi/get_my_paths').get();
