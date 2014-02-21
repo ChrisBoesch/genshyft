@@ -1764,6 +1764,10 @@ function NormalGameController($scope,$resource,$cookieStore){
 
     //To retrieve story information
     $scope.$watch('quest.name', function() {
+        
+        if (!$scope.quest) {
+            return;
+        }
 
     	// to retrieve the story name 
     	var sName = $scope.quest.story;
@@ -1827,7 +1831,6 @@ function NormalGameController($scope,$resource,$cookieStore){
         $scope.solution_check_result = null;
         var editor = ace.edit("editor");
         editor.getSession().setMode("ace/mode/" + $scope.game.problems.problems[$scope.current_problem_index].interface.codeHighlightKey);
-        editor.getSession().removeListener('change', callback);
       }else{
         $scope.current_problem=null;
         $scope.current_problem_index = null;
@@ -1928,6 +1931,11 @@ function NormalGameController($scope,$resource,$cookieStore){
 
       $scope.$watch('quest.videos', function() {
         var numOfUnlocked = 0;
+
+        if (!$scope.quest) {
+            return;
+        }
+
         for(var i=0;i<$scope.quest.videos.length;i++){
             if($scope.quest.videos[i] != "LOCKED"){
                numOfUnlocked++;
