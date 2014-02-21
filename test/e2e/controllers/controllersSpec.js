@@ -101,4 +101,53 @@ describe("E2E: Testing Controllers", function () {
         });
 
     });
+
+    describe('Edit Problem form', function() {
+
+        beforeEach(function () {
+            browser().navigateTo('/app/index.html?scenario=newProblem');
+        });
+
+        xit('should select a problem', function() {
+            element('#menu *:contains("Path or Level")').click();
+            element('button:contains("Create and Edit Problems")').click();
+            expect(browser().location().path()).toBe("/editproblem");
+
+            expect(element('form[name="editProblem"]').css('display')).toBe('none');
+
+            select('path').option(0);
+            select('problemSet').option(0);
+            select('problem').option(0);
+
+            expect(element('form[name="editProblem"]').css('display')).toBe('block');
+            expect(element('#examples').val()).toBe(">>> greeting\n'hello world'");
+
+            element('li.tabspacing a:contains("Tests")').click();
+            expect(element('#tests .ace_text-layer').text()).toMatch(/>>>\sgreeting'hello\sworld'/g);
+        });
+
+        it('should run tests', function() {
+            element('#menu *:contains("Path or Level")').click();
+            element('button:contains("Create and Edit Problems")').click();
+            select('path').option(0);
+            select('problemSet').option(0);
+            select('problem').option(0);
+            
+            expect(element('button:contains("Save")').attr('disabled')).toBeTruthy();
+            element('button:contains("Run")').click();
+            expect(element('#t7').text()).toMatch(/Your solution passes all tests/);
+            expect(element('button:contains("Save")').attr('disabled')).toBeFalsy();
+        });
+
+        it('should save a problem', function() {
+            element('#menu *:contains("Path or Level")').click();
+            element('button:contains("Create and Edit Problems")').click();
+            select('path').option(0);
+            select('problemSet').option(0);
+            select('problem').option(0);
+            element('button:contains("Run")').click();
+            alertOK();
+            element('button:contains("Save")').click();
+        });
+    });
 });

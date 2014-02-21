@@ -7,7 +7,13 @@
             'quest': [,
                 '../test/mocks/mocked-app.js',
                 '../test/mocks/quest.js'
-            ]
+            ],
+
+            'newProblem': [
+                '../test/mocks/mocked-app.js',
+                '../test/mocks/home.js',
+                '../test/mocks/problem-edit.js'
+            ],
         },
         getScenario = function() {
             var search = document.location.search.slice(1),
