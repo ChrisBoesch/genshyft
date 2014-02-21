@@ -9,7 +9,7 @@ describe("E2E: Testing Routes", function () {
     //You can reload a page before every test if desired.
     //This can slow testing down but make test much more consistent.
     beforeEach(function () {
-        browser().navigateTo('/app/index.html');
+        browser().navigateTo('/app/index.html?scenario=default');
     });
 
 

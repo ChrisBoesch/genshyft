@@ -7,10 +7,6 @@ describe("E2E: Testing Controllers", function () {
     //You can load the runner with runner.html?pauseAll=true to see each page after each test.
     pauseAll = window.location.search.replace("?pauseAll=", "");
 
-    beforeEach(function () {
-        browser().navigateTo('/app/index.html');
-    });
-
     /*
      1. Practice Game
      Load /app/index.html?test_with=app-test.js
@@ -23,6 +19,10 @@ describe("E2E: Testing Controllers", function () {
      On the page you should find: “Name: Functions” in the top box and “This is the first problem” in the examples box.
      */
     describe('Practice Game', function () {
+        beforeEach(function () {
+            browser().navigateTo('/app/index.html?scenario=default');
+        });
+
         it('should be able to create a new practice game for python with easy difficulty', function () {
 
             expect(browser().location().path()).toBe("/home");
@@ -54,6 +54,10 @@ describe("E2E: Testing Controllers", function () {
 
     
     describe('Quest', function() {
+
+        beforeEach(function () {
+            browser().navigateTo('/app/index.html?scenario=quest');
+        });
         
 
         it('should create a new quest', function() {
