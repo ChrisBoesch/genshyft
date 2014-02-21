@@ -36,10 +36,10 @@
             return scenario['default'];
         },
         urls = getScenario();
-            
+    
+    document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </script>');     
     urls.forEach(function(url) {
         console.log('loading "'+url+'"');
         document.write('<script src="'+ url + '"> </script> ');
     });
-    document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </script>  ');
 })();
