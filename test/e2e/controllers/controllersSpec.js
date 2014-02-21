@@ -84,10 +84,18 @@ describe("E2E: Testing Controllers", function () {
             element('*:contains("Continue")').click();
 
             sleep(5);
-            expect(browser().location().url()).toBe("/normal_play_page.html");
+            element('*:contains("Run")').click();
+            expect(element('#t2 tr:eq(1) td:contains("Errors")').css('display')).toBe('table-cell');
+
+            element('*:contains("StoryBoard")').click();
+            sleep(5);
+            expect(browser().location().path()).toBe("/storyboard");
+
+            // TODO: test skip button
+            // maybe using the e2e binding function (not sure how to use it)
         });
 
-        it('should restart an existing quest', function() {
+        xit('should restart an existing quest', function() {
             // TODO: I am not sure how I would be able to differenciate 
             // between a new and an existing story.
         });
