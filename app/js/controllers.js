@@ -3884,7 +3884,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
         return $http.get('/jsonapi/interfaces').then(function(resp) {
 
             if (!resp.data.interfaces) {
-                alert('error: Could not fetch the interface');
+                $window.alert('error: Could not fetch the interface');
                 return $q.reject(resp.data);
             }
 
@@ -3927,7 +3927,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
         $scope.loadingPaths = true;
         return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
             if (!resp.data.paths) {
-                alert('error: could not fetch paths.');
+                $window.alert('error: could not fetch paths.');
                 return $q.reject(resp.data);
             }
             $scope.paths = resp.data.paths;
@@ -3960,7 +3960,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
         $scope.creatingPath = true;
         $http.post('/jsonapi/new_path', newPath, postConfig).then(function(resp){
             if (!resp.data.path_id) {
-                alert('error: could not not save the new path');
+                $window.alert('error: could not not save the new path');
                 return $q.reject(resp.data);
             }
 
@@ -4012,7 +4012,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
         $scope.loadingLevels = true;
         return $http.get('/jsonapi/problemsets/' + path.id).then(function(resp){
             if (!resp.data.problemsets) {
-                alert('error: could not get the levels.');
+                $window.alert('error: could not get the levels.');
                 return $q.reject(resp.data);
             }
 
@@ -4047,7 +4047,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
         $scope.creatingLevel = true;
         $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
             if (!resp.data.problemset_id) {
-                alert('error: could not save the new level.');
+                $window.alert('error: could not save the new level.');
                 return $q.reject(resp.data);
             }
 
@@ -4099,7 +4099,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
         $scope.loadingProblems = true;
         return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
             if (!resp.data.problems) {
-                alert('error: could not get the new level.');
+                $window.alert('error: could not get the new level.');
                 return $q.reject(resp.data);
             }
 
@@ -4160,7 +4160,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
             var next, target = problem.problemsetorder - 1;
 
             if (!resp.data.success) {
-                alert('error: could not move problem up.');
+                $window.alert('error: could not move problem up.');
                 return $q.reject(resp.data);
             }
 
@@ -4196,7 +4196,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
             var prev, target = problem.problemsetorder + 1;
 
             if (!resp.data.success) {
-                alert('error: could not move problem down.');
+                $window.alert('error: could not move problem down.');
                 return $q.reject(resp.data);
             }
 
@@ -4567,7 +4567,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
 
             return $http.post('/jsonapi/update_mobile_problem', data).then(function(resp) {
                 if ('error' in resp.data) {
-                    alert('error saving mobile problem');
+                    $window.alert('error saving mobile problem');
                     return $q.reject(resp.data);
                 }
 
@@ -4613,20 +4613,20 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
             $scope.resetTestRun();
 
             if (!resp.data.problem_id) {
-                alert('error: could not save problem.');
+                $window.alert('error: could not save problem.');
                 return $q.reject(resp);
             }
 
             $scope.problemDetails.problem_id = resp.data.problem_id;
             $scope.problem.id = resp.data.problem_id;
-            alert('problem saved');
+            $window.alert('problem saved');
             
             if ($scope.problemMobile) {
                 return $scope.build.save();
             }
         }).then(function (problemMobile) {
             if (problemMobile) {
-                alert('mobile problem saved');
+                $window.alert('mobile problem saved');
             }
         }).always(function(){
             $scope.savingProblem = false;
@@ -4654,7 +4654,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
             }
 
             var msg = 'Interface not found. It does not exist or you cannot edit it';
-            alert(msg);
+            $window.alert(msg);
             return $q.reject(msg);
         }).then(function(paths) {
             for (var i = 0; i < paths.length; i++) {
@@ -4665,7 +4665,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
             }
 
             var msg = 'Path not found. It does not exist or you cannot edit it';
-            alert(msg);
+            $window.alert(msg);
             return $q.reject(msg);
         }).then(function(levels) {
             for (var i = 0; i < levels.length; i++) {
@@ -4676,7 +4676,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
             }
 
             var msg = 'Level not found. It does not exist or you cannot edit it';
-            alert(msg);
+            $window.alert(msg);
             return $q.reject(msg);
         }).then(function(problems) {
             for (var i = 0; i < problems.length; i++) {
@@ -4686,7 +4686,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
                 }
             }
             var msg = 'Problem not found. It does not exist or you cannot edit it';
-            alert(msg);
+            $window.alert(msg);
             return $q.reject(msg);
         }).then(
             function() {
@@ -4694,7 +4694,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
                 $scope.problemMobile = problem.problemMobile;
             },
             function() {
-                alert('failed to found the problem.');
+                $window.alert('failed to found the problem.');
             }
         );
     }

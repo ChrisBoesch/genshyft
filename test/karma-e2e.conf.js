@@ -6,6 +6,7 @@ module.exports = function (config) {
     conf.files = conf.files.concat([
         // Test specific files
         './test/lib/ng-scenario-dsl.js',
+        './test/lib/window-dialog-commands.js',
         // App specific files
         // './test/e2e/**/*.js'
         './test/e2e/routesSpec.js',

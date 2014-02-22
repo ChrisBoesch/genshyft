@@ -12,7 +12,7 @@
                     <label class="control-label" for="interface">Choose language: </label>
                     <div class="controls">
                         <div class="progress progress-striped active" ng-show="loadingInterfaces"><div class="bar"></div></div>
-                        <select id="interface" ng-model="interface" ng-options="i.name for i in interfaces" ng-change="getPaths(interface)" ng-hide="loadingInterfaces"></select>
+                        <select id="interface" name="interface" ng-model="interface" ng-options="i.name for i in interfaces" ng-change="getPaths(interface)" ng-hide="loadingInterfaces"></select>
                     </div>
                 </div>
 
@@ -21,7 +21,7 @@
                     <div class="controls">
                         <div class="progress progress-striped active" ng-show="loadingPaths"><div class="bar"></div></div>
                         <span ng-hide="loadingPaths">
-                            <select id="path" ng-model="path" ng-options="p.name for p in paths" ng-change="getLevels(path)">
+                            <select id="path" name="path" ng-model="path" ng-options="p.name for p in paths" ng-change="getLevels(path)">
                                 <option value="">new path...</option>
                             </select> 
                             <button class="btn" ng-click="createNewPath(interface)" ng-if="!path && !newPath">new path</button>
@@ -34,7 +34,7 @@
                     <div class="controls">
                         <div class="progress progress-striped active" ng-show="loadingLevels"><div class="bar"></div></div>
                         <span ng-hide="loadingLevels">
-                            <select id="problemSet" ng-model="problemSet" ng-options="l.name for l in problemSets" ng-change="getProblems(problemSet)">
+                            <select id="problemSet" name="problemSet" ng-model="problemSet" ng-options="l.name for l in problemSets" ng-change="getProblems(problemSet)">
                                 <option value="">new level...</option>
                             </select> 
                             <button class="btn" ng-click="createNewLevel(path)" ng-if="!problemSet && !newLevel">new level</button>
@@ -47,7 +47,7 @@
                     <div class="controls">
                         <div class="progress progress-striped active" ng-show="loadingProblems"><div class="bar"></div></div>
                         <span ng-hide="loadingProblems">
-                            <select id="problem" ng-model="problem" ng-options="p.name for p in problems" ng-change="getProblemDetails(problem)">
+                            <select id="problem" name="problem" ng-model="problem" ng-options="p.name for p in problems" ng-change="getProblemDetails(problem)">
                                 <option value="">new problem...</option>
                             </select> 
                             <button class="btn" ng-click="createNewProblem(problemSet)" ng-if="!problem && !newProblem">new problem</button>
@@ -137,8 +137,8 @@
         </div>
     </div>
     
-    <form name="editProblem" role="form">
-        <div class="row-fluid" ng-show="problem">
+    <form name="editProblem" role="form" ng-show="problem">
+        <div class="row-fluid">
             <div class="span6 well">
                 <div class="tabbable">
                 

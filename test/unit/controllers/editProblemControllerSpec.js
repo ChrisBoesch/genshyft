@@ -29,7 +29,10 @@
                     'clearInterval': interval.clearInterval,
                     '$': $window['$'],
                     'jQuery': $window['jQuery'],
-                    'Date': $window.Date
+                    'Date': $window.Date,
+                    'alert': function() {
+                        return true;
+                    }
                 }
             });
 
