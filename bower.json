@@ -1,7 +1,7 @@
 {
   "name": "sing-path",
   "dependencies": {
-    "components-font-awesome": "~3.1.0",
+    "components-font-awesome": "~3.2.1",
     "jquery-ui": "~1.10.0",
     "jquery": "~1.10.2",
     "fancybox": "~2.1.5",
