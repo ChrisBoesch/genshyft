@@ -1,11 +1,20 @@
 {
   "name": "sing-path",
   "dependencies": {
-    "angular-unstable": "1.1.5",
-    "angular-resource-unstable": "~1.1.5",
-    "components-font-awesome": "3.1.0"
-  },
-  "devDependencies": {
-    "angular-mocks-unstable": "~1.1.5"
+    "components-font-awesome": "~3.1.0",
+    "jquery-ui": "~1.10.0",
+    "jquery": "~1.10.2",
+    "fancybox": "~2.1.5",
+    "leaflet": "~0.6.4",
+    "angular-bootstrap": "~0.6.0",
+    "angular-ui-ace": "~0.1.0",
+    "ace-builds": "~1.1.1",
+    "underscore": "~1.5.2",
+    "unstable-angular-complete": "1.1.5",
+    "bootstrap-css": "2.3.2",
+    "bootstrap-datepicker": "~1.2.0",
+    "angular-leaflet-directive": "0.6.1",
+    "leaflet-dist": "0.6.4",
+    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch"
   }
 }

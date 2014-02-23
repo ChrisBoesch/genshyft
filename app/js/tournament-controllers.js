@@ -1,11 +1,13 @@
 'use strict';
 
-/*Scripts for tabs*/
+// TODO: Fix
+// 
+// /*Scripts for tabs*/
 
-$('#myTab a').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
+// $('#myTab a').click(function (e) {
+//   e.preventDefault();
+//   $(this).tab('show');
+// });
 
 /*GENShYFT's TournamentController*/
 function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route){

@@ -13,25 +13,47 @@ module.exports = function () {
 
         files: [
             // 3rd Party Code
-            'app/js/jquery-1.7.2.js',
-            'bower_components/angular-unstable/angular.js',
-
-            'bower_components/angular-resource-unstable/angular-resource.js',
-            'app/js/cookies.js',
-            'app/js/ui-ace.js',
-            'app/js/analytics.js',
+            'bower_components/jquery/jquery.js',
+            'bower_components/underscore/underscore.js',
+            'bower_components/jquery-ui/ui/jquery-ui.js',
+            'bower_components/fancybox/source/jquery.fancybox.js',
+            'bower_components/jquery-ui-touch-punch/jquery.ui.touch-punch.js',
+            'bower_components/ace-builds/src/ace.js',
+            'bower_components/leaflet-dist/leaflet-src.js',
+            'bower_components/unstable-angular-complete/angular.js',
+            'bower_components/unstable-angular-complete/angular-cookies.js',
+            'bower_components/unstable-angular-complete/angular-resource.js',
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'bower_components/angular-ui-ace/ui-ace.js',
+            'bower_components/angular-leaflet-directive/src/angular-leaflet-directive.js',
+            'bower_components/bootstrap-css/js/bootstrap.js',
             'app/js/angular-google-maps.js',
 
             //App-specific Code
-            'app/js/controllers.js',
-            'app/js/directives.js',
-            'app/js/services.js',
-            'app/js/filters.js',
-            'app/js/app.js',
             'app/js/app-config.js',
+            'app/js/app.js',
+            'app/js/admin-controllers.js',
+            'app/js/analytics.js',
+            'app/js/BATController.js',
+            'app/js/controllers.js',
+            'app/js/dir-dnd.js',
+            'app/js/directives.js',
+            'app/js/fancybox-fire.js',
+            'app/js/filters.js',
+            'app/js/game-play-app.js',
+            'app/js/mbcoaching-controllers.js',
+            'app/js/PurposeDrivenAdminController.js',
+            'app/js/PurposeDrivenController.js',
+            'app/js/school-controllers.js',
+            'app/js/services.js',
+            'app/js/tournament-controllers.js',
+            'app/js/TournamentGameController.js',
+            'app/js/ymbcoaching-controllers.js',
+            'app/js/ymbcoaching-play-controllers.js',
+            'app/js/WebGameController.js',
 
             // Test-Specific Code
-            'bower_components/angular-mocks-unstable/angular-mocks.js'
+            'bower_components/unstable-angular-complete/angular-mocks.js'
         ]
-    }
+    };
 };

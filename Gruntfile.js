@@ -13,15 +13,13 @@ module.exports = function (grunt) {
       },
       bower_install: {
         command: './node_modules/.bin/bower install'
-      },
-      font_awesome_fonts: {
-        command: 'cp -R bower_components/components-font-awesome/font/ app/font'
       }
     },
 
     connect: {
       options: {
-        base: 'app/'
+        base: '.',
+        hostname: '0.0.0.0'
       },
       webserver: {
         options: {
@@ -31,8 +29,7 @@ module.exports = function (grunt) {
       },
       devserver: {
         options: {
-          port: 8888,
-          keepalive: true
+          port: 8888
         }
       },
       testserver: {
@@ -112,39 +109,126 @@ module.exports = function (grunt) {
     },
 
     watch: {
-      assets: {
-        files: ['app/styles/**/*.css', 'app/scripts/**/*.js'],
+      options: {
+        livereload: 7777
+      },
+      'source': {
+        files: ['app/css/**/*.css', 'app/js/**/*.js'],
         tasks: ['concat']
       }
     },
 
+    clean: {
+      assets: ["assets/css", "assets/js", "assets/font", "assets/images", "assets/img"],
+    },
+
+    copy: {
+      'jquery-ui': {
+        expand: true,
+        cwd: 'bower_components/jquery-ui/themes/ui-lightness/',
+        src: 'images/*',
+        dest: 'app/assets/'
+      },
+      'font-awesome': {
+        expand: true,
+        cwd: 'bower_components/components-font-awesome/',
+        src: 'font/*',
+        dest: 'app/assets/'
+      },
+      'bootstrap': {
+        expand: true,
+        cwd: 'bower_components/bootstrap-css/',
+        src: 'img/*',
+        dest: 'app/assets/'
+      },
+      'fancybox': {
+        expand: true,
+        cwd: 'bower_components/fancybox/source/',
+        src: ['*.gif', '*.png'],
+        dest: 'app/assets/css/'
+      },
+      'leaflet': {
+        expand: true,
+        cwd: 'bower_components/leaflet-dist',
+        src: ['images/*'],
+        dest: 'app/assets/css/'
+      },
+      'ico': {
+        src: 'app/img/ico/favicon.ico',
+        dest: 'app/assets/ico/favicon.ico'
+      },
+      'ace': {
+        expand: true,
+        cwd: 'bower_components/ace-builds/src',
+        src: '*.js',
+        dest: 'app/assets/js/ace/'
+      }
+    },
+
+
     concat: {
+      options: {
+        process: function(src, filepath) {
+          return '// Source: ' + filepath + '\n' + src;
+        },
+        nonull: true
+      },
       styles: {
-        dest: './app/assets/app.css',
+        dest: './app/assets/css/app.css',
         src: [
-          'app/styles/reset.css',
           'bower_components/components-font-awesome/css/font-awesome.css',
-          'bower_components/bootstrap.css/css/bootstrap.css',
-          'app/styles/app.css'
+          'bower_components/bootstrap-css/css/bootstrap.css',
+          'bower_components/bootstrap-datepicker/css/datepicker.css',
+          'bower_components/bootstrap-css/css/bootstrap-responsive.css',
+          'bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css',
+          'bower_components/fancybox/source/jquery.fancybox.css',
+          'bower_components/leaflet-dist/leaflet.css',
+          'app/css/app.css',
         ]
       },
+
       scripts: {
         options: {
           separator: ';'
         },
-        dest: './app/assets/app.js',
+        dest: './app/assets/js/app.js',
         src: [
-          'bower_components/angular/angular.js',
-          'bower_components/angular-route/angular-route.js',
-          'bower_components/angularjs-scope.safeapply/src/Scope.SafeApply.js',
-          'app/scripts/lib/router.js',
-          'app/scripts/config/config.js',
-          'app/scripts/services/**/*.js',
-          'app/scripts/directives/**/*.js',
-          'app/scripts/controllers/**/*.js',
-          'app/scripts/filters/**/*.js',
-          'app/scripts/config/routes.js',
-          'app/scripts/app.js'
+          'bower_components/jquery/jquery.js',
+          'bower_components/underscore/underscore.js',
+          'bower_components/jquery-ui/ui/jquery-ui.js',
+          'bower_components/fancybox/source/jquery.fancybox.js',
+          'bower_components/jquery-ui-touch-punch/jquery.ui.touch-punch.js',
+          'bower_components/ace-builds/src/ace.js',
+          'bower_components/leaflet-dist/leaflet-src.js',
+          'bower_components/unstable-angular-complete/angular.js',
+          'bower_components/unstable-angular-complete/angular-cookies.js',
+          'bower_components/unstable-angular-complete/angular-resource.js',
+          'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+          'bower_components/angular-ui-ace/ui-ace.js',
+          'bower_components/angular-leaflet-directive/src/angular-leaflet-directive.js',
+          'bower_components/bootstrap-css/js/bootstrap.js',
+          'app/js/angular-google-maps.js',
+          'app/js/app-config.js',
+          'app/js/app.js',
+          'app/js/admin-controllers.js',
+          'app/js/analytics.js',
+          'app/js/BATController.js',
+          'app/js/controllers.js',
+          'app/js/dir-dnd.js',
+          'app/js/directives.js',
+          'app/js/fancybox-fire.js',
+          'app/js/filters.js',
+          'app/js/game-play-app.js',
+          'app/js/mbcoaching-controllers.js',
+          'app/js/PurposeDrivenAdminController.js',
+          'app/js/PurposeDrivenController.js',
+          'app/js/school-controllers.js',
+          'app/js/services.js',
+          'app/js/tournament-controllers.js',
+          'app/js/TournamentGameController.js',
+          'app/js/ymbcoaching-controllers.js',
+          'app/js/ymbcoaching-play-controllers.js',
+          'app/js/WebGameController.js'
         ]
       }
     }
@@ -160,13 +244,16 @@ module.exports = function (grunt) {
   grunt.registerTask('coverage', ['karma:unit_coverage', 'open:coverage', 'connect:coverage']);
 
   // installation-related
-  grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install', 'shell:font_awesome_fonts']);
+  grunt.registerTask('install', ['shell:npm_install', 'shell:bower_install', 'build']);
+
+  // build assets
+  grunt.registerTask('build', ['clean', 'concat', 'copy']);
 
   // defaults
   grunt.registerTask('default', ['dev']);
 
   // development
-  grunt.registerTask('dev', ['install', 'concat', 'connect:devserver', 'open:devserver', 'watch:assets']);
+  grunt.registerTask('dev', ['install', 'build', 'connect:devserver', 'watch']);
 
   // server daemon
   grunt.registerTask('serve', ['connect:webserver']);
