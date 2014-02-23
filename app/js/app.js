@@ -18,5 +18,8 @@ myApp.directive('datepicker', function() {
                 });
             });
         }
-    }
+    };
 });
+
+
+

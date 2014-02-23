@@ -43,7 +43,7 @@
         },
         urls = getScenario();
     
-    document.write('<script src="../bower_components/angular-mocks-unstable/angular-mocks.js"> </script>');     
+    document.write('<script src="../bower_components/unstable-angular-complete/angular-mocks.js"> </script>');
     urls.forEach(function(url) {
         console.log('loading "'+url+'"');
         document.write('<script src="'+ url + '"> </script> ');

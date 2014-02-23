@@ -42,6 +42,13 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     
     $routeProvider.when('/home2', {templateUrl: 'partials/home2.html', controller: IndexController});
     $routeProvider.otherwise({redirectTo: '/home'});
+
+    // ace settings
+    if (!window.ace) {
+        return;
+    }
+
+    window.ace.config.set('basePath', 'assets/js/ace/');
 }]);
 
 myAppConfig.run(function($rootScope, $location) {
@@ -50,7 +57,7 @@ myAppConfig.run(function($rootScope, $location) {
 
 myAppConfig.filter('startFrom', function() {
     return function(input, idx) {
-        if(input != undefined){
+        if(input !== undefined){
             var i=idx, len=input.length, result = [];
             for (; i<len; i++)
                 result.push(input[i]);
