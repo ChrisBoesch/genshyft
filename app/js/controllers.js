@@ -4348,6 +4348,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
     $scope.build = {
         rate: 200,
         maxToken: 5,
+        maxRetries: 50,
         permutations: {
             remaining: [],
             passing: 0,
@@ -4471,6 +4472,16 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
                     }
                     return;
                 }
+                if($scope.build.permutations.retries >= $scope.build.maxRetries) {
+                    
+                    if (!$scope.build.pending()) {
+                        $window.alert("Too many failed request. There might be problem the verification server");
+                        $scope.build.retry(perm);
+                        $scope.build.stop();
+                        $scope.$digest();
+                    }
+                    return;
+                }
 
                 $scope.build.token -= 1;
                 $scope.build.verify(
@@ -4553,8 +4564,8 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
                     return result;
 
                 }, 
-                function() {
-                    return perm;
+                function(resp) {
+                    return $q.reject(perm);
                 }
             );
         },
