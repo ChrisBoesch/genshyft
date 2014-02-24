@@ -761,7 +761,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "directorID": 57754,
     "tournType": "Group",
     "tournamentID": 5060388987076610,
-    "maxNoPlayerPerGrp": 5,
+    "numPlayerPerGrp": 5,
     "numberOfGrp": 5,
     "mentorAssignInTeam": "Y/N",
 	"round":[{
@@ -1011,7 +1011,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "directorID": 57754,
     "isGroup": true,
     "tournamentID": 5060388987076609,
-	"maxNoPlayerPerGrp":5,
+	"numPlayerPerGrp":5,
 	"numberOfGrp":5,
     "mentorAssignInTeam": true,
     "rounds": [
