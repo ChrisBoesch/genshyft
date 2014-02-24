@@ -15,6 +15,6 @@
     "bootstrap-datepicker": "~1.2.0",
     "angular-leaflet-directive": "0.6.1",
     "leaflet-dist": "0.6.4",
-    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch"
+    "jquery-ui-touch-punch": "furf/jquery-ui-touch-punch#8f7559b6e65cdc3ee3648d5fe76d38c653f87ff5"
   }
 }
