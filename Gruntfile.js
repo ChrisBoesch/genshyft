@@ -132,7 +132,7 @@ module.exports = function (grunt) {
       'font-awesome': {
         expand: true,
         cwd: 'bower_components/components-font-awesome/',
-        src: 'font/*',
+        src: ['font/*', 'css/*'],
         dest: 'app/assets/'
       },
       'bootstrap': {
@@ -176,7 +176,6 @@ module.exports = function (grunt) {
       styles: {
         dest: './app/assets/css/app.css',
         src: [
-          'bower_components/components-font-awesome/css/font-awesome.css',
           'bower_components/bootstrap-css/css/bootstrap.css',
           'bower_components/bootstrap-datepicker/css/datepicker.css',
           'bower_components/bootstrap-css/css/bootstrap-responsive.css',
