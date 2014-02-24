@@ -51,11 +51,19 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			   $scope.master_next_ten_qn = $scope.mastery.next_ten;
 			   console.log("Array for next ten  :  " + $scope.master_next_ten_qn );
 			   
-			   
-			   for(var i = 1;i<$scope.master_next_ten_qn.length;i++){
-					$scope.problemsToDo.push($scope.master_next_ten_qn[i].problemId);
-					console.log("Problems added into list are " + $scope.mastery.next_ten[i].problemId);
+			   try{
+				   for(var i = 1;i<$scope.master_next_ten_qn.length;i++){
+						$scope.problemsToDo.push($scope.master_next_ten_qn[i].problemId);
+						console.log("Problems added into list are " + $scope.mastery.next_ten[i].problemId);
+				   }
 			   }
+			   catch(err){
+				alert("Please do several questions at Practice and come back later.");
+				location.path("#/practice");
+			   
+			   }
+			   
+			   
 			   $scope.problemsInSequence = 0;
 			   if($scope.mastery.next_ten.length>0){
 				$scope.nextProblemID = $scope.mastery.next_ten[$scope.problemsInSequence].problemId
