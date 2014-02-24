@@ -39,14 +39,20 @@ function Ctrl($scope) {
 }
 
 function PlayerController($scope,$resource,$location,$cookieStore,$http,currentUserService){
+    var resetSearch = function() {
+        $location.search('storyID', null);
+        $location.search('difficulty', null);
+        $location.search('path_ID', null);
+    };
+
 	$scope.list=function(){
-		$scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
-	  $scope.player = $resource('/jsonapi/player').get();
-		$scope.tags = $resource('/jsonapi/tags').get();
-	    $scope.$watch('player', function() {
-	    	$scope.current_country = $scope.player.country;
-        currentUserService.setUser($scope.player);
-	    },true);
+        $scope.mobile_paths = $resource('/jsonapi/mobile_paths').query();
+        $scope.player = $resource('/jsonapi/player').get();
+        $scope.tags = $resource('/jsonapi/tags').get();
+        $scope.$watch('player', function() {
+            $scope.current_country = $scope.player.country;
+            currentUserService.setUser($scope.player);
+        }, true);
 	};
 	
 	$scope.addTag = function(addedTag){
@@ -60,182 +66,60 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 			}
 		}
 		$scope.taglist=[];
-  	};
+    };
+
+    $scope.firstLoad=function(paid){
+        if($scope.player.nickname){
+            resetSearch();
+            $cookieStore.put("pid", paid);
+            $location.path("practice");
+        } else {
+            alert("Please login with FaceBook or Google Account first!");
+        }
+    };
 	
-	$scope.firstLoad=function(paid){
-		if($scope.player.nickname){
-   			$location.search('storyID', null);
-   			$location.search('difficulty', null);
-   			$location.search('path_ID', null);
-			$cookieStore.put("pid", paid);
-			$location.path("practice");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
+    $scope.login = function() {};
+
+    var checkLogin = function(path) {
+        if($scope.player.nickname){
+            $location.path(path);
+        }
+        else{
+            alert("Please login with FaceBook or Google Account first!");
+        }
+    };
+
+    var checkLoginResetSearch = function (path) {
+        if($scope.player.nickname){
+            resetSearch();
+            $location.path(path);
+        } else {
+            alert("Please login with FaceBook or Google Account first!");
+        }
+    };
 	
-    $scope.login=function(){
-  
-    }; 
-	
-	$scope.checkQuestLogin = function(){
-		if($scope.player.nickname){
-			$location.search('storyID', null);
-   			$location.search('difficulty', null);
-   			$location.search('path_ID', null);
-			$location.path("quests");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkPracticeLogin = function(){
-		if($scope.player.nickname){
-			$location.path("practice");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkStoryLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("story");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkChallengesLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("challenges");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkRankingLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("ranking");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkFeedbackLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("feedback");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-	
-	$scope.checkProfileLogin = function(){
-		$location.search('storyID', null);
-		$location.search('difficulty', null);
-		$location.search('path_ID', null);
-		if($scope.player.nickname){
-			$location.path("profile");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
+    $scope.checkQuestLogin = checkLoginResetSearch.bind($scope, 'quests');
+    $scope.checkStoryLogin = checkLoginResetSearch.bind($scope, 'story');
+    $scope.checkChallengesLogin = checkLoginResetSearch.bind($scope, 'challenges');
+    $scope.checkRankingLogin = checkLoginResetSearch.bind($scope, 'ranking');
+    $scope.checkFeedbackLogin = checkLoginResetSearch.bind($scope, 'feedback');
+    $scope.checkProfileLogin = checkLoginResetSearch.bind($scope, 'profile');
 
 //GENShYFT Codes
-	$scope.toVideos = function(){
-		$location.path("videos");
-	}
+    $scope.toVideos = function(){
+        $location.path("videos");
+    };
 
-	$scope.checkCreatePathorLevelLogin = function(){
-		if($scope.player.nickname){
-			$location.path("create");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
+    $scope.checkPracticeLogin = checkLogin.bind($scope, 'practice');
+    $scope.checkCreatePathorLevelLogin = checkLogin.bind($scope, 'create');
+	$scope.checkSchoolRegistrationLogin = checkLogin.bind($scope, 'schoolregistration');
+    $scope.checkMasteryLogin = checkLogin.bind($scope, 'ymbcoaching');
+    $scope.checkPurposeDrivenLogin = checkLogin.bind($scope, 'purposedriven');
+    $scope.checkTournamentLogin = checkLogin.bind($scope, 'tournaments');
+    $scope.checkCreateTournamentLogin = checkLogin.bind($scope, 'mytournaments');
+    $scope.checkEventsLogin = checkLogin.bind($scope, 'events');
+    $scope.checkSchoolsMapLogin = checkLogin.bind($scope, 'schoolsmap');
 
-	$scope.checkSchoolRegistrationLogin = function(){
-		if($scope.player.nickname){
-			$location.path("schoolregistration");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkMasteryLogin = function(){
-		if($scope.player.nickname){
-			$location.path("ymbcoaching");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkPurposeDrivenLogin = function(){
-		if($scope.player.nickname){
-			$location.path("purposedriven");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkTournamentLogin = function(){
-		if($scope.player.nickname){
-			$location.path("tournaments");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkCreateTournamentLogin = function(){
-		if($scope.player.nickname){
-			$location.path("mytournaments");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkEventsLogin = function(){
-		if($scope.player.nickname){
-			$location.path("events");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
-
-	$scope.checkSchoolsMapLogin = function(){
-		if($scope.player.nickname){
-			$location.path("schoolsmap");
-		}
-		else{
-			alert("Please login with FaceBook or Google Account first!");
-		}
-	};
 	// End GENShYFT Code
 
 	
@@ -1880,6 +1764,10 @@ function NormalGameController($scope,$resource,$cookieStore){
 
     //To retrieve story information
     $scope.$watch('quest.name', function() {
+        
+        if (!$scope.quest) {
+            return;
+        }
 
     	// to retrieve the story name 
     	var sName = $scope.quest.story;
@@ -1943,7 +1831,6 @@ function NormalGameController($scope,$resource,$cookieStore){
         $scope.solution_check_result = null;
         var editor = ace.edit("editor");
         editor.getSession().setMode("ace/mode/" + $scope.game.problems.problems[$scope.current_problem_index].interface.codeHighlightKey);
-        editor.getSession().removeListener('change', callback);
       }else{
         $scope.current_problem=null;
         $scope.current_problem_index = null;
@@ -2044,6 +1931,11 @@ function NormalGameController($scope,$resource,$cookieStore){
 
       $scope.$watch('quest.videos', function() {
         var numOfUnlocked = 0;
+
+        if (!$scope.quest) {
+            return;
+        }
+
         for(var i=0;i<$scope.quest.videos.length;i++){
             if($scope.quest.videos[i] != "LOCKED"){
                numOfUnlocked++;
@@ -3019,46 +2911,41 @@ function QuestController($scope,$resource,$location,$routeParams,$cookieStore){
     //Create quest
     $scope.create_quest = function(storyID,path_id,difficulty){
 	  
-      $scope.$watch('location.search()', function() {
-        $scope.target = ($location.search()).target;
-      }, true);
+        $scope.$watch('location.search()', function() {
+            $scope.target = ($location.search()).target;
+        }, true);
 
-      for(var i=0;i<$scope.quests.length;i++){
-		//adding the filter on supported path logic. 
-		if(storyID==$scope.quests[i].story && path_id==$scope.quests[i].path && difficulty==$scope.quests[i].difficulty){
-		    $cookieStore.put("name", $scope.quests[i]);
-		  	$cookieStore.put("type", "questGame");
-		    $scope.list();
-		    $location.search('storyID', null);
-			$location.search('difficulty', null);
-			$location.search('path_ID', null);
-		    $location.path('storyboard');
-		    break;
-		}
-		else{
-			$scope.createNewQuestFlag = true;
-		}			
-	  }	
+        for(var i=0;i<$scope.quests.length;i++){
+            //adding the filter on supported path logic.
+            if(storyID==$scope.quests[i].story && path_id==$scope.quests[i].path && difficulty==$scope.quests[i].difficulty){
+                $cookieStore.put("name", $scope.quests[i]);
+                $cookieStore.put("type", "questGame");
+                $scope.list();
+                $location.search('storyID', null);
+                $location.search('difficulty', null);
+                $location.search('path_ID', null);
+                $location.path('storyboard');
+                return;
+            }
+        }
 
-	  if($scope.createNewQuestFlag){
-	  	$scope.newQuest = {}
-	    $scope.newQuest.storyID = storyID;
-		$scope.newQuest.pathID = path_id;
-	    $scope.newQuest.difficulty = difficulty;
-	    $scope.NewQuest = $resource('/jsonapi/quest');
-	    var new_quest = new $scope.NewQuest($scope.newQuest);
-	      
-	    new_quest.$save(function(response){
-	      $scope.quest = response;
-	      $cookieStore.put("name", response);
-	  	  $cookieStore.put("type", "questGame");
-	      $scope.list();
-	      $location.search('storyID', null);
-		  $location.search('difficulty', null);
-		  $location.search('path_ID', null);
-	      $location.path('storyboard');
-	    });
-	  }
+        $scope.newQuest = {}
+        $scope.newQuest.storyID = storyID;
+        $scope.newQuest.pathID = path_id;
+        $scope.newQuest.difficulty = difficulty;
+        $scope.NewQuest = $resource('/jsonapi/quest');
+        var new_quest = new $scope.NewQuest($scope.newQuest);
+
+        new_quest.$save(function(response){
+            $scope.quest = response;
+            $cookieStore.put("name", response);
+            $cookieStore.put("type", "questGame");
+            $scope.list();
+            $location.search('storyID', null);
+            $location.search('difficulty', null);
+            $location.search('path_ID', null);
+            $location.path('storyboard');
+        });
 
     };
     
@@ -3974,11 +3861,10 @@ function EventTableController($scope, $resource, $route, $location){
  * If a problem is being edited it should have a problem_id.
  *
  * TODO: allow to edit names of existing problem.
- * TODO: allow the set the problem to be edited via a route parameter.
  * TODO: handle success and error message.
  * 
  */
-function EditProblemController($scope, $http, $q, $window, permutations) {
+function EditProblemController($scope, $http, $q, $routeParams, $window, permutations, Timer) {
     var postConfig = {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         transformRequest: function (data) {
@@ -3991,25 +3877,25 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
     };
 
     /**
-     * Fetch the list of language and the set the 1st one.
-     *
-     * The result sill be saved in $scope.interfaces
-     * 
+     * Get the list of interface
      */
-    $scope.loadingInterfaces = true;
-    $http.get('/jsonapi/interfaces').then(function(resp) {
+    $scope.getInterfaces = function() {
+        $scope.loadingInterfaces = true;
+        return $http.get('/jsonapi/interfaces').then(function(resp) {
 
-        if (!resp.data.interfaces) {
-            alert('error');
-            return $q.reject(resp.data);
-        }
+            if (!resp.data.interfaces) {
+                $window.alert('error: Could not fetch the interface');
+                return $q.reject(resp.data);
+            }
 
-        $scope.interfaces = resp.data.interfaces;
-        $scope.interface = $scope.interfaces[0];
-        $scope.getPaths($scope.interface);
-    }).always(function(){
-        $scope.loadingInterfaces = false;
-    });
+            $scope.interfaces = resp.data.interfaces;
+
+            return $scope.interfaces;
+        }).always(function(){
+            $scope.loadingInterfaces = false;
+        });
+    }
+    
 
     /**
      * Reset the list of paths (`$scope.paths`).
@@ -4041,7 +3927,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         $scope.loadingPaths = true;
         return $http.get('/jsonapi/get_my_paths?interface_id=' + language.id).then(function(resp){
             if (!resp.data.paths) {
-                alert('error');
+                $window.alert('error: could not fetch paths.');
                 return $q.reject(resp.data);
             }
             $scope.paths = resp.data.paths;
@@ -4074,7 +3960,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         $scope.creatingPath = true;
         $http.post('/jsonapi/new_path', newPath, postConfig).then(function(resp){
             if (!resp.data.path_id) {
-                alert('error');
+                $window.alert('error: could not not save the new path');
                 return $q.reject(resp.data);
             }
 
@@ -4126,7 +4012,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         $scope.loadingLevels = true;
         return $http.get('/jsonapi/problemsets/' + path.id).then(function(resp){
             if (!resp.data.problemsets) {
-                alert('error');
+                $window.alert('error: could not get the levels.');
                 return $q.reject(resp.data);
             }
 
@@ -4161,7 +4047,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         $scope.creatingLevel = true;
         $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
             if (!resp.data.problemset_id) {
-                alert('error');
+                $window.alert('error: could not save the new level.');
                 return $q.reject(resp.data);
             }
 
@@ -4213,7 +4099,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
         $scope.loadingProblems = true;
         return $http.get('/jsonapi/problems/' + problemSet.id).then(function(resp){
             if (!resp.data.problems) {
-                alert('error');
+                $window.alert('error: could not get the new level.');
                 return $q.reject(resp.data);
             }
 
@@ -4274,7 +4160,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             var next, target = problem.problemsetorder - 1;
 
             if (!resp.data.success) {
-                alert('error');
+                $window.alert('error: could not move problem up.');
                 return $q.reject(resp.data);
             }
 
@@ -4310,7 +4196,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             var prev, target = problem.problemsetorder + 1;
 
             if (!resp.data.success) {
-                alert('error');
+                $window.alert('error: could not move problem down.');
                 return $q.reject(resp.data);
             }
 
@@ -4458,26 +4344,55 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
     $scope.$watch('problemDetails.tests', $scope.resetTestRun);
     $scope.$watch('problemDetails.privateTests', $scope.resetTestRun);
 
+
     $scope.build = {
         rate: 200,
         maxToken: 5,
+        maxRetries: 50,
+        permutations: {
+            remaining: [],
+            passing: 0,
+            failing: 0,
+            errors: 0,
+            total: 0,
+            retries: 0,
+
+            reset: function (argument) {
+                this.remaining = [];
+                this.passing = 0;
+                this.failing = 0;
+                this.errors = 0;
+                this.total = 0;
+                this.retries = 0;
+            },
+
+            checked: function() {
+                return this.passing + this.failing + this.errors;
+            },
+
+            progress: function() {
+                if (!this.total) {
+                    return 100;
+                }
+
+                return (this.checked() * 100 / this.total);
+            }
+        },
 
         required: function () {
             return $scope.problemMobile && !$scope.build.built();
         },
 
         reset: function() {
+            $scope.timer = null;
             $scope.build.stop();
             $scope.build.token = $scope.build.maxToken;
             $scope.build.started = false;
-            $scope.build.permutations = {
-                remaining: [],
-                passing: 0,
-                failing: 0,
-                errors: 0,
-                total: 0,
-                retries: 0
-            };
+            $scope.build.permutations.reset();
+            
+            if (!$scope.build.verificationUrls) {
+                $scope.build.verificationUrls = [];
+            }
         },
 
         sync: function (problemDetails) {
@@ -4492,7 +4407,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             $scope.problemMobile.depth = $scope.problemMobile.lines.length;
         },
 
-        start: function (problemDetails, verificationUrl) {
+        start: function (problemDetails, verificationUrls) {
             $scope.build.reset();
             $scope.build.sync(problemDetails);
 
@@ -4500,7 +4415,8 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             $scope.build.permutations.remaining = permutations($scope.problemMobile.depth);
             $scope.build.permutations.total = $scope.build.permutations.remaining.length;
 
-            $scope.build.run(verificationUrl);
+            $scope.build.timer = new Timer();
+            $scope.build.run(verificationUrls);
         },
 
         stop: function (argument) {
@@ -4508,13 +4424,14 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                 return;
             }
             $window.clearInterval($scope.build.runInterval);
+            $scope.build.timer.stop();
             $scope.build.runInterval = null;
         },
 
         sortResults: function (resp) {
             var permKey;
 
-            if (resp.error) {
+            if (resp.errors) {
                 $scope.build.permutations.errors +=1;
                 return;
             }
@@ -4535,11 +4452,15 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             $scope.build.permutations.remaining.push(perm);
         },
 
-        run: function (verificationUrl) {
+        run: function (verificationUrls) {
+            var i = 0;
+
             $scope.build.runInterval = $window.setInterval(function () {
-                var perm;
+                var perm,
+                    url = verificationUrls[i++ % verificationUrls.length];
 
                 if ($scope.build.token === 0) {
+                    $scope.$digest();
                     return;
                 }
 
@@ -4547,6 +4468,17 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                 if (!perm) {
                     if (!$scope.build.pending()) {
                         $scope.build.stop();
+                        $scope.$digest();
+                    }
+                    return;
+                }
+                if($scope.build.permutations.retries >= $scope.build.maxRetries) {
+                    
+                    if (!$scope.build.pending()) {
+                        $window.alert("Too many failed request. There might be problem the verification server");
+                        $scope.build.retry(perm);
+                        $scope.build.stop();
+                        $scope.$digest();
                     }
                     return;
                 }
@@ -4556,7 +4488,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                     perm,
                     $scope.problemMobile.lines,
                     $scope.problemMobile.tests,
-                    verificationUrl
+                    url
                 ).then(
                     $scope.build.sortResults,
                     $scope.build.retry
@@ -4632,8 +4564,8 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
                     return result;
 
                 }, 
-                function() {
-                    return perm;
+                function(resp) {
+                    return $q.reject(perm);
                 }
             );
         },
@@ -4646,8 +4578,7 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
 
             return $http.post('/jsonapi/update_mobile_problem', data).then(function(resp) {
                 if ('error' in resp.data) {
-                    alert('error saving mobile problem');
-                    console.log(resp.data.error);
+                    $window.alert('error saving mobile problem');
                     return $q.reject(resp.data);
                 }
 
@@ -4693,24 +4624,99 @@ function EditProblemController($scope, $http, $q, $window, permutations) {
             $scope.resetTestRun();
 
             if (!resp.data.problem_id) {
-                alert('error');
+                $window.alert('error: could not save problem.');
                 return $q.reject(resp);
             }
 
             $scope.problemDetails.problem_id = resp.data.problem_id;
             $scope.problem.id = resp.data.problem_id;
-            alert('problem saved');
+            $window.alert('problem saved');
             
             if ($scope.problemMobile) {
                 return $scope.build.save();
             }
         }).then(function (problemMobile) {
             if (problemMobile) {
-                alert('mobile problem saved');
+                $window.alert('mobile problem saved');
             }
         }).always(function(){
             $scope.savingProblem = false;
         });
     };
+
+    /** init **/
+
+    var interfacePromise = $scope.getInterfaces();
+
+    if ($routeParams.problemId) {
+        var problem;
+        
+        $q.all({
+            interfaces: interfacePromise,
+            problem: $scope.getProblemDetails({'id': $routeParams.problemId})
+        }).then(function(results) {
+            problem = results.problem;
+
+            for (var i = 0; i < results.interfaces.length; i++) {
+                if (results.interfaces[i].id === problem.problemDetails.interface_id) {
+                    $scope.interface = results.interfaces[i];
+                    return $scope.getPaths(results.interfaces[i]);
+                }
+            }
+
+            var msg = 'Interface not found. It does not exist or you cannot edit it';
+            $window.alert(msg);
+            return $q.reject(msg);
+        }).then(function(paths) {
+            for (var i = 0; i < paths.length; i++) {
+                if (paths[i].id === problem.problemDetails.path_id) {
+                    $scope.path = paths[i];
+                    return $scope.getLevels(paths[i]);
+                }
+            }
+
+            var msg = 'Path not found. It does not exist or you cannot edit it';
+            $window.alert(msg);
+            return $q.reject(msg);
+        }).then(function(levels) {
+            for (var i = 0; i < levels.length; i++) {
+                if (levels[i].id === problem.problemDetails.problemset_id) {
+                    $scope.problemSet = levels[i];
+                    return $scope.getProblems(levels[i]);
+                }
+            }
+
+            var msg = 'Level not found. It does not exist or you cannot edit it';
+            $window.alert(msg);
+            return $q.reject(msg);
+        }).then(function(problems) {
+            for (var i = 0; i < problems.length; i++) {
+                if (problems[i].id === problem.problemDetails.problem_id) {
+                    $scope.problem = problems[i];
+                    return problems[i]
+                }
+            }
+            var msg = 'Problem not found. It does not exist or you cannot edit it';
+            $window.alert(msg);
+            return $q.reject(msg);
+        }).then(
+            function() {
+                $scope.problemDetails = problem.problemDetails;
+                $scope.problemMobile = problem.problemMobile;
+            },
+            function() {
+                $window.alert('failed to found the problem.');
+            }
+        );
+    }
+
+    if ($scope.interface) {
+        return;
+    }
+
+    interfacePromise.then(function(interfaces) {
+        $scope.interface = interfaces[0];
+        $scope.getPaths($scope.interface);
+    });
 
 }

@@ -20,6 +20,57 @@ angular.module('myApp.services', []).
         };
     })
 
+    .factory('ace', function($window){
+        return $window.ace;
+    })
+
+    .factory('now', function($window) {
+        if ($window.Date.now) {
+            return $window.Date.now;
+        } else {
+            return function() {
+                return new Date().getTime();
+            };
+        }
+    })
+
+    .factory('Timer', function(now) {
+        var Timer = function() {
+            this._start = now();
+            this._stop = null;
+        };
+
+        Timer.prototype = {
+            stop: function() {
+                this._stop = now();
+            },
+
+            delta: function() {
+                var ref = this._stop ? this._stop : now();
+                    
+                return ref - this._start;
+            },
+
+            rate: function(count) {
+                var d = count || 1;
+
+                if (count === 0) {
+                    return 0;
+                }
+
+                return this.delta() / d ;
+            },
+
+            running: function (argument) {
+                return this._stop === null;
+            }
+
+        };
+
+        return Timer;
+
+    })
+
     // Todo: Make it a provider so that _basePath can be configured from app.config
     .factory('gameService', function ($resource, $q) {
         var _basePath = '/jsonapi/',

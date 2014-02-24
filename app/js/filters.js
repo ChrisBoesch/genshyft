@@ -24,4 +24,16 @@
         };
     });
 
+    module.filter('renderMs', function() {
+        return function (delta) {
+            // delta = parseInt(delta, 10);
+
+            if (delta < 1000) {
+                return Math.round(delta) + 'ms';
+            } else {
+                return (Math.round(delta / 10) / 100) + 's';
+            }
+        };
+    });
+
 })();

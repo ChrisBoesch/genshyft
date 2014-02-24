@@ -34,6 +34,7 @@
     "ng-midway-tester": "2.0.5",
     "bower": "~1.2.7",
     "time-grunt": "~0.2.5",
-    "karma-coverage": "~0.1.4"
+    "karma-coverage": "~0.1.4",
+    "grunt-contrib-clean": "~0.5.0"
   }
 }

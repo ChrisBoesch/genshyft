@@ -20,6 +20,7 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/eventsManage', {templateUrl: 'partials/eventsManage.html', controller: IndexController});
     $routeProvider.when('/create', {templateUrl: 'partials/create_paths_and_levels.html', controller: IndexController});
     $routeProvider.when('/editproblem', {templateUrl: 'partials/editproblem.html', controller: IndexController});
+    $routeProvider.when('/editproblem/:problemId', {templateUrl: 'partials/editproblem.html', controller: IndexController});
     $routeProvider.when('/videos', {templateUrl: 'partials/videos.html', controller: IndexController});
     $routeProvider.when('/feedback', {templateUrl: 'partials/feedback.html', controller: IndexController});
     $routeProvider.when('/schoolregistration', {templateUrl: 'partials/schoolregistration.html', controller: IndexController});
@@ -42,6 +43,13 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     
     $routeProvider.when('/home2', {templateUrl: 'partials/home2.html', controller: IndexController});
     $routeProvider.otherwise({redirectTo: '/home'});
+
+    // ace settings
+    if (!window.ace) {
+        return;
+    }
+
+    window.ace.config.set('basePath', 'assets/js/ace/');
 }]);
 
 myAppConfig.run(function($rootScope, $location) {
@@ -50,7 +58,7 @@ myAppConfig.run(function($rootScope, $location) {
 
 myAppConfig.filter('startFrom', function() {
     return function(input, idx) {
-        if(input != undefined){
+        if(input !== undefined){
             var i=idx, len=input.length, result = [];
             for (; i<len; i++)
                 result.push(input[i]);

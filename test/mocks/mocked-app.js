@@ -1,0 +1,1 @@
+var myApp = angular.module('myApp', ['myAppConfig', 'ngMockE2E', 'google-maps']);

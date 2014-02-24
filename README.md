@@ -31,10 +31,11 @@ You should see all the tests passing.
 ### Development Mode
 
 Run the following command to start the server
-`node server.js`
+grunt dev
 
-This is an easy way to view your pages live. 
-You can now access the website by clicking on preview and port 8888.
+This is an easy way to view your pages live. You can now access the website 
+by clicking on preview and port 8888. It will also to rebuild assets 
+automatically after editing a javascript or style file.
 
 #### Single Run Tests
 

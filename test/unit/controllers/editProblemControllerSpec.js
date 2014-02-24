@@ -3,16 +3,88 @@
 
     describe('EditProblemController', function() {
 
-        var ctrl, scope, httpBackend, levels, problems, problemDetails, problemMobile;
+        var ctrl, scope, httpBackend, levels, problems, problemDetails, problemMobile, interval, interfaces, paths;
 
         beforeEach(angular.mock.module('myApp'));
 
-        beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
+        beforeEach(inject(function($rootScope, $controller, _$httpBackend_, $window) {
+            interval = {
+                cbs: [],
+                setInterval: function(cb, rate) {
+                    interval.cbs.push({cb: cb, rate: rate});
+                    return interval.cbs.length;
+                },
+                clearInterval: function(intervalId) {
+                    interval.cbs[intervalId - 1] = null;
+                }
+            };
+            interval.cb = [];
             scope = $rootScope.$new();
             httpBackend = _$httpBackend_;
+
             ctrl = $controller('EditProblemController', {
-                $scope: scope
+                $scope: scope,
+                '$window': {
+                    'setInterval': interval.setInterval,
+                    'clearInterval': interval.clearInterval,
+                    '$': $window['$'],
+                    'jQuery': $window['jQuery'],
+                    'Date': $window.Date,
+                    'alert': function() {
+                        return true;
+                    }
+                }
             });
+
+            interfaces = {
+                "interfaces": [{
+                    "singpathSupported": true,
+                    "description": "Python 2.5",
+                    "codeHighlightKey": "python",
+                    "editor": {
+                        "player_id": 57754,
+                        "nickname": "Chris",
+                        "email": "removed"
+                    },
+                    "urls": ["http://python-gae-verifier.appspot.com/verify", "http://ideone-verifier.appspot.com/verify"],
+                    "exampleSolution": "spam=2\r\ndef addOne(x): \r\n  return x+1",
+                    "exampleTests": ">>> spam \r\n 2\r\n>>> addOne(2)\r\n 3\r\n>>> spam\r\n 3\r\n>>> addOne(2)\r\n 2\r\n",
+                    "id": 11020,
+                    "name": "Python"
+                }, {
+                    "singpathSupported": true,
+                    "description": "Java Interface",
+                    "codeHighlightKey": "Java",
+                    "editor": {
+                        "player_id": 57754,
+                        "nickname": "Chris",
+                        "email": "Removed"
+                    },
+                    "urls": ["http://parserplayground-staging.appspot.com/java", "http://parserplayground.appspot.com/java", "http://java-gae-verifier.appspot.com/java"],
+                    "exampleSolution": "int add(int x)\r\n{\r\n    return x+1;\r\n}\r\nString foo = \"foo\"; \r\nint b=1;\r\nchar[] charArray ={ 'a', 'b'};",
+                    "exampleTests": "assertEquals(add(0), 1); \r\nassertEquals(add(b), 2);\r\nassertTrue(true);\r\nassertFalse(false);\r\nassertEquals(foo, \"foo\");\r\nchar[] newArray ={ 'a', 'b'};\r\nassertArrayEquals(charArray, newArray);\r\nassertTrue(false);\r\nassertFalse(true);\r\nassertEquals(3.4, 3.4, 0.001); //Need a delta for floats.\r\n\r\n",
+                    "id": 2276166,
+                    "name": "Java"
+                }]
+            };
+
+            paths = {
+                "paths": [{
+                    "description": "Chris' new problems",
+                    "isGamePath": false,
+                    "interface_id": 11020,
+                    "editor": {
+                        "player_id": 57754,
+                        "nickname": "Chris",
+                        "email": "PRIVATE"
+                    },
+                    "id": 10030,
+                    "name": "Default Path for Chris"
+                }, ],
+                "type": "my_paths",
+                "interface_id": 11020
+            };
+
             levels = {
                 "type": "problemsets",
                 "problemsets": [{
@@ -387,54 +459,8 @@
                 "name": "Welcome"
             };
 
-            httpBackend.expectGET('/jsonapi/interfaces').respond({
-                "interfaces": [{
-                    "singpathSupported": true,
-                    "description": "Python 2.5",
-                    "codeHighlightKey": "python",
-                    "editor": {
-                        "player_id": 57754,
-                        "nickname": "Chris",
-                        "email": "removed"
-                    },
-                    "urls": ["http://python-gae-verifier.appspot.com/verify", "http://ideone-verifier.appspot.com/verify"],
-                    "exampleSolution": "spam=2\r\ndef addOne(x): \r\n  return x+1",
-                    "exampleTests": ">>> spam \r\n 2\r\n>>> addOne(2)\r\n 3\r\n>>> spam\r\n 3\r\n>>> addOne(2)\r\n 2\r\n",
-                    "id": 11020,
-                    "name": "Python"
-                }, {
-                    "singpathSupported": true,
-                    "description": "Java Interface",
-                    "codeHighlightKey": "Java",
-                    "editor": {
-                        "player_id": 57754,
-                        "nickname": "Chris",
-                        "email": "Removed"
-                    },
-                    "urls": ["http://parserplayground-staging.appspot.com/java", "http://parserplayground.appspot.com/java", "http://java-gae-verifier.appspot.com/java"],
-                    "exampleSolution": "int add(int x)\r\n{\r\n    return x+1;\r\n}\r\nString foo = \"foo\"; \r\nint b=1;\r\nchar[] charArray ={ 'a', 'b'};",
-                    "exampleTests": "assertEquals(add(0), 1); \r\nassertEquals(add(b), 2);\r\nassertTrue(true);\r\nassertFalse(false);\r\nassertEquals(foo, \"foo\");\r\nchar[] newArray ={ 'a', 'b'};\r\nassertArrayEquals(charArray, newArray);\r\nassertTrue(false);\r\nassertFalse(true);\r\nassertEquals(3.4, 3.4, 0.001); //Need a delta for floats.\r\n\r\n",
-                    "id": 2276166,
-                    "name": "Java"
-                }]
-            });
-
-            httpBackend.expectGET('/jsonapi/get_my_paths?interface_id=11020').respond({
-                "paths": [{
-                    "description": "Chris' new problems",
-                    "isGamePath": false,
-                    "interface_id": 11020,
-                    "editor": {
-                        "player_id": 57754,
-                        "nickname": "Chris",
-                        "email": "PRIVATE"
-                    },
-                    "id": 302013,
-                    "name": "Default Path for Chris"
-                }, ],
-                "type": "my_paths",
-                "interface_id": 11020
-            });
+            httpBackend.expectGET('/jsonapi/interfaces').respond(interfaces);
+            httpBackend.expectGET('/jsonapi/get_my_paths?interface_id=11020').respond(paths);
             httpBackend.flush();
         }));
 
@@ -442,7 +468,7 @@
             expect(scope.interfaces.length).toBe(2);
             expect(scope.interface.id).toBe(11020);
             expect(scope.paths.length).toBe(1);
-            expect(scope.paths[0].id).toBe(302013);
+            expect(scope.paths[0].id).toBe(10030);
         });
 
         it('should update the list of path when the selected interface changes', function() {
@@ -503,7 +529,7 @@
             scope.getLevels(scope.path);
 
             expect(scope.problemSets).toEqual([]);
-            httpBackend.expectGET('/jsonapi/problemsets/302013').respond(levels);
+            httpBackend.expectGET('/jsonapi/problemsets/10030').respond(levels);
             httpBackend.flush();
 
             expect(scope.problemSets).toEqual(levels.problemsets);
@@ -514,7 +540,7 @@
 
             scope.path = scope.paths[0];
             scope.getLevels(scope.path);
-            httpBackend.whenGET('/jsonapi/problemsets/302013').respond(levels);
+            httpBackend.whenGET('/jsonapi/problemsets/10030').respond(levels);
 
             scope.createNewLevel(scope.path);
             expect(scope.newLevel.path_id).toBe(scope.path.id);
@@ -544,7 +570,7 @@
             scope.path = scope.paths[0];
             scope.getLevels(scope.path);
 
-            httpBackend.whenGET('/jsonapi/problemsets/302013').respond(levels);
+            httpBackend.whenGET('/jsonapi/problemsets/10030').respond(levels);
             httpBackend.flush();
 
             scope.problemSet = scope.problemSets[0];
@@ -563,7 +589,7 @@
 
             scope.path = scope.paths[0];
             scope.getLevels(scope.path);
-            httpBackend.whenGET('/jsonapi/problemsets/302013').respond(levels);
+            httpBackend.whenGET('/jsonapi/problemsets/10030').respond(levels);
             httpBackend.flush();
 
             scope.problemSet = scope.problemSets[0];
@@ -590,7 +616,7 @@
 
             scope.path = scope.paths[0];
             scope.getLevels(scope.path);
-            httpBackend.whenGET('/jsonapi/problemsets/302013').respond(levels);
+            httpBackend.whenGET('/jsonapi/problemsets/10030').respond(levels);
             httpBackend.flush();
 
             scope.problemSet = scope.problemSets[0];
@@ -621,6 +647,35 @@
             expect(scope.problemDetails.problem_id).toBe(37043);
             expect(scope.problemMobile.id).toBe(37043);
         });
+
+        it('should select the problem from $routeParams', inject(function($controller, $window) {
+            ctrl = $controller('EditProblemController', {
+                '$scope': scope,
+                '$window': {
+                    'setInterval': interval.setInterval,
+                    'clearInterval': interval.clearInterval,
+                    '$': $window['$'],
+                    'jQuery': $window['jQuery'],
+                    'Date': $window.Date
+                },
+                '$routeParams': {'problemId': '37043'}
+            });
+
+            httpBackend.expectGET('/jsonapi/interfaces').respond(interfaces);
+            httpBackend.expectGET('/jsonapi/get_problem?problem_id=37043').respond(problemDetails);
+            httpBackend.expectGET('/jsonapi/mobile_problem/37043').respond(problemMobile);
+            httpBackend.expectGET('/jsonapi/get_my_paths?interface_id=11020').respond(paths);
+            httpBackend.expectGET('/jsonapi/problemsets/10030').respond(levels);
+            httpBackend.expectGET('/jsonapi/problems/11021').respond(problems);
+            httpBackend.flush();
+            
+            expect(scope.interface.id).toBe(11020);
+            expect(scope.path.id).toBe(10030);
+            expect(scope.problemSet.id).toBe(11021);
+            expect(scope.problem.id).toBe(37043);
+            expect(scope.problemDetails.problem_id).toBe(37043);
+            expect(scope.problemMobile.id).toBe(37043);
+        }));
 
         it('should run private and public test against the solution', function() {
             var data = [];
@@ -671,7 +726,7 @@
             httpBackend.flush();
 
             expect(data.interface_id).toBe('11020');
-            expect(data.path_id).toBe('302013');
+            expect(data.path_id).toBe('10030');
             expect(data.level_id).toBe('11021');
             expect(data.name).toBe('foo');
             expect(data.solution_code).toBe('a=1');
@@ -699,7 +754,7 @@
             httpBackend.flush();
 
             expect(data.interface_id).toBe('11020');
-            expect(data.path_id).toBe('302013');
+            expect(data.path_id).toBe('10030');
             expect(data.level_id).toBe('11021');
             expect(data.name).toBe('Welcome');
             expect(data.solution_code).toBe("greeting='hello world'");
@@ -740,6 +795,117 @@
                 nonErrorResults: problemMobile.nonErrorResults
             });
 
+        });
+
+        it('should build mobile problems solutions', function() {
+            var data = [], url;
+
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.solution = "greeting='Hello Jasmine'";
+            scope.problemDetails.tests = ">>> greeting\n'Hello Jasmine'";
+            scope.problemMobile = problemMobile;
+
+            scope.build.start(scope.problemDetails, ['http://example.com/verify']);
+
+            expect(scope.build.running()).toBe(true);
+            expect(scope.build.timer.running()).toBe(true);
+            expect(scope.build.token).toBe(scope.build.maxToken);
+            expect(scope.build.token).toBeGreaterThan(0);
+            expect(scope.build.permutations.remaining).toEqual([[1]]);
+            expect(scope.build.permutations.total).toBe(1);
+            expect(scope.build.permutations.checked()).toBe(0);
+            expect(scope.build.permutations.progress()).toBe(0);
+
+            expect(interval.cbs.length).toBe(1);
+            expect(scope.build.runInterval).toBe(1);
+            expect(interval.cbs[0].rate).toBe(scope.build.rate);
+
+            httpBackend.expectJSONP(/http:\/\/example.com\/verify\?vcallback=JSON_CALLBACK/).respond(function(method, url) {
+                var search = url.split('?')[1],
+                    params = parseParam(search),
+                    jsonrequest = JSON.parse(atob(params['jsonrequest']));
+
+                data.push(jsonrequest);
+
+                return [200, {
+                    'solved': true,
+                    'results': [
+                        {
+                            'correct': true,
+                            'call': 'greeting',
+                            'expected': 'Hello Jasmine',
+                            'received': 'Hello Jasmine'
+                        }
+                    ]
+                }];
+            });
+            interval.cbs[0].cb();
+            httpBackend.flush();
+
+            expect(data.length).toBe(1);
+            expect(data[0]['solution']).toBe("greeting='Hello Jasmine'");
+            expect(data[0]['tests']).toBe(">>> greeting\n'Hello Jasmine'");
+
+            expect(scope.build.running()).toBe(false);
+            expect(scope.build.timer.running()).toBe(false);
+
+            expect(scope.problemMobile.nonErrorResults).toEqual({
+                '1': {
+                    'solved': true,
+                    'results': [
+                        {
+                            'correct': true,
+                            'call': 'greeting',
+                            'expected': 'Hello Jasmine',
+                            'received': 'Hello Jasmine'
+                        }
+                    ]
+                }
+            });
+        });
+
+        it('should filter error built result', function() {
+
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.solution = "greeting='Hello Jasmine'";
+            scope.problemDetails.tests = ">>> greeting\n'Hello Jasmine'";
+            scope.problemMobile = problemMobile;
+
+            scope.build.start(scope.problemDetails, ['http://example.com/verify']);
+
+            httpBackend.expectJSONP(/http:\/\/example.com\/verify\?vcallback=JSON_CALLBACK/).respond(function(method, url) {
+                return [200, {
+                    'errors': 'bad request',
+                }];
+            });
+            interval.cbs[0].cb();
+            httpBackend.flush();
+
+            expect(scope.problemMobile.nonErrorResults).toEqual({});
+
+        });
+
+        it('should stop build after 50 failed verify http request', function() {
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.solution = "greeting='Hello Jasmine'";
+            scope.problemDetails.tests = ">>> greeting\n'Hello Jasmine'";
+            scope.problemMobile = problemMobile;
+
+            scope.build.start(scope.problemDetails, ['http://example.com/verify']);
+            scope.build.permutations.retries = 50;
+
+            interval.cbs[0].cb();
+
+            expect(scope.build.running()).toBe(false);
         });
 
     });
