@@ -242,7 +242,9 @@
                     <input type="submit" class="btn span4" value="add" ng-click="build.verificationUrls.push(newVerificationUrl); newVerificationUrl = ''"/>
                 </div>
                 <div class="controls controls-row">
-                    <input type="submit" class="btn btn-success span8" ng-disabled="!testRun.solved || savingProblem || build.verificationUrls.length < 1" value="Build" ng-click="build.start(problemDetails, build.verificationUrls)"/>
+                    <label class="span2" for="build-token">Concurrent request: </label>
+                    <input type="number" min="1" step="1" max="9" ng-model="build.maxToken" class="span1" id="build-token"/>
+                    <input type="submit" class="btn btn-success span5" ng-disabled="!testRun.solved || savingProblem || build.verificationUrls.length < 1" value="Build" ng-click="build.start(problemDetails, build.verificationUrls)"/>
                     <input type="submit" class="btn span4" ng-disabled="!build.running()" value="Stop build" ng-click="build.stop()"/>
                 </div>
             </form>

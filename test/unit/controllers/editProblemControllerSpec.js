@@ -891,6 +891,23 @@
 
         });
 
+        it('should stop build after 50 failed verify http request', function() {
+            scope.path = scope.paths[0];
+            scope.problemSet = levels.problemsets[0];
+            scope.problem = problems.problems[0];
+            scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.solution = "greeting='Hello Jasmine'";
+            scope.problemDetails.tests = ">>> greeting\n'Hello Jasmine'";
+            scope.problemMobile = problemMobile;
+
+            scope.build.start(scope.problemDetails, ['http://example.com/verify']);
+            scope.build.permutations.retries = 50;
+
+            interval.cbs[0].cb();
+
+            expect(scope.build.running()).toBe(false);
+        });
+
     });
 
     function parseParam(params) {
