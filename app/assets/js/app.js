@@ -78592,6 +78592,7 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
 	$routeProvider.when('/roundranking', {templateUrl: 'partials/roundranking.html', controller: IndexController});
     $routeProvider.when('/events', {templateUrl: 'partials/events.html', controller: IndexController});
     $routeProvider.when('/eventsTable', {templateUrl: 'partials/eventsTable.html', controller: IndexController});
+    $routeProvider.when('/eventsManage', {templateUrl: 'partials/eventsManage.html', controller: IndexController});
     $routeProvider.when('/create', {templateUrl: 'partials/create_paths_and_levels.html', controller: IndexController});
     $routeProvider.when('/editproblem', {templateUrl: 'partials/editproblem.html', controller: IndexController});
     $routeProvider.when('/editproblem/:problemId', {templateUrl: 'partials/editproblem.html', controller: IndexController});
@@ -86172,9 +86173,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   var fetchRegisteredUser =function(tournament){
     $scope.registeredPlayersArray =[];
     console.log("fetchRegisteredUser: " + tournament.tournamentID);
-    for(var i =0; i < tournament.registeredPlayers.length; i++){
-      if(tournament.registeredPlayers[i].group===0){
-        var playerDetails = {"playerName":tournament.registeredPlayers[i].playerName,"playerId":tournament.registeredPlayers[i].playerId};
+    for(var i =0; i < tournament.registeredPlayerIDs.length; i++){
+      if(tournament.registeredPlayerIDs[i].group===0){
+        var playerDetails = {"playerName":tournament.registeredPlayerIDs[i].playerName,"playerId":tournament.registeredPlayerIDs[i].playerId};
         $scope.registeredPlayersArray.push(playerDetails);
       }
     }
@@ -86208,16 +86209,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "roundCount": $scope.newTournamentRounds.length,
                    "rounds": $scope.newTournamentRounds,
                    "utcOffset": currentDate.toLocaleString(),
-                   "tournamentId":tournamentID,
+                   /*"tournamentId":tournamentID,
                    "passwordConfirm": $scope.grpTourPasswordConfirm,
                    "addDetails":$scope.grpTourAddDetails,
-                   "status": $scope.grpTourStatus,
+                   "status": $scope.grpTourStatus,*/
                    "isGroup": isGroup,
-                   "mentorAssignment": $scope.grpTourMentor,
+                   "mentorAssignInTeam": $scope.grpTourMentor,
                    "numberOfGrp": $scope.grpTourNoGroup,
                    "numPlayerPerGrp": $scope.grpTourMaxNoPlayer
                  }
-      $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
+      /*$scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
+      $scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
       var new_grpTournament = new $scope.NewGrpTournament(data);
       new_grpTournament.$save(function(response){
          if(response.error) {
@@ -86228,7 +86230,21 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           $scope.grpTournament = response;
         }
       });
-      $('#grpTournamentCreated').modal('show');
+      */
+      $.ajax({
+        url: '../jsonapi/add_grptournament',
+        type: 'POST',
+        async: false,
+        data: data,
+        dataType: "text",
+        success: function(){
+          $('#grpTournamentCreated').modal('show');
+        },
+        error: function(jqXHR, textStatus) {
+          alert( "Request failed: " + textStatus );
+        }
+      }); 
+      //$('#grpTournamentCreated').modal('show');
     }
     else{
       var isGroup = false;
@@ -86238,16 +86254,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "roundCount": $scope.newTournamentRounds.length,
                    "rounds": $scope.newTournamentRounds,
                    "utcOffset": currentDate.toLocaleString(),
-                   "tournamentId":tournamentID,
+                   /*"tournamentId":tournamentID,
                    "passwordConfirm": $scope.grpTourPasswordConfirm,
                    "addDetails":$scope.grpTourAddDetails,
-                   "status": $scope.grpTourStatus,
+                   "status": $scope.grpTourStatus,*/
                    "isGroup": isGroup,
-                   "mentorAssignment": "",
+                   "mentorAssignInTeam": false,
                    "numberOfGrp": 0,
                    "numPlayerPerGrp": 0
                  }
-      $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
+      /*$scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
+      $scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
       var new_grpTournament = new $scope.NewGrpTournament(data);
       new_grpTournament.$save(function(response){
          if(response.error) {
@@ -86258,8 +86275,21 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           $scope.grpTournament = response;
         //$scope.newGrpTournamentID = response.id;
         }
-      });
-      $('#grpTournamentCreated').modal('show');
+      });*/
+      $.ajax({
+        url: '../jsonapi/add_grptournament',
+        type: 'POST',
+        async: false,
+        data: data,
+        dataType: "text",
+        success: function(){
+          $('#grpTournamentCreated').modal('show');
+        },
+        error: function(jqXHR, textStatus) {
+          alert( "Request failed: " + textStatus );
+        }
+      }); 
+      //$('#grpTournamentCreated').modal('show');
     }
   };
 
@@ -86460,7 +86490,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*JSON API Call to retrieve tournament data - By Glen*/
   $scope.fetch_tournament_details = function(tournamentID){
-    $resource('/jsonapi/tournament_progress/:tournamentID').get({"tournamentID":tournamentID}, function(response){
+    $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
         $scope.tournament = response;
         console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
         $scope.get_indivNoGrpPlayers($scope.tournament);
@@ -86473,7 +86503,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*JSON API Call to retrieve tournament data once - By Glen*/
   $scope.fetch_tournament_details_once = function(tournamentID){  
-    $resource('/jsonapi/tournament_progress/:tournamentID').get({"tournamentID": tournamentID}, function(response){
+    $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID": tournamentID}, function(response){
         $scope.tournament = response;
         console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
         $scope.get_indivNoGrpPlayers($scope.tournament);
@@ -86493,19 +86523,19 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         var grouping = [];
         grouping.push("Group "+(i+1));
         
-        for(var j=0; j < tournament.registeredPlayers.length ;j++){
-          if(tournament.registeredPlayers[j].group == (i+1)){
-            var player = {"playerName":tournament.registeredPlayers[j].playerName,"playerId":tournament.registeredPlayers[j].playerId};
+        for(var j=0; j < tournament.registeredPlayerIDs.length ;j++){
+          if(tournament.registeredPlayerIDs[j].group == (i+1)){
+            var player = {"playerName":tournament.registeredPlayerIDs[j].playerName,"playerId":tournament.registeredPlayerIDs[j].playerId};
             grouping.push(player);      
            }
 
-           if(tournament.registeredPlayers[j].playerId === tournament.currentPlayerID){
-              $scope.currentUserGrping = tournament.registeredPlayers[j].group;
+           if(tournament.registeredPlayerIDs[j].playerId === tournament.currentPlayerID){
+              $scope.currentUserGrping = tournament.registeredPlayerIDs[j].group;
               $scope.have_grp($scope.currentUserGrping);
            }
         }
         if(grouping.length>0){
-          $scope.numGrp.push(grouping);
+          $scope.numGrp.push(grouping)
         }
       }
 
@@ -87529,11 +87559,19 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			   $scope.master_next_ten_qn = $scope.mastery.next_ten;
 			   console.log("Array for next ten  :  " + $scope.master_next_ten_qn );
 			   
-			   
-			   for(var i = 1;i<$scope.master_next_ten_qn.length;i++){
-					$scope.problemsToDo.push($scope.master_next_ten_qn[i].problemId);
-					console.log("Problems added into list are " + $scope.mastery.next_ten[i].problemId);
+			   try{
+				   for(var i = 1;i<$scope.master_next_ten_qn.length;i++){
+						$scope.problemsToDo.push($scope.master_next_ten_qn[i].problemId);
+						console.log("Problems added into list are " + $scope.mastery.next_ten[i].problemId);
+				   }
 			   }
+			   catch(err){
+				alert("Please do several questions at Practice and come back later.");
+				location.path("#/practice");
+			   
+			   }
+			   
+			   
 			   $scope.problemsInSequence = 0;
 			   if($scope.mastery.next_ten.length>0){
 				$scope.nextProblemID = $scope.mastery.next_ten[$scope.problemsInSequence].problemId
