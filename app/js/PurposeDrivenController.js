@@ -144,7 +144,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 					 var id = $scope.purposeVideos.Videos[vnoNumber+1].id;
 					 $scope.saveNewUnlock(id);
 					// $scope.saveNewUnlock(vnoNumber+1);
-					  alert ("You have unlock a new video! with video " );		
+					  alert ("You have unlocked a new video!" );		
 						
 				}
 		
