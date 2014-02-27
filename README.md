@@ -31,7 +31,7 @@ You should see all the tests passing.
 ### Development Mode
 
 Run the following command to start the server
-grunt dev
+`grunt dev`
 
 This is an easy way to view your pages live. You can now access the website 
 by clicking on preview and port 8888. It will also to rebuild assets 
