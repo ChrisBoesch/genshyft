@@ -483,6 +483,46 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $('#editTournRound').modal('show');
   }
 
+  $scope.activateTournament = function(tournamentID){ 
+    $http({
+      url: '../jsonapi/activate_tournament/'+tournamentID,
+      async:false,
+      success: function(data){
+        window.location.href = '/ender/viewTournaments.html';
+      }
+    });
+  };
+  
+  $scope.closeTournament = function(tournamentID){  
+    $http({
+      url: '../jsonapi/close_tournament/'+tournamentID,
+      async:false,
+      success: function(data){
+        window.location.href = '/ender/viewTournaments.html';
+      }
+    });
+  };
+  
+  $scope.hideTournament = function(tournamentID){ 
+    $http({
+      url: '../jsonapi/hide_tournament/'+tournamentID,
+      async:false,
+      success: function(data){
+        window.location.href = '/ender/viewTournaments.html';
+      }
+    });
+  };    
+  
+  $scope.deletePlayerTournament = function(tournamentID,tournamentTitle){
+    $http({
+      url: '../jsonapi/delete_tournament/'+tournamentID,
+      async:false,
+      success: function(data){
+        window.location.href = '/ender/viewTournaments.html';
+      }
+    });                   
+  };  
+
   /*method to hide modal after successfully created tournament*/
   $scope.hideSuccessTournamentModal = function(){
     $location.path("mytournaments");
