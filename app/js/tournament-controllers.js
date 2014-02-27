@@ -317,38 +317,49 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     else if($scope.newTournamentRounds.length==0){
       alert("Please add at least one round for your tournament!");
     }
-    else if($scope.grpTourType=="group"){
-      var isGroup = true;
+    else{
+      var isGroup = false;
+      var mentorAssignInTeam = "";
+      var numberOfGrp = 0;
+      var numPlayerPerGrp = 0;
+      
+      if($scope.grpTourType=="group"){
+        isGroup = true;
+        mentorAssignInTeam = $scope.grpTourMentor;
+        numberOfGrp = $scope.grpTourNoGroup;
+        numPlayerPerGrp = $scope.grpTourMaxNoPlayer;
+      }
       var data = {"shortTitle":$scope.grpTourTitle,
                    "description":$scope.grpTourDescription,
                    "password": $scope.grpTourPassword,
                    "roundCount": $scope.newTournamentRounds.length,
                    "rounds": $scope.newTournamentRounds,
                    "utcOffset": currentDate.toLocaleString(),
-                   /*"tournamentId":tournamentID,
-                   "passwordConfirm": $scope.grpTourPasswordConfirm,
                    "addDetails":$scope.grpTourAddDetails,
-                   "status": $scope.grpTourStatus,*/
                    "isGroup": isGroup,
                    "mentorAssignInTeam": $scope.grpTourMentor,
                    "numberOfGrp": $scope.grpTourNoGroup,
                    "numPlayerPerGrp": $scope.grpTourMaxNoPlayer
+                   /*"tournamentId":tournamentID,
+                   "passwordConfirm": $scope.grpTourPasswordConfirm,
+                   "status": $scope.grpTourStatus,*/
                  }
-      /*$scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
-      $scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
+      $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
+      //$scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
       var new_grpTournament = new $scope.NewGrpTournament(data);
       new_grpTournament.$save(function(response){
          if(response.error) {
           console.log(response.error);
+          console.log("testing here");
          }
          else{
           console.log("Save Group tournament into DB")
           $scope.grpTournament = response;
         }
       });
-      */
+      /*
       $.ajax({
-        url: '../jsonapi/add_grptournament',
+        url: '../jsonapi/create_tournament',
         type: 'POST',
         async: false,
         data: data,
@@ -360,9 +371,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           alert( "Request failed: " + textStatus );
         }
       }); 
+      */
       //$('#grpTournamentCreated').modal('show');
     }
-    else{
+    /*else{
       var isGroup = false;
       var data = {"shortTitle":$scope.grpTourTitle,
                    "description":$scope.grpTourDescription,
@@ -370,14 +382,14 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "roundCount": $scope.newTournamentRounds.length,
                    "rounds": $scope.newTournamentRounds,
                    "utcOffset": currentDate.toLocaleString(),
-                   /*"tournamentId":tournamentID,
-                   "passwordConfirm": $scope.grpTourPasswordConfirm,
                    "addDetails":$scope.grpTourAddDetails,
-                   "status": $scope.grpTourStatus,*/
                    "isGroup": isGroup,
                    "mentorAssignInTeam": false,
                    "numberOfGrp": 0,
                    "numPlayerPerGrp": 0
+                   /*"tournamentId":tournamentID,
+                   "passwordConfirm": $scope.grpTourPasswordConfirm,
+                   "status": $scope.grpTourStatus,
                  }
       /*$scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
       $scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
@@ -391,7 +403,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           $scope.grpTournament = response;
         //$scope.newGrpTournamentID = response.id;
         }
-      });*/
+      });
       $.ajax({
         url: '../jsonapi/add_grptournament',
         type: 'POST',
@@ -407,6 +419,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }); 
       //$('#grpTournamentCreated').modal('show');
     }
+    */
   };
 
   /*Method to save edited tournament details-GenShyft*/
@@ -420,19 +433,20 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     else if($scope.selectedTournament.password!=$scope.selectedTournament.passwordConfirm){
       alert("The tournament password does not match!");
     }
-    else if($scope.selectedTournament.isGroup==true){
-      var updatedTournament = {"shortTitle":$scope.selectedTournament.shortTitle,
+    else{
+      var updatedTournament = {
+                  "tournamentID":$scope.selectedTournament.tournamentID,
+                  "shortTitle":$scope.selectedTournament.shortTitle,
                   "description":$scope.selectedTournament.description,
-                   "password": $scope.selectedTournament.password,
-                   "tournamentId":$scope.selectedTournament.tournamentID,
-                   "addDetails":$scope.selectedTournament.addDetails,
-                   "status": $scope.selectedTournament.status,
-                   "mentorAssignment": $scope.selectedTournament.mentorAssignment,
-                   "numberOfGrp": $scope.selectedTournament.numberOfGrp,
-                   "numPlayerPerGrp": $scope.selectedTournament.numPlayerPerGrp
-
+                  "password": $scope.selectedTournament.password,
+                  "addDetails":$scope.selectedTournament.addDetails,
+                  "mentorAssignInTeam": $scope.selectedTournament.mentorAssignment,
+                  "numberOfGrp": $scope.selectedTournament.numberOfGrp,
+                  "numPlayerPerGrp": $scope.selectedTournament.numPlayerPerGrp
+                  /*"status": $scope.selectedTournament.status,*/
                  }
       //codes copied from managetournament.js, updateTournament() in SingPath Ender codes
+      /*
       $.ajax({
         url: '../jsonapi/updateTournament',
         type: 'POST',
@@ -448,16 +462,21 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           alert( "Request failed: " + textStatus );
         }
       });
+      */
       $('#editTournInfo').modal('hide');
       $('#changesSaved').modal('show');
     }
-    else{
-      var updatedTournament = {"shortTitle":$scope.selectedTournament.shortTitle,
+    /*else{
+      var updatedTournament = {
+                  "tournamentId":$scope.selectedTournament.tournamentID,
+                  "shortTitle":$scope.selectedTournament.shortTitle,
                   "description":$scope.selectedTournament.description,
-                   "password": $scope.selectedTournament.password,
-                   "tournamentId":$scope.selectedTournament.tournamentID,
-                   "addDetails":$scope.selectedTournament.addDetails,
-                   "status": $scope.selectedTournament.status,
+                  "password": $scope.selectedTournament.password,
+                  "addDetails":$scope.selectedTournament.addDetails,
+                  "mentorAssignInTeam": $scope.selectedTournament.mentorAssignment,
+                  "numberOfGrp": $scope.selectedTournament.numberOfGrp,
+                  "numPlayerPerGrp": $scope.selectedTournament.numPlayerPerGrp
+                  /*"status": $scope.selectedTournament.status,
                  }
       //codes copied from managetournament.js, updateTournament() in SingPath Ender codes
       $.ajax({
@@ -477,7 +496,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       });
       $('#editTournInfo').modal('hide');
       $('#changesSaved').modal('show');
-    }
+    }*/
   };
 
   /*Method to save edited tournament round details-GenShyft*/
@@ -495,6 +514,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
       var updatedRound = {"roundId":$scope.selectedRound.roundId,"roundName":$scope.selectedRound.roundName,"timeLimit":$scope.selectedRound.timeLimit,"problemIDs":roundQuestions,"description":$scope.selectedRound.description};    
       //codes copied from managetournament.js, updateRound()
+      /*
       $.ajax({
         url: '../jsonapi/updateRound',
         type: 'POST',
@@ -510,6 +530,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           alert( "Request failed: " + textStatus );
         }
       });
+      */
       $scope.cartQuestions = [];
       $('#editTournRound').modal('hide');
       $('#changesSaved').modal('show');
