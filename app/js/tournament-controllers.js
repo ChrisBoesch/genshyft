@@ -145,7 +145,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
       //roundId is used to simulate actual saving into backend. To remove after integrating
       console.log("Saving round into $scope.newTournamentRounds to be saved into tournament later");
-      $scope.newTournamentRounds.push({roundId:$scope.roundIdTracker,roundName:$scope.grpTourRoundName,timeLimit:$scope.grpTourRoundMins,problemIDs:roundQuestions,description:$scope.grpTourRoundDesc});
+      $scope.newTournamentRounds.push({roundId:$scope.roundIdTracker,roundName:$scope.grpTourRoundName,timelimit:$scope.grpTourRoundMins,problemIDs:roundQuestions,description:$scope.grpTourRoundDesc});
       
       $scope.grpTourRoundName = "";
       $scope.grpTourRoundMins = "";
@@ -334,23 +334,24 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "password": $scope.grpTourPassword,
                    "roundCount": $scope.newTournamentRounds.length,
                    "rounds": $scope.newTournamentRounds,
-                   "utcOffset": currentDate.toLocaleString(),
-                   "addDetails":$scope.grpTourAddDetails,
+                   //"utcOffset": currentDate.toLocaleString(),
+                   "status": "Closed",
+                   "type": "Normal",
+                   "details":$scope.grpTourAddDetails,
                    "isGroup": isGroup,
-                   "mentorAssignInTeam": mentorAssignInTeam,
-                   "numberOfGrp": numberOfGrp,
-                   "numPlayerPerGrp": numPlayerPerGrp
+                   "assignMentorInTeam": mentorAssignInTeam,
+                   "maxGroups": numberOfGrp,
+                   "maxPlayersPerGroup": numPlayerPerGrp
                    /*"tournamentId":tournamentID,
                    "passwordConfirm": $scope.grpTourPasswordConfirm,
                    "status": $scope.grpTourStatus,*/
                  }
-      $scope.NewGrpTournament = $resource('/jsonapi/add_grptournament');
+      $scope.NewGrpTournament = $resource('/jsonapi/create_grptournament');
       //$scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
       var new_grpTournament = new $scope.NewGrpTournament(data);
       new_grpTournament.$save(function(response){
          if(response.error) {
           console.log(response.error);
-          console.log("testing here");
          }
          else{
           console.log("Save Group tournament into DB")
@@ -393,10 +394,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                   "shortTitle":$scope.selectedTournament.shortTitle,
                   "description":$scope.selectedTournament.description,
                   "password": $scope.selectedTournament.password,
-                  "addDetails":$scope.selectedTournament.addDetails,
-                  "mentorAssignInTeam": $scope.selectedTournament.mentorAssignment,
-                  "numberOfGrp": $scope.selectedTournament.numberOfGrp,
-                  "numPlayerPerGrp": $scope.selectedTournament.numPlayerPerGrp
+                  "details":$scope.selectedTournament.addDetails,
+                  "assignMentorInTeam": $scope.selectedTournament.mentorAssignment,
+                  "maxGroups": $scope.selectedTournament.numberOfGrp,
+                  "maxPlayersPerGroup": $scope.selectedTournament.numPlayerPerGrp,
+                  "status":$scope.selectedTournament.status,
+                  "type": $scope.selectedTournament.type
                   /*"status": $scope.selectedTournament.status,*/
                  }
       //codes copied from managetournament.js, updateTournament() in SingPath Ender codes
@@ -427,7 +430,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     if($scope.selectedRound.roundName == undefined || $scope.selectedRound.roundName == ""){
       alert("The round name cannot be empty!");
     }
-    else if($scope.selectedRound.timeLimit == undefined || $scope.selectedRound.timeLimit == 0){
+    else if($scope.selectedRound.timelimit == undefined || $scope.selectedRound.timelimit == 0){
       alert("The round time limit cannot be empty!");
     }
     else{
@@ -435,7 +438,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       for(var j = 0; j < $scope.cartQuestions.length; j++){
         roundQuestions.push($scope.cartQuestions[j].questionId);
       }
-      var updatedRound = {"roundId":$scope.selectedRound.roundId,"roundName":$scope.selectedRound.roundName,"timeLimit":$scope.selectedRound.timeLimit,"problemIDs":roundQuestions,"description":$scope.selectedRound.description};    
+      var updatedRound = {"roundId":$scope.selectedRound.roundId,"roundName":$scope.selectedRound.roundName,"timelimit":$scope.selectedRound.timelimit,"problemIDs":roundQuestions,"description":$scope.selectedRound.description};    
       //codes copied from managetournament.js, updateRound()
       /*
       $.ajax({
@@ -488,7 +491,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       url: '../jsonapi/activate_tournament/'+tournamentID,
       async:false,
       success: function(data){
-        window.location.href = '/ender/viewTournaments.html';
+        window.location.href = 'index.html#/mytournaments';
       }
     });
   };
@@ -498,7 +501,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       url: '../jsonapi/close_tournament/'+tournamentID,
       async:false,
       success: function(data){
-        window.location.href = '/ender/viewTournaments.html';
+        window.location.href = 'index.html#/mytournaments';
       }
     });
   };
@@ -508,7 +511,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       url: '../jsonapi/hide_tournament/'+tournamentID,
       async:false,
       success: function(data){
-        window.location.href = '/ender/viewTournaments.html';
+        window.location.href = 'index.html#/mytournaments';
       }
     });
   };    
@@ -518,7 +521,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       url: '../jsonapi/delete_tournament/'+tournamentID,
       async:false,
       success: function(data){
-        window.location.href = '/ender/viewTournaments.html';
+        window.location.href = 'index.html#/mytournaments';
       }
     });                   
   };  
@@ -922,7 +925,6 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
                        "largePicture": "largePicture",
                        "status": "Closed",
                        "type": "Normal"}
-          //backend POST but not in game-app-test.js --engsen
           $scope.NewTournament = $resource('/jsonapi/add_or_update_tournament');
       var new_tournament = new $scope.NewTournament(data);
       new_tournament.$save(function(response){
