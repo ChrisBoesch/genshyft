@@ -39,10 +39,6 @@
       </tr>
     </thead>
     <tbody>
-<!-- dynamic cutoff ready
-      <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>={{eventsData.cutoff}}">
-
-      -->
 
 <!-- tentative hardcoded cutoff set at 50 -->
 <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=eventsData.cutoff">
@@ -103,11 +99,6 @@
 
 <tbody>
 
-<!-- dynamic cutoff ready
-      <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index<={{eventsData.cutoff-1}}">
-
-      -->
-
 <!-- tenative hardcoded cutoff at 50-->
         <tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index<={{eventsData.cutoff-1}}||$index>=50&&!participant.isCurrentPlayer">
 
@@ -137,6 +128,8 @@
               <span ng-if="participant.solvedproblems<0">No school</span>
                 <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
           </span>
+        </td>
+        <td>
           <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
         </td>
 
