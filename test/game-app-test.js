@@ -2364,7 +2364,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "schooltype": "Tertiary",
             "subtype": "JC",
             "playerid": 5428208946118656,
-            "isCurrentPlayer": true,
+            "isCurrentPlayer": false,
             "solvedproblems": 83,
             "year": 2013,
             "schoolname": "Dunman High School",
@@ -2524,7 +2524,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "schooltype": "Tertiary",
             "subtype": "JC",
             "playerid": 6619269143986176,
-            "isCurrentPlayer": false,
+            "isCurrentPlayer": true,
             "solvedproblems": 11,
             "year": 2013,
             "schoolname": "Dunman High School",
@@ -2830,7 +2830,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "latitude": null,
     "id": 6095188913029120,
     "path":"Python",
-    "cutoff":36, //testing
+    "cutoff":14, //testing
     "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
 }
 		
