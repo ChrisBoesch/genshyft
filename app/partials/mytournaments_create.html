@@ -294,15 +294,19 @@
 							Select a Game Path:
 						</div>
 						<div class="span3">	
-							<select class="span7" ng-model="qnsLanguage" ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']" ng-change="get_tournamentLvl(qnsLanguage)"></select>
+							<select class="span7" ng-model="selectedPath" ng-init="populatePaths()" ng-change="loadLevelList()">
+								<option value="null">Choose Game Path...</option>
+								<option ng-repeat="gamePath in gamePaths" value="{{gamePath.id}}">{{gamePath.name}}</option>
+							</select>
 						</div>
+				<!-- ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']"-->		
 				<!--Choosing a Level-->
 						<div class="span2">
 							Select a Level:
 						</div>
 						<div class="span3">	
-							<select class="span12" ng-model="pathLevel" ng-init="get_tournamentLvl(qnsLanguage)" multiple-"multiple" size="4">
-								<option ng-repeat="pathLvl in lvlArray">{{pathLvl}}</option>
+							<select class="span12" ng-model="pathLevel" multiple-"multiple" size="6">
+								<option ng-repeat="gameLevel in gameLevels" value="{{gameLevel.id}}">{{gameLevel.description}}</option>
 							</select>
 						</div>
 					</div>
@@ -310,7 +314,7 @@
 				<div class="row-fluid">
 					<div class="span12">	
 							<center>
-								<button class="btn btn-primary" id="create" type="button" ng-click="get_tournamentQns(qnsLanguage, pathLevel)"><i class="icon-search icon-white"></i> Search Questions</button>
+								<button class="btn btn-primary" id="create" type="button" ng-click="get_tournamentQns(selectedPath.id, pathLevel.id)"><i class="icon-search icon-white"></i> Search Questions</button>
 							</center>
 					</div>	
 				</div>
