@@ -88555,3 +88555,5 @@ function WebGameController($scope,$resource,$cookieStore,$timeout){
   
 }
 
+}(window.jQuery);
+
