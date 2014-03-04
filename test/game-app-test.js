@@ -2524,7 +2524,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "schooltype": "Tertiary",
             "subtype": "JC",
             "playerid": 6619269143986176,
-            "isCurrentPlayer": true,
+            "isCurrentPlayer": false,
             "solvedproblems": 11,
             "year": 2013,
             "schoolname": "Dunman High School",
@@ -2740,7 +2740,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "solvedproblems": -6,
             "schoolname": "No school registered",
             "nickname": "Liang Yi",
-            "isCurrentPlayer": false
+            "isCurrentPlayer": true
         },
         {
             "playerid": 4569586733154304,

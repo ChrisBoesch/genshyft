@@ -20,25 +20,21 @@
 
           <div class="span12 well">
             <h1 class="well well-small bootCamp" align="center">- UPCOMING EVENTS -</h1>
-          <div class="container">  
+          <div class="container"> 
+            <div class="span11"> 
           <ol>
             <li ng-repeat="event in events">
               <h4>{{event.name}}</h4><br>
+
               {{event.description}}<br>
+
               Participating: {{event.participating}}<br>
               My Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}</strong><br><br>
               <button class="btn btn-primary" data-toggle="modal" data-target="#participateModal" ng-click="register_for_event(event.id, 'participate')"><i class="icon-check icon-white"></i> I'd like to participate</button>
               <button class="btn btn-primary" data-toggle="modal" data-target="#watchModal"ng-click="register_for_event(event.id, 'watch')"><i class="icon-eye-open icon-white"></i> I'd like to come watch</button>
               <button class="btn btn-primary" data-toggle="modal" data-target="#postModal"ng-click="register_for_event(event.id, 'follow')"><i class="icon-bell icon-white"></i> Keep me posted</button>
               <button class="btn btn-primary" ng-click="go_to_eventsRanking(event.id)"><i class="icon-list icon-white"></i> I'd like to view the rankings</button>
-              <!--
-              <button class="btn btn-primary" ng-click="">+1</button>
-            -->
-              <!--input type="submit" value="I'd like to participate" ng-click="register_for_event(event.id, 'participate')">
-              <input type="submit" value="I'd like to come watch" ng-click="register_for_event(event.id, 'watch')">
-              <input type="submit" value="Keep me posted" ng-click="register_for_event(event.id, 'follow')">
-              <input type="submit" value="Unregister" ng-click="register_for_event(event.id, 'Not registered')">
-              <input type="submit" value="+1" ng-click=""-->
+              </div>
               <br><br>
             </li>
             <br>

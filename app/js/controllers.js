@@ -3773,12 +3773,35 @@ function EventController($scope, $resource, $location){
             
           });
         },
-        
+
         $scope.create_edit_event = function(id){
           var event = Event.save({eventId:id},$scope.event, function() {
                  $scope.event = event;
             });
         },
+
+        $scope.delete_event = function(idx){
+        	//var event = Event.delete({eventId:id},$scope.event, function(){
+        	//	$scope.event = event;
+        	//})
+        	///$scope.event.events.splice(index, 1);
+
+    		var delEvent = $scope.events[idx];
+
+    		API.DeleteEvent({ id: delEvent.id }, function (success) {
+
+        		$scope.events.splice(idx, 1);
+    		});
+        	console.log(event);
+        };
+
+		$scope.delete = function ( idx ) {
+			var event_to_delete = $scope.events[idx];
+
+			API.DeleteEvent({ id: event_to_delete.id }, function (success) {
+				$scope.events.splice(idx, 1);
+			});
+		};
 
         $scope.register_for_event = function(id,action){
           var EventRegistration = $resource('/jsonapi/eventregistration/:eventId', {eventId:'@id'});
@@ -3794,6 +3817,20 @@ function EventController($scope, $resource, $location){
           $location.search({"eventID":eventID}).path("eventsTable");
           console.log(eventID);
         }
+
+        $scope.go_to_eventsEdit = function(eventID){
+          $location.search({"eventID":eventID}).path("eventsEdit");
+          console.log(eventID);
+        }
+
+        $scope.reload_eventsManage = function(eventID){
+          $location.search({"eventID":eventID}).path("eventsManage");
+          console.log(eventID);
+        }
+
+        $scope.returnToPreviousPage = function() {
+  			window.history.back();
+		};
           
 }
 
@@ -3824,34 +3861,38 @@ function EventTableController($scope, $resource, $route, $location){
 
 	  	};
   
-    $scope.get_currentPlayerRanking = function(){
-      $resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
-        $scope.current_event = response;
-        for(var i =0;i< $scope.current_event.ranking.length;i++){
-          if($scope.current_event.ranking[i].isCurrentPlayer){
-            $scope.currentPlayerRanking = i+1;
-            $scope.currentPlayerSolvedProblems = $scope.current_event.ranking[i].solvedproblems;
-            console.log($scope.currentPlayerRanking);
-            break;
-          }
-        }
-        
-        for(var i =0;i< $scope.current_event.ranking.length;i++){
-          if($scope.current_event.cutoff === i){
-            $scope.cutOffPlayer = $scope.current_event.ranking[i-1].nickname;
-            $scope.cutOffPlayerProblems = $scope.current_event.ranking[i-1].solvedproblems;
-            console.log($scope.cutOffPlayer);
-            console.log($scope.cutOffPlayerProblems);
-            
-            break;
-          }
-        }
-        $scope.isPlayerBelowCutoff = $scope.currentPlayerRanking > $scope.current_event.cutoff;
-        console.log($scope.isPlayerBelowCutoff);
-        $scope.timeToQualify = 5 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
-      }); 
-      console.log("getCurrentPlayerRanking" + "");
-    };
+	    $scope.get_currentPlayerRanking = function(){
+	      $resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
+	        $scope.current_event = response;
+	        for(var i =0;i< $scope.current_event.ranking.length;i++){
+	          if($scope.current_event.ranking[i].isCurrentPlayer){
+	            $scope.currentPlayerRanking = i+1;
+	            $scope.currentPlayerSolvedProblems = $scope.current_event.ranking[i].solvedproblems;
+	            console.log($scope.currentPlayerRanking);
+	            break;
+	          }
+	        }
+	        
+	        for(var i =0;i< $scope.current_event.ranking.length;i++){
+	          if($scope.current_event.cutoff === i){
+	            $scope.cutOffPlayer = $scope.current_event.ranking[i-1].nickname;
+	            $scope.cutOffPlayerProblems = $scope.current_event.ranking[i-1].solvedproblems;
+	            console.log($scope.cutOffPlayer);
+	            console.log($scope.cutOffPlayerProblems);
+	            
+	            break;
+	          }
+	        }
+	        $scope.isPlayerBelowCutoff = $scope.currentPlayerRanking > $scope.current_event.cutoff;
+	        console.log($scope.isPlayerBelowCutoff);
+	        $scope.hasRegisteredSchool = false;
+	        if($scope.currentPlayerSolvedProblems>=0){
+	        	$scope.hasRegisteredSchool = true;
+	        }
+	        $scope.timeToQualify = 5 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
+	      }); 
+	      console.log("getCurrentPlayerRanking" + "");
+	    };
         
         $scope.returnToPreviousPage = function() {
   			window.history.back();

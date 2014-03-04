@@ -1,0 +1,117 @@
+<style>
+	.modal-body{position: relative;
+	    overflow-y: auto;
+	    max-height: 16000px;
+	    padding: 15px;
+	}
+
+    .modal-large {
+	    width: 50%; /* responsive width */
+	    margin-left:-25%;/*  width/2) */ 
+	}
+</style>
+</br>
+<div ng-controller="EventTableController" ng-init="get_participants(); get_eventID(); get_currentPlayerRanking(); get_currentUrl();" class="container" id="eventsEdit" style="position:relative;" >
+	<button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
+	<br>
+	<br>
+	<div class="row-fluid">
+		<div class="span12 well well-small" >
+			<div class="span12 bootCamp" id="heading">
+				<h2>Edit Event</h2>
+			</div>
+			<br>			
+			</br>		
+	<div class="row-fluid">
+		<br>
+		<div class="alert alert-warning">
+			<h4>Welcome to Edit Event!</h4>
+			To begin, enter your Event details below - required details are highlighted with a (*). Once you are ready, hit submit to edit your event!
+		</div>
+	</div>
+		<h4>Event Details</h4>
+		<div class="row-fluid">
+		<div class="span12 well well-small">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span2">
+						Event Title*:
+					</div>
+					<div class="span9">
+						 <input class="span8" type="text" required ng-model="eventTitle" placeholder={{eventsData.name}}></input>
+						 <span class="alert-error" ng-show="eventTitle==''">Required!
+						 </span>
+					</div>
+				</div>	
+			</div>
+
+			<!--Description input field-->
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span2">
+						Event Description:
+					</div>
+					<div class="span9">
+						 <textarea class="span8" rows="3" ng-model="grpTourDescription" placeholder = {{eventsData.description}} >
+						</textarea>
+					</div>
+				</div>	
+			</div>
+
+			<!--Cutoff number input field-->
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span2">
+						Cutoff*:
+					</div>
+					<div class="span7">
+						 <input class="span6" type="text" required ng-model="cutoffNum" placeholder={{eventsData.cutoff}} ></input>
+						 <span class="alert-error" ng-show="cutoffNum==''">Required!
+						 </span>
+					</div>
+				</div>	
+			</div>
+			
+			<!--Event Programming Language selection-->
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span2">
+						Programming Language:
+					</div>
+					<div class="span9">
+						 <div class="span8">
+						  <label>
+						    <input type="radio" ng-model="eventProgLang" id="optionsRadios1" value="Java">
+						    Java
+						  </label>
+						  <label>
+						    <input type="radio" ng-model="eventProgLang" id="optionsRadios2" value="Python">
+						    Python
+						  </label>
+						  <label>
+						    <input type="radio" ng-model="eventProgLang" id="optionsRadios3" value="Javascript">
+						    Javascript
+						  </label>
+						  <label>
+						    <input type="radio" ng-model="eventProgLang" id="optionsRadios4" value="Ruby">
+						    Ruby
+						  </label>
+						</div>
+					</div>
+				</div>	
+			</div>
+
+			<div class="row-fluid">
+				<div class="span12">
+					<center>
+						<button class="btn btn-primary" type="button"><i class="icon-check icon-white"></i> Submit</button> 
+					</center>
+				</div>	
+			</div>
+
+			</div>
+		</div>
+		</div>	
+		</br>
+		</br>
+	</div>
