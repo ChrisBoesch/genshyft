@@ -108,7 +108,7 @@ describe("E2E: Testing Controllers", function () {
             browser().navigateTo('/app/index.html?scenario=newProblem');
         });
 
-        xit('should select a problem', function() {
+        it('should select a problem', function() {
             element('#menu *:contains("Path or Level")').click();
             element('button:contains("Create and Edit Problems")').click();
             expect(browser().location().path()).toBe("/editproblem");
