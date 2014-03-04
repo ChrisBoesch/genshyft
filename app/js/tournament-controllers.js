@@ -136,6 +136,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       if($scope.gamePaths.length!=0){
         
       }else{
+        /*
         ajax({
             //url: '../jsonapi/get_game_paths',
             url: '../jsonapi/get_game_and_my_paths',
@@ -144,6 +145,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                 $scope.gamePaths=data.paths;
             }
         });
+        */
+        $resource('/jsonapi/get_game_and_my_paths').get({},function(response){
+          console.log("Retrieving game paths from DB");
+          $scope.gamePaths = response;
+        });  
       }
   }
   //$scope.populatePaths();
@@ -153,43 +159,49 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     if($scope.selectedPath=="null"){
       $scope.gameLevels=[];
     }else{
-        ajax({
-            url: '../jsonapi/problemsets/'+$scope.selectedPath,
-            async:false,
-            success: function(data){
-                $scope.gameLevels=data.problemsets;
-            }
-        });
-      }
+      /*
+      ajax({
+          url: '../jsonapi/problemsets/'+$scope.selectedPath,
+          async:false,
+          success: function(data){
+              $scope.gameLevels=data.problemsets;
+          }
+      });
+      */
+      $resource('/jsonapi/problemsets/'+$scope.selectedPath).get({},function(response){
+        console.log("Retrieving game levels based on selected game paths from DB");
+        $scope.gameLevels = response;
+      });  
+    }
   }
 
   //Loads the Queried List of Questions                 
-  $scope.loadQueriedQuestionTable = function(selectedPathID, pathLevelID){
+  $scope.loadQueriedQuestionTable = function(selectedPathID, pathLevel){
       var path_id = selectedPathID;
-      var level_ids = pathLevelID;
+      var level_ids = [];
+      i=0;
+      $(pathLevel).each(function(){
+        level_ids[i] = this.value;
+        i++;
+      }); 
           
       $scope.bankQuestions = [];
           
       for(var i = 0; i < level_ids.length; i++){
-          ajax({
-              url: '../jsonapi/problems/'+level_ids[i],
-              async: false,
-              success: function(data){
-                $scope.bankQuestions=$scope.bankQuestions.concat(data.problems);
-              }
-          });
+        /*
+        ajax({
+          url: '../jsonapi/problems/'+level_ids[i],
+          async: false,
+          success: function(data){
+            $scope.bankQuestions=$scope.bankQuestions.concat(data.problems);
+          }
+        });
+        */
+        $resource('/jsonapi/problems/'+level_ids[i]).get({},function(response){
+          console.log("Retrieving all questions based on selected game paths and path levels from DB");
+          $scope.bankQuestions=$scope.bankQuestions.concat(response.problems);
+        });
       }
-  }
-    
-  $scope.addToCart = function(id){
-        for(var j = 0; j < $scope.bankQuestions.length; j++){                   
-      if($scope.bankQuestions[j].id == id){
-        var addedQuestion = $scope.bankQuestions.slice(j, j+1)[0];
-        $scope.cartQuestions.push(addedQuestion);
-        break;
-      }
-        }
-        $scope.updateDisableStatus();
   }
 
   //Save each created round into an array 
@@ -238,9 +250,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.cartQuestions.splice(index,1);
   }
 
-  /*To implement for Create Tournaments - engsen
-    method to get all relevant tournament questions 
-    according to question language*/
+  /*Retrieving questions from game-app-test.js
+  //To implement for Create Tournaments - engsen, method to get all relevant tournament questions according to question language
 	$scope.get_tournamentLvl = function(qnsLanguage){
     console.log("Retrieving all available levels for questions");
     $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
@@ -252,7 +263,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
        
 	};
 
-  /*method to filter path level based on language*/
+  //method to filter path level based on language
   $scope.list_levels = function(qnsLanguage, tournamentQns){
     $scope.lvlArray = [];
     console.log("Filtering questions based on language");
@@ -266,9 +277,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     //console.log($scope.lvlArray);
   };
 
-   /*To implement for Create Tournaments - GenShyft
-    method to get all relevant tournament questions 
-    according to question language*/
+  //To implement for Create Tournaments - GenShyft method to get all relevant tournament questions according to question language
   $scope.get_tournamentQns = function(qnsLanguage, pathLevel){
     console.log("Retrieving available questions in DB");
     $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
@@ -280,7 +289,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
   };
 
-  /*method to filter questions based on language and pathLevel-GenShyft*/
+  //method to filter questions based on language and pathLevel-GenShyft
   $scope.list_questions = function(qnsLanguage, pathLevel, tournamentQns){
     console.log("Filtering questions based on language and pathlevel")
     $scope.qnsArray = [];
@@ -293,6 +302,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     $scope.bankQuestions = $scope.qnsArray;
   };
+  */
 
   //Add selected questions to a cart(array)
   $scope.addToCart = function(question){
@@ -317,9 +327,13 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   //Retrieve question information and display to user
   $scope.viewQuestionInfo = function(question){
-    $scope.questionName = question.question;
+    /*$scope.questionName = question.question;
     $scope.questionDescription = question.questionDescription;
     $scope.questionExamples = question.questionExamples;
+    $scope.skeleton = question.skeleton;*/
+    $scope.questionName = question.name;
+    $scope.questionDescription = question.description;
+    $scope.questionExamples = question.examples;
     $scope.skeleton = question.skeleton;
     $('#questionInfo').modal('show');
   }
@@ -343,7 +357,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Gets tournaments created by user-GenShyft
 	$scope.get_mytournaments = function(){
     console.log("Retrieving all tournaments created by User from DB");
-    $resource("/jsonapi/added_tournaments").query({},function(response){
+    $resource("/jsonapi/get_tournament_new").get({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       console.log($scope.grpTournaments);
     });
@@ -414,7 +428,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "passwordConfirm": $scope.grpTourPasswordConfirm,
                    "status": $scope.grpTourStatus,*/
                  }
-      $scope.NewGrpTournament = $resource('/jsonapi/create_grptournament');
+      $scope.NewGrpTournament = $resource('/jsonapi/create__or_update_grptournament');
       //$scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
       var new_grpTournament = new $scope.NewGrpTournament(data);
       new_grpTournament.$save(function(response){
@@ -488,7 +502,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
       });
       */
-      $scope.NewTournament = $resource('/jsonapi/add_or_update_tournament/'+tournamentID);
+      $scope.NewTournament = $resource('/jsonapi/create__or_update_grptournament/'+tournamentID);
       var new_tournament = new $scope.NewTournament(updatedTournament);
       new_tournament.$save(function(response){
          if(response.error) {
@@ -551,7 +565,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
       });
       */
-      $scope.NewRound = $resource('/jsonapi/add_or_update_round/'+roundID);
+      $scope.NewRound = $resource('/jsonapi/edit_and_update_round/'+roundID);
       var new_round = new $scope.NewRound(updatedRound);
       new_round.$save(function(response){
          if(response.error) {
@@ -686,7 +700,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.hideQuestionInfoEditRound = function(){
     $('#questionsInCart').modal('hide');
     $('#editTournRound').modal('show');
-  }
+  };
 
   $scope.hideQuestionsInfoInCart = function(){
     $('#questionsInfoInCart').modal('hide');
@@ -695,25 +709,24 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Tournament Join page initialization - By Glen*/
   $scope.tournamentInit=function(){
-      //$scope.tournamentID = ($location.search()).tournamentID;
-      //$scope.fetch_tournament_details(($location.search()).tournamentID);
-      if($cookieStore.get("tournamentID")){
-          $scope.fetch_tournament_details($cookieStore.get("tournamentID"));
-      }else{
-        alert("No tournamentID passed to GenshyftTournamentController.")
-      }
-          
-  }
+    //$scope.tournamentID = ($location.search()).tournamentID;
+    //$scope.fetch_tournament_details(($location.search()).tournamentID);
+    if($cookieStore.get("tournamentID")){
+        $scope.fetch_tournament_details($cookieStore.get("tournamentID"));
+    }else{
+      alert("No tournamentID passed to GenshyftTournamentController.")
+    }      
+  };
 
   /*JSON API Call to retrieve tournament data - By Glen*/
   $scope.fetch_tournament_details = function(tournamentID){
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
-        $scope.tournament = response;
-        console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
-        $scope.get_indivNoGrpPlayers($scope.tournament);
-        if($scope.tournament.isGroup){
-          $scope.get_grpPlayers($scope.tournament);
-        }       
+      $scope.tournament = response;
+      console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
+      $scope.get_indivNoGrpPlayers($scope.tournament);
+      if($scope.tournament.isGroup){
+        $scope.get_grpPlayers($scope.tournament);
+      }       
     });
     //$timeout(function(){ $scope.fetch_tournament_details(tournamentID); }, 5000);
   };
@@ -721,43 +734,43 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*JSON API Call to retrieve tournament data once - By Glen*/
   $scope.fetch_tournament_details_once = function(tournamentID){  
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID": tournamentID}, function(response){
-        $scope.tournament = response;
-        console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
-        $scope.get_indivNoGrpPlayers($scope.tournament);
-        if($scope.tournament.isGroup){
-          $scope.get_grpPlayers($scope.tournament);
-        }       
+      $scope.tournament = response;
+      console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
+      $scope.get_indivNoGrpPlayers($scope.tournament);
+      if($scope.tournament.isGroup){
+        $scope.get_grpPlayers($scope.tournament);
+      }       
     });
   };
 
   /*Extract players and sort them into the respective group - by Glen*/
   $scope.get_grpPlayers = function(tournament){
-      console.log("get_grpPlayers");
-      $scope.numGrp = [];
-      $scope.currentUserGrping = 0;
+    console.log("get_grpPlayers");
+    $scope.numGrp = [];
+    $scope.currentUserGrping = 0;
 
-      for(var i=0; i < tournament.numberOfGrp ; i++){
-        var grouping = [];
-        grouping.push("Group "+(i+1));
-        
-        for(var j=0; j < tournament.registeredPlayerIDs.length ;j++){
-          if(tournament.registeredPlayerIDs[j].group == (i+1)){
-            var player = {"playerName":tournament.registeredPlayerIDs[j].playerName,"playerId":tournament.registeredPlayerIDs[j].playerId};
-            grouping.push(player);      
-           }
+    for(var i=0; i < tournament.numberOfGrp ; i++){
+      var grouping = [];
+      grouping.push("Group "+(i+1));
+      
+      for(var j=0; j < tournament.registeredPlayerIDs.length ;j++){
+        if(tournament.registeredPlayerIDs[j].group == (i+1)){
+          var player = {"playerName":tournament.registeredPlayerIDs[j].playerName,"playerId":tournament.registeredPlayerIDs[j].playerId};
+          grouping.push(player);      
+         }
 
-           if(tournament.registeredPlayerIDs[j].playerId === tournament.currentPlayerID){
-              $scope.currentUserGrping = tournament.registeredPlayerIDs[j].group;
-              $scope.have_grp($scope.currentUserGrping);
-           }
-        }
-        if(grouping.length>0){
-          $scope.numGrp.push(grouping)
-        }
+         if(tournament.registeredPlayerIDs[j].playerId === tournament.currentPlayerID){
+            $scope.currentUserGrping = tournament.registeredPlayerIDs[j].group;
+            $scope.have_grp($scope.currentUserGrping);
+         }
       }
+      if(grouping.length>0){
+        $scope.numGrp.push(grouping)
+      }
+    }
 
-      console.log("Num of Groups :" + $scope.numGrp.length);
-      console.log("Current User Grouping : "+$scope.currentUserGrping);
+    console.log("Num of Groups :" + $scope.numGrp.length);
+    console.log("Current User Grouping : "+$scope.currentUserGrping);
   };
 
   /*Registered to Tournament and redirect to join page, used in tournament.html - by Glen*/

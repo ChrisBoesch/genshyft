@@ -314,7 +314,7 @@
 				<div class="row-fluid">
 					<div class="span12">	
 							<center>
-								<button class="btn btn-primary" id="create" type="button" ng-click="get_tournamentQns(selectedPath.id, pathLevel.id)"><i class="icon-search icon-white"></i> Search Questions</button>
+								<button class="btn btn-primary" id="create" type="button" ng-click="loadQueriedQuestionTable(selectedPath, pathLevel)"><i class="icon-search icon-white"></i> Search Questions</button>
 							</center>
 					</div>	
 				</div>
@@ -334,10 +334,10 @@
 	            		<th class"questionTitle">Question Title</th>
 	            		<th class"questionTitle"> </th>
 	            	</tr>
-	                <tr ng-repeat="question in qnsArray" class="questionTableRows">
-	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionInfo(question)">{{question.question}}</button></td>
+	                <tr ng-repeat="bankQuestion in bankQuestions" class="questionTableRows">
+	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionInfo(bankQuestion.id)">{{bankQuestion.name}}</button></td>
 	                    <td class="questionTableCells">
-	                    	<button name="addQuestions" ng-click="addToCart(question);isDisabled=true" class="btn btn-primary" ng-disabled="isDisabled"><i class="icon-plus icon-white"></i> Add</button>
+	                    	<button name="addQuestions" ng-click="addToCart(bankQuestion);isDisabled=true" class="btn btn-primary" ng-disabled="isDisabled"><i class="icon-plus icon-white"></i> Add</button>
 	                    </td>
 	                </tr>
             	</table>
@@ -428,7 +428,7 @@
 	            		<th class"questionTitle">Actions</th>
 	            	</tr>
 	                <tr ng-repeat="question in cartQuestions track by $index" class="questionTableRows">
-	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question)">{{question.question}}</button></td>
+	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question)">{{question.name}}</button></td>
 	                    <td class="questionTableCells">
 	                    	<div ng-hide="$index==0">
 	                    		<button name="moveUp" ng-click="moveQuestionUp($index)" class="btn btn-warning"><i class="icon-arrow-up icon-white"></i> Move Up</button>
