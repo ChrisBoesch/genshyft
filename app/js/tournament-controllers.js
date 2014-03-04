@@ -10,7 +10,7 @@
 // });
 
 /*GENShYFT's TournamentController*/
-function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route){
+function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route,$window){
   $scope.GHeatModel = $resource('/jsonapi/get_heat_ranking');
   $scope.heatID = null;
   $scope.location = $location;
@@ -614,44 +614,121 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $('#editTournRound').modal('show');
   }
 
+  //method to activate tournament and change status of Tournament to 'Open'
   $scope.activateTournament = function(tournamentID){ 
+    /*
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $http({
-      url: '../jsonapi/activate_tournament/'+tournamentID,
+      method: 'POST',
+      url: '/jsonapi/activate_tournament/'+tournamentID,
       async:false,
-      success: function(data){
+    }).success(function (data){
         window.location.href = 'index.html#/mytournaments';
+      });
+    */
+    $scope.openTournament = $resource('/jsonapi/activate_tournament/');
+    var data = {
+      "tournamentID":tournamentID
+    };
+    var newOpenTournament = new $scope.openTournament(data);
+    newOpenTournament.$save(function(response){
+      if(response.error) {
+        console.log(response.error);
+      }
+      else{
+        console.log("Activate tournament and change status to Open")
+        console.log(response);
+        $location.path('mytournaments');
       }
     });
   };
   
+  //method to close tournament and change status of Tournament to 'Closed'
   $scope.closeTournament = function(tournamentID){  
+    /*
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $http({
-      url: '../jsonapi/close_tournament/'+tournamentID,
+      method: 'POST',
+      url: '/jsonapi/close_tournament/'+tournamentID,
       async:false,
-      success: function(data){
+    }).success(function (data){
         window.location.href = 'index.html#/mytournaments';
+      });
+    */
+    $scope.closeTournament = $resource('/jsonapi/close_tournament/');
+    var data = {
+      "tournamentID":tournamentID
+    };
+    var newCloseTournament = new $scope.closeTournament(data);
+    newCloseTournament.$save(function(response){
+      if(response.error) {
+        console.log(response.error);
+      }
+      else{
+        console.log("Close tournament and change status to Closed")
+        console.log(response);
+        $location.path('mytournaments');
       }
     });
   };
   
+  //method to hide tournament and change status of Tournament to 'Invisible'
   $scope.hideTournament = function(tournamentID){ 
+    /*
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $http({
-      url: '../jsonapi/hide_tournament/'+tournamentID,
+      method: 'POST',
+      url: '/jsonapi/hide_tournament/'+tournamentID,
       async:false,
-      success: function(data){
+    }).success(function (data){
         window.location.href = 'index.html#/mytournaments';
+      });
+    */
+    
+    $scope.hideTournament = $resource('/jsonapi/hide_tournament/');
+    var data = {
+      "tournamentID":tournamentID
+    };
+    var newHideTournament = new $scope.hideTournament(data);
+    newHideTournament.$save(function(response){
+      if(response.error) {
+        console.log(response.error);
       }
-    });
+      else{
+        console.log("Hide tournament and change status to Invisible")
+        console.log(response);
+        $location.path('mytournaments');
+      }
+    });  
   };    
   
+  //method to delete tournament
   $scope.deletePlayerTournament = function(tournamentID,tournamentTitle){
+    /*
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $http({
-      url: '../jsonapi/delete_tournament/'+tournamentID,
+      method: 'POST',
+      url: '/jsonapi/delete_tournament/'+tournamentID,
       async:false,
-      success: function(data){
+    }).success(function (data){
         window.location.href = 'index.html#/mytournaments';
+      }); 
+    */
+    $scope.deleteTournament = $resource('/jsonapi/delete_tournament/');
+    var data = {
+      "tournamentID":tournamentID
+    };
+    var newDeleteTournament = new $scope.deleteTournament(data);
+    newCloseTournament.$save(function(response){
+      if(response.error) {
+        console.log(response.error);
       }
-    });                   
+      else{
+        console.log("Delete tournament")
+        console.log(response);
+        $location.path('mytournaments');
+      }
+    });                  
   };  
 
   /*method to hide modal after successfully created tournament*/
@@ -706,6 +783,177 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $('#questionsInfoInCart').modal('hide');
     $('#questionsInCart').modal('show');
   };
+
+  $scope.createHeat = function(tournamentID,roundID,currentHeat,timeTillStart){
+    for(var i = 0; i < $scope.playerTournaments.length; i++){
+      if($scope.playerTournaments[i].tournamentID == tournamentID){
+        for(var j = 0; j < $scope.playerTournaments[i].rounds.length; j++){
+          if($scope.playerTournaments[i].rounds[j].roundID == roundID){
+            currentHeat = $scope.playerTournaments[i].rounds[j].currentHeat;
+            break;
+          }
+        }
+        break;
+      }
+    }
+    if(currentHeat == 0){
+      //If there is no currentHeat (aka the round has been stopped or another round was started)
+      /*
+      $.confirm({
+        'title'   : '<b style="color:#FF0000">Restart Round?</b>',
+        'message' : 'You are about to restart a Round.<br/>All other Rounds will be Stopped (Which will affect<br/> players currently playing them)<br /><br />Continue?',
+        'buttons' : {
+            'Yes' : {
+                'class' : 'gray',
+                'action': function(){
+        ajax({
+            url: '../jsonapi/create_heat',
+        type: 'POST',
+        async: false,
+        data: {tournamentID:tournamentID, roundID:roundID, startIn:timeTillStart,isReset:"true"},
+        dataType: "text",
+          success: function(){
+            //$scope.reloadPlayerTourn(tournamentID);
+          },
+          error: function(jqXHR, textStatus) {
+            alert( "Request failed: " + textStatus );
+          }
+          });                   
+              }
+          },
+          'No'  : {
+              'class' : 'gray',
+          }
+        }
+      });
+      */
+      $scope.createHeat = $resource('/jsonapi/create_heat/');
+      var data = {
+          tournamentID:tournamentID,
+          roundID:roundID,
+          startIn:timeTillStart,
+          isReset:"true"
+      };
+      var newCreateHeat = new $scope.createHeat(data);
+      newCreateHeat.$save(function(response){
+      if(response.error) {
+        console.log(response.error);
+      }
+      else{
+        console.log("Create Round Heat")
+        console.log(response);
+        alert("Heat starting in: " + timeTillStart);
+      }
+      });
+      /*
+      $http.post("/jsonapi/create_heat", data)
+            .success(function (data, status, headers, config) {
+              alert("Heat starting in: " + timeTillStart);
+            }).error(function (data, status, headers, config) {
+              alert("Request failed: " + status);
+            }); 
+      */      
+    }else{
+      // Executed when the round is not restarted (aka, Stopped first before starting)
+      /*
+      $.confirm({
+        'title'   : '<b style="color:#FF0000">Reset Timer?</b>',
+        'message' : 'You are about to reset the timer for <br/> this Round.<br /><br />Continue?',
+        'buttons' : {
+            'Yes' : {
+                'class' : 'gray',
+                'action': function(){
+          ajax({
+              url: '../jsonapi/create_heat',
+          type: 'POST',
+          async: false,
+          //data: {tournamentID:tournamentID, roundID:roundID, startIn:timeTillStart,isReset:"false"},
+          data: {tournamentID:tournamentID, roundID:roundID, startIn:timeTillStart,isReset:"true"},
+          dataType: "text",
+          success: function(){
+            //$scope.reloadPlayerTourn(tournamentID);
+          },
+          error: function(jqXHR, textStatus) {
+            alert( "Request failed: " + textStatus );
+          }
+          });                   
+              }
+          },
+          'No'  : {
+              'class' : 'gray',
+          }
+        }
+      }); 
+      */
+      $scope.createHeat = $resource('/jsonapi/create_heat/');
+      var data = {
+          tournamentID:tournamentID,
+          roundID:roundID,
+          startIn:timeTillStart,
+          isReset:"true"
+      };
+      var newCreateHeat = new $scope.createHeat(data);
+      newCreateHeat.$save(function(response){
+      if(response.error) {
+        console.log(response.error);
+      }
+      else{
+        console.log("Create Round Heat")
+        console.log(response);
+        alert("Heat starting in: " + timeTillStart);
+      }
+      });
+    }
+  };
+  
+  $scope.stopHeat = function(tournamentID,roundID){
+    /*
+    $.confirm({
+      'title'   : '<b style="color:#FF0000">Stop Round?</b>',
+      'message' : 'You are about to stop a Round.<br/>The round will no longer be accessible and<br />Players currently in-game will be interrupted.<br /><br />Continue?',
+      'buttons' : {
+          'Yes' : {
+              'class' : 'gray',
+              'action': function(){                 
+                //document.write(tournamentID);
+        ajax({
+            url: '../jsonapi/stop_heat',
+        type: 'POST',
+        async: false,
+        data: {tournamentID:tournamentID, roundID:roundID},
+        dataType: "text",
+        success: function(){
+          $scope.reloadPlayerTourn(tournamentID);
+        },
+        error: function(jqXHR, textStatus) {
+          alert( "Request failed: " + textStatus );
+        }
+        });                   
+            }
+        },
+        'No'  : {
+            'class' : 'gray',
+        }
+      }
+    }); 
+    */
+    $scope.stopHeat = $resource('/jsonapi/stop_heat/');
+      var data = {
+          tournamentID:tournamentID,
+          roundID:roundID
+      };
+      var newStopHeat = new $scope.stopHeat(data);
+      newStopHeat.$save(function(response){
+      if(response.error) {
+        console.log(response.error);
+      }
+      else{
+        console.log("Stop current Round Heat")
+        console.log(response);
+        alert("Heat is stopped");
+      }
+      });  
+  } 
 
   /*Tournament Join page initialization - By Glen*/
   $scope.tournamentInit=function(){

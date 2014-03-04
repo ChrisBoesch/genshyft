@@ -23,18 +23,18 @@
 	                	<th class="tournTableHeader"></th>
 	                	<th class="tournTableHeader">Tournament Status Change Buttons:</th>
 	 				</tr>
-	                <tr class="warning" ng-repeat="grpTournament in grpTournaments track by $index">
-	                    <td class="tournInfo">{{grpTournaments[$index].shortTitle}}</td>
-	                    <td class="tournInfo">{{grpTournaments[$index].utcOffset}}</td>
-	                    <td class="tournInfo">{{grpTournaments[$index].status}}</td>
+	                <tr class="warning" ng-repeat="grpTournament in grpTournaments">
+	                    <td class="tournInfo">{{grpTournament.shortTitle}}</td>
+	                    <td class="tournInfo">{{grpTournament.utcOffset}}</td>
+	                    <td class="tournInfo">{{grpTournament.status}}</td>
 	                    <td>
-	                    	<button class="btn btn-warning" type="button" ng-click="manage_my_tournament(grpTournaments[$index].tournamentId)"><i class="icon-cog icon-black"></i> Manage</button>
+	                    	<button class="btn btn-warning" type="button" ng-click="manage_my_tournament(grpTournament.tournamentID)"><i class="icon-cog icon-black"></i> Manage</button>
 	                    </td>
 	                    <td>
-	                    	<button type="button" class="btn btn-primary" ng-click="activateTournament(grpTournaments[$index].tournamentID)"><i class="icon-star icon-white"></i> Open</button>
-  							<button type="button" class="btn btn-info" ng-click="closeTournament(grpTournaments[$index].tournamentID)"><i class="icon-lock icon-white"></i> Close</button>
-  							<button type="button" class="btn btn-inverse" ng-click="hideTournament(grpTournaments[$index].tournamentID)"><i class="icon-eye-close icon-white"></i> Hide</button>
-  							<button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deletePlayerTourn"><i class="icon-trash icon-white"></i> Delete</button>
+	                    	<button type="button" class="btn btn-primary" ng-click="activateTournament(grpTournament.tournamentID)"><i class="icon-star icon-white"></i> Open</button>
+  							<button type="button" class="btn btn-info" ng-click="closeTournament(grpTournament.tournamentID)"><i class="icon-lock icon-white"></i> Close</button>
+  							<button type="button" class="btn btn-inverse" ng-click="hideTournament(grpTournament.tournamentID)"><i class="icon-eye-close icon-white"></i> Hide</button>
+  							<button class="btn btn-danger" type="button" ng-click="deletePlayerTournament(grpTournament.tournamentID, grpTournament.shortTitle)" data-toggle="modal" data-target="#deletePlayerTourn"><i class="icon-trash icon-white"></i> Delete</button>
 	                    </td>
 	                </tr>
             	</table>
