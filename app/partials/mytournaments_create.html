@@ -294,15 +294,19 @@
 							Select a Game Path:
 						</div>
 						<div class="span3">	
-							<select class="span7" ng-model="qnsLanguage" ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']" ng-change="get_tournamentLvl(qnsLanguage)"></select>
+							<select class="span7" ng-model="selectedPath" ng-init="populatePaths()" ng-change="loadLevelList()">
+								<option value="null">Choose Game Path...</option>
+								<option ng-repeat="gamePath in gamePaths" value="{{gamePath.id}}">{{gamePath.name}}</option>
+							</select>
 						</div>
+				<!-- ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']"-->		
 				<!--Choosing a Level-->
 						<div class="span2">
 							Select a Level:
 						</div>
 						<div class="span3">	
-							<select class="span12" ng-model="pathLevel" ng-init="get_tournamentLvl(qnsLanguage)" multiple-"multiple" size="4">
-								<option ng-repeat="pathLvl in lvlArray">{{pathLvl}}</option>
+							<select class="span12" ng-model="pathLevel" multiple-"multiple" size="6">
+								<option ng-repeat="gameLevel in gameLevels" value="{{gameLevel.id}}">{{gameLevel.description}}</option>
 							</select>
 						</div>
 					</div>
@@ -310,7 +314,7 @@
 				<div class="row-fluid">
 					<div class="span12">	
 							<center>
-								<button class="btn btn-primary" id="create" type="button" ng-click="get_tournamentQns(qnsLanguage, pathLevel)"><i class="icon-search icon-white"></i> Search Questions</button>
+								<button class="btn btn-primary" id="create" type="button" ng-click="loadQueriedQuestionTable(selectedPath, pathLevel)"><i class="icon-search icon-white"></i> Search Questions</button>
 							</center>
 					</div>	
 				</div>
@@ -330,10 +334,10 @@
 	            		<th class"questionTitle">Question Title</th>
 	            		<th class"questionTitle"> </th>
 	            	</tr>
-	                <tr ng-repeat="question in qnsArray" class="questionTableRows">
-	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionInfo(question)">{{question.question}}</button></td>
+	                <tr ng-repeat="bankQuestion in bankQuestions" class="questionTableRows">
+	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionInfo(bankQuestion.id)">{{bankQuestion.name}}</button></td>
 	                    <td class="questionTableCells">
-	                    	<button name="addQuestions" ng-click="addToCart(question);isDisabled=true" class="btn btn-primary" ng-disabled="isDisabled"><i class="icon-plus icon-white"></i> Add</button>
+	                    	<button name="addQuestions" ng-click="addToCart(bankQuestion);isDisabled=true" class="btn btn-primary" ng-disabled="isDisabled"><i class="icon-plus icon-white"></i> Add</button>
 	                    </td>
 	                </tr>
             	</table>
@@ -424,7 +428,7 @@
 	            		<th class"questionTitle">Actions</th>
 	            	</tr>
 	                <tr ng-repeat="question in cartQuestions track by $index" class="questionTableRows">
-	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question)">{{question.question}}</button></td>
+	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question)">{{question.name}}</button></td>
 	                    <td class="questionTableCells">
 	                    	<div ng-hide="$index==0">
 	                    		<button name="moveUp" ng-click="moveQuestionUp($index)" class="btn btn-warning"><i class="icon-arrow-up icon-white"></i> Move Up</button>
