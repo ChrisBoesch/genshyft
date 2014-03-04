@@ -601,7 +601,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 
 	var grpPlayers = [];
 
-  	$httpBackend.whenPOST('/jsonapi/join_group/join').respond(function(method, url, data) {
+  	$httpBackend.whenPOST('/jsonapi/join_group').respond(function(method, url, data) {
         var item = JSON.parse(data);
 	    grpPlayers.push(item);
 	    return [200,item];
@@ -734,18 +734,18 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{ 
 			"playerId":57754,
 			"playerName":"Chris", 
-			"Group": 3
+			"group": 3
 		},
 
 		{ 
 			"playerId":2739102,
 			"playerName":"Player 2", 
-			"Group":0
+			"group":0
 		},
 		{
 			"playerId":9379339,
 			"playerName":"Player 3", 
-			"Group":0
+			"group":0
 		}],
 
 		"numRounds": 1,
