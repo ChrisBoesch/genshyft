@@ -3803,7 +3803,7 @@ function EventTableController($scope, $resource, $route, $location){
 		
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
-    		console.log($scope.eventID + "here2");
+    		console.log($scope.eventID + "here3");
     	}
 
     	$scope.get_currentUrl = function(){
@@ -3814,7 +3814,6 @@ function EventTableController($scope, $resource, $route, $location){
         //Gets registered jcParticipants.
 		$scope.get_participants = function(){
 	    console.log("get_mytournaments");
-	    	//current resource refers to just JC Comp
 		    $resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
             	$scope.eventsData = response;
  
@@ -3823,7 +3822,36 @@ function EventTableController($scope, $resource, $route, $location){
             console.log($scope.eventsData);
         	 })
 
-	  	};	  	
+	  	};
+  
+    $scope.get_currentPlayerRanking = function(){
+      $resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
+        $scope.current_event = response;
+        for(var i =0;i< $scope.current_event.ranking.length;i++){
+          if($scope.current_event.ranking[i].isCurrentPlayer){
+            $scope.currentPlayerRanking = i+1;
+            $scope.currentPlayerSolvedProblems = $scope.current_event.ranking[i].solvedproblems;
+            console.log($scope.currentPlayerRanking);
+            break;
+          }
+        }
+        
+        for(var i =0;i< $scope.current_event.ranking.length;i++){
+          if($scope.current_event.cutoff === i){
+            $scope.cutOffPlayer = $scope.current_event.ranking[i-1].nickname;
+            $scope.cutOffPlayerProblems = $scope.current_event.ranking[i-1].solvedproblems;
+            console.log($scope.cutOffPlayer);
+            console.log($scope.cutOffPlayerProblems);
+            
+            break;
+          }
+        }
+        $scope.isPlayerBelowCutoff = $scope.currentPlayerRanking > $scope.current_event.cutoff;
+        console.log($scope.isPlayerBelowCutoff);
+        $scope.timeToQualify = 5 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
+      }); 
+      console.log("getCurrentPlayerRanking");
+    };
         
         $scope.returnToPreviousPage = function() {
   			window.history.back();

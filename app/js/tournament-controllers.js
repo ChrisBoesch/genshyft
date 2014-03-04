@@ -34,6 +34,13 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.bankQuestions =[];
   $scope.newTournamentRounds = [];
   $scope.tourStatus = "";
+  $scope.questionName = "-";
+  $scope.questionDescription = "-";
+  $scope.questionExamples = "-";
+  $scope.questionSkeleton = "-";
+  $scope.gamePaths = [];
+  $scope.selectedPath;
+  $scope.gameLevels = [];
 
   //variables for create tournament details
   $scope.grpTourTitle="";
@@ -123,6 +130,67 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.startRef = function(){
     $timeout.cancel($scope.fetch_ranks(heatID));
   };
+
+  // Loads all the different possible paths into the paths droplist
+  $scope.populatePaths = function(){
+      if($scope.gamePaths.length!=0){
+        
+      }else{
+        ajax({
+            //url: '../jsonapi/get_game_paths',
+            url: '../jsonapi/get_game_and_my_paths',
+            async:false,
+            success: function(data){
+                $scope.gamePaths=data.paths;
+            }
+        });
+      }
+  }
+  //$scope.populatePaths();
+      
+  // Loads all the different possible levels into the level droplist
+  $scope.loadLevelList = function(){
+    if($scope.selectedPath=="null"){
+      $scope.gameLevels=[];
+    }else{
+        ajax({
+            url: '../jsonapi/problemsets/'+$scope.selectedPath,
+            async:false,
+            success: function(data){
+                $scope.gameLevels=data.problemsets;
+            }
+        });
+      }
+  }
+
+  //Loads the Queried List of Questions                 
+  $scope.loadQueriedQuestionTable = function(selectedPathID, pathLevelID){
+      var path_id = selectedPathID;
+      var level_ids = pathLevelID;
+          
+      $scope.bankQuestions = [];
+          
+      for(var i = 0; i < level_ids.length; i++){
+          ajax({
+              url: '../jsonapi/problems/'+level_ids[i],
+              async: false,
+              success: function(data){
+                $scope.bankQuestions=$scope.bankQuestions.concat(data.problems);
+              }
+          });
+      }
+  }
+    
+  $scope.addToCart = function(id){
+        for(var j = 0; j < $scope.bankQuestions.length; j++){                   
+      if($scope.bankQuestions[j].id == id){
+        var addedQuestion = $scope.bankQuestions.slice(j, j+1)[0];
+        $scope.cartQuestions.push(addedQuestion);
+        break;
+      }
+        }
+        $scope.updateDisableStatus();
+  }
 
   //Save each created round into an array 
   $scope.save_round = function(){      
@@ -401,7 +469,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                   "status":$scope.selectedTournament.status,
                   "type": $scope.selectedTournament.type
                   /*"status": $scope.selectedTournament.status,*/
-                 }
+                 };
       //codes copied from managetournament.js, updateTournament() in SingPath Ender codes
       /*
       $.ajax({
@@ -420,9 +488,31 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
       });
       */
+      $scope.NewTournament = $resource('/jsonapi/add_or_update_tournament/'+tournamentID);
+      var new_tournament = new $scope.NewTournament(updatedTournament);
+      new_tournament.$save(function(response){
+         if(response.error) {
+          console.log(response.error)
+         }
+         else{
+        //$scope.tournament = response;
+        console.log("Save edited tournament details into DB")
+        $scope.fetch_tournament(tournamentID); //Using legacy fetch. 
+       }
+      });
       $('#editTournInfo').modal('hide');
       $('#changesSaved').modal('show');
     }
+  };
+
+  $scope.fetch_tournament = function(tournamentID){
+    $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
+        $scope.tournament = response;
+        console.log("fetch_tournament = " + $scope.tournament);
+        //$scope.startTime = new Date("2013-09-29 08:24:46.840830");
+        //$scope.stopTime = new Date("2013-09-29 12:00:11.784760");
+        //console.log(($scope.stopTime - $scope.startTime)/1000);
+    });
   };
 
   /*Method to save edited tournament round details-GenShyft*/
@@ -438,7 +528,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       for(var j = 0; j < $scope.cartQuestions.length; j++){
         roundQuestions.push($scope.cartQuestions[j].questionId);
       }
-      var updatedRound = {"roundId":$scope.selectedRound.roundId,"roundName":$scope.selectedRound.roundName,"timelimit":$scope.selectedRound.timelimit,"problemIDs":roundQuestions,"description":$scope.selectedRound.description};    
+      var updatedRound = {"roundId":$scope.selectedRound.roundId,
+                          "roundName":$scope.selectedRound.roundName,
+                          "timelimit":$scope.selectedRound.timelimit,
+                          "problemIDs":roundQuestions,
+                          "description":$scope.selectedRound.description};    
       //codes copied from managetournament.js, updateRound()
       /*
       $.ajax({
@@ -457,10 +551,30 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
       });
       */
+      $scope.NewRound = $resource('/jsonapi/add_or_update_round/'+roundID);
+      var new_round = new $scope.NewRound(updatedRound);
+      new_round.$save(function(response){
+         if(response.error) {
+          console.log(response.error)
+         }
+         else{
+        //$scope.round = response;
+        console.log("Save edited round details into DB")
+        $scope.fetch_round(roundID);//Using legacy fetch
+       }
+      });
+   
       $scope.cartQuestions = [];
       $('#editTournRound').modal('hide');
       $('#changesSaved').modal('show');
     }
+  };
+
+  $scope.fetch_round = function(roundID){
+    $resource('/jsonapi/round/:roundID').get({"roundID":roundID}, function(response){
+        $scope.round = response;
+        $scope.roundDirty = false;
+    });
   };
 
   /*Method to load details of selected round with Round ID to display in Mange Tournament from all the questions in DB-GenShyft*/
