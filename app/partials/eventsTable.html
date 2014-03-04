@@ -19,7 +19,7 @@
 <!-- Render eventsTable page based on url parameter (event id) -->
 <div class="row-fluid">
 
-<div ng-controller="EventTableController" ng-init="get_participants(); get_eventID(); get_currentUrl();" class="container">
+<div ng-controller="EventTableController" ng-init="get_participants(); get_eventID(); get_currentPlayerRanking(); get_currentUrl();" class="container">
 
 <button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
 
@@ -89,7 +89,8 @@
 <tbody>
   <tr bgcolor="black">
     <td>
-      <font color = "white"><b>INVITATION CUTOFF</b></font>
+      <span ng-if="isPlayerBelowCutoff"><font color = "white"><strong>INVITATION CUTOFF - It will take you approximately {{timeToQualify}} minutes to qualify for this event. Start solving more problems now!</b></font></span>
+      <span ng-show="!isPlayerBelowCutoff"><font color = "white"><b>INVITATION CUTOFF</b></font></span>
     </td>
 
   </tr>
