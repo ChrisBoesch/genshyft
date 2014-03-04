@@ -3850,7 +3850,7 @@ function EventTableController($scope, $resource, $route, $location){
         console.log($scope.isPlayerBelowCutoff);
         $scope.timeToQualify = 5 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
       }); 
-      console.log("getCurrentPlayerRanking");
+      console.log("getCurrentPlayerRanking" + "");
     };
         
         $scope.returnToPreviousPage = function() {
