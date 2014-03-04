@@ -182,7 +182,6 @@ module.exports = function (grunt) {
           'bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css',
           'bower_components/fancybox/source/jquery.fancybox.css',
           'bower_components/leaflet-dist/leaflet.css',
-          'app/css/app.css',
         ]
       },
 
