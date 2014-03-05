@@ -148,7 +148,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         */
         $resource('/jsonapi/get_game_and_my_paths').get({},function(response){
           console.log("Retrieving game paths from DB");
-          $scope.gamePaths = response;
+          $scope.gamePaths = response.paths;
           console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
         });  
       }
