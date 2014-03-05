@@ -40,6 +40,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.questionSkeleton = "-";
   $scope.gamePaths = [];
   $scope.selectedPath;
+  $scope.pathLevel;
   $scope.gameLevels = [];
 
   //variables for create tournament details
@@ -149,7 +150,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $resource('/jsonapi/get_game_and_my_paths').get({},function(response){
           console.log("Retrieving game paths from DB");
           $scope.gamePaths = response.paths;
-          console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
+          //console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
         });  
       }
   }
@@ -177,15 +178,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   }
 
   //Loads the Queried List of Questions                 
-  $scope.loadQueriedQuestionTable = function(selectedPathID, pathLevel){
-      var path_id = selectedPathID;
+  $scope.loadQueriedQuestionTable = function(){
+      console.log(JSON.stringify($scope.pathLevel);
+      var path_id = $scope.selectedPath;
       var level_ids = [];
       i=0;
-      $(pathLevel).each(function(){
+      $($scope.pathLevel).each(function(){
         level_ids[i] = this.value;
         i++;
       }); 
-          
+      console.log(level_ids);
+
       $scope.bankQuestions = [];
           
       for(var i = 0; i < level_ids.length; i++){
