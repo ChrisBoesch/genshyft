@@ -294,8 +294,8 @@
 							Select a Game Path:
 						</div>
 						<div class="span3">	
-							<select class="span7" ng-model="selectedPath" ng-init="populatePaths()" ng-change="loadLevelList()">
-								<option value="null">Choose Game Path...</option>
+							<select class="span8" ng-model="selectedPath" ng-init="populatePaths()" ng-change="loadLevelList()">
+								<option value="" selected>Choose Game Path...</option>
 								<option ng-repeat="gamePath in gamePaths" value="{{gamePath.id}}">{{gamePath.name}}</option>
 							</select>
 						</div>
