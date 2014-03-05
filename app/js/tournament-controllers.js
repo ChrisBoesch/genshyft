@@ -148,8 +148,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         */
         $resource('/jsonapi/get_game_and_my_paths').get({},function(response){
           console.log("Retrieving game paths from DB");
-          $scope.gamePaths = response;
-          console.log("Printing response for game paths: " + $scope.gamePaths);
+          $scope.gamePaths = response.paths;
+          console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
         });  
       }
   }
@@ -171,7 +171,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       */
       $resource('/jsonapi/problemsets/'+$scope.selectedPath).get({},function(response){
         console.log("Retrieving game levels based on selected game paths from DB");
-        $scope.gameLevels = response;
+        $scope.gameLevels = response.problemsets;
       });  
     }
   }
