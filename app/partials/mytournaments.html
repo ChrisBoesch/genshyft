@@ -8,11 +8,11 @@
 			<b>Tournaments by you:</b>
 		</div>
 	</div>
-	<div ng-show="grpTournaments.length==0">
-		<center><b> You have not created any tournaments. Click on the button above to create one! </b></center>
+	<div ng-show="grpTournaments.length==null">
+		<center><b><h3> You have not created any tournaments. Click on the button above to create one! </h3></b></center>
 	</div>
 
-	<div ng-show="grpTournaments.length!=0">
+	<div ng-show="grpTournaments.length!=null">
 		<div class="row-fluid">	
 			<div class="span12 well well-small" >
 				<table ng-grid id="grpTournTable" class="table table-bordered" width="100%">
