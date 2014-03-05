@@ -207,40 +207,35 @@
 							<div class="span2">
 								Round Title*:
 							</div>
-							<div class="span9">
-								<input class="span6" type="text" required ng-model="grpTourRoundName" placeholder="Enter round name here" ></input>
+							<div class="span4">
+								<input class="span9" type="text" required ng-model="grpTourRoundName" placeholder="Enter round name here" ></input>
 								<span class="alert-error" ng-show="grpTourRoundName==''">Required!
 							 	</span>
 							</div>
-						</div>	
-					</div>
-					<!--Round Duration input field-->
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="span2">
-								Duration(minutes)*:
-							</div>
-							<div class="span9">
-								<select class="span2" ng-model="grpTourRoundMins" ng-options="numgrp for numgrp in [10,15,20,25,30,35,40,45,50,55,60]"></select>
-							</div>
-						</div>	
-					</div>
 					<!--Round Description input field-->
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="span2">
+							<div class="span1">
 								Description:
 							</div>
-							<div class="span9">
-								 <textarea class="span6" rows="3" ng-model="grpTourRoundDesc" placeholder="Enter round description here">
+							<div class="span5">
+								 <textarea class="span12" rows="2" ng-model="grpTourRoundDesc" placeholder="Enter round description here">
 								</textarea>
 							</div>
 						</div>	
 					</div>
-				</br>
-				<center>
-					<button class="btn btn-primary" type="button" data-target='#ChooseQns' data-toggle="tab" id="groups"><i class="icon-plus icon-white"></i> Choose Questions</button>
-				</center>
+					<div class="row-fluid">
+						<div class="span12">
+							<!--Round Duration input field-->
+							<div class="span2">
+								Duration(minutes)*:
+							</div>
+							<div class="span3">
+								<select class="span6" ng-model="grpTourRoundMins" ng-options="numgrp for numgrp in [10,15,20,25,30,35,40,45,50,55,60]"></select>
+							</div>
+							<div class="span7">
+								<button class="btn btn-primary" type="button" data-target='#ChooseQns' data-toggle="tab" id="groups"><i class="icon-plus icon-white"></i> Choose Questions</button>
+							</div>
+						</div>	
+					</div>
 				</div>
 			</div>
 			<center><div class="tournamentRoundheader" ><b>{{grpTourTitle}} Tournament Rounds</b></div></center>
