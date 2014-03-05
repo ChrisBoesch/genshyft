@@ -123,7 +123,7 @@
 							<button class="btn btn-primary btn-warning" data-toggle="modal" ng-click="go_to_eventsEdit(event.id)">
 							<i class="icon-check icon-white"></i> Edit Event
 							</button>
-			            	<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="delete($index)">
+			            	<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="delete_event(event.id)">
 			            	<i class="icon-eye-open icon-white"></i> Delete Event
 			            	</button>
 			            
@@ -178,16 +178,16 @@
 			<label class="control-label" for="inputPassword"></label>
 			<div class="controls">
 				<br><br><br><br><br>
-				<textarea class="span10" rows="6" ng-model="grpTourDescription" placeholder = "Message here will be included in the RSVP mail" >
+				<textarea class="span10" rows="6" ng-model="messageDescription" placeholder = "Message here will be included in the RSVP mail" >
 				</textarea>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
 				<label class="checkbox">
-					<input type="checkbox" id="includeMessage" value="true"> Include Message
+					<input type="checkbox" id="includeMessage" ng-model="includeMessage"value="true"> Include Message
 				</label>
-				<button type="submit" class="btn btn-primary btn-success" data-toggle="modal" data-target="#watchModal"ng-click="register_for_event(event.id, 'watch')">
+				<button type="submit" class="btn btn-primary btn-success" data-toggle="modal" data-target="#watchModal" ng-click="send_rsvp(event.id, messageDescription, includeMessage)">
 			    <i class="icon-check icon-white"></i>Send RSVP</button>
 			</div>
 		</div>

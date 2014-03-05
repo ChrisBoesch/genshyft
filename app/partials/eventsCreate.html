@@ -11,7 +11,7 @@
 	}
 </style>
 </br>
-<div ng-controller="EventController" ng-init="loading()" class="container" id="tourncreate"style="position:relative;" >
+<div ng-controller="EventController" ng-init="loading()" class="container" id="eventCreate"style="position:relative;" >
 	<button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
 	<br>
 	<br>
@@ -52,7 +52,7 @@
 						Event Description:
 					</div>
 					<div class="span9">
-						 <textarea class="span8" rows="3" ng-model="grpTourDescription" placeholder = "Please enter a description for your event" >
+						 <textarea class="span8" rows="3" ng-model="eventDescription" placeholder = "Please enter a description for your event" >
 						</textarea>
 					</div>
 				</div>	
@@ -65,8 +65,8 @@
 						Cutoff*:
 					</div>
 					<div class="span7">
-						 <input class="span6" type="text" required ng-model="cutoffNum" placeholder="Enter event cutoff number here" ></input>
-						 <span class="alert-error" ng-show="cutoffNum==''">Required!
+						 <input class="span6" type="text" required ng-model="cutoff" placeholder="Enter event cutoff number here" ></input>
+						 <span class="alert-error" ng-show="cutoff==''">Required!
 						 </span>
 					</div>
 				</div>	
@@ -104,7 +104,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<center>
-						<button class="btn btn-primary" type="button"><i class="icon-check icon-white"></i> Submit</button> 
+						<button class="btn btn-primary" type="button" ng-click="create_new_event(eventTitle,eventDescription,cutoff,eventProgLang)" ><i class="icon-check icon-white"></i> Create</button> 
 					</center>
 				</div>	
 			</div>
