@@ -154,7 +154,8 @@
 			<tr>
 				<td class = "span1"><strong>Rank</td>
 				<td class = "span3"><strong>Player Name</td>
-				<td class = "span2"><strong>{{eventsData.path}} Problems Solved</td>
+				<td class = "span1"><strong>{{eventsData.path}} Problems Solved</td>
+				<td class = "span1"><strong>Mail</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -162,9 +163,16 @@
 			<tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=50">
 				<td class = "span1">{{$index+1}}</td>
 				<td class = "span3">{{participant.nickname}}</td>
-				<td class = "span2">
+				<td class = "span1">
 					<span ng-if="participant.solvedproblems<0">No School</span>
 					<span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
+				</td>
+				<td class = "span1">
+					<center><p>
+					<label class="checkbox">
+					<input type="checkbox" id="participantToSend" ng-model="participantToSend" value="{{participant.id}}">
+					</label>
+					</center>
 				</td>
 			</tr>
 		</tbody>
@@ -185,9 +193,9 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="checkbox">
-					<input type="checkbox" id="includeMessage" ng-model="includeMessage"value="true"> Include Message
+					<input type="checkbox" id="includeRSVP" ng-model="includeRSVP"value="true"> Include RSVP
 				</label>
-				<button type="submit" class="btn btn-primary btn-success" data-toggle="modal" data-target="#watchModal" ng-click="send_rsvp(event.id, messageDescription, includeMessage)">
+				<button type="submit" class="btn btn-primary btn-success" data-toggle="modal" data-target="#watchModal" ng-click="send_rsvp(participantToSend, messageDescription, includeRSVP)">
 			    <i class="icon-check icon-white"></i>Send RSVP</button>
 			</div>
 		</div>
