@@ -171,7 +171,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       */
       $resource('/jsonapi/problemsets/'+$scope.selectedPath).get({},function(response){
         console.log("Retrieving game levels based on selected game paths from DB");
-        $scope.gameLevels = response;
+        $scope.gameLevels = response.problemsets;
       });  
     }
   }
