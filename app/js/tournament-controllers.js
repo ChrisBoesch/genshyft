@@ -179,7 +179,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   //Loads the Queried List of Questions                 
   $scope.loadQueriedQuestionTable = function(){
-      console.log(JSON.stringify($scope.pathLevel);
+      console.log(JSON.stringify($scope.pathLevel));
       var path_id = $scope.selectedPath;
       var level_ids = [];
       i=0;
