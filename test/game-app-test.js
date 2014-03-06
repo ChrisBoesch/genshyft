@@ -1422,13 +1422,13 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       $httpBackend.whenGET('/jsonapi/added_rounds').respond(added_rounds);
 	  */
 	  
-      $httpBackend.whenPOST('/jsonapi/create_tournament').passThrough();
-      $httpBackend.whenPOST('/jsonapi/updateTournament').passThrough();
-      $httpBackend.whenPOST('/jsonapi/updateRound').passThrough();
+      //$httpBackend.whenPOST('/jsonapi/create_tournament').passThrough();
+      //$httpBackend.whenPOST('/jsonapi/updateTournament').passThrough();
+      //$httpBackend.whenPOST('/jsonapi/updateRound').passThrough();
       //Tournaments are added successfully and displayed on the partials - engsen
       var added_grpTournaments = [];
 
-      $httpBackend.whenPOST('/jsonapi/add_grptournament').respond(function(method, url, data) {
+      $httpBackend.whenPOST('/jsonapi/create_or_update_tournament').respond(function(method, url, data) {
         var grpTournament = JSON.parse(data);
         added_grpTournaments.push(grpTournament);
         return [200,grpTournament];
