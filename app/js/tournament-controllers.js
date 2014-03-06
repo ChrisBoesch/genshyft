@@ -179,33 +179,34 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   //Loads the Queried List of Questions                 
   $scope.loadQueriedQuestionTable = function(){
-      console.log(JSON.stringify($scope.pathLevel));
-      var path_id = $scope.selectedPath;
-      var level_ids = [];
-      i=0;
-      $($scope.pathLevel).each(function(){
-        level_ids[i] = this.value;
-        i++;
-      }); 
-      console.log(level_ids);
-
-      $scope.bankQuestions = [];
-          
-      for(var i = 0; i < level_ids.length; i++){
-        /*
-        ajax({
-          url: '../jsonapi/problems/'+level_ids[i],
-          async: false,
-          success: function(data){
-            $scope.bankQuestions=$scope.bankQuestions.concat(data.problems);
-          }
-        });
-        */
-        $resource('/jsonapi/problems/'+level_ids[i]).get({},function(response){
-          console.log("Retrieving all questions based on selected game paths and path levels from DB");
-          $scope.bankQuestions=$scope.bankQuestions.concat(response.problems);
-        });
-      }
+    console.log(JSON.stringify($scope.pathLevel));
+    var path_id = $scope.selectedPath;
+    var level_ids = $scope.pathLevel;
+    /*
+    i=0;
+    $($scope.pathLevel).each(function(){
+      level_ids[i] = this.value;
+      i++;
+    }); 
+    console.log(level_ids);
+    */
+    $scope.bankQuestions = [];
+        
+    //for(var i = 0; i < level_ids.length; i++){
+      /*
+      ajax({
+        url: '../jsonapi/problems/'+level_ids[i],
+        async: false,
+        success: function(data){
+          $scope.bankQuestions=$scope.bankQuestions.concat(data.problems);
+        }
+      });
+      */
+    $resource('/jsonapi/problems/'+level_ids).get({},function(response){
+      console.log("Retrieving all questions based on selected game paths and path levels from DB");
+      $scope.bankQuestions=$scope.bankQuestions.concat(response.problems);
+    });
+    //}
   }
 
   //Save each created round into an array 
