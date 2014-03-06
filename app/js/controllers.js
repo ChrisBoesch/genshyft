@@ -118,6 +118,7 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
     $scope.checkTournamentLogin = checkLogin.bind($scope, 'tournaments');
     $scope.checkCreateTournamentLogin = checkLogin.bind($scope, 'mytournaments');
     $scope.checkEventsLogin = checkLogin.bind($scope, 'events');
+    $scope.checkCreateEventsLogin = checkLogin.bind($scope, 'eventsManage');
     $scope.checkSchoolsMapLogin = checkLogin.bind($scope, 'schoolsmap');
 
 	// End GENShYFT Code
@@ -3758,6 +3759,12 @@ function EventController($scope, $resource, $location){
         $scope.events = [];
   		$scope.location = $location;
 
+  		//variables for create event details
+  		$scope.eventTitle="";
+  		$scope.eventDescription="";
+  		$scope.cutoff="";
+  		$scope.progLang="";
+
         var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
                   
         // posting without and id should result in creating an object.
@@ -3781,26 +3788,54 @@ function EventController($scope, $resource, $location){
             });
         },
 
-        $scope.delete_event = function(idx){
-        	//var event = Event.delete({eventId:id},$scope.event, function(){
-        	//	$scope.event = event;
-        	//})
-        	///$scope.event.events.splice(index, 1);
+		$scope.create_new_event = function(eventTitle, eventDescription, cutoff, progLang){
+			console.log("Create_new_event executed here")
+			if(eventTitle==""){
+				alert("The event title cannot be empty!");
+			}
+			else if(cutoff==""){
+				alert("The cutoff cannot be empty!");
+			}
+			else if(progLang==""){
+				alert("Please select a Programming langauge!");
+			}
+			else{
 
-    		var delEvent = $scope.events[idx];
+				var data = {"eventTitle":eventTitle,
+					"eventDescription":eventDescription,
+					"cutoff": cutoff,
+					"progLang": progLang
 
-    		API.DeleteEvent({ id: delEvent.id }, function (success) {
+				}
+				$scope.newEvent = $resource('/jsonapi/create_event');
+				var new_event = new $scope.newEvent(data);
+				new_event.$save(function(response){
+					if(response.error) {
+						console.log(response.error);
+					}
+					else{
+						console.log("Save New event into DB")
+						console.log(response);
+						$location.path("eventsManage");
+					}
+				});
+			}
+			
+		};
 
-        		$scope.events.splice(idx, 1);
-    		});
-        	console.log(event);
-        };
-
-		$scope.delete = function ( idx ) {
-			var event_to_delete = $scope.events[idx];
-
-			API.DeleteEvent({ id: event_to_delete.id }, function (success) {
-				$scope.events.splice(idx, 1);
+		$scope.delete_event = function(id){
+			console.log("delete_event executed here");
+			$scope.deleteEvent = $resource('/jsonapi/delete_event/:eventId', {eventId:'@id'});
+			var delete_event = new $scope.deleteEvent();
+			delete_event.$save({eventId:id}, function(response){
+				if(response.error) {
+					console.log(response.error);
+				}
+				else{
+					console.log("Delete event in DB")
+					console.log(response);
+					$location.path("eventsManage");
+				}
 			});
 		};
 
@@ -3839,6 +3874,47 @@ function EventTableController($scope, $resource, $route, $location){
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		
+		//variables for edit event details
+  		$scope.eventTitle="";
+  		$scope.eventDescription="";
+  		$scope.cutoff="";
+  		$scope.progLang="";
+
+		$scope.edit_event = function(id, eventTitle, eventDescription, cutoff, progLang){
+			console.log("edit_event executed here")
+			if(eventTitle==""){
+				alert("The event title cannot be empty!");
+			}
+			else if(cutoff==""){
+				alert("The cutoff cannot be empty!");
+			}
+			else if(progLang==""){
+				alert("Please select a Programming langauge!");
+			}
+			else{
+
+				var data = {"eventTitle":eventTitle,
+					"eventDescription":eventDescription,
+					"cutoff": cutoff,
+					"progLang": progLang
+
+				}
+				$scope.editEvent = $resource('/jsonapi/edit_event/:eventId', {eventId:'@id'});
+				var edit_event = new $scope.editEvent(data);
+				edit_event.$save({eventId:id}, function(response){
+					if(response.error) {
+						console.log(response.error);
+					}
+					else{
+						console.log("Edit event in DB")
+						console.log(response);
+						$location.path("eventsManage");
+					}
+				});
+			}
+			
+		};
+
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
     		console.log($scope.eventID + "here3");

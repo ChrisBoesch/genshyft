@@ -40,6 +40,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.questionSkeleton = "-";
   $scope.gamePaths = [];
   $scope.selectedPath;
+  $scope.pathLevel;
   $scope.gameLevels = [];
 
   //variables for create tournament details
@@ -148,7 +149,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         */
         $resource('/jsonapi/get_game_and_my_paths').get({},function(response){
           console.log("Retrieving game paths from DB");
-          $scope.gamePaths = response;
+          $scope.gamePaths = response.paths;
+          //console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
         });  
       }
   }
@@ -170,38 +172,41 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       */
       $resource('/jsonapi/problemsets/'+$scope.selectedPath).get({},function(response){
         console.log("Retrieving game levels based on selected game paths from DB");
-        $scope.gameLevels = response;
+        $scope.gameLevels = response.problemsets;
       });  
     }
   }
 
   //Loads the Queried List of Questions                 
-  $scope.loadQueriedQuestionTable = function(selectedPathID, pathLevel){
-      var path_id = selectedPathID;
-      var level_ids = [];
-      i=0;
-      $(pathLevel).each(function(){
-        level_ids[i] = this.value;
-        i++;
-      }); 
-          
-      $scope.bankQuestions = [];
-          
-      for(var i = 0; i < level_ids.length; i++){
-        /*
-        ajax({
-          url: '../jsonapi/problems/'+level_ids[i],
-          async: false,
-          success: function(data){
-            $scope.bankQuestions=$scope.bankQuestions.concat(data.problems);
-          }
-        });
-        */
-        $resource('/jsonapi/problems/'+level_ids[i]).get({},function(response){
-          console.log("Retrieving all questions based on selected game paths and path levels from DB");
-          $scope.bankQuestions=$scope.bankQuestions.concat(response.problems);
-        });
-      }
+  $scope.loadQueriedQuestionTable = function(){
+    console.log(JSON.stringify($scope.pathLevel));
+    var path_id = $scope.selectedPath;
+    var level_ids = $scope.pathLevel;
+    /*
+    i=0;
+    $($scope.pathLevel).each(function(){
+      level_ids[i] = this.value;
+      i++;
+    }); 
+    console.log(level_ids);
+    */
+    $scope.bankQuestions = [];
+        
+    //for(var i = 0; i < level_ids.length; i++){
+      /*
+      ajax({
+        url: '../jsonapi/problems/'+level_ids[i],
+        async: false,
+        success: function(data){
+          $scope.bankQuestions=$scope.bankQuestions.concat(data.problems);
+        }
+      });
+      */
+    $resource('/jsonapi/problems/'+level_ids).get({},function(response){
+      console.log("Retrieving all questions based on selected game paths and path levels from DB");
+      $scope.bankQuestions=$scope.bankQuestions.concat(response.problems);
+    });
+    //}
   }
 
   //Save each created round into an array 
