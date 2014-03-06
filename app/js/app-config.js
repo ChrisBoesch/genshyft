@@ -34,7 +34,7 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/tournament-grpjoin', {templateUrl: 'partials/tournament_grpjoin.html', controller: IndexController});
     $routeProvider.when('/tournament-grpplay', {templateUrl: 'partials/tournament_grpplay.html', controller: IndexController});
     $routeProvider.when('/tournament-ranking', {templateUrl: 'partials/tournament_ranking.html', controller: IndexController});
-
+    $routeProvider.when('/ezwebdev', {templateUrl: 'partials/ezwebdev.html', controller: IndexController});
     $routeProvider.when('/purposedriven', {templateUrl: 'partials/purposedriven.html', controller: IndexController});
     $routeProvider.when('/purposedriven-play', {templateUrl: 'partials/purposedriven-play.html', controller: IndexController});
     $routeProvider.when('/purposedriven-admin', {templateUrl: 'partials/purposedriven-admin.html', controller: IndexController});

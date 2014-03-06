@@ -183,9 +183,10 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 function AceController($scope){
 	$scope.modes=['javascript', 'XML', 'java'];
 	$scope.mode=$scope.modes[0];
+	$scope.solution1 = 'abc';
 
 	$scope.aceOption = {
-		mode: $scope.mode.toLowerCase(),
+		mode: 'html',
 
 		onLoad: function (_ace){
 			$scope.modeChanged = function(){
