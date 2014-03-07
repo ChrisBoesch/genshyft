@@ -204,7 +204,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $resource('/jsonapi/problems/'+level_ids).get({},function(response){
       console.log("Retrieving all questions based on selected game paths and path levels from DB");
       $scope.bankQuestions=$scope.bankQuestions.concat(response.problems);
-      console.log(JSON.stringify($scope.bankQuestions));
+      //console.log(JSON.stringify($scope.bankQuestions));
     });
     //}
   }
@@ -215,7 +215,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       alert("The maximum number of rounds per tournament is 5!");
     }
     else if($scope.grpTourRoundName == undefined || $scope.grpTourRoundName == ""){
-      alert("The round name cannot be empty!");
+      alert("The round title cannot be empty!");
     }
     else if($scope.grpTourRoundMins == undefined || $scope.grpTourRoundMins == 0){
       alert("The round time limit cannot be empty!");
@@ -226,11 +226,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     else{
       var roundQuestions = [];
       for(var j = 0; j < $scope.cartQuestions.length; j++){
-        roundQuestions.push($scope.cartQuestions[j].questionId);
+        roundQuestions.push($scope.cartQuestions[j].id);
       }
-      //roundId is used to simulate actual saving into backend. To remove after integrating
+      console.log(roundQuestions);
       console.log("Saving round into $scope.newTournamentRounds to be saved into tournament later");
-      $scope.newTournamentRounds.push({roundId:$scope.roundIdTracker,roundName:$scope.grpTourRoundName,timelimit:$scope.grpTourRoundMins,problemIDs:roundQuestions,description:$scope.grpTourRoundDesc});
+      $scope.newTournamentRounds.push({description:$scope.grpTourRoundName,timelimit:$scope.grpTourRoundMins,problemIDs:roundQuestions});
       
       $scope.grpTourRoundName = "";
       $scope.grpTourRoundMins = "";
@@ -255,67 +255,13 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.cartQuestions.splice(index,1);
   }
 
-  /*Retrieving questions from game-app-test.js
-  //To implement for Create Tournaments - engsen, method to get all relevant tournament questions according to question language
-	$scope.get_tournamentLvl = function(qnsLanguage){
-    console.log("Retrieving all available levels for questions");
-    $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
-      $scope.tournamentQns = response; 
-      $scope.roundLvl = {};
-      $scope.roundLvl.language = qnsLanguage;
-      $scope.list_levels($scope.roundLvl.language, $scope.tournamentQns);
-    });
-       
-	};
-
-  //method to filter path level based on language
-  $scope.list_levels = function(qnsLanguage, tournamentQns){
-    $scope.lvlArray = [];
-    console.log("Filtering questions based on language");
-    for(var i = 0; i < tournamentQns.tourQns.length; i++){
-      var language = tournamentQns.tourQns[i].language;
-      if(language==qnsLanguage){
-        var pathLevel = tournamentQns.tourQns[i].pathLevel;
-        $scope.lvlArray.push(pathLevel);
-      }
-    }
-    //console.log($scope.lvlArray);
-  };
-
-  //To implement for Create Tournaments - GenShyft method to get all relevant tournament questions according to question language
-  $scope.get_tournamentQns = function(qnsLanguage, pathLevel){
-    console.log("Retrieving available questions in DB");
-    $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
-      $scope.tournamentQns = response; 
-      $scope.roundQns = {};
-      $scope.roundQns.language = qnsLanguage;
-      $scope.roundQns.pathLevel = pathLevel;
-      $scope.list_questions($scope.roundQns.language, $scope.roundQns.pathLevel, $scope.tournamentQns);
-    });
-  };
-
-  //method to filter questions based on language and pathLevel-GenShyft
-  $scope.list_questions = function(qnsLanguage, pathLevel, tournamentQns){
-    console.log("Filtering questions based on language and pathlevel")
-    $scope.qnsArray = [];
-    for(var i = 0; i < tournamentQns.tourQns.length; i++){
-      var language = tournamentQns.tourQns[i].language;
-      var level = tournamentQns.tourQns[i].pathLevel;
-      if(language==qnsLanguage && level==pathLevel){
-        $scope.qnsArray = tournamentQns.tourQns[i].questionSet;
-      }
-    }
-    $scope.bankQuestions = $scope.qnsArray;
-  };
-  */
-
   //Add selected questions to a cart(array)
   $scope.addToCart = function(question){
     var addedQuestion = question;
     var exist = false;
     for(var i=0;i<$scope.cartQuestions.length;i++){
       var cartQuestion = $scope.cartQuestions[i];
-      if(addedQuestion.questionId==cartQuestion.questionId && addedQuestion.name==cartQuestion.name){
+      if(addedQuestion.id==cartQuestion.id){
         exist = true;
       } 
     }
@@ -536,8 +482,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Method to save edited tournament round details-GenShyft*/
   $scope.updateRound = function(){
-    if($scope.selectedRound.roundName == undefined || $scope.selectedRound.roundName == ""){
-      alert("The round name cannot be empty!");
+    if($scope.selectedRound.description == undefined || $scope.selectedRound.description == ""){
+      alert("The round title cannot be empty!");
     }
     else if($scope.selectedRound.timelimit == undefined || $scope.selectedRound.timelimit == 0){
       alert("The round time limit cannot be empty!");
@@ -545,10 +491,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     else{
       var roundQuestions = [];
       for(var j = 0; j < $scope.cartQuestions.length; j++){
-        roundQuestions.push($scope.cartQuestions[j].questionId);
+        roundQuestions.push($scope.cartQuestions[j].id);
       }
       var updatedRound = {"roundId":$scope.selectedRound.roundId,
-                          "roundName":$scope.selectedRound.roundName,
                           "timelimit":$scope.selectedRound.timelimit,
                           "problemIDs":roundQuestions,
                           "description":$scope.selectedRound.description};    
@@ -609,7 +554,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       for(var i = 0; i < $scope.selectedRound.problemIDs.length; i++){
         for(var j = 0; j < $scope.tournamentQns.tourQns.length; j++){
           for(var k = 0; k < $scope.tournamentQns.tourQns[j].questionSet.length; k++){
-            if($scope.selectedRound.problemIDs[i] == $scope.tournamentQns.tourQns[j].questionSet[k].questionId){
+            if($scope.selectedRound.problemIDs[i] == $scope.tournamentQns.tourQns[j].questionSet[k].id){
               $scope.cartQuestions.push($scope.tournamentQns.tourQns[j].questionSet[k]);
             }
           }
@@ -762,9 +707,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.viewQuestionsInfoInCart = function(question){
-    $scope.questionName = question.question;
-    $scope.questionDescription = question.questionDescription;
-    $scope.questionExamples = question.questionExamples;
+    $scope.questionName = question.name;
+    $scope.questionDescription = question.description;
+    $scope.questionExamples = question.examples;
     $scope.skeleton = question.skeleton;
     $('#questionsInCart').modal('hide');
     $('#editTournRound').modal('hide');
