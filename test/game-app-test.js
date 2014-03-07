@@ -1,7 +1,7 @@
 'use strict';
 
 //var myApp = angular.module('myApp', ['ngResource', 'analytics']);
-var myApp = angular.module('myApp', ['myAppConfig','ngMockE2E','google-maps']);
+var myApp = angular.module('myApp'); //, ['myAppConfig','ngMockE2E','google-maps']);
 // myApp.config(function($provide) {
 //     // delay the mocked response
 //     // see http://endlessindirection.wordpress.com/2013/05/18/angularjs-delay-response-from-httpbackend/

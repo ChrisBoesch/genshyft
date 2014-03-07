@@ -1,5 +1,5 @@
 'use strict';
-var myApp = angular.module('myApp', ['myAppConfig', 'google-maps']);
+var myApp = angular.module('myApp', ['myAppConfig', 'google-maps', 'ngMockE2E']);
 
 myApp.directive('datepicker', function() {
     return {

@@ -738,7 +738,6 @@
           <script src='js/directives.js'></script>
           <script src='js/fancybox-fire.js'></script>
           <script src='js/filters.js'></script>
-          <script src='js/game-play-app.js'></script>
           <script src='js/PurposeDrivenAdminController.js'></script>
           <script src='js/PurposeDrivenController.js'></script>
           <script src='js/school-controllers.js'></script>
@@ -753,6 +752,9 @@
       // Defaulting to staticly mock the API when not on port 80 for testing simplicity.
       if(document.location.port && document.location.port!= 80){
         document.write('<script src="../test/scenario.js"><'+'/script>');
+      } else {
+          // Dummy ngMock module
+          angular.module('ngMockE2E', []);
       }
     </script>
   </body>
