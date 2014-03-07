@@ -178,7 +178,7 @@
 							<b>Round Title:</b>  
 						</div>
 						<div class="span6">	
-							{{selectedRound.roundName}} 
+							{{selectedRound.description}} 
 						</div>
 					</div>		
 				</div>
@@ -228,13 +228,13 @@
 	                	<th></th>
 	                	<th class="roundTableHeader"><b>Start round in:</b></th>
 	 				</tr>
-	                <tr class="warning" ng-repeat="tournamentRound in selectedTournament.rounds track by $index">
-	                    <td class="roundInfo">{{tournamentRound.roundName}}</td>
+	                <tr class="warning" ng-repeat="tournamentRound in selectedTournament.rounds">
+	                    <td class="roundInfo">{{tournamentRound.description}}</td>
 	                    <td class="roundInfo">{{tournamentRound.timeLimit}}</td>
 	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
 	                    <td>
 	                    	<div>
-								<button class="btn btn-primary" type="button" ng-click="edit_round(tournamentRound.roundId)"><i class="icon-edit icon-white"></i> Edit</button>
+								<button class="btn btn-primary" type="button" ng-click="edit_round(tournamentRound.roundID)"><i class="icon-edit icon-white"></i> Edit</button>
 							</div>
 						</td>	
 	                    <td>
