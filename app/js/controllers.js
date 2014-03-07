@@ -2013,9 +2013,17 @@ function PracticeGameController($scope,$resource,$cookieStore){
 	
     //alert($scope.qid);
     $scope.create_practice_game = function(LevelID,numProblems){
+      console.log("Creating practice game in PracticeGameController");
       $scope.CreateGameModel = $resource('/jsonapi/create_game/problemsetID/:problemsetID/numProblems/:numProblems');
       
       $scope.CreateGameModel.get({"problemsetID":LevelID,"numProblems":numProblems}, function(response){
+        console.log("**Creating practice game in PracticeGameController");
+        //Add error checking here. 
+        if('error' in response){
+            console.log(response.error);
+            alert(response.error);
+            window.location.href="index.html#/practice";
+        }
         $scope.game = response;
         $scope.update_remaining_problems();
 		});
@@ -2541,6 +2549,8 @@ function PracticeDnDController($scope,$resource,$cookieStore,$location){
 	
     //alert($scope.qid);
     $scope.create_practice_game = function(LevelID,numProblems){
+      console.log("Attempting to launch practice game.");
+      alert("Hi");
       $scope.CreateGameModel = $resource('/jsonapi/create_game/problemsetID/:problemsetID/numProblems/:numProblems');
       
       $scope.CreateGameModel.get({"problemsetID":LevelID,"numProblems":numProblems}, function(response){
