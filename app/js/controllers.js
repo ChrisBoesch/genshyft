@@ -2553,7 +2553,8 @@ function PracticeDnDController($scope,$resource,$cookieStore,$location){
       $scope.CreateGameModel = $resource('/jsonapi/create_game/problemsetID/:problemsetID/numProblems/:numProblems');
       
       $scope.CreateGameModel.get({"problemsetID":LevelID,"numProblems":numProblems}, function(response){
-        //Need to add checking and popup to ensure that the player is not being blocked. 
+        //Need to add checking and popup to ensure that the player is not being blocked.
+        console.log(response);
         $scope.game = response;
         $scope.update_remaining_problems();
       });
@@ -2585,7 +2586,12 @@ function PracticeDnDController($scope,$resource,$cookieStore,$location){
     }
 
     $scope.modelEmpty = function() {
-      return $scope.line_outcome.origional.length == 0;
+      if ($scope.line_outcome.origional){
+        return $scope.line_outcome.origional.length == 0;
+      }
+      else{
+        return false;
+      }
     }
 
     $scope.assign_id = function() {
@@ -2629,10 +2635,12 @@ function PracticeDnDController($scope,$resource,$cookieStore,$location){
 
     $scope.update_remaining_problems = function(){
       $scope.remaining_problems = [];
-      //loop through problems and find unsolved. Add to remaining_problems.
-      for (var i = 0; i < $scope.game.problemIDs.length; i++) {
-        if($scope.game.solvedProblemIDs.indexOf($scope.game.problemIDs[i])<0){
-          $scope.remaining_problems.push($scope.game.problemIDs[i]);
+      if($scope.game.problemIDs){
+        //loop through problems and find unsolved. Add to remaining_problems.
+        for (var i = 0; i < $scope.game.problemIDs.length; i++) {
+          if($scope.game.solvedProblemIDs.indexOf($scope.game.problemIDs[i])<0){
+            $scope.remaining_problems.push($scope.game.problemIDs[i]);
+          }
         }
       }
 	  

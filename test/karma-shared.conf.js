@@ -41,7 +41,6 @@ module.exports = function () {
             'app/js/fancybox-fire.js',
             'app/js/filters.js',
             'app/js/game-play-app.js',
-            'app/js/mbcoaching-controllers.js',
             'app/js/PurposeDrivenAdminController.js',
             'app/js/PurposeDrivenController.js',
             'app/js/school-controllers.js',
