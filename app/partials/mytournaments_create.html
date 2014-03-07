@@ -51,7 +51,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Tournament Title*:
+						<b>Tournament Title</b>*:
 					</div>
 					<div class="span9">
 						 <input class="span8" type="text" required ng-model="grpTourTitle" placeholder="Enter tournament title here" ></input>
@@ -68,7 +68,7 @@
 						Tournament Description:
 					</div>
 					<div class="span9">
-						 <textarea class="span8" rows="3" ng-model="grpTourDescription" placeholder = "Please enter a description for your tournament" >
+						 <textarea class="span8" rows="2" ng-model="grpTourDescription" placeholder = "Please enter a description for your tournament" >
 						</textarea>
 					</div>
 				</div>	
@@ -78,7 +78,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Password*:
+						<b>Password</b>*:
 					</div>
 					<div class="span7">
 						 <input class="span6" type="password" required ng-model="grpTourPassword" placeholder="Enter tournament password here" ></input>
@@ -92,7 +92,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Password Confirm*:
+						<b>Password Confirm</b>*:
 					</div>
 					<div class="span7">
 						 <input class="span6" type="password" required ng-model="grpTourPasswordConfirm" placeholder="Confirm tournament password here" ></input>
@@ -109,7 +109,7 @@
 						Additional Details:
 					</div>
 					<div class="span9">
-						 <textarea class="span8" rows="3" ng-model="grpTourAddDetails" placeholder = "Please enter any additional details for your tournament" >
+						 <textarea class="span8" rows="2" ng-model="grpTourAddDetails" placeholder = "Please enter any additional details for your tournament" >
 						</textarea>
 					</div>
 				</div>	
@@ -122,17 +122,15 @@
 						Type:
 					</div>
 					<div class="span9">
-						 <div class="span8">
-						  <label>
+						<div class="span2">
 						    <input type="radio" ng-model="grpTourType" id="optionsRadios1" value="individual">
-						    Individual
+						    <b>Individual</b>
 						    </input>
-						  </label>
-						  <label>
+						</div>
+						<div class="span2">
 						    <input type="radio" ng-model="grpTourType" id="optionsRadios2" value="group">
-						    Group
+						    <b>Group</b>
 							</input>
-						  </label>
 						</div>
 					</div>
 				</div>	
@@ -189,101 +187,103 @@
 		</br>
 	</div><!--end of tournament details tab-->
 
-		<!--Add Rounds Tab-->
-		<div class="tab-pane" id="AddRounds">
-			<div class="row-fluid">
-				<div class="span12">
-					<font color="#08088A" size="2"><b>Adding Tournament Rounds</b></br>
-					Tournaments in SingPath must contain at least 1 round, up to a maximum of 5, each with a specified duration and it's own unique set of questions. For example, your Tournament can consist of a Qualifying Round, a Semi-Final Round, and a Final Round.</br>
-					Enter your Round details below - the required details are, again, highlighted with a (*). When you're done, click on the Step 3 tab above or the Choose Question Button below to start selecting your Round Problems!</font>
-				</div>	
-			</div>
-			<h4>Round Details</h4>
-			<div class="row-fluid">
-				<div class="span12 well well-small">
-					<!--Round Name input field-->
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="span2">
-								Round Title*:
-							</div>
-							<div class="span4">
-								<input class="span9" type="text" required ng-model="grpTourRoundName" placeholder="Enter round name here" ></input>
-								<span class="alert-error" ng-show="grpTourRoundName==''">Required!
-							 	</span>
-							</div>
-					<!--Round Description input field-->
-							<div class="span1">
-								Description:
-							</div>
-							<div class="span5">
-								 <textarea class="span12" rows="2" ng-model="grpTourRoundDesc" placeholder="Enter round description here">
-								</textarea>
-							</div>
-						</div>	
-					</div>
-					<div class="row-fluid">
-						<div class="span12">
-							<!--Round Duration input field-->
-							<div class="span2">
-								Duration(minutes)*:
-							</div>
-							<div class="span3">
-								<select class="span6" ng-model="grpTourRoundMins" ng-options="numgrp for numgrp in [10,15,20,25,30,35,40,45,50,55,60]"></select>
-							</div>
-							<div class="span7">
-								<button class="btn btn-primary" type="button" data-target='#ChooseQns' data-toggle="tab" id="groups"><i class="icon-plus icon-white"></i> Choose Questions</button>
-							</div>
-						</div>	
-					</div>
+	<!--Add Rounds Tab-->
+	<div class="tab-pane" id="AddRounds">
+		<div class="row-fluid">
+			<div class="span12">
+				<font color="#08088A" size="2"><b>Adding Tournament Rounds</b></br>
+				Tournaments in SingPath must contain at least 1 round, up to a maximum of 5, each with a specified duration and it's own unique set of questions. For example, your Tournament can consist of a Qualifying Round, a Semi-Final Round, and a Final Round.</br>
+				Enter your Round details below - the required details are, again, highlighted with a (*). When you're done, click on the Step 3 tab above or the Choose Question Button below to start selecting your Round Problems!</font>
+			</div>	
+		</div>
+		<h4>Round Details</h4>
+		<div class="row-fluid">
+			<div class="span12 well well-small">
+				<!--Round Name input field-->
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="span2">
+							<b>Round Title</b>*:
+						</div>
+						<div class="span4">
+							<input class="span9" type="text" required ng-model="grpTourRoundName" placeholder="Enter round name here" ></input>
+							<span class="alert-error" ng-show="grpTourRoundName==''">Required!
+						 	</span>
+						</div>
+				<!--Round Description input field-->
+						<div class="span1">
+							Description:
+						</div>
+						<div class="span5">
+							 <textarea class="span12" rows="2" ng-model="grpTourRoundDesc" placeholder="Enter round description here">
+							</textarea>
+						</div>
+					</div>	
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<!--Round Duration input field-->
+						<div class="span2">
+							<b>Duration(minutes)</b>*:
+						</div>
+						<div class="span3">
+							<select class="span6" ng-model="grpTourRoundMins" ng-options="numgrp for numgrp in [10,15,20,25,30,35,40,45,50,55,60]"></select>
+							<span class="alert-error" ng-show="grpTourRoundMins==''">Required!
+							</span>
+						</div>
+						<div class="span7">
+							<button class="btn btn-primary" type="button" data-target='#ChooseQns' data-toggle="tab" id="groups"><i class="icon-plus icon-white"></i> Choose Questions</button>
+						</div>
+					</div>	
 				</div>
 			</div>
-			<center><div class="tournamentRoundheader" ><b>{{grpTourTitle}} Tournament Rounds</b></div></center>
-			<table ng-grid id="grpTournRoundsTable" class="table table-bordered" width="100%">
-                <tr class="roundTableHeaders">
-                	<th class="roundTableHeader"><b>Round Title</b></th>
-                	<th class="roundTableHeader"><b>Round Duration</b></th>
-                	<th class="roundTableHeader"><b>Number of Questions in round</b></th>
-                	<th></th>
- 				</tr>
-                <tr ng-repeat="newTournamentRound in newTournamentRounds track by $index" class="active">
-                    <td class="roundInfo">{{newTournamentRound.roundName}}</td>
-                    <td class="roundInfo">{{newTournamentRound.timeLimit}}</td>
-                    <td class="roundInfo">{{newTournamentRound.problemIDs.length}}</td>
-                    <td class="editRoundInfo">
-                    	<button class="btn btn-danger" id="create" type="button" ng-click="deleteRound($index)"><i class="icon-remove icon-white"></i> Delete Round</button>
-                    </td>
-                </tr>
-                <tr class="warning">
-                    <td class="roundInfo">{{grpTourRoundName}}</td>
-                    <td class="roundInfo">{{grpTourRoundMins}}</td>
-                    <td class="roundInfo">{{cartQuestions.length}}</td>
-                    <td></td>
-                </tr>
-            </table>
-		<!--Finalize Tournament-->
-			<div class="row-fluid">
-				<div class="span12">	
-						<center>
-							<button class="btn btn-success btn-lg" id="create" type="button" ng-click="create_grptournament(5060388987076608)"><i class="icon-ok icon-white"></i> Finalize Tournament</button>
-						</center>
-				</div>	
-			</div>
-		</div><!--end of add rounds tab-->
+		</div>
+		<center><div class="tournamentRoundheader" ><b>{{grpTourTitle}} Tournament Rounds</b></div></center>
+		<table ng-grid id="grpTournRoundsTable" class="table table-bordered" width="100%">
+            <tr class="roundTableHeaders">
+            	<th class="roundTableHeader"><b>Round Title</b></th>
+            	<th class="roundTableHeader"><b>Round Duration</b></th>
+            	<th class="roundTableHeader"><b>Number of Questions in round</b></th>
+            	<th></th>
+				</tr>
+            <tr ng-repeat="newTournamentRound in newTournamentRounds" class="active">
+                <td class="roundInfo">{{newTournamentRound.roundName}}</td>
+                <td class="roundInfo">{{newTournamentRound.timelimit}}</td>
+                <td class="roundInfo">{{newTournamentRound.problemIDs.length}}</td>
+                <td class="editRoundInfo">
+                	<button class="btn btn-danger" id="create" type="button" ng-click="deleteRound($index)"><i class="icon-remove icon-white"></i> Delete Round</button>
+                </td>
+            </tr>
+            <tr class="warning">
+                <td class="roundInfo">{{grpTourRoundName}}</td>
+                <td class="roundInfo">{{grpTourRoundMins}}</td>
+                <td class="roundInfo">{{cartQuestions.length}}</td>
+                <td></td>
+            </tr>
+        </table>
+	<!--Finalize Tournament-->
+		<div class="row-fluid">
+			<div class="span12">	
+					<center>
+						<button class="btn btn-success btn-lg" id="create" type="button" ng-click="create_grptournament(5060388987076608)"><i class="icon-ok icon-white"></i> Finalize Tournament</button>
+					</center>
+			</div>	
+		</div>
+	</div><!--end of add rounds tab-->
 
 
-		<!-- Choose Questions tab -->
-		<div class="tab-pane" id="ChooseQns">
-			<div class="row-fluid">
-				<div class="span12">
-					<font color="#08088A" size="2"><b>Choose your Round Questions!</b></br>
-					Now comes the FUN part! To choose your questions: Browse our question bank and compile your very own custom-made set of questions. You can click on each question to view more details.</br>
-					When you are done, you can save the round by clicking on "Save Round". You will then be brought back to Step 2 where you can choose to add another round, or finalize your tournament by clicking "Finalize Tournament".</font>
-				</div>	
-			</div>
-			<h4>Choose Round Questions</h4>
-			<!--Choosing a Game Path-->
-			<div class="row-fluid">
+	<!-- Choose Questions tab -->
+	<div class="tab-pane" id="ChooseQns">
+		<div class="row-fluid">
+			<div class="span12">
+				<font color="#08088A" size="2"><b>Choose your Round Questions!</b></br>
+				Now comes the FUN part! To choose your questions: Browse our question bank and compile your very own custom-made set of questions. You can click on each question to view more details.</br>
+				When you are done, you can save the round by clicking on "Save Round". You will then be brought back to Step 2 where you can choose to add another round, or finalize your tournament by clicking "Finalize Tournament".</font>
+			</div>	
+		</div>
+		<h4>Choose Round Questions</h4>
+		<!--Choosing a Game Path-->
+		<div class="row-fluid">
 			<div class="span4 well well-small">
 				<div class="row-fluid">
 					<div class="span12">
@@ -297,8 +297,7 @@
 							</select>
 						</div>
 					</div>
-				</div>		
-				<!-- ng-options="languages for languages in ['Ruby','Python', 'Javascript','Java']"-->		
+				</div>			
 				<!--Choosing a Level-->
 				<div class="row-fluid">
 					<div class="span12">
@@ -314,45 +313,46 @@
 				</div>		
 				<div class="row-fluid">
 					<div class="span12">	
-							<center>
-								<button class="btn btn-primary" id="create" type="button" ng-click="loadQueriedQuestionTable()"><i class="icon-search icon-white"></i> Search Questions</button>
-							</center>
+						<center>
+							<button class="btn btn-primary" id="create" type="button" ng-click="loadQueriedQuestionTable()"><i class="icon-search icon-white"></i> Search Questions</button>
+						</center>
 					</div>	
 				</div>
-            </div>	              	
-           	<div class="span8 well well-small">
-           		<div class="row-fluid">
+			</div>	          	
+	       	<div class="span8 well well-small">
+	       		<div class="row-fluid">
 	           		<div class="span12">
 			            <div class="span5"><b>Round Title: </b>{{grpTourRoundName}}</div>
 			            <div class="span4" id="questionDuration"><b>Duration: </b>{{grpTourRoundMins}} mins</div>
 			            <div class="span3" id="questionCount"><b>No. of Questions: </b>{{cartQuestions.length}}</div>
 	        		</div>
-        		</div>
-    			<div class="row-fluid">
-    				<div class="span12">	
+	    		</div>
+				<div class="row-fluid">
+					<div class="span12">	
 	    				<div class="span4">
 	    					<div class="pull-left"><button class="btn btn-info" id="create" type="button" ng-click="viewQuestionsInCart()"><i class="icon-eye-open icon-white"></i> Manage Added Questions</button></div>
-    					</div>
+						</div>
 	    				<div class="span8">
 	    					<div class="pull-right"><button class="btn btn-success" id="create" type="button" ng-click="save_round()"><i class="icon-ok icon-white"></i> Save Round</button></div>
 	    				</div>
-    				</div>
-    			</div>
-    		</br>
-	            <table ng-grid id="questionTable" class="table table-bordered" width="100%">
-	            	<tr class"questionTableTitle">
-	            		<th class"questionTitle">Question Title</th>
-	            		<th class"questionTitle"> </th>
-	            	</tr>
-	                <tr ng-repeat="bankQuestion in bankQuestions" class="questionTableRows">
-	                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionInfo(bankQuestion.id)">{{bankQuestion.name}}</button></td>
-	                    <td class="questionTableCells">
-	                    	<button name="addQuestions" ng-click="addToCart(bankQuestion);isDisabled=true" class="btn btn-primary" ng-disabled="isDisabled"><i class="icon-plus icon-white"></i> Add</button>
-	                    </td>
-	                </tr>
-            	</table>
-            </div>	
-		</div>
+					</div>
+				</div>
+				</br>
+		        <table ng-grid id="questionTable" class="table table-bordered" width="100%">
+		        	<tr class"questionTableTitle">
+		        		<th class"questionTitle">Question Title</th>
+		        		<th class"questionTitle"> </th>
+		        	</tr>
+		            <tr ng-repeat="bankQuestion in bankQuestions" class="questionTableRows">
+		                <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionInfo(bankQuestion)">{{bankQuestion.name}}</button></td>
+		                <td class="questionTableCells">
+		                	<button name="addQuestions" ng-click="addToCart(bankQuestion);isDisabled=true" class="btn btn-primary" ng-disabled="isDisabled"><i class="icon-plus icon-white"></i> Add</button>
+		                </td>
+		            </tr>
+		    	</table>
+	    	</div>
+	    </div>	
+	</div>	
 	<!-- Tournament Creation Success Modal -->
 	<div class="modal fade modal-large" id="grpTournamentCreated" style="display:none">         
 	    <div class="modal-body" style="color:black">

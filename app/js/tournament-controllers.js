@@ -179,7 +179,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   //Loads the Queried List of Questions                 
   $scope.loadQueriedQuestionTable = function(){
-    console.log(JSON.stringify($scope.pathLevel));
     var path_id = $scope.selectedPath;
     var level_ids = $scope.pathLevel;
     /*
@@ -205,6 +204,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $resource('/jsonapi/problems/'+level_ids).get({},function(response){
       console.log("Retrieving all questions based on selected game paths and path levels from DB");
       $scope.bankQuestions=$scope.bankQuestions.concat(response.problems);
+      console.log(JSON.stringify($scope.bankQuestions));
     });
     //}
   }
@@ -315,7 +315,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     var exist = false;
     for(var i=0;i<$scope.cartQuestions.length;i++){
       var cartQuestion = $scope.cartQuestions[i];
-      if(addedQuestion.questionId == cartQuestion.questionId){
+      if(addedQuestion.questionId==cartQuestion.questionId && addedQuestion.name==cartQuestion.name){
         exist = true;
       } 
     }
@@ -362,7 +362,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Gets tournaments created by user-GenShyft
 	$scope.get_mytournaments = function(){
     console.log("Retrieving all tournaments created by User from DB");
-    $resource("/jsonapi/get_tournament_new").get({},function(response){
+    $resource("/jsonapi/list_tournaments").get({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       console.log($scope.grpTournaments);
     });
@@ -433,16 +433,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "passwordConfirm": $scope.grpTourPasswordConfirm,
                    "status": $scope.grpTourStatus,*/
                  }
-      $scope.NewGrpTournament = $resource('/jsonapi/create__or_update_grptournament');
+      $scope.NewGrpTournament = $resource('/jsonapi/create_or_update_tournament');
       //$scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
       var new_grpTournament = new $scope.NewGrpTournament(data);
       new_grpTournament.$save(function(response){
-         if(response.error) {
+        if(response.error) {
           console.log(response.error);
-         }
-         else{
+        }
+        else{
           console.log("Save Group tournament into DB")
           $scope.grpTournament = response;
+          $('#grpTournamentCreated').modal('show');
         }
       });
       /*
@@ -460,7 +461,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
       }); 
       */
-      $('#grpTournamentCreated').modal('show');
     }
   };
 
@@ -507,7 +507,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
       });
       */
-      $scope.NewTournament = $resource('/jsonapi/create__or_update_grptournament/'+tournamentID);
+      $scope.NewTournament = $resource('/jsonapi/create_or_update_tournament/'+tournamentID);
       var new_tournament = new $scope.NewTournament(updatedTournament);
       new_tournament.$save(function(response){
          if(response.error) {
@@ -570,7 +570,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
       });
       */
-      $scope.NewRound = $resource('/jsonapi/edit_and_update_round/'+roundID);
+      $scope.NewRound = $resource('/jsonapi/add_or_update_round/'+roundID);
       var new_round = new $scope.NewRound(updatedRound);
       new_round.$save(function(response){
          if(response.error) {
@@ -738,8 +738,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*method to hide modal after successfully created tournament*/
   $scope.hideSuccessTournamentModal = function(){
+    $('#grpTournamentCreated').modal('hide');
     $location.path("mytournaments");
-    $('.modal-backdrop').remove();
+    //$('.modal-backdrop').remove();
     //window.location="index.html#/mytournaments";
   };
 
