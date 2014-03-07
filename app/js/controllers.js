@@ -2549,11 +2549,11 @@ function PracticeDnDController($scope,$resource,$cookieStore,$location){
 	
     //alert($scope.qid);
     $scope.create_practice_game = function(LevelID,numProblems){
-      console.log("Attempting to launch practice game.");
-      alert("Hi");
+      console.log("Attempting to drag-n-drop practice game.");
       $scope.CreateGameModel = $resource('/jsonapi/create_game/problemsetID/:problemsetID/numProblems/:numProblems');
       
       $scope.CreateGameModel.get({"problemsetID":LevelID,"numProblems":numProblems}, function(response){
+        //Need to add checking and popup to ensure that the player is not being blocked. 
         $scope.game = response;
         $scope.update_remaining_problems();
       });
