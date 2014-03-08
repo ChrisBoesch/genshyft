@@ -3898,6 +3898,8 @@ function EventTableController($scope, $resource, $route, $location){
   		$scope.cutoff="";
   		$scope.progLang="";
 
+  		$scope.rsvpList = [];
+
 		$scope.edit_event = function(id, eventTitle, eventDescription, cutoff, progLang){
 			console.log("edit_event executed here")
 			if(eventTitle==""){
@@ -3932,6 +3934,42 @@ function EventTableController($scope, $resource, $route, $location){
 			}
 			
 		};
+
+		$scope.send_rsvp = function(messageDescription, includeRSVP){
+			console.log("rsvp executed here")
+			console.log("RSVP List= " + $scope.rsvpList);
+			if(includeRSVP==null){
+				includeRSVP = false;
+			}
+			if(messageDescription==null){
+				messageDescription = "Default Message";
+			}
+			var data = {"participantToSend":$scope.rsvpList,
+						"messageDescription":messageDescription,
+						"includeRSVP": includeRSVP
+
+						}
+			$scope.send_rsvp = $resource('/jsonapi/send_rsvp');
+			var new_rsvp = new $scope.send_rsvp(data);
+			new_rsvp.$save(function(response){
+				if(response.error) {
+					console.log(response.error);
+				}
+				else{
+					console.log("rsvp sent");
+					console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
+					console.log(response);
+					$location.path("eventsManage");
+				}
+			});
+			
+		}
+
+		//Add selected participants to an array
+		$scope.addToRSVPList = function(participantID){
+			console.log(participantID);
+		    $scope.rsvpList.push(participantID);
+		}
 
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;

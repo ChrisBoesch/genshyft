@@ -333,7 +333,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*Method to create tournaments-GenShyft*/
   $scope.create_grptournament = function(tournamentID){
     console.log("Create tournament executed here")
-    var currentDate = new Date(); 
+    //var currentDate = new Date(); 
 
     if( $scope.grpTourMentor == ""){
        $scope.grpTourMentor = false;
@@ -380,14 +380,15 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "status": $scope.grpTourStatus,*/
                  }
       $scope.NewGrpTournament = $resource('/jsonapi/create_or_update_tournament');
-      //$scope.NewGrpTournament = $resource('/jsonapi/create_tournament');
+      console.log("printing tournament data here" + data);
       var new_grpTournament = new $scope.NewGrpTournament(data);
       new_grpTournament.$save(function(response){
         if(response.error) {
-          console.log(response.error);
+          console.log("printing response here:" + response);
+          console.log("printing error in response here:" + response.error);
         }
         else{
-          console.log("Save Group tournament into DB")
+          console.log("Successfully Save Group tournament into DB")
           $scope.grpTournament = response;
           $('#grpTournamentCreated').modal('show');
         }
