@@ -137,16 +137,17 @@
                     <li>
                       <a ng-click="toVideos()">Learn about SingPath</a>
                     </li> 
-                    <li class="divider" ng-show="player.countryCode=='SG'"></li> 
-                    <li type="button" ng-show="player.countryCode=='SG'" class="nav-header">Singapore Schools</li>                    
+                    <li class="divider" ng-show="player.countryCode=='SG'||player.countryCode==''"></li> 
+                    <li type="button" ng-show="player.countryCode=='SG'||player.countryCode==''" class="nav-header">Singapore Schools</li>                    
                     
-                    <li ng-show="player.countryCode=='SG'">
+                    <li ng-show="player.countryCode=='SG'||player.countryCode==''">
                       <a type="button" ng-click="checkSchoolRegistrationLogin()">Register Your School</a>
                     </li>
-
-                    <li ng-show="player.countryCode=='SG'">
+                    <!--
+                    <li ng-show="player.countryCode=='SG'||player.countryCode==''">
                       <a type="button" ng-click="checkSchoolsMapLogin()">View Schools Map</a>
                     </li>
+                    -->
                     
                     <li class="divider"></li> 
                     <li class="nav-header">Others</li>  
@@ -199,28 +200,26 @@
     <!-- Le javascript
         ================================================== -->    
     <!-- Placed at the end of the document so the pages load faster -->
-        <script src="assets/js/app.js"></script>
-          <script src='js/app.js'></script>
-          <script src='js/angular-google-maps.js'></script>
-          <script src='js/app-config.js'></script>
-          <script src='js/admin-controllers.js'></script>
-          <script src='js/analytics.js'></script>
-          <script src='js/BATController.js'></script>
-          <script src='js/controllers.js'></script>
-          <script src='js/dir-dnd.js'></script>
-          <script src='js/directives.js'></script>
-          <script src='js/fancybox-fire.js'></script>
-          <script src='js/filters.js'></script>
-          <script src='js/game-play-app.js'></script>
-          <script src='js/PurposeDrivenAdminController.js'></script>
-          <script src='js/PurposeDrivenController.js'></script>
-          <script src='js/school-controllers.js'></script>
-          <script src='js/services.js'></script>
-          <script src='js/tournament-controllers.js'></script>
-          <script src='js/TournamentGameController.js'></script>
-          <script src='js/ymbcoaching-controllers.js'></script>
-          <script src='js/ymbcoaching-play-controllers.js'></script>
-          <script src='js/WebGameController.js'></script>
+    <script src="assets/js/app.js"></script>
+    <script src='js/app.js'></script>
+    <script src='js/angular-google-maps.js'></script>
+    <script src='js/app-config.js'></script>
+    <script src='js/admin-controllers.js'></script>
+    <script src='js/analytics.js'></script>
+    <script src='js/BATController.js'></script>
+    <script src='js/controllers.js'></script>
+    <script src='js/directives.js'></script>
+    <script src='js/fancybox-fire.js'></script>
+    <script src='js/filters.js'></script>
+    <script src='js/PurposeDrivenAdminController.js'></script>
+    <script src='js/PurposeDrivenController.js'></script>
+    <script src='js/school-controllers.js'></script>
+    <script src='js/services.js'></script>
+    <script src='js/tournament-controllers.js'></script>
+    <script src='js/TournamentGameController.js'></script>
+    <script src='js/ymbcoaching-controllers.js'></script>
+    <script src='js/ymbcoaching-play-controllers.js'></script>
+    <script src='js/WebGameController.js'></script>
     <script src="http://www.youtube.com/player_api"></script>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
 
