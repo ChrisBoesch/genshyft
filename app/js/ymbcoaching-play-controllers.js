@@ -52,6 +52,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 				if($scope.problemViaURL != null){
 					$scope.problemsToDo.push($scope.problemViaURL);
 					console.log("Take problem from URL : + "+$scope.problemViaURL);
+					$scope.nextProblemID = $scope.problemViaURL;
 				}			   
 			   
 			   $scope.problemsToDo.push($scope.nextProblemID);
@@ -69,7 +70,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			   
 				   for(var i = 1;i<$scope.master_next_ten_qn.length;i++){
 						$scope.problemsToDo.push($scope.master_next_ten_qn[i].problemId);
-						console.log("Problems added into list are " + $scope.mastery.next_ten[i].problemId);
+						console.log("Problems added into list are " + $scope.problemsToDo[i]);
 				   }
 			   }
 			   catch(err){
@@ -80,7 +81,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			   
 			   
 			   $scope.problemsInSequence = 0;
-			   if($scope.mastery.next_ten.length>0){
+			   if($scope.problemsToDo>$scope.problemsInSequence){
 				//$scope.nextProblemID = $scope.mastery.next_ten[$scope.problemsInSequence].problemId
 				$scope.nextProblemID = $scope.problemsToDo[$scope.problemsInSequence];
 			   }
@@ -123,21 +124,34 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 	
 	$scope.getGameID = function(){
 		$scope.gameModel = $resource('/jsonapi/create_game_for_problems');
+		var tempArrayProblemID =[];
+		tempArrayProblemID.push($scope.problemsToDo[$scope.problemsInSequence]);		
 		var data = {"problemIDs":$scope.problemsToDo};
-	
 	      var item = new $scope.gameModel(data);
           item.$save(function(response) { 
                   $scope.response = response;
-				  $scope.gameDetails = $scope.response
-	;	
+				  $scope.gameDetails = $scope.response;	
 							//Execute Game
 							$timeout(function(){ 
-								$scope.create_practice_game($scope.gameDetails);
-								$scope.runButton = true;
-							}, 12000);	 		 
+								$scope.create_practice_game($scope.gameDetails);		
+				}, 12000);	 		 
           });	
 	}	
-	
+	$scope.getGameID_wo_delay = function(){
+		$scope.gameModel = $resource('/jsonapi/create_game_for_problems');
+		var tempArrayProblemID =[];
+		tempArrayProblemID.push($scope.problemsToDo[$scope.problemsInSequence]);
+		var data = {"problemIDs":tempArrayProblemID};
+		//var data = {"problemIDs":$scope.problemsToDo};
+	      var item = new $scope.gameModel(data);
+          item.$save(function(response) { 
+                  $scope.response = response;
+				  $scope.gameDetails = $scope.response;	
+				  console.log("CREATING NEW GAME _ WO_ DELAY ");
+							//Execute Game
+								$scope.create_practice_game($scope.gameDetails);		 		 
+          });	
+	}	
 	
 	
   // yousof version with gameId given
@@ -156,6 +170,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 				$scope.solutionToProblem = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
 				$scope.descriptionToProblem = $scope.game.problems.problems[$scope.current_problem_index].description;
 				$scope.nameToProblem = $scope.game.problems.problems[$scope.current_problem_index].name;
+				
 				//$scope.solution1 = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
 				console.log("CURRENT PROBLEM INDEX IS " + i );
 				console.log("skeleton is " + $scope.game.problems.problems[$scope.current_problem_index].skeleton);
@@ -183,6 +198,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		
 		$timeout(function(){
 			$scope.solution1 = $scope.solutionToProblem;
+			$scope.runButton = true;
 		},10000);
 		
     };
@@ -227,12 +243,14 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		$scope.problemsInSequence = $scope.problemsInSequence + 1;
 		console.log($scope.problemsInSequence + ": ProblemInSequence");
 		console.log($scope.nextProblemID + "current problem Id ");
-		if($scope.problemsInSequence <= $scope.mastery.next_ten.length){
+		if($scope.problemsInSequence < $scope.problemsToDo.length){
 		
-			$scope.nextProblemID = $scope.mastery.next_ten[$scope.problemsInSequence].problemId;
+			$scope.nextProblemID = $scope.problemsToDo[$scope.problemsInSequence];
 			console.log($scope.nextProblemID + "newly changed problem Id ");
-			$scope.create_practice_game($scope.gameDetails);
+			//$scope.create_practice_game($scope.gameDetails);
+			$scope.getGameID_wo_delay();
 			$scope.showNewQuestion = false;
+			$scope.runButton = false;
 		}
 		else{
 			$route.reload();
@@ -339,7 +357,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 						$scope.words = $scope.audiotext.correctanswer;
 						//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 						audioplayer.load();
-						
+						$scope.runButton = false;
 						
 		  $('#t21').removeClass('active');
 		  $('#t11').addClass('active');
