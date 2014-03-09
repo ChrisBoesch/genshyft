@@ -43,6 +43,13 @@ module.exports = function (grunt) {
           port: 5555,
           keepalive: true
         }
+      },
+      screenshots: {
+        options: {
+          base: 'screenshots/',
+          port: 5556,
+          keepalive: true
+        }
       }
     },
 
@@ -52,6 +59,9 @@ module.exports = function (grunt) {
       },
       coverage: {
         path: 'http://localhost:5555'
+      },
+      screenshots: {
+        path: 'http://0.0.0.0:5556'
       }
     },
 
@@ -207,7 +217,209 @@ module.exports = function (grunt) {
           'bower_components/bootstrap-css/js/bootstrap.js'
         ]
       }
+    },
+
+    autoshot: {
+      default_options: {
+        options: {
+          path: 'screenshots/',
+          remote: {
+            files: [
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/home',
+                dest: 'home.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/quests',
+                dest: 'quests.jpg',
+                delay: 3000
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/practice',
+                dest: 'practice.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/challenges',
+                dest: 'challenges.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/profile',
+                dest: 'profile.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/teach',
+                dest: 'teach.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/storyboard',
+                dest: 'storyboard.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/story',
+                dest: 'story.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/challengestatistics',
+                dest: 'challengestatistics.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/ranking',
+                dest: 'ranking.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/registration',
+                dest: 'registration.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/challengeCreator',
+                dest: 'challengeCreator.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/challengeEdit',
+                dest: 'challengeEdit.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/tournaments',
+                dest: 'tournaments.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/roundranking',
+                dest: 'roundranking.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/events',
+                dest: 'events.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/eventsTable',
+                dest: 'eventsTable.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/eventsManage',
+                dest: 'eventsManage.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/eventsCreate',
+                dest: 'eventsCreate.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/eventsEdit',
+                dest: 'eventsEdit.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/create',
+                dest: 'create.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/editproblem',
+                dest: 'editproblem.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/editproblem/1234',
+                dest: 'editproblem-details.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/videos',
+                dest: 'videos.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/feedback',
+                dest: 'feedback.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/schoolregistration',
+                dest: 'schoolregistration.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/schoolregistrationstats',
+                dest: 'schoolregistrationstats.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/schoolsmap',
+                dest: 'schoolsmap.jpg',
+                delay: 3000
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/mytournaments',
+                dest: 'mytournaments.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/mytournaments-create',
+                dest: 'mytournaments-create.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/mytournaments-manage',
+                dest: 'mytournaments-manage.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/tournament-grpjoin',
+                dest: 'tournament-grpjoin.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/tournament-grpplay',
+                dest: 'tournament-grpplay.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/tournament-ranking',
+                dest: 'tournament-ranking.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/ezwebdev',
+                dest: 'ezwebdev.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/purposedriven',
+                dest: 'purposedriven.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/purposedriven-play',
+                dest: 'purposedriven-play.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/purposedriven-admin',
+                dest: 'purposedriven-admin.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/ymbcoaching',
+                dest: 'ymbcoaching.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/ymbcoaching-play',
+                dest: 'ymbcoaching-play.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/ymbcoaching-cache',
+                dest: 'ymbcoaching-cache.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/batpage',
+                dest: 'batpage.jpg'
+              },
+              {
+                src: 'http://0.0.0.0:8888/app/index.html#/home2',
+                dest: 'home2.jpg'
+              }
+            ]
+          },
+          local: false,
+          viewport: ['1024x655']
+        }
+      }
+    },
+    
+    compress: {
+      screenshots: {
+        options: {
+          archive: 'screenshots/screenshots.zip'
+        },
+        files: [{
+          expand: true,
+          src: ['screenshots/*.jpg'],
+          dest: '/'
+        }]
+      }
     }
+
   });
 
   grunt.registerTask('test', ['verbosity', 'develop:server', 'karma:unit', 'karma:midway', 'karma:e2e']);
@@ -230,6 +442,10 @@ module.exports = function (grunt) {
 
   // development
   grunt.registerTask('dev', ['install', 'build', 'connect:devserver', 'watch']);
+  
+  //screenshots
+  grunt.registerTask('screenshots', ['connect:devserver', 'autoshot',
+    'compress:screenshots', 'connect:screenshots', 'open:screenshots']);
 
   // server daemon
   grunt.registerTask('serve', ['connect:webserver']);
