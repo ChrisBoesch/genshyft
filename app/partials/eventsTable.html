@@ -24,18 +24,34 @@
 <button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
 
 <div style="float:right" class="fb-share-button" data-href="{{currentUrl}}" data-type="button"></div>
-
+<br>
 <div class="table-responsive">
-  <center><h2>{{eventsData.name}}</h2></center>
+  
+  <br>
+  <div class="alert alert-info">
+      <center><h2>{{eventsData.name}}</h2>
+      <h4>Total Participating: {{total_registered}} (Cutoff: {{current_event.cutoff}})
+      <br>
+      What is at stake: (Lots of prizes and school pride!)</h4>
+      <br>
+      <br>
+      Ranking might take a moment to load..
+    </center>
+
+  </div>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
         <td class = "span1"><strong>Rank</td>
         <td class = "span3"><strong>Player Name</td>
-        <td class = "span6"><strong>School</td>
-        <td class = "span2"><strong>School Type</td>
-        <td class = "span3"><strong>Starting Year</td>
+        <td class = "span4"><strong>School</td>
+        <td class = "span1"><strong>School Type</td>
+        <td class = "span2"><strong>Starting Year</td>
         <td class = "span4"><strong>{{eventsData.path}} Problems Solved</td>
+        <!--
+        <td class = "span1"><strong>Invited</td>
+        <td class = "span1"><strong>Accepted</td>
+      -->
       </tr>
     </thead>
     <tbody>

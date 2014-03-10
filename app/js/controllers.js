@@ -4000,6 +4000,7 @@ function EventTableController($scope, $resource, $route, $location){
 	    $scope.get_currentPlayerRanking = function(){
 	      $resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 	        $scope.current_event = response;
+	        $scope.total_registered = $scope.current_event.ranking.length;
 	        for(var i =0;i< $scope.current_event.ranking.length;i++){
 	          if($scope.current_event.ranking[i].isCurrentPlayer){
 	            $scope.currentPlayerRanking = i+1;
@@ -4025,7 +4026,7 @@ function EventTableController($scope, $resource, $route, $location){
 	        if($scope.currentPlayerSolvedProblems>=0){
 	        	$scope.hasRegisteredSchool = true;
 	        }
-	        $scope.timeToQualify = 5 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
+	        $scope.timeToQualify = 2 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
 	      }); 
 	      console.log("getCurrentPlayerRanking" + "");
 	    };
