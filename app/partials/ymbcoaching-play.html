@@ -501,8 +501,8 @@
                                 <div style="text-align: left;">
                                     <h5>&nbsp;Master These Question</h5>
                                         <font>                                
-                                            &nbsp;Name: <span ng-bind="descriptionToProblem"></span>
-                                            <br>&nbsp;Description: <span ng-bind="nameToProblem"></span>
+                                            &nbsp;<b>Name:</b> <span ng-bind="nameToProblem"></span> <br>
+                                            <br>&nbsp;<b>Description:</b> <span ng-bind="descriptionToProblem"></span> 
                                         </font>
                                 </div>
                             </div>
@@ -554,7 +554,8 @@
                                   <a href="ymbcoaching-play/#t3" data-toggle="tab">Solution</a>
                                 </li>
                                 <button class="btn btn-primary pull-right" ng-show ="runButton" ng-click="check_solution_for_game();" >&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
-
+								
+                                <button class="btn btn-warning pull-right" ng-show ="skipButton" ng-click="nextQuestion();" >&nbsp;&nbsp;Skip&nbsp;&nbsp;</button>
 								
 								<button class="btn btn-warning pull-right" ng-show="showNewQuestion" ng-click="nextQuestion();">&nbsp;Next Question &nbsp;
 								</button>								

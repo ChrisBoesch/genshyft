@@ -230,7 +230,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
       console.log(roundQuestions);
       console.log("Saving round into $scope.newTournamentRounds to be saved into tournament later");
-      $scope.newTournamentRounds.push({description:$scope.grpTourRoundName,timelimit:$scope.grpTourRoundMins,problemIDs:roundQuestions});
+      $scope.newTournamentRounds.push({problemIDs:roundQuestions,description:$scope.grpTourRoundName,timelimit:$scope.grpTourRoundMins});
       
       $scope.grpTourRoundName = "";
       $scope.grpTourRoundMins = "";
@@ -380,11 +380,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "status": $scope.grpTourStatus,*/
                  }
       $scope.NewGrpTournament = $resource('/jsonapi/create_or_update_tournament');
-      console.log("printing tournament data here" + data);
+      console.log("printing tournament data here:" + JSON.stringify(data));
       var new_grpTournament = new $scope.NewGrpTournament(data);
       new_grpTournament.$save(function(response){
         if(response.error) {
-          console.log("printing response here:" + response);
+          console.log("printing response here:" + JSON.stringify(response));
           console.log("printing error in response here:" + response.error);
         }
         else{

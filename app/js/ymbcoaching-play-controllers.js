@@ -133,6 +133,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 				  $scope.gameDetails = $scope.response;	
 							//Execute Game
 							$timeout(function(){ 
+								$scope.counter = 0;
 								$scope.create_practice_game($scope.gameDetails);		
 				}, 12000);	 		 
           });	
@@ -199,6 +200,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		$timeout(function(){
 			$scope.solution1 = $scope.solutionToProblem;
 			$scope.runButton = true;
+			$scope.skipButton = true;
 		},10000);
 		
     };
@@ -239,6 +241,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 	*/
 	$scope.nextQuestion = function(){
 		//$route.reload();
+		$scope.counter = 0;
 		console.log("next question");
 		$scope.problemsInSequence = $scope.problemsInSequence + 1;
 		console.log($scope.problemsInSequence + ": ProblemInSequence");
@@ -251,6 +254,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			$scope.getGameID_wo_delay();
 			$scope.showNewQuestion = false;
 			$scope.runButton = false;
+			$scope.skipButton = false;
 		}
 		else{
 			$route.reload();
@@ -358,6 +362,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 						//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 						audioplayer.load();
 						$scope.runButton = false;
+						$scope.skipButton = false;
 						
 		  $('#t21').removeClass('active');
 		  $('#t11').addClass('active');

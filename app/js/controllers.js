@@ -4037,6 +4037,32 @@ function EventTableController($scope, $resource, $route, $location){
 			
 }
 
+function EZWebDevController($scope,$resource,$cookieStore,$timeout,$http,$route,$location){
+
+	$scope.ezwebdevQns = [];
+	$scope.totalQns = 0;
+	$scope.qnIndex = 0;
+
+	$scope.getEZWebDevQuestions = function(){
+		$resource('/jsonapi/ezwebdevquestions').get({},function(response){
+			$scope.ezwebdevcall = response;
+
+			$scope.ezwebdevquestions = $scope.ezwebdevcall.problems.problems;
+			$scope.currEZWebDevQn = $scope.ezwebdevquestions[$scope.qnIndex];
+
+			$scope.current_level_progress = $scope.ezwebdevcall.numSolvedProblems;
+			$scope.total_level_progress = $scope.ezwebdevcall.numProblems;
+			$scope.nameToProblem = $scope.currEZWebDevQn.name;
+			$scope.descriptionToProblem = $scope.currEZWebDevQn.description;
+			$scope.skeleton = $scope.currEZWebDevQn.skeleton;
+			$scope.examples = $scope.currEZWebDevQn.examples;
+			console.log($scope.currEZWebDevQn);
+		})
+
+	};
+
+}
+
 /**
  * Should fetch:
  *
