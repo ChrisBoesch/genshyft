@@ -25,7 +25,7 @@
 	 				</tr>
 	                <tr class="warning" ng-repeat="grpTournament in grpTournaments">
 	                    <td class="tournInfo">{{grpTournament.shortTitle}}</td>
-	                    <td class="tournInfo">{{grpTournament.utcOffset}}</td>
+	                    <td class="tournInfo">{{grpTournament.created}}</td>
 	                    <td class="tournInfo">{{grpTournament.status}}</td>
 	                    <td>
 	                    	<button class="btn btn-warning" type="button" ng-click="manage_my_tournament(grpTournament.tournamentID)"><i class="icon-cog icon-black"></i> Manage</button>
