@@ -349,8 +349,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           console.log("Successfully Save Group tournament into DB")
           $scope.createdTournament = response;
           console.log($scope.createdTournament);
-          $location.path("mytournaments-create-addrounds");
           $('#grpTournamentCreated').modal('show');
+          $location.path("mytournaments-create-addrounds");
         //}
       });
     }
@@ -609,17 +609,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };    
   
   //method to delete tournament
-  $scope.deletePlayerTournament = function(tournamentID,tournamentTitle){
-    /*
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http({
-      method: 'POST',
-      url: '/jsonapi/delete_tournament/'+tournamentID,
-      async:false,
-    }).success(function (data){
-        window.location.href = 'index.html#/mytournaments';
-      }); 
-    */
+  $scope.deletePlayerTournament = function(tournamentID){
+    console.log(tournamentID);
     $scope.deleteTournament = $resource('/jsonapi/delete_tournament/'+tournamentID);
     var data = {
       "tournamentID":tournamentID

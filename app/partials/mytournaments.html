@@ -17,6 +17,7 @@
 			<div class="span12 well well-small" >
 				<table ng-grid id="grpTournTable" class="table table-bordered" width="100%">
 	                <tr class="tournTableHeaders">
+	                	<th class="tournTableHeader">Tournament ID</th>
 	                	<th class="tournTableHeader">Tournament Title</th>
 	                	<th class="tournTableHeader">Date Created</th>
 	                	<th class="tournTableHeader">Status</th>
@@ -24,6 +25,7 @@
 	                	<th class="tournTableHeader">Tournament Status Change Buttons:</th>
 	 				</tr>
 	                <tr class="warning" ng-repeat="grpTournament in grpTournaments">
+	                	<td class="tournInfo">{{grpTournament.tournamentID}}</td>
 	                    <td class="tournInfo">{{grpTournament.shortTitle}}</td>
 	                    <td class="tournInfo">{{grpTournament.created}}</td>
 	                    <td class="tournInfo">{{grpTournament.status}}</td>
@@ -34,7 +36,7 @@
 	                    	<button type="button" class="btn btn-primary" ng-click="activateTournament(grpTournament.tournamentID)"><i class="icon-star icon-white"></i> Open</button>
   							<button type="button" class="btn btn-info" ng-click="closeTournament(grpTournament.tournamentID)"><i class="icon-lock icon-white"></i> Close</button>
   							<button type="button" class="btn btn-inverse" ng-click="hideTournament(grpTournament.tournamentID)"><i class="icon-eye-close icon-white"></i> Hide</button>
-  							<button class="btn btn-danger" type="button" ng-click="deletePlayerTournament(grpTournament.tournamentID, grpTournament.shortTitle)" data-toggle="modal" data-target="#deletePlayerTourn"><i class="icon-trash icon-white"></i> Delete</button>
+  							<button class="btn btn-danger" type="button" ng-click="deletePlayerTournament(grpTournament.tournamentID)" data-toggle="modal" data-target="#deletePlayerTourn"><i class="icon-trash icon-white"></i> Delete</button>
 	                    </td>
 	                </tr>
             	</table>
