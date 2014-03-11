@@ -3819,13 +3819,13 @@ function EventController($scope, $resource, $location){
 			}
 			else{
 
-				var data = {"eventTitle":eventTitle,
-					"eventDescription":eventDescription,
+				var data = {"name":eventTitle,
+					"description":eventDescription,
 					"cutoff": cutoff,
-					"progLang": progLang
+					"path": progLang
 
 				}
-				$scope.newEvent = $resource('/jsonapi/create_event');
+				$scope.newEvent = $resource('/jsonapi/event');
 				var new_event = new $scope.newEvent(data);
 				new_event.$save(function(response){
 					if(response.error) {
@@ -3843,8 +3843,10 @@ function EventController($scope, $resource, $location){
 
 		$scope.delete_event = function(id){
 			console.log("delete_event executed here");
-			$scope.deleteEvent = $resource('/jsonapi/delete_event/:eventId', {eventId:'@id'});
-			var delete_event = new $scope.deleteEvent();
+			var data = {"archived": true
+						}	
+			$scope.deleteEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
+			var delete_event = new $scope.deleteEvent(data);
 			delete_event.$save({eventId:id}, function(response){
 				if(response.error) {
 					console.log(response.error);
@@ -3913,13 +3915,13 @@ function EventTableController($scope, $resource, $route, $location){
 			}
 			else{
 
-				var data = {"eventTitle":eventTitle,
-					"eventDescription":eventDescription,
+				var data = {"name":eventTitle,
+					"description":eventDescription,
 					"cutoff": cutoff,
-					"progLang": progLang
+					"path": progLang
 
 				}
-				$scope.editEvent = $resource('/jsonapi/edit_event/:eventId', {eventId:'@id'});
+				$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
 				var edit_event = new $scope.editEvent(data);
 				edit_event.$save({eventId:id}, function(response){
 					if(response.error) {
@@ -3949,7 +3951,7 @@ function EventTableController($scope, $resource, $route, $location){
 						"includeRSVP": includeRSVP
 
 						}
-			$scope.send_rsvp = $resource('/jsonapi/send_rsvp');
+			$scope.send_rsvp = $resource('/jsonapi/eventrsvp');
 			var new_rsvp = new $scope.send_rsvp(data);
 			new_rsvp.$save(function(response){
 				if(response.error) {
@@ -3959,7 +3961,7 @@ function EventTableController($scope, $resource, $route, $location){
 					console.log("rsvp sent");
 					console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
 					console.log(response);
-					$location.path("eventsManage");
+					$location.path("eventsTable");
 				}
 			});
 			
@@ -3981,22 +3983,24 @@ function EventTableController($scope, $resource, $route, $location){
     		console.log($scope.currentUrl);
     	}
 
-        //Gets registered jcParticipants.
 		$scope.get_participants = function(){
 	    console.log("get_mytournaments");
-		    $resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
-            	$scope.eventsData = response;
- 
-            	$scope.predicate = '-solvedproblems';
+	    	if($scope.eventID!=null){
+		    	$resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
+	            	$scope.eventsData = response;
+	 
+	            	$scope.predicate = '-solvedproblems';
 
-            console.log($scope.eventsData);
-        	 })
+	            	console.log($scope.eventsData);
+        	 	})
+			}
 
 	  	};
   
 	    $scope.get_currentPlayerRanking = function(){
 	      $resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 	        $scope.current_event = response;
+	        $scope.total_registered = $scope.current_event.ranking.length;
 	        for(var i =0;i< $scope.current_event.ranking.length;i++){
 	          if($scope.current_event.ranking[i].isCurrentPlayer){
 	            $scope.currentPlayerRanking = i+1;
@@ -4022,7 +4026,7 @@ function EventTableController($scope, $resource, $route, $location){
 	        if($scope.currentPlayerSolvedProblems>=0){
 	        	$scope.hasRegisteredSchool = true;
 	        }
-	        $scope.timeToQualify = 5 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
+	        $scope.timeToQualify = 2 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
 	      }); 
 	      console.log("getCurrentPlayerRanking" + "");
 	    };
