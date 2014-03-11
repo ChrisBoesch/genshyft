@@ -308,7 +308,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Gets tournaments created by user-GenShyft
 	$scope.get_mytournaments = function(){
     console.log("Retrieving all tournaments created by User from DB");
-    $resource("/jsonapi/list_tournaments").get({},function(response){
+    $resource("/jsonapi/list_tournaments").query({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       console.log($scope.grpTournaments);
     });
@@ -390,6 +390,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         else{
           console.log("Successfully Save Group tournament into DB")
           $scope.grpTournament = response;
+          console.log(response);
           $('#grpTournamentCreated').modal('show');
         }
       });
@@ -564,6 +565,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
     $('#editTournRound').modal('show');
   }
+
 
   //method to activate tournament and change status of Tournament to 'Open'
   $scope.activateTournament = function(tournamentID){ 
@@ -1009,7 +1011,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.manageSelectedTournament = function(){
     var tID = $cookieStore.get("tournamentID");
 
-    $resource("/jsonapi/added_tournaments").query({},function(response){
+    $resource("/jsonapi/list_tournaments").query({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       for(var i = 0; i < $scope.grpTournaments.length; i++){
         if(tID == $scope.grpTournaments[i].tournamentId){
