@@ -1441,7 +1441,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
         added_grpTournaments.push(grpTournament);
         return [200,grpTournament];
       });
-      $httpBackend.whenGET('/jsonapi/list_tournaments').respond(added_grpTournaments);
+      $httpBackend.whenGET('/jsonapi/get_player_tournaments').respond(added_grpTournaments);
 
       var added_grpTournamentRounds = [];
 

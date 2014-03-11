@@ -274,7 +274,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Gets tournaments created by user-GenShyft
 	$scope.get_mytournaments = function(){
     console.log("Retrieving all tournaments created by User from DB");
-    $resource("/jsonapi/list_tournaments").query({},function(response){
+    $resource("/jsonapi/get_player_tournaments").query({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       console.log($scope.grpTournaments);
     });
@@ -337,8 +337,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "isGroup": isGroup,
                    "assignMentorInTeam": mentorAssignInTeam,
                    "maxGroups": numberOfGrp,
-                   "maxPlayersPerGroup": numPlayerPerGrp,
-                   "tournamentID":123456 //simulate localhost
+                   "maxPlayersPerGroup": numPlayerPerGrp
+                   //"tournamentID":123456 //simulate localhost
                    /*"passwordConfirm": $scope.grpTourPasswordConfirm,
                    "status": $scope.grpTourStatus,*/
                  }
@@ -361,7 +361,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   //Save each created round into an array 
-  $scope.save_round = function(tournamentID){      
+  $scope.save_round = function(){      
+    var tournamentID = $cookieStore.get("tournamentID");
     if($scope.newTournamentRounds.length == 5){
       alert("The maximum number of rounds per tournament is 5!");
     }
@@ -392,7 +393,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           console.log(response.error)
         }
         else{
-          console.log("Successfully Saving round into DB");
+          console.log("Successfully Save round into DB");
           $scope.round = response;
           console.log(JSON.stringify($scope.round));
           $scope.grpTourRoundName = "";
@@ -688,6 +689,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.completeCreateTournament = function(){
+    $scope.newTournamentRounds = [];
     $location.path('mytournaments');
   }
 
@@ -1011,7 +1013,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.manageSelectedTournament = function(){
     var tID = $cookieStore.get("tournamentID");
 
-    $resource("/jsonapi/list_tournaments").query({},function(response){
+    $resource("/jsonapi/get_player_tournaments").query({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       for(var i = 0; i < $scope.grpTournaments.length; i++){
         if(tID == $scope.grpTournaments[i].tournamentId){
