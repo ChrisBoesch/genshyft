@@ -1441,7 +1441,16 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
         added_grpTournaments.push(grpTournament);
         return [200,grpTournament];
       });
-      $httpBackend.whenGET('/jsonapi/list_tournaments').respond(added_grpTournaments);
+      $httpBackend.whenGET('/jsonapi/get_player_tournaments').respond(added_grpTournaments);
+
+      var added_grpTournamentRounds = [];
+
+      $httpBackend.whenPOST('/jsonapi/add_or_update_round').respond(function(method, url, data) {
+        var grpTournamentRounds = JSON.parse(data);
+        added_grpTournamentRounds.push(grpTournamentRounds);
+        return [200,grpTournamentRounds];
+      });
+      $httpBackend.whenGET('/jsonapi/list_rounds').respond(added_grpTournamentRounds);
 
       var list_tournamentQns = {"tourQns":[
 								{
