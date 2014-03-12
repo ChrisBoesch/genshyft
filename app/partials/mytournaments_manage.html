@@ -81,7 +81,7 @@
 	
 </style>
 </br>
-<div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="tournamentInit();manageSelectedTournament();get_mytournaments()">
+<div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="manageSelectedTournament()">
 	<div class="row-fluid">
 		<div class="pull-right"><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments'"><i class="icon-home icon-white"></i> Back To My Tournaments </button></div>
 	</div>
@@ -317,16 +317,6 @@
 	        <div class="row-fluid">
 				<div class="span12">
 					<div class="span3">
-						<b>Status:</b>
-					</div>
-					<div class="span9">
-						 <select class="span3" ng-model="selectedTournament.status" ng-options="status for status in ['Open', 'Closed', 'Hide', 'Archive']"></select>
-					</div>
-				</div>	
-			</div>
-	        <div class="row-fluid">
-				<div class="span12">
-					<div class="span3">
 						<b>Tournament Title*:</b>
 					</div>
 					<div class="span9">
@@ -361,8 +351,8 @@
 						<b>Password Confirm*:</b>
 					</div>
 					<div class="span7">
-						 <input class="span6" type="password" required ng-model="selectedTournament.passwordConfirm"></input>
-						 <span class="alert-error" ng-show="selectedTournament.passwordConfirm!=selectedTournament.password">Password doesn't match!
+						 <input class="span6" type="password" required ng-model="passwordConfirm"></input>
+						 <span class="alert-error" ng-show="passwordConfirm!=selectedTournament.password">Password doesn't match!
 						 </span>
 					</div>
 				</div>	

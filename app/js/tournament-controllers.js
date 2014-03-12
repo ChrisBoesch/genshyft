@@ -59,6 +59,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   //variables for edit tournament details
   $scope.selectedTournament;
+  $scope.passwordConfirm="";
   $scope.selectedRound;
   $scope.allTournaments = [];
 
@@ -346,11 +347,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           console.log("printing error in response here:" + response.error);
         }
         //else{}
-          console.log("Successfully Save Group tournament into DB")
-          $scope.createdTournament = response;
-          console.log($scope.createdTournament);
-          $('#grpTournamentCreated').modal('show');
-          $location.path("mytournaments-create-addrounds");
+        console.log("Successfully Save Group tournament into DB")
+        $scope.createdTournament = response;
+        console.log($scope.createdTournament);
+        //$location.path("mytournaments-create-addrounds");
+        $('#grpTournamentCreated').modal('show');
         //}
       });
     }
@@ -410,7 +411,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     else if($scope.selectedTournament.password=="" || $scope.selectedTournament.password==undefined){
       alert("The tournament password cannot be empty!");
     }
-    else if($scope.selectedTournament.password!=$scope.selectedTournament.passwordConfirm){
+    else if($scope.selectedTournament.password!=$scope.passwordConfirm){
       alert("The tournament password does not match!");
     }
     else{
@@ -522,16 +523,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   //method to activate tournament and change status of Tournament to 'Open'
   $scope.activateTournament = function(tournamentID){ 
-    /*
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http({
-      method: 'POST',
-      url: '/jsonapi/activate_tournament/'+tournamentID,
-      async:false,
-    }).success(function (data){
-        window.location.href = 'index.html#/mytournaments';
-      });
-    */
     $scope.openTournament = $resource('/jsonapi/activate_tournament/'+tournamentID);
     var data = {
       "tournamentID":tournamentID
@@ -544,23 +535,14 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       else{
         console.log("Activate tournament and change status to Open")
         console.log(response);
-        $location.path('mytournaments');
+        //$location.path('mytournaments');
+        window.location.href = 'index.html#/mytournaments';
       }
     });
   };
   
   //method to close tournament and change status of Tournament to 'Closed'
-  $scope.closeTournament = function(tournamentID){  
-    /*
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http({
-      method: 'POST',
-      url: '/jsonapi/close_tournament/'+tournamentID,
-      async:false,
-    }).success(function (data){
-        window.location.href = 'index.html#/mytournaments';
-      });
-    */
+  $scope.closeTournament = function(tournamentID){ 
     $scope.closeTournament = $resource('/jsonapi/close_tournament/'+tournamentID);
     var data = {
       "tournamentID":tournamentID
@@ -573,24 +555,14 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       else{
         console.log("Close tournament and change status to Closed")
         console.log(response);
-        $location.path('mytournaments');
+        //$location.path('mytournaments');
+        window.location.href = 'index.html#/mytournaments';
       }
     });
   };
   
   //method to hide tournament and change status of Tournament to 'Invisible'
   $scope.hideTournament = function(tournamentID){ 
-    /*
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http({
-      method: 'POST',
-      url: '/jsonapi/hide_tournament/'+tournamentID,
-      async:false,
-    }).success(function (data){
-        window.location.href = 'index.html#/mytournaments';
-      });
-    */
-    
     $scope.hideTournament = $resource('/jsonapi/hide_tournament/'+tournamentID);
     var data = {
       "tournamentID":tournamentID
@@ -603,17 +575,19 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       else{
         console.log("Hide tournament and change status to Invisible")
         console.log(response);
-        $location.path('mytournaments');
+        //$location.path('mytournaments');
+        window.location.href = 'index.html#/mytournaments';
       }
     });  
   };    
   
   //method to delete tournament
-  $scope.deletePlayerTournament = function(tournamentID){
-    console.log(tournamentID);
-    $scope.deleteTournament = $resource('/jsonapi/delete_tournament/'+tournamentID);
+  $scope.deletePlayerTournament = function(){
+    var tID = $cookieStore.get("deleteTournamentID");
+    console.log("ID of tournament to delete: "+tID);
+    $scope.deleteTournament = $resource('/jsonapi/delete_tournament/'+tID);
     var data = {
-      "tournamentID":tournamentID
+      "tournamentID":tID
     };
     var newDeleteTournament = new $scope.deleteTournament(data);
     newDeleteTournament.$save(function(response){
@@ -621,9 +595,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log(response.error);
       }
       else{
-        console.log("Delete tournament")
+        console.log("Delete tournament successfully")
         console.log(response);
-        $location.path('mytournaments');
+        //$location.path('mytournaments');
+        window.location.href = 'index.html#/mytournaments';
       }
     });                  
   };  
@@ -640,7 +615,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   $scope.completeCreateTournament = function(){
     $scope.newTournamentRounds = [];
-    $location.path('mytournaments');
+    //$location.path('mytournaments');
+    window.location.href = 'index.html#/mytournaments';
   }
 
   /*method to hide modal after successfully save round*/
@@ -648,6 +624,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $('#roundSaved').modal('hide');
     $location.path('mytournaments-create-addrounds');
     //window.location="index.html#/mytournaments";
+  };
+
+  /*method to show modal to confirm deletion of tournament*/
+  $scope.confirmDeleteTourn = function(tournamentID){
+    $cookieStore.put("deleteTournamentID", tournamentID);
+    $('#deletePlayerTourn').modal('show');
   };
 
   /*method to hide modal after seeing questions information*/
@@ -962,16 +944,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   $scope.manageSelectedTournament = function(){
     var tID = $cookieStore.get("tournamentID");
-
+    console.log("TournamentID of tournament to be managed: " + tID);
     $resource("/jsonapi/get_player_tournaments").query({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       for(var i = 0; i < $scope.grpTournaments.length; i++){
-        if(tID == $scope.grpTournaments[i].tournamentId){
+        if(tID == $scope.grpTournaments[i].tournamentID){
           $scope.selectedTournament = $scope.grpTournaments[i];
         }
       }
       //console.log($scope.selectedTournament.status);
     });
+    $scope.passwordConfirm = $scope.selectedTournament.password;
   }
 
   //need to reference to deletePlayerTournament() function in manageTournament.js
