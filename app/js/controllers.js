@@ -3776,6 +3776,8 @@ function EventController($scope, $resource, $location){
                             "venue": "Default venue"};
         $scope.events = [];
   		$scope.location = $location;
+  		$scope.currentUrl = $location.absUrl();
+		$scope.eventID = ($location.search()).eventID;
 
   		//variables for create event details
   		$scope.eventTitle="";
@@ -3784,17 +3786,30 @@ function EventController($scope, $resource, $location){
   		$scope.progLang="";
 
         var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
-                  
+        
+        $scope.get_eventID = function(){
+    		$scope.eventID = ($location.search()).eventID;
+    		console.log($scope.eventID + "here3");
+    	},
+
+    	$scope.get_currentUrl = function(){
+    		$scope.currentUrl =$location.absUrl();
+    		console.log($scope.currentUrl);
+    	},
+
         // posting without and id should result in creating an object.
         $scope.fetch_event = function(id){
           var event = Event.get({eventId:id}, function() {
             $scope.last_result = event;
             //If id return event
             if(id){
-                 $scope.event = event;
+                $scope.event = event;
             }
-            else{
-                 $scope.events = event.events; 
+            else if($scope.eventID!=null){
+            	$scope.event = $scope.fetch_event($scope.eventID);
+                 
+            }else{
+            	$scope.events = event.events; 
             }
             
           });
