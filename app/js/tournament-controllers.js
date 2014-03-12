@@ -59,6 +59,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   //variables for edit tournament details
   $scope.selectedTournament;
+  $scope.selectedTournamentRounds;
   $scope.passwordConfirm="";
   $scope.selectedRound;
   $scope.allTournaments = [];
@@ -774,10 +775,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       */
       $scope.createHeat = $resource('/jsonapi/create_heat/');
       var data = {
-          tournamentID:tournamentID,
-          roundID:roundID,
-          startIn:timeTillStart,
-          isReset:"true"
+          "tournamentID":tournamentID,
+          "roundID":roundID,
+          "startIn":timeTillStart,
+          "isReset":"true"
       };
       var newCreateHeat = new $scope.createHeat(data);
       newCreateHeat.$save(function(response){
@@ -826,8 +827,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     */
     $scope.stopHeat = $resource('/jsonapi/stop_heat/');
       var data = {
-          tournamentID:tournamentID,
-          roundID:roundID
+          "tournamentID":tournamentID,
+          "roundID":roundID
       };
       var newStopHeat = new $scope.stopHeat(data);
       newStopHeat.$save(function(response){
@@ -955,15 +956,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       //console.log($scope.selectedTournament.status);
     });
     $scope.passwordConfirm = $scope.selectedTournament.password;
-  }
 
-  //need to reference to deletePlayerTournament() function in manageTournament.js
-  $scope.delete_my_tournament = function(tournamentID){
-      for(var i = 0; i < $scope.grpTournaments.length; i++){
-        if(tournamentID == $scope.grpTournaments[i].tournamentId){
-          $scope.grpTournaments.splice(i,1);
-        }
-      }
+    $resource("/jsonapi/get_tournament_rounds/:tID").query({},function(response){
+      $scope.selectedTournamentRounds = response;
+    })
   }
 
   /*Join Group or Leave Group for group tournament - by Glen (GENShYFT)*/
