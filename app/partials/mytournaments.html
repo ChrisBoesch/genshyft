@@ -1,10 +1,36 @@
-</br>
+<p></p>
+<style>
+	/* Theme for box heading */
+	.bootCamp {
+		color: #ffffff;
+		font-size: 18px;
+		border-bottom-color: #6b808d;
+		border-radius: 6px 6px 6px 6px;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+		margin-top: 4px;
+		margin-bottom: 8px;
+		padding: 8px 8px;
+	}
+
+	.bootCampSmall {
+		color: #ffffff;
+		font-size: 12px;
+		border-bottom-color: #6b808d;
+		border-radius: 6px 6px 6px 6px;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+		margin-top: 4px;
+		margin-bottom: 8px;
+		padding: 5px 5px;
+	}
+</style>	
 <div class="container" id="manageTournament" style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="get_mytournaments()">
-	<center><h2>My Tournaments</h2></center>
-	</br>
+	<div class="container">
+		<h4 class="well well-small bootCamp" align="center" id="well-c">My Tournaments</h4>
+	</div>	
 	<div class="row-fluid">
 		<div class="span12">
-			<button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-create'"><i class="icon-plus icon-white"></i> Create Tournament</button></br></br>
+			<center><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments-create'"><i class="icon-plus icon-white"></i> Create Tournament</button></center>
+			</br>
 			<b>Tournaments by you:</b>
 		</div>
 	</div>
