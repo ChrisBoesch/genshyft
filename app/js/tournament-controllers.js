@@ -930,8 +930,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           //$scope.tournamentID = tournamentID;
           //$location.search({"tournamentID":tournamentID}).path("tournament-grpjoin");
           $cookieStore.put("tournamentID", tournamentID);
-          $location.path("tournament-grpjoin");
-          
+          $cookieStore.put("tournamentPassword", tournamentPassword);
+          $location.path("tournament-grpjoin");  
         }
     }).error(function (data, status, headers, config) {
       console.log("Error");
