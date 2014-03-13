@@ -337,7 +337,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "assignMentorInTeam": mentorAssignInTeam,
                    "maxGroups": numberOfGrp,
                    "maxPlayersPerGroup": numPlayerPerGrp,
-                   "tournamentID":123456 //simulate localhost
+                   //"tournamentID":123456 //simulate localhost
                  }
       $scope.NewGrpTournament = $resource('/jsonapi/create_or_update_tournament');
       console.log("printing tournament data here:" + JSON.stringify(data));
