@@ -960,14 +960,14 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
     */
 
-    $resource('/jsonapi/tournament/' + tID).get({"tournamentID":tID}, function(response){
+    $resource('/jsonapi/tournament/' + tID).get({},function(response){
       $scope.tournament = response;
       console.log("fetch_tournament = " + $scope.tournament);  
       console.log($scope.selectedTournament.password);
       $scope.passwordConfirm = $scope.selectedTournament.password;
     });
 
-    $resource("/jsonapi/get_tournament_rounds/:tID").query({},function(response){
+    $resource("/jsonapi/get_tournament_rounds/" + tID).query({},function(response){
       $scope.selectedTournamentRounds = response;
     });
   }
