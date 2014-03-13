@@ -55,7 +55,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.grpTourNoGroup=2;
   $scope.grpTourMaxNoPlayer=1;
   $scope.qnsLanguage="Ruby";
-  $scope.createdTournament=null;
+  $scope.createdTournament;
+  $scope.createdTournamentID="";
 
   //variables for edit tournament details
   $scope.selectedTournament;
@@ -350,7 +351,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         //else{}
         console.log("Successfully Save Group tournament into DB")
         $scope.createdTournament = response;
-        console.log($scope.createdTournament);
+        console.log($scope.createdTournament.id);
+        $cookieStore.put("createdTournamentID", $scope.createdTournament.id);
         //$location.path("mytournaments-create-addrounds");
         $('#grpTournamentCreated').modal('show');
         /*
@@ -364,7 +366,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   //Save each created round into an array 
   $scope.save_round = function(){      
-    var tournamentID = $cookieStore.get("tournamentID");
+    var tournamentID = $cookieStore.get("createdTournamentID");
     if($scope.newTournamentRounds.length == 5){
       alert("The maximum number of rounds per tournament is 5!");
     }
@@ -605,17 +607,20 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };  
 
   /*method to hide modal after successfully created tournament*/
-  $scope.proceedToAddRounds = function(tournamentID){
+  $scope.proceedToAddRounds = function(){
     $('#grpTournamentCreated').modal('hide');
-    var tID = tournamentID;
-    console.log(tID);
-    $cookieStore.put("tournamentID", tID);
+    //console.log(tournamentID);
+    var tID = $cookieStore.get("createdTournamentID");
     $location.search({"tournamentID":tID}).path('mytournaments-create-addrounds');
   };
 
   $scope.completeCreateTournament = function(){
-    $scope.newTournamentRounds = [];
-    $location.path('mytournaments');
+    if($scope.newTournamentRounds.length == 0){
+      alert("You have not added any tournament round! Please add at least 1 tournament round!");
+    }else{
+      $scope.newTournamentRounds=[]
+      $location.path('mytournaments');
+    } 
   }
 
   /*method to hide modal after successfully save round*/
@@ -955,7 +960,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
     */
 
-    $resource('/jsonapi/tournament/' + tID).get({"tournamentID":tournamentID}, function(response){
+    $resource('/jsonapi/tournament/' + tID).get({"tournamentID":tID}, function(response){
       $scope.tournament = response;
       console.log("fetch_tournament = " + $scope.tournament);  
       console.log($scope.selectedTournament.password);

@@ -9,16 +9,26 @@
 		
 				<center><h2>Open Tournaments</h2></center>
 			    <ol>
-			      <li ng-repeat="tournament in tournaments | filter: { status: 'open' }">
-			        {{tournament.shortTitle}},{{tournament.description}}<br>
-			        {{tournament.registeredPlayerIDs.length}} registered.  
-			        Enter password to join 
-					<input type="text" ng-model="tournamentPassword">
-			        <input type="submit" value="Register" ng-controller="GenshyftTournamentController" ng-click="register_for_tournament_new(tournament.tournamentID, tournamentPassword)"><br>
-			      </li>
-			    </ol>
+				
+				
+				<table  class = 'table table-bordered'>
+					
+			      <!-- <li ng-repeat="tournament in tournaments | filter: { status: 'open' }"> !-->
+				 <th> Title and Description</th>
+				 <th> Currently Registered</th>
+				 <th> Insert Password</th>
+				 <th> Register</th>
+				 <tr ng-repeat="tournament in tournaments | filter: { status: 'open' }">
+				 
+			        <td width = 60%>  {{tournament.shortTitle}},{{tournament.description}} </td>
+			        <td> {{tournament.registeredPlayerIDs.length}} registered. </td>
+					<td><input type="text" ng-model="tournamentPassword"> </td>
+			        <td> <input type="submit" value="Register" ng-controller="GenshyftTournamentController" ng-click="register_for_tournament_new(tournament.tournamentID, tournamentPassword)"> </td><br>
+			     
+			    </tr>
 
+				</table>
 	
-
+	
 	</div>
 <div>
