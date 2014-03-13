@@ -607,10 +607,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*method to hide modal after successfully created tournament*/
   $scope.proceedToAddRounds = function(tournamentID){
     $('#grpTournamentCreated').modal('hide');
-    var tID = tournamentID;
-    console.log(tID);
-    $cookieStore.put("tournamentID", tID);
-    $location.search({"tournamentID":tID}).path('mytournaments-create-addrounds');
+    //var tID = tournamentID;
+    console.log(tournamentID);
+    $cookieStore.put("tournamentID", tournamentID);
+    $location.search({"tournamentID":tournamentID}).path('mytournaments-create-addrounds');
   };
 
   $scope.completeCreateTournament = function(){
@@ -955,7 +955,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
     */
 
-    $resource('/jsonapi/tournament/' + tID).get({"tournamentID":tournamentID}, function(response){
+    $resource('/jsonapi/tournament/' + tID).get({"tournamentID":tID}, function(response){
       $scope.tournament = response;
       console.log("fetch_tournament = " + $scope.tournament);  
       console.log($scope.selectedTournament.password);
