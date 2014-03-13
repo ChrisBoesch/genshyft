@@ -228,7 +228,7 @@
 	                	<th></th>
 	                	<th class="roundTableHeader"><b>Start round in:</b></th>
 	 				</tr>
-	                <tr class="warning" ng-repeat="tournamentRound in selectedTournament.rounds">
+	                <tr class="warning" ng-repeat="tournamentRound in tournamentRounds">
 	                    <td class="roundInfo">{{tournamentRound.description}}</td>
 	                    <td class="roundInfo">{{tournamentRound.timelimit}}</td>
 	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
@@ -237,13 +237,13 @@
 								<button class="btn btn-primary" type="button" ng-click="edit_round(tournamentRound.roundID)"><i class="icon-edit icon-white"></i> Edit</button>
 							</div>
 						</td>	
-	                    <td>
+	                    <td ng-show="selectedTournament.status=='Open'">
 	                    	<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">		
-	                    		<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 1 min</button>
-	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 5 min</button>
-	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 30 min</button>
-	  							<button type="button" class="btn btn-info"><i class="icon-play icon-white"></i> 60 min</button>	
-	  							<button class="btn btn-danger" type="button" ng-model="stop"><i class="icon-stop icon-white"></i> Stop </button>	
+	                    		<button type="button" class="btn btn-info" ng-click="createHeat(selectedTournament.tournamentID,tournamentRound.roundID,tournamentRound.currentHeat,1)"><i class="icon-play icon-white"></i> 1 min</button>
+	  							<button type="button" class="btn btn-info" ng-click="createHeat(selectedTournament.tournamentID,tournamentRound.roundID,tournamentRound.currentHeat,5)"><i class="icon-play icon-white"></i> 5 min</button>
+	  							<button type="button" class="btn btn-info" ng-click="createHeat(selectedTournament.tournamentID,tournamentRound.roundID,tournamentRound.currentHeat,30)"><i class="icon-play icon-white"></i> 30 min</button>
+	  							<button type="button" class="btn btn-info" ng-click="createHeat(selectedTournament.tournamentID,tournamentRound.roundID,tournamentRound.currentHeat,60)"><i class="icon-play icon-white"></i> 60 min</button>	
+	  							<button class="btn btn-danger" type="button" ng-model="stop" ng-click="stopHeat(selectedTournament.tournamentID,tournamentRound.roundID)"><i class="icon-stop icon-white"></i> Stop </button>	
 							</div>
 	                    </td>
 	                </tr>
