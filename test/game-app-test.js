@@ -597,11 +597,14 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		]};
 		$httpBackend.whenGET('/jsonapi/mytournaments/all').respond(tournaments);
 
-	
+	$httpBackend.whenPOST('/jsonapi/mentor_has_arrived').respond(function(method, url, data) {
+        var item = JSON.parse(data);
+	    return [200,item];
+ 	});
 
 	var grpPlayers = [];
 
-  	$httpBackend.whenPOST('/jsonapi/join_group').respond(function(method, url, data) {
+  	$httpBackend.whenPOST('/jsonapi/join_group/join').respond(function(method, url, data) {
         var item = JSON.parse(data);
 	    grpPlayers.push(item);
 	    return [200,item];
@@ -626,9 +629,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "directorID": 57754,
     "isGroup": false,
     "tournamentID": 5060388987076608,
-	"maxNoPlayerPerGrp":0,
-	"numberOfGrp":0,
-    "mentorAssignInTeam": false,
+	"maxNoPlayersPerGrp":0,
+	"maxGroups":0,
+    "assignMentorInTeam": false,
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -732,19 +735,19 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		],
 		"registeredPlayerIDs":[
 		{ 
-			"playerId":57754,
-			"playerName":"Chris", 
+			"playerID":57754,
+			"nickname":"Chris", 
 			"group": 3
 		},
 
 		{ 
-			"playerId":2739102,
-			"playerName":"Player 2", 
+			"playerID":2739102,
+			"nickname":"Player 2", 
 			"group":0
 		},
 		{
-			"playerId":9379339,
-			"playerName":"Player 3", 
+			"playerID":9379339,
+			"nickname":"Player 3", 
 			"group":0
 		}],
 
@@ -754,255 +757,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		"winnerText": ""
 	};
 
-	var IndTournData= {
-    "status": "Close",
-    "currentPlayerID": 57754,
-    "description": "Tournament",
-    "directorID": 57754,
-    "tournType": "Group",
-    "tournamentID": 5060388987076610,
-    "numPlayerPerGrp": 5,
-    "numberOfGrp": 5,
-    "mentorAssignInTeam": "Y/N",
-	"round":[{
-		"roundID":4912161075757056,
-		"description": "Round 1",
-		"currentHeatDetails": {
-			"heatID": 6144086545268736,
-			"description": "Heat 2",
-			"startTime": "2013-10-04 14:02:05.835670",
-			"currentTime": "2013-10-04 14:02:00.246270"
-		},
-		"registeredPlayerIDs": [
-			{
-				"playerId": 57754,
-				"playerName": "Chris",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 1,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739102,
-				"playerName": "Player 2",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 1,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""	
-			},
-			{
-				"playerId": 9379339,
-				"playerName": "Player 3",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 1,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 57753,
-				"playerName": "Player 4",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 2,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739101,
-				"playerName": "Player 5",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 2,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 9379338,
-				"playerName": "Player 6",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 2,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 57752,
-				"playerName": "Player 7",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 3,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739100,
-				"playerName": "Player 8",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 3,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 9379337,
-				"playerName": "Player 9",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 4,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 57751,
-				"playerName": "Player 10",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 4,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739099,
-				"playerName": "Player 11",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 4,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 9379336,
-				"playerName": "Player 12",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 4,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 57750,
-				"playerName": "Player 13",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 5,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739098,
-				"playerName": "Player 14",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 3,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 9379335,
-				"playerName": "Player 15",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 2,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			}
-		]
-	}] 
-};
+	
 
  	var tournamentGrpData = {
     "status": "Open for registration",
@@ -1011,9 +766,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "directorID": 57754,
     "isGroup": true,
     "tournamentID": 5060388987076609,
-	"numPlayerPerGrp":5,
-	"numberOfGrp":5,
-    "mentorAssignInTeam": true,
+	"maxPlayersPerGrp":5,
+	"maxGroups":5,
+    "assignMentorInTeam": true,
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -1116,88 +871,88 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
         }],
 	    "registeredPlayerIDs":[
 		{ 
-			"playerId":57754,
-			"playerName":"Chris", 
+			"playerID":57754,
+			"nickname":"Chris", 
 			"group":3
 		},
 		
 		{ 
-			"playerId":2739102,
-			"playerName":"Player 2", 
+			"playerID":2739102,
+			"nickname":"Player 2", 
 			"group":0
 		},
 		{
-			"playerId":9379339,
-			"playerName":"Player 3", 
+			"playerID":9379339,
+			"nickname":"Player 3", 
 			"group":1
 		},{ 
-			"playerId":57753,
-			"playerName":"Player 4", 
+			"playerID":57753,
+			"nickname":"Player 4", 
 			"group": 1
 		},
 		
 		{ 
-			"playerId":2739101,
-			"playerName":"Player 5", 
+			"playerID":2739101,
+			"nickname":"Player 5", 
 			"group":1
 		},
 		{
-			"playerId":9379338,
-			"playerName":"Player 6", 
+			"playerID":9379338,
+			"nickname":"Player 6", 
 			"group":2
 		},
 		{ 
-			"playerId":57752,
-			"playerName":"Player 7", 
+			"playerID":57752,
+			"nickname":"Player 7", 
 			"group": 2
 		},
 		
 		{ 
-			"playerId":2739100,
-			"playerName":"Player 8", 
+			"playerID":2739100,
+			"nickname":"Player 8", 
 			"group":0
 		},
 		{
-			"playerId":9379337,
-			"playerName":"Player 9", 
+			"playerID":9379337,
+			"nickname":"Player 9", 
 			"group":4
 		},
 		{ 
-			"playerId":57751,
-			"playerName":"Player 10", 
+			"playerID":57751,
+			"nickname":"Player 10", 
 			"group": 4
 		},
 		
 		{ 
-			"playerId":2739099,
-			"playerName":"Player 11", 
+			"playerID":2739099,
+			"nickname":"Player 11", 
 			"group":4
 		},
 		{
-			"playerId":9379336,
-			"playerName":"Player 12", 
+			"playerID":9379336,
+			"nickname":"Player 12", 
 			"group":5
 		},
 		{ 
-			"playerId":57750,
-			"playerName":"Player 13", 
+			"playerID":57750,
+			"nickname":"Player 13", 
 			"group": 5
 		},
 		
 		{ 
-			"playerId":2739098,
-			"playerName":"Player 14", 
+			"playerID":2739098,
+			"nickname":"Player 14", 
 			"group":5
 		},
 		{
 			"playerId":9379335,
-			"playerName":"Player 15", 
+			"nickname":"Player 15", 
 			"group":3
 		}],
 		
 	    "numRounds": 1,
 	    "shortTitle": "Test Group Tournament",
-	    "tournamentType": "Normal",
+	    "tournamentType": "Genshyft",
 	    "winnerText": ""
 	};
 	$httpBackend.whenGET('/jsonapi/tournament/5060388987076609').respond(tournamentGrpData);
@@ -2251,7 +2006,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       var tournamentGame = {
 	    "game_end": "2013-09-29 09:27:03.104550",
 	    "player": "Chris",
-	    "solvedProblemIDs": [10033, 17155],
+	    "solvedProblemIDs": [10033],
 	    "currentProblem_id": "TBD",
 	    "playerID": 57754,
 	    "allSolved": false,
