@@ -170,7 +170,7 @@
 								<b>No. of groups:</b>  
 							</div>
 							<div class="span6">	
-								{{selectedTournament.numberOfGrp}} 
+								{{selectedTournament.maxGroups}} 
 							</div>
 						</div>	
 					</div>	
@@ -180,7 +180,7 @@
 								<b>No. of players per group:</b>  
 							</div>
 							<div class="span6">	
-								{{selectedTournament.numPlayerPerGrp}} 
+								{{selectedTournament.maxNoPlayersPerGrp}} 
 							</div>
 						</div>	
 					</div>	
@@ -304,7 +304,7 @@
 					<div class="row-fluid">
 						<div class="span12 well well-small" style="overflow:auto;">
 							<li class="bulletless" ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
-								<button class="btn bttn ft" ng-click="remove_from_tournament(unregisteredPlayer.playerId, tournament.tournamentID)"><span><b>{{unregisteredPlayer.playerName}}</b></span></button>
+								<button class="btn bttn ft" ng-click="remove_from_tournament(unregisteredPlayer.playerID, tournament.tournamentID)"><span><b>{{unregisteredPlayer.nickname}}</b></span></button>
 							</li>	
 						</div>
 					</div>
@@ -324,7 +324,7 @@
 												<b>Group {{$index+1}}</b>
 												
 												<li class="bulletless" ng-repeat="player in group track by $index">
-													<button class="btn bttn ft" ng-if="$index != 0" ng-click="join_grp(player.playerId, tournament.tournamentID, 0)"><span><b>{{player.playerName}}</b></span>
+													<button class="btn bttn ft" ng-if="$index != 0" ng-click="join_grp(player.playerID, tournament.tournamentID, 0)"><span><b>{{player.nickname}}</b></span>
 													</button>
 												</li>
 											
