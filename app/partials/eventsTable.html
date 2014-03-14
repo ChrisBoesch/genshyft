@@ -56,10 +56,11 @@
         <td class = "span1"><strong>School Type</td>
         <td class = "span2"><strong>Starting Year</td>
         <td class = "span4"><strong>{{eventsData.path}} Problems Solved</td>
-        <!--
+        <td class = "span4"><strong>Highest Badge</td>
+        <td class = "span4"><strong>Rank at Cutoff</td>
+        <td class = "span4"><strong>Solved at Cutoff</td>
         <td class = "span1"><strong>Invited</td>
         <td class = "span1"><strong>Accepted</td>
-      -->
       </tr>
     </thead>
     <tbody>
@@ -95,6 +96,15 @@
         </td>
         <td>
           <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
+        </td>
+    <td>{{participant.rankatcutoff}}
+       </td>
+    <td>{{participant.solvedatcutoff}}
+        </td>
+       </td>
+  <td><font ng-show="participant.sentrsvp">{{participant.sentrsvp}}</font>
+       </td>
+  <td><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
         </td>
 
     </span>
@@ -152,11 +162,21 @@
                 <span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
           </span>
         </td>
-        <td>
+        <td class = "span4">
           <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
         </td>
-
     </span>
+
+    <td>{{participant.rankatcutoff}}
+       </td>
+    <td>{{participant.solvedatcutoff}}
+        </td>
+       </td>
+  <td><font ng-show="participant.sentrsvp">{{participant.sentrsvp}}</font>
+       </td>
+  <td><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
+        </td>
+
       </tr>
       </tbody>
 
