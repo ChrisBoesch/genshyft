@@ -332,7 +332,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "description":$scope.grpTourDescription,
                    "password": $scope.grpTourPassword,
                    "status": "Closed",
-                   "type": "Normal",
+                   "type": "Genshyft",
                    "details":$scope.grpTourAddDetails,
                    "isGroup": isGroup,
                    "assignMentorInTeam": mentorAssignInTeam,
