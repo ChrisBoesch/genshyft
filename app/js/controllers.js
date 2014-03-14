@@ -4004,7 +4004,7 @@ function EventTableController($scope, $resource, $route, $location){
 		    	$resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
 	            	$scope.eventsData = response;
 	 
-	            	$scope.predicate = '-solvedproblems';
+	            	//$scope.predicate = '-solvedproblems';
 
 	            	console.log($scope.eventsData);
         	 	})
@@ -4015,6 +4015,8 @@ function EventTableController($scope, $resource, $route, $location){
 	    $scope.get_currentPlayerRanking = function(){
 	      $resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 	        $scope.current_event = response;
+	        console.log("refer here");
+	        console.log($scope.current_event);
 	        $scope.total_registered = $scope.current_event.ranking.length;
 	        for(var i =0;i< $scope.current_event.ranking.length;i++){
 	          if($scope.current_event.ranking[i].isCurrentPlayer){
