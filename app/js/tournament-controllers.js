@@ -332,7 +332,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "description":$scope.grpTourDescription,
                    "password": $scope.grpTourPassword,
                    "status": "Closed",
-                   "type": "Normal",
+                   "type": "Genshyft",
                    "details":$scope.grpTourAddDetails,
                    "isGroup": isGroup,
                    "assignMentorInTeam": mentorAssignInTeam,
@@ -950,15 +950,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       if(response.error){
         console.log("Error from retrieving tournament: " + JSON.stringify(response.error));
       }
-      $scope.tournament = response;
-      console.log("fetch_tournament = " + $scope.tournament);  
+      $scope.selectedTournament = response;
+      console.log("fetch_tournament = " + JSON.stringify($scope.selectedTournament));  
       console.log($scope.selectedTournament.password);
       $scope.passwordConfirm = $scope.selectedTournament.password;
+      $scope.selectedTournamentRounds = $scope.selectedTournament.rounds;
     });
-
+    /*
     $resource("/jsonapi/get_tournament_rounds/" + tID).query({},function(response){
       $scope.selectedTournamentRounds = response;
     });
+  */
   }
 
   /*Join Group or Leave Group for group tournament - by Glen (GENShYFT)*/
