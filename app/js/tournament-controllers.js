@@ -961,6 +961,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     */
 
     $resource('/jsonapi/tournament/' + tID).get({},function(response){
+      if(response.error){
+        console.log("Error from retrieving tournament: " + JSON.stringify(response.error));
+      }
       $scope.tournament = response;
       console.log("fetch_tournament = " + $scope.tournament);  
       console.log($scope.selectedTournament.password);
