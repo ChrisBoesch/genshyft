@@ -623,8 +623,9 @@
                             
                             <div class="tab-content">
                             <div class="tab-pane fade in active" id="t11" style="height:317px;">
-                                <div>Examples: 
-                                    <pre style = "color:blue;"><span ng-bind="examples"></span></pre>
+                                <div>Output: 
+                                <div ng-bind-html-unsafe="examples"></div>
+                                    <pre style = "color:blue;"><span ng-bind-html-unsafe="examples"></span></pre>
                                 </div>
                             </div>
                             <div ng-hide="solution_check_result.error" class="tab-pane fade in" id="t21" style="height:320px;">
