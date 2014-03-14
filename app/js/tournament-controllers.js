@@ -440,11 +440,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
          if(response.error) {
           console.log(response.error)
          }
-         else{
         //$scope.tournament = response;
         console.log("Save edited tournament details into DB")
         $scope.fetch_tournament(tournamentID); //Using legacy fetch. 
-       }
       });
       $('#editTournInfo').modal('hide');
       $('#changesSaved').modal('show');
@@ -474,24 +472,20 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       for(var j = 0; j < $scope.cartQuestions.length; j++){
         roundQuestions.push($scope.cartQuestions[j].id);
       }
-      var updatedRound = {"roundId":$scope.selectedRound.roundId,
+      var updatedRound = {"roundID":$scope.selectedRound.roundId,
                           "timelimit":$scope.selectedRound.timelimit,
                           "problemIDs":roundQuestions,
                           "description":$scope.selectedRound.description};    
       $scope.NewRound = $resource('/jsonapi/add_or_update_round/'+$scope.selectedRound.roundID);
       var new_round = new $scope.NewRound(updatedRound);
       new_round.$save(function(response){
-         if(response.error) {
+        if(response.error) {
           console.log(response.error)
-         }
-         else{
+        }
         //$scope.round = response;
         console.log("Save edited round details into DB")
         $scope.fetch_round(roundID);//Using legacy fetch
-       }
       });
-   
-      $scope.cartQuestions = [];
       $('#editTournRound').modal('hide');
       $('#changesSaved').modal('show');
     }
@@ -506,16 +500,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Method to load details of selected round with Round ID to display in Mange Tournament from all the questions in DB-GenShyft*/
   $scope.load_round_details = function(round){
-    /*
-    for(var i = 0; i < $scope.selectedTournament.rounds.length; i++){
-      var checkRound = $scope.selectedTournament.rounds[i];
-      if(roundId == checkRound.roundId){
-        $scope.selectedRound = checkRound;
-      }
-    }
-    */
     $resource("/jsonapi/array_problems").get({"problemIDs":round.problemIDs}, function(response){
-      $scope.tournamentRoundQns = response.problems; 
+      $scope.cartQuestions = response.problems; 
       /*
       for(var i = 0; i < $scope.selectedRound.problemIDs.length; i++){
         for(var j = 0; j < $scope.tournamentQns.tourQns.length; j++){
