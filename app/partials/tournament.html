@@ -42,7 +42,7 @@
 			<tr class="warning" ng-repeat="tournament in tournaments | filter: { status: 'open' }"> 
 			    <td>  {{tournament.shortTitle}} </br>{{tournament.description}} </td>
 			    <td> {{tournament.registeredPlayerIDs.length}} registered </td>
-				<td><input type="text" ng-model="tournamentPassword"> </td>
+				<td><input type="password" ng-model="tournamentPassword"> </td>
 			    <td> <input type="submit" value="Register" ng-controller="GenshyftTournamentController" ng-click="register_for_tournament_new(tournament.tournamentID, tournamentPassword)"> </td><br>
 			</tr>
 		</table>
