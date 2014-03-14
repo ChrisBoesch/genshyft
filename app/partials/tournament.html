@@ -1,24 +1,50 @@
-</br>
-</br>
-<div ng-controller="TournamentController" ng-init="fetch_tournaments()" class="container" id="tournament" style="position:relative;">
+<p></p>
+<style>
+	/* Theme for box heading */
+	.bootCamp {
+		color: #ffffff;
+		font-size: 18px;
+		border-bottom-color: #6b808d;
+		border-radius: 6px 6px 6px 6px;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+		margin-top: 4px;
+		margin-bottom: 8px;
+		padding: 8px 8px;
+	}
 
+	.bootCampSmall {
+		color: #ffffff;
+		font-size: 12px;
+		border-bottom-color: #6b808d;
+		border-radius: 6px 6px 6px 6px;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+		margin-top: 4px;
+		margin-bottom: 8px;
+		padding: 5px 5px;
+	}
+</style>	
+<div ng-controller="TournamentController" ng-init="fetch_tournaments()" class="container" id="tournament" style="position:relative;">
 	
 	<div class="row-fluid">
-
-		
-		
-				<center><h2>Open Tournaments</h2></center>
-			    <ol>
-			      <li ng-repeat="tournament in tournaments | filter: { status: 'open' }">
-			        {{tournament.shortTitle}},{{tournament.description}}<br>
-			        {{tournament.registeredPlayerIDs.length}} registered.  
-			        Enter password to join 
-					<input type="text" ng-model="tournamentPassword">
-			        <input type="submit" value="Register" ng-controller="GenshyftTournamentController" ng-click="register_for_tournament_new(tournament.tournamentID, tournamentPassword)"><br>
-			      </li>
-			    </ol>
-
-	
-
+		<div class="container">
+			<h4 class="well well-small bootCamp" align="center" id="well-c">Open Tournaments</h4>
+		</div>		
+	</div>
+	<div class="well well-small" >		
+		<table ng-grid id="openTournTable" class="table table-hover" width="100%">
+	      <!-- <li ng-repeat="tournament in tournaments | filter: { status: 'open' }"> !-->
+		    <tr>
+				<th width=40%> Title and Description</th>
+				<th> Currently Registered</th>
+				<th> Insert Password</th>
+				<th> Register</th>
+			</tr>
+			<tr class="warning" ng-repeat="tournament in tournaments | filter: { status: 'open' }"> 
+			    <td>  {{tournament.shortTitle}} </br>{{tournament.description}} </td>
+			    <td> {{tournament.registeredPlayerIDs.length}} registered </td>
+				<td><input type="text" ng-model="tournamentPassword"> </td>
+			    <td> <input type="submit" value="Register" ng-controller="GenshyftTournamentController" ng-click="register_for_tournament_new(tournament.tournamentID, tournamentPassword)"> </td><br>
+			</tr>
+		</table>
 	</div>
 <div>

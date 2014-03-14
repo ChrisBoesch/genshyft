@@ -1,3 +1,4 @@
+<p></p>
 <style>
    	.modal-large {
 	    width: 60%; /* responsive width */
@@ -79,18 +80,45 @@
 		width:10%;
 	}
 	
+	/* Theme for box heading */
+	.bootCamp {
+		color: #ffffff;
+		font-size: 18px;
+		border-bottom-color: #6b808d;
+		border-radius: 6px 6px 6px 6px;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+		margin-top: 4px;
+		margin-bottom: 8px;
+		padding: 8px 8px;
+	}
+
+	.bootCampSmall {
+		color: #ffffff;
+		font-size: 16px;
+		border-bottom-color: #6b808d;
+		border-radius: 6px 6px 6px 6px;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.7);
+		margin-top: 4px;
+		margin-bottom: 8px;
+		padding: 5px 5px;
+	}
 </style>
-</br>
 <div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="manageSelectedTournament()">
 	<div class="row-fluid">
-		<div class="pull-right"><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments'"><i class="icon-home icon-white"></i> Back To My Tournaments </button></div>
+		<div class="container">
+			<h4 class="well well-small bootCamp" align="center" id="well-c">Tournament Center</h4>
+		</div>		
 	</div>
-	</br>
+	<!--
 	<div class="row-fluid">
-		<div class="span6 bootCamp" id="heading">
+		<div class="pull-left"><button class="btn btn-primary" type="button" onClick="parent.location='#/mytournaments'"><i class="icon-home icon-white"></i> Back To My Tournaments </button></div>
+	</div>
+	-->
+	<div class="row-fluid">
+		<div class="span6 bootCampSmall" id="heading">
 			Tournament Details
 		</div>
-		<div class="span6 bootCamp" id="heading">
+		<div class="span6 bootCampSmall" id="heading">
 			Tournament Progress
 		</div>
 		<div class="row-fluid">
@@ -142,7 +170,7 @@
 								<b>No. of groups:</b>  
 							</div>
 							<div class="span6">	
-								{{selectedTournament.numberOfGrp}} 
+								{{selectedTournament.maxGroups}} 
 							</div>
 						</div>	
 					</div>	
@@ -152,7 +180,7 @@
 								<b>No. of players per group:</b>  
 							</div>
 							<div class="span6">	
-								{{selectedTournament.numPlayerPerGrp}} 
+								{{selectedTournament.maxPlayersPerGroup}} 
 							</div>
 						</div>	
 					</div>	
@@ -228,16 +256,16 @@
 	                	<th></th>
 	                	<th class="roundTableHeader"><b>Start round in:</b></th>
 	 				</tr>
-	                <tr class="warning" ng-repeat="tournamentRound in tournamentRounds">
+	                <tr class="warning" ng-repeat="tournamentRound in selectedTournamentRounds">
 	                    <td class="roundInfo">{{tournamentRound.description}}</td>
 	                    <td class="roundInfo">{{tournamentRound.timelimit}}</td>
 	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
 	                    <td>
 	                    	<div>
-								<button class="btn btn-primary" type="button" ng-click="edit_round(tournamentRound.roundID)"><i class="icon-edit icon-white"></i> Edit</button>
+								<button class="btn btn-primary" type="button" ng-click="load_round_details(tournamentRound)"><i class="icon-edit icon-white"></i> Edit</button>
 							</div>
 						</td>	
-	                    <td ng-show="selectedTournament.status=='Open'">
+	                    <td ng-show="selectedTournament.status=='Open for registration'">
 	                    	<div  id="categories" class="btn-group" data-toggle="buttons-radio" align="center">		
 	                    		<button type="button" class="btn btn-info" ng-click="createHeat(selectedTournament.tournamentID,tournamentRound.roundID,tournamentRound.currentHeat,1)"><i class="icon-play icon-white"></i> 1 min</button>
 	  							<button type="button" class="btn btn-info" ng-click="createHeat(selectedTournament.tournamentID,tournamentRound.roundID,tournamentRound.currentHeat,5)"><i class="icon-play icon-white"></i> 5 min</button>
@@ -245,6 +273,9 @@
 	  							<button type="button" class="btn btn-info" ng-click="createHeat(selectedTournament.tournamentID,tournamentRound.roundID,tournamentRound.currentHeat,60)"><i class="icon-play icon-white"></i> 60 min</button>	
 	  							<button class="btn btn-danger" type="button" ng-model="stop" ng-click="stopHeat(selectedTournament.tournamentID,tournamentRound.roundID)"><i class="icon-stop icon-white"></i> Stop </button>	
 							</div>
+	                    </td>
+	                    <td ng-show="selectedTournament.status!='Open for registration'">
+	                    	Tournament is not open!
 	                    </td>
 	                </tr>
             	</table>
@@ -256,7 +287,7 @@
   			<div class="row-fluid" ng-show="selectedTournament.status=='Closed'">
   				<center><h2>The Tournament Status is Closed.</h2></center>
   			</div>
-  			<div class="row-fluid" ng-show="selectedTournament.status=='Open'">
+  			<div class="row-fluid" ng-show="selectedTournament.status=='Open for registration'">
 	  			<div class="span4" id="unregisteredUsers" style="overflow:auto;" width="100%">
 					<div class="row-fluid">
 						<div class="span12 bootCamp" id="heading"> 
@@ -273,7 +304,7 @@
 					<div class="row-fluid">
 						<div class="span12 well well-small" style="overflow:auto;">
 							<li class="bulletless" ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
-								<button class="btn bttn ft" ng-click="remove_from_tournament(unregisteredPlayer.playerId, tournament.tournamentID)"><span><b>{{unregisteredPlayer.playerName}}</b></span></button>
+								<button class="btn bttn ft" ng-click="remove_from_tournament(unregisteredPlayer.playerID, tournament.tournamentID)"><span><b>{{unregisteredPlayer.nickname}}</b></span></button>
 							</li>	
 						</div>
 					</div>
@@ -289,11 +320,11 @@
 								<div >
 									<table class="table table-hover">
 										<tr >
-											<td ng-repeat="group in numGrp track by $index">										
+											<td ng-repeat="group in numGrp track by $index">			
 												<b>Group {{$index+1}}</b>
 												
 												<li class="bulletless" ng-repeat="player in group track by $index">
-													<button class="btn bttn ft" ng-if="$index != 0" ng-click="join_grp(player.playerId, tournament.tournamentID, 0)"><span><b>{{player.playerName}}</b></span>
+													<button class="btn bttn ft" ng-if="$index != 0" ng-click="join_grp(player.playerID, tournament.tournamentID, 0)"><span><b>{{player.nickname}}</b></span>
 													</button>
 												</li>
 											
@@ -363,7 +394,7 @@
 						<b>Additional Details:</b>
 					</div>
 					<div class="span9">
-						 <textarea class="span8" rows="3" ng-model="selectedTournament.addDetails">
+						 <textarea class="span8" rows="3" ng-model="selectedTournament.details">
 						</textarea>
 					</div>
 				</div>	
@@ -376,7 +407,7 @@
 							<b>No. of groups:</b>
 						</div>
 						<div class="span9">
-							 <select class="span2" ng-model="selectedTournament.numberOfGrp" ng-options="numgrp for numgrp in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+							 <select class="span2" ng-model="selectedTournament.maxGroups" ng-options="numgrp for numgrp in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 						</div>
 					</div>	
 				</div>
@@ -388,7 +419,7 @@
 							<b>No. of players per group:</b>
 						</div>
 						<div class="span9">
-							 <select class="span2" ng-model="selectedTournament.numPlayerPerGrp" ng-options="maxnumplayers for maxnumplayers in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
+							 <select class="span2" ng-model="selectedTournament.maxPlayersPerGroup" ng-options="maxnumplayers for maxnumplayers in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"></select>
 						</div>
 					</div>	
 				</div>
@@ -423,7 +454,7 @@
 							<b>Duration(mins):</b>
 						</div>
 						<div class="span9">
-							 <select class="span3" ng-model="selectedRound.timelimit" ng-options="timeLimit for timeLimit in [10,15,20,25,30,35,40,45,50,55,60]"></select>
+							 <select class="span3" ng-model="selectedRound.timelimit" ng-options="numgrp for numgrp in [10,15,20,25,30,35,40,45,50,55,60]"></select>
 						</div>
 					</div>	
 				</div>
@@ -450,9 +481,10 @@
 		            		<th class"questionTitle">Question Title</th>
 		            		<th></th>
 		            		<th></th>
+		            		<!--<th></th>-->
 		            	</tr>
 		                <tr ng-repeat="question in cartQuestions track by $index" class="questionTableRows">
-		                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question)">{{question.question}}</button></td>
+		                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question)">{{question.name}}</button></td>
 		                    <td class="questionTableCells">
 		                    	<div ng-hide="$index==0">
 		                    		<button name="moveUp" ng-click="moveQuestionUp($index)" class="btn btn-warning"><i class="icon-arrow-up icon-white"></i> Move Up</button>
@@ -463,13 +495,20 @@
 		                    		<button name="moveDown" ng-click="moveQuestionDown($index)" class="btn btn-warning"><i class="icon-arrow-down icon-white"></i> Move Down</button>
 		                   		</div>
 		                    </td>
+		                 <!--
+		                    <td class="questionTableCells">
+		                    	<div>
+		                    		<button name="delete" ng-click="deleteFromCart($index)" class="btn btn-warning"><i class="icon-trash icon-white"></i> Delete</button>
+		                   		</div>
+		                    </td>
+		                -->
 		                </tr>
 		        	</table>
 		        </div>	
 	        </div>	
 	    </div>
 	    <div class="modal-footer">
-	    	<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="resetQuestionCart()"><i class="icon-remove icon-black"></i> Close</button>
+	    	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="icon-remove icon-black"></i> Close</button>
 	       	<button type="button" class="btn btn-primary" ng-click="updateRound()"><i class="icon-ok icon-white"></i> Save Changes</button></a>
 	    </div>
 	</div>

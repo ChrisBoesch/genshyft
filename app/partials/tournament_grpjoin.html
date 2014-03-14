@@ -46,7 +46,7 @@
 					<div class="span12 well well-small" style="height:145px;overflow:auto;" >
 						<b>Tournament :</b> {{tournament.shortTitle}} </br>
 						<b>Status :</b> {{tournament.status}}</br>
-						<b>No. of Registered Players :</b> {{tournament.registeredPlayers.length}}</b></br>
+						<b>No. of Registered Players :</b> {{tournament.registeredPlayerIDs.length}}</b></br>
 						<b>Number of Rounds:</b> {{tournament.rounds.length}}</br>
 						</br>
 					</div>
@@ -97,7 +97,7 @@
 				<div class="row-fluid">
 					<div class="span12 well well-small" style="overflow:auto;">
 						<li class="bulletless" ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
-							{{unregisteredPlayer.playerName}}
+							{{unregisteredPlayer.nickname}}
 						</li>	
 					</div>
 				</div>
@@ -119,7 +119,7 @@
 											<b>Group {{$index+1}}</b>
 											
 											<li class="bulletless" ng-repeat="player in group track by $index">
-												<font ng-if="$index != 0">{{player.playerName}}
+												<font ng-if="$index != 0">{{player.nickname}}
 												</font>
 											</li>
 										

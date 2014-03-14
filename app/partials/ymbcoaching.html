@@ -149,8 +149,8 @@ float:left;
 				</div>
 			 
 			 	  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,coaches.coachID)">Start Practising </button> <br>  <br>
-			 <button id="reset" class="btn btn-warning" ng-click ="resetMentor()">  New Mentor </button> 
-			 <button id="reset" class="btn btn-warning" ng-click ="resetPath()">  New Path </button> 
+			 <button id="reset" class="btn btn-danger" ng-click ="resetMentor()">  New Mentor </button> 
+			 <button id="reset" class="btn btn-danger" ng-click ="resetPath()">  New Path </button> 
 			<br> <br> Current Mentor :  {{coaches.name}}
 			<br> Current Path :{{currentPathName}}
 			 </td>
@@ -173,13 +173,24 @@ float:left;
 						
 	
 			<span class="span11">
-			<center><table border = '1'>
+			<center><table border = '0' class = "table table-bordered">
 			<td ng-repeat ="coaches in allCoachesData.coachesData" align ='center'>
 			
-			<IMG ng-src=" {{coaches.image}}" width ='150'> <br>
-			<input type ="radio" name = "coachSelect" ng-model ="$parent.currentCoach" value ="{{coaches.name}}"> 
-
-			<b><br>{{coaches.name}}</b> <br><br> {{coaches.description}} <br>
+			 
+					
+				<IMG ng-src=" {{coaches.image}}" width ='150'> <br>
+			
+			<br>
+			<button id="selectCoach" class="btn btn-warning" ng-click ="$parent.currentCoach = coaches.name "> 	
+			Mentor Me
+			</button> <br>
+			
+			<!-- <input type ="radio" name = "coachSelect" ng-model ="$parent.currentCoach" value ="{{coaches.name}}">
+			<br> !-->
+		
+			
+			<b><br>{{coaches.name}}</b> <br> 
+<p>			{{coaches.description}} </p> <br>
 			<br>
 			</td>
 			</table>
@@ -236,9 +247,18 @@ float:left;
 				</div>
 				<div style="height:270px;overflow-y:auto;overflow-x:hidden" ng-model="filter">
 					<table class="table table-hover">
-						<tr ng-repeat="path in player_progress.paths" ng-init="count(0);">	 
-							<div ng-show = "path.name.substring(0,5).trim() != 'Begin'">
-							<td class="name">{{path.name}} :</td>
+						<tr ng-repeat="path in player_progress.paths| filter:path.name.substring(0,8).trim() != 'Beginner' " ng-init="count(0);">	
+						
+							<div ng-show = "path.name.substring(0,8).trim() != 'Beginner'">
+							<td class="name">{{path.name}} {{path.name.substring(0,5).trim()}}:
+							
+
+							
+							
+							</td>
+							
+							
+							
 							<td class="myprogress">{{path.solvedProblems}}/{{path.problemsInPath}}
 								<div class="progress progress-success">
 								
@@ -246,9 +266,11 @@ float:left;
 								</div>
 							</td>
 							<td class="continue">
-								<button id="resume" class="btn btn-info" ng-click = "resetLanguage(path.id,path.name)">Change Path </button>
+								<button id="resume" class="btn btn-warning" ng-click = "resetLanguage(path.id,path.name)">Change Path </button>
 								
 							</td>  
+							
+
 							</div>
 						</tr>									 
 					</table>				

@@ -108,6 +108,25 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       $('.modal-backdrop').remove();
     };
 
+    //By GENShYFT - Setting Mentor Arrival
+    $scope.mentor_arrived =function(playerID, heatID){
+      console.log("mentor_arrived : heatID=" + heatID);
+
+      var data = {
+        'playerID':playerID,
+        'heatID':heatID
+      };
+      $scope.mentor_arrival = $resource('/jsonapi/mentor_has_arrived');
+      var hasArrived = new $scope.mentor_arrival(data);
+      hasArrived.$save(function(response){
+        if(response.error) {
+          console.log(response.error);
+        }else{
+          console.log(response);
+        }
+      });
+    }
+
     $scope.move_to_next_unsolved_problem = function(){
       $scope.sampleAnswers = "yes";
       if ($scope.remaining_problems.length>0){

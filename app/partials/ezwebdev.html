@@ -590,7 +590,7 @@
                                 <li class="tabspacing active">
                                   <a href="ymbcoaching-play/#t3" data-toggle="tab">Solution</a>
                                 </li>
-                                <button class="btn btn-primary pull-right" ng-show ="runButton" ng-click="check_solution_for_game();" >&nbsp;&nbsp;Run&nbsp;&nbsp;</button>                         
+                                <button class="btn btn-primary pull-right" ng-click="renderHTML();" >&nbsp;&nbsp;Render&nbsp;&nbsp;</button>                         
                                 
                             </ul>
                             <div  class="tab-content">
@@ -614,18 +614,17 @@
                         
                             <ul class="nav nav-tabs">
                                 <li id = "ta11" class="tabspacing active">
-                                  <a href="ymbcoaching-play/#t11" data-toggle="tab">Sample Answer</a>
+                                  <a href="ymbcoaching-play/#t11" data-toggle="tab">Output</a>
                                 </li>
                                 <li id = "ta21" class="tabspacing">
-                                  <a href="ymbcoaching-play/#t21" data-toggle="tab">Outcome</a>
+                                  <a href="ymbcoaching-play/#t21" data-toggle="tab">E2E Console</a>
                                 </li>  
                             </ul>
                             
                             <div class="tab-content">
                             <div class="tab-pane fade in active" id="t11" style="height:317px;">
-                                <div>Examples: 
-                                    <pre style = "color:blue;"><span ng-bind="examples"></span></pre>
-                                </div>
+                                <div ng-bind-html-unsafe="examples" ></div>
+                                    
                             </div>
                             <div ng-hide="solution_check_result.error" class="tab-pane fade in" id="t21" style="height:320px;">
                                 <table border=1 bgcolor=#FFFFFF width=100%>

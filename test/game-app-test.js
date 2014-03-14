@@ -597,11 +597,14 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		]};
 		$httpBackend.whenGET('/jsonapi/mytournaments/all').respond(tournaments);
 
-	
+	$httpBackend.whenPOST('/jsonapi/mentor_has_arrived').respond(function(method, url, data) {
+        var item = JSON.parse(data);
+	    return [200,item];
+ 	});
 
 	var grpPlayers = [];
 
-  	$httpBackend.whenPOST('/jsonapi/join_group').respond(function(method, url, data) {
+  	$httpBackend.whenPOST('/jsonapi/join_group/join').respond(function(method, url, data) {
         var item = JSON.parse(data);
 	    grpPlayers.push(item);
 	    return [200,item];
@@ -626,9 +629,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "directorID": 57754,
     "isGroup": false,
     "tournamentID": 5060388987076608,
-	"maxNoPlayerPerGrp":0,
-	"numberOfGrp":0,
-    "mentorAssignInTeam": false,
+	"maxNoPlayersPerGrp":0,
+	"maxGroups":0,
+    "assignMentorInTeam": false,
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -732,19 +735,19 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		],
 		"registeredPlayerIDs":[
 		{ 
-			"playerId":57754,
-			"playerName":"Chris", 
+			"playerID":57754,
+			"nickname":"Chris", 
 			"group": 3
 		},
 
 		{ 
-			"playerId":2739102,
-			"playerName":"Player 2", 
+			"playerID":2739102,
+			"nickname":"Player 2", 
 			"group":0
 		},
 		{
-			"playerId":9379339,
-			"playerName":"Player 3", 
+			"playerID":9379339,
+			"nickname":"Player 3", 
 			"group":0
 		}],
 
@@ -754,255 +757,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		"winnerText": ""
 	};
 
-	var IndTournData= {
-    "status": "Close",
-    "currentPlayerID": 57754,
-    "description": "Tournament",
-    "directorID": 57754,
-    "tournType": "Group",
-    "tournamentID": 5060388987076610,
-    "numPlayerPerGrp": 5,
-    "numberOfGrp": 5,
-    "mentorAssignInTeam": "Y/N",
-	"round":[{
-		"roundID":4912161075757056,
-		"description": "Round 1",
-		"currentHeatDetails": {
-			"heatID": 6144086545268736,
-			"description": "Heat 2",
-			"startTime": "2013-10-04 14:02:05.835670",
-			"currentTime": "2013-10-04 14:02:00.246270"
-		},
-		"registeredPlayerIDs": [
-			{
-				"playerId": 57754,
-				"playerName": "Chris",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 1,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739102,
-				"playerName": "Player 2",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 1,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""	
-			},
-			{
-				"playerId": 9379339,
-				"playerName": "Player 3",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 1,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 57753,
-				"playerName": "Player 4",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 2,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739101,
-				"playerName": "Player 5",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 2,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 9379338,
-				"playerName": "Player 6",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 2,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 57752,
-				"playerName": "Player 7",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 3,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739100,
-				"playerName": "Player 8",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 3,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 9379337,
-				"playerName": "Player 9",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 4,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 57751,
-				"playerName": "Player 10",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 4,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739099,
-				"playerName": "Player 11",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 4,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 9379336,
-				"playerName": "Player 12",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 4,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 57750,
-				"playerName": "Player 13",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 5,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 2739098,
-				"playerName": "Player 14",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 3,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			},
-			{
-				"playerId": 9379335,
-				"playerName": "Player 15",
-				"playerImg":"http://www.gravatar.com/avatar/ab79010592920abe25a6eb8d9025f0c5/?default=&amp;s=30",
-				"group": 2,
-				"rankingInGrp":"",
-				"overallRanking":"",
-				"problemsSolved":[
-					"/problem_is_solved_for_game/6096747415732224/10033",
-					"/problem_is_solved_for_game/6096747415732224/17155"
-				],
-				"progress":"",
-				"mentoredBy":"",
-				"assignedMentorName":""
-			}
-		]
-	}] 
-};
+	
 
  	var tournamentGrpData = {
     "status": "Open for registration",
@@ -1011,9 +766,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "directorID": 57754,
     "isGroup": true,
     "tournamentID": 5060388987076609,
-	"numPlayerPerGrp":5,
-	"numberOfGrp":5,
-    "mentorAssignInTeam": true,
+	"maxPlayersPerGrp":5,
+	"maxGroups":5,
+    "assignMentorInTeam": true,
     "rounds": [
         {
             "roundID": 4912161075757056,
@@ -1116,88 +871,88 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
         }],
 	    "registeredPlayerIDs":[
 		{ 
-			"playerId":57754,
-			"playerName":"Chris", 
+			"playerID":57754,
+			"nickname":"Chris", 
 			"group":3
 		},
 		
 		{ 
-			"playerId":2739102,
-			"playerName":"Player 2", 
+			"playerID":2739102,
+			"nickname":"Player 2", 
 			"group":0
 		},
 		{
-			"playerId":9379339,
-			"playerName":"Player 3", 
+			"playerID":9379339,
+			"nickname":"Player 3", 
 			"group":1
 		},{ 
-			"playerId":57753,
-			"playerName":"Player 4", 
+			"playerID":57753,
+			"nickname":"Player 4", 
 			"group": 1
 		},
 		
 		{ 
-			"playerId":2739101,
-			"playerName":"Player 5", 
+			"playerID":2739101,
+			"nickname":"Player 5", 
 			"group":1
 		},
 		{
-			"playerId":9379338,
-			"playerName":"Player 6", 
+			"playerID":9379338,
+			"nickname":"Player 6", 
 			"group":2
 		},
 		{ 
-			"playerId":57752,
-			"playerName":"Player 7", 
+			"playerID":57752,
+			"nickname":"Player 7", 
 			"group": 2
 		},
 		
 		{ 
-			"playerId":2739100,
-			"playerName":"Player 8", 
+			"playerID":2739100,
+			"nickname":"Player 8", 
 			"group":0
 		},
 		{
-			"playerId":9379337,
-			"playerName":"Player 9", 
+			"playerID":9379337,
+			"nickname":"Player 9", 
 			"group":4
 		},
 		{ 
-			"playerId":57751,
-			"playerName":"Player 10", 
+			"playerID":57751,
+			"nickname":"Player 10", 
 			"group": 4
 		},
 		
 		{ 
-			"playerId":2739099,
-			"playerName":"Player 11", 
+			"playerID":2739099,
+			"nickname":"Player 11", 
 			"group":4
 		},
 		{
-			"playerId":9379336,
-			"playerName":"Player 12", 
+			"playerID":9379336,
+			"nickname":"Player 12", 
 			"group":5
 		},
 		{ 
-			"playerId":57750,
-			"playerName":"Player 13", 
+			"playerID":57750,
+			"nickname":"Player 13", 
 			"group": 5
 		},
 		
 		{ 
-			"playerId":2739098,
-			"playerName":"Player 14", 
+			"playerID":2739098,
+			"nickname":"Player 14", 
 			"group":5
 		},
 		{
 			"playerId":9379335,
-			"playerName":"Player 15", 
+			"nickname":"Player 15", 
 			"group":3
 		}],
 		
 	    "numRounds": 1,
 	    "shortTitle": "Test Group Tournament",
-	    "tournamentType": "Normal",
+	    "tournamentType": "Genshyft",
 	    "winnerText": ""
 	};
 	$httpBackend.whenGET('/jsonapi/tournament/5060388987076609').respond(tournamentGrpData);
@@ -1205,7 +960,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	//$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076610').respond(IndTournData);
 	
   var events ={"type": "events", "events": [{"cutoff": 20, "name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "following": 9, "cutoffdate": "2014-03-14T10:48:14.183200", "currentPlayerStatus": "Not registered", "registered": 37, "venue": null, "longitude": null, "participating": 20, "start": "2014-03-21T10:50:07.652310", "latitude": null, "watching": 8, "id": 5308925893148672, "description": "Come join us for the IDA-sponsored Secondary School Coding Competition that will take place on Friday, March 21st, at SMU. The top five secondary students who have registered their school and starting year will be invited. These top five students will join fifteen other students selected by the IDA committee. So register for the event and register your school now, and then go solve a few Javascript problems. The grand prize for this event will be an iPad Mini. "}, {"cutoff": 40, "name": "National Singapore JC and High-school Coding Competition", "created": "2014-01-10T15:41:36.848030", "following": 4, "cutoffdate": "2014-03-22T10:48:27.878890", "currentPlayerStatus": "Not registered", "registered": 62, "venue": null, "longitude": null, "participating": 55, "start": "2014-03-29T10:49:55.721590", "latitude": null, "watching": 3, "id": 6095188913029120, "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on the morning of March 29th, at 9am, at SMU. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."}, {"cutoff": 40, "name": "2014 Coding Competition for Polytechnics in Singapore", "created": "2014-01-10T15:41:03.411980", "following": 4, "cutoffdate": "2014-03-22T10:48:48.156880", "currentPlayerStatus": "Not registered", "registered": 35, "venue": null, "longitude": null, "participating": 29, "start": "2014-03-29T10:49:48.352000", "latitude": null, "watching": 2, "id": 6486660988534784, "description": "Come join us for the 2014 Coding Competition for Polytechnics in Singapore. The event will take place on March 29th, at SMU starting at 1pm. The top 40 students who have registered their polytechnic and starting year will be invited. So register you school now and then go start solving a few Python problems. The grand prize for this event will be a MacBook Air."}]};
-      //{"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};
+  
+  //{"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};
       $httpBackend.whenGET('/jsonapi/event').respond(events);
       $httpBackend.whenGET('/jsonapi/mapEvent').respond(events.events);
       
@@ -2251,7 +2007,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       var tournamentGame = {
 	    "game_end": "2013-09-29 09:27:03.104550",
 	    "player": "Chris",
-	    "solvedProblemIDs": [10033, 17155],
+	    "solvedProblemIDs": [10033],
 	    "currentProblem_id": "TBD",
 	    "playerID": 57754,
 	    "allSolved": false,
@@ -2898,7 +2654,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		
     var eventsTableDataSec = {"path":"Javascript","following": 2, "name": "Secondary Test Ranking", "ranking": [{"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "Highschool", "playerid": 5428208946118656, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 103, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Dunman High School", "nickname": "NC-12"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "Highschool", "playerid": 5226227371606016, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 103, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Dunman High School", "nickname": "Leong Xuhua"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 5 Badge", "subtype": "JC", "playerid": 5950332819472384, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 91, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/python/p005_on.png", "schoolname": "Hwa Chong Institution", "nickname": "Nirvana"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 5205559720542208, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 76, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6449477007179776, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 75, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Sui Dongchen"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "JC", "playerid": 6309974053486592, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 74, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Pioneer Junior College", "nickname": "Tan Tze Guang"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "JC", "playerid": 4798855845511168, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 69, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Pioneer Junior College", "nickname": "Lin Rizhong James"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6537241174212608, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 62, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 4 Badge", "subtype": "Highschool", "playerid": 6619269143986176, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 59, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/python/p004_on.png", "schoolname": "Dunman High School", "nickname": "Justin Leow"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 6542601293398016, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 53, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 8539593, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 41, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "tanjinyi"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "JC", "playerid": 5806483090440192, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 39, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Pioneer Junior College", "nickname": "Armordillo"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 3 Badge", "subtype": "Highschool", "playerid": 5323577100337152, "isCurrentPlayer": false, "year": 2015, "solvedproblems": 35, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/python/p003_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5417015456038912, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 27, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Yong Loong Ang"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5307015706443776, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 26, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 5928418017280000, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 25, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "wcm"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6476317599989760, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Tomato"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6301682082250752, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Nala ;D"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 2 Badge", "subtype": "Highschool", "playerid": 6249092355194880, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 24, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/python/p002_on.png", "schoolname": "Dunman High School", "nickname": "Tan Di Sheng"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 5699766038036480, "isCurrentPlayer": false, "year": 2009, "solvedproblems": 13, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "NUS High School of Mathematics and Science", "nickname": "Moose"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 4836948715765760, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "highestbadgedescription": "Python Level 1 Badge", "subtype": "Highschool", "playerid": 5862928355950592, "isCurrentPlayer": false, "year": 2009, "solvedproblems": 11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "schoolname": "Dunman High School", "nickname": "Sam"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 6437610817847296, "isCurrentPlayer": false, "solvedproblems": 5, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 6273369120964608, "isCurrentPlayer": false, "solvedproblems": 4, "year": 2013, "schoolname": "Pioneer Junior College", "nickname": "Thong Mien Mien"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5060571825176576, "isCurrentPlayer": false, "solvedproblems": 4, "year": 2013, "schoolname": "Pioneer Junior College", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5810523044052992, "isCurrentPlayer": false, "solvedproblems": 3, "year": 2013, "schoolname": "Hwa Chong Institution", "nickname": "Lee Yan Hwa"}, {"playerid": 5605421578452992, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6604643169730560, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Song Kai", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 5958130332598272, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Lai Wai Liang"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 5795639908630528, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Dunman High School", "nickname": "Thng JX"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 6239605309308928, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Tan YuGin"}, {"playerid": 6356396207505408, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6609723444953088, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4899048842592256, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2009, "schoolname": "Dunman High School", "nickname": "yuansiang"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 6022159168176128, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4621759311511552, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Secret Agent"}, {"playerid": 6439117143408640, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 4826577711923200, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Yao Hong", "isCurrentPlayer": false}, {"playerid": 6678236763258880, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Secret Agent", "isCurrentPlayer": false}, {"playerid": 6604643169730560, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Song Kai", "isCurrentPlayer": false}, {"schooltype": "Tertiary", "subtype": "Highschool", "playerid": 4961583566422016, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2013, "schoolname": "Dunman High School", "nickname": "Wang Zexin"}, {"schooltype": "Tertiary", "subtype": "JC", "playerid": 4980996818599936, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2014, "schoolname": "Pioneer Junior College", "nickname": "Ng Zhen Yuan"}, {"playerid": 6622855978549248, "solvedproblems": -3, "schoolname": "No school registered", "nickname": "Apocalypster", "isCurrentPlayer": false}, {"playerid": 4539845695242240, "solvedproblems": -6, "schoolname": "No school registered", "nickname": "Liang Yi", "isCurrentPlayer": false}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 4569586733154304, "isCurrentPlayer": false, "solvedproblems": -10, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 5536602377945088, "isCurrentPlayer": false, "solvedproblems": -11, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 6661817774374912, "isCurrentPlayer": false, "solvedproblems": -13, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Eileen"}, {"highestbadgedescription": "Python Level 1 Badge", "schoolname": "No school registered", "playerid": 6101567476334592, "isCurrentPlayer": false, "solvedproblems": -16, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/python/p001_on.png", "nickname": "Secret Agent"}], "created": "2014-01-10T15:41:36.848030", "registered": 51, "watching": 1, "venue": null, "longitude": null, "participating": 48, "start": "2014-01-10T15:41:36.848050", "latitude": null, "id": 6095188913029120, "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on the morning of March 29th, at 9am, at SMU. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."};
       
-		$httpBackend.whenGET('/jsonapi/event/5308925893148672').respond({"cutoff": 10, "name": "IDA Secondary School Tournament", "ranking": [{"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 8 Badge", "subtype": "", "playerid": 6525077021523968, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 113, "highestbadgename": "Level 8", "highestbadgeurl": "/static/badges/javascript/js008_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Jerome Leow"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 7 Badge", "subtype": "", "playerid": 5006175527501824, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 104, "highestbadgename": "Level 7", "highestbadgeurl": "/static/badges/javascript/js007_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Jerrayl Ng"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 6 Badge", "subtype": "", "playerid": 6245960787165184, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 99, "highestbadgename": "Level 6", "highestbadgeurl": "/static/badges/javascript/js006_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Lee Wei Jie"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "subtype": "", "playerid": 6627285163573248, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 71, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/javascript/js005_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Li Zhao Qi"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 5503910697500672, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 66, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Liang Shi Lin, Bob"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 4811745176584192, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 64, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Mou Yan Qiao"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 5776607029493760, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 60, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Isaac Ong"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 5688596237385728, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 54, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "hometue"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 4540446453792768, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 49, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Nigel Poh"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "subtype": "", "playerid": 5151474271125504, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 48, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/javascript/js003_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Loh Hao Yuan"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "subtype": "", "playerid": 4930128836558848, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 35, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/javascript/js003_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Ryan"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "subtype": "", "playerid": 6556916419395584, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 33, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/javascript/js003_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Jin Zi Long"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "subtype": "", "playerid": 6314182047694848, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 28, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/javascript/js002_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "En Yang"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "subtype": "", "playerid": 5517688952586240, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 14, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/javascript/js001_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Christel"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "subtype": "", "playerid": 6057308643655680, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 12, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/javascript/js001_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Mai Youlian"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "subtype": "", "playerid": 5958782093885440, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 12, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/javascript/js001_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Lee Yu Quan"}, {"schooltype": "Secondary", "subtype": "", "playerid": 5270372354097152, "isCurrentPlayer": false, "solvedproblems": 1, "year": 2002, "schoolname": "Anderson Secondary School", "nickname": "Secret Agent"}, {"schooltype": "Secondary", "subtype": "", "playerid": 5605421578452992, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2008, "schoolname": "Dunman High School (Secondary)", "nickname": "Toh Zi Jie"}, {"playerid": 5869693801857024, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Nicole Sim", "isCurrentPlayer": false}, {"highestbadgedescription": "Javascript Level 2 Badge", "schoolname": "No school registered", "playerid": 6032495812280320, "isCurrentPlayer": false, "solvedproblems": -23, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/javascript/js002_on.png", "nickname": "Secret Agent"}], "created": "2014-01-10T15:40:45.896110", "following": 9, "cutoffdate": "2014-03-14T10:48:14.183200", "registered": 37, "watching": 8, "venue": null, "longitude": null, "participating": 20, "start": "2014-03-21T10:50:07.652310", "latitude": null, "path": "Javascript", "id": 5308925893148672, "description": "Come join us for the IDA-sponsored Secondary School Coding Competition that will take place on Friday, March 21st, at SMU. The top five secondary students who have registered their school and starting year will be invited. These top five students will join fifteen other students selected by the IDA committee. So register for the event and register your school now, and then go solve a few Javascript problems. The grand prize for this event will be an iPad Mini. "});
+		$httpBackend.whenGET('/jsonapi/event/5308925893148672').respond({"rankinglocked": true, "name": "IDA Secondary School Tournament", "ranking": [{"solvedatcutoff": 135, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 8 Badge", "solvedproblems": 135, "playerid": 6525077021523968, "highestbadgeurl": "/static/badges/javascript/js008_on.png", "year": 2013, "rank": 1, "sentrsvp": false, "highestbadgename": "Level 8", "rankatcutoff": 1, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Jerome Leow", "rsvp": "None"}, {"solvedatcutoff": 132, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 8 Badge", "solvedproblems": 132, "playerid": 6627285163573248, "highestbadgeurl": "/static/badges/javascript/js008_on.png", "year": 2013, "rank": 2, "sentrsvp": false, "highestbadgename": "Level 8", "rankatcutoff": 2, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Li Zhao Qi", "rsvp": "None"}, {"solvedatcutoff": 117, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 8 Badge", "solvedproblems": 117, "playerid": 5006175527501824, "highestbadgeurl": "/static/badges/javascript/js008_on.png", "year": 2012, "rank": 3, "sentrsvp": false, "highestbadgename": "Level 8", "rankatcutoff": 3, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Jerrayl Ng", "rsvp": "None"}, {"solvedatcutoff": 113, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 8 Badge", "solvedproblems": 113, "playerid": 5605515111432192, "highestbadgeurl": "/static/badges/javascript/js008_on.png", "year": 2012, "rank": 4, "sentrsvp": false, "highestbadgename": "Level 8", "rankatcutoff": 4, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Daniel Sim", "rsvp": "None"}, {"solvedatcutoff": 113, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 8 Badge", "solvedproblems": 113, "playerid": 4703437895761920, "highestbadgeurl": "/static/badges/javascript/js008_on.png", "year": 2012, "rank": 5, "sentrsvp": false, "highestbadgename": "Level 8", "rankatcutoff": 6, "isCurrentPlayer": false, "schoolname": "Raffles Institution", "nickname": "Bradley Teo", "rsvp": "None"}, {"solvedatcutoff": 113, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 8 Badge", "solvedproblems": 113, "playerid": 4703437895761920, "highestbadgeurl": "/static/badges/javascript/js008_on.png", "year": 2012, "rank": 6, "sentrsvp": false, "highestbadgename": "Level 8", "rankatcutoff": 6, "isCurrentPlayer": false, "schoolname": "Raffles Institution", "nickname": "Bradley Teo", "rsvp": "None"}, {"solvedatcutoff": 108, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 7 Badge", "solvedproblems": 109, "playerid": 5924411601321984, "highestbadgeurl": "/static/badges/javascript/js007_on.png", "year": 2012, "rank": 7, "sentrsvp": false, "highestbadgename": "Level 7", "rankatcutoff": 7, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Clarence Chew", "rsvp": "None"}, {"solvedatcutoff": 107, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 7 Badge", "solvedproblems": 107, "playerid": 6245960787165184, "highestbadgeurl": "/static/badges/javascript/js007_on.png", "year": 2012, "rank": 8, "sentrsvp": false, "highestbadgename": "Level 7", "rankatcutoff": 8, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Lee Wei Jie", "rsvp": "None"}, {"solvedatcutoff": 102, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 7 Badge", "solvedproblems": 102, "playerid": 6515788198445056, "highestbadgeurl": "/static/badges/javascript/js007_on.png", "year": 2012, "rank": 9, "sentrsvp": false, "highestbadgename": "Level 7", "rankatcutoff": 9, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Choo Yi Kai", "rsvp": "None"}, {"solvedatcutoff": 86, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 6 Badge", "solvedproblems": 86, "playerid": 6628540, "highestbadgeurl": "/static/badges/javascript/js006_on.png", "year": 2011, "rank": 10, "sentrsvp": false, "highestbadgename": "Level 6", "rankatcutoff": 10, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Kou Yong Kang", "rsvp": "None"}, {"solvedatcutoff": 82, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 6 Badge", "solvedproblems": 82, "playerid": 5503910697500672, "highestbadgeurl": "/static/badges/javascript/js006_on.png", "year": 2013, "rank": 11, "sentrsvp": false, "highestbadgename": "Level 6", "rankatcutoff": 11, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Liang Shi Lin, Bob", "rsvp": "None"}, {"solvedatcutoff": 81, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 6 Badge", "solvedproblems": 81, "playerid": 5662397792518144, "highestbadgeurl": "/static/badges/javascript/js006_on.png", "year": 2012, "rank": 12, "sentrsvp": false, "highestbadgename": "Level 6", "rankatcutoff": 12, "isCurrentPlayer": false, "schoolname": "Raffles Institution", "nickname": "Pang Wen Yuen", "rsvp": "None"}, {"solvedatcutoff": 76, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "solvedproblems": 76, "playerid": 6208088151425024, "highestbadgeurl": "/static/badges/javascript/js005_on.png", "year": 2012, "rank": 13, "sentrsvp": false, "highestbadgename": "Level 5", "rankatcutoff": 13, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Ryan Peh", "rsvp": "None"}, {"solvedatcutoff": 72, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "solvedproblems": 72, "playerid": 5688596237385728, "highestbadgeurl": "/static/badges/javascript/js005_on.png", "year": 2012, "rank": 14, "sentrsvp": false, "highestbadgename": "Level 5", "rankatcutoff": 14, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Damien Lee", "rsvp": "None"}, {"solvedatcutoff": 70, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "solvedproblems": 70, "playerid": 4811745176584192, "highestbadgeurl": "/static/badges/javascript/js004_on.png", "year": 2012, "rank": 15, "sentrsvp": false, "highestbadgename": "Level 4", "rankatcutoff": 15, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Mou Yan Qiao", "rsvp": "None"}, {"solvedatcutoff": 68, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "solvedproblems": 68, "playerid": 5532982911696896, "highestbadgeurl": "/static/badges/javascript/js005_on.png", "year": 2013, "rank": 16, "sentrsvp": false, "highestbadgename": "Level 5", "rankatcutoff": 16, "isCurrentPlayer": false, "schoolname": "Raffles Institution", "nickname": "Arnold Tan", "rsvp": "None"}, {"solvedatcutoff": 66, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "solvedproblems": 68, "playerid": 5650938819772416, "highestbadgeurl": "/static/badges/javascript/js005_on.png", "year": 2013, "rank": 17, "sentrsvp": false, "highestbadgename": "Level 5", "rankatcutoff": 20, "isCurrentPlayer": false, "schoolname": "Raffles Institution", "nickname": "Solomon Chann", "rsvp": "None"}, {"solvedatcutoff": 66, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "solvedproblems": 66, "playerid": 6478234078150656, "highestbadgeurl": "/static/badges/javascript/js005_on.png", "year": 2011, "rank": 18, "sentrsvp": false, "highestbadgename": "Level 5", "rankatcutoff": 17, "isCurrentPlayer": false, "schoolname": "Commonwealth Secondary School", "nickname": "Eldrian koh", "rsvp": "None"}, {"solvedatcutoff": 66, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "solvedproblems": 66, "playerid": 6687969679245312, "highestbadgeurl": "/static/badges/javascript/js005_on.png", "year": 2011, "rank": 19, "sentrsvp": false, "highestbadgename": "Level 5", "rankatcutoff": 18, "isCurrentPlayer": false, "schoolname": "Commonwealth Secondary School", "nickname": "Ong Yu Sheng", "rsvp": "None"}, {"solvedatcutoff": 66, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "solvedproblems": 66, "playerid": 5776607029493760, "highestbadgeurl": "/static/badges/javascript/js004_on.png", "year": 2012, "rank": 20, "sentrsvp": false, "highestbadgename": "Level 4", "rankatcutoff": 19, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Isaac Ong", "rsvp": "None"}, {"solvedatcutoff": 66, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "solvedproblems": 66, "playerid": 5151474271125504, "highestbadgeurl": "/static/badges/javascript/js004_on.png", "year": 2012, "rank": 21, "sentrsvp": false, "highestbadgename": "Level 4", "rankatcutoff": 21, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Loh Hao Yuan", "rsvp": "None"}, {"solvedatcutoff": 65, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "solvedproblems": 65, "playerid": 6362113882718208, "highestbadgeurl": "/static/badges/javascript/js005_on.png", "year": 2012, "rank": 22, "sentrsvp": false, "highestbadgename": "Level 5", "rankatcutoff": 22, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Felicia Foo", "rsvp": "None"}, {"solvedatcutoff": 64, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "solvedproblems": 64, "playerid": 4683348320452608, "highestbadgeurl": "/static/badges/javascript/js005_on.png", "year": 2014, "rank": 23, "sentrsvp": false, "highestbadgename": "Level 5", "rankatcutoff": 23, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Samuel Chua Jia Cong", "rsvp": "None"}, {"solvedatcutoff": 64, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "solvedproblems": 64, "playerid": 4621121357873152, "highestbadgeurl": "/static/badges/javascript/js004_on.png", "year": 2011, "rank": 24, "sentrsvp": false, "highestbadgename": "Level 4", "rankatcutoff": 24, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Ho Pin Xian", "rsvp": "None"}, {"solvedatcutoff": 64, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "solvedproblems": 64, "playerid": 4540446453792768, "highestbadgeurl": "/static/badges/javascript/js004_on.png", "year": 2013, "rank": 25, "sentrsvp": false, "highestbadgename": "Level 4", "rankatcutoff": 25, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Nigel Poh", "rsvp": "None"}, {"solvedatcutoff": 56, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "solvedproblems": 56, "playerid": 5147624218820608, "highestbadgeurl": "/static/badges/javascript/js004_on.png", "year": 2011, "rank": 26, "sentrsvp": false, "highestbadgename": "Level 4", "rankatcutoff": 26, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Qiu Siqi", "rsvp": "None"}, {"solvedatcutoff": 54, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "solvedproblems": 54, "playerid": 4518016372965376, "highestbadgeurl": "/static/badges/javascript/js004_on.png", "year": 2011, "rank": 27, "sentrsvp": false, "highestbadgename": "Level 4", "rankatcutoff": 27, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Evan Ang", "rsvp": "None"}, {"solvedatcutoff": 51, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "solvedproblems": 51, "playerid": 6032495812280320, "highestbadgeurl": "/static/badges/javascript/js004_on.png", "year": 2013, "rank": 28, "sentrsvp": false, "highestbadgename": "Level 4", "rankatcutoff": 28, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Wee He-kun", "rsvp": "None"}, {"solvedatcutoff": 48, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 48, "playerid": 6377144791859200, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2014, "rank": 29, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 29, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Zenon", "rsvp": "None"}, {"solvedatcutoff": 46, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 46, "playerid": 6057308643655680, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2012, "rank": 30, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 30, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Mai Youlian", "rsvp": "None"}, {"solvedatcutoff": 46, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 46, "playerid": 6170837631631360, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2011, "rank": 31, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 31, "isCurrentPlayer": false, "schoolname": "Commonwealth Secondary School", "nickname": "Kelvin Pang", "rsvp": "None"}, {"solvedatcutoff": 37, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 37, "playerid": 4930128836558848, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2013, "rank": 32, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 32, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Ryan", "rsvp": "None"}, {"solvedatcutoff": 36, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 36, "playerid": 4584674265399296, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2011, "rank": 33, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 33, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Lee Jun Kun", "rsvp": "None"}, {"solvedatcutoff": 0, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 35, "playerid": 5929813395111936, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2011, "rank": 34, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 0, "isCurrentPlayer": false, "schoolname": "Raffles Institution", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 35, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 35, "playerid": 5986012186542080, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2013, "rank": 35, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 34, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Chan Si Hon", "rsvp": "None"}, {"solvedatcutoff": 34, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 34, "playerid": 6455766567354368, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2012, "rank": 36, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 35, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Hema", "rsvp": "None"}, {"solvedatcutoff": 33, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": 33, "playerid": 6556916419395584, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "year": 2013, "rank": 37, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 36, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Jin Zi Long", "rsvp": "None"}, {"solvedatcutoff": 32, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "solvedproblems": 32, "playerid": 5557878421192704, "highestbadgeurl": "/static/badges/javascript/js002_on.png", "year": 2011, "rank": 38, "sentrsvp": false, "highestbadgename": "Level 2", "rankatcutoff": 37, "isCurrentPlayer": false, "schoolname": "Commonwealth Secondary School", "nickname": "Wong Keat Seng", "rsvp": "None"}, {"solvedatcutoff": 30, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "solvedproblems": 32, "playerid": 6314182047694848, "highestbadgeurl": "/static/badges/javascript/js002_on.png", "year": 2013, "rank": 39, "sentrsvp": false, "highestbadgename": "Level 2", "rankatcutoff": 39, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "En Yang", "rsvp": "None"}, {"solvedatcutoff": 31, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "solvedproblems": 31, "playerid": 6234885341577216, "highestbadgeurl": "/static/badges/javascript/js002_on.png", "year": 2014, "rank": 40, "sentrsvp": false, "highestbadgename": "Level 2", "rankatcutoff": 38, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Ivan Tan", "rsvp": "None"}, {"solvedatcutoff": 30, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "solvedproblems": 30, "playerid": 5958782093885440, "highestbadgeurl": "/static/badges/javascript/js002_on.png", "year": 2014, "rank": 41, "sentrsvp": false, "highestbadgename": "Level 2", "rankatcutoff": 40, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Lee Yu Quan", "rsvp": "None"}, {"solvedatcutoff": 29, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "solvedproblems": 29, "playerid": 5517688952586240, "highestbadgeurl": "/static/badges/javascript/js002_on.png", "year": 2012, "rank": 42, "sentrsvp": false, "highestbadgename": "Level 2", "rankatcutoff": 41, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Christel", "rsvp": "None"}, {"solvedatcutoff": 25, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "solvedproblems": 25, "playerid": 5256244294057984, "highestbadgeurl": "/static/badges/javascript/js002_on.png", "year": 2014, "rank": 43, "sentrsvp": false, "highestbadgename": "Level 2", "rankatcutoff": 42, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Boh Jie Qi", "rsvp": "None"}, {"solvedatcutoff": 25, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "solvedproblems": 25, "playerid": 5869693801857024, "highestbadgeurl": "/static/badges/javascript/js002_on.png", "year": 2012, "rank": 44, "sentrsvp": false, "highestbadgename": "Level 2", "rankatcutoff": 43, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Nicole Sim", "rsvp": "None"}, {"solvedatcutoff": 23, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "solvedproblems": 23, "playerid": 5814579573555200, "highestbadgeurl": "/static/badges/javascript/js002_on.png", "year": 2014, "rank": 45, "sentrsvp": false, "highestbadgename": "Level 2", "rankatcutoff": 44, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Poh Say Keong", "rsvp": "None"}, {"solvedatcutoff": 21, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": 21, "playerid": 4709877796569088, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "year": 2011, "rank": 46, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 45, "isCurrentPlayer": false, "schoolname": "Temasek Secondary School", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 19, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": 19, "playerid": 5283569547083776, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "year": 2012, "rank": 47, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 46, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Jackson(Jun)", "rsvp": "None"}, {"solvedatcutoff": 0, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": 19, "playerid": 4646102229843968, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "year": 2013, "rank": 48, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 0, "isCurrentPlayer": false, "schoolname": "Raffles Institution", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 19, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": 19, "playerid": 5153176940445696, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "year": 2014, "rank": 49, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 47, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Gabriel Lee", "rsvp": "None"}, {"solvedatcutoff": 15, "subtype": "", "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": 15, "playerid": 5605421578452992, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "year": 2008, "rank": 50, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 48, "isCurrentPlayer": false, "schoolname": "Dunman High School (Secondary)", "nickname": "Toh Zi Jie", "rsvp": "None"}, {"solvedatcutoff": 13, "subtype": null, "schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": 13, "playerid": 5506734487502848, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "year": 2011, "rank": 51, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 49, "isCurrentPlayer": false, "schoolname": "NUS High School of Mathematics and Science (Secondary)", "nickname": "Winsen Alfiano Hijani", "rsvp": "None"}, {"solvedatcutoff": 1, "subtype": "", "schooltype": "Secondary", "solvedproblems": 1, "playerid": 5270372354097152, "year": 2002, "rank": 52, "sentrsvp": false, "rankatcutoff": 50, "isCurrentPlayer": false, "schoolname": "Anderson Secondary School", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "solvedproblems": 0, "playerid": 6146521187745792, "schoolname": "No school registered", "rank": 53, "sentrsvp": false, "rankatcutoff": 51, "isCurrentPlayer": false, "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "solvedproblems": 0, "playerid": 4527347994722304, "schoolname": "No school registered", "rank": 54, "sentrsvp": false, "rankatcutoff": 52, "isCurrentPlayer": false, "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "solvedproblems": 0, "playerid": 6479495590576128, "schoolname": "No school registered", "rank": 55, "sentrsvp": false, "rankatcutoff": 53, "isCurrentPlayer": false, "nickname": ".", "rsvp": "None"}, {"solvedatcutoff": 0, "subtype": "", "schooltype": "Secondary", "solvedproblems": 0, "playerid": 4986655823888384, "year": 2011, "rank": 56, "sentrsvp": false, "rankatcutoff": 54, "isCurrentPlayer": false, "schoolname": "Tanjong Katong Secondary School", "nickname": "Thuya Oo", "rsvp": "None"}, {"solvedatcutoff": 0, "solvedproblems": 0, "playerid": 5845921610858496, "schoolname": "No school registered", "rank": 57, "sentrsvp": false, "rankatcutoff": 55, "isCurrentPlayer": false, "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "subtype": "", "schooltype": "Secondary", "solvedproblems": 0, "playerid": 4649810397233152, "year": 2007, "rank": 58, "sentrsvp": false, "rankatcutoff": 56, "isCurrentPlayer": false, "schoolname": "Broadrick Secondary School", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "solvedproblems": -4, "playerid": 6734765226983424, "schoolname": "No school registered", "rank": 59, "sentrsvp": false, "rankatcutoff": 0, "isCurrentPlayer": false, "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": -12, "playerid": 5845327093432320, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "rank": 60, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 0, "isCurrentPlayer": false, "schoolname": "No school registered", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": -12, "playerid": 5173867811176448, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "rank": 61, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 0, "isCurrentPlayer": false, "schoolname": "No school registered", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": -12, "playerid": 6011224500207616, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "rank": 62, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 0, "isCurrentPlayer": false, "schoolname": "No school registered", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": 0, "highestbadgedescription": "Javascript Level 1 Badge", "solvedproblems": -12, "playerid": 6441709072285696, "highestbadgeurl": "/static/badges/javascript/js001_on.png", "rank": 63, "sentrsvp": false, "highestbadgename": "Level 1", "rankatcutoff": 0, "isCurrentPlayer": false, "schoolname": "No school registered", "nickname": "Secret Agent", "rsvp": "None"}, {"solvedatcutoff": -35, "highestbadgedescription": "Javascript Level 3 Badge", "solvedproblems": -35, "playerid": 4676943182036992, "highestbadgeurl": "/static/badges/javascript/js003_on.png", "rank": 64, "sentrsvp": false, "highestbadgename": "Level 3", "rankatcutoff": 57, "isCurrentPlayer": false, "schoolname": "No school registered", "nickname": "Rye123", "rsvp": "None"}], "cutoff": 20, "following": 14, "cutoffdate": "2014-03-14T10:48:14.183200", "registered": 87, "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "participating": 64, "start": "2014-03-21T10:50:07.652310", "latitude": null, "path": "Javascript", "watching": 9, "id": 5308925893148672, "description": "Come join us for the IDA Programming Challenge that will take place on Friday, March 21st, at SMU, at 1:00pm. The top 20 students who have registered their school and starting year will be invited. So register now and then go solve a few Javascript problems. The grand prize for this event will be an iPad Mini."});
+      //{"cutoff": 10, "name": "IDA Secondary School Tournament", "ranking": [{"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 8 Badge", "subtype": "", "playerid": 6525077021523968, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 113, "highestbadgename": "Level 8", "highestbadgeurl": "/static/badges/javascript/js008_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Jerome Leow"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 7 Badge", "subtype": "", "playerid": 5006175527501824, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 104, "highestbadgename": "Level 7", "highestbadgeurl": "/static/badges/javascript/js007_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Jerrayl Ng"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 6 Badge", "subtype": "", "playerid": 6245960787165184, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 99, "highestbadgename": "Level 6", "highestbadgeurl": "/static/badges/javascript/js006_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Lee Wei Jie"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 5 Badge", "subtype": "", "playerid": 6627285163573248, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 71, "highestbadgename": "Level 5", "highestbadgeurl": "/static/badges/javascript/js005_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Li Zhao Qi"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 5503910697500672, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 66, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Liang Shi Lin, Bob"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 4811745176584192, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 64, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Mou Yan Qiao"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 5776607029493760, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 60, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Isaac Ong"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 5688596237385728, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 54, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "hometue"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 4 Badge", "subtype": "", "playerid": 4540446453792768, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 49, "highestbadgename": "Level 4", "highestbadgeurl": "/static/badges/javascript/js004_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Nigel Poh"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "subtype": "", "playerid": 5151474271125504, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 48, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/javascript/js003_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Loh Hao Yuan"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "subtype": "", "playerid": 4930128836558848, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 35, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/javascript/js003_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Ryan"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 3 Badge", "subtype": "", "playerid": 6556916419395584, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 33, "highestbadgename": "Level 3", "highestbadgeurl": "/static/badges/javascript/js003_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Jin Zi Long"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 2 Badge", "subtype": "", "playerid": 6314182047694848, "isCurrentPlayer": false, "year": 2013, "solvedproblems": 28, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/javascript/js002_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "En Yang"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "subtype": "", "playerid": 5517688952586240, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 14, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/javascript/js001_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Christel"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "subtype": "", "playerid": 6057308643655680, "isCurrentPlayer": false, "year": 2012, "solvedproblems": 12, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/javascript/js001_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Mai Youlian"}, {"schooltype": "Secondary", "highestbadgedescription": "Javascript Level 1 Badge", "subtype": "", "playerid": 5958782093885440, "isCurrentPlayer": false, "year": 2014, "solvedproblems": 12, "highestbadgename": "Level 1", "highestbadgeurl": "/static/badges/javascript/js001_on.png", "schoolname": "Dunman High School (Secondary)", "nickname": "Lee Yu Quan"}, {"schooltype": "Secondary", "subtype": "", "playerid": 5270372354097152, "isCurrentPlayer": false, "solvedproblems": 1, "year": 2002, "schoolname": "Anderson Secondary School", "nickname": "Secret Agent"}, {"schooltype": "Secondary", "subtype": "", "playerid": 5605421578452992, "isCurrentPlayer": false, "solvedproblems": 0, "year": 2008, "schoolname": "Dunman High School (Secondary)", "nickname": "Toh Zi Jie"}, {"playerid": 5869693801857024, "solvedproblems": 0, "schoolname": "No school registered", "nickname": "Nicole Sim", "isCurrentPlayer": false}, {"highestbadgedescription": "Javascript Level 2 Badge", "schoolname": "No school registered", "playerid": 6032495812280320, "isCurrentPlayer": false, "solvedproblems": -23, "highestbadgename": "Level 2", "highestbadgeurl": "/static/badges/javascript/js002_on.png", "nickname": "Secret Agent"}], "created": "2014-01-10T15:40:45.896110", "following": 9, "cutoffdate": "2014-03-14T10:48:14.183200", "registered": 37, "watching": 8, "venue": null, "longitude": null, "participating": 20, "start": "2014-03-21T10:50:07.652310", "latitude": null, "path": "Javascript", "id": 5308925893148672, "description": "Come join us for the IDA-sponsored Secondary School Coding Competition that will take place on Friday, March 21st, at SMU. The top five secondary students who have registered their school and starting year will be invited. These top five students will join fifteen other students selected by the IDA committee. So register for the event and register your school now, and then go solve a few Javascript problems. The grand prize for this event will be an iPad Mini. "});
 	
 	var ezwebdevData = {
 			"game_end": "2010-06-01 15:19:39.813685",
@@ -2925,7 +2682,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 						"description": "Welcome to easy web development!",
 						"path_id": 10054,
 						"problemset_id": 10058,
-						"examples":">>> question['color']\r\n 'blue'\r\n>>> question[7]\r\n 'seven'\r\n>>> question[3.14]\r\n [3,1,4,6]",
+						"examples":"<b>Hello World</b><br><i>YOLO SWAG 420</i>",
 						"interface":{
 							"codeHighlightKey": "html",
 		                    "name": "HTML",
