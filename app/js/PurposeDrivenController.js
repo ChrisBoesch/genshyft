@@ -1,5 +1,4 @@
 
-
 function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$route){
 
 	$scope.videoArray ="Select";
@@ -58,7 +57,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 					 console.log("JUMP TO NEXT VIDEO  :" + i );
 					 break;
 				}
-				if( i== $scope.purposeVideos.Videos.length){
+				if( i== $scope.purposeVideos.Videos.length-1){
 					$location.search({'youtube':$scope.purposeVideos.Videos[0].vlink,'vno':0}).path('purposedriven-play') ;
 				}
 				
