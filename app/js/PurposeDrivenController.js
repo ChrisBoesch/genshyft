@@ -144,7 +144,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 					 var id = $scope.purposeVideos.Videos[vnoNumber+1].id;
 					 $scope.saveNewUnlock(id);
 					// $scope.saveNewUnlock(vnoNumber+1);
-					  alert ("You have unlocked a new video!" );		
+					 // alert ("You have unlocked a new video!" );		
 						
 				}
 		
@@ -155,7 +155,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 				
               }
               else{
-                alert (" Oops , no more");
+                $location.search({'youtube':$scope.purposeVideos.Videos[0].vlink,'vno':0}).path('purposedriven-play') 
               }
              
         }
