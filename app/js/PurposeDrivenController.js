@@ -49,8 +49,8 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 			  
                console.log($scope.purposeVideos);
 			   
-			   
-			for(var i = 0; i < $scope.purposeVideos.Videos.length-1; i++){
+			var i = 0;   
+			for(i = 0; i < $scope.purposeVideos.Videos.length-1; i++){
 				if($scope.purposeVideos.Videos[i].unlocked ==false){
 					 $location.search({'youtube':$scope.purposeVideos.Videos[i].vlink,'vno':i}).path('purposedriven-play') ;
 					 console.log("JUMP TO NEXT VIDEO  :" + i );
