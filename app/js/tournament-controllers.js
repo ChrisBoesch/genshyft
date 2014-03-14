@@ -281,8 +281,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $scope.grpTournaments = response; // stores the Json files
       console.log($scope.grpTournaments);
       for(var i = 0; i < $scope.grpTournaments.length; i++){
-        localCreated = new Date($scope.playerTournaments[i].created.toString().replace(/ /g,"T")+"+00:00");
-        $scope.playerTournaments[i].localCreated = $.format.date(localCreated,'yyyy-MM-dd HH:mm');
+        localCreated = new Date($scope.grpTournaments[i].created.toString().replace(/ /g,"T")+"+00:00");
+        $scope.grpTournaments[i].localCreated = $.format.date(localCreated,'yyyy-MM-dd HH:mm');
       }
     });
   }
