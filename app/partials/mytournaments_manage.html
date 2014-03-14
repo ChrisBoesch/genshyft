@@ -256,13 +256,13 @@
 	                	<th></th>
 	                	<th class="roundTableHeader"><b>Start round in:</b></th>
 	 				</tr>
-	                <tr class="warning" ng-repeat="tournamentRound in tournamentRounds">
+	                <tr class="warning" ng-repeat="tournamentRound in selectedTournamentRounds">
 	                    <td class="roundInfo">{{tournamentRound.description}}</td>
 	                    <td class="roundInfo">{{tournamentRound.timelimit}}</td>
 	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
 	                    <td>
 	                    	<div>
-								<button class="btn btn-primary" type="button" ng-click="edit_round(tournamentRound.roundID)"><i class="icon-edit icon-white"></i> Edit</button>
+								<button class="btn btn-primary" type="button" ng-click="load_round_details(tournamentRound)"><i class="icon-edit icon-white"></i> Edit</button>
 							</div>
 						</td>	
 	                    <td ng-show="selectedTournament.status=='Open'">
@@ -273,6 +273,9 @@
 	  							<button type="button" class="btn btn-info" ng-click="createHeat(selectedTournament.tournamentID,tournamentRound.roundID,tournamentRound.currentHeat,60)"><i class="icon-play icon-white"></i> 60 min</button>	
 	  							<button class="btn btn-danger" type="button" ng-model="stop" ng-click="stopHeat(selectedTournament.tournamentID,tournamentRound.roundID)"><i class="icon-stop icon-white"></i> Stop </button>	
 							</div>
+	                    </td>
+	                    <td ng-show="selectedTournament.status!='Open'">
+	                    	Tournament is not open!
 	                    </td>
 	                </tr>
             	</table>
@@ -451,7 +454,7 @@
 							<b>Duration(mins):</b>
 						</div>
 						<div class="span9">
-							 <select class="span3" ng-model="selectedRound.timelimit" ng-options="timeLimit for timeLimit in [10,15,20,25,30,35,40,45,50,55,60]"></select>
+							 <select class="span3" ng-model="selectedRound.timelimit" ng-options="numgrp for numgrp in [10,15,20,25,30,35,40,45,50,55,60]"></select>
 						</div>
 					</div>	
 				</div>
@@ -479,8 +482,8 @@
 		            		<th></th>
 		            		<th></th>
 		            	</tr>
-		                <tr ng-repeat="question in cartQuestions track by $index" class="questionTableRows">
-		                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question)">{{question.question}}</button></td>
+		                <tr ng-repeat="question in tournamentRoundQns track by $index" class="questionTableRows">
+		                    <td title="Question Title" class="questionTitleRow"><button type="button" class="btn btn-link" ng-click="viewQuestionsInfoInCart(question)">{{question.name}}</button></td>
 		                    <td class="questionTableCells">
 		                    	<div ng-hide="$index==0">
 		                    		<button name="moveUp" ng-click="moveQuestionUp($index)" class="btn btn-warning"><i class="icon-arrow-up icon-white"></i> Move Up</button>

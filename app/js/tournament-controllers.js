@@ -505,15 +505,18 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   /*Method to load details of selected round with Round ID to display in Mange Tournament from all the questions in DB-GenShyft*/
-  $scope.edit_round = function(roundId){
+  $scope.load_round_details = function(round){
+    /*
     for(var i = 0; i < $scope.selectedTournament.rounds.length; i++){
       var checkRound = $scope.selectedTournament.rounds[i];
       if(roundId == checkRound.roundId){
         $scope.selectedRound = checkRound;
       }
     }
-    $resource("/jsonapi/list_tournamentQns/all").get({},function(response){
-      $scope.tournamentQns = response; 
+    */
+    $resource("/jsonapi/array_problems").get({"problemIDs":round.problemIDs}, function(response){
+      $scope.tournamentRoundQns = response.problems; 
+      /*
       for(var i = 0; i < $scope.selectedRound.problemIDs.length; i++){
         for(var j = 0; j < $scope.tournamentQns.tourQns.length; j++){
           for(var k = 0; k < $scope.tournamentQns.tourQns[j].questionSet.length; k++){
@@ -523,10 +526,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           }
         }
       }
+      */
     });
     $('#editTournRound').modal('show');
   }
-
 
   //method to activate tournament and change status of Tournament to 'Open'
   $scope.activateTournament = function(tournamentID){ 
@@ -949,15 +952,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     var tID = $cookieStore.get("tournamentID");
     console.log("TournamentID of tournament to be managed: " + tID);
     /*
-    $resource("/jsonapi/get_player_tournaments").query({},function(response){
-      $scope.grpTournaments = response; // stores the Json files
-      for(var i = 0; i < $scope.grpTournaments.length; i++){
-        if(tID == $scope.grpTournaments[i].tournamentID){
-          $scope.selectedTournament = $scope.grpTournaments[i];
-        }
+    for(var i = 0; i < $scope.grpTournaments.length; i++){
+      if(tID == $scope.grpTournaments[i].tournamentID){
+        $scope.selectedTournament = $scope.grpTournaments[i];
       }
-      //console.log($scope.selectedTournament.status);
-    });
+    }
+    //console.log($scope.selectedTournament.status);
     */
 
     $resource('/jsonapi/tournament/' + tID).get({},function(response){
