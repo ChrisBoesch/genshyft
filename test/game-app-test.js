@@ -2682,7 +2682,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 						"description": "Welcome to easy web development!",
 						"path_id": 10054,
 						"problemset_id": 10058,
-						"examples":">>> question['color']\r\n 'blue'\r\n>>> question[7]\r\n 'seven'\r\n>>> question[3.14]\r\n [3,1,4,6]",
+						"examples":"<b>Hello World</b><br><i>YOLO SWAG 420</i>",
 						"interface":{
 							"codeHighlightKey": "html",
 		                    "name": "HTML",

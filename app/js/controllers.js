@@ -4080,6 +4080,10 @@ function EZWebDevController($scope,$resource,$cookieStore,$timeout,$http,$route,
 
 	};
 
+	$scope.renderHTML = function(){
+		console.log($scope.skeleton);
+	};
+
 }
 
 /**
