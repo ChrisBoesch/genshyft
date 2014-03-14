@@ -236,9 +236,18 @@ float:left;
 				</div>
 				<div style="height:270px;overflow-y:auto;overflow-x:hidden" ng-model="filter">
 					<table class="table table-hover">
-						<tr ng-repeat="path in player_progress.paths" ng-init="count(0);">	 
-							<div ng-show = "path.name.substring(0,5).trim() != 'Begin'">
-							<td class="name">{{path.name}} :</td>
+						<tr ng-repeat="path in player_progress.paths| filter:path.name.substring(0,8).trim() != 'Beginner' " ng-init="count(0);">	
+						
+							<div ng-show = "path.name.substring(0,8).trim() != 'Beginner'">
+							<td class="name">{{path.name}} {{path.name.substring(0,5).trim()}}:
+							
+
+							
+							
+							</td>
+							
+							
+							
 							<td class="myprogress">{{path.solvedProblems}}/{{path.problemsInPath}}
 								<div class="progress progress-success">
 								
@@ -249,6 +258,8 @@ float:left;
 								<button id="resume" class="btn btn-info" ng-click = "resetLanguage(path.id,path.name)">Change Path </button>
 								
 							</td>  
+							
+
 							</div>
 						</tr>									 
 					</table>				
