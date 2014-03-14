@@ -443,7 +443,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         //$scope.tournament = response;
         console.log("Save edited tournament details into DB")
         $scope.fetch_tournament(tournamentID); //Using legacy fetch. 
-       }
       });
       $('#editTournInfo').modal('hide');
       $('#changesSaved').modal('show');
