@@ -280,6 +280,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $resource("/jsonapi/get_player_tournaments").query({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       console.log($scope.grpTournaments);
+      for(var i = 0; i < $scope.grpTournaments.length; i++){
+        localCreated = new Date($scope.playerTournaments[i].created.toString().replace(/ /g,"T")+"+00:00");
+        $scope.playerTournaments[i].localCreated = $.format.date(localCreated,'yyyy-MM-dd HH:mm');
+      }
     });
   }
 
@@ -434,7 +438,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                   "status":$scope.selectedTournament.status,
                   "type": $scope.selectedTournament.type
                  };
-      $scope.NewTournament = $resource('/jsonapi/create_or_update_tournament/'+tournamentID);
+      $scope.NewTournament = $resource('/jsonapi/create_or_update_tournament/'+$scope.selectedTournament.tournamentID);
       var new_tournament = new $scope.NewTournament(updatedTournament);
       new_tournament.$save(function(response){
          if(response.error) {
@@ -502,6 +506,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.load_round_details = function(round){
     $resource("/jsonapi/array_problems").get({"problemIDs":round.problemIDs}, function(response){
       $scope.cartQuestions = response.problems; 
+      console.log(JSON.stringify($scope.cartQuestions));
       /*
       for(var i = 0; i < $scope.selectedRound.problemIDs.length; i++){
         for(var j = 0; j < $scope.tournamentQns.tourQns.length; j++){
@@ -514,6 +519,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
       */
     });
+    $scope.selectedRound = round;
     $('#editTournRound').modal('show');
   }
 
