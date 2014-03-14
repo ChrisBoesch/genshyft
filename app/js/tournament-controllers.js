@@ -972,7 +972,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       'tournamentID':tournamentId,
       'group':groupNo
     };
-    $scope.joining_grp = $resource('/jsonapi/join_group/join');
+    $scope.joining_grp = $resource('/jsonapi/join_group/join/');
     var joingrp = new $scope.joining_grp(data);
     joingrp.$save(function(response){
       if(response.error) {
