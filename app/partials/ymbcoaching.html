@@ -237,7 +237,7 @@ float:left;
 
 
 			  <div width="400px"style="width:98.7%; height:30px">
-				<table class="table table-condensed">
+				<table class="table table-hovered">
 					<tr>
 						<th class="name">Path Name</th>
 						<th class="myprogress">Progress</th>
@@ -250,7 +250,7 @@ float:left;
 						<tr ng-repeat="path in player_progress.paths| filter:path.name.substring(0,8).trim() != 'Beginner' " ng-init="count(0);">	
 						
 							<div ng-show = "path.name.substring(0,8).trim() != 'Beginner'">
-							<td class="name">{{path.name}} {{path.name.substring(0,5).trim()}}:
+							<td class="name">{{path.name}}
 							
 
 							
