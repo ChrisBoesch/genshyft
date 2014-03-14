@@ -32,32 +32,32 @@
 						 <br>
 						 <table cellpadding ='5' cellspacing ='5' align ='center'>
 						 <tr><td>
-						 <button class ="btn btn-primary" ng-model="purposeVideos.Videos[vno].feedback" value ="1" 
+						 <button class ="btn btn-primary" ng-model="purposeVideos.Videos[vno].selected" value ="1" 
 						 ng-click = "nextVideo(vno,1)" style="width:200px" > This is totally me. </button> <br>
 						 </td>
-						 <td><label ng-show="purposeVideos.Videos[vno].feedback==1"><b> O </b></label></td>
+						 <td><label ng-show="purposeVideos.Videos[vno].selected==1"><b> O </b></label></td>
 
 						 
 						 </tr> <tr><td>
-						 <button class ="btn btn-info" ng-model="purposeVideos.Videos[vno].feedback" value ="2"
+						 <button class ="btn btn-info" ng-model="purposeVideos.Videos[vno].selected" value ="2"
 						ng-click = "nextVideo(vno,2)" style="width:200px" > I think this is me. </button> <br>
-						 <td><label ng-show="purposeVideos.Videos[vno].feedback==2"><b> O </b></label></td>
+						 <td><label ng-show="purposeVideos.Videos[vno].selected==2"><b> O </b></label></td>
 						</td></tr> <tr><td>
 						
 
-						 <button class ="btn btn-success" ng-model="purposeVideos.Videos[vno].feedback" value ="3" 
+						 <button class ="btn btn-success" ng-model="purposeVideos.Videos[vno].selected" value ="3" 
 						 ng-click = "nextVideo(vno,3)" style="width:200px" > Meh.. Maybe? </button> <br>
-						 <td><label ng-show="purposeVideos.Videos[vno].feedback==3"><b> O </b></label></td>
+						 <td><label ng-show="purposeVideos.Videos[vno].selected==3"><b> O </b></label></td>
 						 </td></tr> <tr><td>
 						 
-						 <button class ="btn btn-warning" ng-model="purposeVideos.Videos[vno].feedback" value ="4"
+						 <button class ="btn btn-warning" ng-model="purposeVideos.Videos[vno].selected" value ="4"
 						ng-click = "nextVideo(vno,4)" style="width:200px" > I don't know .. </button> <br>
-						 <td><label ng-show="purposeVideos.Videos[vno].feedback==4"><b> O </b></label></td>
+						 <td><label ng-show="purposeVideos.Videos[vno].selected==4"><b> O </b></label></td>
 						</td></tr> <tr><td>
 						
-						 <button class ="btn btn-danger" ng-model="purposeVideos.Videos[vno].feedback" value ="5" 
+						 <button class ="btn btn-danger" ng-model="purposeVideos.Videos[vno].selected" value ="5" 
 						 ng-click = "nextVideo(vno,5)" style="width:200px"> I doubt this is me. </button> <br>
-						 <td><label ng-show="purposeVideos.Videos[vno].feedback==5"><b> O </b></label></td>
+						 <td><label ng-show="purposeVideos.Videos[vno].selected==5"><b> O </b></label></td>
 						 
 						 
 						 </td></tr> 
