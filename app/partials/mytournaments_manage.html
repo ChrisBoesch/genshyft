@@ -293,10 +293,10 @@
 	  			<div class="span4" id="unregisteredUsers" style="overflow:auto;" width="100%">
 					<div class="row-fluid">
 						<div class="span12 bootCamp" id="heading"> 
-							<div ng-show="tournament.isGroup">
+							<div ng-show="selectedTournament.isGroup">
 								Registered Users Without Groups
 							</div>
-							<div ng-hide="tournament.isGroup">
+							<div ng-hide="selectedTournament.isGroup">
 								Registered Users
 							</div>		
 						</div>
@@ -306,13 +306,13 @@
 					<div class="row-fluid">
 						<div class="span12 well well-small" style="overflow:auto;">
 							<li class="bulletless" ng-repeat="unregisteredPlayer in registeredPlayersArray track by $index">
-								<button class="btn bttn ft" ng-click="remove_from_tournament(unregisteredPlayer.playerID, tournament.tournamentID)"><span><b>{{unregisteredPlayer.nickname}}</b></span></button>
+								<button class="btn bttn ft" ng-click="remove_from_tournament(unregisteredPlayer.playerID, selectedTournament.tournamentID)"><span><b>{{unregisteredPlayer.nickname}}</b></span></button>
 							</li>	
 						</div>
 					</div>
 				</div> 	
 
-	  			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%" ng-show="tournament.isGroup">
+	  			<div class="span8" id="registeredUserWithTeam" style="overflow:auto;" width="100%" ng-show="selectedTournament.isGroup">
 					<div class="row-fluid">
 						<div class="span12 bootCamp" id="heading">Registered Groups</div>
 					</div>
@@ -326,7 +326,7 @@
 												<b>Group {{$index+1}}</b>
 												
 												<li class="bulletless" ng-repeat="player in group track by $index">
-													<button class="btn bttn ft" ng-if="$index != 0" ng-click="join_grp(player.playerID, tournament.tournamentID, 0)"><span><b>{{player.nickname}}</b></span>
+													<button class="btn bttn ft" ng-if="$index != 0" ng-click="join_grp(player.playerID, selectedTournament.tournamentID, 0)"><span><b>{{player.nickname}}</b></span>
 													</button>
 												</li>
 											
