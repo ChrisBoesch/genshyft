@@ -655,7 +655,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     if(currentHeat == 0){
       $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
       $http.post("/jsonapi/create_heat", {
-          tournamentID: tournamentId,
+          tournamentID: tournamentID,
           roundID:roundID,
           startIn:timeTillStart,
           isReset:"true"
