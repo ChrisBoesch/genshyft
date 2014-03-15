@@ -653,6 +653,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     console.log("Current Round in progress: " + $scope.currentRound);
     if(currentHeat == 0){
+      $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
       $http.post("/jsonapi/create_heat", {
           tournamentID: tournamentId,
           roundID:roundID,
@@ -695,6 +696,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }); 
     */     
     }else{
+      $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
       $http.post("/jsonapi/create_heat", {
           tournamentID: tournamentId,
           roundID:roundID,
@@ -758,6 +760,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
     });  
     */
+    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $http.post("/jsonapi/stop_heat", {
         tournamentID: tournamentId,
         roundID:roundID
