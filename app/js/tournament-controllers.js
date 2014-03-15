@@ -245,7 +245,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $scope.grpTournaments = response; // stores the Json files
       console.log($scope.grpTournaments);
       for(var i = 0; i < $scope.grpTournaments.length; i++){
-        localCreated = new Date($scope.grpTournaments[i].created.toString().replace(/ /g,"T")+"+00:00");
+        var localCreated = new Date($scope.grpTournaments[i].created.toString().replace(/ /g,"T")+"+00:00");
         $scope.grpTournaments[i].localCreated = $.format.date(localCreated,'yyyy-MM-dd HH:mm');
       }
     });
@@ -395,7 +395,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                   "shortTitle":$scope.selectedTournament.shortTitle,
                   "description":$scope.selectedTournament.description,
                   "password": $scope.selectedTournament.password,
-                  "details":$scope.selectedTournament.addDetails,
+                  "details":$scope.selectedTournament.details,
                   "assignMentorInTeam": $scope.selectedTournament.mentorAssignment,
                   "maxGroups": $scope.selectedTournament.numberOfGrp,
                   "maxPlayersPerGroup": $scope.selectedTournament.numPlayerPerGrp,
@@ -424,7 +424,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.fetch_tournament = function(tournamentID){
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
         $scope.tournament = response;
-        console.log("fetch_tournament = " + $scope.tournament);
+        console.log("fetch edited tournament = " + $scope.tournament.tournamentID);
         //$scope.startTime = new Date("2013-09-29 08:24:46.840830");
         //$scope.stopTime = new Date("2013-09-29 12:00:11.784760");
         //console.log(($scope.stopTime - $scope.startTime)/1000);
@@ -456,7 +456,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
         //$scope.round = response;
         console.log("Save edited round details into DB")
-        $scope.fetch_round(roundID);//Using legacy fetch
+        $scope.fetch_round($scope.selectedRound.roundID);//Using legacy fetch
       });
       $('#editTournRound').modal('hide');
       $('#changesSaved').modal('show');
@@ -472,8 +472,15 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Method to load details of selected round with Round ID to display in Mange Tournament from all the questions in DB-GenShyft*/
   $scope.load_round_details = function(round){
-    console.log(round.problemIDs);
-    $resource("/jsonapi/array_problems").get({"problemIDs":round.problemIDs}, function(response){
+    $scope.getRoundProblems = $resource("/jsonapi/array_problems");
+    var data = {
+      "problemIDs":round.problemIDs
+    };
+    var problemsInRound = new $scope.getRoundProblems(data);
+    problemsInRound.$save(function(response){
+      if(response.error) {
+        console.log("Printing get problems in round error: " + response.error);
+      }
       $scope.cartQuestions = response.problems; 
       console.log(JSON.stringify(response));
       /*
