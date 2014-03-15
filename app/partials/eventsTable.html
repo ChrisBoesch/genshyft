@@ -54,10 +54,12 @@
         <td class = "span1"><strong>School Type</td>
         <td class = "span2"><strong>Starting Year</td>
         <td class = "span4"><strong>{{eventsData.path}} Problems Solved</td>
-        <!--
-        <td class = "span1"><strong>Invited</td>
-        <td class = "span1"><strong>Accepted</td>
-      -->
+
+        <td class = "span4"><strong>Highest Badge</td>
+        <td class = "span4" ng-show="eventsData.rankinglocked"><strong>Rank at Cutoff</td>
+        <td class = "span4" ng-show="eventsData.rankinglocked"><strong>Solved at Cutoff</td>
+        <td class = "span1" ng-show="eventsData.rankinglocked"><strong>Invited</td>
+        <td class = "span1" ng-show="eventsData.rankinglocked"><strong>Accepted</td>
       </tr>
     </thead>
     <tbody>
@@ -95,6 +97,14 @@
           <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
         </td>
 
+        <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.rankatcutoff}}
+         </td>
+         <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.solvedatcutoff}}
+         </td>
+         <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.sentrsvp">{{participant.sentrsvp}}</font>
+         </td>
+         <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
+         </td>
     </span>
       </tr>
       </tbody>
@@ -154,6 +164,14 @@
           <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
         </td>
 
+         <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.rankatcutoff}}
+          </td>
+          <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.solvedatcutoff}}
+          </td>
+          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.sentrsvp">{{participant.sentrsvp}}</font>
+          </td>
+          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
+          </td>
     </span>
       </tr>
       </tbody>
