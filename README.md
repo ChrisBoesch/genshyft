@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/ChrisBoesch/genshyft.png?branch=master)](https://travis-ci.org/ChrisBoesch/genshyft)
 
 ## Genshyft - Angularjs GUI for SingPath.com
-
+  
 SingPath.com is the most fun way to practice software. 
 
 ## Setup on Nitrous.io
