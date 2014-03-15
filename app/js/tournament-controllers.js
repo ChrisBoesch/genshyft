@@ -884,6 +884,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   }
 
   $scope.manageSelectedTournament = function(){
+    $scope.tournamentInit();
     var tID = $cookieStore.get("tournamentID");
     console.log("TournamentID of tournament to be managed: " + tID);
     /*
