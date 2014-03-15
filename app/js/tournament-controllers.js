@@ -780,6 +780,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         alert("An error occurred.")
         console.log(data);
     });
+    $route.reload();
   } 
 
   /*Tournament Join page initialization - By Glen*/
