@@ -646,19 +646,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.createHeat = function(tournamentID,roundID,currentHeat,timeTillStart){
-    /*
-    for(var i = 0; i < $scope.playerTournaments.length; i++){
-      if($scope.playerTournaments[i].tournamentID == tournamentID){
-        for(var j = 0; j < $scope.playerTournaments[i].rounds.length; j++){
-          if($scope.playerTournaments[i].rounds[j].roundID == roundID){
-            currentHeat = $scope.playerTournaments[i].rounds[j].currentHeat;
-            break;
-          }
-        }
-        break;
-      }
-    }
-    */
     for(var j = 0; j < $scope.selectedTournamentRounds.length; j++){
       if($scope.selectedTournamentRounds[j].roundID == roundID){
         $scope.currentRound = $scope.selectedTournamentRounds[j];
@@ -666,6 +653,28 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     console.log("Current Round in progress: " + $scope.currentRound);
     if(currentHeat == 0){
+      $http.post("/jsonapi/create_heat", {
+          tournamentID: tournamentId,
+          roundID:roundID,
+          startIn:timeTillStart,
+          isReset:"true"
+      }).success(function (data, status, headers, config) {
+          $scope.createHeat_response = data;
+          console.log(data);
+          if (data.failed){
+            alert(data.failed);
+          }
+          else{
+            console.log("Create Round Heat")
+            console.log(JSON.stringify(response));
+            alert("Heat starting in: " + timeTillStart);
+          }
+      }).error(function (data, status, headers, config) {
+          console.log("Error");
+          alert("An error occurred.")
+          console.log(data);
+      });
+    /*if(currentHeat == 0){
       $scope.createHeat = $resource('/jsonapi/create_heat');
       var data = {
           "tournamentID":tournamentID,
@@ -683,39 +692,31 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log(JSON.stringify(response));
         alert("Heat starting in: " + timeTillStart);
       }
-      });    
-    }else{
-      // Executed when the round is not restarted (aka, Stopped first before starting)
-      /*
-      $.confirm({
-        'title'   : '<b style="color:#FF0000">Reset Timer?</b>',
-        'message' : 'You are about to reset the timer for <br/> this Round.<br /><br />Continue?',
-        'buttons' : {
-            'Yes' : {
-                'class' : 'gray',
-                'action': function(){
-          ajax({
-              url: '../jsonapi/create_heat',
-          type: 'POST',
-          async: false,
-          //data: {tournamentID:tournamentID, roundID:roundID, startIn:timeTillStart,isReset:"false"},
-          data: {tournamentID:tournamentID, roundID:roundID, startIn:timeTillStart,isReset:"true"},
-          dataType: "text",
-          success: function(){
-            //$scope.reloadPlayerTourn(tournamentID);
-          },
-          error: function(jqXHR, textStatus) {
-            alert( "Request failed: " + textStatus );
-          }
-          });                   
-              }
-          },
-          'No'  : {
-              'class' : 'gray',
-          }
-        }
       }); 
-      */
+    */     
+    }else{
+      $http.post("/jsonapi/create_heat", {
+          tournamentID: tournamentId,
+          roundID:roundID,
+          startIn:timeTillStart,
+          isReset:"true"
+      }).success(function (data, status, headers, config) {
+          $scope.createHeat_response = data;
+          console.log(data);
+          if (data.failed){
+            alert(data.failed);
+          }
+          else{
+            console.log("Create Round Heat")
+            console.log(JSON.stringify(data));
+            alert("Heat starting in: " + timeTillStart);
+          }
+      }).error(function (data, status, headers, config) {
+          console.log("Error");
+          alert("An error occurred.")
+          console.log(data);
+      });
+      /*
       $scope.createHeat = $resource('/jsonapi/create_heat');
       var data = {
           "tournamentID":tournamentID,
@@ -734,41 +735,13 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         alert("Heat starting in: " + timeTillStart);
       }
       });
+      */
     }
   };
   
   $scope.stopHeat = function(tournamentID,roundID){
     /*
-    $.confirm({
-      'title'   : '<b style="color:#FF0000">Stop Round?</b>',
-      'message' : 'You are about to stop a Round.<br/>The round will no longer be accessible and<br />Players currently in-game will be interrupted.<br /><br />Continue?',
-      'buttons' : {
-          'Yes' : {
-              'class' : 'gray',
-              'action': function(){                 
-                //document.write(tournamentID);
-        ajax({
-            url: '../jsonapi/stop_heat',
-        type: 'POST',
-        async: false,
-        data: {tournamentID:tournamentID, roundID:roundID},
-        dataType: "text",
-        success: function(){
-          $scope.reloadPlayerTourn(tournamentID);
-        },
-        error: function(jqXHR, textStatus) {
-          alert( "Request failed: " + textStatus );
-        }
-        });                   
-            }
-        },
-        'No'  : {
-            'class' : 'gray',
-        }
-      }
-    }); 
-    */
-    $scope.stopHeat = $resource('/jsonapi/stop_heat/');
+    $scope.stopHeat = $resource('/jsonapi/stop_heat');
       var data = {
           "tournamentID":tournamentID,
           "roundID":roundID
@@ -783,7 +756,27 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log(JSON.stringify(response));
         alert("Heat is stopped");
       }
-      });  
+    });  
+    */
+    $http.post("/jsonapi/stop_heat", {
+        tournamentID: tournamentId,
+        roundID:roundID
+    }).success(function (data, status, headers, config) {
+        $scope.stopHeat_response = data;
+        console.log(data);
+        if (data.failed){
+          alert(data.failed);
+        }
+        else{
+          console.log("Stop current Round Heat")
+          console.log(JSON.stringify(data));
+          alert("Heat is stopped");
+        }
+    }).error(function (data, status, headers, config) {
+        console.log("Error");
+        alert("An error occurred.")
+        console.log(data);
+    });
   } 
 
   /*Tournament Join page initialization - By Glen*/
