@@ -51,6 +51,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 			   
 			var i = 0;   
 			for(i = 0; i < $scope.purposeVideos.Videos.length-1; i++){
+				console.log(i + ".  checking for unlcoked status");
 				if($scope.purposeVideos.Videos[i].unlocked ==false){
 					 $location.search({'youtube':$scope.purposeVideos.Videos[i].vlink,'vno':i}).path('purposedriven-play') ;
 					 console.log("JUMP TO NEXT VIDEO  :" + i );
@@ -58,6 +59,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
 				}
 			}	
 			
+			console.log("final I = " + i);
 			
 			if( i== $scope.purposeVideos.Videos.length){
 				console.log("USER HAS UNLOCKED ALL VIDEOS");
