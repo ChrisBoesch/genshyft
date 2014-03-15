@@ -50,7 +50,7 @@ function PurposeDrivenController($scope,$resource,$location,$cookieStore,$http,$
                console.log($scope.purposeVideos);
 			   
 			var i = 0;   
-			for(i = 0; i < $scope.purposeVideos.Videos.length-1; i++){
+			for(i = 0; i < $scope.purposeVideos.Videos.length; i++){
 				console.log(i + ".  checking for unlcoked status");
 				if($scope.purposeVideos.Videos[i].unlocked ==false){
 					 $location.search({'youtube':$scope.purposeVideos.Videos[i].vlink,'vno':i}).path('purposedriven-play') ;
