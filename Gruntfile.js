@@ -231,8 +231,7 @@ module.exports = function (grunt) {
               },
               {
                 src: 'http://0.0.0.0:8888/app/index.html#/quests',
-                dest: 'quests.jpg',
-                delay: 3000
+                dest: 'quests.jpg'
               },
               {
                 src: 'http://0.0.0.0:8888/app/index.html#/practice',
@@ -402,11 +401,11 @@ module.exports = function (grunt) {
             ]
           },
           local: false,
-          viewport: ['1024x655']
+          viewport: ['1024x655', '568x320']
         }
       }
     },
-    
+
     compress: {
       screenshots: {
         options: {
@@ -442,7 +441,7 @@ module.exports = function (grunt) {
 
   // development
   grunt.registerTask('dev', ['install', 'build', 'connect:devserver', 'watch']);
-  
+
   //screenshots
   grunt.registerTask('screenshots', ['connect:devserver', 'autoshot',
     'compress:screenshots', 'connect:screenshots', 'open:screenshots']);
