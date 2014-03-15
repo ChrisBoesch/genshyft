@@ -392,17 +392,13 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                   "description":$scope.selectedTournament.description,
                   "password": $scope.selectedTournament.password,
                   "details":$scope.selectedTournament.details,
-                  "assignMentorInTeam": $scope.selectedTournament.mentorAssignment,
-                  "maxGroups": $scope.selectedTournament.numberOfGrp,
-                  "maxPlayersPerGroup": $scope.selectedTournament.numPlayerPerGrp,
+                  "assignMentorInTeam": $scope.selectedTournament.assignMentorInTeam,
+                  "maxGroups": $scope.selectedTournament.maxGroups,
+                  "maxPlayersPerGroup": $scope.selectedTournament.maxPlayersPerGroup,
                   "status":$scope.selectedTournament.status,
                   "type": $scope.selectedTournament.tournamentType,
                   "isGroup": $scope.selectedTournament.isGroup
                  };
-      console.log($scope.selectedTournament.shortTitle);
-      console.log($scope.selectedTournament.password);
-      console.log($scope.selectedTournament.details);
-      console.log($scope.selectedTournament.description);
       $scope.NewTournament = $resource('/jsonapi/create_or_update_tournament/'+$scope.selectedTournament.tournamentID);
       var new_tournament = new $scope.NewTournament(updatedTournament);
       new_tournament.$save(function(response){
@@ -653,7 +649,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           }
           else{
             console.log("Create Round Heat")
-            console.log(JSON.stringify(response));
+            console.log(data);
             alert("Heat starting in: " + timeTillStart);
           }
       }).error(function (data, status, headers, config) {
@@ -696,7 +692,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           }
           else{
             console.log("Create Round Heat")
-            console.log(JSON.stringify(data));
+            console.log(data);
             alert("Heat starting in: " + timeTillStart);
           }
       }).error(function (data, status, headers, config) {
@@ -747,7 +743,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });  
     */
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http.post("/jsonapi/stop_heat", {
+    $http.post("/jsonapi/stop_heat_new", {
         tournamentID: tournamentID,
         roundID:roundID
     }).success(function (data, status, headers, config) {
@@ -758,7 +754,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }
         else{
           console.log("Stop current Round Heat")
-          console.log(JSON.stringify(data));
+          console.log(data);
           alert("Heat is stopped");
         }
     }).error(function (data, status, headers, config) {
