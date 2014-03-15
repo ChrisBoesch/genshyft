@@ -52,19 +52,17 @@ describe("E2E: Testing Controllers", function () {
         });
     });
 
-    
+
     describe('Quest', function() {
 
         beforeEach(function () {
             browser().navigateTo('/app/index.html?scenario=quest');
         });
-        
+
 
         it('should create a new quest', function() {
             element('.nav li a:contains("Quests")').click();
             expect(browser().location().path()).toBe("/quests");
-
-            sleep(5); // wait for carousel to load (create outside angular framework).
 
             var story = element('#myCarousel input[src*="The_Spy_Who_Coded.jpg"]'),
                 level = element('#levels button:contains("Easy")'),
@@ -96,7 +94,7 @@ describe("E2E: Testing Controllers", function () {
         });
 
         xit('should restart an existing quest', function() {
-            // TODO: I am not sure how I would be able to differenciate 
+            // TODO: I am not sure how I would be able to differenciate
             // between a new and an existing story.
         });
 
@@ -132,7 +130,7 @@ describe("E2E: Testing Controllers", function () {
             select('path').option(0);
             select('problemSet').option(0);
             select('problem').option(0);
-            
+
             expect(element('button:contains("Save")').attr('disabled')).toBeTruthy();
             element('button:contains("Run")').click();
             expect(element('#t7').text()).toMatch(/Your solution passes all tests/);
