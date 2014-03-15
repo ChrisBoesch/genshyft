@@ -244,10 +244,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $resource("/jsonapi/get_player_tournaments").query({},function(response){
       $scope.grpTournaments = response; // stores the Json files
       console.log($scope.grpTournaments);
-      for(var i = 0; i < $scope.grpTournaments.length; i++){
-        var localCreated = new Date($scope.grpTournaments[i].created.toString().replace(/ /g,"T")+"+00:00");
-        $scope.grpTournaments[i].localCreated = $.format.date(localCreated,'yyyy-MM-dd HH:mm');
-      }
     });
   }
 
@@ -400,7 +396,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                   "maxGroups": $scope.selectedTournament.numberOfGrp,
                   "maxPlayersPerGroup": $scope.selectedTournament.numPlayerPerGrp,
                   "status":$scope.selectedTournament.status,
-                  "type": $scope.selectedTournament.tournamentType
+                  "type": $scope.selectedTournament.tournamentType,
+                  "isGroup": $scope.selectedTournament.isGroup
                  };
       console.log($scope.selectedTournament.shortTitle);
       console.log($scope.selectedTournament.password);
@@ -472,7 +469,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Method to load details of selected round with Round ID to display in Mange Tournament from all the questions in DB-GenShyft*/
   $scope.load_round_details = function(round){
-    $scope.getRoundProblems = $resource("/jsonapi/array_problems");
+    $scope.getRoundProblems = $resource('/jsonapi/array_problems');
     var data = {
       "problemIDs":round.problemIDs
     };
@@ -483,17 +480,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
       $scope.cartQuestions = response.problems; 
       console.log(JSON.stringify(response));
-      /*
-      for(var i = 0; i < $scope.selectedRound.problemIDs.length; i++){
-        for(var j = 0; j < $scope.tournamentQns.tourQns.length; j++){
-          for(var k = 0; k < $scope.tournamentQns.tourQns[j].questionSet.length; k++){
-            if($scope.selectedRound.problemIDs[i] == $scope.tournamentQns.tourQns[j].questionSet[k].id){
-              $scope.cartQuestions.push($scope.tournamentQns.tourQns[j].questionSet[k]);
-            }
-          }
-        }
-      }
-      */
     });
     $scope.selectedRound = round;
     $('#editTournRound').modal('show');
