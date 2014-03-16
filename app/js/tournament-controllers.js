@@ -986,6 +986,18 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $location.search({"heatID":heatID}).path("tournament-ranking");
     }    
   };
+
+  $scope.get_seconds_to_start = function(startTime, currentTime){
+    var diff = Math.round((new Date(startTime) - new Date(currentTime))/1000);
+    if (diff > 0){
+      return diff;
+    }
+    else if (startTime==null){
+      console.log("Round has not startTime");
+    return -1;  
+    }
+    else return 0;
+};
   
 }
 
