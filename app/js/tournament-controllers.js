@@ -106,7 +106,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     else{
       //console.log("Fetching heat "+$scope.heatID);
-      $scope.fetch_ranks($scope.heatID);
+      $scope.fetching_ranking($scope.heatID);
     };
   };
 
@@ -118,13 +118,20 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.playerRanks = $scope.tournament.ranking;
         
         //Code here continually refreshes every 10 seconds
-        $timeout(function() {
-        $scope.fetch_ranks($scope.heatID)
-        console.log("fetch_ranks");
-        $route.reload();
-        }, 10000);
+        
       });
   };
+
+  $scope.refresh_ranking = function(heatID){
+    $scope.fetch_ranks($scope.heatID)
+      console.log("fetch_ranks");
+      $route.reload();
+  }
+
+  $scope.fetching_ranking = function(heatID){
+    $scope.fetch_ranks(heatID);
+    $timeout($scope.refresh_ranking, 10000);
+  }
 
   $scope.my_range = function(n) {
     var result = [];
