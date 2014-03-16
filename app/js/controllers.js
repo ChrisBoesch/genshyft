@@ -3778,6 +3778,7 @@ function EventController($scope, $resource, $location){
   		$scope.location = $location;
   		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
+		$scope.noEventID = false;
 
   		//variables for create event details
   		$scope.eventTitle="";
@@ -3790,6 +3791,9 @@ function EventController($scope, $resource, $location){
         $scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
     		console.log($scope.eventID + "here3");
+    		if($scope.eventID==null){
+    			$scope.noEventID=true;
+    		}
     	},
 
     	$scope.get_currentUrl = function(){
@@ -3803,11 +3807,7 @@ function EventController($scope, $resource, $location){
             $scope.last_result = event;
             //If id return event
             if(id){
-                $scope.event = event;
-            }
-            else if($scope.eventID!=null){
-            	$scope.event = $scope.fetch_event($scope.eventID);
-                 
+                $scope.event = event;  
             }else{
             	$scope.events = event.events; 
             }
@@ -3908,6 +3908,7 @@ function EventController($scope, $resource, $location){
 function EventTableController($scope, $resource, $route, $location){ 
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
+		$scope.noEventID = false;
 		
 		//variables for edit event details
   		$scope.eventTitle="";
@@ -3991,6 +3992,9 @@ function EventTableController($scope, $resource, $route, $location){
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
     		console.log($scope.eventID + "here3");
+    		if($scope.eventID==null){
+    			$scope.noEventID=true;
+    		}
     	}
 
     	$scope.get_currentUrl = function(){
@@ -4051,7 +4055,6 @@ function EventTableController($scope, $resource, $route, $location){
         $scope.returnToPreviousPage = function() {
   			window.history.back();
 		};
-
 
 
 
