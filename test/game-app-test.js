@@ -1233,7 +1233,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       });
 
 	  
-	  
+	  var ezwebdevtestsoln = {"renderReturn":"<b>HELLO WORLD</b><br/><i>TEST ITALICS</i>"};
+	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
 	  
 	  
