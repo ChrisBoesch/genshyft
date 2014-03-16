@@ -123,6 +123,9 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 
 	
 	$scope.getGameID = function(){
+	
+	$timeout(function(){ 
+	
 		$scope.gameModel = $resource('/jsonapi/create_game_for_problems');
 		var tempArrayProblemID =[];
 		tempArrayProblemID.push($scope.problemsToDo[$scope.problemsInSequence]);		
@@ -132,11 +135,14 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
                   $scope.response = response;
 				  $scope.gameDetails = $scope.response;	
 							//Execute Game
-							$timeout(function(){ 
-								$scope.counter = 0;
-								$scope.create_practice_game($scope.gameDetails);		
-				}, 12000);	 		 
+ 		 
           });	
+		  
+					$scope.counter = 0;
+					$scope.create_practice_game($scope.gameDetails);		
+	}, 12000);			  
+		  
+		  
 	}	
 	$scope.getGameID_wo_delay = function(){
 		$scope.gameModel = $resource('/jsonapi/create_game_for_problems');
