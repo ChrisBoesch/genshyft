@@ -571,6 +571,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       alert("You have not added any tournament round! Please add at least 1 tournament round!");
     }else{
       $scope.newTournamentRounds=[]
+      $('#roundLimit').modal('hide');
       $location.path('mytournaments');
     } 
   }
