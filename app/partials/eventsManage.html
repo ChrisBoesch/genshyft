@@ -170,7 +170,7 @@
 
 <!--bottom half-->
 <!--When user clicks on the send invite button for the different events, the table below should change dynamically -->
-<div class="container" style="position:relative" ng-controller="EventTableController" ng-init="get_participants(); get_eventID(); get_currentUrl();">
+<div class="container" style="position:relative" ng-controller="EventTableController" ng-init="get_participants(); get_eventID(); get_currentUrl(); initializeArray();">
 	<div class="row-fluid">
 		<div class="span12 bootCamp" id="title">
 			<h4>Send Invite</h4>
@@ -210,8 +210,8 @@
 					    type="checkbox"
 					    name="selectedParticipants[]"
 					    value="{{participant.playerid}}"
-					    ng-checked="participant.rank<eventsData.cutoff"
-					    ng-click="addToRSVPList(participant.playerid)"
+					    ng-checked="participant.rank<(eventsData.cutoff+1)"
+					    ng-click="addRemoveRSVPList(participant.playerid)"
   					>
 				</td>
 			</tr>
@@ -226,8 +226,12 @@
 			<label class="control-label" for="inputPassword"></label>
 			<div class="controls">
 				<br><br><br><br><br>
+				
+				<input class="span8" type="text" required ng-model="messageTitle" placeholder="Enter message title here" ></input>
+				<br><br><br>
 				<textarea class="span10" rows="6" ng-model="messageDescription" placeholder = "Message here will be included in the RSVP mail" >
 				</textarea>
+				<br>
 			</div>
 		</div>
 		<div class="control-group">
