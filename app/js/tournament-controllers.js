@@ -158,11 +158,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
   }
 
-  //delete selected round from newTournamentRounds array before saving tournament
-  $scope.deleteFromCart = function(index){
-    $scope.cartQuestions.splice(index,1);
-  }
-
   //Add selected questions to a cart(array)
   $scope.addToCart = function(question){
     var addedQuestion = question;
@@ -425,6 +420,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log("Save edited round details into DB")
         $scope.fetch_round($scope.selectedRound.roundID);//Using legacy fetch
       });
+      $scope.cartQuestions = [];
       $('#editTournRound').modal('hide');
       $('#changesSaved').modal('show');
     }
@@ -439,25 +435,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Method to load details of selected round with Round ID to display in Mange Tournament from all the questions in DB-GenShyft*/
   $scope.load_round_details = function(round){
-    /*
-    $scope.getRoundProblems = $resource('/jsonapi/array_problems');
-    var data = {
-      "problemIDs":round.problemIDs
-    };
-    var problemsInRound = new $scope.getRoundProblems(data);
-    problemsInRound.$save(function(response){
-      if(response.error) {
-        console.log("Printing get problems in round error: " + response.error);
-      }
-      $scope.cartQuestions = response.problems; 
-      console.log(JSON.stringify(response));
-    });
-    */
-
     var problem_ids = round.problemIDs;
     for(var i = 0; i < problem_ids.length; i++){
       $resource('/jsonapi/get_a_problem/' + problem_ids[i]).get({}, function(response){
-        console.log(JSON.stringify(response));
+        //console.log(JSON.stringify(response));
         $scope.cartQuestions = $scope.cartQuestions.concat(response.problem);
       })
     }
