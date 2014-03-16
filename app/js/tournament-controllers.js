@@ -955,30 +955,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*Remove from tournament - by Glen (GENShYFT)*/
   $scope.remove_from_tournament = function(playerId, tournamentId){
     console.log("remove_from_tournament:"+ playerId+" tournamentId="+tournamentId);
-    $scope.join_grp(playerId, tournamentId, -1);
-/*    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http.post("/jsonapi/remove_player/tournament", {
-        playerID: playerId,
-        tournamentID: tournamentId,
-    }).success(function (data, status, headers, config) {
-        $scope.registration_response = data;
-        console.log(data);
-        if (data.failed){
-          alert(data.failed);
-        }
-        else{
-           //Method to check whether data passes through in local testing work
-          //$resource('/jsonapi/remove_player/check').query({}, function(response){
-           $scope.removePlayerVal = response;
-           console.log("removePlayerVal = " + $scope.removePlayerVal.length);
-          }); 
-          $scope.fetch_tournament_details_once();
-        }
-    }).error(function (data, status, headers, config) {
-      console.log("Error");
-        alert("An error occurred.")
-        console.log(data);
-    }); */  
+    $scope.join_grp(playerId, tournamentId, -1); 
   };
 
   /*Taken from previous TournamentsController and modified to redirect to the new page- Glen (GENShYFT)*/
@@ -1014,6 +991,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $location.path("tournament-grpplay");
       });  
     }
+  };
+
+  $scope.round_end_manage = function(heatID){
+    $location.search({"heatID":$scope.game.heatID}).path("tournament-ranking");
   };
   
 }
