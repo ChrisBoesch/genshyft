@@ -15,6 +15,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.heatID = null;
   $scope.location = $location;
   $scope.playerRanks = [];
+  $scope.countval = 10;
   //$scope.$watch('location.search()', function() {
     //  $scope.tournamentID = ($location.search()).tournamentID;
   //}, true);
@@ -119,7 +120,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         //Code here continually refreshes every 10 seconds
         $timeout(function() {
         $scope.fetch_ranks($scope.heatID)
-      }, 10000);
+        console.log("fetch_ranks");
+        $route.reload();
+        }, 10000);
       });
   };
 
