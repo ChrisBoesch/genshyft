@@ -457,7 +457,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     var problem_ids = round.problemIDs;
     for(var i = 0; i < problem_ids.length; i++){
       $resource('/jsonapi/get_a_problem/' + problem_ids[i]).get({}, function(response){
-        $scope.cartQuestions = $scope.problemsInRound.concat(response.problem);
+        console.log(JSON.stringify(response));
+        $scope.cartQuestions = $scope.cartQuestions.concat(response.problem);
       })
     }
     $scope.selectedRound = round;
