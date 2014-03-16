@@ -3923,41 +3923,48 @@ function EventTableController($scope, $resource, $route, $location, $filter){
   		$scope.rsvpList = [];
 
 		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
-			console.log("edit_event executed here")
-			if(eventTitle==""){
-				alert("The event title cannot be empty!");
-			}
-			else if(eventVenue==""){
-				alert("The venue cannot be empty!");
-			}
-			else if(cutoff==""){
-				alert("The cutoff cannot be empty!");
-			}
-			else if(progLang==""){
-				alert("Please select a Programming langauge!");
-			}
-			else{
+			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
+		        $scope.current_event = response;
 
-				var data = {"name":eventTitle,
-					"description":eventDescription,
-					"venue":eventVenue,
-					"cutoff": cutoff,
-					"path": progLang
-
+				console.log("edit_event executed here");
+				if(eventTitle==""){
+					$scope.eventTitle = $scope.current_event.name;
 				}
-				$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
-				var edit_event = new $scope.editEvent(data);
-				edit_event.$save({eventId:id}, function(response){
-					if(response.error) {
-						console.log(response.error);
+				else if(eventVenue==""){
+					$scope.eventVenue = $scope.current_event.venue;
+				}
+				else if(eventDescription==""){
+					$scope.eventDescription = $scope.current_event.description;
+				}
+				else if(cutoff==""){
+					$scope.cutoff = $scope.current_event.cutoff;
+				}
+				else if(progLang==""){
+					$scope.progLang = $scope.current_event.path;
+				}
+				else{
+
+					var data = {"name":eventTitle,
+						"description":eventDescription,
+						"venue":eventVenue,
+						"cutoff": cutoff,
+						"path": progLang
+
 					}
-					else{
-						console.log("Edit event in DB")
-						console.log(response);
-						$location.path("eventsManage");
-					}
-				});
-			}
+					$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
+					var edit_event = new $scope.editEvent(data);
+					edit_event.$save({eventId:id}, function(response){
+						if(response.error) {
+							console.log(response.error);
+						}
+						else{
+							console.log("Edit event in DB")
+							console.log(response);
+							$location.path("eventsManage");
+						}
+					});
+				}
+			});
 			
 		};
 
