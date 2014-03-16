@@ -179,11 +179,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   }
 
   //delete selected round from newTournamentRounds array before saving tournament
-  $scope.deleteRound = function(index){
-    $scope.newTournamentRounds.splice(index,1);
-  }
-
-  //delete selected round from newTournamentRounds array before saving tournament
   $scope.deleteFromCart = function(index){
     $scope.cartQuestions.splice(index,1);
   }
@@ -332,7 +327,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.save_round = function(){      
     var tournamentID = $cookieStore.get("createdTournamentID");
     if($scope.newTournamentRounds.length == 5){
-      alert("The maximum number of rounds per tournament is 5!");
+      //alert("The maximum number of rounds per tournament is 5!");
+      $scope.grpTourRoundName = "";
+      $scope.grpTourRoundMins = "";
+      $scope.cartQuestions = [];
+      $('#roundLimit').modal('show');
     }
     else if($scope.grpTourRoundName == undefined || $scope.grpTourRoundName == ""){
       alert("The round title cannot be empty!");
@@ -366,7 +365,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           console.log(JSON.stringify($scope.round));
           $scope.grpTourRoundName = "";
           $scope.grpTourRoundMins = "";
-          $scope.grpTourRoundDesc = "";
+          //$scope.grpTourRoundDesc = "";
           $scope.cartQuestions = [];
           $('#roundSaved').modal('show');
         }
