@@ -38,8 +38,8 @@
 						Event Title*:
 					</div>
 					<div class="span9">
-						 <input class="span8" type="text" required ng-model="eventTitle" placeholder={{eventsData.name}}></input>
-						 <span class="alert-error" ng-show="eventTitle==''">Required!
+						 <input class="span8" type="text"  ng-model="eventsData.name" ></input>
+						 <span class="alert-error" ng-show="eventsData.name==''">Required!
 						 </span>
 					</div>
 				</div>	
@@ -52,7 +52,7 @@
 						Event Description:
 					</div>
 					<div class="span9">
-						 <textarea class="span8" rows="3" ng-model="grpTourDescription" placeholder = {{eventsData.description}} >
+						 <textarea class="span8" rows="3" ng-model="eventsData.description"  >
 						</textarea>
 					</div>
 				</div>	
@@ -65,8 +65,8 @@
 						Cutoff*:
 					</div>
 					<div class="span7">
-						 <input class="span6" type="text" required ng-model="cutoff" placeholder={{eventsData.cutoff}} ></input>
-						 <span class="alert-error" ng-show="cutoff==''">Required!
+						 <input class="span6" type="number" required ng-model="eventsData.cutoff"  ></input>
+						 <span class="alert-error" ng-show="eventsData.cutoff==''">Required!
 						 </span>
 					</div>
 				</div>	
@@ -81,7 +81,7 @@
 					<div class="span9">
 						 <div class="span8">
 						  <label>
-						    <input type="radio" ng-model="eventProgLang" id="optionsRadios1" value="Java">
+						    <input type="radio" ng-model="eventProgLang" id="optionsRadios1" value="Java"  >
 						    Java
 						  </label>
 						  <label>
