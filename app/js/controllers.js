@@ -3821,10 +3821,13 @@ function EventController($scope, $resource, $location){
             });
         },
 
-		$scope.create_new_event = function(eventTitle, eventDescription, cutoff, progLang){
+		$scope.create_new_event = function(eventTitle, eventDescription, eventVenue, cutoff, progLang){
 			console.log("Create_new_event executed here")
 			if(eventTitle==""){
 				alert("The event title cannot be empty!");
+			}
+			else if(eventVenue==""){
+				alert("The venue cannot be empty!");
 			}
 			else if(cutoff==""){
 				alert("The cutoff cannot be empty!");
@@ -3836,6 +3839,7 @@ function EventController($scope, $resource, $location){
 
 				var data = {"name":eventTitle,
 					"description":eventDescription,
+					"venue": eventVenue,
 					"cutoff": cutoff,
 					"path": progLang
 
@@ -3918,10 +3922,13 @@ function EventTableController($scope, $resource, $route, $location){
 
   		$scope.rsvpList = [];
 
-		$scope.edit_event = function(id, eventTitle, eventDescription, cutoff, progLang){
+		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
 			console.log("edit_event executed here")
 			if(eventTitle==""){
 				alert("The event title cannot be empty!");
+			}
+			else if(eventVenue==""){
+				alert("The venue cannot be empty!");
 			}
 			else if(cutoff==""){
 				alert("The cutoff cannot be empty!");
@@ -3933,6 +3940,7 @@ function EventTableController($scope, $resource, $route, $location){
 
 				var data = {"name":eventTitle,
 					"description":eventDescription,
+					"venue":eventVenue,
 					"cutoff": cutoff,
 					"path": progLang
 
