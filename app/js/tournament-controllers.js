@@ -743,8 +743,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });  
     */
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http.post("/jsonapi/stop_heat_new", {
-        tournamentID: tournamentID,
+    $http.post("/jsonapi/stop_heat_updated", {
+        tournamentID:tournamentID,
         roundID:roundID
     }).success(function (data, status, headers, config) {
         $scope.stopHeat_response = data;
