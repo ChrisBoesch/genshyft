@@ -3909,7 +3909,7 @@ function EventController($scope, $resource, $location){
           
 }
 
-function EventTableController($scope, $resource, $route, $location){ 
+function EventTableController($scope, $resource, $route, $location, $filter){ 
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		$scope.noEventID = false;
@@ -3961,7 +3961,7 @@ function EventTableController($scope, $resource, $route, $location){
 			
 		};
 
-		$scope.send_rsvp = function(messageDescription, includeRSVP){
+		$scope.send_rsvp = function(messageDescription, messageTitle, includeRSVP){
 			console.log("rsvp executed here")
 			console.log("RSVP List= " + $scope.rsvpList);
 			if(includeRSVP==null){
@@ -3970,12 +3970,17 @@ function EventTableController($scope, $resource, $route, $location){
 			if(messageDescription==null){
 				messageDescription = "Default Message";
 			}
-			var data = {"participantToSend":$scope.rsvpList,
-						"messageDescription":messageDescription,
+			if(messageTitle==null){
+				messageTitle = "Default Title";
+			}
+			var data = {"eventID":$scope.eventID,
+						"playerIDs":$scope.rsvpList,
+						"messageTitle":messageTitle,
+						"messageBody":messageDescription,
 						"includeRSVP": includeRSVP
 
 						}
-			$scope.send_rsvp = $resource('/jsonapi/eventrsvp');
+			$scope.send_rsvp = $resource('/jsonapi/send_event_message');
 			var new_rsvp = new $scope.send_rsvp(data);
 			new_rsvp.$save(function(response){
 				if(response.error) {
@@ -3991,10 +3996,31 @@ function EventTableController($scope, $resource, $route, $location){
 			
 		}
 
-		//Add selected participants to an array
-		$scope.addToRSVPList = function(participantID){
-			console.log(participantID);
-		    $scope.rsvpList.push(participantID);
+		//Add/remove selected participants in an array
+		$scope.addRemoveRSVPList = function(participantID){
+	        if ($scope.rsvpList.indexOf(participantID) === -1) {
+            	$scope.rsvpList.push(participantID);
+         	}
+         	else {
+            	$scope.rsvpList.splice($scope.rsvpList.indexOf(participantID), 1);
+         	}
+		    console.log("pushed" + participantID);
+		    console.log($scope.rsvpList);
+		}
+
+		$scope.initializeArray = function(){
+			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
+				$scope.current_event = response;
+				for(var i =0;i< $scope.current_event.ranking.length;i++){
+	          		if(i<=$scope.current_event.cutoff-1){
+	          			$scope.rsvpList.push($scope.current_event.ranking[i].playerid);
+	          		}
+	        	}
+	        	console.log($scope.rsvpList);
+	        	console.log($scope.rsvpList.length);
+			});
+
+
 		}
 
     	$scope.get_eventID = function(){
