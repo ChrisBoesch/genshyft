@@ -409,7 +409,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     else{
       var roundQuestions = [];
       for(var j = 0; j < $scope.cartQuestions.length; j++){
-        roundQuestions.push($scope.cartQuestions[j].id);
+        roundQuestions.push($scope.cartQuestions[j].problem_id);
       }
       var updatedRound = {"roundID":$scope.selectedRound.roundId,
                           "timelimit":$scope.selectedRound.timelimit,
@@ -439,6 +439,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Method to load details of selected round with Round ID to display in Mange Tournament from all the questions in DB-GenShyft*/
   $scope.load_round_details = function(round){
+    /*
     $scope.getRoundProblems = $resource('/jsonapi/array_problems');
     var data = {
       "problemIDs":round.problemIDs
@@ -451,6 +452,15 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $scope.cartQuestions = response.problems; 
       console.log(JSON.stringify(response));
     });
+    */
+
+    var problem_ids = round.problemIDs;
+    for(var i = 0; i < problem_ids.length; i++){
+      $resource('/jsonapi/get_a_problem/' + problem_ids[i]).get({}, function(response){
+        console.log(JSON.stringify(response));
+        $scope.cartQuestions = $scope.cartQuestions.concat(response.problem);
+      })
+    }
     $scope.selectedRound = round;
     $('#editTournRound').modal('show');
   }
