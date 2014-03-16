@@ -135,11 +135,12 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
                   $scope.response = response;
 				  $scope.gameDetails = $scope.response;	
 							//Execute Game
+				$scope.counter = 0;
+				$scope.create_practice_game($scope.gameDetails);							
  		 
           });	
 		  
-					$scope.counter = 0;
-					$scope.create_practice_game($scope.gameDetails);		
+		
 	}, 12000);			  
 		  
 		  
