@@ -994,7 +994,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.round_end_manage = function(heatID){
-    $location.search({"heatID":$scope.game.heatID}).path("tournament-ranking");
+    $location.search({"heatID":heatID}).path("tournament-ranking");
   };
   
 }
