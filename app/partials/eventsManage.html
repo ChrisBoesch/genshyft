@@ -81,7 +81,7 @@
 	
 </style>
 </br>
-<div class="container" style="position:relative" ng-controller="EventController" ng-init="fetch_event();">
+<div class="container" style="position:relative" ng-controller="EventController" ng-init="get_eventID(); fetch_event(); get_eventID()">
 	<button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
 	</br>
 	</br>
@@ -100,34 +100,66 @@
 
 				</center>
 				<div class="row-fluid" ng-repeat="event in events">
-
-					<div class="span6">
-			              <h4>{{$index+1}}. {{event.name}}</h4><br>
-			              {{event.description}}<br>
-			              Registration Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}</strong>
-			              <br>
-			              Tournament Type: {{event.path}}
-			              <br>
-			              Cutoff Ranking: {{event.cutoff}}
-			              <br>
-			              
-			        </div>
-			            <center>
-			              	<br>
-			              	<br>
-			              	<br>
-			              	<br>
-			              	<button class="btn btn-primary btn-success" data-toggle="modal" ng-click="reload_eventsManage(event.id)">
-			            	<i class="icon-eye-open icon-white"></i> Send Invite
-			            	</button>
-							<button class="btn btn-primary btn-warning" data-toggle="modal" ng-click="go_to_eventsEdit(event.id)">
-							<i class="icon-check icon-white"></i> Edit Event
-							</button>
-			            	<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="delete_event(event.id)">
-			            	<i class="icon-eye-open icon-white"></i> Delete Event
-			            	</button>
-			            
-			          </center>
+					<span ng-hide="eventID!=event.id">
+						<div class="span6">
+							
+				              <h4>{{event.name}}</h4><br>
+				              {{event.description}}<br>
+				              Registration Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}</strong>
+				              <br>
+				              Tournament Type: {{event.path}}
+				              <br>
+				              Cutoff Ranking: {{event.cutoff}}
+				              <br>
+				              
+				        </div>
+				            <center>
+				              	<br>
+				              	<br>
+				              	<br>
+				              	<br>
+				              	<button class="btn btn-primary btn-success" data-toggle="modal" ng-click="reload_eventsManage(event.id)">
+				            	<i class="icon-eye-open icon-white"></i> Send Invite
+				            	</button>
+								<button class="btn btn-primary btn-warning" data-toggle="modal" ng-click="go_to_eventsEdit(event.id)">
+								<i class="icon-check icon-white"></i> Edit Event
+								</button>
+				            	<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="delete_event(event.id)">
+				            	<i class="icon-eye-open icon-white"></i> Delete Event
+				            	</button>
+				            
+				          </center>
+			        </span>
+			        <span ng-show="noEventID">
+			        	<div class="span6">
+							
+				              <h4>{{event.name}}</h4><br>
+				              {{event.description}}<br>
+				              Registration Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}</strong>
+				              <br>
+				              Tournament Type: {{event.path}}
+				              <br>
+				              Cutoff Ranking: {{event.cutoff}}
+				              <br>
+				              
+				        </div>
+				            <center>
+				              	<br>
+				              	<br>
+				              	<br>
+				              	<br>
+				              	<button class="btn btn-primary btn-success" data-toggle="modal" ng-click="reload_eventsManage(event.id)">
+				            	<i class="icon-eye-open icon-white"></i> Send Invite
+				            	</button>
+								<button class="btn btn-primary btn-warning" data-toggle="modal" ng-click="go_to_eventsEdit(event.id)">
+								<i class="icon-check icon-white"></i> Edit Event
+								</button>
+				            	<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="delete_event(event.id)">
+				            	<i class="icon-eye-open icon-white"></i> Delete Event
+				            	</button>
+				            
+				          </center>
+				    </span>
 				</div>
 			</div>	
 		</div>	
@@ -159,7 +191,13 @@
 			</tr>
 		</thead>
 		<tbody>
-
+			<center>
+			<span ng-show="noEventID">
+					<h4>
+						Please select an event to send invite(s) to!
+					</h4>
+			</span>
+		</center>
 			<tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=50">
 				<td class = "span1">{{$index+1}}</td>
 				<td class = "span3">{{participant.nickname}}</td>
@@ -168,7 +206,13 @@
 					<span ng-if="participant.solvedproblems>=0">{{participant.solvedproblems}}</span>
 				</td>
 				<td class = "span1">
-					<button name="addParticipantToRSVP" ng-click="addToRSVPList(participant.playerid);isDisabled=true" class="btn btn-primary" ng-disabled="isDisabled"><i class="icon-plus icon-white"></i> Add</button>
+					<input
+					    type="checkbox"
+					    name="selectedParticipants[]"
+					    value="{{participant.playerid}}"
+					    ng-checked="participant.rank<eventsData.cutoff"
+					    ng-click="addToRSVPList(participant.playerid)"
+  					>
 				</td>
 			</tr>
 		</tbody>
