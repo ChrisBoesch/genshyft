@@ -409,7 +409,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     else{
       var roundQuestions = [];
       for(var j = 0; j < $scope.cartQuestions.length; j++){
-        roundQuestions.push($scope.cartQuestions[j].id);
+        roundQuestions.push($scope.cartQuestions[j].problem_id);
       }
       var updatedRound = {"roundID":$scope.selectedRound.roundId,
                           "timelimit":$scope.selectedRound.timelimit,
