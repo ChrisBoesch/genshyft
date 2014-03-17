@@ -267,7 +267,7 @@
 	 				</tr>
 	                <tr class="warning" ng-repeat="tournamentRound in selectedTournamentRounds">
 	                    <td class="roundInfo">{{tournamentRound.description}}</td>
-	                    <td class="roundInfo">{{tournamentRound.timelimit}}</td>
+	                    <td class="roundInfo">{{tournamentRound.timelimit/60}}</td>
 	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
 	                    <td>
 	                    	<div>

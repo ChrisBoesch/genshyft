@@ -451,6 +451,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       })
     }
     $scope.selectedRound = round;
+    $scope.selectedRound.timelimit = $scope.selectedRound.timelimit / 60;
     $('#editTournRound').modal('show');
   }
 
