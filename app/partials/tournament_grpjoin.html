@@ -66,7 +66,7 @@
 	    					<b>{{round.description}}</b><br>
 	    					Number of problems : <b>{{round.problemIDs.length}}</b><br>
 								<div ng-controller="CountdownController" ng-init="start_timer(get_seconds_to_start(round.currentHeatDetails.startTime, round.currentHeatDetails.currentTime))">
-									<font color="blue" ng-show="counter>0">Round starting in <b> {{counter}} seconds </b> </font><font color="red" ng-show="counter==0"><b>Round have started, Let's </b></font><font ng-show="counter<0"><b>Round have not started or is over.</b> </font>
+									<font color="blue" ng-show="counter>0">Round starting in <b> {{counter}} seconds </b> </font><font color="red" ng-show="counter==0"><b>Round has started, Let's </b></font><font ng-show="counter<0"><b>Round has not started or is over.</b> </font>
 									<button class="btn btn-primary" type="button" ng-show="counter==0" ng-click="create_tournament_round_game_new(round.roundID, isInGrp, tournament.isGroup)"><i class="icon-play icon-white"></i> Play </button>
 									</br>
 									</br>
