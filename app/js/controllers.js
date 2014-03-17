@@ -3806,8 +3806,10 @@ function EventController($scope, $resource, $location){
           var event = Event.get({eventId:id}, function() {
             $scope.last_result = event;
             //If id return event
+           
             if(id){
-                $scope.event = event;  
+                $scope.event = event;
+                
             }else{
             	$scope.events = event.events; 
             }
@@ -3923,16 +3925,38 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		$scope.noEventID = false;
-
-		//variables for edit event details
-  		$scope.eventTitle="";
+    	$scope.eventTitle="";
   		$scope.eventDescription="";
   		$scope.cutoff="";
   		$scope.progLang="";
 
   		$scope.rsvpList = [];
-
-		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
+  
+    //Countdown til cutoff
+    $scope.countdown = function(element,days,seconds) {
+    var time = days*24*3600 + seconds;
+    var interval = setInterval(function() {
+        var el = document.getElementById(element);
+        if(time == 0) {
+            el.innerHTML = "Ranking is locked.";    
+            clearInterval(interval);
+            return;
+        }
+      //var minutes = Number.floor( time / 60 );
+        var minutes = Math.floor( time / 60 );
+        var hours = Math.floor(time/3600);
+        var days = Math.floor(time/(3600*24));
+      
+        if (minutes < 10) minutes = "0" + minutes;
+        var seconds = time % 60;
+        if (seconds < 10) seconds = "0" + seconds; 
+        var text = days +" Days "+hours%24+ " Hours "+ minutes%60 + " Minutes " + seconds+" Seconds ";
+        el.innerHTML = text;
+        time--;
+    }, 1000);
+}
+		
+    $scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 		        $scope.current_event = response;
 
@@ -4089,6 +4113,7 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 
 		}
 
+     
 		$scope.getRankFromID = function(playerid){
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 				$scope.current_event = response;
@@ -4156,6 +4181,11 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 	        console.log("refer here");
 	        console.log($scope.current_event);
 	        $scope.total_registered = $scope.current_event.ranking.length;
+          
+          if($scope.current_event.time_to_cutoff && $scope.current_event.time_to_cutoff.days>0){
+            $scope.countdown('countdown',$scope.current_event.time_to_cutoff.days , $scope.current_event.time_to_cutoff.seconds);
+          }
+          
 	        for(var i =0;i< $scope.current_event.ranking.length;i++){
 	          if($scope.current_event.ranking[i].isCurrentPlayer){
 	            $scope.currentPlayerRanking = i+1;
