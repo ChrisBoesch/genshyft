@@ -180,6 +180,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
   }
 
+  //delete selected round from newTournamentRounds array before saving tournament
+  $scope.deleteFromCart = function(index){
+    $scope.cartQuestions.splice(index,1);
+  }
+
   //Retrieve question information and display to user
   $scope.viewQuestionInfo = function(question){
     $scope.questionName = question.name;
@@ -321,7 +326,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
       //console.log(roundQuestions);
       $scope.newTournamentRounds.push({problemIDs:roundQuestions,description:$scope.grpTourRoundName,timelimit:$scope.grpTourRoundMins});
-      var data = {'timelimit':$scope.grpTourRoundMins,
+      var data = {'timelimit':$scope.grpTourRoundMins * 60,
             'description':$scope.grpTourRoundName,
             'problemIDs':roundQuestions,
             'tournamentID':tournamentID}
@@ -408,7 +413,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         roundQuestions.push($scope.cartQuestions[j].problem_id);
       }
       var updatedRound = {"roundID":$scope.selectedRound.roundId,
-                          "timelimit":$scope.selectedRound.timelimit,
+                          "timelimit":$scope.selectedRound.timelimit * 60,
                           "problemIDs":roundQuestions,
                           "description":$scope.selectedRound.description};    
       $scope.NewRound = $resource('/jsonapi/add_or_update_round/'+$scope.selectedRound.roundID);
@@ -437,6 +442,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*Method to load details of selected round with Round ID to display in Mange Tournament from all the questions in DB-GenShyft*/
   $scope.load_round_details = function(round){
     var problem_ids = round.problemIDs;
+    console.log(problem_ids);
     for(var i = 0; i < problem_ids.length; i++){
       $resource('/jsonapi/get_a_problem/' + problem_ids[i]).get({}, function(response){
         //console.log(JSON.stringify(response));

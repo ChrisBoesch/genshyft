@@ -197,7 +197,7 @@
 								<b>Tournament Round Starting in:</b>  
 							</div>
 							<div class="span7" ng-controller="CountdownController" ng-init="start_timer(get_seconds_to_start(round.currentHeatDetails.startTime, round.currentHeatDetails.currentTime))">
-							<font color="red" ng-show="counter==0"><b>Round have started</b></font>
+							<font color="red" ng-show="counter==0"><b>Round has started</b></font>
 							<font ng-show="counter<0">Round currently inactive</font>
 							<font color="blue" ng-show="counter>0"><b>{{counter}} seconds</b></font>							
 							</div>
