@@ -95,15 +95,16 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       });
   };
 
-  $scope.refresh_ranking = function(heatID){
-    $scope.fetch_ranks($scope.heatID)
-    console.log("fetching_ranks");
-    $route.reload();
-  }
+  //$scope.refresh_ranking = function(heatID){
+    //$scope.fetch_ranks($scope.heatID)
+    //console.log("fetching_ranks");
+    //$route.reload();
+  //}
 
   $scope.fetching_ranking = function(heatID){
+    console.log("fetching_ranks");
     $scope.fetch_ranks(heatID);
-    $timeout($scope.refresh_ranking, 10000);
+    $timeout($scope.fetching_ranking(heatID), 10000);
   }
 
   $scope.my_range = function(n) {
