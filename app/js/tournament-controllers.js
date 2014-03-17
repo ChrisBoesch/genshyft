@@ -30,7 +30,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.grpTourRoundMins="";
   $scope.grpTourRoundDesc="";
 
-  $scope.roundIdTracker=1001; //to simulate round ID
+  //$scope.roundIdTracker=1001; //to simulate round ID
   $scope.cartQuestions = [];
   $scope.bankQuestions =[];
   $scope.newTournamentRounds = [];
@@ -50,12 +50,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.grpTourAddDetails="";
   $scope.grpTourPassword="";
   $scope.grpTourPasswordConfirm="";
-  $scope.grpTourStatus="Closed";
+  //$scope.grpTourStatus="Closed";
   $scope.grpTourType="individual";
   $scope.grpTourMentor="";
   $scope.grpTourNoGroup=2;
   $scope.grpTourMaxNoPlayer=1;
-  $scope.qnsLanguage="Ruby";
+  //$scope.qnsLanguage="Ruby";
   $scope.createdTournament;
   $scope.createdTournamentID="";
 
@@ -64,6 +64,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.selectedTournamentRounds;
   $scope.passwordConfirm="";
   $scope.selectedRound;
+  $scope.timeInMins;
   $scope.currentRound;
   $scope.allTournaments = [];
 
@@ -406,7 +407,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     if($scope.selectedRound.description == undefined || $scope.selectedRound.description == ""){
       alert("The round title cannot be empty!");
     }
-    else if($scope.selectedRound.timelimit == undefined || $scope.selectedRound.timelimit == 0){
+    else if($scope.timeInMins == undefined || $scope.timeInMins == 0){
       alert("The round time limit cannot be empty!");
     }
     else{
@@ -415,7 +416,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         roundQuestions.push($scope.cartQuestions[j].problem_id);
       }
       var updatedRound = {"roundID":$scope.selectedRound.roundId,
-                          "timelimit":$scope.selectedRound.timelimit * 60,
+                          "timelimit":$scope.timeInMins * 60,
                           "problemIDs":roundQuestions,
                           "description":$scope.selectedRound.description};    
       $scope.NewRound = $resource('/jsonapi/add_or_update_round/'+$scope.selectedRound.roundID);
@@ -448,13 +449,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     for(var i = 0; i < problem_ids.length; i++){
       var problemid = problem_ids[i];
       $resource('/jsonapi/get_a_problem/' + problemid).get({}, function(response){
-        //console.log(JSON.stringify(response));
         console.log(response.problem.problem_id);
         $scope.cartQuestions.push(response.problem);
       })
     }
     $scope.selectedRound = round;
-    $scope.selectedRound.timelimit = $scope.selectedRound.timelimit / 60;
+    $scope.timeInMins = $scope.selectedRound.timelimit / 60;
     $('#editTournRound').modal('show');
   }
 
