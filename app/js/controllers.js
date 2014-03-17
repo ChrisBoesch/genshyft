@@ -4120,7 +4120,9 @@ function EZWebDevController($scope,$resource,$cookieStore,$timeout,$http,$route,
 			$scope.nameToProblem = $scope.currEZWebDevQn.name;
 			$scope.descriptionToProblem = $scope.currEZWebDevQn.description;
 			$scope.skeleton = $scope.currEZWebDevQn.skeleton;
-			$scope.examples = $scope.currEZWebDevQn.examples;
+			//$scope.examples = $scope.currEZWebDevQn.examples;
+			$scope.problemId = $scope.currEZWebDevQn.id;
+			$scope.gameID = $scope.ezwebdevcall.gameID;
 			console.log($scope.currEZWebDevQn);
 		})
 
@@ -4128,6 +4130,18 @@ function EZWebDevController($scope,$resource,$cookieStore,$timeout,$http,$route,
 
 	$scope.renderHTML = function(){
 		console.log($scope.skeleton);
+		$scope.SaveResource = $resource('/jsonapi/render_ezwebdev');
+		$scope.dataToRender = {user_code:$scope.skeleton,
+								problem_id:$scope.problemId,
+								game_id:$scope.gameID};
+		console.log($scope.dataToRender);
+
+		var item = new $scope.SaveResource($scope.dataToRender);
+		item.$save(function(response){
+			$scope.renderData = response;
+			$scope.examples = $scope.renderData.renderReturn;
+
+		});
 	};
 
 }

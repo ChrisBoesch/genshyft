@@ -767,7 +767,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "isGroup": true,
     "tournamentID": 5060388987076609,
 	"maxPlayersPerGroup":5,
-	"maxGroups":5,
+	"maxGroups":20,
     "assignMentorInTeam": true,
     "rounds": [
         {
@@ -1233,7 +1233,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       });
 
 	  
-	  
+	  var ezwebdevtestsoln = {"renderReturn":"<b>HELLO WORLD</b><br/><i>TEST ITALICS</i>"};
+	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
 	  
 	  
