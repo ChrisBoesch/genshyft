@@ -3933,14 +3933,22 @@ function EventTableController($scope, $resource, $route, $location, $filter){
   		$scope.rsvpList = [];
 
 		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
+			console.log(id);
+			console.log(eventTitle);
+			console.log(eventDescription);
+			console.log(eventVenue);
+			console.log(cutoff);
+			console.log(progLang);
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 		        $scope.current_event = response;
 
 				console.log("edit_event executed here");
 				if(eventTitle==""){
 					$scope.eventTitle = $scope.current_event.name;
+					console.log($scope.eventTitle);
 				}else{
 					$scope.eventTitle = eventTitle;
+					console.log(eventTitle);
 				}
 				if(eventVenue==""){
 					$scope.eventVenue = $scope.current_event.venue;
