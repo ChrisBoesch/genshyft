@@ -3861,20 +3861,30 @@ function EventController($scope, $resource, $location){
 		};
 
 		$scope.delete_event = function(id){
-			console.log("delete_event executed here");
-			var data = {"archived": true
-						}	
-			$scope.deleteEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
-			var delete_event = new $scope.deleteEvent(data);
-			delete_event.$save({eventId:id}, function(response){
-				if(response.error) {
-					console.log(response.error);
-				}
-				else{
-					console.log("Delete event in DB")
-					console.log(response);
-					$location.path("eventsManage");
-				}
+			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
+				$scope.current_event = response;
+				var eventDetails = $scope.current_event;
+				console.log("delete_event executed here");
+
+				var data = {"name":eventDetails.name,
+							"description":eventDetails.description,
+							"venue": eventDetails.venue,
+							"cutoff": eventDetails.cutoff,
+							"path": eventDetails.path,
+							"archived" : true
+							}	
+				$scope.deleteEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
+				var delete_event = new $scope.deleteEvent(data);
+				delete_event.$save({eventId:id}, function(response){
+					if(response.error) {
+						console.log(response.error);
+					}
+					else{
+						console.log("Delete event in DB")
+						console.log(response);
+						$location.path("eventsManage");
+					}
+				});
 			});
 		};
 
@@ -3913,7 +3923,7 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		$scope.noEventID = false;
-		
+
 		//variables for edit event details
   		$scope.eventTitle="";
   		$scope.eventDescription="";
@@ -4013,15 +4023,96 @@ function EventTableController($scope, $resource, $route, $location, $filter){
          	}
 		    console.log("pushed" + participantID);
 		    console.log($scope.rsvpList);
+		    console.log($scope.rsvpList.length);
 		}
 
-		$scope.initializeArray = function(){
+		//check if rsvpList contains everyone within cutoff, if it doesn't, fill it with those within
+		//cutoff, if it does, remove all within cutoff
+		$scope.addCutoffToRSVPList = function(){
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 				$scope.current_event = response;
+				var tempCutoffArray = [];
+				var containsEveryone = false;
+				for(var i =0; i < $scope.current_event.ranking.length; i++){
+					if($scope.current_event.ranking[i].rank<=$scope.current_event.cutoff){
+						//collect all the cutoff's playerids
+						tempCutoffArray.push($scope.current_event.ranking[i].playerid);
+					}
+				}
+				//iterate though the whole existing rsvpList, remove ids from tempCutoffArray if
+				//ids can be found. the entire tempCutoffArray should be empty if rsvpList contains
+				//everyone within cutoff
+				for(var i =0; i < $scope.rsvpList.length; i++){
+					$scope.tempCutoffArray.splice($scope.tempCutoffArray.indexOf($scope.rsvpList[i]), 1);
+				}
+
+				if(tempCutoffArray==0){
+					containsEveryone = true;
+				}
+
+				for(var i = 0; i < $scope.tempCutoffArray.length; i++){
+					$scope.rsvpList.splice($scope.rsvpList.indexOf($scope.tempCutoffArray[i]), 1);
+				}
+
+				/**
 				for(var i =0;i< $scope.current_event.ranking.length;i++){
+					if($scope.current_event.ranking[i].rank<=$scope.current_event.cutoff){
+						$scope.rsvpList.splice($scope.rsvpList.indexOf($scope.current_event.ranking[i].playerid));
+					}
 	          		if(i<=$scope.current_event.cutoff-1){
 	          			$scope.rsvpList.push($scope.current_event.ranking[i].playerid);
 	          		}
+	        	}
+	        	**/
+	        	console.log($scope.rsvpList);
+	        	console.log($scope.rsvpList.length);
+			});
+
+
+		}
+
+		$scope.addSelectedFewToRSVPList = function(){
+			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
+				$scope.current_event = response;
+				if($scope.rsvpList.length!=$scope.current_event.cutoff){
+					for(var i =0;i< $scope.current_event.ranking.length;i++){
+						if($scope.current_event.ranking[i].rank<=$scope.current_event.cutoff){
+		          			$scope.rsvpList.push($scope.current_event.ranking[i].playerid);
+		          		}
+		        	}
+		        }else{
+		        	$scope.rsvpList = [];
+		        }
+	        	console.log($scope.rsvpList);
+	        	console.log($scope.rsvpList.length);
+			});
+
+		}
+
+		$scope.getRankFromID = function(playerid){
+			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
+				$scope.current_event = response;
+				for(var i = 0; i < $scope.current_event.ranking.length-1; i++){
+					if($scope.current_event.ranking[i].playerid = playerid){
+						return $scope.current_event.ranking[i].rank;
+					}
+				}
+			});
+
+		}
+
+		//checks if rsvpList contains everyone, if it doesn't, fill it up with everyone's name
+		//if it does, clear all
+		$scope.addAllToRSVPList = function(){
+			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
+				$scope.current_event = response;
+				if($scope.current_event.ranking.length!=$scope.rsvpList.length){
+					$scope.rsvpList = [];
+					for(var i =0;i< $scope.current_event.ranking.length;i++){
+	          			$scope.rsvpList.push($scope.current_event.ranking[i].playerid);
+	          		}
+	        	}else{
+	        		$scope.rsvpList = [];
 	        	}
 	        	console.log($scope.rsvpList);
 	        	console.log($scope.rsvpList.length);
@@ -4029,6 +4120,8 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 
 
 		}
+
+
 
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
