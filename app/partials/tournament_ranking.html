@@ -49,37 +49,27 @@
 
 </style>
 </br>
-<center><h2>Tournament Ranking</h2></center>
+<center><h2>Round Ranking</h2></center>
 
 <div class="container"  style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="check_location()">
 
-	<!--<div class="row-fluid">
+	<div class="row-fluid">
 		<div class="container">
-			<h4 class="well well-small bootCamp" align="center" id="well-c" ng-controller="CountdownController" ng-init="start_timer(countval)">Ranking refreshing in {{counter}} seconds...</h4>
+			<h4 class="well well-small bootCamp" align="center" id="well-c" ng-controller="CountdownController" ng-init="start_timer(countval)">Ranking refreshes every 10 seconds</h4>
 		</div>		
-	</div>-->
+	</div>
     
     <div class="row-fluid">
         <div class="span12" >
             
 			<div class="tabbable well" align="center">				
-				<!--Top Tabs : All Challenges & My Creations-->
-				<ul class="nav nav-tabs">
-					<li class="tabspacing active">
-					  <a data-target="#Ranking" data-toggle="tab">Round</a>
-					</li>
-					<!-- Need to make sure tabs is dynamically displayed according to the number of rounds each tournaments have. -->
-					 <button type="button" class="btn btn-primary" id="createChallenge" ng-hide="true" ng-click="startRef()">End Tournament</button>
-				</ul>
-
-
-
 				<div class="tab-content" id="top-content">				
 					<div class="tab-pane active" align="left" id="Ranking">
 						<div style="width:99.8%; height:{{window_Height_challenge}}px;overflow-y:auto;overflow-x:hidden">						
 
 						<div>
-						<h4>{{tournament.roundDescription}} {{counter}}</h4>
+								<button type="button" class="btn btn-inverse" id="tourn_lobby" ng-click="tournament_bay()"><i class="icon-home icon-white"></i> Back To Tournament Lobby</button>
+						<center><h4>{{tournament.roundDescription}} {{counter}}</h4><center>
 						<h5 ng-hide="true">{{tournament.heatDescription}}</h5>
 							<table class="table table-hover">	
 								<tr>
