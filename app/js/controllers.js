@@ -3939,41 +3939,50 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 				console.log("edit_event executed here");
 				if(eventTitle==""){
 					$scope.eventTitle = $scope.current_event.name;
+				}else{
+					$scope.eventTitle = eventTitle;
 				}
-				else if(eventVenue==""){
+				if(eventVenue==""){
 					$scope.eventVenue = $scope.current_event.venue;
+				}else{
+					$scope.eventVenue = eventVenue;
 				}
-				else if(eventDescription==""){
+				if(eventDescription==""){
 					$scope.eventDescription = $scope.current_event.description;
+				}else{
+					$scope.eventDescription = eventDescription;
 				}
-				else if(cutoff==""){
+				if(cutoff==""){
 					$scope.cutoff = $scope.current_event.cutoff;
+				}else{
+					$scope.cutoff = cutoff;
 				}
-				else if(progLang==""){
+				if(progLang==""){
 					$scope.progLang = $scope.current_event.path;
+				}else{
+					$scope.progLang = progLang;
 				}
-				else{
 
-					var data = {"name":eventTitle,
-						"description":eventDescription,
-						"venue":eventVenue,
-						"cutoff": cutoff,
-						"path": progLang
+				var data = {"name":eventTitle,
+					"description":eventDescription,
+					"venue":eventVenue,
+					"cutoff": cutoff,
+					"path": progLang
 
+				}
+				$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
+				var edit_event = new $scope.editEvent(data);
+				edit_event.$save({eventId:id}, function(response){
+					if(response.error) {
+						console.log(response.error);
 					}
-					$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
-					var edit_event = new $scope.editEvent(data);
-					edit_event.$save({eventId:id}, function(response){
-						if(response.error) {
-							console.log(response.error);
-						}
-						else{
-							console.log("Edit event in DB")
-							console.log(response);
-							$location.path("eventsManage");
-						}
-					});
-				}
+					else{
+						console.log("Edit event in DB")
+						console.log(response);
+						$location.path("eventsManage");
+					}
+				});
+
 			});
 			
 		};
