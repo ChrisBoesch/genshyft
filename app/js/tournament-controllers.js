@@ -325,7 +325,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }
       //console.log(roundQuestions);
       $scope.newTournamentRounds.push({problemIDs:roundQuestions,description:$scope.grpTourRoundName,timelimit:$scope.grpTourRoundMins});
-      var data = {'timelimit':$scope.grpTourRoundMins,
+      var data = {'timelimit':$scope.grpTourRoundMins * 60,
             'description':$scope.grpTourRoundName,
             'problemIDs':roundQuestions,
             'tournamentID':tournamentID}
@@ -412,7 +412,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         roundQuestions.push($scope.cartQuestions[j].problem_id);
       }
       var updatedRound = {"roundID":$scope.selectedRound.roundId,
-                          "timelimit":$scope.selectedRound.timelimit,
+                          "timelimit":$scope.selectedRound.timelimit * 60,
                           "problemIDs":roundQuestions,
                           "description":$scope.selectedRound.description};    
       $scope.NewRound = $resource('/jsonapi/add_or_update_round/'+$scope.selectedRound.roundID);
