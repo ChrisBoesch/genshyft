@@ -3958,12 +3958,14 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 		
 
 		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
+			/**
 			console.log(id);
 			console.log(eventTitle);
 			console.log(eventDescription);
 			console.log(eventVenue);
 			console.log(cutoff);
 			console.log(progLang);
+			**/
 
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 		        $scope.current_event = response;
@@ -3996,14 +3998,28 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 				}else{
 					$scope.progLang = progLang;
 				}
+				console.log($scope.eventTitle);
+				console.log($scope.eventDescription);
+				console.log($scope.eventVenue);
+				console.log($scope.cutoff);
+				console.log($scope.progLang);
 
+				/**
 				var data = {"name":eventTitle,
 					"description":eventDescription,
 					"venue":eventVenue,
 					"cutoff": cutoff,
 					"path": progLang
+				**/
+
+				var data = {"name":$scope.eventTitle,
+					"description":$scope.eventDescription,
+					"venue":$scope.eventVenue,
+					"cutoff": $scope.cutoff,
+					"path": $scope.progLang
 
 				}
+				console.log("data = " + data);
 				$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
 				var edit_event = new $scope.editEvent(data);
 				edit_event.$save({eventId:id}, function(response){
@@ -4026,7 +4042,10 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 			console.log("RSVP List= " + $scope.rsvpList);
 			if(includeRSVP==null){
 				includeRSVP = false;
+			}else{
+				includeRSVP = true;
 			}
+			console.log("rsvp value" + " " + includeRSVP);
 			if(messageDescription==null){
 				messageDescription = "Default Message";
 			}
