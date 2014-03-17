@@ -3931,40 +3931,50 @@ function EventTableController($scope, $resource, $route, $location, $filter){
   		$scope.progLang="";
 
   		$scope.rsvpList = [];
-  
+
     //Countdown til cutoff
     $scope.countdown = function(element,days,seconds) {
-    var time = days*24*3600 + seconds;
-    var interval = setInterval(function() {
-        var el = document.getElementById(element);
-        if(time == 0) {
-            el.innerHTML = "Ranking is locked.";    
-            clearInterval(interval);
-            return;
-        }
-      //var minutes = Number.floor( time / 60 );
-        var minutes = Math.floor( time / 60 );
-        var hours = Math.floor(time/3600);
-        var days = Math.floor(time/(3600*24));
-      
-        if (minutes < 10) minutes = "0" + minutes;
-        var seconds = time % 60;
-        if (seconds < 10) seconds = "0" + seconds; 
-        var text = days +" Days "+hours%24+ " Hours "+ minutes%60 + " Minutes " + seconds+" Seconds ";
-        el.innerHTML = text;
-        time--;
-    }, 1000);
-}
+	    var time = days*24*3600 + seconds;
+	    var interval = setInterval(function() {
+	        var el = document.getElementById(element);
+	        if(time == 0) {
+	            el.innerHTML = "Ranking is locked.";    
+	            clearInterval(interval);
+	            return;
+	        }
+	      //var minutes = Number.floor( time / 60 );
+	        var minutes = Math.floor( time / 60 );
+	        var hours = Math.floor(time/3600);
+	        var days = Math.floor(time/(3600*24));
+	      
+	        if (minutes < 10) minutes = "0" + minutes;
+	        var seconds = time % 60;
+	        if (seconds < 10) seconds = "0" + seconds; 
+	        var text = days +" Days "+hours%24+ " Hours "+ minutes%60 + " Minutes " + seconds+" Seconds ";
+	        el.innerHTML = text;
+	        time--;
+	    }, 1000);
+	}
 		
-    $scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
+
+		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
+			console.log(id);
+			console.log(eventTitle);
+			console.log(eventDescription);
+			console.log(eventVenue);
+			console.log(cutoff);
+			console.log(progLang);
+
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 		        $scope.current_event = response;
 
 				console.log("edit_event executed here");
 				if(eventTitle==""){
 					$scope.eventTitle = $scope.current_event.name;
+					console.log($scope.eventTitle);
 				}else{
 					$scope.eventTitle = eventTitle;
+					console.log(eventTitle);
 				}
 				if(eventVenue==""){
 					$scope.eventVenue = $scope.current_event.venue;
