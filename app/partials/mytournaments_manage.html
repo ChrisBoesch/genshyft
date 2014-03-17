@@ -103,7 +103,7 @@
 		padding: 5px 5px;
 	}
 </style>
-<div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="manageSelectedTournament()">
+<div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="manageSelectedTournament();tournamentInit()">
 	<div class="row-fluid">
 		<div class="container">
 			<h4 class="well well-small bootCamp" align="center" id="well-c">Tournament Centre</h4>
@@ -267,7 +267,7 @@
 	 				</tr>
 	                <tr class="warning" ng-repeat="tournamentRound in selectedTournamentRounds">
 	                    <td class="roundInfo">{{tournamentRound.description}}</td>
-	                    <td class="roundInfo">{{tournamentRound.timelimit}}</td>
+	                    <td class="roundInfo">{{tournamentRound.timelimit/60}}</td>
 	                    <td class="roundInfo">{{tournamentRound.problemIDs.length}}</td>
 	                    <td>
 	                    	<div>
