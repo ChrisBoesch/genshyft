@@ -104,7 +104,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 
     //By GENShYFT - Round to Join Tournament Redirection
     $scope.round_end_tournament_lobby = function(heatID){
-      $location.path("tournaments");
+      $location.path("tournament-grpjoin");
       $('.modal-backdrop').remove();
     };
 
