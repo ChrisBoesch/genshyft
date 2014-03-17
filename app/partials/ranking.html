@@ -81,36 +81,6 @@
 		}
 	}
 
-/*#CountryRankingListLarge{
-	height:300px;
-	overflow:auto
-}
-
-#UserCountryRankListLarge{
-	height:120px;
-	overflow:auto
-}
-
-#GlobalRankListLarge{
-	height:120px;
-	overflow:auto
-}*/
-
-#CountryRankingListSmall{
-	height:310px;
-	overflow:auto
-}
-
-#UserCountryRankListSmall{
-	height:120px;
-	overflow:auto
-}
-
-#GlobalRankListSmall{
-	height:120px;
-	overflow:auto
-}
-
 li{ list-style:none; }
 
 .tabspacing{
@@ -247,7 +217,7 @@ td.crsmall_playernumber{width:30%; text-align:center;}
 																</tr>  
 															</table>
 
-															<div id="UserCountryRankListLarge" style="height:{{window_Height_table}}px;overflow:auto;">
+															<div id="UserCountryRankListLarge">
 																<table class="table table-condensed">
 																	<tr ng-repeat="ranking in rankingUserCountry.rankings">
 																		<td class="RankList">
@@ -286,7 +256,7 @@ td.crsmall_playernumber{width:30%; text-align:center;}
 																	<th class="Solved">Solved</th>
 																</tr>
 															</table>
-															<div id="GlobalRankListLarge" style="height:{{window_Height_table}}px;overflow:auto;">
+															<div id="GlobalRankListLarge">
 																<table class="table table-condensed">
 																	<tr ng-repeat="ranking in rankingGlobal.rankings">   
 																		<td class="RankList">
@@ -332,7 +302,7 @@ td.crsmall_playernumber{width:30%; text-align:center;}
 									<th class="crUsers">No. of Users</th>						
 								</tr>  
 							</table> 
-							<div id="CountryRankingListLarge" style="height:{{window_Height_country}}px;overflow:auto;">
+							<div id="CountryRankingListLarge" >
 								<table class="table table-condensed" ng-init="get_country_ranks();" style="height:10px;" >
 									<tr ng-repeat="ranking in countryRank.rankings">
 										<td class="crRankList">
@@ -511,7 +481,7 @@ td.crsmall_playernumber{width:30%; text-align:center;}
 													<th class="crUsers">No. of Users</th>						
 												</tr>  
 											</table> 
-											<div id="CountryRankingListLarge" style="height:{{window_Height_country}}px;overflow:auto;">
+											<div id="CountryRankingListLarge">
 												<table class="table table-condensed" ng-init="get_country_ranks();" style="height:10px;" >
 													<tr ng-repeat="ranking in countryRank.rankings">
 														<td class="crRankList">
