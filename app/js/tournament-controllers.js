@@ -446,13 +446,15 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     var problem_ids = round.problemIDs;
     console.log(problem_ids);
     for(var i = 0; i < problem_ids.length; i++){
-      $resource('/jsonapi/get_a_problem/' + problem_ids[i]).get({}, function(response){
+      var problemid = problem_ids[i];
+      $resource('/jsonapi/get_a_problem/' + problemid).get({}, function(response){
         //console.log(JSON.stringify(response));
         console.log(response.problem.problem_id);
         $scope.cartQuestions.push(response.problem);
       })
     }
     $scope.selectedRound = round;
+    $scope.selectedRound.timelimit = $scope.selectedRound.timelimit / 60;
     $('#editTournRound').modal('show');
   }
 
