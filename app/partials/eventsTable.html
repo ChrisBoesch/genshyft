@@ -38,9 +38,13 @@
         Total Participating: {{current_event.ranking.length}} (Cutoff: {{current_event.cutoff}})
       <br>
       What is at stake: (Lots of prizes and school pride!)</h4>
-      <br>
-      <br>
-      Ranking might take a moment to load..
+        
+        <h3 ng-show="current_event.time_to_cutoff.days>=0">Time to cutoff: <span id="countdown"></span></h3>
+      
+        <script type="application/javascript">
+
+         </script>
+       
     </center>
 
   </div>
