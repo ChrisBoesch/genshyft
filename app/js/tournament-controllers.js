@@ -836,6 +836,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
   };
 
+  $scope.tournament_bay = function(){
+    $location.path("tournament-grpjoin"); 
+  }
+
   $scope.manage_my_tournament = function(tournamentID){
     $cookieStore.put("tournamentID", tournamentID);
     $location.path("mytournaments-manage");
