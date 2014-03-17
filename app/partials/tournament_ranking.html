@@ -53,11 +53,11 @@
 
 <div class="container"  style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="check_location()">
 
-	<div class="row-fluid">
+	<!--<div class="row-fluid">
 		<div class="container">
 			<h4 class="well well-small bootCamp" align="center" id="well-c" ng-controller="CountdownController" ng-init="start_timer(countval)">Ranking refreshing in {{counter}} seconds...</h4>
 		</div>		
-	</div>
+	</div>-->
     
     <div class="row-fluid">
         <div class="span12" >
@@ -80,7 +80,7 @@
 
 						<div>
 						<h4>{{tournament.roundDescription}} {{counter}}</h4>
-						<h5>{{tournament.heatDescription}}</h5>
+						<h5 ng-hide="true">{{tournament.heatDescription}}</h5>
 							<table class="table table-hover">	
 								<tr>
 									<th class="Rank_Ranking">Overall Ranking</th>

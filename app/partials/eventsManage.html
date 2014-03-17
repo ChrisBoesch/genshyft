@@ -198,7 +198,8 @@
 					</h4>
 			</span>
 		</center>
-			<tr ng-repeat="participant in eventsData.ranking | orderBy:predicate:reverse" ng-hide = "$index>=50">
+			<!--show all, not just top 50. To show top 50 only, ng-hide="$index>=50"-->
+			<tr ng-repeat="participant in eventsData.ranking">
 				<td class = "span1">{{$index+1}}</td>
 				<td class = "span3">{{participant.nickname}}</td>
 				<td class = "span1">
@@ -210,7 +211,7 @@
 					    type="checkbox"
 					    name="selectedParticipants[]"
 					    value="{{participant.playerid}}"
-					    ng-checked="participant.rank<(eventsData.cutoff+1)"
+					    ng-checked="checkAll || (cutoffList && participant.rank<(eventsData.cutoff+1))"
 					    ng-click="addRemoveRSVPList(participant.playerid)"
   					>
 				</td>
@@ -223,12 +224,31 @@
 <div class = "span6">
 	<form class="form-horizontal">
 		<div class="control-group">
-			<label class="control-label" for="inputPassword"></label>
+			
 			<div class="controls">
-				<br><br><br><br><br>
+				<br><br><br><br>
+					<strong>Please select ONE only.<br></strong>
+					Select 'All' to send invites to all participants OR<br>
+					Select 'Cutoff' to send invites to participants above cutoff
+					<br><br>All
+					<input 
+						type="checkbox" 
+						ng-model="checkAll"
+						ng-checked=false
+						ng-click="addAllToRSVPList()">
+					Cutoff
+					<input 
+						type="checkbox" 
+						ng-model="cutoffList"
+						ng-checked="checkall"
+						ng-click="addSelectedFewToRSVPList()"><br/>
+					<br>
 				
+				Message Title
+				<br>
 				<input class="span8" type="text" required ng-model="messageTitle" placeholder="Enter message title here" ></input>
 				<br><br><br>
+				Message Body
 				<textarea class="span10" rows="6" ng-model="messageDescription" placeholder = "Message here will be included in the RSVP mail" >
 				</textarea>
 				<br>
@@ -236,6 +256,7 @@
 		</div>
 		<div class="control-group">
 			<div class="controls">
+
 				<label class="checkbox">
 					<input type="checkbox" id="includeRSVP" ng-model="includeRSVP"value="true"> Include RSVP
 				</label>
@@ -244,6 +265,7 @@
 			</div>
 		</div>
 	</form>
+	
 			            								
 			         </div>
 				</div>
