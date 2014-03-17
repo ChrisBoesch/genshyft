@@ -791,7 +791,13 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.numGrp.push(grouping)
       }
     }
+    console.log(Math.ceil($scope.numGrp.length/5));
+    $scope.rowNum = $scope.getNumber(Math.ceil($scope.numGrp.length/5)); 
   };
+
+  $scope.getNumber = function(num) {
+    return new Array(num);   
+  }
 
   /*Registered to Tournament and redirect to join page, used in tournament.html - by Glen*/
   $scope.register_for_tournament_new = function(tournamentID, tournamentPassword){

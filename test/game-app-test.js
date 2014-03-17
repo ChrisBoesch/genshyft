@@ -767,7 +767,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "isGroup": true,
     "tournamentID": 5060388987076609,
 	"maxPlayersPerGroup":5,
-	"maxGroups":5,
+	"maxGroups":20,
     "assignMentorInTeam": true,
     "rounds": [
         {
