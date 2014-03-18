@@ -95,6 +95,24 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       //$timeout(function(){ $scope.get_mentor(heatID, playerID); }, 5000); 
     };
 
+    $scope.get_mentor_once = function(heatID, playerID){
+      $scope.mentor_id = null;
+      $scope.mentor_hasArrived = false;
+
+      $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
+        $scope.current_heat = response;
+        for(var i =0;i< $scope.current_heat.ranking.length;i++){
+          if($scope.current_heat.ranking[i].playerid === playerID){
+            $scope.mentor_id = $scope.current_heat.ranking[i].mentorID;
+            $scope.mentor_name= $scope.current_heat.ranking[i].mentor;
+            $scope.mentor_hasArrived = $scope.current_heat.ranking[i].mentorHasArrived;
+            break;
+          }
+        }
+      });
+      console.log("get_mentor_once()");
+    };
+
 
     //By GENShYFT - Round to Ranking Redirection
     $scope.round_end_ranking = function(heatID){
@@ -125,6 +143,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
           console.log(response);
         }
       });
+      $scope.get_mentor_once(heatID, playerID);
     }
 
     $scope.move_to_next_unsolved_problem = function(){
