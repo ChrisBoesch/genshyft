@@ -257,7 +257,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     else{
       var isGroup = false;
-      var mentorAssignInTeam = false;
+      var mentorAssignInTeam = true;
       var numberOfGrp = 0;
       var numPlayerPerGrp = 0;
       
