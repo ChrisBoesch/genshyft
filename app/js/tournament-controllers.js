@@ -966,6 +966,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
     $scope.heat = null;
     $scope.round = null;
     $scope.roundDirty = false;
+    $scope.tournamentPassword="";
 
   $scope.my_range = function(n) {
     var result = [];
