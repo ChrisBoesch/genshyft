@@ -164,6 +164,20 @@
 					</div>		
 				</div>
 				<div ng-show="selectedTournament.isGroup==true">
+					<!--Mentor assignments-->
+					<div class="row-fluid">
+						<div class="span12">
+							<div class="span5">
+								<b>Mentor Assignment within team</b>
+								<a data-toggle="tooltip" data-placement="right" title="If you select this option, Mentor Assignment will be executed within team only.">(?)</a>
+								:
+							</div>
+							<div class="span6">
+								<div ng-show="selectedTournament.assignMentorInTeam == true">Yes</div>
+								<div ng-show="selectedTournament.assignMentorInTeam == false">No</div>
+							</div>
+						</div>	
+					</div>
 					<div class="row-fluid">
 						<div class="span12">
 							<div class="span5">
@@ -410,6 +424,20 @@
 				</div>	
 			</div>
 			<div ng-show="selectedTournament.isGroup==true">
+				<!--Mentor assignments-->
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="span3">
+							<b>Mentor Assignment within team</b>
+							<a data-toggle="tooltip" data-placement="right" title="If you select this option, Mentor Assignment will be executed within team only.">(?)</a>
+							:
+						</div>
+						<div class="span9">
+							 <input type="checkbox" ng-model="selectedTournament.assignMentorInTeam" ></input>
+						</div>
+					</div>	
+				</div>
+
 				<!--Max number of group-->
 				<div class="row-fluid">
 					<div class="span12">
