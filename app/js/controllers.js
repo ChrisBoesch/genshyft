@@ -3784,7 +3784,7 @@ function EventController($scope, $resource, $location){
   		$scope.eventTitle="";
   		$scope.eventDescription="";
   		$scope.cutoff="";
-  		$scope.progLang="";
+  		$scope.progLang="Java"; //default
 
         var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
         
@@ -3825,40 +3825,43 @@ function EventController($scope, $resource, $location){
 
 		$scope.create_new_event = function(eventTitle, eventDescription, eventVenue, cutoff, progLang){
 			console.log("Create_new_event executed here")
+			console.log(progLang + "proglang");
 			if(eventTitle==""){
 				alert("The event title cannot be empty!");
+				return;
 			}
-			else if(eventVenue==""){
+			if(eventVenue==undefined){
 				alert("The venue cannot be empty!");
+				return;
 			}
-			else if(cutoff==""){
+			if(cutoff==""){
 				alert("The cutoff cannot be empty!");
+				return;
 			}
-			else if(progLang==""){
-				alert("Please select a Programming langauge!");
+			if(progLang!=undefined){
+				$scope.progLang = progLang;
 			}
-			else{
+			console.log($scope.progLang + "updated progLang");
 
-				var data = {"name":eventTitle,
-					"description":eventDescription,
-					"venue": eventVenue,
-					"cutoff": cutoff,
-					"path": progLang
+			var data = {"name":eventTitle,
+				"description":eventDescription,
+				"venue": eventVenue,
+				"cutoff": cutoff,
+				"path": $scope.progLang
 
+			}
+			$scope.newEvent = $resource('/jsonapi/event');
+			var new_event = new $scope.newEvent(data);
+			new_event.$save(function(response){
+				if(response.error) {
+					console.log(response.error);
 				}
-				$scope.newEvent = $resource('/jsonapi/event');
-				var new_event = new $scope.newEvent(data);
-				new_event.$save(function(response){
-					if(response.error) {
-						console.log(response.error);
-					}
-					else{
-						console.log("Save New event into DB")
-						console.log(response);
-						$location.path("eventsManage");
-					}
-				});
-			}
+				else{
+					console.log("Save New event into DB")
+					console.log(response);
+					$location.path("eventsManage");
+				}
+			});
 			
 		};
 
@@ -3868,13 +3871,14 @@ function EventController($scope, $resource, $location){
 				var eventDetails = $scope.current_event;
 				console.log("delete_event executed here");
 
-				var data = {"name":eventDetails.name,
-							"description":eventDetails.description,
-							"venue": eventDetails.venue,
-							"cutoff": eventDetails.cutoff,
-							"path": eventDetails.path,
-							"archived" : true
-							}	
+				var data = {"archived":true
+							}
+				console.log(eventDetails.name);
+				console.log(eventDetails.description);
+				console.log(eventDetails.venue);
+				console.log(eventDetails.cutoff);
+				console.log(eventDetails.path);
+
 				$scope.deleteEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
 				var delete_event = new $scope.deleteEvent(data);
 				delete_event.$save({eventId:id}, function(response){
@@ -3998,7 +4002,7 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 				}else{
 					$scope.progLang = progLang;
 				}
-				console.log($scope.eventTitle);
+				console.log("impt " + $scope.eventTitle);
 				console.log($scope.eventDescription);
 				console.log($scope.eventVenue);
 				console.log($scope.cutoff);
@@ -4188,7 +4192,7 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
-    		console.log($scope.eventID + "here3");
+    		console.log($scope.eventID + "-> eventID");
     		if($scope.eventID==null){
     			$scope.noEventID=true;
     		}
