@@ -25,6 +25,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.round = null;
   $scope.roundDirty = false;
 
+  $scope.timeoutVar = null;
+
   //variables for create tournament rounds
   $scope.grpTourRoundName="";
   $scope.grpTourRoundMins="";
@@ -96,7 +98,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.playerRanks = $scope.tournament.ranking;        
       });
       console.log("fetch_ranks");
-      $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
+      $scope.timeoutVar = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
   };
 
   //$scope.refresh_ranking = function(heatID){
@@ -763,7 +765,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.get_grpPlayers($scope.tournament);
       }       
     });
-    $timeout(function(){$scope.fetch_tournament_details(tournamentID)}, 5000);
+    $scope.timeoutVar = $timeout(function(){$scope.fetch_tournament_details(tournamentID)}, 5000);
   };
 
   /*JSON API Call to retrieve tournament data once - By Glen*/
@@ -837,6 +839,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.tournament_bay = function(){
+    $timeout.cancel($scope.timeoutVar);
     $location.path("tournament-grpjoin"); 
   }
 
@@ -910,6 +913,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           $cookieStore.put("type", "practiceGame");
             
           //window.location.href = "tournament_play_page.html";
+          $timeout.cancel($scope.timeoutVar);
           $location.path("tournament-grpplay");
         });
       }else{
@@ -926,6 +930,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $cookieStore.put("type", "practiceGame");
       
         //window.location.href = "tournament_play_page.html";
+        $timeout.cancel($scope.timeoutVar);
         $location.path("tournament-grpplay");
       });  
     }
@@ -966,7 +971,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
     $scope.heat = null;
     $scope.round = null;
     $scope.roundDirty = false;
-    $scope.tournamentPassword=" ";
+    $scope.tournamentPassword="";
 
   $scope.my_range = function(n) {
     var result = [];
