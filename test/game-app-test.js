@@ -767,7 +767,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "isGroup": true,
     "tournamentID": 5060388987076609,
 	"maxPlayersPerGroup":5,
-	"maxGroups":20,
+	"maxGroups":7,
     "assignMentorInTeam": true,
     "rounds": [
         {
@@ -949,7 +949,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{ 
 			"playerID":57754,
 			"nickname":"Chris", 
-			"group":3
+			"group":0
 		},
 		
 		{ 
@@ -975,12 +975,12 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{
 			"playerID":9379338,
 			"nickname":"Player 6", 
-			"group":2
+			"group":1
 		},
 		{ 
 			"playerID":57752,
 			"nickname":"Player 7", 
-			"group": 2
+			"group": 1
 		},
 		
 		{ 
