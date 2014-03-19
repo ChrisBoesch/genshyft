@@ -130,8 +130,7 @@
 										<td ng-repeat="group in numGrp track by $index">
 											<!-- 1. To make button dynamic, lock buttons after player has joined -->
 											<!-- 2. To update the teams with new player after clicking join, page has to be refreshed to show updated team list -->
-
-											<button class="btn btn-primary" ng-click="join_grp(tournament.currentPlayerID, tournament.tournamentID, $index+1)" ng-show="currentUserGrping == 0" style=""><i class="icon-plus icon-white"></i> Join</button>
+											<button class="btn btn-primary" ng-click="join_grping(tournament.currentPlayerID, tournament.tournamentID, $index+1,group,tournament.maxPlayersPerGroup)" ng-show="currentUserGrping == 0" style=""><i class="icon-plus icon-white"></i> Join</button>
 											<button class="btn btn-danger" ng-click="join_grp(tournament.currentPlayerID, tournament.tournamentID, 0)" ng-show="currentUserGrping == $index+1" style=""><i class="icon-remove icon-white"></i> Leave Team</button>
 										</td>
 									</tr>
