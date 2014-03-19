@@ -1,0 +1,129 @@
+ <br>
+        <div ng-controller="WebGameController" ng-init="" class="container">
+            <div>
+                <!--<a class="janrainEngage" href="#"><input type="submit" value="Hyperlinked Sign In Button"></a>-->  
+                <div class="row-fluid"> 
+                    <div class="span12 well">
+                        <div class="row-fluid">
+                            <div class="span9">
+                            <!--
+                                <div class="span3" align="left">Level Progress:&nbsp;&nbsp;&nbsp; <span ng-bind="current_level_progress"> </span>/<span ng-bind="total_level_progress"></span>
+                                </div>
+
+                                <div align="left"> 
+                                    <div class="progress progress-success" align="left">
+                                        <div class="bar" style="width:{{count = (   current_level_progress/total_level_progress)*100 |number:0}}%;">
+                                        </div>
+                                    </div>
+                                </div>
+                                -->
+                            </div>
+                            <div class="span3" align="left">
+                                <font>
+                                        <p>
+                                            Game progress 
+                                            &nbsp; <span ng-bind="game.numSolvedProblems"></span> of <span ng-bind="game.numProblems"></span>
+                                        </p>
+                                </font>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span9" style="border: 1px solid #DBDACB;">
+                                <div style="text-align: left;">
+                                    <h5>&nbsp;Current Practice Question</h5>
+                                        <font>                                
+                                            &nbsp;Name: <span ng-bind="game.problems.problems[current_problem_index].name"></span>
+                                            <br>&nbsp;Description: <span ng-bind="game.problems.problems[current_problem_index].description"></span>
+                                        </font>
+                                </div>
+                            </div>
+                            <div class="span3" >
+                                <!--
+                                <div class="span12" style="border: 1px solid #DBDACB;">
+                                    <font>
+                                        &nbsp;&nbsp;Path Name: <span ng-bind="nameOfPath"></span>
+                                        <br>
+                                            &nbsp;&nbsp;Level: <span ng-bind="levelNumber"></span>
+                                        <br>
+                                            &nbsp;&nbsp;Difficulty: <span ng-bind="gameDifficulty"></span>
+                                    </font>
+                                </div>
+                                -->
+                                <div class="span12" align="center" style="padding-top: 5px">
+                                    <p> 
+                                        <button class="btn btn-primary" ng-click="skip_problem()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                    </p>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row-fluid">
+                    <div class="span6 well">
+                        <!-- Tab for Run-->
+                        <div id="tab11"class="tabbable">
+                            <ul class="nav nav-tabs">
+                                <li class="tabspacing active">
+                                  <a href="web_play_page.html#t3" data-toggle="tab">Solution</a>
+                                </li>
+                                <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                            </ul>
+                            <div  class="tab-content">
+                                <div class="tab-pane fade in active" id="t3" style="height:300px;">
+                                    <div>
+                                        <section>
+                                            <div id="editorPractice" ui-ace="{mode: 'html'}" ng-model="solution1"><span ng-bind="game.problems.problems[current_problem_index].skeleton"></div>
+                                        </section>
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6 well">
+                        <!-- Tab for Sample Answer and Outcome-->
+                        <div id="tab21" class="tabbable">
+                            <ul class="nav nav-tabs">
+                                <li id = "ta11" class="tabspacing active">
+                                  <a href="" data-toggle="tab" ng-click="theTab=0">Your Code</a>
+                                </li>
+                                <li id = "ta21" class="tabspacing">
+                                  <a href="" data-toggle="tab" ng-click="theTab=1">Tests</a>
+                                </li>  
+                            </ul>
+                            <div class="tab-content">
+                              <div ng-show="theTab" style="height:317px;">
+                                <input type="submit" value="reload" ng-click="fill_test_iframe()">
+                                
+                                {{issues}} issue(s) to correct.<br>
+                                <iframe id="testIframe" height="320" width="400" src=""></iframe>
+                              </div>
+                              <div ng-show="!theTab" style="height:317px;">
+                                
+                                <input type="submit" value="refresh" ng-click="fill_iframe()">
+                                in {{counter}} seconds<br>
+                                
+                                
+                                <iframe id="anIframe" src=""></iframe><br>
+                                Example (Put this in a 3rd tab)<br>
+                                <iframe id="exampleIframe" src=""></iframe><br>
+                                
+                                
+                              </div>
+
+                          </div>
+                        </div>
+                    </div>
+                </div>  
+
+                <div class="modal fade" id="finish_all_info" style="display:none">
+                    <div class="modal-body">
+                      <h3><font color="blue">Congratulations! You finished all questions in this quest.</font><h3>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="index.html" class="btn" data-dismiss="modal">Go to Home Page</a>
+                        <button type="button" ng-click="goStoryBoard()" data-dismiss="modal" class="btn btn-primary">Go To Story Board</button>
+                    </div>
+                </div> 
+            </div>
+        </div>

@@ -54,7 +54,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.grpTourPasswordConfirm="";
   //$scope.grpTourStatus="Closed";
   $scope.grpTourType="individual";
-  $scope.grpTourMentor="";
+  $scope.grpTourMentor=true;
   $scope.grpTourNoGroup=2;
   $scope.grpTourMaxNoPlayer=1;
   //$scope.qnsLanguage="Ruby";
@@ -244,10 +244,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.create_grptournament = function(){
     console.log("Create tournament executed here")
     //var currentDate = new Date(); 
-
+    /*
     if( $scope.grpTourMentor == ""){
        $scope.grpTourMentor = false;
     }
+    */
     if($scope.grpTourTitle==""){
       alert("The tournament title cannot be empty!");
     }
@@ -265,7 +266,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       
       if($scope.grpTourType=="group"){
         isGroup = true;
-        mentorAssignInTeam = $scope.grpTourMentor;
+        //mentorAssignInTeam = $scope.grpTourMentor;
         numberOfGrp = $scope.grpTourNoGroup;
         numPlayerPerGrp = $scope.grpTourMaxNoPlayer;
       }
@@ -805,8 +806,8 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.numGrp.push(grouping)
       }
     }
-    console.log(Math.ceil($scope.numGrp.length/5));
-    $scope.rowNum = $scope.getNumber(Math.ceil($scope.numGrp.length/5)); 
+    //console.log(Math.ceil($scope.numGrp.length/5));
+    //$scope.rowNum = $scope.getNumber(Math.ceil($scope.numGrp.length/5)); 
   };
 
   $scope.getNumber = function(num) {
@@ -880,6 +881,32 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.fetch_tournament_details_once(tournamentId);
       }
     });  
+  };
+
+  /*Join Group or Leave Group for group tournament - by Glen (GENShYFT)*/
+  $scope.join_grping = function(playerId, tournamentId, groupNo, grpArry, maxPlayerPerGrp){
+    console.log("join_grping : playerId="+ playerId+" tournamentId="+tournamentId+" group="+groupNo," grpArry="+grpArry.length, " maxPlayerPerGrp="+maxPlayerPerGrp);
+
+    if(grpArry.length-1 >= maxPlayerPerGrp){
+      alert("Group is FULL. Please join another group.");
+    }else{
+      console.log("Added");
+      var data = {
+        'playerID':playerId,
+        'tournamentID':tournamentId,
+        'group':groupNo
+      };
+      $scope.joining_grp = $resource('/jsonapi/join_group/join/');
+      var joingrp = new $scope.joining_grp(data);
+      joingrp.$save(function(response){
+        if(response.error) {
+          console.log(response.error);
+        }else{
+          console.log(response);
+          $scope.fetch_tournament_details_once(tournamentId);
+        }
+      });
+    }  
   };
 
   /*Check whether in group - by Glen (GENShYFT)*/

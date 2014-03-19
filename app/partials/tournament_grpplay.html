@@ -58,7 +58,7 @@
                 <div id="tab11"class="tabbable">
                     <ul class="nav nav-tabs">
                         <li class="tabspacing active">
-                          <a href="#t3" data-toggle="tab">Solution</a>
+                          <a href="tournament-grpplay/#t3" data-toggle="tab">Solution</a>
                         </li>
                         <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
                     </ul>
@@ -78,10 +78,10 @@
                 <div id="tab21"class="tabbable">
                     <ul class="nav nav-tabs">
                         <li id = "ta11" class="tabspacing active">
-                          <a data-target='#t11' data-toggle="tab">Sample Answer</a>
+                          <a href='tournament-grpplay/#t11' data-toggle="tab">Sample Answer</a>
                         </li>
                         <li id = "ta21" class="tabspacing">
-                          <a data-target='#t21' data-toggle="tab">Outcome</a>
+                          <a href='tournament-grpplay/#t21' data-toggle="tab">Outcome</a>
                         </li>  
                     </ul>
                     <div class="tab-content">
@@ -108,7 +108,8 @@
                             <tr>
                                 <td colspan="4" ng-hide="!solution_check_result.errors">Errors: <pre style = "color:blue;"><span ng-bind="solution_check_result.errors"></span></pre></td>
                             </tr>
-                        </table>
+                        </table><br>
+                              Private Test Results: {{solution_check_result.other_tests_result}}
                     </div>
                     <div ng-show="solution_check_result.error">
                         {{solution_check_result.error}}
