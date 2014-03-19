@@ -949,7 +949,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{ 
 			"playerID":57754,
 			"nickname":"Chris", 
-			"group":0
+			"group":1
 		},
 		
 		{ 
@@ -2089,7 +2089,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       var tournamentGame = {
 	    "game_end": "2013-09-29 09:27:03.104550",
 	    "player": "Chris",
-	    "solvedProblemIDs": [10033,17155],
+	    "solvedProblemIDs": [10033],
 	    "currentProblem_id": "TBD",
 	    "playerID": 57754,
 	    "allSolved": false,

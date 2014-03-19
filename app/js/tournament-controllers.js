@@ -780,6 +780,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.get_grpPlayers($scope.tournament);
       }       
     });
+    $route.reload();
   };
 
   /*Extract players and sort them into the respective group - by Glen*/
