@@ -36,7 +36,7 @@
               </div>   
 
               <!--<div class="span1">&nbsp;</div> !-->
-                <div class="span5">                                            
+                <div class="span6" ng-controller="PlayerController">                                           
                   <div> <center><font color="White"> <font size="14"><b> SingPath </b></font>
 				  <h3> Fun with software languages!</h3> </font></center>                                       
                     <hr>                                    
@@ -45,28 +45,42 @@
                     
                       <!-- SingPath is the most FUN way to practice software languages!!--> 
 					 <font color="White">  <center> SingPath provides a platform to those that want to test their programming skills in a competitive and fun environment. <br><br>Specialize in one language or show your flexibility and skill by coding in multiple languages.</font> <!-- There is a range of programming languages that you can test your skills with including Python, JavaScript, Ruby, Objective C and Java with many other languages to come. Specialize in one language or show your flexibility and skill by coding in multiple languages.What are you waiting for? Sign in today and follow your chosen Path!                !-->
-                   <div class="row-fluid">                                                   
-                      <div class="span12" ng-controller="PlayerController">		
-					  <br><br>
-
-                      <a ng-show="player.nickname" class="btn btn-action btn-large pull-left" href="#quests" style="position:absolute; right:160px;">
+                                                          
+               	<br>	<br>
+					  
+<table cellpadding="9">
+ <tr>
+ <td>					  
+					  
+                      <a ng-show="player.nickname" class="btn btn-action" href="#quests" style="">
+                     <b> Gotta try a Quest! </b>
+                      </a>
+                      <a ng-show="!player.nickname" class="btn btn-action " type="button" data-target="#loginAlert" data-toggle="modal" ">
                       Gotta try a Quest!
                       </a>
-                      <a ng-show="!player.nickname" class="btn btn-action btn-large pull-left" type="button" data-target="#loginAlert" data-toggle="modal" style="position:absolute; right:160px;">
-                      Gotta try a Quest!
-                      </a>
+</td>
+<td>	
+					  
+					  
+			
 				
-                      <a ng-show="player.nickname" class="btn btn-action btn-large pull-left" href="#practice" >Ready to Practice
+                      <a ng-show="player.nickname" class="btn btn-action " href="#practice" >
+					   <b>Ready to Practice </b>
                       </a>
-                      <a ng-show="!player.nickname" class="btn btn-action btn-large pull-left" type="button" data-target="#loginAlert" data-toggle="modal">
+                      <a ng-show="!player.nickname" class="btn btn-action " type="button" data-target="#loginAlert" data-toggle="modal">
                       Ready to Practice
                       </a>
-
+</td>
+</tr>
+</table>					  
+				  
+</center>
 					  
-					</div>
+ </div>   
+					
 					
 
-                </div>                
+                             
               </div>                         
             </div>			
 				<br><br>
