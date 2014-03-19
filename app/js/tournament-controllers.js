@@ -774,13 +774,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.fetch_tournament_details_once = function(tournamentID){  
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID": tournamentID}, function(response){
       $scope.tournament = response;
-      console.log("fetch_tournament_details = "+ $scope.tournament.tournamentID );
+      console.log("fetch_tournament_details_once = "+ $scope.tournament.tournamentID );
       $scope.get_indivNoGrpPlayers($scope.tournament);
       if($scope.tournament.isGroup){
         $scope.get_grpPlayers($scope.tournament);
       }       
     });
-    $route.reload();
   };
 
   /*Extract players and sort them into the respective group - by Glen*/
@@ -880,6 +879,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }else{
         console.log(response);
         $scope.fetch_tournament_details_once(tournamentId);
+        $route.reload();
       }
     });  
   };
@@ -905,6 +905,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }else{
           console.log(response);
           $scope.fetch_tournament_details_once(tournamentId);
+          $route.reload();
         }
       });
     }  
