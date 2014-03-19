@@ -1208,7 +1208,12 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       });
 
 	  
-	  var ezwebdevtestsoln = {"renderReturn":"<b>HELLO WORLD</b><br/><i>TEST ITALICS</i>"};
+	  var ezwebdevtestsoln = {	"renderReturn":"\<input type=\"text\" ng-model=\"sometext\" /> \
+    <h1>Hello \{\{ sometext \}\}</h1>"};
+
+
+    // var ezwebdevtestsoln = {"renderReturn":"<script type=\"text/javascript\"> var myVar=\"hello\"; function showAlert() { alert('You triggered an alert!'); }</script>\
+	   // <p><a onClick=\"showAlert();\">Click Me</a></p>  "};
 	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
 	  

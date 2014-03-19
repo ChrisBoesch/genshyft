@@ -4288,13 +4288,13 @@ function EZWebDevController($scope,$resource,$cookieStore,$timeout,$http,$route,
 			//$scope.examples = $scope.currEZWebDevQn.examples;
 			$scope.problemId = $scope.currEZWebDevQn.id;
 			$scope.gameID = $scope.ezwebdevcall.gameID;
-			console.log($scope.currEZWebDevQn);
+			//console.log($scope.currEZWebDevQn);
 		})
 
 	};
 
 	$scope.renderHTML = function(){
-		console.log($scope.skeleton);
+		//console.log($scope.skeleton);
 		$scope.SaveResource = $resource('/jsonapi/render_ezwebdev');
 		$scope.dataToRender = {user_code:$scope.skeleton,
 								problem_id:$scope.problemId,
