@@ -26,6 +26,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.roundDirty = false;
 
   $scope.timeoutVar = null;
+  $scope.currentUserGrping = 0;
 
   //variables for create tournament rounds
   $scope.grpTourRoundName="";
@@ -785,7 +786,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.get_grpPlayers = function(tournament){
     console.log("get_grpPlayers");
     $scope.numGrp = [];
-    $scope.currentUserGrping = 0;
 
     for(var i=0; i < tournament.maxGroups ; i++){
       var grouping = [];
