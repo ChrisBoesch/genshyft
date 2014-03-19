@@ -11,6 +11,7 @@
 
 /*GENShYFT's TournamentController*/
 function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route,$window){
+  $scope.currentPlayerID = $cookieStore.get("playerID") 
   $scope.GHeatModel = $resource('/jsonapi/get_heat_ranking');
   $scope.heatID = null;
   $scope.location = $location;
@@ -797,7 +798,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           grouping.push(player);      
          }
 
-         if(tournament.registeredPlayerIDs[j].playerID === tournament.currentPlayerID){
+         if(tournament.registeredPlayerIDs[j].playerID === $scope.currentPlayerID){
             $scope.currentUserGrping = tournament.registeredPlayerIDs[j].group;
             $scope.have_grp($scope.currentUserGrping);
          }
