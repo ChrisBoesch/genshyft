@@ -3554,7 +3554,7 @@ function RankController($scope,$resource,$cookieStore,$location,$filter,currentU
 	//fetch list of rankers based in the path selected by user
 	$scope.get_path_ranks = function(pathId){
 		//ALL Languages
-		if(pathId=='AllLanguages'){
+		if(pathId=='AllLanguages' || !pathId){
 			
 			// based on player's country
 			var data = {"countryCode":$scope.player.countryCode};
