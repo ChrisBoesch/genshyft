@@ -54,7 +54,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.grpTourPasswordConfirm="";
   //$scope.grpTourStatus="Closed";
   $scope.grpTourType="individual";
-  $scope.grpTourMentor="";
+  $scope.grpTourMentor=true;
   $scope.grpTourNoGroup=2;
   $scope.grpTourMaxNoPlayer=1;
   //$scope.qnsLanguage="Ruby";
@@ -244,10 +244,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.create_grptournament = function(){
     console.log("Create tournament executed here")
     //var currentDate = new Date(); 
-
+    /*
     if( $scope.grpTourMentor == ""){
        $scope.grpTourMentor = false;
     }
+    */
     if($scope.grpTourTitle==""){
       alert("The tournament title cannot be empty!");
     }
@@ -265,7 +266,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       
       if($scope.grpTourType=="group"){
         isGroup = true;
-        mentorAssignInTeam = $scope.grpTourMentor;
+        //mentorAssignInTeam = $scope.grpTourMentor;
         numberOfGrp = $scope.grpTourNoGroup;
         numPlayerPerGrp = $scope.grpTourMaxNoPlayer;
       }
