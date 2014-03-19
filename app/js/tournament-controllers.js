@@ -767,7 +767,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.get_grpPlayers($scope.tournament);
       }       
     });
-    $scope.timeoutVar = $timeout(function(){$scope.fetch_tournament_details(tournamentID)}, 5000);
+    $scope.timeoutVar = $timeout(function(){$scope.fetch_tournament_details(tournamentID)}, 10000);
   };
 
   /*JSON API Call to retrieve tournament data once - By Glen*/
