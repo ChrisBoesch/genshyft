@@ -27,6 +27,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     */
     
     $scope.fetch = function(gameID){
+    $scope.mentor_hasArrived = false;
+    $scope.mentor_id = null;
 		$scope.GameModel = $resource('/jsonapi/game/:gameID');
       
 		$scope.GameModel.get({"gameID":gameID}, function(response){
