@@ -857,7 +857,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                 ],
                 "heatID": 4691468476219391,
                 "description": "Heat 2",
-                "startTime": "2013-10-04 14:02:05.835670",
+                //"startTime": "2013-10-04 14:02:05.835670",
+                "startTime": "2013-10-04 00:00:00",
                 "currentTime": "2013-10-04 14:02:00.246270",
                 "solvedProblemIDListsByPlayerID": {
                     "57754": [
@@ -869,7 +870,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                         "/problem_is_solved_for_game/6412161224015872/17155"
                     ]
                 },
-                "stopTime": "2013-10-04 15:02:05.835670",
+                //"stopTime": "2013-10-04 15:02:05.835670",
+                "stopTime": "2013-10-04 00:00:00",
                 "heatNumber": 2
             },
             "problemIDs": [

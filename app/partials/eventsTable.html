@@ -48,14 +48,14 @@
     </center>
 
   </div>
-</div>
+
   <table class="table table-striped table-hover">
     <thead>
       <tr>
         <td class = "span1"><strong>Rank</td>
         <td class = "span3"><strong>Player Name</td>
         <td class = "span4"><strong>School</td>
-        <td class = "span1"><strong>School Type</td>
+      <!--  <td class = "span1"><strong>School Type</td> !-->
         <td class = "span2"><strong>Starting Year</td>
         <td class = "span4"><strong>{{eventsData.path}} Problems Solved</td>
 
@@ -76,11 +76,11 @@
         </span>
         </td>
 
-        <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>{{participant.nickname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname}}</span></td>
+        <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>{{participant.nickname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname}} </span></td>
 
-        <td class = "span6"><span ng-if="participant.isCurrentPlayer"><b>{{participant.schoolname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.schoolname}}</span></td>
+        <td class = "span6"><span ng-if="participant.isCurrentPlayer"><b>{{participant.schoolname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.schoolname}} </span></td>
 
-        <td class = "span2"><span ng-if="participant.isCurrentPlayer"><b>{{participant.subtype}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.subtype}}</span></td>
+      <!--  <td class = "span2"><span ng-if="participant.isCurrentPlayer"><b>{{participant.subtype}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.subtype}} </span></td> !-->
 
         <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>{{participant.year}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.year}}</span></td>
 
@@ -113,13 +113,14 @@
       </tr>
       </tbody>
     </table>
-  </div>
+
   <div class="table-responsive">
 <table class="table">
     
+	<!-- cut off detaisl !-->
 <tbody>
   <tr bgcolor="black">
-    <td>
+    <td colspan = 11>
       <span ng-if="isPlayerBelowCutoff&&hasRegisteredSchool"><font color = "white"><strong>INVITATION CUTOFF - It will take you approximately {{timeToQualify}} minutes to qualify for this event. Start solving more problems now!</b></font></span>
       <span ng-if="isPlayerBelowCutoff&&!hasRegisteredSchool"><font color = "white"><strong>INVITATION CUTOFF - Quick! Register your school now!</b></font></span>
       <span ng-show="!isPlayerBelowCutoff"><font color = "white"><b>INVITATION CUTOFF</b></font></span>
@@ -133,9 +134,27 @@
 <div ng-controller="EventTableController" ng-init="fetch_event(); get_participants(); get_eventID(); get_currentPlayerRanking(); get_currentUrl();" class="container">
 
 <div class="table-responsive">
-<table class="table table-striped table-hover">
+<font color = '#909090'  > 
+<table border = '1'">
 
-<tbody>
+ <table class="table table-striped table-hover">
+    <thead> 
+      <tr >
+        <td class = "span1"><strong>Rank</td>
+        <td class = "span3"><strong>Player Name</td>
+        <td class = "span4"><strong>School</td>
+      <!--  <td class = "span1"><strong>School Type</td> !-->
+        <td class = "span2"><strong>Starting Year</td>
+        <td class = "span4"><strong>{{eventsData.path}} Problems Solved</td>
+
+        <td class = "span4"><strong>Highest Badge</td>
+        <td class = "span4" ng-show="eventsData.rankinglocked"><strong>Rank at Cutoff</td>
+        <td class = "span4" ng-show="eventsData.rankinglocked"><strong>Solved at Cutoff</td>
+        <td class = "span1" ng-show="eventsData.rankinglocked"><strong>  Invited  </td>
+        <td class = "span1" ng-show="eventsData.rankinglocked"><strong>  Accepted  </td>
+      </tr>
+    </thead>
+    <tbody>
 
         <tr ng-repeat="participant in eventsData.ranking" ng-hide = "$index<={{eventsData.cutoff-1}}||$index>=50&&!participant.isCurrentPlayer||$index==0">
 
@@ -148,7 +167,7 @@
 
         <td class = "span6"><span ng-if="participant.isCurrentPlayer"><b>{{participant.schoolname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.schoolname}}</span></td>
 
-        <td class = "span2"><span ng-if="participant.isCurrentPlayer"><b>{{participant.subtype}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.subtype}}</span></td>
+     <!--   <td class = "span2"><span ng-if="participant.isCurrentPlayer"><b>{{participant.subtype}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.subtype}}</span></td> !-->
 
         <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>{{participant.year}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.year}}</span></td>
 
@@ -166,23 +185,27 @@
         </td>
         <td>
           <span ng-if="participant.highestbadgeurl"><img src="http://www.singpath.com{{participant.highestbadgeurl}}"></span>
+		  <span ng-if="!participant.highestbadgeurl"> ---- </span>
         </td>
 
-         <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.rankatcutoff}}
+         <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.rankatcutoff}} 
           </td>
           <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.solvedatcutoff}}
           </td>
-          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.sentrsvp">{{participant.sentrsvp}}</font>
+          <td class ="span1" ng-show="eventsData.rankinglocked"> <font ng-show="participant.sentrsvp">{{participant.sentrsvp}}</font> <font ng-show="!participant.sentrsvp"> -- </font>
+		  
           </td>
-          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
+          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}  </font> <font ng-show="!participant.rsvp!='None'"> --  </font>
           </td>
     </span>
       </tr>
       </tbody>
 
   </table>
+  
+  </div>
 </div>
-
+  </div>
 </div>
 </div>
 </div>
