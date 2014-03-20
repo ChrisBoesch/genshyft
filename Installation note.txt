@@ -1,0 +1,17 @@
+DO NOT SYNC WHAT U HAVE FIRST!!!!
+
+Backup what you currently have.
+
+Delete or rename the current "genshyft" folder in your directory
+
+Go git and reclone a new copy of the current git.
+
+Copy the folders which is in this folder(npm install new 250214)
+
+Paste into the newly clone "genshyft" folder
+
+run node server and test. Everything should work now.
+
+NOTE: ALL COMMITS PREVIOUSLY AFTER THE MERGE PULL #56 IS GONE.
+
+250214 @ 1835PM: Either u replace the file that have been changed previously and commit. Remember to test it before commiting.
