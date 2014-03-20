@@ -87,14 +87,14 @@
 	</br>
 	<div class="row-fluid">
 		<div class="span12 bootCamp" id="heading">
-			<h2>Manage Events</h2>
+			<h2>Manage your Events</h2>
 		</div>
 		
 		<div class="row-fluid">
 			<div class="span12 well well-small" >
 				<center>
 					<button class="btn btn-primary" data-toggle="modal" onClick="parent.location='#/eventsCreate'">
-						<i class="icon-check icon-white"></i> Create New Event
+						<i class="icon-plus-sign icon-white"></i> Create New Event
 					</button>
 
 
@@ -111,6 +111,7 @@
 				              <br>
 				              Cutoff Ranking: {{event.cutoff}}
 				              <br>
+				              <span ng-show"event.rankinglocked">Ranking is locked!</span>
 				              
 				        </div>
 				            <center>
@@ -119,13 +120,16 @@
 				              	<br>
 				              	<br>
 				              	<button class="btn btn-primary btn-success" data-toggle="modal" ng-click="reload_eventsManage(event.id)">
-				            	<i class="icon-eye-open icon-white"></i> Send Invite
+				            	<i class="icon-envelope icon-white"></i> Send Invite
 				            	</button>
 								<button class="btn btn-primary btn-warning" data-toggle="modal" ng-click="go_to_eventsEdit(event.id)">
-								<i class="icon-check icon-white"></i> Edit Event
+								<i class="icon-pencil icon-white"></i> Edit Event
 								</button>
-				            	<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="delete_event(event.id)">
-				            	<i class="icon-eye-open icon-white"></i> Delete Event
+								<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="lock_ranking(event.id)">
+								<i class="icon-lock icon-white"></i> Lock Ranking
+								</button>
+				            	<button class="btn btn-primary btn-inverse" data-toggle="modal" ng-click="delete_event(event.id)">
+				            	<i class="icon-trash icon-white"></i> Delete Event
 				            	</button>
 				            
 				          </center>
@@ -149,13 +153,16 @@
 				              	<br>
 				              	<br>
 				              	<button class="btn btn-primary btn-success" data-toggle="modal" ng-click="reload_eventsManage(event.id)">
-				            	<i class="icon-eye-open icon-white"></i> Send Invite
+				            	<i class="icon-envelope icon-white"></i> Send Invite
 				            	</button>
 								<button class="btn btn-primary btn-warning" data-toggle="modal" ng-click="go_to_eventsEdit(event.id)">
-								<i class="icon-check icon-white"></i> Edit Event
+								<i class="icon-pencil icon-white"></i> Edit Event
 								</button>
-				            	<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="delete_event(event.id)">
-				            	<i class="icon-eye-open icon-white"></i> Delete Event
+								<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="lock_ranking(event.id)">
+								<i class="icon-lock icon-white"></i> Lock Ranking
+								</button>
+				            	<button class="btn btn-primary btn-inverse" data-toggle="modal" ng-click="delete_event(event.id)">
+				            	<i class="icon-trash icon-white"></i> Delete Event
 				            	</button>
 				            
 				          </center>
@@ -199,7 +206,7 @@
 			</span>
 		</center>
 			<!--show all, not just top 50. To show top 50 only, ng-hide="$index>=50"-->
-			<tr ng-repeat="participant in eventsData.ranking">
+			<tr ng-show="player.player_id==event.editor" ng-repeat="participant in eventsData.ranking">
 				<td class = "span1">{{$index+1}}</td>
 				<td class = "span3">{{participant.nickname}}</td>
 				<td class = "span1">
@@ -263,7 +270,7 @@
 					<input type="checkbox" id="includeRSVP" ng-model="includeRSVP"value="true"> Include RSVP
 				</label>
 				<button type="submit" class="btn btn-primary btn-success" data-toggle="modal" data-target="#watchModal" ng-click="send_rsvp(messageDescription, messageTitle, includeRSVP)">
-			    <i class="icon-check icon-white"></i>Send RSVP</button>
+			    <i class="icon-envelope icon-white"></i> Send RSVP</button>
 			</div>
 		</div>
 	</form>

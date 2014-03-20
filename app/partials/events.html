@@ -23,9 +23,9 @@
           <div class="container"> 
             <div class="span11"> 
           <ol>
-            <li ng-repeat="event in events" ng-hide="event.archived">
-              
-              <h4>{{event.name}}</h4><br>
+            <div ng-repeat="event in events" ng-hide="event.archived">
+              <h4>{{$index+1}}. 
+              {{event.name}}</h4><br>
 
               {{event.description}}<br>
 
@@ -36,7 +36,7 @@
               <button class="btn btn-primary" data-toggle="modal" data-target="#postModal"ng-click="register_for_event(event.id, 'follow')"><i class="icon-bell icon-white"></i> Keep me posted</button>
               <button class="btn btn-primary" ng-click="go_to_eventsRanking(event.id)"><i class="icon-list icon-white"></i> I'd like to view the rankings</button>
               <br><br>
-            </li>
+            </div>
             <br>
           </ol>
           </div>

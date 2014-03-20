@@ -107,7 +107,13 @@
          </td>
          <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.solvedatcutoff}}
          </td>
-         <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.sentrsvp">Yes</font>
+         <td class ="span4" ng-show="eventsData.rankinglocked"><font ng-show="participant.sentrsvp">Yes</font><!--
+          <span ng-if="player.player_id==eventsData.editor && participant.sentrsvp && participant.rsvp=='None'">
+            <button class="btn btn-primary btn-warning" data-toggle="modal" ng-click = "uninvite(eventsData.id, participant.playerid)">
+                <i class="icon-remove icon-white"></i> Un-invite
+            </button>
+          </span>
+        -->
          </td>
          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
          </td>
