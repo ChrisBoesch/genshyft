@@ -750,7 +750,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*Tournament Join page initialization - By Glen*/
   $scope.tournamentInit=function(){
     if($cookieStore.get("tournamentID")){
-      $scope.fetch_tournament_details($cookieStore.get("tournamentID"));
+      $scope.fetch_tournament_details($cookieStore.get("tournamentID"), $cookieStore.get("playerID"));
     }else{
       alert("No tournamentID passed to GenshyftTournamentController.");
       $location.path('mytournaments');
@@ -758,35 +758,35 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   /*JSON API Call to retrieve tournament data - By Glen*/
-  $scope.fetch_tournament_details = function(tournamentID){
+  $scope.fetch_tournament_details = function(tournamentID, playerID){
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
       $scope.tournament = response;
       console.log("fetching tournament details = "+ $scope.tournament.tournamentID );
       $scope.get_indivNoGrpPlayers($scope.tournament);
       if($scope.tournament.isGroup){
-        $scope.get_grpPlayers($scope.tournament);
+        $scope.get_grpPlayers($scope.tournament, playerID);
       }       
     });
-    $scope.timeoutVar = $timeout(function(){$scope.fetch_tournament_details(tournamentID)}, 10000);
+    $scope.timeoutVar = $timeout(function(){$scope.fetch_tournament_details(tournamentID, playerID)}, 10000);
   };
 
   /*JSON API Call to retrieve tournament data once - By Glen*/
-  $scope.fetch_tournament_details_once = function(tournamentID){  
+  $scope.fetch_tournament_details_once = function(tournamentID, playerID){  
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID": tournamentID}, function(response){
       $scope.tournament = response;
       console.log("fetch_tournament_details_once = "+ $scope.tournament.tournamentID );
       $scope.get_indivNoGrpPlayers($scope.tournament);
       if($scope.tournament.isGroup){
-        $scope.get_grpPlayers($scope.tournament);
+        $scope.get_grpPlayers($scope.tournament, playerID);
       }       
     });
   };
 
   /*Extract players and sort them into the respective group - by Glen*/
-  $scope.get_grpPlayers = function(tournament){
+  $scope.get_grpPlayers = function(tournament, playerID){
     console.log("get_grpPlayers");
     $scope.numGrp = [];
-     $scope.currentUserGrping = 0;
+    $scope.currentUserGrping = 0;
 
     for(var i=0; i < tournament.maxGroups ; i++){
       var grouping = [];
@@ -798,7 +798,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           grouping.push(player);      
          }
 
-         if(tournament.registeredPlayerIDs[j].playerID === $scope.currentPlayerID){
+         if(tournament.registeredPlayerIDs[j].playerID === playerID){
             $scope.currentUserGrping = tournament.registeredPlayerIDs[j].group;
             $scope.have_grp($scope.currentUserGrping);
          }
@@ -879,7 +879,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log(response.error);
       }else{
         console.log(response);
-        $scope.fetch_tournament_details_once(tournamentId);
+        $scope.fetch_tournament_details_once(tournamentId, playerId);
         $route.reload();
       }
     });  
@@ -905,7 +905,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           console.log(response.error);
         }else{
           console.log(response);
-          $scope.fetch_tournament_details_once(tournamentId);
+          $scope.fetch_tournament_details_once(tournamentId, playerId);
           $route.reload();
         }
       });
