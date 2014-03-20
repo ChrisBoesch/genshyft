@@ -96,7 +96,7 @@
 									<!-- -->
 									<td class="Rank_Progress">{{player.finished.split(":")[0]}} hour {{player.finished.split(":")[1]}} min {{player.finished.split(":")[2].split(".")[0]}} sec</td>
 									<td class="Rank_Mentoring">{{player.mentee}}</td>
-									<td class="Rank_MentoredBy"><p ng-hide="player.mentorID == null"><font ng-show="player.mentorHasArrived == false">Waiting for </font>{{player.mentor}}</p></td>
+									<td class="Rank_MentoredBy"><p ng-hide="player.mentorID == null"><!--<font ng-show="player.mentorHasArrived == false">Waiting for </font>-->{{player.mentor}}</p></td>
 								</tr>           
 							</table>
 						
