@@ -99,8 +99,8 @@
 
 
 				</center>
-				<div class="row-fluid" ng-repeat="event in events">
-					<span ng-hide="eventID!=event.id || event.archived">
+				<div class="row-fluid" ng-repeat="event in events" ng-hide="event.archived || player.player_id!=event.editor">
+					<span ng-hide="eventID!=event.id">
 						<div class="span6">
 							
 				              <h4>{{event.name}}</h4><br>
@@ -130,7 +130,7 @@
 				            
 				          </center>
 			        </span>
-			        <span ng-show="noEventID" ng-hide="event.archived">
+			        <span ng-show="noEventID" ng-hide="event.archived || player.player_id!=event.editor">
 			        	<div class="span6">
 							
 				              <h4>{{event.name}}</h4><br>

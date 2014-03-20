@@ -1035,8 +1035,94 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 	$httpBackend.whenGET('/jsonapi/tournament/5060388987076608').respond(tournamentIndivData);
 	//$httpBackend.whenGET('/jsonapi/tournament_progress/5060388987076610').respond(IndTournData);
 	
-  var events ={"type": "events", "events": [{"cutoff": 20, "name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "following": 9, "cutoffdate": "2014-03-14T10:48:14.183200", "currentPlayerStatus": "Not registered", "registered": 37, "venue": null, "longitude": null, "participating": 20, "start": "2014-03-21T10:50:07.652310", "latitude": null, "watching": 8, "id": 5308925893148672, "description": "Come join us for the IDA-sponsored Secondary School Coding Competition that will take place on Friday, March 21st, at SMU. The top five secondary students who have registered their school and starting year will be invited. These top five students will join fifteen other students selected by the IDA committee. So register for the event and register your school now, and then go solve a few Javascript problems. The grand prize for this event will be an iPad Mini. "}, {"cutoff": 40, "name": "National Singapore JC and High-school Coding Competition", "created": "2014-01-10T15:41:36.848030", "following": 4, "cutoffdate": "2014-03-22T10:48:27.878890", "currentPlayerStatus": "Not registered", "registered": 62, "venue": null, "longitude": null, "participating": 55, "start": "2014-03-29T10:49:55.721590", "latitude": null, "watching": 3, "id": 6095188913029120, "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on the morning of March 29th, at 9am, at SMU. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."}, {"cutoff": 40, "name": "2014 Coding Competition for Polytechnics in Singapore", "created": "2014-01-10T15:41:03.411980", "following": 4, "cutoffdate": "2014-03-22T10:48:48.156880", "currentPlayerStatus": "Not registered", "registered": 35, "venue": null, "longitude": null, "participating": 29, "start": "2014-03-29T10:49:48.352000", "latitude": null, "watching": 2, "id": 6486660988534784, "description": "Come join us for the 2014 Coding Competition for Polytechnics in Singapore. The event will take place on March 29th, at SMU starting at 1pm. The top 40 students who have registered their polytechnic and starting year will be invited. So register you school now and then go start solving a few Python problems. The grand prize for this event will be a MacBook Air."}]};
+  //var events ={"type": "events", "events": [{"cutoff": 20, "name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "following": 9, "cutoffdate": "2014-03-14T10:48:14.183200", "currentPlayerStatus": "Not registered", "registered": 37, "venue": null, "longitude": null, "participating": 20, "start": "2014-03-21T10:50:07.652310", "latitude": null, "watching": 8, "id": 5308925893148672, "description": "Come join us for the IDA-sponsored Secondary School Coding Competition that will take place on Friday, March 21st, at SMU. The top five secondary students who have registered their school and starting year will be invited. These top five students will join fifteen other students selected by the IDA committee. So register for the event and register your school now, and then go solve a few Javascript problems. The grand prize for this event will be an iPad Mini. "}, {"cutoff": 40, "name": "National Singapore JC and High-school Coding Competition", "created": "2014-01-10T15:41:36.848030", "following": 4, "cutoffdate": "2014-03-22T10:48:27.878890", "currentPlayerStatus": "Not registered", "registered": 62, "venue": null, "longitude": null, "participating": 55, "start": "2014-03-29T10:49:55.721590", "latitude": null, "watching": 3, "id": 6095188913029120, "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on the morning of March 29th, at 9am, at SMU. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."}, {"cutoff": 40, "name": "2014 Coding Competition for Polytechnics in Singapore", "created": "2014-01-10T15:41:03.411980", "following": 4, "cutoffdate": "2014-03-22T10:48:48.156880", "currentPlayerStatus": "Not registered", "registered": 35, "venue": null, "longitude": null, "participating": 29, "start": "2014-03-29T10:49:48.352000", "latitude": null, "watching": 2, "id": 6486660988534784, "description": "Come join us for the 2014 Coding Competition for Polytechnics in Singapore. The event will take place on March 29th, at SMU starting at 1pm. The top 40 students who have registered their polytechnic and starting year will be invited. So register you school now and then go start solving a few Python problems. The grand prize for this event will be a MacBook Air."}]};
   
+  var events = {
+    "type": "events",
+    "events": [
+        {
+            "rankinglocked": true,
+            "archived": false,
+            "name": "IDA Secondary School Tournament",
+            "cutoff": 20,
+            "following": 15,
+            "cutoffdate": "2014-03-14T10:48:14.183200",
+            "currentPlayerStatus": "watch",
+            "created": "2014-01-10T15:40:45.896110",
+            "venue": null,
+            "longitude": null,
+            "participating": 83,
+            "start": "2014-03-21T10:50:07.652310",
+            "editor": 57754,
+            "latitude": null,
+            "watching": 10,
+            "registered": 108,
+            "id": 5308925893148672,
+            "description": "Come join us for the IDA Programming Challenge that will take place on Friday, March 21st, at SMU, at 1:00pm. The top 20 students who have registered their school and starting year will be invited. So register now and then go solve a few Javascript problems. The grand prize for this event will be an iPad Mini."
+        },
+        {
+            "rankinglocked": false,
+            "archived": false,
+            "name": "Tetradine College Competition",
+            "cutoff": 9,
+            "following": 0,
+            "cutoffdate": null,
+            "currentPlayerStatus": "participate",
+            "created": "2014-03-16T14:33:44.392990",
+            "venue": "Tetradine College",
+            "longitude": null,
+            "participating": 4,
+            "start": null,
+            "editor": 10103676,
+            "latitude": null,
+            "watching": 3,
+            "registered": 7,
+            "id": 5990669860470784,
+            "description": "Open to students from Tetradine College only."
+        },
+        {
+            "rankinglocked": false,
+            "archived": false,
+            "name": "National Singapore JC and High-school Coding Competition",
+            "cutoff": 40,
+            "following": 4,
+            "cutoffdate": "2014-03-22T10:48:27.878890",
+            "currentPlayerStatus": "Not registered",
+            "created": "2014-01-10T15:41:36.848030",
+            "venue": null,
+            "longitude": null,
+            "participating": 72,
+            "start": "2014-03-29T10:49:55.721590",
+            "editor": 57754,
+            "latitude": null,
+            "watching": 7,
+            "registered": 83,
+            "id": 6095188913029120,
+            "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on the morning of March 29th, at 9am, at SMU. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
+        },
+        {
+            "rankinglocked": false,
+            "archived": false,
+            "name": "2014 Coding Competition for Polytechnics in Singapore",
+            "cutoff": 40,
+            "following": 7,
+            "cutoffdate": "2014-03-22T10:48:48.156880",
+            "currentPlayerStatus": "Not registered",
+            "created": "2014-01-10T15:41:03.411980",
+            "venue": null,
+            "longitude": null,
+            "participating": 62,
+            "start": "2014-03-29T10:49:48.352000",
+            "editor": 57754,
+            "latitude": null,
+            "watching": 2,
+            "registered": 71,
+            "id": 6486660988534784,
+            "description": "Come join us for the 2014 Coding Competition for Polytechnics in Singapore. The event will take place on March 29th, at SMU starting at 1pm. The top 40 students who have registered their polytechnic and starting year will be invited. So register you school now and then go start solving a few Python problems. The grand prize for this event will be a MacBook Air."
+        }
+    ]
+};
+
   //{"type": "events", "events": [{"name": "IDA Secondary School Tournament", "created": "2014-01-10T15:40:45.896110", "venue": null, "longitude": null, "latitude": null, "id": 5308925893148672, "description": "Default Description"}, {"name": "National JC Coding Competition", "created": "2014-01-10T15:41:36.848030", "venue": null, "longitude": null, "latitude": null, "id": 6095188913029120, "description": "Default Description"}, {"name": "National Polytechnic Coding Competition", "created": "2014-01-10T15:41:03.411980", "venue": null, "longitude": null, "latitude": null, "id": 6486660988534784, "description": "Default Description"}]};
       $httpBackend.whenGET('/jsonapi/event').respond(events);
       $httpBackend.whenGET('/jsonapi/mapEvent').respond(events.events);
@@ -3418,6 +3504,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 
 		var eventsTableDataPoly = {
     "following": 1,
+    "archived": true,
     "name": "National Polytechnic Coding Competition",
     "ranking": [
         {

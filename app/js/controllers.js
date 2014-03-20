@@ -3780,6 +3780,7 @@ function EventController($scope, $resource, $location){
   		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		$scope.noEventID = false;
+		$scope.player = $resource('/jsonapi/player').get();
 
   		//variables for create event details
   		$scope.eventTitle="";
