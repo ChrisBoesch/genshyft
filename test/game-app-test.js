@@ -2203,7 +2203,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
       //eventTables data
       var eventsTableDataJC = {
     "rankinglocked": false,
-    "archived": false,
+    "archived": true,
     "name": "National Singapore JC and High-school Coding Competition",
     "ranking": [
         {
@@ -3392,7 +3392,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "rsvp": "None"
         }
     ],
-    "cutoff": 40,
+    "cutoff": 30,
     "following": 4,
     "cutoffdate": "2014-03-22T10:48:27.878890",
     "registered": 82,
