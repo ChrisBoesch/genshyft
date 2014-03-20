@@ -235,12 +235,14 @@
 						type="checkbox" 
 						ng-model="checkAll"
 						ng-checked=false
+						ng-disabled="secondButton"
 						ng-click="addAllToRSVPList()">
 					Cutoff
 					<input 
 						type="checkbox" 
 						ng-model="cutoffList"
 						ng-checked="checkall"
+						ng-disabled="firstButton"
 						ng-click="addSelectedFewToRSVPList()"><br/>
 					<br>
 				

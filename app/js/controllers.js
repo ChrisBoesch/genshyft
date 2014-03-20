@@ -3934,6 +3934,8 @@ function EventTableController($scope, $resource, $route, $location, $filter){
   		$scope.eventDescription="";
   		$scope.cutoff="";
   		$scope.progLang="";
+  		$scope.firstButton=false;
+  		$scope.secondButton=false;
 
   		$scope.rsvpList = [];
 
@@ -4139,6 +4141,11 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 		}
 
 		$scope.addSelectedFewToRSVPList = function(){
+			if($scope.secondButton){
+				$scope.secondButton = false;
+			}else{
+				$scope.secondButton = true;
+			}
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 				$scope.current_event = response;
 				if($scope.rsvpList.length!=$scope.current_event.cutoff){
@@ -4172,6 +4179,11 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 		//checks if rsvpList contains everyone, if it doesn't, fill it up with everyone's name
 		//if it does, clear all
 		$scope.addAllToRSVPList = function(){
+			if($scope.firstButton){
+				$scope.firstButton = false;
+			}else{
+				$scope.firstButton = true;
+			}
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 				$scope.current_event = response;
 				if($scope.current_event.ranking.length!=$scope.rsvpList.length){
