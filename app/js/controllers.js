@@ -52,7 +52,7 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
         $scope.$watch('player', function() {
             $scope.current_country = $scope.player.country;
             currentUserService.setUser($scope.player);
-            $cookieStore.put("playerID", $scope.player_id);
+            $cookieStore.put("playerID", $scope.player.player_id);
         }, true);
 	};
 	
