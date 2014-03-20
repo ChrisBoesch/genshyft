@@ -72,11 +72,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.currentRound;
   $scope.allTournaments = [];
 
-  $scope.list=function(){
+  /*$scope.list=function(){
     $scope.userObj = currentUserService.getUser();
     console.log("list() UserOBJ playerID="+$scope.userObj.player_id);
     $cookieStore.put("playerID", $scope.userObj.player_id);
-  };
+  };*/
 
   $scope.loading = function(){	
   	$scope.tournaments = {};
@@ -756,7 +756,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Tournament Join page initialization - By Glen*/
   $scope.tournamentInit=function(){
-    $scope.list();
+    //$scope.list();
     if($cookieStore.get("tournamentID")){
       $scope.fetch_tournament_details($cookieStore.get("tournamentID"), $cookieStore.get("playerID"));
     }else{
