@@ -78,6 +78,15 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $cookieStore.put("playerID", $scope.userObj.player_id);
   };*/
 
+  $scope.fetch_player = function(){
+    $resource('/jsonapi/player').get({},function(response){
+        $scope.player = response;
+        $scope.currentPlayerID = $scope.player.player_id;
+        $cookieStore.put("playerID",$scope.currentPlayerID);
+        console.log("fetchPlayer="+$scope.currentPlayerID);
+    });
+  }
+
   $scope.loading = function(){	
   	$scope.tournaments = {};
   	$scope.unregisteredPlayers = {};
@@ -767,6 +776,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*JSON API Call to retrieve tournament data - By Glen*/
   $scope.fetch_tournament_details = function(tournamentID, playerID){
+    if(playerID == null||playerID == undefined){
+      $scope.fetch_player();
+    }
+
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
       $scope.tournament = response;
       console.log("fetching tournament details = "+ $scope.tournament.tournamentID +" playerID="+playerID);
@@ -780,6 +793,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*JSON API Call to retrieve tournament data once - By Glen*/
   $scope.fetch_tournament_details_once = function(tournamentID, playerID){  
+    if(playerID == null||playerID == undefined){
+      $scope.fetch_player();
+    }
+
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID": tournamentID}, function(response){
       $scope.tournament = response;
       console.log("fetch_tournament_details_once = "+ $scope.tournament.tournamentID +" playerID="+playerID);
