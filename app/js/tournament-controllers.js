@@ -782,10 +782,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
       $scope.tournament = response;
-      console.log("fetching tournament details = "+ $scope.tournament.tournamentID +" playerID="+playerID);
+      console.log("fetching tournament details = "+ $scope.tournament.tournamentID +" playerID="+$scope.currentPlayerID);
       $scope.get_indivNoGrpPlayers($scope.tournament);
       if($scope.tournament.isGroup){
-        $scope.get_grpPlayers($scope.tournament, playerID);
+        $scope.get_grpPlayers($scope.tournament, $scope.currentPlayerID);
       }       
     });
     $scope.timeoutVar = $timeout(function(){$scope.fetch_tournament_details(tournamentID, playerID)}, 10000);
@@ -799,10 +799,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID": tournamentID}, function(response){
       $scope.tournament = response;
-      console.log("fetch_tournament_details_once = "+ $scope.tournament.tournamentID +" playerID="+playerID);
+      console.log("fetch_tournament_details_once = "+ $scope.tournament.tournamentID +" playerID="+$scope.currentPlayerID);
       $scope.get_indivNoGrpPlayers($scope.tournament);
       if($scope.tournament.isGroup){
-        $scope.get_grpPlayers($scope.tournament, playerID);
+        $scope.get_grpPlayers($scope.tournament, $scope.currentPlayerID);
       }       
     });
   };
