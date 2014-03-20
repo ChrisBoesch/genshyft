@@ -3810,9 +3810,11 @@ function EventController($scope, $resource, $location){
            
             if(id){
                 $scope.event = event;
+                console.log(event);
                 
             }else{
             	$scope.events = event.events; 
+            	console.log(event.events);
             }
             
           });

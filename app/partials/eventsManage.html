@@ -100,7 +100,7 @@
 
 				</center>
 				<div class="row-fluid" ng-repeat="event in events">
-					<span ng-hide="eventID!=event.id">
+					<span ng-hide="eventID!=event.id || event.archived">
 						<div class="span6">
 							
 				              <h4>{{event.name}}</h4><br>
@@ -130,7 +130,7 @@
 				            
 				          </center>
 			        </span>
-			        <span ng-show="noEventID">
+			        <span ng-show="noEventID" ng-hide="event.archived">
 			        	<div class="span6">
 							
 				              <h4>{{event.name}}</h4><br>
