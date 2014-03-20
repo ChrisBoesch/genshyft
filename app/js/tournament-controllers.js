@@ -248,7 +248,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*Function to seperate Registered Users without group or Individual Tournament - By Glen*/
   var fetchRegisteredUser =function(tournament){
     $scope.registeredPlayersArray =[];
-    console.log("fetchRegisteredUser: " + tournament.tournamentID);
+    console.log("fetchRegisteredUser TournID: " + tournament.tournamentID);
     for(var i =0; i < tournament.registeredPlayerIDs.length; i++){
       if(tournament.registeredPlayerIDs[i].group===0){
         var playerDetails = {"nickname":tournament.registeredPlayerIDs[i].nickname,"playerID":tournament.registeredPlayerIDs[i].playerID};
