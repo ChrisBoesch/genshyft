@@ -78,6 +78,15 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $cookieStore.put("playerID", $scope.userObj.player_id);
   };*/
 
+  $scope.fetch_player = function(){
+    $resource('/jsonapi/player').get({},function(response){
+        $scope.player = response;
+        $scope.currentPlayerID = $scope.player.player_id;
+        $cookieStore.put("playerID",$scope.currentPlayerID);
+        console.log("fetchPlayer="+$scope.currentPlayerID);
+    });
+  }
+
   $scope.loading = function(){	
   	$scope.tournaments = {};
   	$scope.unregisteredPlayers = {};
