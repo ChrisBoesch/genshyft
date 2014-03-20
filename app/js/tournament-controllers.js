@@ -761,7 +761,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.fetch_tournament_details = function(tournamentID, playerID){
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
       $scope.tournament = response;
-      console.log("fetching tournament details = "+ $scope.tournament.tournamentID );
+      console.log("fetching tournament details = "+ $scope.tournament.tournamentID +" playerID="+playerID);
       $scope.get_indivNoGrpPlayers($scope.tournament);
       if($scope.tournament.isGroup){
         $scope.get_grpPlayers($scope.tournament, playerID);
@@ -774,7 +774,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.fetch_tournament_details_once = function(tournamentID, playerID){  
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID": tournamentID}, function(response){
       $scope.tournament = response;
-      console.log("fetch_tournament_details_once = "+ $scope.tournament.tournamentID );
+      console.log("fetch_tournament_details_once = "+ $scope.tournament.tournamentID +" playerID="+playerID);
       $scope.get_indivNoGrpPlayers($scope.tournament);
       if($scope.tournament.isGroup){
         $scope.get_grpPlayers($scope.tournament, playerID);
