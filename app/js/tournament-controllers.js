@@ -10,8 +10,9 @@
 // });
 
 /*GENShYFT's TournamentController*/
-function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route,$window){
-  $scope.currentPlayerID = $cookieStore.get("playerID") 
+function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route,$window,currentUserService){
+  $scope.currentPlayerID = $cookieStore.get("playerID");
+  $scope.userObj = currentUserService.getUser();
   $scope.GHeatModel = $resource('/jsonapi/get_heat_ranking');
   $scope.heatID = null;
   $scope.location = $location;
@@ -72,11 +73,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.allTournaments = [];
 
   $scope.list=function(){
-    $scope.player = $resource('/jsonapi/player').get();
-    console.log("list() playerID="+$scope.player.player_id);
-    $scope.$watch('player', function() {
-        $cookieStore.put("playerID", $scope.player.player_id);
-    }, true);
+    $scope.userObj = currentUserService.getUser();
+    console.log("list() UserOBJ playerID="+$scope.userObj.player_id);
+    $cookieStore.put("playerID", $scope.userObj.player_id);
   };
 
   $scope.loading = function(){	
