@@ -47,7 +47,7 @@
                 <div class="row-fluid">
                     <div class="span12">                  
                         <b>Round progress: </b> <span ng-bind="game.numSolvedProblems"></span><b> / </b><span ng-bind="game.numProblems"></span> 
-                        </br><b>Mentor :</b> <b><font color='blue'><span ng-bind="mentor_name"></span></font></b> <button class="btn btn-danger" ng-show="mentor_id!=null && mentor_hasArrived=='False'" ng-click='mentor_arrived(game.playerID, game.heatID)'> <b>Has Mentor Arrived ? </b></button>
+                        </br><b>Mentor :</b> <b><font color='blue'><span ng-bind="mentor_name"></span></font></b> <button class="btn btn-danger" ng-show="mentor_id!=null && mentor_hasArrived==false" ng-click='mentor_arrived(game.playerID, game.heatID)'> <b>Has Mentor Arrived ? </b></button>
                         </br><b ng-show="remaining_problems.length == 0" >Assigned To :</b> <font color='red'><b><span ng-bind="mentee_name"></span></b></font>
                         </br>
                     </div>
