@@ -431,6 +431,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       alert("The round time limit cannot be empty!");
     }
     else{
+      console.log($scope.cartQuestions);
       var roundQuestions = [];
       for(var j = 0; j < $scope.cartQuestions.length; j++){
         roundQuestions.push($scope.cartQuestions[j].problem_id);
