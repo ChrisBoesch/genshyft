@@ -3492,7 +3492,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "editor": 57754,
     "time_to_cutoff": {
         "seconds": 9055,
-        "days": 2
+        "days": 0
     },
     "latitude": null,
     "path": "Python",

@@ -4251,7 +4251,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 	        console.log($scope.current_event);
 	        $scope.total_registered = $scope.current_event.ranking.length;
           
-          if($scope.current_event.time_to_cutoff && $scope.current_event.time_to_cutoff.days>0){
+          if($scope.current_event.time_to_cutoff && $scope.current_event.time_to_cutoff.days>=0){
             $scope.countdown('countdown',$scope.current_event.time_to_cutoff.days , $scope.current_event.time_to_cutoff.seconds);
           }
           
