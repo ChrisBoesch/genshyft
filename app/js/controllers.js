@@ -3771,7 +3771,7 @@ function CountdownController($scope,$timeout) {
             
 }
 
-function EventController($scope, $resource, $location){
+function EventController($scope, $resource, $location, $http){
         $scope.event = {"name":"Default name", 
                             "description": "Default description",
                             "venue": "Default venue"};
@@ -3780,6 +3780,7 @@ function EventController($scope, $resource, $location){
   		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		$scope.noEventID = false;
+		$scope.player = $resource('/jsonapi/player').get();
 
   		//variables for create event details
   		$scope.eventTitle="";
@@ -3789,6 +3790,11 @@ function EventController($scope, $resource, $location){
 
         var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
         
+        $scope.lock_ranking = function(id){
+        	var response = $http.get('/jsonapi/lock_event_ranking/' + id);
+        	console.log("Lock Ranking - " + id + " " + response);
+        }
+
         $scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
     		console.log($scope.eventID + "here3");
@@ -3928,7 +3934,7 @@ function EventController($scope, $resource, $location){
           
 }
 
-function EventTableController($scope, $resource, $route, $location, $filter){ 
+function EventTableController($scope, $resource, $route, $location, $filter, $http){ 
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		$scope.noEventID = false;
@@ -3938,32 +3944,38 @@ function EventTableController($scope, $resource, $route, $location, $filter){
   		$scope.progLang="";
   		$scope.firstButton=false;
   		$scope.secondButton=false;
+  		$scope.player = $resource('/jsonapi/player').get();
 
   		$scope.rsvpList = [];
 
-    //Countdown til cutoff
-    $scope.countdown = function(element,days,seconds) {
-	    var time = days*24*3600 + seconds;
-	    var interval = setInterval(function() {
-	        var el = document.getElementById(element);
-	        if(time == 0) {
-	            el.innerHTML = "Ranking is locked.";    
-	            clearInterval(interval);
-	            return;
-	        }
-	      //var minutes = Number.floor( time / 60 );
-	        var minutes = Math.floor( time / 60 );
-	        var hours = Math.floor(time/3600);
-	        var days = Math.floor(time/(3600*24));
-	      
-	        if (minutes < 10) minutes = "0" + minutes;
-	        var seconds = time % 60;
-	        if (seconds < 10) seconds = "0" + seconds; 
-	        var text = days +" Days "+hours%24+ " Hours "+ minutes%60 + " Minutes " + seconds+" Seconds ";
-	        el.innerHTML = text;
-	        time--;
-	    }, 1000);
-	}
+  		$scope.uninvite = function(eventid, playerid){
+        	var response = $http.get('/jsonapi/uninvite_for_event/' + eventid + '/' + playerid);
+        	console.log("Uninvite - " + eventid + " " + playerid + " " + response);
+        }
+
+	    //Countdown til cutoff
+	    $scope.countdown = function(element,days,seconds) {
+		    var time = days*24*3600 + seconds;
+		    var interval = setInterval(function() {
+		        var el = document.getElementById(element);
+		        if(time == 0) {
+		            el.innerHTML = "Ranking is locked.";    
+		            clearInterval(interval);
+		            return;
+		        }
+		      //var minutes = Number.floor( time / 60 );
+		        var minutes = Math.floor( time / 60 );
+		        var hours = Math.floor(time/3600);
+		        var days = Math.floor(time/(3600*24));
+		      
+		        if (minutes < 10) minutes = "0" + minutes;
+		        var seconds = time % 60;
+		        if (seconds < 10) seconds = "0" + seconds; 
+		        var text = days +" Days "+hours%24+ " Hours "+ minutes%60 + " Minutes " + seconds+" Seconds ";
+		        el.innerHTML = text;
+		        time--;
+		    }, 1000);
+		}
 		
 
 		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
@@ -4280,6 +4292,142 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 
 
 			
+}
+
+function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route,$location){
+
+	$scope.ezwebdevQns = [];
+	$scope.totalQns = 0;
+	$scope.qnIndex = 0;
+
+	$scope.getEZWebDevQuestions = function(){
+		$resource('/jsonapi/ezwebdevquestions').get({},function(response){
+			$scope.ezwebdevcall = response;
+
+			$scope.ezwebdevquestions = $scope.ezwebdevcall.problems.problems;
+			$scope.currEZWebDevQn = $scope.ezwebdevquestions[$scope.qnIndex];
+
+			$scope.current_level_progress = $scope.ezwebdevcall.numSolvedProblems;
+			$scope.total_level_progress = $scope.ezwebdevcall.numProblems;
+			$scope.nameToProblem = $scope.currEZWebDevQn.name;
+			$scope.descriptionToProblem = $scope.currEZWebDevQn.description;
+			$scope.skeleton = $scope.currEZWebDevQn.skeleton;
+			//$scope.examples = $scope.currEZWebDevQn.examples;
+			$scope.problemId = $scope.currEZWebDevQn.id;
+			$scope.gameID = $scope.ezwebdevcall.gameID;
+			//console.log($scope.currEZWebDevQn);
+		})
+
+	};
+
+	$scope.renderHTML = function(){
+		//console.log($scope.skeleton);
+		$scope.SaveResource = $resource('/jsonapi/render_ezwebdev');
+		$scope.dataToRender = {user_code:$scope.skeleton,
+								problem_id:$scope.problemId,
+								game_id:$scope.gameID};
+		console.log($scope.dataToRender);
+
+		var item = new $scope.SaveResource($scope.dataToRender);
+		item.$save(function(response){
+			$scope.renderData = response;
+			$scope.examples = $scope.renderData.renderReturn;
+
+		});
+	};
+
+	$scope.check_solution_for_game = function() {
+      //$scope.solution
+      //$scope.current_problem
+      //$scope.game.gameID
+
+      //Update the iFrames when run is clicked.
+      $scope.theTab=1; 
+      $scope.fill_iframe();
+      //$scope.fill_example_iframe();
+      $scope.fill_test_iframe();
+
+      $('#t11').removeClass('active');
+      $('#t21').addClass('active');
+      $('#ta11').removeClass('active');
+      $('#ta21').addClass('active');
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      
+      //Post the solution
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            //If solved, update the game.
+            if($scope.solution_check_result.last_solved){
+                $scope.fetch($scope.game.gameID);
+            }
+      });
+
+    };
+
+	$scope.fill_iframe = function() { 
+      console.log("filling solution iFrame");
+      var iFrame = angular.element( document.querySelector( '#anIframe' ) );
+      iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.skeleton));
+    };
+    $scope.fill_example_iframe = function() { 
+      console.log("filling example iFrame");
+      var iFrame = angular.element( document.querySelector( '#exampleIframe' ) );
+      iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
+    };
+
+    $scope.fill_test_iframe = function() { 
+      console.log("filling test iFrame");
+      var iframe = angular.element( document.querySelector( '#testIframe' ) );
+      //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
+      iframe.attr("src","web_test_example.html");//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
+      $scope.log_test_iframe();
+
+    };
+    $scope.log_test_iframe = function() { 
+      var iframe = angular.element( document.querySelector( '#testIframe' ).contentDocument.getElementsByTagName('div')[0].innerText.split("Errors"));
+      var errors = iframe[1].split(" ")[0];
+      var failures = iframe[1].split(" ")[1].split("Failures")[1];
+      $scope.issues = parseInt(errors) + parseInt(failures);      
+      console.log("There were "+errors+" errors and "+failures+" failures and "+$scope.issues+" issues overall.");
+      
+    };
+
+    $scope.counter = -1;
+    $scope.run_timer=true;
+    $scope.onTimeout = function(){
+        $scope.counter--;
+        if ($scope.counter > 0) {
+            mytimeout = $timeout($scope.onTimeout,1000);
+        }
+        else {
+          $scope.start_timer(10);
+          if($scope.run_timer){
+            $scope.fill_iframe();
+          }
+        }
+    }
+
+    $scope.start_timer = function(countdown){
+      //Only start the timer if coundown >=0
+      if (countdown >= 0){
+      $scope.counter = countdown;//countdown;
+      mytimeout = $timeout($scope.onTimeout,1000);
+      }
+      else{
+        console.log("Negative number passed to start_timer "+countdown);
+      }
+    }
+
+    var mytimeout = null;
+    $scope.start_timer(5);
+
+
+
 }
 
 function EZWebDevController($scope,$resource,$cookieStore,$timeout,$http,$route,$location){
