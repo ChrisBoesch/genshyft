@@ -1,22 +1,20 @@
  <br>
-        <div ng-controller="WebGameController" ng-init="" class="container">
+        <div ng-controller="EZWebGameController" ng-init="getEZWebDevQuestions()" class="container">
             <div>
-                <!--<a class="janrainEngage" href="#"><input type="submit" value="Hyperlinked Sign In Button"></a>-->  
+                <!--<a class="janrainEngage" href="#"><input type="submit" value="Hyperlinked Sign In Button"></a>--> 
                 <div class="row-fluid"> 
                     <div class="span12 well">
-                        <div class="row-fluid">
+                    
+                    <div class="row-fluid">
                             <div class="span9">
-                            <!--
                                 <div class="span3" align="left">Level Progress:&nbsp;&nbsp;&nbsp; <span ng-bind="current_level_progress"> </span>/<span ng-bind="total_level_progress"></span>
                                 </div>
-
                                 <div align="left"> 
                                     <div class="progress progress-success" align="left">
-                                        <div class="bar" style="width:{{count = (   current_level_progress/total_level_progress)*100 |number:0}}%;">
+                                        <div class="bar" style="width:{{count = (current_level_progress/total_level_progress)*100 |number:0}}%;">
                                         </div>
                                     </div>
                                 </div>
-                                -->
                             </div>
                             <div class="span3" align="left">
                                 <font>
@@ -27,18 +25,23 @@
                                 </font>
                             </div>
                         </div>
+                    <!-- this is for the progression bar !-->
+
+                        
                         <div class="row-fluid">
                             <div class="span9" style="border: 1px solid #DBDACB;">
                                 <div style="text-align: left;">
-                                    <h5>&nbsp;Current Practice Question</h5>
+                                    <h5>&nbsp;Current Question</h5>
                                         <font>                                
-                                            &nbsp;Name: <span ng-bind="game.problems.problems[current_problem_index].name"></span>
-                                            <br>&nbsp;Description: <span ng-bind="game.problems.problems[current_problem_index].description"></span>
+                                            &nbsp;Name: <span ng-bind="nameToProblem"></span>
+                                            <br>&nbsp;Description: <span ng-bind="descriptionToProblem"></span>
                                         </font>
                                 </div>
                             </div>
+                            
+                            
+
                             <div class="span3" >
-                                <!--
                                 <div class="span12" style="border: 1px solid #DBDACB;">
                                     <font>
                                         &nbsp;&nbsp;Path Name: <span ng-bind="nameOfPath"></span>
@@ -48,17 +51,46 @@
                                             &nbsp;&nbsp;Difficulty: <span ng-bind="gameDifficulty"></span>
                                     </font>
                                 </div>
-                                -->
                                 <div class="span12" align="center" style="padding-top: 5px">
                                     <p> 
                                         <button class="btn btn-primary" ng-click="skip_problem()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                                     </p>
                                 </div>
+                            </div> 
+                            <!-- video here 
+                               <div class="span6" >
+                                <div class="span12" style="border: 1px solid #DBDACB;">
+                                    
+                                    <div class = "span3">
+                                    
+                                    <img ng-src="{{coachImage}}" width='150px'/>
+                                    </div>
+
+                                    <div class = "span9" id ="audioText">
+                                    <font>
+
+                                            &nbsp;&nbsp;<b> {{currentCoach}} says  </b> <br>
+                                            &nbsp;&nbsp;<div class ='span10'> <br> {{words}} </div> <br>
+                                                
+                                    </font>
+                                    </div>
+                                </div>
+                                        <div id = "audioDiv">   
+                                            <audio src="{{audio}}" autoplay ></audio>
+                                        
+                                        
+                                        </div>
+
+
                             </div>  
+                             video end here !-->
+                            
+                            
                         </div>
+                        
                     </div>
                 </div>
-               
+
                 <div class="row-fluid">
                     <div class="span6 well">
                         <!-- Tab for Run-->
@@ -73,7 +105,7 @@
                                 <div class="tab-pane fade in active" id="t3" style="height:300px;">
                                     <div>
                                         <section>
-                                            <div id="editorPractice" ui-ace="{mode: 'html'}" ng-model="solution1"><span ng-bind="game.problems.problems[current_problem_index].skeleton"></div>
+                                            <div id="editorPractice" ui-ace="{mode: 'html' }" ng-model="skeleton"><span ng-bind="game.problems.problems[current_problem_index].skeleton"></span></div>
                                         </section>
                                     </div>   
                                 </div>
