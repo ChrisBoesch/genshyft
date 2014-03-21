@@ -296,7 +296,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "isGroup": isGroup,
                    "assignMentorInTeam": mentorAssignInTeam,
                    "maxGroups": numberOfGrp,
-                   "maxPlayersPerGroup": numPlayerPerGrp,
+                   "maxPlayersPerGroup": numPlayerPerGrp
                    //"tournamentID":123456 //simulate localhost
                  }
       $scope.NewGrpTournament = $resource('/jsonapi/create_or_update_tournament');
@@ -606,6 +606,16 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $('#questionInfoInCart').modal('show');
   };
 
+  //Retrieve question information and display to user
+  $scope.viewQnsInfo_editRound = function(question){
+    $scope.questionName = question.name;
+    $scope.questionDescription = question.description;
+    $scope.questionExamples = question.examples;
+    $scope.skeleton = question.skeleton;
+    $('#addMoreQuestions').modal('hide');
+    $('#qnsInfo_editRound').modal('show');
+  };
+
   $scope.resetQuestionCart = function(){
     $scope.cartQuestions = [];
   };
@@ -615,9 +625,25 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $('#questionsInfoInCart').modal('hide');
   };
 
+  $scope.hideAddMoreQuestions = function(){
+    $('#addMoreQuestions').modal('hide');
+    $('#editTournRound').modal('show');
+  };
+
+  $scope.addMoreQuestions = function(){
+    $('#editTournRound').modal('hide');
+    $('#addMoreQuestions').modal('show');
+  };
+
   $scope.hideQuestionInfoEditRound = function(){
     $('#questionsInCart').modal('hide');
     $('#editTournRound').modal('show');
+  };
+
+  /*method to hide modal after seeing questions information*/
+  $scope.hideQnsInfoEditRound_addQns = function(){
+    $('#qnsInfo_editRound').modal('hide');
+    $('#addMoreQuestions').modal('show');
   };
 
   $scope.hideQuestionsInfoInCart = function(){

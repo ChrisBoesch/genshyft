@@ -163,7 +163,7 @@
 						</div>
 						<div class="span7">	
 							<select class="span12" ng-model="pathLevel" multiple-"multiple" size="6">
-								<option ng-repeat="gameLevel in gameLevels" value="{{gameLevel.id}}">{{gameLevel.description}}</option>
+								<option ng-repeat="gameLevel in gameLevels" value="{{gameLevel.id}}" ng-click="loadQueriedQuestionTable()">{{gameLevel.description}}</option>
 							</select>
 						</div>
 					</div>
