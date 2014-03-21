@@ -40,7 +40,9 @@
       What is at stake: (Lots of prizes and school pride!)</h4>
         
         <h3 ng-show="current_event.time_to_cutoff.days>=0">Time to cutoff: <span id="countdown"></span></h3>
-      
+        <br>
+        <br>
+        Loading latest ranking.. This may take a few seconds..
         <script type="application/javascript">
 
          </script>
@@ -105,7 +107,13 @@
          </td>
          <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.solvedatcutoff}}
          </td>
-         <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.sentrsvp">Yes</font>
+         <td class ="span4" ng-show="eventsData.rankinglocked"><font ng-show="participant.sentrsvp">Yes</font><!--
+          <span ng-if="player.player_id==eventsData.editor && participant.sentrsvp && participant.rsvp=='None'">
+            <button class="btn btn-primary btn-warning" data-toggle="modal" ng-click = "uninvite(eventsData.id, participant.playerid)">
+                <i class="icon-remove icon-white"></i> Un-invite
+            </button>
+          </span>
+        -->
          </td>
          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
          </td>
@@ -192,11 +200,12 @@
           </td>
           <td class ="span4" ng-show="eventsData.rankinglocked">{{participant.solvedatcutoff}}
           </td>
-          <td class ="span1" ng-show="eventsData.rankinglocked"> <font ng-show="participant.sentrsvp">{{participant.sentrsvp}}</font> <font ng-show="!participant.sentrsvp"> -- </font>
+          <td class ="span1" ng-show="eventsData.rankinglocked"> <font ng-show="participant.sentrsvp">Yes</font> <font ng-show="!participant.sentrsvp"> -- </font>
 		  
           </td>
-          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}  </font> <font ng-show="!participant.rsvp!='None'"> --  </font>
+          <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">Yes  </font> <font ng-show="!participant.rsvp!='None'"> --  </font>
           </td>
+          
     </span>
       </tr>
       </tbody>

@@ -27,7 +27,7 @@
         console.log("Current location for login redirect "+document.location.href);
         //Come back to the current page after login. 
         //redirect_url = document.location.href;
-        redirect_url = "http://"+document.location.host+"/kat/index.html#/profile";
+        redirect_url = "http://"+document.location.host+"/genshyft/index.html#/profile";
         
         janrain.settings.tokenUrl = auth_url+'?target='+redirect_url;
 
@@ -143,11 +143,11 @@
                     <li ng-show="player.countryCode=='SG'||player.countryCode==''">
                       <a type="button" ng-click="checkSchoolRegistrationLogin()">Register Your School</a>
                     </li>
-                    <!--
+                    
                     <li ng-show="player.countryCode=='SG'||player.countryCode==''">
                       <a type="button" ng-click="checkSchoolsMapLogin()">View Schools Map</a>
                     </li>
-                    -->
+                    
                     
                     <li class="divider"></li> 
                     <li class="nav-header">Others</li>  

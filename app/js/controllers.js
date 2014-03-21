@@ -52,6 +52,7 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
         $scope.$watch('player', function() {
             $scope.current_country = $scope.player.country;
             currentUserService.setUser($scope.player);
+            $cookieStore.put("playerID", $scope.player.player_id);
         }, true);
 	};
 	
@@ -3554,7 +3555,7 @@ function RankController($scope,$resource,$cookieStore,$location,$filter,currentU
 	//fetch list of rankers based in the path selected by user
 	$scope.get_path_ranks = function(pathId){
 		//ALL Languages
-		if(pathId=='AllLanguages'){
+		if(pathId=='AllLanguages' || !pathId){
 			
 			// based on player's country
 			var data = {"countryCode":$scope.player.countryCode};
@@ -3770,7 +3771,7 @@ function CountdownController($scope,$timeout) {
             
 }
 
-function EventController($scope, $resource, $location){
+function EventController($scope, $resource, $location, $http){
         $scope.event = {"name":"Default name", 
                             "description": "Default description",
                             "venue": "Default venue"};
@@ -3779,6 +3780,7 @@ function EventController($scope, $resource, $location){
   		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		$scope.noEventID = false;
+		$scope.player = $resource('/jsonapi/player').get();
 
   		//variables for create event details
   		$scope.eventTitle="";
@@ -3788,6 +3790,11 @@ function EventController($scope, $resource, $location){
 
         var Event = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
         
+        $scope.lock_ranking = function(id){
+        	var response = $http.get('/jsonapi/lock_event_ranking/' + id);
+        	console.log("Lock Ranking - " + id + " " + response);
+        }
+
         $scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
     		console.log($scope.eventID + "here3");
@@ -3809,9 +3816,11 @@ function EventController($scope, $resource, $location){
            
             if(id){
                 $scope.event = event;
+                console.log(event);
                 
             }else{
             	$scope.events = event.events; 
+            	console.log(event.events);
             }
             
           });
@@ -3925,7 +3934,7 @@ function EventController($scope, $resource, $location){
           
 }
 
-function EventTableController($scope, $resource, $route, $location, $filter){ 
+function EventTableController($scope, $resource, $route, $location, $filter, $http){ 
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
 		$scope.noEventID = false;
@@ -3933,32 +3942,40 @@ function EventTableController($scope, $resource, $route, $location, $filter){
   		$scope.eventDescription="";
   		$scope.cutoff="";
   		$scope.progLang="";
+  		$scope.firstButton=false;
+  		$scope.secondButton=false;
+  		$scope.player = $resource('/jsonapi/player').get();
 
   		$scope.rsvpList = [];
 
-    //Countdown til cutoff
-    $scope.countdown = function(element,days,seconds) {
-	    var time = days*24*3600 + seconds;
-	    var interval = setInterval(function() {
-	        var el = document.getElementById(element);
-	        if(time == 0) {
-	            el.innerHTML = "Ranking is locked.";    
-	            clearInterval(interval);
-	            return;
-	        }
-	      //var minutes = Number.floor( time / 60 );
-	        var minutes = Math.floor( time / 60 );
-	        var hours = Math.floor(time/3600);
-	        var days = Math.floor(time/(3600*24));
-	      
-	        if (minutes < 10) minutes = "0" + minutes;
-	        var seconds = time % 60;
-	        if (seconds < 10) seconds = "0" + seconds; 
-	        var text = days +" Days "+hours%24+ " Hours "+ minutes%60 + " Minutes " + seconds+" Seconds ";
-	        el.innerHTML = text;
-	        time--;
-	    }, 1000);
-	}
+  		$scope.uninvite = function(eventid, playerid){
+        	var response = $http.get('/jsonapi/uninvite_for_event/' + eventid + '/' + playerid);
+        	console.log("Uninvite - " + eventid + " " + playerid + " " + response);
+        }
+
+	    //Countdown til cutoff
+	    $scope.countdown = function(element,days,seconds) {
+		    var time = days*24*3600 + seconds;
+		    var interval = setInterval(function() {
+		        var el = document.getElementById(element);
+		        if(time == 0) {
+		            el.innerHTML = "Ranking is locked.";    
+		            clearInterval(interval);
+		            return;
+		        }
+		      //var minutes = Number.floor( time / 60 );
+		        var minutes = Math.floor( time / 60 );
+		        var hours = Math.floor(time/3600);
+		        var days = Math.floor(time/(3600*24));
+		      
+		        if (minutes < 10) minutes = "0" + minutes;
+		        var seconds = time % 60;
+		        if (seconds < 10) seconds = "0" + seconds; 
+		        var text = days +" Days "+hours%24+ " Hours "+ minutes%60 + " Minutes " + seconds+" Seconds ";
+		        el.innerHTML = text;
+		        time--;
+		    }, 1000);
+		}
 		
 
 		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
@@ -4138,6 +4155,11 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 		}
 
 		$scope.addSelectedFewToRSVPList = function(){
+			if($scope.secondButton){
+				$scope.secondButton = false;
+			}else{
+				$scope.secondButton = true;
+			}
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 				$scope.current_event = response;
 				if($scope.rsvpList.length!=$scope.current_event.cutoff){
@@ -4171,6 +4193,11 @@ function EventTableController($scope, $resource, $route, $location, $filter){
 		//checks if rsvpList contains everyone, if it doesn't, fill it up with everyone's name
 		//if it does, clear all
 		$scope.addAllToRSVPList = function(){
+			if($scope.firstButton){
+				$scope.firstButton = false;
+			}else{
+				$scope.firstButton = true;
+			}
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 				$scope.current_event = response;
 				if($scope.current_event.ranking.length!=$scope.rsvpList.length){

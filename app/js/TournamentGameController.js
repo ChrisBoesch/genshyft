@@ -14,6 +14,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     $scope.timeoutVar = null;
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
+    $scope.mentor_hasArrived = false;
+    $scope.mentor_id = null;
 
     if($cookieStore.get("type")){
       $scope.gameType = $cookieStore.get("type"); //retrieve game type
@@ -25,6 +27,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     */
     
     $scope.fetch = function(gameID){
+    $scope.mentor_hasArrived = false;
+    $scope.mentor_id = null;
 		$scope.GameModel = $resource('/jsonapi/game/:gameID');
       
 		$scope.GameModel.get({"gameID":gameID}, function(response){
@@ -72,9 +76,6 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 
     //By GENShYFT - Getting Mentor
     $scope.get_mentor = function(heatID, playerID){
-      $scope.mentor_id = null;
-      $scope.mentor_hasArrived = false;
-
       $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
         $scope.current_heat = response;
         for(var i =0;i< $scope.current_heat.ranking.length;i++){
@@ -96,9 +97,6 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     };
 
     $scope.get_mentor_once = function(heatID, playerID){
-      $scope.mentor_id = null;
-      $scope.mentor_hasArrived = false;
-
       $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
         $scope.current_heat = response;
         for(var i =0;i< $scope.current_heat.ranking.length;i++){
