@@ -5009,7 +5009,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 			"problems": {
 				"problems": [
 					{
-						"skeleton": "<b>HELLO WORLD</b>",
+						"skeleton": "<div>Hi Chris</div>",
 						"description": "Welcome to easy web development!",
 						"path_id": 10054,
 						"problemset_id": 10058,
