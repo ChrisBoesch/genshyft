@@ -955,7 +955,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{ 
 			"playerID":2739102,
 			"nickname":"Player 2", 
-			"group":0
+			"group":1
 		},
 		{
 			"playerID":9379339,
@@ -986,17 +986,17 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		{ 
 			"playerID":2739100,
 			"nickname":"Player 8", 
-			"group":0
+			"group":1
 		},
 		{
 			"playerID":9379337,
 			"nickname":"Player 9", 
-			"group":4
+			"group":1
 		},
 		{ 
 			"playerID":57751,
 			"nickname":"Player 10", 
-			"group": 4
+			"group": 1
 		},
 		
 		{ 
