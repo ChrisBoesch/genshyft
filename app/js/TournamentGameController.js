@@ -92,7 +92,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     };
 
     $scope.get_mentor_once = function(heatID, playerID){
-      $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
+      $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID,"nocache":"True"}, function(response){
         $scope.current_heat = response;
         for(var i =0;i< $scope.current_heat.ranking.length;i++){
           if($scope.current_heat.ranking[i].playerid === playerID){
