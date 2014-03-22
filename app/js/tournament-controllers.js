@@ -132,7 +132,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         seconds = "00";
       } 
 
-      var time = hour+":"+minute+":"+seconds+".0000"
+      var time = hour+":"+minute+":"+seconds+".000000"
       console.log("Fetching rankings at " +time+" ...");
       $scope.GHeatModel.get({"heatID":heatID,"nocache":"True", "time":time}, function(response){
         $scope.tournament = response;
