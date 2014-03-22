@@ -659,7 +659,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                     ]
                 },
                 "stopTime": "2013-10-04 15:02:05.835670",
-                "heatNumber": 2
+                "heatNumber": 3
             },
             "problemIDs": [
                 10033,
@@ -2157,7 +2157,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		        }
 		    ],
 		    "heatStopTime": "2013-12-11 19:31:21.814470",
-		    "heatDescription": "Heat 2",
+		    "heatDescription": "Heat 1",
 		    "tournamentID": 5060388987076608,
 		    "tournamentDescription": "Prize round for Python Enrichment December 2013",
 		    "roundID": 4912161075757056,
