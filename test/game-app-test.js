@@ -1062,7 +1062,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
         },
         {
             "rankinglocked": false,
-            "archived": false,
+            "archived": true,
             "name": "Tetradine College Competition",
             "cutoff": 9,
             "following": 0,

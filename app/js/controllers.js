@@ -4222,6 +4222,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
     		console.log($scope.eventID + "-> eventID");
     		if($scope.eventID==null){
     			$scope.noEventID=true;
+    			console.log($scope.noEventID + "-> noEventID");
     		}
     	}
 
