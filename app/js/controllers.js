@@ -3953,6 +3953,13 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
   		$scope.rsvpList = [];
 
+  		$scope.rsvpButton = function(eventid, decisionNum){
+        	var response = $http.get('/jsonapi/eventrsvp/' + eventid + '/' + decisionNum);
+        	//console.log(response);
+        	//console.log('/jsonapi/eventrsvp/' + eventid + '/' + decisionNum);
+        	$route.reload();
+        }
+
   		$scope.uninvite = function(eventid, playerid){
         	var response = $http.get('/jsonapi/uninvite_for_event/' + eventid + '/' + playerid);
         	console.log("Uninvite - " + eventid + " " + playerid + " " + response);

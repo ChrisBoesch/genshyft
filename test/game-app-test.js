@@ -3565,7 +3565,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
             "sentrsvp": true,
             "highestbadgename": "Level 8",
             "rankatcutoff": 1,
-            "isCurrentPlayer": false,
+            "isCurrentPlayer": true,
             "schoolname": "Dunman High School (Secondary)",
             "nickname": "Jerome Leow",
             "rsvp": "None"
@@ -4980,6 +4980,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 
 	$httpBackend.whenGET('/jsonapi/event/5308925893148672').respond(eventsTableDataSec);
 	$httpBackend.whenGET('/jsonapi/event?eventid=5308925893148672').respond(eventsTableDataSec);
+
+	$httpBackend.whenGET('/jsonapi/eventrsvp/5308925893148672/1').respond("accepted");
+	$httpBackend.whenGET('/jsonapi/eventrsvp/5308925893148672/0').respond("rejected");
 
 
 	$httpBackend.whenGET('/jsonapi/uninvite_for_event/5308925893148672/6525077021523968').respond("eventsTableDataSec");
