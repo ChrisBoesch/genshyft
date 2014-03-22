@@ -1882,7 +1882,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "nickname": "Ronald",
 		            "menteeID": 6715360346636288,
 		            "mentorHasArrived": false,
-		            "rankingInGrp":1,
+		            "rankingInGrp":2,
 		            "group": 1
 		        },
 		        {
@@ -1900,7 +1900,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "nickname": "Jifei",
 		            "menteeID": 4685146485686272,
 		            "mentorHasArrived": false,
-		            "rankingInGrp":1,
+		            "rankingInGrp":3,
 		            "group": 1
 		        },
 		        {
@@ -1918,7 +1918,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "nickname": "Ben Chan",
 		            "menteeID": 5170357531049984,
 		            "mentorHasArrived": false,
-		            "rankingInGrp":1,
+		            "rankingInGrp":4,
 		            "group": 1
 		        },
 		        {
@@ -1936,7 +1936,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "nickname": "Fu Mei",
 		            "menteeID": 6561842646220800,
 		            "mentorHasArrived": false,
-		            "rankingInGrp":1,
+		            "rankingInGrp":5,
 		            "group": 1
 		        },
 		        {
@@ -1954,7 +1954,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "nickname": "Mrchamp",
 		            "menteeID": 4874949680431104,
 		            "mentorHasArrived": false,
-		            "rankingInGrp":1,
+		            "rankingInGrp":6,
 		            "group": 1
 		        },
 		        {
@@ -1972,7 +1972,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "nickname": "iPython",
 		            "menteeID": 6689212585738240,
 		            "mentorHasArrived": false,
-		            "rankingInGrp":1,
+		            "rankingInGrp":7,
 		            "group": 1
 		        },
 		        {
@@ -1991,7 +1991,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "menteeID": 4545551458631680,
 		            "mentorHasArrived": false,
 		            "rankingInGrp":1,
-		            "group": 1
+		            "group": 2
 		        },
 		        {
 		            "status": "GAME CLOSED",
@@ -2152,7 +2152,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "nickname": "Secret Agent",
 		            "menteeID": null,
 		            "mentorHasArrived": true,
-		            "rankingInGrp":1,
+		            "rankingInGrp":2,
 		            "group": 1
 		        }
 		    ],
@@ -2167,7 +2167,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		    "currentTime": "2014-01-09 09:38:59.184880",
 		    "tournamentType": "Normal",
 		    "type": "heat ranking",
-		    "isGroup":false
+		    "isGroup":true
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);

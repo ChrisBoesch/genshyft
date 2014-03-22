@@ -953,7 +953,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Link to Tournament Ranking in manage tournament By Glen
   $scope.round_end_manage = function(heatID){
     if(heatID==null){
-      alert("Round have not started");
+      alert("Round has not started");
     }else{
       $timeout.cancel($scope.timeoutVar);
       $location.search({"heatID":heatID}).path("tournament-ranking");
@@ -963,7 +963,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Link to Tournament Ranking Static in manage tournament By Glen
   $scope.completed_round_ranking = function(heatID){
     if(heatID==null){
-      alert("Round have not started");
+      alert("Round has not started");
     }else{
       $location.search({"heatID":heatID}).path("tournament-ranking-static");
     }    
