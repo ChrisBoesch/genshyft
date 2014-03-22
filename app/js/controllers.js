@@ -3762,7 +3762,7 @@ function CountdownController($scope,$timeout) {
 			mytimeout = $timeout($scope.onTimeout,1000);
 		}
 		else{
-			console.log("Negative number passed to start_timer "+countdown);
+			//console.log("Timer reset");
 		}
     }
     	

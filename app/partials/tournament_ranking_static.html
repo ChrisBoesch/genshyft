@@ -52,14 +52,8 @@
 </br>
 <center><h2>Round Ranking</h2></center>
 
-<div class="container"  style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="check_location()">
-
-	<div class="row-fluid">
-		<div class="container">
-			<h4 class="well well-small bootCamp" align="center" id="well-c" ng-controller="CountdownController" ng-init="start_timer(countval)">Ranking refreshes every 10 seconds</h4>
-		</div>		
-	</div>
-    
+<div class="container"  style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="fetch_ranks_once()">
+ 
     <div class="row-fluid">
         <div class="span12" >
             
@@ -69,7 +63,7 @@
 						<div style="width:99.8%; height:{{window_Height_challenge}}px;overflow-y:auto;overflow-x:hidden">						
 
 						<div>
-								<button type="button" class="btn btn-inverse" id="tourn_lobby" ng-click="tournament_bay()"><i class="icon-home icon-white"></i> Back To Tournament Lobby</button>
+								<button type="button" class="btn btn-inverse" id="tourn_lobby" ng-click="mytournaments_rankings()"><i class="icon-chevron-left icon-white"></i> Completed Round Rankings</button>
 						<center><h4>{{tournament.roundDescription}} </h4><center>
 						<h5 ng-hide="true">{{tournament.heatDescription}}</h5>
 							<table class="table table-hover">	
