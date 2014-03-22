@@ -954,7 +954,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		
 		{ 
 			"playerID":2739102,
-			"nickname":"Player 2", 
+			"nickname":"Player 2sdfghfhazzzzzzzzzzzzzzzzzzzz", 
 			"group":1
 		},
 		{

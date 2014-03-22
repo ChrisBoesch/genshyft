@@ -33,6 +33,16 @@
         overflow:auto;  
     }
 
+    table.playerTable{
+    	table-layout:fixed;
+		width:100%;
+    }
+
+    .playerTable tr td{
+    	border: none;
+        width: 110px;
+    }
+
     .bttn:hover{
     	color: #ffffff;
 	  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -101,6 +111,14 @@
 		margin-bottom: 8px;
 		padding: 5px 5px;
 	}
+
+	button.overspill{
+    	overflow: hidden;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100%;
+    }
 </style>
 <div class="container" id="manageTournInidv" style="position:relative" ng-controller="GenshyftTournamentController" ng-init="manageSelectedTournament();tournamentInit()">
 	<div class="row-fluid">
@@ -215,13 +233,13 @@
 				</div>		
 			</div>
 			<div class="span6 well well-small" style="height:300px;overflow:auto;">
-				<div ng-repeat="round in tournament.rounds">
+				<div ng-repeat="round in tournament.rounds" ng-controller="CountdownController" ng-init="start_timer(get_seconds_to_start(round.currentHeatDetails.startTime, round.currentHeatDetails.currentTime))">
 					<div class="row-fluid">
 						<div class="span12">
 							<div class="span5">
 								<b>Tournament Round Starting in:</b>  
 							</div>
-							<div class="span7" ng-controller="CountdownController" ng-init="start_timer(get_seconds_to_start(round.currentHeatDetails.startTime, round.currentHeatDetails.currentTime))">
+							<div class="span7">
 							<font color="red" ng-show="counter==0"><b>Round has started</b></font>
 							<font ng-show="counter<0">Round currently inactive</font>
 							<font color="blue" ng-show="counter>0"><b>{{counter}} seconds</b></font>							
@@ -261,8 +279,8 @@
 					</div>		
 				</div>
 			-->
-				<!--<button class="btn" type="button" ng-show="currentHeatDetails==null" ng-click="round_end_manage(round.heats[0].heatID)">Go to Ranking<i class="icon-chevron-right icon-white"></i></button>-->
-				<button class="btn btn-inverse" type="button" ng-click="round_end_manage(round.currentHeatDetails.heatID)">Go to Ranking <i class="icon-chevron-right icon-white"></i></button>
+				<!--<button class="btn" type="button" ng-show="currentHeatDetails==null" ng-show="counter==0" ng-click="round_end_manage(round.heats[0].heatID)">Go to Ranking<i class="icon-chevron-right icon-white"></i></button>-->
+				<button class="btn btn-inverse" type="button" ng-show="counter==0" ng-click="round_end_manage(round.currentHeatDetails.heatID)">Go to Ranking <i class="icon-chevron-right icon-white"></i></button>
 				</br>
 				</br>
 				</div>
@@ -354,13 +372,13 @@
 						<div class="row-fluid" >
 							<div class="span12 well well-small" style="overflow:auto;">
 								<div >
-									<table class="table table-hover">
+									<table class="table table-hover playerTable">
 										<tr >
 											<td ng-repeat="group in numGrp track by $index">			
 												<b>Group {{$index+1}}</b>
 												
 												<li class="bulletless" ng-repeat="player in group track by $index">
-													<button class="btn bttn ft" ng-if="$index != 0" ng-click="join_grp(player.playerID, selectedTournament.tournamentID, 0)"><span><b>{{player.nickname}}</b></span>
+													<button class="btn bttn ft overspill" ng-if="$index != 0" ng-click="join_grp(player.playerID, selectedTournament.tournamentID, 0)"><span><b>{{player.nickname}}</b></span>
 													</button>
 												</li>
 											
