@@ -114,6 +114,7 @@
 				              <span ng-show"event.rankinglocked">Ranking is locked!</span>
 				              
 				        </div>
+				        <div class="span6">
 				            <center>
 				              	<br>
 				              	<br>
@@ -133,8 +134,9 @@
 				            	</button>
 				            
 				          </center>
+				        </div>
 			        </span>
-			        <span ng-show="noEventID" ng-hide="event.archived || player.player_id!=event.editor">
+			        <span ng-if="noEventID" ng-hide="event.archived || player.player_id!=event.editor">
 			        	<div class="span6">
 							
 				              <h4>{{event.name}}</h4><br>
@@ -147,6 +149,7 @@
 				              <br>
 				              
 				        </div>
+				        <div class="span6">
 				            <center>
 				              	<br>
 				              	<br>
@@ -164,7 +167,7 @@
 				            	<button class="btn btn-primary btn-inverse" data-toggle="modal" ng-click="delete_event(event.id)">
 				            	<i class="icon-trash icon-white"></i> Delete Event
 				            	</button>
-				            
+				         </div>
 				          </center>
 				    </span>
 				</div>
@@ -199,14 +202,15 @@
 		</thead>
 		<tbody>
 			<center>
-			<span ng-show="noEventID">
+			<span ng-if="noEventID">
 					<h4>
 						Please select an event to send invite(s) to!
 					</h4>
 			</span>
 		</center>
 			<!--show all, not just top 50. To show top 50 only, ng-hide="$index>=50"-->
-			<tr ng-show="player.player_id==event.editor" ng-repeat="participant in eventsData.ranking">
+			<div ng-show="player.player_id==event.editor">
+			<tr ng-repeat="participant in eventsData.ranking">
 				<td class = "span1">{{$index+1}}</td>
 				<td class = "span3">{{participant.nickname}}</td>
 				<td class = "span1">
@@ -223,6 +227,7 @@
   					>
 				</td>
 			</tr>
+		</div>
 		</tbody>
 	</table>
 </div>
