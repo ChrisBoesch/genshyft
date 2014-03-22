@@ -1861,7 +1861,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
 		            "mentorID": 1111,
 		            "professional": null,
 		            "total_problems": 10,
-		            "nickname": "Chris hgihsdihgiohhsdiogsdhghhiosdhghsidodgiosdsdhiolgh",
+		            "nickname": "Chris",
 		            "menteeID": 6474597901795328,
 		            "mentorHasArrived": false,
 		            "rankingInGrp":1,
