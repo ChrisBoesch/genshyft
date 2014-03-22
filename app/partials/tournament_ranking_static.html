@@ -74,6 +74,11 @@
 								<button type="button" class="btn btn-inverse" id="tourn_lobby" ng-click="mytournaments_rankings()"><i class="icon-chevron-left icon-white"></i> Completed Rounds Rankings</button>
 						<center><h4>{{tournament.roundDescription}} </h4><center>
 						<h5 >({{tournament.heatDescription}} Ranking)</h5><center>
+						
+							<input class="input-mini" type="text" maxlength="2" placeholder="HH" ng-model="hourVal"> : <input class="input-mini" type="text" maxlength="2"placeholder="mm" ng-model="minVal"> : 
+						<div class="input-append">	
+							<input class="input-mini" type="text" maxlength="2" placeholder="ss" ng-model="secVal"> <button class="btn btn-inverse" type="button" ng-click="fetch_ranks_with_time(tournament.heatID, hourVal, minVal, secVal)"><i class="icon-time icon-white"></i>  Fetch Ranking</button>
+						</div>
 							<table class="table table-hover">	
 								<tr>
 									<th class="Rank_Ranking">Overall Ranking</th>
@@ -89,7 +94,7 @@
 								<tr ng-repeat="player in playerRanks">
 									<td class="Rank_Ranking">{{$index+1}}</td>
 									<td class="Rank_PlayerName overspill"><img class="grav"ng-src="{{player.gravatar}}"> &nbsp; &nbsp;{{player.nickname}}</td>
-									<td class="Rank_RankInGrp" ng-show="tournament.isGroup == true">{{player.rankingInGrp}}</td>
+									<td class="Rank_RankInGrp" ng-show="tournament.isGroup == true">{{player.rankingInGrp}}<font ng-show="player.rankingInGrp==1">st</font><font ng-show="player.rankingInGrp==2">nd</font><font ng-show="player.rankingInGrp==3">rd</font><font ng-show="player.rankingInGrp>=4">th</font></td>
 									<td class="Rank_Grp" ng-show="tournament.isGroup == true">{{player.group}}</td>
 													
 									<!-- Need to add in the questions associated to each round and the tick logo -->
