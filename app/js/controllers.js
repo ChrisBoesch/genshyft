@@ -126,26 +126,31 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 
 	
 	
-    $scope.update_player_profile = function($event){  
-  
-        var data = {"nickname":$scope.player.nickname,
-                    "professional":$scope.player.professional,
-                    "about":$scope.player.about,
-					"location":$scope.player.location,
-					"tags":$scope.player.tags,
-                    "gender":$scope.player.gender};
+    $scope.update_player_profile = function($event){ 
 
-        $http.post("/jsonapi/update_player_profile", data)
-            .success(function (data, status, headers, config) {
-                window.console.log(data);
-                $scope.player = data;
+    	if($scope.player.nickname.length>20){
+    		alert("Name no more than 20 characters.");
+    		window.location.reload('profile')
+    	}else{
+	        var data = {"nickname":$scope.player.nickname,
+	                    "professional":$scope.player.professional,
+	                    "about":$scope.player.about,
+						"location":$scope.player.location,
+						"tags":$scope.player.tags,
+	                    "gender":$scope.player.gender};
 
-            }).error(function (data, status, headers, config) {
-                $scope.status = status;
-            }); 
-            
-        //$route.reload('profile');
-        window.location.reload('profile')
+	        $http.post("/jsonapi/update_player_profile", data)
+	            .success(function (data, status, headers, config) {
+	                window.console.log(data);
+	                $scope.player = data;
+
+	            }).error(function (data, status, headers, config) {
+	                $scope.status = status;
+	            }); 
+	            
+	        //$route.reload('profile');
+	        window.location.reload('profile')
+   	 	}
     };
     
     $scope.log_event = function($event){  
