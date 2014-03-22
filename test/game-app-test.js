@@ -767,7 +767,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
     "isGroup": true,
     "tournamentID": 5060388987076609,
 	"maxPlayersPerGroup":5,
-	"maxGroups":7,
+	"maxGroups":20,
     "assignMentorInTeam": true,
     "rounds": [
         {
@@ -827,7 +827,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                 }
             ],
             "description": "Round 1",
-            "currentHeatID": 6144086545268736,
+            "currentHeatID": 4691468476219392,
             "currentHeat": 2,
             "problemDetails": {
                 "10033": {
@@ -872,7 +872,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                 },
                 //"stopTime": "2013-10-04 15:02:05.835670",
                 "stopTime": "2013-10-04 00:00:00",
-                "heatNumber": 2
+                "heatNumber": 3
             },
             "problemIDs": [
                 10033,
@@ -887,7 +887,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                         10033,
                         17155
                     ],
-                    "heatID": 4691468476219392,
+                    "heatID": 4691468476219391,
                     "description": "Heat 1",
                     "startTime": "2013-09-29 08:24:46.840830",
                     "currentTime": "2013-10-04 13:57:28.164880",
@@ -909,7 +909,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                         10033,
                         17155
                     ],
-                    "heatID": 6144086545268736,
+                    "heatID": 6144086545268735,
                     "description": "Heat 2",
                     "startTime": "2013-10-04 14:02:05.835670",
                     "currentTime": "2013-10-04 13:57:28.306810",
@@ -927,8 +927,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
                     "heatNumber": 2
                 }
             ],
-            "description": "Round 1",
-            "currentHeatID": 6144086545268736,
+            "description": "Round 2",
+            "currentHeatID": 614408654526873,
             "currentHeat": 2,
             "problemDetails": {
                 "10033": {
@@ -1062,7 +1062,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond(
         },
         {
             "rankinglocked": false,
-            "archived": false,
+            "archived": true,
             "name": "Tetradine College Competition",
             "cutoff": 9,
             "following": 0,

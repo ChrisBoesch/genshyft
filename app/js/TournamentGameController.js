@@ -11,7 +11,6 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     4. Redirect the player to the proper page once the game is completed.
     */
 
-    $scope.timeoutVar = null;
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
     $scope.mentor_hasArrived = false;
@@ -89,11 +88,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       });
       console.log("get_mentor()");
       
-      //if($scope.mentor_id == null && $scope.mentor_hasArrived == false){
-      $scope.timeoutVar = $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 30000); 
-      //}
-
-      //$timeout(function(){ $scope.get_mentor(heatID, playerID); }, 5000); 
+      $scope.timeoutVar = $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 10000);
     };
 
     $scope.get_mentor_once = function(heatID, playerID){
@@ -114,14 +109,14 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 
     //By GENShYFT - Round to Ranking Redirection
     $scope.round_end_ranking = function(heatID){
-      $timeout.cancel($scope.timeoutVar);
+      $timeout.cancel($cookieStore.get("timeoutVar"));
       $location.search({"heatID":$scope.game.heatID}).path("tournament-ranking");
       $('.modal-backdrop').remove();
     };
 
     //By GENShYFT - Round to Join Tournament Redirection
     $scope.round_end_tournament_lobby = function(heatID){
-      $timeout.cancel($scope.timeoutVar);
+      $timeout.cancel($cookieStore.get("timeoutVar"));
       $location.path("tournament-grpjoin");
       $('.modal-backdrop').remove();
     };

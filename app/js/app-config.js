@@ -32,9 +32,11 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/mytournaments-create', {templateUrl: 'partials/mytournaments_create.html', controller: IndexController});
     $routeProvider.when('/mytournaments-create-addrounds', {templateUrl: 'partials/mytournaments_create_addrounds.html', controller: IndexController});
     $routeProvider.when('/mytournaments-manage', {templateUrl: 'partials/mytournaments_manage.html', controller: IndexController});
+    $routeProvider.when('/mytournaments-rankings', {templateUrl: 'partials/mytournaments_rankings.html', controller: IndexController});
     $routeProvider.when('/tournament-grpjoin', {templateUrl: 'partials/tournament_grpjoin.html', controller: IndexController});
     $routeProvider.when('/tournament-grpplay', {templateUrl: 'partials/tournament_grpplay.html', controller: IndexController});
     $routeProvider.when('/tournament-ranking', {templateUrl: 'partials/tournament_ranking.html', controller: IndexController});
+    $routeProvider.when('/tournament-ranking-static', {templateUrl: 'partials/tournament_ranking_static.html', controller: IndexController});
     $routeProvider.when('/ezwebdev', {templateUrl: 'partials/ezwebdev.html', controller: IndexController});
     $routeProvider.when('/ezwebdevt', {templateUrl: 'partials/ezwebdevt.html', controller: IndexController});
     $routeProvider.when('/purposedriven', {templateUrl: 'partials/purposedriven.html', controller: IndexController});
@@ -44,7 +46,7 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('/ymbcoaching-play', {templateUrl: 'partials/ymbcoaching-play.html', controller: IndexController});
     $routeProvider.when('/ymbcoaching-cache', {templateUrl: 'partials/ymbcoaching-cache.html', controller: IndexController});
     $routeProvider.when('/batpage', {templateUrl: 'partials/acepartial.html', controller: IndexController});
-    
+
     $routeProvider.when('/home2', {templateUrl: 'partials/home2.html', controller: IndexController});
     $routeProvider.otherwise({redirectTo: '/home'});
 

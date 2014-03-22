@@ -1,33 +1,18 @@
 'use strict';
 
-// TODO: Fix
-// 
-// /*Scripts for tabs*/
-
-// $('#myTab a').click(function (e) {
-//   e.preventDefault();
-//   $(this).tab('show');
-// });
-
 /*GENShYFT's TournamentController*/
 function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route,$window,currentUserService){
   $scope.currentPlayerID = $cookieStore.get("playerID");
-  $scope.userObj = currentUserService.getUser();
+
   $scope.GHeatModel = $resource('/jsonapi/get_heat_ranking');
   $scope.heatID = null;
   $scope.location = $location;
   $scope.playerRanks = [];
   $scope.countval = 10;
-  //$scope.$watch('location.search()', function() {
-    //  $scope.tournamentID = ($location.search()).tournamentID;
-  //}, true);
 
-  //$scope.heatID = 12883052;
   $scope.heat = null;
   $scope.round = null;
   $scope.roundDirty = false;
-
-  $scope.timeoutVar = null;
 
   //variables for create tournament rounds
   $scope.grpTourRoundName="";
@@ -54,12 +39,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.grpTourAddDetails="";
   $scope.grpTourPassword="";
   $scope.grpTourPasswordConfirm="";
-  //$scope.grpTourStatus="Closed";
   $scope.grpTourType="individual";
   $scope.grpTourMentor=true;
   $scope.grpTourNoGroup=2;
   $scope.grpTourMaxNoPlayer=1;
-  //$scope.qnsLanguage="Ruby";
   $scope.createdTournament;
   $scope.createdTournamentID="";
 
@@ -72,18 +55,13 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.currentRound;
   $scope.allTournaments = [];
 
-  /*$scope.list=function(){
-    $scope.userObj = currentUserService.getUser();
-    console.log("list() UserOBJ playerID="+$scope.userObj.player_id);
-    $cookieStore.put("playerID", $scope.userObj.player_id);
-  };*/
 
   $scope.fetch_player = function(){
     $resource('/jsonapi/player').get({},function(response){
         $scope.player = response;
         $scope.currentPlayerID = $scope.player.player_id;
         $cookieStore.put("playerID",$scope.currentPlayerID);
-        console.log("fetchPlayer="+$scope.currentPlayerID);
+        //console.log("fetchPlayer="+$scope.currentPlayerID);
     });
   }
 
@@ -101,13 +79,11 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       alert("No Heat ID passed via URL.");
     }
     else{
-      //console.log("Fetching heat "+$scope.heatID);
       $scope.fetch_ranks($scope.heatID);
     };
   };
 
   $scope.fetch_ranks = function(heatID){
-
       $scope.GHeatModel.get({"heatID":heatID}, function(response){
         $scope.tournament = response;
         //console.log("test");
@@ -115,19 +91,24 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.playerRanks = $scope.tournament.ranking;        
       });
       console.log("fetch_ranks");
-      $scope.timeoutVar = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
+      $scope.timeoutVarRanking = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
   };
 
-  //$scope.refresh_ranking = function(heatID){
-    //$scope.fetch_ranks($scope.heatID)
-    //console.log("fetching_ranks");
-    //$route.reload();
-  //}
-
-  //$scope.fetching_ranking = function(heatID){
-    //console.log("fetching_ranks");
-    //$timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
-  //}
+  /* Fetch ranking once - by Glen GENShYFT*/
+  $scope.fetch_ranks_once = function(){
+    $scope.heatID = ($location.search()).heatID;
+    if (!$scope.heatID){
+      alert("No Heat ID passed via URL.");
+    }
+    else{
+      console.log("Fetching rankings...");
+      $scope.GHeatModel.get({"heatID":$scope.heatID}, function(response){
+        $scope.tournament = response;
+        $scope.playerRanks = $scope.tournament.ranking;        
+      });
+      console.log("Rankings fetched");
+    } 
+  };
 
   $scope.my_range = function(n) {
     var result = [];
@@ -260,12 +241,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   /*Method to create tournaments-GenShyft*/
   $scope.create_grptournament = function(){
     console.log("Create tournament executed here")
-    //var currentDate = new Date(); 
-    /*
-    if( $scope.grpTourMentor == ""){
-       $scope.grpTourMentor = false;
-    }
-    */
+
     if($scope.grpTourTitle==""){
       alert("The tournament title cannot be empty!");
     }
@@ -296,9 +272,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
                    "isGroup": isGroup,
                    "assignMentorInTeam": mentorAssignInTeam,
                    "maxGroups": numberOfGrp,
-                   "maxPlayersPerGroup": numPlayerPerGrp
-                   //"tournamentID":123456 //simulate localhost
-                 }
+                   "maxPlayersPerGroup": numPlayerPerGrp}
       $scope.NewGrpTournament = $resource('/jsonapi/create_or_update_tournament');
       console.log("printing tournament data here:" + JSON.stringify(data));
       var new_grpTournament = new $scope.NewGrpTournament(data);
@@ -307,18 +281,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           console.log("printing response here:" + JSON.stringify(response));
           console.log("printing error in response here:" + response.error);
         }
-        //else{}
+        
         console.log("Successfully Save Group tournament into DB")
         $scope.createdTournament = response;
         console.log($scope.createdTournament.id);
         $cookieStore.put("createdTournamentID", $scope.createdTournament.id);
-        //$location.path("mytournaments-create-addrounds");
         $('#grpTournamentCreated').modal('show');
-        /*
-        if($scope.clickOk == true){
-        $location.path("mytournaments-create-addrounds");
-         }
-        }*/
       });
     }
   };
@@ -416,9 +384,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
         $scope.tournament = response;
         console.log("fetch edited tournament = " + $scope.tournament.tournamentID);
-        //$scope.startTime = new Date("2013-09-29 08:24:46.840830");
-        //$scope.stopTime = new Date("2013-09-29 12:00:11.784760");
-        //console.log(($scope.stopTime - $scope.startTime)/1000);
     });
   };
 
@@ -681,27 +646,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           console.log("Error");
           alert("An error occurred.")
           console.log(data);
-      });
-    /*if(currentHeat == 0){
-      $scope.createHeat = $resource('/jsonapi/create_heat');
-      var data = {
-          "tournamentID":tournamentID,
-          "roundID":roundID,
-          "startIn":timeTillStart,
-          "isReset":"true"
-      };
-      var newCreateHeat = new $scope.createHeat(data);
-      newCreateHeat.$save(function(response){
-      if(response.error) {
-        console.log("Printing Create Round Heat error: " + response.error);
-      }
-      else{
-        console.log("Create Round Heat")
-        console.log(JSON.stringify(response));
-        alert("Heat starting in: " + timeTillStart);
-      }
-      }); 
-    */     
+      });    
     }else{
       $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
       $http.post("/jsonapi/create_heat_new", {
@@ -725,48 +670,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           alert("An error occurred.")
           console.log(data);
       });
-      /*
-      $scope.createHeat = $resource('/jsonapi/create_heat');
-      var data = {
-          "tournamentID":tournamentID,
-          "roundID":roundID,
-          "startIn":timeTillStart,
-          "isReset":"true"
-      };
-      var newCreateHeat = new $scope.createHeat(data);
-      newCreateHeat.$save(function(response){
-      if(response.error) {
-        console.log("Printing Create Round Heat error: " + response.error);
-      }
-      else{
-        console.log("Create Round Heat")
-        console.log(JSON.stringify(response));
-        alert("Heat starting in: " + timeTillStart);
-      }
-      });
-      */
     }
   };
   
   $scope.stopHeat = function(tournamentID,roundID){
-    /*
-    $scope.stopHeat = $resource('/jsonapi/stop_heat');
-      var data = {
-          "tournamentID":tournamentID,
-          "roundID":roundID
-      };
-      var newStopHeat = new $scope.stopHeat(data);
-      newStopHeat.$save(function(response){
-      if(response.error) {
-        console.log("Printing Stop Round Heat error: " + response.error);
-      }
-      else{
-        console.log("Stop current Round Heat")
-        console.log(JSON.stringify(response));
-        alert("Heat is stopped");
-      }
-    });  
-    */
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     $http.post("/jsonapi/stop_heat_updated", {
         tournamentID: tournamentID,
@@ -801,8 +708,19 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }      
   };
 
+  /*Tournament Manage Rankings page initialization - By Glen*/
+  $scope.fetch_heatIDs=function(){
+    if($cookieStore.get("tournamentID")){
+      $scope.fetch_tournament_details_once($cookieStore.get("tournamentID"), $cookieStore.get("playerID"));
+    }else{
+      alert("No tournamentID passed to GenshyftTournamentController.");
+      $location.path('mytournaments-manage');
+    }  
+  }
+
   /*JSON API Call to retrieve tournament data - By Glen*/
   $scope.fetch_tournament_details = function(tournamentID, playerID){
+    $timeout.cancel($scope.timeoutVar);
     if(playerID == null||playerID == undefined){
       $scope.fetch_player();
     }
@@ -836,7 +754,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   /*Extract players and sort them into the respective group - by Glen*/
   $scope.get_grpPlayers = function(tournament, playerID){
-    console.log("get_grpPlayers");
+    //console.log("get_grpPlayers");
     $scope.numGrp = [];
     $scope.currentUserGrping = 0;
 
@@ -892,11 +810,25 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
   };
 
+  /*Redirection to Group Join- By Glen*/
   $scope.tournament_bay = function(){
-    $timeout.cancel($scope.timeoutVar);
+    $timeout.cancel($scope.timeoutVarRanking);
     $location.path("tournament-grpjoin"); 
   }
 
+  /*Redirection to My Tournaments- By Glen*/
+  $scope.mytournaments_list = function(){
+    $timeout.cancel($scope.timeoutVar);
+    $location.path("mytournaments"); 
+  }
+
+  /*Redirection to My Tournaments- By Glen*/
+  $scope.mytournaments_rankings = function(){
+    $timeout.cancel($scope.timeoutVar);
+    $location.path("mytournaments-rankings"); 
+  }
+
+  /*Redirection to My Tournaments-Manage - By Glen*/
   $scope.manage_my_tournament = function(tournamentID){
     $cookieStore.put("tournamentID", tournamentID);
     $location.path("mytournaments-manage");
@@ -915,7 +847,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
   }
 
-  /*Join Group or Leave Group for group tournament - by Glen (GENShYFT)*/
+  /*Join Group or Leave Group WITHOUT player limit for group tournament - by Glen (GENShYFT)*/
   $scope.join_grp = function(playerId, tournamentId, groupNo){
     console.log("join_grp : playerId="+ playerId+" tournamentId="+tournamentId+" group="+groupNo);
 
@@ -937,7 +869,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });  
   };
 
-  /*Join Group or Leave Group for group tournament - by Glen (GENShYFT)*/
+  /*Join Group or Leave Group WITH player limit for group tournament - by Glen (GENShYFT)*/
   $scope.join_grping = function(playerId, tournamentId, groupNo, grpArry, maxPlayerPerGrp){
     console.log("join_grping : playerId="+ playerId+" tournamentId="+tournamentId+" group="+groupNo," grpArry="+grpArry.length, " maxPlayerPerGrp="+maxPlayerPerGrp);
 
@@ -981,7 +913,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     $scope.join_grp(playerId, tournamentId, -1); 
   };
 
-  /*Taken from previous TournamentsController and modified to redirect to the new page- Glen (GENShYFT)*/
+  /*Modified to redirect to the new page- by Glen (GENShYFT)*/
   $scope.create_tournament_round_game_new = function(roundID, grpHave, tournamentType){
     if(tournamentType){
       if(grpHave==true){
@@ -995,7 +927,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           $cookieStore.put("type", "practiceGame");
             
           //window.location.href = "tournament_play_page.html";
-          $timeout.cancel($scope.timeoutVar);
+         $timeout.cancel($scope.timeoutVar);
           $location.path("tournament-grpplay");
         });
       }else{
@@ -1023,9 +955,20 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     if(heatID==null){
       alert("Round have not started");
     }else{
+      $timeout.cancel($scope.timeoutVar);
       $location.search({"heatID":heatID}).path("tournament-ranking");
     }    
   };
+
+  //Link to Tournament Ranking Static in manage tournament By Glen
+  $scope.completed_round_ranking = function(heatID){
+    if(heatID==null){
+      alert("Round have not started");
+    }else{
+      $location.search({"heatID":heatID}).path("tournament-ranking-static");
+    }    
+  };
+
 
   //Taken from TournamentController
   $scope.get_seconds_to_start = function(startTime, currentTime){
@@ -1034,7 +977,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       return diff;
     }
     else if (startTime==null){
-      console.log("Round has not startTime");
+      //console.log("Round has not startTime");
     return -1;  
     }
     else return 0;
@@ -1210,7 +1153,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
         return diff;
       }
       else if (startTime==null){
-        console.log("Round has not startTime");
+        //console.log("Round has not startTime");
       return -1;  
       }
       else return 0;
