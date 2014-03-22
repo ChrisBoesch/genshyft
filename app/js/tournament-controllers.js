@@ -102,7 +102,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     else{
       console.log("Fetching rankings...");
-      $scope.GHeatModel.get({"heatID":$scope.heatID,"nocache":"true", function(response){
+      $scope.GHeatModel.get({"heatID":$scope.heatID,"nocache":"true"},function(response){
         $scope.tournament = response;
         $scope.playerRanks = $scope.tournament.ranking;        
       });
@@ -134,7 +134,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
       var time = hour+":"+minute+":"+seconds+".000000"
       console.log("Fetching rankings at " +time+" ...");
-      $scope.GHeatModel.get({"heatID":heatID,"nocache":"true", "time":time}, function(response){
+      $scope.GHeatModel.get({"heatID":heatID,"nocache":"true","time":time}, function(response){
         $scope.tournament = response;
         $scope.playerRanks = $scope.tournament.ranking;        
       });
