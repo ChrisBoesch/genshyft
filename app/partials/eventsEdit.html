@@ -26,7 +26,7 @@
 		<br>
 		<div class="alert alert-warning">
 			<h4>Welcome to Edit Event!</h4>
-			To begin, enter your Event details below - required details are highlighted with a (*). Once you are ready, hit submit to edit your event!
+			To begin, enter your Event details below. Leaving fields empty will keep the original variables as it is. Once you are ready, hit submit to edit your event!
 		</div>
 	</div>
 		<h4>Event Details</h4>
@@ -35,7 +35,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Event Title*:
+						Event Title:
 					</div>
 					<div class="span9">
 						 <input class="span8" type="text"  ng-model="eventsData.name" ></input>
@@ -61,10 +61,10 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Venue*:
+						Venue:
 					</div>
 					<div class="span7">
-						 <input class="span6" type="text" required ng-model="eventsData.venue"  ></input>
+						 <input class="span6" type="text" ng-model="eventsData.venue"  ></input>
 						 
 					</div>
 				</div>	
@@ -74,10 +74,10 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Cutoff*:
+						Cutoff:
 					</div>
 					<div class="span7">
-						 <input class="span6" type="number" required ng-model="eventsData.cutoff"  ></input>
+						 <input class="span6" type="number" ng-model="eventsData.cutoff"  ></input>
 						 
 					</div>
 				</div>	
