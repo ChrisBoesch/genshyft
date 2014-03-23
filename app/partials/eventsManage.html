@@ -105,13 +105,16 @@
 							
 				              <h4>{{event.name}}</h4><br>
 				              {{event.description}}<br>
-				              Registration Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}</strong>
-				              <br>
 				              Tournament Type: {{event.path}}
 				              <br>
 				              Cutoff Ranking: {{event.cutoff}}
 				              <br>
-				              <span ng-if"event.rankinglocked">Ranking is locked!</span>
+				              Ranking Status: 
+				              <strong>
+				              <span ng-if="event.rankinglocked">Locked </span>
+				              <span ng-if="!event.rankinglocked">
+				              Not Locked </span>
+				          </strong>
 				              
 				        </div>
 				        <div class="span6">
@@ -140,14 +143,18 @@
 			        	<div class="span6">
 							
 				              <h4>{{event.name}}</h4><br>
-				              {{event.description}}<br>
-				              Registration Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}</strong>
+				              {{event.description}}
 				              <br>
 				              Tournament Type: {{event.path}}
 				              <br>
 				              Cutoff Ranking: {{event.cutoff}}
 				              <br>
-				              <span ng-if"event.rankinglocked">Ranking is locked!</span>
+				              Ranking Status: 
+				              <strong>
+				              <span ng-if="event.rankinglocked">Locked </span>
+				              <span ng-if="!event.rankinglocked">
+				              Not Locked </span>
+				          </strong>
 				              
 				        </div>
 				        <div class="span6">
