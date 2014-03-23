@@ -4067,6 +4067,9 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
     "latitude": null,
     "path": "Javascript",
     "watching": 10,
+    "invited": 20,
+    "accepted": 16,
+    "responded": 17,
     "id": 5308925893148672,
     "description": "Come join us for the IDA Programming Challenge that will take place on Friday, March 21st, at SMU, at 1:00pm. The top 20 students who have registered their school and starting year will be invited. So register now and then go solve a few Javascript problems. The grand prize for this event will be an iPad Mini."
 }
