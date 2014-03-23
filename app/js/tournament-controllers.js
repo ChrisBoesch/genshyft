@@ -14,6 +14,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.round = null;
   $scope.roundDirty = false;
 
+  $scope.hourVal = "";
+  $scope.minVal = "";
+  $scope.secVal = "";
+
   //variables for create tournament rounds
   $scope.grpTourRoundName="";
   $scope.grpTourRoundMins="";
@@ -111,14 +115,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   /* Fetch ranking with time - by Glen GENShYFT*/
-  $scope.fetch_ranks_with_time = function(heatID,hour,minute,seconds){
+  $scope.fetch_ranks_with_time_value = function(heatID,hour,minute,seconds){
     console.log("Time: " + hour+":"+minute+":"+seconds+".0000");
     if(!isNaN(hour)&&!isNaN(minute)&&!isNaN(seconds)){
-      if(hour.toString().length==1){
-        hour = "0"+hour.toString();
-      }else if(hour.toString().length==0){
-        hour = "00";
-      }
 
      if(minute.toString().length==1){
         minute = "0"+minute.toString();
@@ -133,17 +132,25 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       } 
 
       var time = hour+":"+minute+":"+seconds+".000000"
-      console.log("Fetching rankings at " +time+" ...");
-      $scope.GHeatModel.get({"heatID":heatID,"nocache":"true","time":time}, function(response){
-        $scope.tournament = response;
-        $scope.playerRanks = $scope.tournament.ranking;        
-      });
-      console.log("Rankings at "+ time +" fetched.");
+      $scope.fetch_ranks_with_time(heatID, time);
     }else if(hour==undefined||minute==undefined||seconds==undefined){
       alert("Please fill in all fields.");
     }else{
       alert("Invalid values, only numbers allowed.");
     }
+  };
+
+  /* Fetch ranking with time - by Glen GENShYFT*/
+  $scope.fetch_ranks_with_time = function(heatID,time){
+      console.log("Fetching rankings at " +time+" ...");
+      $scope.hourVal = time.split(":")[0];
+      $scope.minVal = time.split(":")[1];
+      $scope.secVal = time.split(":")[2].split(".")[0];
+      $scope.GHeatModel.get({"heatID":heatID,"nocache":"true","time":time}, function(response){
+        $scope.tournament = response;
+        $scope.playerRanks = $scope.tournament.ranking;        
+      });
+      console.log("Rankings at "+ time +" fetched.");
   };
 
 
