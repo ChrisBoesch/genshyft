@@ -3902,7 +3902,7 @@ function EventController($scope, $resource, $location, $http){
 					else{
 						console.log("Delete event in DB")
 						console.log(response);
-						$location.path("eventsManage");
+						$route.reload();
 					}
 				});
 			});
