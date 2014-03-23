@@ -118,6 +118,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.fetch_ranks_with_time_value = function(heatID,hour,minute,seconds){
     console.log("Time: " + hour+":"+minute+":"+seconds+".0000");
     if(!isNaN(hour)&&!isNaN(minute)&&!isNaN(seconds)){
+      if(hour.toString().length==2){
+        var hourConvert = parseInt(hour);
+        hour = hourConvert.toString();
+      }else if(hour.toString().length==0){
+        hour = "0";
+      }
 
      if(minute.toString().length==1){
         minute = "0"+minute.toString();
