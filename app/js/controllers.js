@@ -3776,7 +3776,7 @@ function CountdownController($scope,$timeout) {
             
 }
 
-function EventController($scope, $resource, $location, $http){
+function EventController($scope, $resource, $location, $http, $route){
         $scope.event = {"name":"Default name", 
                             "description": "Default description",
                             "venue": "Default venue"};
@@ -3798,6 +3798,7 @@ function EventController($scope, $resource, $location, $http){
         $scope.lock_ranking = function(id){
         	var response = $http.get('/jsonapi/lock_event_ranking/' + id);
         	console.log("Lock Ranking - " + id + " " + response);
+        	$route.reload();
         }
 
         $scope.get_eventID = function(){
