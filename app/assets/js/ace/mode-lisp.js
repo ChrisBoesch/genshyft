@@ -38,7 +38,9 @@ var Tokenizer = require("../tokenizer").Tokenizer;
 var LispHighlightRules = require("./lisp_highlight_rules").LispHighlightRules;
 
 var Mode = function() {
-    this.HighlightRules = LispHighlightRules;
+    var highlighter = new LispHighlightRules();
+    
+    this.$tokenizer = new Tokenizer(highlighter.getRules());
 };
 oop.inherits(Mode, TextMode);
 
@@ -46,7 +48,6 @@ oop.inherits(Mode, TextMode);
        
     this.lineCommentStart = ";";
     
-    this.$id = "ace/mode/lisp";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

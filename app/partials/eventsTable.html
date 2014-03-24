@@ -8,7 +8,10 @@
     margin-top: 4px;
     margin-bottom: 20px;
     padding: 8px 8px;
+    word-wrap: break-word;
 }
+
+
 </style>
 </br>
 </br>
@@ -77,8 +80,8 @@
             <span ng-if="!participant.isCurrentPlayer">{{$index+1}}</span>
         </span>
         </td>
-
-        <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>{{participant.nickname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname}} </span></td>
+        
+        <td class = "span3 overspill"><span ng-if="participant.isCurrentPlayer"><b>{{participant.nickname | limitTo:20}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname | limitTo:20}} </span></td>
 
         <td class = "span6"><span ng-if="participant.isCurrentPlayer"><b>{{participant.schoolname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.schoolname}} </span></td>
 
@@ -146,7 +149,7 @@
 
 <div class="table-responsive">
 <font color = '#909090'  > 
-<table border = '1'">
+<table border = '1'>
 
  <table class="table table-striped table-hover">
     <thead> 
@@ -174,7 +177,7 @@
             <span ng-if="!participant.isCurrentPlayer">{{$index+1}}</span>
         </td>
 
-        <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>&nbsp;{{participant.nickname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname}}</span></td>
+        <td class = "span3"><span ng-if="participant.isCurrentPlayer"><b>&nbsp;{{participant.nickname | limitTo:20}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.nickname | limitTo:20}}</span></td>
 
         <td class = "span6"><span ng-if="participant.isCurrentPlayer"><b>{{participant.schoolname}}</b></span><span ng-if="!participant.isCurrentPlayer">{{participant.schoolname}}</span></td>
 

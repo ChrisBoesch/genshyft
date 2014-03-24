@@ -39,7 +39,7 @@ var PythonFoldMode = require("./folding/pythonic").FoldMode;
 var Range = require("../range").Range;
 
 var Mode = function() {
-    this.HighlightRules = PythonHighlightRules;
+    this.$tokenizer = new Tokenizer(new PythonHighlightRules().getRules());
     this.foldingRules = new PythonFoldMode("\\:");
 };
 oop.inherits(Mode, TextMode);
@@ -51,7 +51,7 @@ oop.inherits(Mode, TextMode);
     this.getNextLineIndent = function(state, line, tab) {
         var indent = this.$getIndent(line);
 
-        var tokenizedLine = this.getTokenizer().getLineTokens(line, state);
+        var tokenizedLine = this.$tokenizer.getLineTokens(line, state);
         var tokens = tokenizedLine.tokens;
 
         if (tokens.length && tokens[tokens.length-1].type == "comment") {
@@ -80,7 +80,7 @@ oop.inherits(Mode, TextMode);
         if (input !== "\r\n" && input !== "\r" && input !== "\n")
             return false;
 
-        var tokens = this.getTokenizer().getLineTokens(line.trim(), state).tokens;
+        var tokens = this.$tokenizer.getLineTokens(line.trim(), state).tokens;
         
         if (!tokens)
             return false;
@@ -103,7 +103,6 @@ oop.inherits(Mode, TextMode);
             doc.remove(new Range(row, indent.length-tab.length, row, indent.length));
     };
 
-    this.$id = "ace/mode/python";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

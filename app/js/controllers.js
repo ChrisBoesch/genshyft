@@ -3845,7 +3845,7 @@ function EventController($scope, $resource, $location, $http, $route){
 				alert("The event title cannot be empty!");
 				return;
 			}
-			if(eventVenue==undefined){
+			if(eventVenue==""){
 				alert("The venue cannot be empty!");
 				return;
 			}
@@ -3857,7 +3857,7 @@ function EventController($scope, $resource, $location, $http, $route){
 				$scope.progLang = progLang;
 			}
 			console.log($scope.progLang + "updated progLang");
-
+			console.log(eventTitle + eventDescription + eventVenue + cutoff + $scope.progLang);
 			var data = {"name":eventTitle,
 				"description":eventDescription,
 				"venue": eventVenue,
@@ -3865,6 +3865,7 @@ function EventController($scope, $resource, $location, $http, $route){
 				"path": $scope.progLang
 
 			}
+			console.log("Event venue=" + eventVenue);
 			$scope.newEvent = $resource('/jsonapi/event');
 			var new_event = new $scope.newEvent(data);
 			new_event.$save(function(response){
