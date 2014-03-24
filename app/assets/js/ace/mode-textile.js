@@ -38,7 +38,7 @@ var TextileHighlightRules = require("./textile_highlight_rules").TextileHighligh
 var MatchingBraceOutdent = require("./matching_brace_outdent").MatchingBraceOutdent;
 
 var Mode = function() {
-    this.HighlightRules = TextileHighlightRules;
+    this.$tokenizer = new Tokenizer(new TextileHighlightRules().getRules());
     this.$outdent = new MatchingBraceOutdent();
 };
 oop.inherits(Mode, TextMode);
@@ -59,7 +59,6 @@ oop.inherits(Mode, TextMode);
         this.$outdent.autoOutdent(doc, row);
     };
     
-    this.$id = "ace/mode/textile";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

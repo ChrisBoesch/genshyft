@@ -477,11 +477,11 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
             "cutoffdate": "2014-03-14T10:48:14.183200",
             "currentPlayerStatus": "watch",
             "created": "2014-01-10T15:40:45.896110",
-            "venue": null,
+            "venue": "SMU",
             "longitude": null,
             "participating": 83,
             "start": "2014-03-21T10:50:07.652310",
-            "editor": 57754,
+            "editor": 57753, //57754
             "latitude": null,
             "watching": 10,
             "registered": 108,
@@ -517,7 +517,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
             "cutoffdate": "2014-03-22T10:48:27.878890",
             "currentPlayerStatus": "Not registered",
             "created": "2014-01-10T15:41:36.848030",
-            "venue": null,
+            "venue": "SMU",
             "longitude": null,
             "participating": 72,
             "start": "2014-03-29T10:49:55.721590",
@@ -537,7 +537,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
             "cutoffdate": "2014-03-22T10:48:48.156880",
             "currentPlayerStatus": "Not registered",
             "created": "2014-01-10T15:41:03.411980",
-            "venue": null,
+            "venue": "SMU",
             "longitude": null,
             "participating": 62,
             "start": "2014-03-29T10:49:48.352000",
@@ -2578,7 +2578,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
     "cutoffdate": "2014-03-22T10:48:27.878890",
     "registered": 82,
     "created": "2014-01-10T15:41:36.848030",
-    "venue": null,
+    "venue": "SMU",
     "longitude": null,
     "participating": 71,
     "start": "2014-03-29T10:49:55.721590",
@@ -2616,7 +2616,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
     "created": "2014-01-10T15:41:36.848030",
     "registered": 49,
     "watching": 1,
-    "venue": null,
+    "venue": "SMU",
     "longitude": null,
     "participating": 47,
     "start": "2014-01-10T15:41:36.848050",
@@ -2642,7 +2642,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		
     var eventsTableDataSec = {
     "rankinglocked": true,
-    "archived": false,
+    "archived": true,
     "name": "IDA Secondary School Tournament",
     "ranking": [
         {
@@ -2678,7 +2678,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
             "rankatcutoff": 2,
             "isCurrentPlayer": false,
             "schoolname": "Dunman High School (Secondary)",
-            "nickname": "Li Zhao Qi",
+            "nickname": "Li Zhao Qi3.14987654321123545678998765444117777777777777777777777777777777777777777777777777777777777777777777777777777777",
             "rsvp": "None"
         },
         {
@@ -4059,7 +4059,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
     "longitude": null,
     "participating": 83,
     "start": "2014-03-21T10:50:07.652310",
-    "editor": 57754,
+    "editor": 57754,//57754
     "time_to_cutoff": {
         "seconds": 65199,
         "days": -7
