@@ -219,7 +219,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     var exist = false;
     for(var i=0;i<$scope.cartQuestions.length;i++){
       var cartQuestion = $scope.cartQuestions[i];
-      if(addedQuestion.id==cartQuestion.id || addQuestion.id==cartQuestion.problem_id){
+      if(addedQuestion.id==cartQuestion.id || addedQuestion.id==cartQuestion.problem_id){
         exist = true;
       } 
     }
