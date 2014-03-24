@@ -287,6 +287,17 @@ angular.module('myApp.directives', []).
 
                     return value.toString();
                 });
+
+                scope.$watch(
+                    function() {
+                        return [elm[0].offsetWidth, elm[0].offsetHeight];
+                    },
+                    function() {
+                        editor.resize();
+                        editor.renderer.updateFull();
+                    },
+                    true
+                );
             }
         };
     }])
