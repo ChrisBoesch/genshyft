@@ -4315,7 +4315,8 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
 			//$scope.examples = $scope.currEZWebDevQn.examples;
 			$scope.problemId = $scope.currEZWebDevQn.id;
 			$scope.gameID = $scope.ezwebdevcall.gameID;
-			//console.log($scope.currEZWebDevQn);
+			$scope.test = $scope.currEZWebDevQn.test;
+			console.log($scope.test);
 		})
 
 	};
@@ -4362,6 +4363,7 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
       item.$save(function(response) { 
             $scope.solution_check_result = response;
             //If solved, update the game.
+            $scope.urlToPass = $scope.solution_check_result.url;
             if($scope.solution_check_result.last_solved){
                 $scope.fetch($scope.game.gameID);
             }
