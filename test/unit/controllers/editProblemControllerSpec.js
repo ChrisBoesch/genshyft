@@ -681,6 +681,7 @@
             var data = [];
 
             scope.problemDetails = problemDetails.problem;
+            scope.problemDetails.other_tests = "assert greeting == 'hello world'";
             scope.runTests();
 
             expect(scope.testRun).toEqual({});
@@ -699,7 +700,7 @@
             expect(data[1].interface_id).toBe('11020');
             expect(data[1].source_code).toBe("greeting='hello world'");
             expect(data[1].examples).toBe(">>> greeting\r\n'hello world'");
-            expect(data[1].tests).toBe("");
+            expect(data[1].tests).toBe("assert greeting == 'hello world'");
         });
 
         it('should create a new problem.', function() {

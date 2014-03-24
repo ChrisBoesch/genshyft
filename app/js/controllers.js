@@ -4962,7 +4962,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
                 interface_id: $scope.interface.id, 
                 source_code: $scope.problemDetails.solution,
                 examples: $scope.problemDetails.examples,
-                tests: $scope.problemDetails.privateTests || ""
+                tests: $scope.problemDetails.other_tests || ""
             };
 
         $scope.resetTestRun();
