@@ -129,7 +129,7 @@
 								<button class="btn btn-primary btn-warning" data-toggle="modal" ng-click="go_to_eventsEdit(event.id)">
 								<i class="icon-pencil icon-white"></i> Edit Event
 								</button>
-								<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="lock_ranking(event.id)">
+								<button ng-disabled="event.rankinglocked" class="btn btn-primary btn-danger" data-toggle="modal" ng-click="lock_ranking(event.id)">
 								<i class="icon-lock icon-white"></i> Lock Ranking
 								</button>
 				            	<button class="btn btn-primary btn-inverse" data-toggle="modal" ng-click="delete_event(event.id)">
@@ -169,7 +169,7 @@
 								<button class="btn btn-primary btn-warning" data-toggle="modal" ng-click="go_to_eventsEdit(event.id)">
 								<i class="icon-pencil icon-white"></i> Edit Event
 								</button>
-								<button class="btn btn-primary btn-danger" data-toggle="modal" ng-click="lock_ranking(event.id)">
+								<button ng-disabled="event.rankinglocked" class="btn btn-primary btn-danger" data-toggle="modal" ng-click="lock_ranking(event.id)">
 								<i class="icon-lock icon-white"></i> Lock Ranking
 								</button>
 				            	<button class="btn btn-primary btn-inverse" data-toggle="modal" ng-click="delete_event(event.id)">

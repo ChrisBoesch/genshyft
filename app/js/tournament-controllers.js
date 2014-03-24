@@ -219,7 +219,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     var exist = false;
     for(var i=0;i<$scope.cartQuestions.length;i++){
       var cartQuestion = $scope.cartQuestions[i];
-      if(addedQuestion.id==cartQuestion.id){
+      if(addedQuestion.id==cartQuestion.id || addQuestion.id==cartQuestion.problem_id){
         exist = true;
       } 
     }
@@ -450,7 +450,12 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       console.log($scope.cartQuestions);
       var roundQuestions = [];
       for(var j = 0; j < $scope.cartQuestions.length; j++){
-        roundQuestions.push($scope.cartQuestions[j].problem_id);
+        if($scope.cartQuestions[j].problem_id!=undefined || $scope.cartQuestions[j].problem_id!=null){
+          roundQuestions.push($scope.cartQuestions[j].problem_id);
+        }else{
+          roundQuestions.push($scope.cartQuestions[j].id);
+        }
+        
       }
       var updatedRound = {"roundID":$scope.selectedRound.roundId,
                           "timelimit":$scope.timeInMins * 60,
