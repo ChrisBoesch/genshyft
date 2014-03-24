@@ -32,16 +32,24 @@
     tbody{
         overflow:auto;  
     }
+
+    .overspill{
+    	overflow: hidden;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100%;
+    }
 	
 	
 	<!--All Rankings : Rankings-->
 	th.Rank_Ranking, td.Rank_Ranking						{width:5%;}
 	th.Rank_RankInGrp, td.Rank_RankInGrp					{width:10%;}
     th.Rank_Grp, td.Rank_Grp								{width:10%;}
-    th.Rank_PlayerName										{width:20%;}
-    td.Rank_PlayerName										{width:20%;text-align: left;}
+    th.Rank_PlayerName										{width:15%;}
+    td.Rank_PlayerName										{width:15%;text-align: left;}
     th.Rank_Qns, td.Rank_Qns								{width:5%;}
-    th.Rank_Progress, td.Rank_Progress						{width:10%;}
+    th.Rank_Progress, td.Rank_Progress						{width:15%;}
     th.Rank_Mentoring, td.Rank_Mentoring					{width:10%;}
     th.Rank_MentoredBy, td.Rank_MentoredBy					{width:10%;}
 
@@ -63,9 +71,14 @@
 						<div style="width:99.8%; height:{{window_Height_challenge}}px;overflow-y:auto;overflow-x:hidden">						
 
 						<div>
-								<button type="button" class="btn btn-inverse" id="tourn_lobby" ng-click="mytournaments_rankings()"><i class="icon-chevron-left icon-white"></i> Completed Round Rankings</button>
+								<button type="button" class="btn btn-inverse" id="tourn_lobby" ng-click="mytournaments_rankings()"><i class="icon-chevron-left icon-white"></i> Completed Rounds Rankings</button>
 						<center><h4>{{tournament.roundDescription}} </h4><center>
-						<h5 ng-hide="true">{{tournament.heatDescription}}</h5>
+						<h5 >({{tournament.heatDescription}} Ranking)</h5><center>
+						
+							<input class="input-mini" type="text" maxlength="2" placeholder="HH" ng-model="hourVal"> : <input class="input-mini" type="text" maxlength="2"placeholder="mm" ng-model="minVal"> : 
+						<div class="input-append">	
+							<input class="input-mini" type="text" maxlength="2" placeholder="ss" ng-model="secVal"> <button class="btn btn-inverse" type="button" ng-click="fetch_ranks_with_time_value(tournament.heatID, hourVal, minVal, secVal)"><i class="icon-time icon-white"></i>  Fetch Ranking</button>
+						</div>
 							<table class="table table-hover">	
 								<tr>
 									<th class="Rank_Ranking">Overall Ranking</th>
@@ -80,15 +93,15 @@
 								</tr>  							
 								<tr ng-repeat="player in playerRanks">
 									<td class="Rank_Ranking">{{$index+1}}</td>
-									<td class="Rank_PlayerName"><img class="grav"ng-src="{{player.gravatar}}"> &nbsp; &nbsp;{{player.nickname}}</td>
-									<td class="Rank_RankInGrp" ng-show="tournament.isGroup == true">{{player.rankingInGrp}}</td>
+									<td class="Rank_PlayerName overspill"><img class="grav"ng-src="{{player.gravatar}}"> &nbsp; &nbsp;{{player.nickname}}</td>
+									<td class="Rank_RankInGrp" ng-show="tournament.isGroup == true">{{player.rankingInGrp}}<font ng-show="player.rankingInGrp==1">st</font><font ng-show="player.rankingInGrp==2">nd</font><font ng-show="player.rankingInGrp==3">rd</font><font ng-show="player.rankingInGrp>=4">th</font></td>
 									<td class="Rank_Grp" ng-show="tournament.isGroup == true">{{player.group}}</td>
 													
 									<!-- Need to add in the questions associated to each round and the tick logo -->
 									<td class="Rank_Qns" ng-repeat="i in my_range(player.solved_problems)"><img src="http://www.singpath.com/ender/static/badges/ticks_on.png"></td>
             						<td class="Rank_Qns" ng-repeat="i in my_range(player.total_problems - player.solved_problems)"><img src="http://www.singpath.com/ender/static/badges/ticks_off.png"></td>
 									<!-- -->
-									<td class="Rank_Progress">{{player.finished.split(":")[0]}} hour {{player.finished.split(":")[1]}} min {{player.finished.split(":")[2].split(".")[0]}} sec</td>
+									<td class="Rank_Progress"><button class="btn" ng-click="fetch_ranks_with_time(tournament.heatID, player.finished)">{{player.finished.split(":")[0]}} hour {{player.finished.split(":")[1]}} min {{player.finished.split(":")[2].split(".")[0]}} sec</button></td>
 									<td class="Rank_Mentoring">{{player.mentee}}</td>
 									<td class="Rank_MentoredBy"><p ng-hide="player.mentorID == null"><font ng-show="player.mentorHasArrived == false">Waiting for </font>{{player.mentor}}</p></td>
 								</tr>           

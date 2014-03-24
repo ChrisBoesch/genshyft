@@ -36,8 +36,7 @@
 
 	<div class="row-fluid">
 		<div class="span12 well-small">
-			<font color="#08088A" size="2"><b>Note:</b> This page display rankings to all <b>COMPLETED</b> rounds. Only rounds that had been <b><i>"Stop"</i></b> will be displayed. 
-			A <b>"<i>Heat</i>"</b> is created everytime you start a round.</font>
+			<font color="#08088A" size="2"><b>Note:</b> This page display rankings of all rounds and each round contains <b>"<i>Heats</i>"</b>. A <b>"<i>Heat</i>"</b> is created everytime you start a round by clicking the timer.</font>
 		</div>	
 	</div>
 
@@ -61,7 +60,7 @@
 				<div class="row-fluid">	
 					<div class="span12 well well-small" >
 						<div ng-repeat="round in tournament.rounds track by $index">
-							<h5>{{round.description}} Heats</h5>
+							<h5>{{round.description}} - Heats</h5>
 							<table ng-grid id="grpTournTable" class="table table-hover" width="100%">
 				                <tr class="tournTableHeaders">
 				                	<th class="tournTableHeader">Heat No.</th>
@@ -72,9 +71,9 @@
 				                <tr class="warning" ng-repeat="heat in round.heats track by $index">
 				                	<td class="tournInfo">{{heat.heatNumber}}</td>
 				                    <td class="tournInfo">{{heat.description}}</td>
-				                    <td class="tournInfo">{{heat.startTime}}</td>
+				                    <td class="tournInfo"><i>{{heat.startTime}}</i></td>
 				                    <td>
-				                    	<button class="btn btn-inverse" type="button" ng-click="completed_round_ranking(heat.heatID)"><i class="icon-list icon-white"></i> View Rankings</button>
+				                    	<button class="btn btn-inverse" type="button" ng-click="completed_round_ranking(heat.heatID)"><i class="icon-list icon-white"></i> View Ranking</button>
 				                    </td>
 				                </tr>
 			            	</table>

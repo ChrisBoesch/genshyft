@@ -1,6 +1,11 @@
 <style>
+   	table{
+		table-layout:fixed;
+		width:100%;
+	}
     .table td, .table th {
         border: none;
+        width: 110px;
 
     }
     .table tbody tr:hover td,
@@ -24,6 +29,14 @@
 
     tbody{
         overflow:auto;  
+    }
+
+    li.overspill{
+    	overflow: hidden;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100%;
     }
 	
 	
@@ -117,10 +130,10 @@
 								<!--<table class="table table-hover" ng-repeat="r in rowNum track by $index">-->
 								<table class="table table-hover">
 									<tr>
-										<td ng-repeat="group in numGrp track by $index">									<!--<span ng-if="$index<5">-->
+										<td  ng-repeat="group in numGrp track by $index">									<!--<span ng-if="$index<5">-->
 												<b>Group {{$index+1}}</b>
 												
-												<li class="bulletless" ng-repeat="player in group track by $index">
+												<li class="bulletless overspill" ng-repeat="player in group track by $index">
 													<font ng-if="$index != 0">{{player.nickname}}
 													</font>
 												</li>

@@ -14,6 +14,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.round = null;
   $scope.roundDirty = false;
 
+  $scope.hourVal = "";
+  $scope.minVal = "";
+  $scope.secVal = "";
+
   //variables for create tournament rounds
   $scope.grpTourRoundName="";
   $scope.grpTourRoundMins="";
@@ -102,13 +106,60 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     else{
       console.log("Fetching rankings...");
-      $scope.GHeatModel.get({"heatID":$scope.heatID}, function(response){
+      $scope.GHeatModel.get({"heatID":$scope.heatID,"nocache":"true"},function(response){
         $scope.tournament = response;
         $scope.playerRanks = $scope.tournament.ranking;        
       });
       console.log("Rankings fetched");
     } 
   };
+
+  /* Fetch ranking with time - by Glen GENShYFT*/
+  $scope.fetch_ranks_with_time_value = function(heatID,hour,minute,seconds){
+    console.log("Time: " + hour+":"+minute+":"+seconds+".0000");
+    if(!isNaN(hour)&&!isNaN(minute)&&!isNaN(seconds)){
+      if(hour.toString().length==2){
+        var hourConvert = parseInt(hour);
+        hour = hourConvert.toString();
+      }else if(hour.toString().length==0){
+        hour = "0";
+      }
+
+     if(minute.toString().length==1){
+        minute = "0"+minute.toString();
+      }else if(minute.toString().length==0){
+        minute = "00";
+      } 
+
+      if(seconds.toString().length==1){
+        seconds = "0"+seconds.toString();
+      }else if(seconds.toString().length==0){
+        seconds = "00";
+      } 
+
+      var time = hour+":"+minute+":"+seconds+".000000"
+      $scope.fetch_ranks_with_time(heatID, time);
+    }else if(hour==undefined||minute==undefined||seconds==undefined){
+      alert("Please fill in all fields.");
+    }else{
+      alert("Invalid values, only numbers allowed.");
+    }
+  };
+
+  /* Fetch ranking with time - by Glen GENShYFT*/
+  $scope.fetch_ranks_with_time = function(heatID,time){
+      console.log("Fetching rankings at " +time+" ...");
+      $scope.hourVal = time.split(":")[0];
+      $scope.minVal = time.split(":")[1];
+      $scope.secVal = time.split(":")[2].split(".")[0];
+      $scope.GHeatModel.get({"heatID":heatID,"nocache":"true","time":time}, function(response){
+        $scope.tournament = response;
+        $scope.playerRanks = $scope.tournament.ranking;        
+      });
+      console.log("Rankings at "+ time +" fetched.");
+  };
+
+
 
   $scope.my_range = function(n) {
     var result = [];
@@ -953,7 +1004,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Link to Tournament Ranking in manage tournament By Glen
   $scope.round_end_manage = function(heatID){
     if(heatID==null){
-      alert("Round have not started");
+      alert("Round has not started");
     }else{
       $timeout.cancel($scope.timeoutVar);
       $location.search({"heatID":heatID}).path("tournament-ranking");
@@ -963,7 +1014,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Link to Tournament Ranking Static in manage tournament By Glen
   $scope.completed_round_ranking = function(heatID){
     if(heatID==null){
-      alert("Round have not started");
+      alert("Round has not started");
     }else{
       $location.search({"heatID":heatID}).path("tournament-ranking-static");
     }    

@@ -32,6 +32,14 @@
     tbody{
         overflow:auto;  
     }
+
+    .overspill{
+    	overflow: hidden;
+		text-overflow: ellipsis;
+		-o-text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 100%;
+    }
 	
 	
 	<!--All Rankings : Rankings-->
@@ -86,8 +94,8 @@
 								</tr>  							
 								<tr ng-repeat="player in playerRanks">
 									<td class="Rank_Ranking">{{$index+1}}</td>
-									<td class="Rank_PlayerName"><img class="grav"ng-src="{{player.gravatar}}"> &nbsp; &nbsp;{{player.nickname}}</td>
-									<td class="Rank_RankInGrp" ng-show="tournament.isGroup == true">{{player.rankingInGrp}}</td>
+									<td class="Rank_PlayerName overspill"><img class="grav"ng-src="{{player.gravatar}}"> &nbsp; &nbsp;{{player.nickname}}</td>
+									<td class="Rank_RankInGrp" ng-show="tournament.isGroup == true">{{player.rankingInGrp}}<font ng-show="player.rankingInGrp==1">st</font><font ng-show="player.rankingInGrp==2">nd</font><font ng-show="player.rankingInGrp==3">rd</font><font ng-show="player.rankingInGrp>=4">th</font></td>
 									<td class="Rank_Grp" ng-show="tournament.isGroup == true">{{player.group}}</td>
 													
 									<!-- Need to add in the questions associated to each round and the tick logo -->

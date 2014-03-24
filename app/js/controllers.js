@@ -126,26 +126,31 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
 
 	
 	
-    $scope.update_player_profile = function($event){  
-  
-        var data = {"nickname":$scope.player.nickname,
-                    "professional":$scope.player.professional,
-                    "about":$scope.player.about,
-					"location":$scope.player.location,
-					"tags":$scope.player.tags,
-                    "gender":$scope.player.gender};
+    $scope.update_player_profile = function($event){ 
 
-        $http.post("/jsonapi/update_player_profile", data)
-            .success(function (data, status, headers, config) {
-                window.console.log(data);
-                $scope.player = data;
+    	if($scope.player.nickname.length>20){
+    		alert("Name no more than 20 characters.");
+    		window.location.reload('profile')
+    	}else{
+	        var data = {"nickname":$scope.player.nickname,
+	                    "professional":$scope.player.professional,
+	                    "about":$scope.player.about,
+						"location":$scope.player.location,
+						"tags":$scope.player.tags,
+	                    "gender":$scope.player.gender};
 
-            }).error(function (data, status, headers, config) {
-                $scope.status = status;
-            }); 
-            
-        //$route.reload('profile');
-        window.location.reload('profile')
+	        $http.post("/jsonapi/update_player_profile", data)
+	            .success(function (data, status, headers, config) {
+	                window.console.log(data);
+	                $scope.player = data;
+
+	            }).error(function (data, status, headers, config) {
+	                $scope.status = status;
+	            }); 
+	            
+	        //$route.reload('profile');
+	        window.location.reload('profile')
+   	 	}
     };
     
     $scope.log_event = function($event){  
@@ -3771,7 +3776,7 @@ function CountdownController($scope,$timeout) {
             
 }
 
-function EventController($scope, $resource, $location, $http){
+function EventController($scope, $resource, $location, $http, $route){
         $scope.event = {"name":"Default name", 
                             "description": "Default description",
                             "venue": "Default venue"};
@@ -3793,6 +3798,7 @@ function EventController($scope, $resource, $location, $http){
         $scope.lock_ranking = function(id){
         	var response = $http.get('/jsonapi/lock_event_ranking/' + id);
         	console.log("Lock Ranking - " + id + " " + response);
+        	$route.reload();
         }
 
         $scope.get_eventID = function(){
@@ -3897,7 +3903,7 @@ function EventController($scope, $resource, $location, $http){
 					else{
 						console.log("Delete event in DB")
 						console.log(response);
-						$location.path("eventsManage");
+						$route.reload();
 					}
 				});
 			});
@@ -3947,6 +3953,13 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.player = $resource('/jsonapi/player').get();
 
   		$scope.rsvpList = [];
+
+  		$scope.rsvpButton = function(eventid, decisionNum){
+        	var response = $http.get('/jsonapi/eventrsvp/' + eventid + '/' + decisionNum);
+        	//console.log(response);
+        	//console.log('/jsonapi/eventrsvp/' + eventid + '/' + decisionNum);
+        	$route.reload();
+        }
 
   		$scope.uninvite = function(eventid, playerid){
         	var response = $http.get('/jsonapi/uninvite_for_event/' + eventid + '/' + playerid);
@@ -4222,6 +4235,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
     		console.log($scope.eventID + "-> eventID");
     		if($scope.eventID==null){
     			$scope.noEventID=true;
+    			console.log($scope.noEventID + "-> noEventID");
     		}
     	}
 

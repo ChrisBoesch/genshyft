@@ -65,7 +65,7 @@
         <td class = "span4" ng-show="eventsData.rankinglocked"><strong>Rank at Cutoff</td>
         <td class = "span4" ng-show="eventsData.rankinglocked"><strong>Solved at Cutoff</td>
         <td class = "span1" ng-show="eventsData.rankinglocked"><strong>Invited</td>
-        <td class = "span1" ng-show="eventsData.rankinglocked"><strong>Accepted</td>
+          <td class = "span1" ng-show="eventsData.rankinglocked"><strong>Accepted ({{current_event.accepted}}/{{current_event.invited}})</td>
       </tr>
     </thead>
     <tbody>
@@ -115,7 +115,10 @@
           </span>
         -->
          </td>
-         <td class ="span1" ng-show="eventsData.rankinglocked"><font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
+         <td class ="span1" ng-show="eventsData.rankinglocked">
+          <font ng-show="participant.rsvp!='None'">{{participant.rsvp}}</font>
+          <button ng-show="participant.rsvp=='None' && participant.isCurrentPlayer" class="btn btn-primary btn-success" ng-click= "rsvpButton(eventsData.id,1)">Accept</button>
+          <button ng-show="participant.rsvp=='None' && participant.isCurrentPlayer" class="btn btn-primary btn-danger" ng-click= "rsvpButton(eventsData.id,0)">Reject</button>
          </td>
     </span>
       </tr>
