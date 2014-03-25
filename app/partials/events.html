@@ -29,8 +29,10 @@
               {{event.description}}<br>
 
               Participating: {{event.participating}}<br>
-              My Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}</strong><br><br>
-              <button class="btn btn-primary" data-toggle="modal" data-target="#participateModal" ng-click="register_for_event(event.id, 'participate')"><i class="icon-check icon-white"></i> I'd like to participate</button>
+              My Status: <strong>&nbsp;&nbsp;&nbsp;&nbsp;{{event.currentPlayerStatus}}<br>
+              <font ng-if="event.rankinglocked">Event is locked - Please join other events!</font></strong>
+              <br><br>
+              <button ng-disabled="event.rankinglocked" class="btn btn-primary" data-toggle="modal" data-target="#participateModal" ng-click="register_for_event(event.id, 'participate')"><i class="icon-check icon-white"></i> I'd like to participate</button>
               <button class="btn btn-primary" data-toggle="modal" data-target="#watchModal"ng-click="register_for_event(event.id, 'watch')"><i class="icon-eye-open icon-white"></i> I'd like to come watch</button>
               <button class="btn btn-primary" data-toggle="modal" data-target="#postModal"ng-click="register_for_event(event.id, 'follow')"><i class="icon-bell icon-white"></i> Keep me posted</button>
               <button class="btn btn-primary" ng-click="go_to_eventsRanking(event.id)"><i class="icon-list icon-white"></i> I'd like to view the rankings</button>
