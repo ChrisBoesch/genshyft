@@ -1,21 +1,34 @@
 <!DOCTYPE HTML>
-<html ng-app="" lang="en">
+<html lang="en">
   <head>
     <title>End2end Test Runner</title>
-    <script src="/lib/angular/angular.js"></script>
+    <script src="http://code.angularjs.org/1.1.5/angular.js"></script>
     <script src="../node_modules/karma-ng-scenario/lib/angular-scenario.js" ng-autotest></script>
-    <script src="../bower_components/angular-mocks-unstable/angular-mocks.js"></script>
-    <script src="lib/ng-scenario-dsl.js"></script>
-    <script src="lib/window-dialog-commands.js"></script>
-    <script src="e2e/routesSpec.js"></script>
-    <script src="e2e/controllers/controllersSpec.js"></script> 
-    
+   <!--  // <script src="../bower_components/angular-mocks-unstable/angular-mocks.js"></script>
+    // <script src="lib/ng-scenario-dsl.js"></script>
+    // <script src="lib/window-dialog-commands.js"></script>
+    // <script src="e2e/routesSpec.js"></script>
+    // <script src="e2e/controllers/controllersSpec.js"></script>  -->
+    <script type="text/javascript">
+    function IframeCtrl($scope){
+      $scope.value ="/jsonapi/lastsolution.html";
+
+      window.updatedata = function(data){
+        $scope.$apply(function(){
+          $scope.value = data;
+          console.log($scope.value);
+        });
+      };
+    }
+
+    </script>
   </head>
-  <body>
+  <body ng-app ng-controller="IframeCtrl">
 
   <script type="text/javascript">
+      
       beforeEach(function () {
-        browser().navigateTo('/jsonapi/lastsolution.html');
+        browser().navigateTo(angular.element(document.querySelector('[ng-controller="IframeCtrl"]')).scope().value);
       });
       
       describe("Problem 1", function () {
@@ -24,5 +37,7 @@
         });
       });
     </script>
+
+    {{value}}
   </body>
 </html>

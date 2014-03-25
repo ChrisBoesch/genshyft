@@ -213,6 +213,9 @@
 				<td class = "span3"><strong>Player Name</td>
 				<td class = "span1"><strong>{{eventsData.path}} Problems Solved</td>
 				<td class = "span1"><strong>Mail</td>
+        <td class = "span1"><strong>Invited</td>
+        <td class = "span1"><strong>Accepted</td>
+        <td class = "span1"><strong>Uninvite</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -242,6 +245,10 @@
 					    ng-click="addRemoveRSVPList(participant.playerid)"
   					>
 				</td>
+        <td class = "span1">{{participant.sentrsvp}}</td>
+        <td class = "span1">{{participant.rsvp}}</td>
+        <td class = "span1">
+          <button ng-show="true" class="btn btn-primary btn-danger" ng-click= "uninvite(eventsData.id,participant.playerid)">Uninvite</button></td>
 			</tr>
 		</tbody>
 	</table>
