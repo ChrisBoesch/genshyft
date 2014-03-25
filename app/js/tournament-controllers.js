@@ -920,7 +920,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       }else{
         console.log(response);
         $scope.fetch_tournament_details_once(tournamentId, playerId);
-        $route.reload();
       }
     });  
   };
@@ -946,7 +945,6 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         }else{
           console.log(response);
           $scope.fetch_tournament_details_once(tournamentId, playerId);
-          $route.reload();
         }
       });
     }  
