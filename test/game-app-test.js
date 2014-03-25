@@ -717,13 +717,13 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
       
       //$httpBackend.whenPOST('/jsonapi/verify_for_game').respond(bad_check_soluion_for_game_result); 
       
-      $httpBackend.whenPOST('/jsonapi/verify_for_game').respond(function(method, url, data) {
+      // $httpBackend.whenPOST('/jsonapi/verify_for_game').respond(function(method, url, data) {
 
 
-        var item = bad_check_soluion_for_game_result
-        return [200,item];
+      //   var item = bad_check_soluion_for_game_result
+      //   return [200,item];
         
-      });
+      // });
 
 	  
 	  var ezwebdevtestsoln = {	"renderReturn":"\<input type=\"text\" ng-model=\"sometext\" /> \
@@ -734,8 +734,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	   // <p><a onClick=\"showAlert();\">Click Me</a></p>  "};
 	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
-	  
-	  
+	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>","url": "/jsonapi/lastsolution.html"};
+		$httpBackend.whenPOST('/jsonapi/verify_for_game').respond(ezwebdevtestsoln2);  
 	  
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
       var good_verify_result = {"solved": true, "verification_message": "Your solution passes all tests.", "printed": ""};
