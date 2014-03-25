@@ -1397,7 +1397,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
             "highestbadgeurl": "/static/badges/python/p009_on.png",
             "year": 2013,
             "rank": 1,
-            "sentrsvp": false,
+            "sentrsvp": true,
             "highestbadgename": "Level 9",
             "rankatcutoff": 99,
             "isCurrentPlayer": false,

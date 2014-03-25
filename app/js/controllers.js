@@ -4104,7 +4104,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					console.log("rsvp sent");
 					console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
 					console.log(response);
-					$location.path("eventsTable");
+					$route.reload();
 				}
 			});
 			
