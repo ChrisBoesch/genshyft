@@ -3841,6 +3841,8 @@ function EventController($scope, $resource, $location, $http, $route){
 		$scope.create_new_event = function(eventTitle, eventDescription, eventVenue, cutoff, progLang){
 			console.log("Create_new_event executed here")
 			console.log(progLang + "proglang");
+			var schooltypes = [];
+			schooltypes.push("Secondary");
 			if(eventTitle==""){
 				alert("The event title cannot be empty!");
 				return;
@@ -3862,7 +3864,8 @@ function EventController($scope, $resource, $location, $http, $route){
 				"description":eventDescription,
 				"venue": eventVenue,
 				"cutoff": cutoff,
-				"path": $scope.progLang
+				"path": $scope.progLang,
+				"schooltypes": schooltypes
 
 			}
 			console.log("Event venue=" + eventVenue);

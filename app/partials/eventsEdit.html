@@ -64,7 +64,10 @@
 						Venue:
 					</div>
 					<div class="span7">
-						 <input class="span6" type="text" ng-model="eventsData.venue"  ></input>
+
+						 <input ng-if="eventsData.venue!=null" class="span6" type="text" ng-model="eventsData.venue"  ></input>
+
+						 <input ng-show="eventsData.venue==null" class="span6" type="text" value="Venue has not been set!"></input>
 						 
 					</div>
 				</div>	
