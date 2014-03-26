@@ -273,6 +273,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
   }
 
+  //Gets tournaments user is a collaborator-GenShyft
+  /*
+  $scope.get_collaboratedTournaments = function(){
+    console.log("Retrieving all tournaments created by User from DB");
+    $resource("/jsonapi/get_collaborated_tournaments").query({},function(response){
+      $scope.collabTournaments = response; // stores the Json files
+      console.log($scope.collabTournaments);
+    });
+  }
+  */
+
   /*Get players of indivdual Tournament or Players without Group in Group Tournament - By Glen*/
   $scope.get_indivNoGrpPlayers = function(tournament){
       fetchRegisteredUser(tournament); 
