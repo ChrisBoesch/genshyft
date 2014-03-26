@@ -128,7 +128,7 @@
                                 <input type="submit" value="reload" ng-click="fill_test_iframe()">
                                 
                                 {{issues}} issue(s) to correct.<br>
-                                <iframe id="testIframe" height="320" width="100%" src=""></iframe>
+                                <iframe id="testIframe" height="320" width="100%" ng-src="{{testURL}}"></iframe>
                               </div>
                               <div ng-show="!theTab" style="height:317px;">
                                 

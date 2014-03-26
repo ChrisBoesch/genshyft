@@ -734,7 +734,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	   // <p><a onClick=\"showAlert();\">Click Me</a></p>  "};
 	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
-	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>","url": "/jsonapi/lastsolution.html"};
+	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>","url": "/jsonapi/lastsolution.html","testUrl" : "/web_test_example.html"};
 		$httpBackend.whenPOST('/jsonapi/verify_for_game').respond(ezwebdevtestsoln2);  
 	  
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
@@ -1397,7 +1397,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
             "highestbadgeurl": "/static/badges/python/p009_on.png",
             "year": 2013,
             "rank": 1,
-            "sentrsvp": false,
+            "sentrsvp": true,
             "highestbadgename": "Level 9",
             "rankatcutoff": 99,
             "isCurrentPlayer": false,
@@ -2573,7 +2573,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
             "rsvp": "None"
         }
     ],
-    "cutoff": 30,
+    "cutoff": 300,
     "following": 4,
     "cutoffdate": "2014-03-22T10:48:27.878890",
     "registered": 82,
@@ -2616,7 +2616,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
     "created": "2014-01-10T15:41:36.848030",
     "registered": 49,
     "watching": 1,
-    "venue": "SMU",
+    "venue": null,
     "longitude": null,
     "participating": 47,
     "start": "2014-01-10T15:41:36.848050",

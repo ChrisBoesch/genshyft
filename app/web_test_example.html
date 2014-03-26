@@ -13,11 +13,9 @@
     function IframeCtrl($scope){
       $scope.value ="/jsonapi/lastsolution.html";
 
-      window.updatedata = function(data){
-        $scope.$apply(function(){
-          $scope.value = data;
-          console.log($scope.value);
-        });
+      $scope.updatedata = function(data){
+          $scope.value = data;  
+        
       };
     }
 
@@ -26,9 +24,10 @@
   <body ng-app ng-controller="IframeCtrl">
 
   <script type="text/javascript">
-      
+      //var urlToGo = angularjs.element(window.parent.document.quertySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass;
+      //angularjs.element(document.querySelector('[ng-controller="IframeCtrl"]')).scope().value
       beforeEach(function () {
-        browser().navigateTo(angular.element(document.querySelector('[ng-controller="IframeCtrl"]')).scope().value);
+        browser().navigateTo(angular.element(window.parent.document.querySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass);
       });
       
       describe("Problem 1", function () {
@@ -36,8 +35,6 @@
            expect(element('div').text()).toMatch("Hi Chris"); 
         });
       });
-    </script>
-
-    {{value}}
+    </script> 
   </body>
 </html>

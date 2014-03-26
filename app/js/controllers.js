@@ -3841,6 +3841,8 @@ function EventController($scope, $resource, $location, $http, $route){
 		$scope.create_new_event = function(eventTitle, eventDescription, eventVenue, cutoff, progLang){
 			console.log("Create_new_event executed here")
 			console.log(progLang + "proglang");
+			var schooltypes = [];
+			schooltypes.push("Secondary");
 			if(eventTitle==""){
 				alert("The event title cannot be empty!");
 				return;
@@ -3862,7 +3864,8 @@ function EventController($scope, $resource, $location, $http, $route){
 				"description":eventDescription,
 				"venue": eventVenue,
 				"cutoff": cutoff,
-				"path": $scope.progLang
+				"path": $scope.progLang,
+				"schooltypes": schooltypes
 
 			}
 			console.log("Event venue=" + eventVenue);
@@ -4104,7 +4107,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					console.log("rsvp sent");
 					console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
 					console.log(response);
-					$location.path("eventsTable");
+					$route.reload();
 				}
 			});
 			
@@ -4377,6 +4380,7 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
             $scope.solution_check_result = response;
             //If solved, update the game.
             $scope.urlToPass = $scope.solution_check_result.url;
+            $scope.testURL = $scope.solution_check_result.testUrl;
             console.log($scope.urlToPass);
             if($scope.solution_check_result.last_solved){
                 $scope.fetch($scope.game.gameID);
@@ -4405,7 +4409,8 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
       var iframe = angular.element( document.querySelector( '#testIframe' ) );
       //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
       iframe.attr("src","web_test_example.html");//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
-      document.getElementById('testIframe').contentWindow.updatedata($scope.urlToPass);
+      var scopeToShare = angular.element($scope.urlToPass);
+      //document.getElementById("testIframe").contentWindow.angular.element();
       $scope.log_test_iframe();
 
     };
