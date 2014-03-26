@@ -4377,6 +4377,7 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
             $scope.solution_check_result = response;
             //If solved, update the game.
             $scope.urlToPass = $scope.solution_check_result.url;
+            $scope.testURL = $scope.solution_check_result.testUrl;
             console.log($scope.urlToPass);
             if($scope.solution_check_result.last_solved){
                 $scope.fetch($scope.game.gameID);
@@ -4405,7 +4406,8 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
       var iframe = angular.element( document.querySelector( '#testIframe' ) );
       //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
       iframe.attr("src","web_test_example.html");//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
-      document.getElementById('testIframe').contentWindow.updatedata($scope.urlToPass);
+      var scopeToShare = angular.element($scope.urlToPass);
+      //document.getElementById("testIframe").contentWindow.angular.element();
       $scope.log_test_iframe();
 
     };
