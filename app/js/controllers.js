@@ -112,7 +112,7 @@ function PlayerController($scope,$resource,$location,$cookieStore,$http,currentU
     };
 
     $scope.checkPracticeLogin = checkLogin.bind($scope, 'practice');
-    $scope.checkCreatePathorLevelLogin = checkLogin.bind($scope, 'create');
+    $scope.checkCreatePathorLevelLogin = checkLogin.bind($scope, 'editproblem');
 	$scope.checkSchoolRegistrationLogin = checkLogin.bind($scope, 'schoolregistration');
     $scope.checkMasteryLogin = checkLogin.bind($scope, 'ymbcoaching');
     $scope.checkPurposeDrivenLogin = checkLogin.bind($scope, 'purposedriven');
@@ -4104,7 +4104,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					console.log("rsvp sent");
 					console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
 					console.log(response);
-					$location.path("eventsTable");
+					$route.reload();
 				}
 			});
 			

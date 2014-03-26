@@ -110,37 +110,14 @@
                   <a href="" class="dropdown-toggle" data-toggle="dropdown">More... 
                     <b class="caret"></b></a>                  
                   <ul class="dropdown-menu"> 
-                    <li class="nav-header">Tournaments</li>
+                    <!--<li class="nav-header">Tournaments</li>-->
                     <li>
-                      <a type="button" ng-click="checkEventsLogin()">Upcoming Events</a>
+                      <a type="button" ng-click="checkEventsLogin()">Register for an Event</a>
                     </li>
                     <li>
-                      <a type="button" ng-click="checkTournamentLogin()">Join Tournament</a>
-                    </li> 
-                    <li>
-                      <a type="button" ng-click="checkCreateTournamentLogin()">My Tournaments</a>
+                      <a type="button" ng-click="checkTournamentLogin()">Join a Tournament</a>
                     </li> 
                     <li>                                                  
-                    <li class="divider"></li>                    
-                    <li class="nav-header">Create</li>
-                    <li>
-                      <a ng-click="checkCreatePathorLevelLogin()">Path or Level</a>
-                    </li>   
-                    <li>
-                      <a type="button" ng-click="checkStoryLogin()">Story or Tutorial</a>
-                    </li>
-                    <!-- <li>
-                      <a type="button" ng-click="checkCreateEventsLogin()">Events</a>
-                    </li> !-->
-                    <li class="divider"></li>                    
-                    <li class="nav-header">About</li>                    
-                    <li>
-                      <a ng-click="toVideos()">Learn about SingPath</a>
-                    </li> 
-                    <li>
-                      <a href ="https://www.facebook.com/pages/Singpath/288817147942516" target="_blank">
-					  Visit us on Facebook </a>
-                    </li> 					
                     <li class="divider" ng-show="player.countryCode=='SG'||player.countryCode==''"></li> 
                     <li type="button" ng-show="player.countryCode=='SG'||player.countryCode==''" class="nav-header">Singapore Schools</li>                    
                     
@@ -151,18 +128,44 @@
                     <li ng-show="player.countryCode=='SG'||player.countryCode==''">
                       <a type="button" ng-click="checkSchoolsMapLogin()">View Schools Map</a>
                     </li>
+                    <!-- <li>
+                      <a type="button" ng-click="checkCreateEventsLogin()">Events</a>
+                    </li> !-->
+                    <li class="divider"></li>                    
+                    <li class="nav-header">About Us</li>                    
+                    <li>
+                      <a ng-click="toVideos()">Learn about SingPath</a>
+                    </li> 
+                    <li>
+                      <a href ="https://www.facebook.com/pages/Singpath/288817147942516" target="_blank">
+					  Visit us on Facebook </a>
+                    </li> 					
                     
+                    <li class="divider"></li>                    
+                    <li class="nav-header">Create</li>
+                    <li>
+                      <a ng-click="checkCreatePathorLevelLogin()">Problems</a>
+                    </li>   
+                    <li>
+                      <a type="button" ng-click="checkStoryLogin()">Tutorials</a>
+                    </li>
+                    <!--
+                    <li>
+                      <a type="button" ng-click="checkCreateEventsLogin()">Events</a>
+                    </li>
+                     -->
+                    <li>
+                      <a type="button" ng-click="checkCreateTournamentLogin()">Tournaments</a>
+                    </li> 
                     
                     <li class="divider"></li> 
-                    <li class="nav-header">Others</li>  
-                                       
+                    <li class="nav-header">Other Stuff</li>  
+                    <li>
+                      <a type="button" ng-click="checkRankingLogin()">Location Rankings</a>
+                    </li>                  
                     <li>
                       <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
-                    </li> 
-                    <li>
-                      <a type="button" ng-click="checkRankingLogin()">Rankings</a>
-                    </li> 
-                                 
+                    </li>            
                   </ul>                
                 </li>
                 <li>

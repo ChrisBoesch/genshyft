@@ -109,8 +109,8 @@ describe("E2E: Testing Controllers", function () {
         });
 
         it('should select a problem', function() {
-            element('#menu *:contains("Path or Level")').click();
-            element('button:contains("Create and Edit Problems")').click();
+            element('#menu *:contains("Problems")').click();
+            //element('button:contains("Create and Edit Problems")').click();
             expect(browser().location().path()).toBe("/editproblem");
 
             expect(element('form[name="editProblem"]').css('display')).toBe('none');
@@ -127,8 +127,8 @@ describe("E2E: Testing Controllers", function () {
         });
 
         it('should run tests', function() {
-            element('#menu *:contains("Path or Level")').click();
-            element('button:contains("Create and Edit Problems")').click();
+            element('#menu *:contains("Problems")').click();
+            //element('button:contains("Create and Edit Problems")').click();
             select('path').option(0);
             select('problemSet').option(0);
             select('problem').option(0);
@@ -140,8 +140,8 @@ describe("E2E: Testing Controllers", function () {
         });
 
         it('should save a problem', function() {
-            element('#menu *:contains("Path or Level")').click();
-            element('button:contains("Create and Edit Problems")').click();
+            element('#menu *:contains("Problems")').click();
+            //element('button:contains("Create and Edit Problems")').click();
             select('path').option(0);
             select('problemSet').option(0);
             select('problem').option(0);
