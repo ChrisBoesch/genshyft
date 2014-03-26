@@ -2575,7 +2575,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
             "rsvp": "None"
         }
     ],
-    "cutoff": 30,
+    "cutoff": 300,
     "following": 4,
     "cutoffdate": "2014-03-22T10:48:27.878890",
     "registered": 82,
@@ -2618,7 +2618,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
     "created": "2014-01-10T15:41:36.848030",
     "registered": 49,
     "watching": 1,
-    "venue": "SMU",
+    "venue": null,
     "longitude": null,
     "participating": 47,
     "start": "2014-01-10T15:41:36.848050",
