@@ -1050,6 +1050,22 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     else return 0;
   };
+
+  //Remove Mentor - by Glen (GENShYFT)
+  $scope.remove_mentor = function(heatID, playerID){
+    $resource('/jsonapi/remove_mentor/:heatID/:playerID').get({"heatID":heatID,"playerID":playerID}, function(response){
+        $scope.acceptVal = response;
+        console.log("Mentor Removed");
+    });
+  };
+
+  //Accept Mentor - by Glen (GENShYFT)
+  $scope.accept_mentor = function(heatID, playerID){
+    $resource('/jsonapi/accept_for_mentee/:heatID/:playerID').get({"heatID":heatID,"playerID":playerID}, function(response){
+        $scope.acceptVal = response;
+        console.log("Mentor Accepted");
+    });
+  };
   
 }
 
