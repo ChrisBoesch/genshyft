@@ -734,7 +734,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	   // <p><a onClick=\"showAlert();\">Click Me</a></p>  "};
 	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
-	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>","url": "/jsonapi/lastsolution.html","testUrl" : "/web_test_example.html"};
+	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>", "url": "/jsonapi/lastsolution.html", "testUrl" : "/web_test_example.html"};
 		$httpBackend.whenPOST('/jsonapi/verify_for_game').respond(ezwebdevtestsoln2);  
 	  
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
@@ -750,6 +750,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
       	}
       });
 
+ 	$httpBackend.whenGET('html/get_solution_for_last_problem.html').passThrough();
+ 	$httpBackend.whenGET('html/get_tests_for_last_problem.html').passThrough();
 
     $httpBackend.whenJSONP(/^http:\/\/example.com\/verify/).respond(function(){return [500, "the hamster are dying."]});
     // $httpBackend.whenJSONP(/^http:\/\/example.com\/verify/).respond({
@@ -4109,7 +4111,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 				"problems": [
 					{
 						"skeleton": "<div>Hi Chris</div>",
-						"test": "describe(\"Problem 1\", function () {it('should pass this test', function () {expect(element('div').text()).toMatch(\"Hi Chris\");});});",
+						"test": "html/get_tests_for_last_problem.html",
 						"description": "Welcome to easy web development!",
 						"path_id": 10054,
 						"problemset_id": 10058,

@@ -3,7 +3,7 @@
   <head>
     <title>End2end Test Runner</title>
     <script src="http://code.angularjs.org/1.1.5/angular.js"></script>
-    <script src="../node_modules/karma-ng-scenario/lib/angular-scenario.js" ng-autotest></script>
+    <script src="../../node_modules/karma-ng-scenario/lib/angular-scenario.js" ng-autotest></script>
    <!--  // <script src="../bower_components/angular-mocks-unstable/angular-mocks.js"></script>
     // <script src="lib/ng-scenario-dsl.js"></script>
     // <script src="lib/window-dialog-commands.js"></script>
@@ -11,7 +11,7 @@
     // <script src="e2e/controllers/controllersSpec.js"></script>  -->
     <script type="text/javascript">
     function IframeCtrl($scope){
-      $scope.value ="html/get_tests_for_problem/123";
+      $scope.value ="";
 
       $scope.updatedata = function(data){
           $scope.value = data;  
@@ -26,9 +26,8 @@
   <script type="text/javascript">
       //var urlToGo = window.parent.scopeToShare;
       beforeEach(function () {
-        browser().navigateTo("html/get_solution_for_last_problem.html");
+        browser().navigateTo("get_solution_for_last_problem.html");
       });
-      
       describe("Problem 1", function () {
         it('should pass this test', function () {
            expect(element('div').text()).toMatch("Hi Chris"); 

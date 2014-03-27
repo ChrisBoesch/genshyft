@@ -276,6 +276,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     });
   }
 
+  //Gets tournaments user is a collaborator-GenShyft
+  /*
+  $scope.get_collaboratedTournaments = function(){
+    console.log("Retrieving all tournaments created by User from DB");
+    $resource("/jsonapi/get_collaborated_tournaments").query({},function(response){
+      $scope.collabTournaments = response; // stores the Json files
+      console.log($scope.collabTournaments);
+    });
+  }
+  */
+
   /*Get players of indivdual Tournament or Players without Group in Group Tournament - By Glen*/
   $scope.get_indivNoGrpPlayers = function(tournament){
       fetchRegisteredUser(tournament); 
@@ -1038,6 +1049,22 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     return -1;  
     }
     else return 0;
+  };
+
+  //Remove Mentor - by Glen (GENShYFT)
+  $scope.remove_mentor = function(heatID, playerID){
+    $resource('/jsonapi/remove_mentor/:heatID/:playerID').get({"heatID":heatID,"playerID":playerID}, function(response){
+        $scope.acceptVal = response;
+        console.log("Mentor Removed");
+    });
+  };
+
+  //Accept Mentor - by Glen (GENShYFT)
+  $scope.accept_mentor = function(heatID, playerID){
+    $resource('/jsonapi/accept_for_mentee/:heatID/:playerID').get({"heatID":heatID,"playerID":playerID}, function(response){
+        $scope.acceptVal = response;
+        console.log("Mentor Accepted");
+    });
   };
   
 }
