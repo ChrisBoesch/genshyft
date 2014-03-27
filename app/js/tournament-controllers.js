@@ -2,6 +2,8 @@
 
 /*GENShYFT's TournamentController*/
 function GenshyftTournamentController($scope,$resource,$timeout,$location,$cookieStore,$http,$route,$window,currentUserService){
+  
+  $scope.urlEdit=false;
   $scope.currentPlayerID = $cookieStore.get("playerID");
 
   $scope.GHeatModel = $resource('/jsonapi/get_heat_ranking');
@@ -85,6 +87,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     else{
       $scope.fetch_ranks($scope.heatID);
     };
+    $scope.urlEdit = ($location.search()).edit;
   };
 
   $scope.fetch_ranks = function(heatID){
