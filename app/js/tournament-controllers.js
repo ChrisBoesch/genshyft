@@ -654,6 +654,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   $scope.resetQuestionCart = function(){
     $scope.cartQuestions = [];
+    $route.reload();
   };
 
   /*method to hide modal after seeing questions in questions cart information*/
