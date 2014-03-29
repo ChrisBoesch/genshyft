@@ -23,7 +23,7 @@
 		padding: 5px 5px;
 	}
 </style>	
-<div class="container" id="manageTournament" style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="get_mytournaments()">
+<div class="container" id="manageTournament" style="position:relative;" ng-controller="GenshyftTournamentController" ng-init="get_mytournaments(); get_collaboratedTournaments()">
 	<div class="container">
 		<h4 class="well well-small bootCamp" align="center" id="well-c">My Tournaments</h4>
 	</div>	
@@ -67,7 +67,48 @@
 			</div>
 		</div>
 	</div>
+</br>
+	<!-- to check whether user is collaborator for other tournaments -->
+	<!--
+	<div class="row-fluid">
+		<div class="span12">
+			<b>Tournaments collaborated:</b>
+		</div>
+	</div>
+	<div ng-show="collabTournaments.length==0 || collabTournaments==undefined">
+		<center><b><h3> You are not a collaborator of any tournaments. </h3></b></center>
+	</div>
 
+	<div ng-show="collabTournaments.length!=0 || collabTournaments!=undefined">
+		<div class="row-fluid">	
+			<div class="span12 well well-small" >
+				<table ng-grid id="grpTournTable" class="table table-hover" width="100%">
+	                <tr class="tournTableHeaders">
+	                	<th class="tournTableHeader">Tournament Title</th>
+	                	<th class="tournTableHeader">Date Created</th>
+	                	<th class="tournTableHeader">Status</th>
+	                	<th class="tournTableHeader"></th>
+	                	<th class="tournTableHeader">Tournament Status Change Buttons:</th>
+	 				</tr>
+	                <tr class="warning" ng-repeat="collabTournament in collabTournaments">
+	                    <td class="tournInfo">{{collabTournament.shortTitle}}</td>
+	                    <td class="tournInfo">{{collabTournament.created}}</td>
+	                    <td class="tournInfo">{{collabTournament.status}}</td>
+	                    <td>
+	                    	<button class="btn btn-warning" type="button" ng-click="manage_my_tournament(collabTournament.tournamentID)"><i class="icon-cog icon-black"></i> Manage</button>
+	                    </td>
+	                    <td>
+	                    	<button type="button" class="btn btn-primary" ng-click="activateTournament(collabTournament.tournamentID)"><i class="icon-star icon-white"></i> Open</button>
+  							<button type="button" class="btn btn-info" ng-click="closeTournament(collabTournament.tournamentID)"><i class="icon-lock icon-white"></i> Close</button>
+  							<button type="button" class="btn btn-inverse" ng-click="hideTournament(collabTournament.tournamentID)"><i class="icon-eye-close icon-white"></i> Hide</button>
+  							<button class="btn btn-danger" type="button" ng-click="confirmDeleteTourn(collabTournament.tournamentID)"><i class="icon-trash icon-white"></i> Delete</button>
+	                    </td>
+	                </tr>
+            	</table>
+			</div>
+		</div>
+	</div>
+	-->
 	<div class="modal fade" id="deletePlayerTourn" style="display:none">         
 	    <div class="modal-body" style="color:black">
 	        <center><h2>Are you sure you want to delete this tournament?</h2></center>

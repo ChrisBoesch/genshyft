@@ -32,7 +32,7 @@
   
   <br>
   <div class="alert alert-info">
-      <center><h2>{{current_event.name}}</h2>
+      <center><h2>{{current_event.name | limitTo:60}}</h2>
 
       <h4>
         {{current_event.description}}
