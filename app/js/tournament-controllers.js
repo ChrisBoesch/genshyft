@@ -857,28 +857,34 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   }
 
   /*Registered to Tournament and redirect to join page, used in tournament.html - by Glen*/
-  $scope.register_for_tournament_new = function(tournamentID, tournamentPassword){
+  $scope.register_for_tournament_new = function(tournamentID, tournamentPassword, currentPlayerID, registeredPlayerIDs){
     //Use a normal form post for this legacy API.
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-    $http.post("/jsonapi/register_for_tournament_updated", {
-        tournamentID: tournamentID,
-        password: tournamentPassword
-    }).success(function (data, status, headers, config) {
-        $scope.registration_response = data;
+    if(registeredPlayerIDs.indexOf(currentPlayerID) >= 0){
+      $cookieStore.put("tournamentID", tournamentID);
+      $cookieStore.put("tournamentPassword", tournamentPassword);
+      $location.path("tournament-grpjoin");
+    }else{
+      $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+      $http.post("/jsonapi/register_for_tournament_updated", {
+          tournamentID: tournamentID,
+          password: tournamentPassword
+      }).success(function (data, status, headers, config) {
+          $scope.registration_response = data;
+          console.log(data);
+          if (data.failed){
+            alert(data.failed);
+          }
+          else{
+            $cookieStore.put("tournamentID", tournamentID);
+            $cookieStore.put("tournamentPassword", tournamentPassword);
+            $location.path("tournament-grpjoin");  
+          }
+      }).error(function (data, status, headers, config) {
+        console.log("Error");
+        alert("An error occurred.");
         console.log(data);
-        if (data.failed){
-          alert(data.failed);
-        }
-        else{
-          $cookieStore.put("tournamentID", tournamentID);
-          $cookieStore.put("tournamentPassword", tournamentPassword);
-          $location.path("tournament-grpjoin");  
-        }
-    }).error(function (data, status, headers, config) {
-      console.log("Error");
-      alert("An error occurred.");
-      console.log(data);
-    });
+      });
+    }
   };
 
   /*Redirection to Group Join- By Glen*/
