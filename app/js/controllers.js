@@ -4356,7 +4356,7 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
 		});
 	};
 
-	$scope.check_solution_for_game = function() {
+	$scope.check_solution_for_game_html = function() {
       //$scope.solution
       //$scope.current_problem
       //$scope.game.gameID
