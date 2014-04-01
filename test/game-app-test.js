@@ -377,13 +377,13 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		{ 
 			"playerID":57754,
 			"nickname":"Chris", 
-			"group":1
+			"group":0
 		},
 		
 		{ 
 			"playerID":2739102,
-			"nickname":"Player 2sdfghfhazzzzzzzzzzzzzzzzzzzz", 
-			"group":1
+			"nickname":"James", 
+			"group":0
 		},
 		{
 			"playerID":9379339,
@@ -403,28 +403,28 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		{
 			"playerID":9379338,
 			"nickname":"Player 6", 
-			"group":1
+			"group":2
 		},
 		{ 
 			"playerID":57752,
 			"nickname":"Player 7", 
-			"group": 1
+			"group": 2
 		},
 		
 		{ 
 			"playerID":2739100,
 			"nickname":"Player 8", 
-			"group":1
+			"group":3
 		},
 		{
 			"playerID":9379337,
 			"nickname":"Player 9", 
-			"group":1
+			"group":3
 		},
 		{ 
 			"playerID":57751,
 			"nickname":"Player 10", 
-			"group": 1
+			"group":4
 		},
 		
 		{ 
@@ -451,7 +451,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		{
 			"playerId":9379335,
 			"nickname":"Player 15", 
-			"group":3
+			"group":5
 		}],
 		
 	    "numRounds": 1,
