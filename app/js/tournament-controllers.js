@@ -12,6 +12,9 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.playerRanks = [];
   $scope.countval = 10;
 
+  $scope.timeoutVarRanking=null;
+  $scope.heatStatus=null;
+
   $scope.heat = null;
   $scope.round = null;
   $scope.roundDirty = false;
@@ -95,10 +98,18 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         $scope.tournament = response;
         //console.log("test");
         //console.log($scope.tournament.round[0].registeredPlayers);
-        $scope.playerRanks = $scope.tournament.ranking;        
+        if($scope.tournament.ranking.length!=0){
+          $scope.playerRanks = $scope.tournament.ranking;
+          //$scope.heatStatus = $scope.tournament.heatStatus;
+        }             
       });
-      console.log("fetch_ranks");
-      $scope.timeoutVarRanking = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
+      
+      //if($scope.heatStatus == "Open"){
+        console.log("fetch_ranks");
+        $scope.timeoutVarRanking = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
+      //}else{
+        $timeout.cancel($scope.timeoutVarRanking);
+      //}
   };
 
   /* Fetch ranking once - by Glen GENShYFT*/
