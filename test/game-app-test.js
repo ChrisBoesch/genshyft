@@ -4111,7 +4111,6 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 				"problems": [
 					{
 						"skeleton": "<div>Hi Chris</div>",
-						"test": "html/get_tests_for_last_problem.html",
 						"description": "Welcome to easy web development!",
 						"path_id": 10054,
 						"problemset_id": 10058,
