@@ -377,7 +377,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		{ 
 			"playerID":57754,
 			"nickname":"Chris", 
-			"group":0
+			"group":1
 		},
 		
 		{ 
@@ -734,7 +734,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	   // <p><a onClick=\"showAlert();\">Click Me</a></p>  "};
 	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
-	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>", "url": "/jsonapi/lastsolution.html", "testUrl" : "html/get_tests_for_last_problem.html"};
+	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>", "url": "/jsonapi/lastsolution.html", "testUrl" : "/web_test_example.html"};
 		$httpBackend.whenPOST('/jsonapi/verify_for_game').respond(ezwebdevtestsoln2);  
 	  
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
@@ -1343,6 +1343,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	};
 		
 	$httpBackend.whenGET('/jsonapi/game/5817368383062016').respond(tournamentGame);
+	//$httpBackend.whenGET('/jsonapi/game/5817368383062016').respond(tournamentGame);
 
     $httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=6718984023965696').respond({"ranking": [{"status": "GAME CLOSED", "playerid": 57754, "solved_problems": 2, "flagUrl": "/static/flags/sg_on.png", "finished": "3:10:39.723910", "gravatar": "http://www.gravatar.com/avatar/6e64bb2cab5367fd6e201df2aa722512/?default=&amp;s=30", "professional": true, "total_problems": 2, "nickname": "Chris"}, {"status": "ACCEPTING SOLUTIONS", "playerid": 2739102, "solved_problems": 1, "flagUrl": "/static/flags/sg_on.png", "finished": "3:23:26.882770", "gravatar": "http://www.gravatar.com/avatar/45db5a046daf286a8c901e958fdb384e/?default=&amp;s=30", "professional": true, "total_problems": 2, "nickname": "Prof Boesch"}], "heatStopTime": "2013-10-07 03:55:37.269500", "heatDescription": "Heat 6", "tournamentID": 5060388987076608, "tournamentDescription": "No details", "roundID": 4912161075757056, "heatID": 6718984023965696, "heatStartTime": "2013-10-07 02:55:37.269500", "roundDescription": "test round 1", "currentTime": "2013-10-07 06:19:43.955000", "tournamentType": "Normal", "type": "heat ranking"});
       
@@ -4111,6 +4112,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 				"problems": [
 					{
 						"skeleton": "<div>Hi Chris</div>",
+						"test": "html/get_tests_for_last_problem.html",
 						"description": "Welcome to easy web development!",
 						"path_id": 10054,
 						"problemset_id": 10058,
