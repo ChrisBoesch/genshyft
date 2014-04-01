@@ -4333,8 +4333,9 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
 			//$scope.examples = $scope.currEZWebDevQn.examples;
 			$scope.problemId = $scope.currEZWebDevQn.id;
 			$scope.gameID = $scope.ezwebdevcall.gameID;
+			$scope.codeType = $scope.currEZWebDevQn.interface.codeHighlightKey;
 			$scope.testURL = "html/get_tests_for_last_problem.html";
-			console.log($scope.testURL);
+			console.log($scope.codeType);
 		})
 
 	};

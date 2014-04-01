@@ -99,7 +99,7 @@
                                 <li class="tabspacing active">
                                   <a href="web_play_page.html#t3" data-toggle="tab">Solution</a>
                                 </li>
-                                <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                                <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();" ng-show="codeType == 'html'">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
                             </ul>
                             <div  class="tab-content">
                                 <div class="tab-pane fade in active" id="t3" style="height:300px;">
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="span6 well">
+                    <div class="span6 well" ng-show="codeType == 'html'">
                         <!-- Tab for Sample Answer and Outcome-->
                         <div id="tab21" class="tabbable">
                             <ul class="nav nav-tabs">
