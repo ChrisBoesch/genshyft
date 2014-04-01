@@ -63,7 +63,11 @@
                         <li class="tabspacing active">
                           <a href="tournament-grpplay#t3" data-toggle="tab">Solution</a>
                         </li>
-                        <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                        <!--For HTML problems-->
+                        <button class="btn btn-primary pull-right" ng-controller="EZWebGameController"
+                         ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                        <!--For Non-HTML problems-->
+                        <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();" ng-hide="codeType == 'html'">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
                     </ul>
                     <div  class="tab-content">
                         <div class="tab-pane fade in active" id="t3" style="height:300px;">
@@ -76,7 +80,9 @@
                     </div>
                 </div>
             </div>
-            <div class="span6 well">
+
+            <!--Usual Langauage Path Problems-->
+            <div class="span6 well" ng-hide="codeType == 'html'">
                 <!-- Tab for Sample Answer and Outcome-->
                 <div id="tab21"class="tabbable">
                     <ul class="nav nav-tabs">
@@ -120,6 +126,45 @@
                   </div>
                 </div>
             </div>
+
+
+            <!--HTML Path Problems-->
+            <div class="span6 well" ng-show="codeType == 'html'" ng-controller="EZWebGameController">
+                        <!-- Tab for Sample Answer and Outcome-->
+                        <div id="tab21" class="tabbable">
+                            <ul class="nav nav-tabs">
+                                <li id = "ta11" class="tabspacing active">
+                                  <a href="" data-toggle="tab" ng-click="theTab=0">Your Code</a>
+                                </li>
+                                <li id = "ta21" class="tabspacing">
+                                  <a href="" data-toggle="tab" ng-click="theTab=1">Tests</a>
+                                </li>  
+                            </ul>
+                            <div class="tab-content">
+                              <div ng-show="theTab" style="height:317px;">
+                                <input type="submit" value="reload" ng-click="fill_test_iframe()">
+                                
+                                {{issues}} issue(s) to correct.<br>
+                                <iframe id="testIframe" height="320" width="100%" ng-src="{{testURL}}"></iframe>
+                                <input type="text" id="urlToPass" ng-model="urlToPass"/>
+                              </div>
+                              <div ng-show="!theTab" style="height:317px;">
+                                
+                                <input type="submit" value="refresh" ng-click="fill_iframe()">
+                                in {{counter}} seconds<br>
+                                
+                                
+                                <iframe id="anIframe" height="320" width="100%" src=""></iframe><br>
+                                <!-- Example (Put this in a 3rd tab)<br>
+                                <iframe id="exampleIframe" src=""></iframe><br> -->
+                                
+                                
+                              </div>
+
+                          </div>
+                        </div>
+                    </div>
+
         </div>  
 
         <div class="modal fade" id="finish_all_info" style="display:none">

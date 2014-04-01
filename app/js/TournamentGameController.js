@@ -35,7 +35,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
         $scope.update_remaining_problems();
         //Added by GENShYFT - Glen
         $scope.get_mentor($scope.game.heatID, $scope.game.playerID);
-		});
+		    $scope.codeType="ruby";
+    });
     };
 
     $scope.update_remaining_problems = function(){
@@ -178,6 +179,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 
 
     $scope.check_solution_for_game = function() {
+      console.log("Non-html");
       //$scope.solution
       //$scope.current_problem
       //$scope.game.gameID
