@@ -4381,7 +4381,7 @@ function EZWebGameController($scope,$resource,$cookieStore,$timeout,$http,$route
             $scope.solution_check_result = response;
             //If solved, update the game.
             $scope.urlToPass = $scope.solution_check_result.url;
-            $scope.testURL = "html/get_tests_for_last_problem.html";
+            $scope.testURL = $scope.solution_check_result.testUrl;
             
             //console.log("This is urlToPass " + $scope.urlToPass);
 
