@@ -64,8 +64,8 @@
                           <a href="tournament-grpplay#t3" data-toggle="tab">Solution</a>
                         </li>
                         <!--For HTML problems-->
-                        <button class="btn btn-primary pull-right" ng-controller="EZWebGameController"
-                         ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                        <button class="btn btn-primary pull-right" 
+                         ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;RunHTML&nbsp;&nbsp;</button>
                         <!--For Non-HTML problems-->
                         <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();" ng-hide="codeType == 'html'">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
                     </ul>
@@ -129,7 +129,7 @@
 
 
             <!--HTML Path Problems-->
-            <div class="span6 well" ng-show="codeType == 'html'" ng-controller="EZWebGameController">
+            <div class="span6 well" ng-show="codeType == 'html'">
                         <!-- Tab for Sample Answer and Outcome-->
                         <div id="tab21" class="tabbable">
                             <ul class="nav nav-tabs">

@@ -734,7 +734,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	   // <p><a onClick=\"showAlert();\">Click Me</a></p>  "};
 	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
-	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>", "url": "/jsonapi/lastsolution.html", "testUrl" : "/web_test_example.html"};
+	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>", "url": "/jsonapi/lastsolution.html", "testUrl" : "html/get_tests_for_last_problem.html"};
 		$httpBackend.whenPOST('/jsonapi/verify_for_game').respond(ezwebdevtestsoln2);  
 	  
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
@@ -1272,7 +1272,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
       var tournamentGame = {
 	    "game_end": "2013-09-29 09:27:03.104550",
 	    "player": "Chris",
-	    "solvedProblemIDs": [10033],
+	    "solvedProblemIDs": [10033,17155],
 	    "currentProblem_id": "TBD",
 	    "playerID": 57754,
 	    "allSolved": false,
@@ -1282,7 +1282,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	    "status": "GAME CLOSED",
 	    "problemIDs": [
 	        10033,
-	        17155
+	        17155,
+	        52345
 	    ],
 	    "problems": {
 	        "problems": [
@@ -1325,7 +1326,28 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	                },
 	                "id": 17155,
 	                "name": "Variables"
-	            }
+	            },
+	            {
+					"skeleton": "<div>Hi Chris</div>",
+					"test": "html/get_tests_for_last_problem.html",
+					"description": "Welcome to easy web development!",
+					"path_id": 10054,
+					"problemset_id": 10058,
+					"examples":"<b>Hello World</b>",
+					"interface":{
+						"codeHighlightKey": "html",
+	                    "name": "HTML",
+	                    "description": "HTML"
+					},
+					"problemsetorder":1,
+					"editor":{
+						"player_id": 58546,
+	                    "nickname": "Danny",
+	                    "email": "PRIVATE"
+					},
+					"id": 52345,
+					"name": "Introduction"
+				}
 	        ],
 	        "type": "problems"
 	    },

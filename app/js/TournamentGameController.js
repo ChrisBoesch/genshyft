@@ -35,7 +35,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
         $scope.update_remaining_problems();
         //Added by GENShYFT - Glen
         $scope.get_mentor($scope.game.heatID, $scope.game.playerID);
-		    $scope.codeType="ruby";
+		    $scope.codeType="html";
+        console.log($scope.codeType);
     });
     };
 
@@ -59,6 +60,76 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       }
       //Update the current problem index based on remaining problems and items skipped. 
       $scope.move_to_next_unsolved_problem();
+    };
+
+    $scope.check_solution_for_game_html = function() {
+      //$scope.solution
+      //$scope.current_problem
+      //$scope.game.gameID
+
+      //Update the iFrames when run is clicked.
+      $scope.theTab=1; 
+      $scope.fill_iframe();
+      //$scope.fill_example_iframe();
+      $('#t11').removeClass('active');
+      $('#t21').addClass('active');
+      $('#ta11').removeClass('active');
+      $('#ta21').addClass('active');
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.problemId,
+                        game_id:$scope.gameID};
+      
+      //Post the solution
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            //If solved, update the game.
+            $scope.urlToPass = $scope.solution_check_result.url;
+            $scope.testURL = $scope.solution_check_result.testUrl;
+            
+            //console.log("This is urlToPass " + $scope.urlToPass);
+
+          $scope.fill_test_iframe();  
+            if($scope.solution_check_result.last_solved){
+                $scope.fetch($scope.game.gameID);
+            }
+      });
+
+
+
+    };
+
+  $scope.fill_iframe = function() { 
+      console.log("filling solution iFrame");
+      var iFrame = angular.element( document.querySelector( '#anIframe' ) );
+      iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.solution1));
+    };
+    $scope.fill_example_iframe = function() { 
+      console.log("filling example iFrame");
+      var iFrame = angular.element( document.querySelector( '#exampleIframe' ) );
+      iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
+    };
+
+    $scope.fill_test_iframe = function() { 
+      console.log("filling test iFrame");
+      var iframe = angular.element( document.querySelector( '#testIframe' ) );
+      //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
+      iframe.attr("src", $scope.testURL);//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
+      //var scopeToShare = angular.element(document.querySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass;
+      //console.log(scopeToShare + " from fill");
+      //document.getElementById("testIframe").contentWindow.angular.element();
+      $scope.log_test_iframe();
+
+    };
+    $scope.log_test_iframe = function() { 
+      var iframe = angular.element( document.querySelector( '#testIframe' ).contentDocument.getElementsByTagName('div')[0].innerText.split("Errors"));
+      var errors = iframe[1].split(" ")[0];
+      var failures = iframe[1].split(" ")[1].split("Failures")[1];
+      $scope.issues = parseInt(errors) + parseInt(failures);      
+      console.log("There were "+errors+" errors and "+failures+" failures and "+$scope.issues+" issues overall.");
+      
     };
 
     //By GENShYFT - Getting Mentee
