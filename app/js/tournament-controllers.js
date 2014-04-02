@@ -108,7 +108,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
         console.log("fetch_ranks");
         $scope.timeoutVarRanking = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
       //}else{
-        $timeout.cancel($scope.timeoutVarRanking);
+        //$timeout.cancel($scope.timeoutVarRanking);
       //}
   };
 
