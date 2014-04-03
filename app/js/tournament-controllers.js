@@ -120,7 +120,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     else{
       console.log("Fetching rankings...");
-      $scope.GHeatModel.get({"heatID":$scope.heatID,"nocache":"true"},function(response){
+      $scope.GHeatModel.get({"heatID":$scope.heatID,"nocache":true},function(response){
         $scope.tournament = response;
         $scope.playerRanks = $scope.tournament.ranking;        
       });
