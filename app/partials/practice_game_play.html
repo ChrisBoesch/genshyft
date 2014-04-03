@@ -1,0 +1,141 @@
+ 
+<style type='text/css'>
+ .ace_editor  {
+    height : 280px;
+  }
+</style>
+<!-- /.navbar-wrapper -->
+<br>
+<div ng-controller="PracticeGameController" ng-init="list()" class="container">
+    <div>
+        <!--<a class="janrainEngage" href="#"><input type="submit" value="Hyperlinked Sign In Button"></a>-->  
+        <div class="row-fluid"> 
+            <div class="span12 well">
+                <div class="row-fluid">
+                    <div class="span9">
+                        <div class="span3" align="left">Level Progress:&nbsp;&nbsp;&nbsp; <span ng-bind="current_level_progress"> </span>/<span ng-bind="total_level_progress"></span>
+                        </div>
+                        <div align="left"> 
+                            <div class="progress progress-success" align="left">
+                                <div class="bar" style="width:{{count = (current_level_progress/total_level_progress)*100 |number:0}}%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3" align="left">
+                        <font>
+                                <p>
+                                    Game progress 
+                                    &nbsp; <span ng-bind="game.numSolvedProblems"></span> of <span ng-bind="game.numProblems"></span>
+                                </p>
+                        </font>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span9" style="border: 1px solid #DBDACB;">
+                        <div style="text-align: left;">
+                            <h5>&nbsp;Current Practice Question</h5>
+                                <font>                                
+                                    &nbsp;Name: <span ng-bind="game.problems.problems[current_problem_index].name"></span>
+                                    <br>&nbsp;Description: <span ng-bind="game.problems.problems[current_problem_index].description"></span>
+                                </font>
+                        </div>
+                    </div>
+                    <div class="span3" >
+                        <div class="span12" style="border: 1px solid #DBDACB;">
+                            <font>
+                                &nbsp;&nbsp;Path Name: <span ng-bind="nameOfPath"></span>
+                                <br>
+                                    &nbsp;&nbsp;Level: <span ng-bind="levelNumber"></span>
+                                <br>
+                                    &nbsp;&nbsp;Difficulty: <span ng-bind="gameDifficulty"></span>
+                            </font>
+                        </div>
+                        <div class="span12" align="center" style="padding-top: 5px">
+                            <p> 
+                                <button class="btn btn-primary" ng-click="skip_problem()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+       
+        <div class="row-fluid">
+            <div class="span6 well">
+                <!-- Tab for Run-->
+                <div id="tab11"class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="tabspacing active">
+                          <a href="practice_game_play.html#t3" data-toggle="tab">Solution</a>
+                        </li>
+                        <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                    </ul>
+                    <div  class="tab-content">
+                        <div class="tab-pane fade in active" id="t3" style="height:300px;">
+                            <div>
+                                <section>
+                                    <div id="editorPractice" ui-ace="" ng-model="solution1"><span ng-bind="game.problems.problems[current_problem_index].skeleton"></div>
+                                </section>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span6 well">
+                <!-- Tab for Sample Answer and Outcome-->
+                <div id="tab21"class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li id = "ta11" class="tabspacing active">
+                          <a href="practice_game_play.html/#t11" data-toggle="tab">Sample Answer</a>
+                        </li>
+                        <li id = "ta21" class="tabspacing">
+                          <a href="practice_game_play.html/#t21" data-toggle="tab">Outcome</a>
+                        </li>  
+                    </ul>
+                    <div class="tab-content">
+                    <div class="tab-pane fade in active" id="t11" style="height:317px;">
+                        <div>Examples: 
+                            <pre style = "color:blue;"><span ng-bind="game.problems.problems[current_problem_index].examples"></span></pre>
+                        </div>
+                    </div>
+                    <div ng-hide="solution_check_result.error" class="tab-pane fade in" id="t21" style="height:320px;">
+                        <table border=1 bgcolor=#FFFFFF width=100%>
+                            <tr>
+                                <th height="50">Called</th>
+                                <th height="50">Expected</th>
+                                <th height="50">Recieved</th>
+                                <th height="50">Correct</th>
+                            </tr>
+                            <tr ng-repeat="line in solution_check_result.results">
+                                <td height="40">{{line.call}}</td>
+                                <td height="40">{{line.expected}}</td>
+                                <td height="40">{{line.received}}</td>
+                                <td height="40" ng-show="line.status" bgcolor=#00FF00>{{line.status}}</td>
+                                <td height="40"ng-show="!line.status" bgcolor=#FF0000>{{line.status}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" ng-hide="!solution_check_result.errors">Errors: <pre style = "color:blue;"><span ng-bind="solution_check_result.errors"></span></pre></td>
+                            </tr>
+                        </table><br>
+                      Private Test Results: {{solution_check_result.other_tests_result}}
+                    </div>
+                    <div ng-show="solution_check_result.error">
+                        {{solution_check_result.error}}
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>  
+
+        <div class="modal fade" id="finish_all_info" style="display:none">
+            <div class="modal-body">
+              <h3><font color="blue">Congratulations! You finished all questions in this quest.</font><h3>
+            </div>
+            <div class="modal-footer">
+                <a href="index.html" class="btn" data-dismiss="modal">Go to Home Page</a>
+                <button type="button" ng-click="goStoryBoard()" data-dismiss="modal" class="btn btn-primary">Go To Story Board</button>
+            </div>
+        </div> 
+    </div>
+</div>

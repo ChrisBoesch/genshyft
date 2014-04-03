@@ -734,7 +734,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	   // <p><a onClick=\"showAlert();\">Click Me</a></p>  "};
 	  $httpBackend.whenPOST('/jsonapi/render_ezwebdev').respond(ezwebdevtestsoln);
 	  
-	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>", "url": "/jsonapi/lastsolution.html", "testUrl" : "/web_test_example.html"};
+	  var ezwebdevtestsoln2 = {	"renderReturn":"<div>Hi Chris</div>", "url": "/jsonapi/lastsolution.html", "testUrl" : "html/get_tests_for_last_problem.html"};
 		$httpBackend.whenPOST('/jsonapi/verify_for_game').respond(ezwebdevtestsoln2);  
 	  
       var bad_verify_result = {"solved": false, "printed": "", "verification_message": "Your solution does not pass all the provided tests.", "results": [{"status": false, "expected": 2, "call": "spies", "received": "3"}]};
@@ -1261,18 +1261,21 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		    "currentTime": "2014-01-09 09:38:59.184880",
 		    "tournamentType": "Normal",
 		    "type": "heat ranking",
-		    "isGroup":true
+		    "isGroup":true,
+		    "heatStatus":"Open"
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392&nocache=true').respond(menteeVal);
 
+	var menteeVal2 = {"ranking":[],"heatStopTime":"2013-12-11 19:31:21.814470","heatDescription":"Heat 1","tournamentID":5060388987076608,"tournamentDescription":"Prize round for Python Enrichment December 2013","roundID":4912161075757056,"heatID":4691468476219392,"heatStartTime":"2013-12-09 07:31:21.814470","roundDescription":"Prize Round","currentTime":"2014-01-09 09:38:59.184880","tournamentType":"Normal","type":"heat ranking","isGroup":true, "heatStatus":"Open"};
+	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219391').respond(menteeVal2);
       //$httpBackend.whenGET('/jsonapi/game/5817368383062016').respond({"game_end": "2013-09-29 09:27:03.104550", "player": "Chris", "solvedProblemIDs": [], "currentProblem_id": "TBD", "playerID": 57754, "allSolved": false, "game_created": "2013-09-29 08:27:02.906550", "numProblems": 2, "numSolvedProblems": 1, "status": "GAME CLOSED", "problemIDs": [10033, 17155], "problems": {"problems": [{"skeleton": "oops=317", "description": "When you run your code, SingPath has certain tests that it checks to see if you did what you were supposed to do.  If incorrect you'll see a table with the results of the tests.  \r\n\r\nNotice that the starter code has the wrong value. Go ahead and run the code now so you can see the results (you can finish reading this after you run it).\r\n\r\nThe results tell you that SingPath looked at the variable named 'oops' expecting to find 713, but found 317 instead. Fix the error now and run it to advance to the next problem.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> oops\r\n 713", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 4, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 10033, "name": "Expected Results"}, {"skeleton": "age = ", "description": "Variables are an important part of programming; they allow the you to store a value and reuse it later.  You are allowed to use just about anything you like as your variable name.\r\n\r\nFor this problem, create a variable named 'age' with the value 7.", "path_id": 10030, "problemset_id": 11021, "examples": ">>> age\r\n7", "interface": {"codeHighlightKey": "python", "name": "Python", "description": "Python 2.5"}, "problemsetorder": 5, "editor": {"player_id": 58546, "nickname": "Danny", "email": "PRIVATE"}, "id": 17155, "name": "Variables"}], "type": "problems"}, "nextProblemID": "TBD", "gameID": "5817368383062016", "tournamentID": 5060388987076608, "name": "Tournament game", "roundID": 4912161075757056, "questID": null, "heatID": 4691468476219392, "game_start": "2013-09-29 08:27:03.040390", "currentTime": "2013-09-29 13:54:35.933410", "game_type": "Timed Interview", "timelimit": 3600});
 
       var tournamentGame = {
 	    "game_end": "2013-09-29 09:27:03.104550",
 	    "player": "Chris",
-	    "solvedProblemIDs": [10033],
+	    "solvedProblemIDs": [10033,17155],
 	    "currentProblem_id": "TBD",
 	    "playerID": 57754,
 	    "allSolved": false,
@@ -1282,7 +1285,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	    "status": "GAME CLOSED",
 	    "problemIDs": [
 	        10033,
-	        17155
+	        17155,
+	        52345
 	    ],
 	    "problems": {
 	        "problems": [
@@ -1325,7 +1329,28 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	                },
 	                "id": 17155,
 	                "name": "Variables"
-	            }
+	            },
+	            {
+					"skeleton": "<div>Hi Chris</div>",
+					"test": "html/get_tests_for_last_problem.html",
+					"description": "Welcome to easy web development!",
+					"path_id": 10054,
+					"problemset_id": 10058,
+					"examples":"<b>Hello World</b>",
+					"interface":{
+						"codeHighlightKey": "html",
+	                    "name": "HTML",
+	                    "description": "HTML"
+					},
+					"problemsetorder":1,
+					"editor":{
+						"player_id": 58546,
+	                    "nickname": "Danny",
+	                    "email": "PRIVATE"
+					},
+					"id": 52345,
+					"name": "Introduction"
+				}
 	        ],
 	        "type": "problems"
 	    },

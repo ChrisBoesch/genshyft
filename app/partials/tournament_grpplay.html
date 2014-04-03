@@ -47,7 +47,7 @@
                 <div class="row-fluid">
                     <div class="span12">                  
                         <b>Round progress: </b> <span ng-bind="game.numSolvedProblems"></span><b> / </b><span ng-bind="game.numProblems"></span> 
-                        </br><b>Mentor :</b> <b><font color='blue'><span ng-bind="mentor_name"></span></font></b> <button class="btn btn-danger" ng-show="mentor_id!=null && mentor_hasArrived==false" ng-click='mentor_arrived(game.playerID, game.heatID)'> <b>Has Mentor Arrived ? </b></button>
+                        </br><b>Mentor :</b> <b><font color='blue'><span ng-bind="mentor_name"></span></font></b> <input type="checkbox" ng-show="mentor_id!=null && mentor_hasArrived==false" ng-click='mentor_arrived(game.playerID, game.heatID)'>
                         </br><b ng-show="remaining_problems.length == 0" >Assigned To :</b> <font color='red'><b><span ng-bind="mentee_name"></span></b></font>
                         </br>
                     </div>
@@ -64,8 +64,8 @@
                           <a href="tournament-grpplay#t3" data-toggle="tab">Solution</a>
                         </li>
                         <!--For HTML problems-->
-                        <button class="btn btn-primary pull-right" ng-controller="EZWebGameController"
-                         ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                        <button class="btn btn-primary pull-right" 
+                         ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;RunHTML&nbsp;&nbsp;</button>
                         <!--For Non-HTML problems-->
                         <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();" ng-hide="codeType == 'html'">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
                     </ul>
@@ -129,7 +129,7 @@
 
 
             <!--HTML Path Problems-->
-            <div class="span6 well" ng-show="codeType == 'html'" ng-controller="EZWebGameController">
+            <div class="span6 well" ng-show="codeType == 'html'">
                         <!-- Tab for Sample Answer and Outcome-->
                         <div id="tab21" class="tabbable">
                             <ul class="nav nav-tabs">

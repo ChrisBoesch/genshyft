@@ -13,7 +13,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.countval = 10;
 
   $scope.timeoutVarRanking=null;
-  $scope.heatStatus=null;
+  $scope.heatStatus="Open";
 
   $scope.heat = null;
   $scope.round = null;
@@ -95,10 +95,10 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   $scope.fetch_ranks = function(heatID){
       $scope.GHeatModel.get({"heatID":heatID}, function(response){
-        $scope.tournament = response;
-        //console.log("test");
+        var tournamentVar = response;
         //console.log($scope.tournament.round[0].registeredPlayers);
-        if($scope.tournament.ranking.length!=0){
+        if(tournamentVar.ranking.length!=0){
+          $scope.tournament = tournamentVar;
           $scope.playerRanks = $scope.tournament.ranking;
           //$scope.heatStatus = $scope.tournament.heatStatus;
         }             
@@ -120,7 +120,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
     else{
       console.log("Fetching rankings...");
-      $scope.GHeatModel.get({"heatID":$scope.heatID,"nocache":"true"},function(response){
+      $scope.GHeatModel.get({"heatID":$scope.heatID,"nocache":true},function(response){
         $scope.tournament = response;
         $scope.playerRanks = $scope.tournament.ranking;        
       });
