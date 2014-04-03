@@ -426,7 +426,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			});
 
     };
-
+//----------------------------------------HTML render section----------------------------------------------
     $scope.check_solution_for_game_html = function() {
       //$scope.solution
       //$scope.current_problem
@@ -498,7 +498,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
       
     };
 
-
+//-------------------------------------------------End HTML render section--------------------------------------------
     $scope.verify_solution = function() {
       //$scope.solution
       //$scope.tests
