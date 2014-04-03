@@ -530,7 +530,8 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 			else{
 				//Hi RJ. Here is the change that I made to help simplify things.
 				//The goal is to simplify every game play page to just use one controller. 
-				window.location.href = "practice_game_play.html";
+				$location.path("practice-game-play");
+				//window.location.href = "practice_game_play.html";
 				//window.location.href = "normal_play_page.html";
 			}
 		}
