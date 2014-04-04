@@ -45,7 +45,11 @@
         <h3 ng-show="current_event.time_to_cutoff.days>=0">Time to cutoff: <span id="countdown"></span></h3>
         <br>
         <br>
+
+
+        <div ng-show="current_event.name.length =<0">
         Loading latest ranking.. This may take a few seconds..
+      </div>
         <script type="application/javascript">
 
          </script>
