@@ -21,7 +21,7 @@
 <!-- Concat event id to url -->
 <!-- Render eventsTable page based on url parameter (event id) -->
 <div class="row-fluid">
-<div ng-controller="EventTableController" ng-init="fetch_event(); get_participants(); get_eventID(); get_currentPlayerRanking(); get_currentUrl();" class="container">
+<div ng-controller="EventTableController" ng-init="fetch_event(); get_participants(); get_eventID(); get_eventIDs(); get_currentPlayerRanking(); get_currentUrl();" class="container">
 
 
 <button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
@@ -32,6 +32,7 @@
   
   <br>
   <div class="alert alert-info">
+    <div ng-hide="isEventIDs">
       <center><h2>{{current_event.name | limitTo:60}}</h2>
 
       <h4>
@@ -49,10 +50,11 @@
 
         <div ng-hide="current_event.name.length > 0">
         Loading latest ranking.. This may take a few seconds..
-      </div>
-        <script type="application/javascript">
-
-         </script>
+        </div>
+    </div>
+        <div ng-show="isEventIDs">
+          <h2><center>Aggregate event rankings are not yet supported</center></h2>
+        </div>
        
     </center>
 

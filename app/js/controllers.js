@@ -3951,6 +3951,7 @@ function EventController($scope, $resource, $location, $http, $route){
 function EventTableController($scope, $resource, $route, $location, $filter, $http){ 
 		$scope.currentUrl = $location.absUrl();
 		$scope.eventID = ($location.search()).eventID;
+		$scope.eventIDs = ($location.search()).eventIDs;
 		$scope.noEventID = false;
     	$scope.eventTitle="";
   		$scope.eventDescription="";
@@ -3958,9 +3959,18 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.progLang="";
   		$scope.firstButton=false;
   		$scope.secondButton=false;
+  		$scope.isEventIDs=false;
   		$scope.player = $resource('/jsonapi/player').get();
 
   		$scope.rsvpList = [];
+
+  		$scope.get_eventIDs = function(){
+    		$scope.eventIDs = ($location.search()).eventIDs;
+    		console.log("EventIDs: " + $scope.eventIDs);
+    		if($scope.eventIDs.length>0){
+    			$scope.isEventIDs=true;
+    		}
+    	},
 
   		$scope.rsvpButton = function(eventid, decisionNum){
         	var response = $http.get('/jsonapi/eventrsvp/' + eventid + '/' + decisionNum);

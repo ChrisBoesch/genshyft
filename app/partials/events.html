@@ -21,7 +21,10 @@
           <div class="span12 well">
             <h1 class="well well-small bootCamp" align="center">- UPCOMING EVENTS -</h1>
           <div class="container"> 
-            <div class="span11"> 
+            <div class="span11">
+              <div ng-hide="event.name.length > 0">
+                <h2><center>Loading events.. This may take a few seconds..</center></h2>
+              </div>
           <ol>
             <div ng-repeat="event in events" ng-hide="event.archived">
               <h4>{{event.name}}</h4><br>
