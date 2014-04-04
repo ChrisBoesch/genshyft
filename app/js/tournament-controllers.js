@@ -665,6 +665,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
 
   $scope.resetQuestionCart = function(){
     $scope.cartQuestions = [];
+    $('#changesSaved').modal('hide');
     $route.reload();
   };
 

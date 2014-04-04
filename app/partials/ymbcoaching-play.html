@@ -553,8 +553,10 @@
                                 <li class="tabspacing active">
                                   <a href="ymbcoaching-play/#t3" data-toggle="tab">Solution</a>
                                 </li>
-                                <button class="btn btn-primary pull-right" ng-show ="runButton" ng-click="check_solution_for_game();" >&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                                <button class="btn btn-primary pull-right" ng-show ="runButton" ng-hide="codeType == 'html'" ng-click="check_solution_for_game();" >&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
 								
+                                <button class="btn btn-primary pull-right" ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;RunHTML&nbsp;&nbsp;</button>
+
                                 <button class="btn btn-warning pull-right" ng-show ="skipButton" ng-click="nextQuestion();" >&nbsp;&nbsp;Skip&nbsp;&nbsp;</button>
 								
 								<button class="btn btn-warning pull-right" ng-show="showNewQuestion" ng-click="nextQuestion();">&nbsp;Next Question &nbsp;
@@ -572,14 +574,10 @@
                             </div>
                         </div>
                     </div>
-					
-                    <div class="span6 well">
+					<!-- Usual path -->
+                    <div class="span6 well" ng-hide="codeType == 'html'">
                         <!-- Tab for Sample Answer and Outcome-->
                         <div id="tab21"class="tabbable">
-						
-
-							
-						
                             <ul class="nav nav-tabs">
                                 <li id = "ta11" class="tabspacing active">
                                   <a href="ymbcoaching-play/#t11" data-toggle="tab">Sample Answer</a>
@@ -621,6 +619,44 @@
                           </div>
                         </div>
                     </div>
+                    <!-- End of usual path -->
+                    <!--HTML Path Problems-->
+                    <div class="span6 well" ng-show="codeType == 'html'">
+                        <!-- Tab for Sample Answer and Outcome-->
+                        <div id="tab21" class="tabbable">
+                            <ul class="nav nav-tabs">
+                                <li id = "ta11" class="tabspacing active">
+                                  <a href="" data-toggle="tab" ng-click="theTab=0">Your Code</a>
+                                </li>
+                                <li id = "ta21" class="tabspacing">
+                                  <a href="" data-toggle="tab" ng-click="theTab=1">Tests</a>
+                                </li>  
+                            </ul>
+                            <div class="tab-content">
+                              <div ng-show="theTab" style="height:317px;">
+                                <input type="submit" value="reload" ng-click="fill_test_iframe()">
+                                
+                                {{issues}} issue(s) to correct.<br>
+                                <iframe id="testIframe" height="320" width="100%" ng-src="{{testURL}}"></iframe>
+                                <input type="text" id="urlToPass" ng-model="urlToPass"/>
+                              </div>
+                              <div ng-show="!theTab" style="height:317px;">
+                                
+                                <input type="submit" value="refresh" ng-click="fill_iframe()">
+                                in {{counter}} seconds<br>
+                                
+                                
+                                <iframe id="anIframe" height="320" width="100%" src=""></iframe><br>
+                                <!-- Example (Put this in a 3rd tab)<br>
+                                <iframe id="exampleIframe" src=""></iframe><br> -->
+                                
+                                
+                              </div>
+
+                          </div>
+                        </div>
+                    </div>
+
                 </div> 
 		
 		
