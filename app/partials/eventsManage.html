@@ -230,7 +230,9 @@
 				</center>
 		<!--{{player.player_id}}{{eventsData.editor}}-->
 			<!--show all, not just top 50. To show top 50 only, ng-hide="$index>=50"-->
-			
+			<div ng-hide="eventsData.name.length > 0">
+        		Loading latest ranking.. This may take a few seconds..
+      		</div>
 			<tr ng-repeat="participant in eventsData.ranking" ng-hide="eventsData.archived || player.player_id!=eventsData.editor">
 				<td class = "span1">{{$index+1}}</td>
 				<td class = "span2">{{participant.nickname | limitTo:20}}</td>
