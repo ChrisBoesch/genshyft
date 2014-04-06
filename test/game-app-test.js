@@ -2653,7 +2653,303 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
     "path":"Python",
     "description": "Come join us for the National Singapore JC and High-school Coding Competition that will take place on March 1st, at SMU, at 1pm. The top 40 students who have registered their school and starting year will be invited. So register now and then go solve a few Python problems. The grand prize for this event will be a MacBook Air."
 }
-		
+
+	
+	var gamePaths = {
+    "paths": [
+        {
+            "description": "Java game path",
+            "id": 2243213,
+            "badges": [
+                {
+                    "url": "/static/badges/java/j001_on.png",
+                    "description": "Java Level 1 Badge",
+                    "id": 2595052,
+                    "name": "Level 1"
+                },
+                {
+                    "url": "/static/badges/java/j002_on.png",
+                    "description": "Java Level 2 Badge",
+                    "id": 2552050,
+                    "name": "Level 2"
+                },
+                {
+                    "url": "/static/badges/java/j003_on.png",
+                    "description": "Java Level 3 Badge",
+                    "id": 2577055,
+                    "name": "Level 3"
+                },
+                {
+                    "url": "/static/badges/java/j004_on.png",
+                    "description": "Java Level 4 Badge",
+                    "id": 2631011,
+                    "name": "Level 4"
+                },
+                {
+                    "url": "/static/badges/java/j005_on.png",
+                    "description": "Java Level 5 Badge",
+                    "id": 2574074,
+                    "name": "Level 5"
+                },
+                {
+                    "url": "/static/badges/java/j006_on.png",
+                    "description": "Java Level 6 Badge",
+                    "id": 2578065,
+                    "name": "Level 6"
+                },
+                {
+                    "url": "/static/badges/java/j007_on.png",
+                    "description": "Java Level 7 Badge",
+                    "id": 2573073,
+                    "name": "Level 7"
+                },
+                {
+                    "url": "/static/badges/java/j008_on.png",
+                    "description": "Java Level 8 Badge",
+                    "id": 2590065,
+                    "name": "Level 8"
+                },
+                {
+                    "url": "/static/badges/java/j009_on.png",
+                    "description": "Java Level 9 Badge",
+                    "id": 2550060,
+                    "name": "Level 9"
+                },
+                {
+                    "url": "/static/badges/java/j010_on.png",
+                    "description": "Java Level 10 Badge",
+                    "id": 2589070,
+                    "name": "Level 10"
+                },
+                {
+                    "url": "/static/badges/java/j011_on.png",
+                    "description": "Java Level 11 Badge",
+                    "id": 2604065,
+                    "name": "Level 11"
+                }
+            ],
+            "name": "Java"
+        },
+        {
+            "description": "Javascript Game Path",
+            "id": 2473247,
+            "badges": [
+                {
+                    "url": "/static/badges/javascript/js001_on.png",
+                    "description": "Javascript Level 1 Badge",
+                    "id": 3313007,
+                    "name": "Level 1"
+                },
+                {
+                    "url": "/static/badges/javascript/js002_on.png",
+                    "description": "Javascript Level 2 Badge",
+                    "id": 3202072,
+                    "name": "Level 2"
+                },
+                {
+                    "url": "/static/badges/javascript/js003_on.png",
+                    "description": "Javascript Level 3 Badge",
+                    "id": 3235086,
+                    "name": "Level 3"
+                },
+                {
+                    "url": "/static/badges/javascript/js004_on.png",
+                    "description": "Javascript Level 4 Badge",
+                    "id": 3282091,
+                    "name": "Level 4"
+                },
+                {
+                    "url": "/static/badges/javascript/js005_on.png",
+                    "description": "Javascript Level 5 Badge",
+                    "id": 3206086,
+                    "name": "Level 5"
+                },
+                {
+                    "url": "/static/badges/javascript/js006_on.png",
+                    "description": "Javascript Level 6 Badge",
+                    "id": 3277080,
+                    "name": "Level 6"
+                },
+                {
+                    "url": "/static/badges/javascript/js007_on.png",
+                    "description": "Javascript Level 7 Badge",
+                    "id": 3259076,
+                    "name": "Level 7"
+                },
+                {
+                    "url": "/static/badges/javascript/js008_on.png",
+                    "description": "Javascript Level 8 Badge",
+                    "id": 3217062,
+                    "name": "Level 8"
+                },
+                {
+                    "url": "/static/badges/javascript/js009_on.png",
+                    "description": "Javascript Level 9 Badge",
+                    "id": 3292016,
+                    "name": "Level 9"
+                },
+                {
+                    "url": "/static/badges/javascript/js010_on.png",
+                    "description": "Javascript Level 10 Badge",
+                    "id": 3295005,
+                    "name": "Level 10"
+                },
+                {
+                    "url": "/static/badges/javascript/js011_on.png",
+                    "description": "Javascript Level 11 Badge",
+                    "id": 3212074,
+                    "name": "Level 11"
+                }
+            ],
+            "name": "Javascript"
+        },
+        {
+            "description": "Python game path",
+            "id": 10030,
+            "badges": [
+                {
+                    "url": "/static/badges/python/p001_on.png",
+                    "description": "Python Level 1 Badge",
+                    "id": 87572,
+                    "name": "Level 1"
+                },
+                {
+                    "url": "/static/badges/python/p002_on.png",
+                    "description": "Python Level 2 Badge",
+                    "id": 88541,
+                    "name": "Level 2"
+                },
+                {
+                    "url": "/static/badges/python/p003_on.png",
+                    "description": "Python Level 3 Badge",
+                    "id": 87573,
+                    "name": "Level 3"
+                },
+                {
+                    "url": "/static/badges/python/p004_on.png",
+                    "description": "Python Level 4 Badge",
+                    "id": 88542,
+                    "name": "Level 4"
+                },
+                {
+                    "url": "/static/badges/python/p005_on.png",
+                    "description": "Python Level 5 Badge",
+                    "id": 92683,
+                    "name": "Level 5"
+                },
+                {
+                    "url": "/static/badges/python/p006_on.png",
+                    "description": "Python Level 6 Badge",
+                    "id": 549028,
+                    "name": "Level 6"
+                },
+                {
+                    "url": "/static/badges/python/p007_on.png",
+                    "description": "Python Level 7 Badge",
+                    "id": 515027,
+                    "name": "Level 7"
+                },
+                {
+                    "url": "/static/badges/python/p008_on.png",
+                    "description": "Python Level 8 Badge",
+                    "id": 508029,
+                    "name": "Level 8"
+                },
+                {
+                    "url": "/static/badges/python/p009_on.png",
+                    "description": "Python Level 9 Badge",
+                    "id": 2264210,
+                    "name": "Level 9"
+                },
+                {
+                    "url": "/static/badges/python/p010_on.png",
+                    "description": "Python Level 10 Badge",
+                    "id": 8125949,
+                    "name": "Level 10"
+                }
+            ],
+            "name": "Python"
+        },
+        {
+            "description": "Ruby Game Path",
+            "id": 2462233,
+            "badges": [
+                {
+                    "url": "/static/badges/ruby/r001_on.png",
+                    "description": "Ruby Level 1",
+                    "id": 3251069,
+                    "name": "Level 1"
+                },
+                {
+                    "url": "/static/badges/ruby/r002_on.png",
+                    "description": "Ruby Level 2",
+                    "id": 3222057,
+                    "name": "Level 2"
+                },
+                {
+                    "url": "/static/badges/ruby/r003_on.png",
+                    "description": "Ruby Level 3 Badge",
+                    "id": 3467085,
+                    "name": "Level 3"
+                },
+                {
+                    "url": "/static/badges/ruby/r004_on.png",
+                    "description": "Ruby Level 4 Badge",
+                    "id": 3536063,
+                    "name": "Level 4"
+                },
+                {
+                    "url": "/static/badges/ruby/r005_on.png",
+                    "description": "Ruby Level 5 Badge",
+                    "id": 3454078,
+                    "name": "Level 5"
+                },
+                {
+                    "url": "/static/badges/ruby/r006_on.png",
+                    "description": "Ruby Level 6 Badge",
+                    "id": 3428079,
+                    "name": "Level 6"
+                },
+                {
+                    "url": "/static/badges/ruby/r007_on.png",
+                    "description": "Ruby Level 7 Badge",
+                    "id": 3490101,
+                    "name": "Level 7"
+                },
+                {
+                    "url": "/static/badges/ruby/r008_on.png",
+                    "description": "Ruby Level 8 Badge",
+                    "id": 3532088,
+                    "name": "Level 8"
+                },
+                {
+                    "url": "/static/badges/ruby/r009_on.png",
+                    "description": "Ruby Level 9 Badge",
+                    "id": 3449079,
+                    "name": "Level 9"
+                },
+                {
+                    "url": "/static/badges/ruby/r010_on.png",
+                    "description": "Ruby Level 10 Badge",
+                    "id": 3519065,
+                    "name": "Level 10"
+                },
+                {
+                    "url": "/static/badges/ruby/r011_on.png",
+                    "description": "Ruby Level 11 Badge",
+                    "id": 3523070,
+                    "name": "Level 11"
+                }
+            ],
+            "name": "Ruby"
+        }
+    ],
+    "type": "get_game_paths"
+}
+
+		$httpBackend.whenGET('/jsonapi/get_game_and_my_paths').respond(gamePaths);
+
+
 		$httpBackend.whenGET('/jsonapi/event/6486660988534784').respond(eventsTableDataPoly);
 		//call for events for map
 		//$httpBackend.whenGET('/jsonapi/event?eventid=6486660988534784').respond(eventsTableDataPoly);
