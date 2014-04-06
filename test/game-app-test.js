@@ -750,8 +750,13 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
       	}
       });
 
- 	$httpBackend.whenGET('html/get_solution_for_last_problem.html').passThrough();
- 	$httpBackend.whenGET('html/get_tests_for_last_problem.html').passThrough();
+  
+ 	$httpBackend.whenGET('/jsonapi/lastsolution.html').passThrough();
+ 	$httpBackend.whenGET('/jsonapi/runner.html').passThrough();
+  $httpBackend.whenGET('/jsonapi/e2e-test.js').passThrough();
+
+  //$httpBackend.whenGET('html/get_solution_for_last_problem.html').passThrough();
+ 	//$httpBackend.whenGET('html/get_tests_for_last_problem.html').passThrough();
 
     $httpBackend.whenJSONP(/^http:\/\/example.com\/verify/).respond(function(){return [500, "the hamster are dying."]});
     // $httpBackend.whenJSONP(/^http:\/\/example.com\/verify/).respond({
