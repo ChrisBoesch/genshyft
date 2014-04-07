@@ -141,17 +141,16 @@
                                 </li>  
                             </ul>
                             <div class="tab-content">
+                              <!--Test iframe-->
                               <div ng-show="theTab" style="height:317px;">
-                                <input type="submit" value="reload" ng-click="fill_test_iframe()">
-                                
-                                {{issues}} issue(s) to correct.<br>
+                                <!--<input type="submit" value="reload" ng-click="fill_test_iframe()">-->
+                            
                                 <iframe id="testIframe" height="320" width="100%" ng-src="{{testURL}}"></iframe>
-                                <input type="text" id="urlToPass" ng-model="urlToPass"/>
                               </div>
+                              <!--render iframe-->
                               <div ng-show="!theTab" style="height:317px;">
                                 
-                                <input type="submit" value="refresh" ng-click="fill_iframe()">
-                                in {{counter}} seconds<br>
+                                <input type="submit" value="Render HTML" ng-click="fill_iframe()"><br>
                                 
                                 
                                 <iframe id="anIframe" height="320" width="100%" src=""></iframe><br>
