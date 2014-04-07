@@ -124,7 +124,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       //var scopeToShare = angular.element(document.querySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass;
       //console.log(scopeToShare + " from fill");
       //document.getElementById("testIframe").contentWindow.angular.element();
-      $scope.log_test_iframe();
+      //$scope.log_test_iframe();
 
     };
     $scope.log_test_iframe = function() { 
