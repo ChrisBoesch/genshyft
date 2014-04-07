@@ -37,8 +37,10 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
         $scope.update_remaining_problems();
         //Added by GENShYFT - Glen
         $scope.get_mentor($scope.game.heatID, $scope.game.playerID);
-		    $scope.codeType="html";
-        console.log($scope.codeType);
+        $scope.problems = $scope.game.problems.problems;
+        $scope.codeType=$scope.problems[$scope.current_problem_index].interface.codeHighlightKey;
+
+        console.log($scope.problems[$scope.current_problem_index].interface.codeHighlightKey);
     });
     };
 
