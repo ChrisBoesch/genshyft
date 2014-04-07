@@ -11,7 +11,7 @@
 	}
 </style>
 </br>
-<div ng-controller="EventTableController" ng-init="get_participants(); get_eventID(); get_currentPlayerRanking(); get_currentUrl();" class="container" id="eventsEdit" style="position:relative;" >
+<div ng-controller="EventTableController" ng-init="get_participants(); get_eventID(); get_currentPlayerRanking(); get_currentUrl(); populatePaths(); " class="container" id="eventsEdit" style="position:relative;" >
 	<button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
 	<br>
 	<br>
@@ -93,6 +93,12 @@
 					</div>
 					<div class="span9">
 						 <div class="span8">
+						 	<!--
+						 	<select class="span12" ng-model="selectedPath" ng-init="populatePaths()" ng-change="loadLevelList()">
+								<option value="" selected>Choose Game Path...</option>
+								<option ng-repeat="gamePath in gamePaths" value="{{gamePath.id}}">{{gamePath.name}}</option>
+							</select>
+						-->
 						  <label>
 						    <input type="radio" ng-model="eventProgLang" ng-checked="eventsData.path=='Java'" id="optionsRadios1" value="Java"  >
 						    Java

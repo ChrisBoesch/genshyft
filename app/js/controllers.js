@@ -3851,6 +3851,7 @@ function EventController($scope, $resource, $location, $http, $route){
 				alert("The event title cannot be empty!");
 				return;
 			}
+			/**
 			if(eventVenue==""){
 				alert("The venue cannot be empty!");
 				return;
@@ -3862,8 +3863,10 @@ function EventController($scope, $resource, $location, $http, $route){
 			if(progLang!=undefined){
 				$scope.progLang = progLang;
 			}
+			**/
 			console.log($scope.progLang + "updated progLang");
 			console.log(eventTitle + eventDescription + eventVenue + cutoff + $scope.progLang);
+			/**
 			var data = {"name":eventTitle,
 				"description":eventDescription,
 				"venue": eventVenue,
@@ -3871,6 +3874,10 @@ function EventController($scope, $resource, $location, $http, $route){
 				"path": $scope.progLang,
 				"schooltypes": schooltypes
 
+			}
+			**/
+			var data = {"name":eventTitle,
+				"description":eventDescription
 			}
 			console.log("Event venue=" + eventVenue);
 			$scope.newEvent = $resource('/jsonapi/event');
@@ -3961,8 +3968,22 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.secondButton=false;
   		$scope.isEventIDs=false;
   		$scope.player = $resource('/jsonapi/player').get();
+  		$scope.gamePaths = [];
 
   		$scope.rsvpList = [];
+
+  		  // Loads all the different possible paths into the paths droplist
+		$scope.populatePaths = function(){
+			if($scope.gamePaths.length!=0){
+
+			}else{
+				$resource('/jsonapi/get_game_and_my_paths').get({},function(response){
+				console.log("Retrieving game paths from DB");
+				$scope.gamePaths = response.paths;
+				//console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
+				});  
+			}
+		}
 
   		$scope.get_eventIDs = function(){
     		$scope.eventIDs = ($location.search()).eventIDs;
