@@ -15,6 +15,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     $scope.current_problem_index = 0;
     $scope.mentor_hasArrived = false;
     $scope.mentor_id = null;
+    $scope.codeType = null;
 
     $scope.timeoutVarMentor = null;
 
@@ -275,7 +276,6 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
         $('#t311').addClass('active');
         $('#ta111').removeClass('active');
         $('#ta311').addClass('active');
-
       }
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
