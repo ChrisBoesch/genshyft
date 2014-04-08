@@ -3984,8 +3984,13 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.gamePaths = [];
   		$scope.eventcreatorCC = false; //prepare boolean value to include in send_rsvp api
   		$scope.eventMiscCC=false;
-
+  		$scope.pathID = 0;
   		$scope.rsvpList = [];
+
+  		$scope.selectPath = function(selectedPath){
+			$scope.pathID = selectedPath;
+			console.log("Selected path: " + $scope.pathID);
+		}
 
   		  // Loads all the different possible paths into the paths droplist
 		$scope.populatePaths = function(){
@@ -4099,13 +4104,21 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					"cutoff": cutoff,
 					"path": progLang
 				**/
-
 				var data = {"name":$scope.eventTitle,
 					"description":$scope.eventDescription,
 					"venue":$scope.eventVenue,
 					"cutoff": $scope.cutoff,
 					"path": $scope.progLang
 
+				}
+				if($scope.pathID!=0){
+					var data = {"name":$scope.eventTitle,
+								"description":$scope.eventDescription,
+								"venue":$scope.eventVenue,
+								"cutoff": $scope.cutoff,
+								"pathID": $scope.pathID
+								}
+					
 				}
 				console.log("data = " + data);
 				$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});

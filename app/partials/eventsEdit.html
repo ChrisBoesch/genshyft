@@ -89,16 +89,16 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Programming Language:
+						Path:
 					</div>
 					<div class="span9">
 						 <div class="span8">
-						 	<!--
-						 	<select class="span12" ng-model="selectedPath" ng-init="populatePaths()" ng-change="loadLevelList()">
+						 	
+						 	<select class="span6" ng-model="selectedPath" ng-init="populatePaths()" ng-change="selectPath(selectedPath)">
 								<option value="" selected>Choose Game Path...</option>
 								<option ng-repeat="gamePath in gamePaths" value="{{gamePath.id}}">{{gamePath.name}}</option>
 							</select>
-						-->
+
 						  <label>
 						    <input type="radio" ng-model="eventProgLang" ng-checked="eventsData.path=='Java'" id="optionsRadios1" value="Java"  >
 						    Java
