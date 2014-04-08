@@ -4050,7 +4050,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 		}
 		
 
-		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
+		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff){
 			/**
 			console.log(id);
 			console.log(eventTitle);
@@ -4086,16 +4086,18 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				}else{
 					$scope.cutoff = cutoff;
 				}
+				/**
 				if(progLang==""){
 					$scope.progLang = $scope.current_event.path;
 				}else{
 					$scope.progLang = progLang;
 				}
+				**/
 				console.log("impt " + $scope.eventTitle);
 				console.log($scope.eventDescription);
 				console.log($scope.eventVenue);
 				console.log($scope.cutoff);
-				console.log($scope.progLang);
+				//console.log($scope.progLang);
 
 				/**
 				var data = {"name":eventTitle,
@@ -4107,8 +4109,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				var data = {"name":$scope.eventTitle,
 					"description":$scope.eventDescription,
 					"venue":$scope.eventVenue,
-					"cutoff": $scope.cutoff,
-					"path": $scope.progLang
+					"cutoff": $scope.cutoff
+					//"path": $scope.progLang
 
 				}
 				if($scope.pathID!=0){
