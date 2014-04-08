@@ -3969,6 +3969,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.isEventIDs=false;
   		$scope.player = $resource('/jsonapi/player').get();
   		$scope.gamePaths = [];
+  		$scope.eventcreatorCC = false; //prepare boolean value to include in send_rsvp api
 
   		$scope.rsvpList = [];
 
@@ -4265,6 +4266,17 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 			});
 
 
+		}
+
+		$scope.addEventCreatorToCCList = function(){
+			console.log($scope.player.player_id);
+			if(!$scope.eventcreatorCC){
+				$scope.eventcreatorCC=true;
+				console.log($scope.eventcreatorCC);
+			}else{
+				$scope.eventcreatorCC=false;
+				console.log($scope.eventcreatorCC);
+			}
 		}
 
 
