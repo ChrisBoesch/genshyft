@@ -49,20 +49,10 @@ myApp.run(function($httpBackend) {
 	var video_no_0 ={"Videos":[{"title":"What Most School Don't Teach","image":"img/purposedrivenPlaceholder/Purpose Driven 0.jpg","thumbnail":"img/purposedrivenPlaceholder/thumb/0.jpg","vlink":"http://www.youtube.com/watch?v=nKIu9yen5nc","description":"Learn about a new 'superpower' that isn't being taught in in 90% of US schools.  Starring Bill Gates, Mark Zuckerberg, will.i.am, Chris Bosh, Jack Dorsey, Tony Hsieh, Drew Houston, Gabe Newell, Ruchi Sanghvi, Elena Silenok, Vanessa Hurst, and Hadi Partovi. D","question":"How does this video make you feel?","feedback":2,"unlocked":true,"no":"0"}]};
 
 
-//payload -> {"feedback":0, "purposevideo":2,"unlocked":true }   //user to update the new feedback score and unlock next video - old
-	$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/2').respond({"results":"video 2 unlocked and updated"});
-//payload -> {"feedback":0, "purposevideo":3,"unlocked":true }   //user to update the new feedback score and unlock next video - old
-	$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock/3').respond({"result":"video 3 unlocked and updated"});
+
 //payload -> {"feedback":0, "purposevideo":3 }   //user to update the new feedback score and unlock next video UPDATED AS OF LAST EMAIL BY PROF CHRIS 18-2-14
 	$httpBackend.whenPOST('/jsonapi/record_purpose_video_unlock').respond({"result":"video 3 unlocked and updated"})
 		
-		
-//payload -> {"feedback":3, "purposevideo":0}   // user to update the new feedback score - old
-	$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/0').respond({"result":"video 0 feedback adjusted"});			
-//payload -> {"feedback":3, "purposevideo":1, }   user to update the new feedback score - old 
-	$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/1').respond({"result":"video 1 feedback adjusted"});
-//payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score - old
-	$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback/2').respond({"result":"video 2 feedback adjusted"});	
 //payload -> {"feedback":3, "purposevideo":2, }   user to update the new feedback score UPDATED AS OF LAST EMAIL BY PROF CHRIS 18-2-14
 	$httpBackend.whenPOST('/jsonapi/record_purpose_video_feedback').respond({"result":"video  feedback adjusted"});	
 		
@@ -107,17 +97,7 @@ myApp.run(function($httpBackend) {
 	
 	// payload -> { pathId:"123","coachID":"123" }   // backend will determine the nextProblemID to solve 
 	$httpBackend.whenPOST('/jsonapi/update_current_coaching_status').respond({"result":"New coach and path have been recorded.", "pathID":123, "coachID":123});
-	
-	var gameID ={"gameID":101010};
-	// payload -->{"problemId":11021,"problemSet":304232};   // will save <-- those values to get gameID;
-	$httpBackend.whenPOST('/jsonapi/play_coaching_game').respond(function(method, url, data) {
 
-
-        var item = gameID;
-        return [200,item];
-        
-      })
-	
 	
 	
 //retrieve game details for mastery game base on the game Id;
