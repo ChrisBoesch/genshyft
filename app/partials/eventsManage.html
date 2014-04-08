@@ -285,12 +285,20 @@
 						ng-checked="checkall"
 						ng-disabled="firstButton"
 						ng-click="addSelectedFewToRSVPList()"><br/>
-					<br><br>
-					Include yourself to CC List? 
-					<input 
-						type="checkbox" 
-						ng-click="addEventCreatorToCCList()"><br/>
 					<br>
+					CC yourself
+					<input 
+						type="checkbox"
+						ng-click="addToCCList('eventCreator')"><br/>
+					<br>
+					
+					CC other registrants
+					<input 
+						type="checkbox"
+						ng-click="addToCCList('eventMiscCC')">
+					<br>
+					(Keep me posted registrants and watchers)
+					<br><br>
 				
 				Message Title
 				<br>
