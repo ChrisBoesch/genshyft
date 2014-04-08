@@ -3946,9 +3946,6 @@ function EventController($scope, $resource, $location, $http, $route){
           var registration = EventRegistration.save({eventId:id}, thedata, function() {
           	$scope.registration = registration;
             $scope.fetch_event();
-            console.log("after fetch");
-            $('#postModal').modal('hide');
-          	$('#watchModal').modal('hide');
            });
 
           /*if(action=='watch'){
