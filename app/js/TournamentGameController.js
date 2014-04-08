@@ -268,13 +268,13 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       //$scope.game.gameID
       if ($scope.codeType != 'html'){
         $('#t11').removeClass('active');
-        $('#t21').addClass('active');
         $('#ta11').removeClass('active');
+        $('#t21').addClass('active');
         $('#ta21').addClass('active');
       }else{
         $('#t111').removeClass('active');
-        $('#t311').addClass('active');
         $('#ta111').removeClass('active');
+        $('#t311').addClass('active');
         $('#ta311').addClass('active');
       }
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
