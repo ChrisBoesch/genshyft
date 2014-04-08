@@ -314,6 +314,22 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 
     };
 
+    $scope.run_e2e_tests = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_test_iframe();
+            //If solved, update the game.
+            
+      });
+
+    };
+
     $scope.verify_solution = function() {
       //$scope.solution
       //$scope.tests
