@@ -3940,12 +3940,22 @@ function EventController($scope, $resource, $location, $http, $route){
           var thedata = {"status":action};
           
           var registration = EventRegistration.save({eventId:id}, thedata, function() {
-                 $scope.registration = registration;
-                 $scope.fetch_event();
-            });
+          	$scope.registration = registration;
+          	console.log("hiding");
+          	$('#postModal').modal('hide');
+          	$('#watchModal').modal('hide');
+          	console.log("finish hiding")
+            $scope.fetch_event();
+           });
 
-          $('#postModal').modal('hide');
-          $('#watchModal').modal('hide');
+          /*if(action=='watch'){
+          	console.log("watching");
+          	$('#watchModal').modal('show');
+          }else{
+          	console.log("posting");
+          	$('#postModal').modal('show');
+          }*/
+          
         }
 
         $scope.go_to_eventsRanking = function(eventID){
