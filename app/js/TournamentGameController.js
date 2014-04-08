@@ -15,6 +15,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     $scope.current_problem_index = 0;
     $scope.mentor_hasArrived = false;
     $scope.mentor_id = null;
+    $scope.codeType = null;
 
     $scope.timeoutVarMentor = null;
 
@@ -93,7 +94,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
             $scope.urlToPass = $scope.solution_check_result.url;
             $scope.testURL = $scope.solution_check_result.testUrl;
             
-            //console.log("This is urlToPass " + $scope.urlToPass);
+            console.log("This is test URL " + $scope.testURL);
 
           $scope.fill_test_iframe();  
             if($scope.solution_check_result.last_solved){
@@ -108,7 +109,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
   $scope.fill_iframe = function() { 
       console.log("filling solution iFrame");
       var iFrame = angular.element( document.querySelector( '#anIframe' ) );
-      iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.solution1));
+      iFrame.attr("src","/jsonapi/lastsolution.html");
     };
     $scope.fill_example_iframe = function() { 
       console.log("filling example iFrame");
@@ -120,7 +121,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       console.log("filling test iFrame");
       var iframe = angular.element( document.querySelector( '#testIframe' ) );
       //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
-      iframe.attr("src", $scope.testURL);//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
+      iframe.attr("src", "/jsonapi/runner.html");//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
       //var scopeToShare = angular.element(document.querySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass;
       //console.log(scopeToShare + " from fill");
       //document.getElementById("testIframe").contentWindow.angular.element();
@@ -265,10 +266,19 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       //$scope.solution
       //$scope.current_problem
       //$scope.game.gameID
-      $('#t11').removeClass('active');
-      $('#t21').addClass('active');
-      $('#ta11').removeClass('active');
-      $('#ta21').addClass('active');
+      if ($scope.codeType != 'html'){
+        $('#t11').removeClass('active');
+        $('#ta11').removeClass('active');
+        $('#t21').addClass('active');
+        $('#ta21').addClass('active');
+      }else{
+        $('#t111').removeClass('active');
+        $('#ta111').removeClass('active');
+        $('#t211').removeClass('active');
+        $('#ta211').removeClass('active');
+        $('#t311').addClass('active');
+        $('#ta311').addClass('active');
+      }
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,
@@ -279,11 +289,47 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       var item = new $scope.SaveResource($scope.theData);
       item.$save(function(response) { 
             $scope.solution_check_result = response;
+            if($scope.codeType == 'html'){
+              $scope.fill_iframe();
+              $scope.fill_test_iframe();
+            }
             //If solved, update the game.
             if($scope.solution_check_result.last_solved){
                 $scope.fetch($scope.game.gameID);
             }
       });
+    };
+
+    $scope.render_html = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_iframe();
+            //If solved, update the game.
+            
+      });
+
+    };
+
+    $scope.run_e2e_tests = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_test_iframe();
+            //If solved, update the game.
+            
+      });
+
     };
 
     $scope.verify_solution = function() {

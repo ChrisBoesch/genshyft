@@ -106,7 +106,7 @@
                 text-align: center;
             }
             .tabspacing{
-                width:50%;
+                width:30%;
             }
             /* CUSTOMIZE THE NAVBAR
     -------------------------------------------------- */
@@ -553,9 +553,9 @@
                                 <li class="tabspacing active">
                                   <a href="ymbcoaching-play/#t3" data-toggle="tab">Solution</a>
                                 </li>
-                                <button class="btn btn-primary pull-right" ng-show ="runButton" ng-hide="codeType == 'html'" ng-click="check_solution_for_game();" >&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                                <button class="btn btn-primary pull-right" ng-show ="runButton" ng-click="check_solution_for_game();" >&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
 								
-                                <button class="btn btn-primary pull-right" ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;RunHTML&nbsp;&nbsp;</button>
+                               <!--  <button class="btn btn-primary pull-right" ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;RunHTML&nbsp;&nbsp;</button> -->
 
                                 <button class="btn btn-warning pull-right" ng-show ="skipButton" ng-click="nextQuestion();" >&nbsp;&nbsp;Skip&nbsp;&nbsp;</button>
 								
@@ -625,32 +625,57 @@
                         <!-- Tab for Sample Answer and Outcome-->
                         <div id="tab21" class="tabbable">
                             <ul class="nav nav-tabs">
-                                <li id = "ta11" class="tabspacing active">
-                                  <a href="" data-toggle="tab" ng-click="theTab=0">Your Code</a>
+                                <li id = "ta111" class="tabspacing active">
+                                    <a href="tournament-grpplay/#t111" data-toggle="tab">Your Code</a>
                                 </li>
-                                <li id = "ta21" class="tabspacing">
-                                  <a href="" data-toggle="tab" ng-click="theTab=1">Tests</a>
+                                <li id = "ta211" class="tabspacing">
+                                    <a href="tournament-grpplay/#t211" data-toggle="tab">Tests</a>
+                                </li>   
+                                <li id = "ta311" class="tabspacing">
+                                    <a href="tournament-grpplay/#t311" data-toggle="tab">Outcome</a>
                                 </li>  
                             </ul>
                             <div class="tab-content">
-                              <div ng-show="theTab" style="height:317px;">
-                                <input type="submit" value="reload" ng-click="fill_test_iframe()">
+                              
+                              <!--render iframe-->
+                              <div class="tab-pane active" id="t111"style="height:317px;">
                                 
-                                {{issues}} issue(s) to correct.<br>
-                                <iframe id="testIframe" height="320" width="100%" ng-src="{{testURL}}"></iframe>
-                                <input type="text" id="urlToPass" ng-model="urlToPass"/>
-                              </div>
-                              <div ng-show="!theTab" style="height:317px;">
-                                
-                                <input type="submit" value="refresh" ng-click="fill_iframe()">
-                                in {{counter}} seconds<br>
-                                
+                                <input type="submit" value="Render HTML" ng-click="render_html()"><br>
                                 
                                 <iframe id="anIframe" height="320" width="100%" src=""></iframe><br>
                                 <!-- Example (Put this in a 3rd tab)<br>
                                 <iframe id="exampleIframe" src=""></iframe><br> -->
+
+                              </div>
+
+                              <!--Test iframe-->
+                              <div  class="tab-pane" id="t211" style="height:317px;">
                                 
-                                
+                                <input type="submit" value="Run E2E Tests" ng-click="run_e2e_tests()">
+                                <iframe id="testIframe" height="320" width="100%" src=""></iframe>
+                              </div>
+
+                              <!--This is the outcome tab-->
+                              <div  class="tab-pane" id="t311" style="height:317px;" ng-hide="solution_check_result.error">
+                                <table border=1 bgcolor=#FFFFFF width=100%>
+                                    <tr>
+                                        <th height="50">Called</th>
+                                        <th height="50">Expected</th>
+                                        <th height="50">Recieved</th>
+                                        <th height="50">Correct</th>
+                                    </tr>
+                                    <tr ng-repeat="line in solution_check_result.results">
+                                        <td height="40">{{line.call}}</td>
+                                        <td height="40">{{line.expected}}</td>
+                                        <td height="40">{{line.received}}</td>
+                                        <td height="40" ng-show="line.status" bgcolor=#00FF00>{{line.status}}</td>
+                                        <td height="40"ng-show="!line.status" bgcolor=#FF0000>{{line.status}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" ng-hide="!solution_check_result.errors">Errors: <pre style = "color:blue;"><span ng-bind="solution_check_result.errors"></span></pre></td>
+                                    </tr>
+                                </table><br>
+                                    Private Test Results: {{solution_check_result.other_tests_result}}
                               </div>
 
                           </div>

@@ -23,7 +23,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
     $scope.counter = 0;
 	
 	$scope.problemsInSequence = 0;
-	
+	$scope.codeType = null;
 	
 	
 	
@@ -178,13 +178,8 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 				$scope.solutionToProblem = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
 				$scope.descriptionToProblem = $scope.game.problems.problems[$scope.current_problem_index].description;
 				$scope.nameToProblem = $scope.game.problems.problems[$scope.current_problem_index].name;
-				$scope.codeType = $scope.game.problems.problems[$scope.current_problem_index].interface.codeHighlightKey;
-
-				if($scope.codeType == 'html'){
-					$scope.runButton == false;
-				}else{
-					$scope.runButton == true;
-				}
+				$scope.problems = $scope.game.problems.problems;
+        		$scope.codeType=$scope.problems[$scope.current_problem_index].interface.codeHighlightKey;
 				
 				//$scope.solution1 = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
 				console.log("CURRENT PROBLEM INDEX IS " + i );
@@ -347,17 +342,43 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		});
     };
 
+    $scope.fill_iframe = function() { 
+      console.log("filling solution iFrame");
+      var iFrame = angular.element( document.querySelector( '#anIframe' ) );
+      iFrame.attr("src","/jsonapi/lastsolution.html");
+    };
+
+    $scope.fill_test_iframe = function() { 
+      console.log("filling test iFrame");
+      var iframe = angular.element( document.querySelector( '#testIframe' ) );
+      //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
+      iframe.attr("src", "/jsonapi/runner.html");//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
+      //var scopeToShare = angular.element(document.querySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass;
+      //console.log(scopeToShare + " from fill");
+      //document.getElementById("testIframe").contentWindow.angular.element();
+      //$scope.log_test_iframe();
+
+    };
+
     $scope.check_solution_for_game = function() {
       //$scope.solution
       //$scope.current_problem
 	  //$scope.game.gameID
 		$scope.counter = 0; //reset timer
 		
-
-		  $('#t11').removeClass('active');
-		  $('#t21').addClass('active');
-		  $('#ta11').removeClass('active');
-		  $('#ta21').addClass('active');
+		if ($scope.codeType != 'html'){
+	        $('#t11').removeClass('active');
+	        $('#ta11').removeClass('active');
+	        $('#t21').addClass('active');
+	        $('#ta21').addClass('active');
+	      }else{
+	        $('#t111').removeClass('active');
+	        $('#ta111').removeClass('active');
+	        $('#t211').removeClass('active');
+	        $('#ta211').removeClass('active');
+	        $('#t311').addClass('active');
+	        $('#ta311').addClass('active');
+	      }
 
 		  $scope.SaveResource = $resource('/jsonapi/verify_for_game');
 		  //alert($scope.game.gameID);
@@ -368,6 +389,11 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		  var item = new $scope.SaveResource($scope.theData);
 		  item.$save(function(response) { 
 			  $scope.solution_check_result = response;
+
+			  if($scope.codeType == 'html'){
+              	$scope.fill_iframe();
+              	$scope.fill_test_iframe();
+              }
 			  if($scope.solution_check_result.last_solved){//check if last question was solved correctly
 					//CORRECT
 						$scope.audio = $scope.audiofile.correctanswer;
@@ -378,10 +404,25 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 						$scope.runButton = false;
 						$scope.skipButton = false;
 						
+		  if ($scope.codeType != 'html'){
+
 		  $('#t21').removeClass('active');
 		  $('#t11').addClass('active');
 		  $('#ta21').removeClass('active');
-		  $('#ta11').addClass('active');						
+		  $('#ta11').addClass('active');
+	      }else{
+
+		  $('#t211').removeClass('active');
+		  $('#t311').removeClass('active');
+		  $('#t111').addClass('active');
+		  $('#ta211').removeClass('active');
+		  $('#ta311').removeClass('active');
+		  $('#ta111').addClass('active');
+	      }
+
+
+
+
 						
 						
 						$scope.solution1 ="";
@@ -425,80 +466,43 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			  
 			});
 
-    };
-//----------------------------------------HTML render section----------------------------------------------
-    $scope.check_solution_for_game_html = function() {
-      //$scope.solution
-      //$scope.current_problem
-      //$scope.game.gameID
+		  
 
-      //Update the iFrames when run is clicked.
-      $scope.theTab=1; 
-      $scope.fill_iframe();
-      //$scope.fill_example_iframe();
-      $('#t11').removeClass('active');
-      $('#t21').addClass('active');
-      $('#ta11').removeClass('active');
-      $('#ta21').addClass('active');
+
+    };
+
+    $scope.render_html = function(){
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,
-                        problem_id:$scope.problemId,
-                        game_id:$scope.gameID};
-      
-      //Post the solution
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
       var item = new $scope.SaveResource($scope.theData);
       item.$save(function(response) { 
             $scope.solution_check_result = response;
+            $scope.fill_iframe();
             //If solved, update the game.
-            $scope.urlToPass = $scope.solution_check_result.url;
-            $scope.testURL = $scope.solution_check_result.testUrl;
             
-            //console.log("This is urlToPass " + $scope.urlToPass);
-
-          $scope.fill_test_iframe();  
-            if($scope.solution_check_result.last_solved){
-                $scope.fetch($scope.game.gameID);
-            }
       });
 
+    };
 
+    $scope.run_e2e_tests = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_test_iframe();
+            //If solved, update the game.
+            
+      });
 
     };
 
- 	$scope.fill_iframe = function() { 
-      console.log("filling solution iFrame");
-      var iFrame = angular.element( document.querySelector( '#anIframe' ) );
-      iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.solution1));
-    };
-
-    $scope.fill_example_iframe = function() { 
-      console.log("filling example iFrame");
-      var iFrame = angular.element( document.querySelector( '#exampleIframe' ) );
-      iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
-    };
-
-    $scope.fill_test_iframe = function() { 
-      console.log("filling test iFrame");
-      var iframe = angular.element( document.querySelector( '#testIframe' ) );
-      //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
-      iframe.attr("src", $scope.testURL);//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
-      //var scopeToShare = angular.element(document.querySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass;
-      //console.log(scopeToShare + " from fill");
-      //document.getElementById("testIframe").contentWindow.angular.element();
-      $scope.log_test_iframe();
-
-    };
-    $scope.log_test_iframe = function() { 
-      var iframe = angular.element( document.querySelector( '#testIframe' ).contentDocument.getElementsByTagName('div')[0].innerText.split("Errors"));
-      var errors = iframe[1].split(" ")[0];
-      var failures = iframe[1].split(" ")[1].split("Failures")[1];
-      $scope.issues = parseInt(errors) + parseInt(failures);      
-      console.log("There were "+errors+" errors and "+failures+" failures and "+$scope.issues+" issues overall.");
-      
-    };
-
-//-------------------------------------------------End HTML render section--------------------------------------------
     $scope.verify_solution = function() {
       //$scope.solution
       //$scope.tests
