@@ -135,8 +135,8 @@
     <div id="leftIcon" class="span2" align="left" style= "vertical-align:middle" ><img class="img-rounded" src="img/newStory.png"></img>
       <br/><br/>
         {{route()}}
-        <form action={{changeRoute}}>
-        <button class="btn btn-large btn-block btn-primary" type="submit">Continue</button>
+        <form>
+        <button class="btn btn-large btn-block btn-primary" ng-click="reroute()" type="submit">Continue</button>
         </form>
         <form>
         <button class="btn btn-large btn-block" type="submit" ng-click="playback()">Playback Videos</button>

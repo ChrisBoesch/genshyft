@@ -2,6 +2,7 @@ var myAppConfig = angular.module('myAppConfig', ['ngCookies','ngResource', 'anal
     $routeProvider.when('', {templateUrl: 'partials/home.html', controller: IndexController});
     $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: IndexController});
     $routeProvider.when('/quests', {templateUrl: 'partials/selectquests.html', controller: IndexController, reloadOnSearch:false});
+    $routeProvider.when('/normal-play-page', {templateUrl: 'partials/normal_play_page.html', controller: IndexController, reloadOnSearch:false});
     $routeProvider.when('/practice', {templateUrl: 'partials/practice.html', controller: IndexController, reloadOnSearch:false});
     $routeProvider.when('/practice-game-play', {templateUrl: 'partials/practice_game_play.html', controller: IndexController, reloadOnSearch:false});
     $routeProvider.when('/challenges', {templateUrl: 'partials/challenges.html', controller: IndexController});
