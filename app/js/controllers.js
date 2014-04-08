@@ -1681,7 +1681,7 @@ function ChallengeController($scope,$resource,$location,$cookieStore,$http,$rout
 }
 
 
-function NormalGameController($scope,$resource,$cookieStore){
+function NormalGameController($scope,$resource,$cookieStore,$location){
     //$scope.currentProblem
     //$scope.game = $resource('test_data/python_game.json').get();
     //$scope.mobile_game = $resource('test_data/mobile_python_game.json').get();
@@ -1961,7 +1961,8 @@ function NormalGameController($scope,$resource,$cookieStore){
     };
 
     $scope.goStoryBoard = function(){
-      window.location = "index.html#/storyboard";
+      //window.location = "index.html#/storyboard";
+      $location.path("storyboard");
     };
         
     $scope.create_quest_game($scope.qid);
@@ -2503,7 +2504,8 @@ function GameController($scope,$resource,$cookieStore,$location){
     };
 
     $scope.goStoryBoard = function(){
-      window.location = "index.html#/storyboard";
+      //window.location = "index.html#/storyboard";
+      $location.path("storyboard");
     };
     
     $scope.update_quest = function() {
@@ -2832,7 +2834,7 @@ function PracticeDnDController($scope,$resource,$cookieStore,$location){
     };
 
     $scope.goStoryBoard = function(){
-      window.location = "index.html#/storyboard";
+      $location.path("storyboard");
     };
     
     $scope.update_quest = function() {
@@ -3034,14 +3036,23 @@ function QuestController($scope,$resource,$location,$routeParams,$cookieStore){
 		$('#video').trigger('click');
     };
 
-    $scope.$watch('name', function() {
+    $scope.reroute = function(){
+    	if($scope.name && $scope.name.difficulty == "Drag-n-Drop"){
+       	 	//$scope.changeRoute = "playPage.html";
+       	 	window.location = "playPage.html"
+     	 }else{
+     	 	$location.path("normal-play-page");
+     	 }
+    };
+
+    /*$scope.$watch('name', function() {
       if($scope.name && $scope.name.difficulty == "Drag-n-Drop"){
         $scope.changeRoute = "playPage.html";
       }
     }, true);
 
     $scope.list();
-    $scope.updateQuest();
+    $scope.updateQuest();*/
 
 }
 
