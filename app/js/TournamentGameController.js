@@ -298,6 +298,22 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       });
     };
 
+    $scope.render_html = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_iframe();
+            //If solved, update the game.
+            
+      });
+
+    };
+
     $scope.verify_solution = function() {
       //$scope.solution
       //$scope.tests
