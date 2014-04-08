@@ -3943,6 +3943,9 @@ function EventController($scope, $resource, $location, $http, $route){
                  $scope.registration = registration;
                  $scope.fetch_event();
             });
+
+          $('#postModal').modal('hide');
+          $('#watchModal').modal('hide');
         }
 
         $scope.go_to_eventsRanking = function(eventID){
