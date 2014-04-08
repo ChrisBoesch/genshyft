@@ -93,7 +93,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
             $scope.urlToPass = $scope.solution_check_result.url;
             $scope.testURL = $scope.solution_check_result.testUrl;
             
-            //console.log("This is urlToPass " + $scope.urlToPass);
+            console.log("This is test URL " + $scope.testURL);
 
           $scope.fill_test_iframe();  
             if($scope.solution_check_result.last_solved){

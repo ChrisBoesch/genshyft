@@ -138,7 +138,10 @@
                                 </li>
                                 <li id = "ta21" class="tabspacing">
                                   <a href="" data-toggle="tab" ng-click="theTab=1">Tests</a>
-                                </li>  
+                                </li>   
+                                <li id = "ta31" class="tabspacing">
+                          <a href="tournament-grpplay/#t21" data-toggle="tab">Outcome</a>
+                        </li>  
                             </ul>
                             <div class="tab-content">
                               <!--Test iframe-->
@@ -159,6 +162,29 @@
                                 
                                 
                               </div>
+
+                              <!--This is the outcome tab-->
+                              <div ng-hide="solution_check_result.error" class="tab-pane " id="t31" style="height:320px;">
+                        <table border=1 bgcolor=#FFFFFF width=100%>
+                            <tr>
+                                <th height="50">Called</th>
+                                <th height="50">Expected</th>
+                                <th height="50">Recieved</th>
+                                <th height="50">Correct</th>
+                            </tr>
+                            <tr ng-repeat="line in solution_check_result.results">
+                                <td height="40">{{line.call}}</td>
+                                <td height="40">{{line.expected}}</td>
+                                <td height="40">{{line.received}}</td>
+                                <td height="40" ng-show="line.status" bgcolor=#00FF00>{{line.status}}</td>
+                                <td height="40"ng-show="!line.status" bgcolor=#FF0000>{{line.status}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" ng-hide="!solution_check_result.errors">Errors: <pre style = "color:blue;"><span ng-bind="solution_check_result.errors"></span></pre></td>
+                            </tr>
+                        </table><br>
+                              Private Test Results: {{solution_check_result.other_tests_result}}
+                    </div>
 
                           </div>
                         </div>
