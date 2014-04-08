@@ -3843,6 +3843,8 @@ function EventController($scope, $resource, $location, $http, $route){
             	$scope.events = event.events; 
             	console.log(event.events);
             }
+          	$('#postModal').modal('hide');
+          	$('#watchModal').modal('hide');
             
           });
         },
@@ -3940,9 +3942,9 @@ function EventController($scope, $resource, $location, $http, $route){
           var thedata = {"status":action};
           
           var registration = EventRegistration.save({eventId:id}, thedata, function() {
-                 $scope.registration = registration;
-                 $scope.fetch_event();
-            });
+          	$scope.registration = registration;
+            $scope.fetch_event();
+           });   
         }
 
         $scope.go_to_eventsRanking = function(eventID){
@@ -3981,8 +3983,14 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.player = $resource('/jsonapi/player').get();
   		$scope.gamePaths = [];
   		$scope.eventcreatorCC = false; //prepare boolean value to include in send_rsvp api
-
+  		$scope.eventMiscCC=false;
+  		$scope.pathID = 0;
   		$scope.rsvpList = [];
+
+  		$scope.selectPath = function(selectedPath){
+			$scope.pathID = selectedPath;
+			console.log("Selected path: " + $scope.pathID);
+		}
 
   		  // Loads all the different possible paths into the paths droplist
 		$scope.populatePaths = function(){
@@ -4042,7 +4050,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 		}
 		
 
-		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, progLang){
+		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff){
 			/**
 			console.log(id);
 			console.log(eventTitle);
@@ -4078,16 +4086,18 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				}else{
 					$scope.cutoff = cutoff;
 				}
+				/**
 				if(progLang==""){
 					$scope.progLang = $scope.current_event.path;
 				}else{
 					$scope.progLang = progLang;
 				}
+				**/
 				console.log("impt " + $scope.eventTitle);
 				console.log($scope.eventDescription);
 				console.log($scope.eventVenue);
 				console.log($scope.cutoff);
-				console.log($scope.progLang);
+				//console.log($scope.progLang);
 
 				/**
 				var data = {"name":eventTitle,
@@ -4096,13 +4106,21 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					"cutoff": cutoff,
 					"path": progLang
 				**/
-
 				var data = {"name":$scope.eventTitle,
 					"description":$scope.eventDescription,
 					"venue":$scope.eventVenue,
-					"cutoff": $scope.cutoff,
-					"path": $scope.progLang
+					"cutoff": $scope.cutoff
+					//"path": $scope.progLang
 
+				}
+				if($scope.pathID!=0){
+					var data = {"name":$scope.eventTitle,
+								"description":$scope.eventDescription,
+								"venue":$scope.eventVenue,
+								"cutoff": $scope.cutoff,
+								"pathID": $scope.pathID
+								}
+					
 				}
 				console.log("data = " + data);
 				$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
@@ -4279,14 +4297,25 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
 		}
 
-		$scope.addEventCreatorToCCList = function(){
-			console.log($scope.player.player_id);
-			if(!$scope.eventcreatorCC){
-				$scope.eventcreatorCC=true;
-				console.log($scope.eventcreatorCC);
+		$scope.addToCCList = function(partyToCC){
+			if(partyToCC===("eventCreator")){
+				console.log($scope.player.player_id);
+				if(!$scope.eventcreatorCC){
+					$scope.eventcreatorCC=true;
+					console.log($scope.eventcreatorCC);
+				}else{
+					$scope.eventcreatorCC=false;
+					console.log($scope.eventcreatorCC);
+				}
 			}else{
-				$scope.eventcreatorCC=false;
-				console.log($scope.eventcreatorCC);
+				//console.log($scope.player.player_id);
+				if(!$scope.eventMiscCC){
+					$scope.eventMiscCC=true;
+					console.log("Misc: " + $scope.eventMiscCC);
+				}else{
+					$scope.eventMiscCC=false;
+					console.log($scope.eventMiscCC);
+				}
 			}
 		}
 

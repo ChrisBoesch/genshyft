@@ -6,7 +6,14 @@
     </title>      
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
     <meta name="description" content="">    
-    <meta name="author" content="">    
+    <meta name="author" content="">
+
+    <style>
+    .mouseover:hover{
+      cursor: pointer;
+      cursor: hand;
+    }
+    </style>    
     
     <!-- Le styles -->
     <link href="assets/css/app.css" rel="stylesheet" />
@@ -89,21 +96,21 @@
             <div class="nav-collapse collapse">              
               <ul class="nav pull-right" id="myTab">  
               <li>
-                <a type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice</a>
+                <a class="mouseover" type="button" ng-click="firstLoad(mobile_paths[0].path_id)">Practice</a>
               </li>
               <li >
-                <a type="button" ng-click="checkQuestLogin()">Quests</a>
+                <a class="mouseover" type="button" ng-click="checkQuestLogin()">Quests</a>
               </li>
 
               <li>
-                <a type="button" ng-click="checkMasteryLogin()">Mastery</a>
+                <a class="mouseover" type="button" ng-click="checkMasteryLogin()">Mastery</a>
               </li>
               <li>
-                <a type="button" ng-click="checkPurposeDrivenLogin()">Purpose</a>
+                <a class="mouseover" type="button" ng-click="checkPurposeDrivenLogin()">Purpose</a>
               </li>
 
               <li>
-                <a type="button" ng-click="checkFeedbackLogin()">Feedback</a>
+                <a class="mouseover" type="button" ng-click="checkFeedbackLogin()">Feedback</a>
               </li>
                 <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->                 
                 <li class="dropdown" id="menu">                  
@@ -112,21 +119,21 @@
                   <ul class="dropdown-menu"> 
                     <!--<li class="nav-header">Tournaments</li>-->
                     <li>
-                      <a type="button" ng-click="checkEventsLogin()">Register for an Event</a>
+                      <a class="mouseover" type="button" ng-click="checkEventsLogin()">Register for an Event</a>
                     </li>
                     <li>
-                      <a type="button" ng-click="checkTournamentLogin()">Join a Tournament</a>
+                      <a class="mouseover" type="button" ng-click="checkTournamentLogin()">Join a Tournament</a>
                     </li> 
                     <li>                                                  
                     <li class="divider" ng-show="player.countryCode=='SG'||player.countryCode==''"></li> 
                     <li type="button" ng-show="player.countryCode=='SG'||player.countryCode==''" class="nav-header">Singapore Schools</li>                    
                     
                     <li ng-show="player.countryCode=='SG'||player.countryCode==''">
-                      <a type="button" ng-click="checkSchoolRegistrationLogin()">Register Your School</a>
+                      <a class="mouseover" type="button" ng-click="checkSchoolRegistrationLogin()">Register Your School</a>
                     </li>
                     
                     <li ng-show="player.countryCode=='SG'||player.countryCode==''">
-                      <a type="button" ng-click="checkSchoolsMapLogin()">View Schools Map</a>
+                      <a class="mouseover" type="button" ng-click="checkSchoolsMapLogin()">View Schools Map</a>
                     </li>
                     <!-- <li>
                       <a type="button" ng-click="checkCreateEventsLogin()">Events</a>
@@ -134,7 +141,7 @@
                     <li class="divider"></li>                    
                     <li class="nav-header">About Us</li>                    
                     <li>
-                      <a ng-click="toVideos()">Learn about SingPath</a>
+                      <a class="mouseover" ng-click="toVideos()">Learn about SingPath</a>
                     </li> 
                     <li>
                       <a href ="https://www.facebook.com/pages/Singpath/288817147942516" target="_blank">
@@ -144,10 +151,10 @@
                     <li class="divider"></li>                    
                     <li class="nav-header">Create</li>
                     <li>
-                      <a ng-click="checkCreatePathorLevelLogin()">Problems</a>
+                      <a class="mouseover" ng-click="checkCreatePathorLevelLogin()">Problems</a>
                     </li>   
                     <li>
-                      <a type="button" ng-click="checkStoryLogin()">Tutorials</a>
+                      <a class="mouseover" type="button" ng-click="checkStoryLogin()">Tutorials</a>
                     </li>
                     <!--
                     <li>
@@ -155,21 +162,21 @@
                     </li>
                      -->
                     <li>
-                      <a type="button" ng-click="checkCreateTournamentLogin()">Tournaments</a>
+                      <a class="mouseover" type="button" ng-click="checkCreateTournamentLogin()">Tournaments</a>
                     </li> 
                     
                     <li class="divider"></li> 
                     <li class="nav-header">Other Stuff</li>  
                     <li>
-                      <a type="button" ng-click="checkRankingLogin()">Location Rankings</a>
+                      <a class="mouseover" type="button" ng-click="checkRankingLogin()">Location Rankings</a>
                     </li>                  
                     <li>
-                      <a type="button" ng-click="checkChallengesLogin()">Challenges</a>
+                      <a class="mouseover" type="button" ng-click="checkChallengesLogin()">Challenges</a>
                     </li>            
                   </ul>                
                 </li>
                 <li>
-                  <a type="button" ng-click="checkProfileLogin()">Profile</a>
+                  <a class="mouseover" type="button" ng-click="checkProfileLogin()">Profile</a>
                 </li>                           
               </ul>            
             </div>
