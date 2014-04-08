@@ -3940,12 +3940,22 @@ function EventController($scope, $resource, $location, $http, $route){
           var thedata = {"status":action};
           
           var registration = EventRegistration.save({eventId:id}, thedata, function() {
-                 $scope.registration = registration;
-                 $scope.fetch_event();
-            });
+          	$scope.registration = registration;
+          	console.log("hiding");
+          	$('#postModal').modal('hide');
+          	$('#watchModal').modal('hide');
+          	console.log("finish hiding")
+            $scope.fetch_event();
+           });
 
-          $('#postModal').modal('hide');
-          $('#watchModal').modal('hide');
+          /*if(action=='watch'){
+          	console.log("watching");
+          	$('#watchModal').modal('show');
+          }else{
+          	console.log("posting");
+          	$('#postModal').modal('show');
+          }*/
+          
         }
 
         $scope.go_to_eventsRanking = function(eventID){
@@ -3984,6 +3994,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.player = $resource('/jsonapi/player').get();
   		$scope.gamePaths = [];
   		$scope.eventcreatorCC = false; //prepare boolean value to include in send_rsvp api
+  		$scope.eventMiscCC=false;
 
   		$scope.rsvpList = [];
 
@@ -4282,14 +4293,25 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
 		}
 
-		$scope.addEventCreatorToCCList = function(){
-			console.log($scope.player.player_id);
-			if(!$scope.eventcreatorCC){
-				$scope.eventcreatorCC=true;
-				console.log($scope.eventcreatorCC);
+		$scope.addToCCList = function(partyToCC){
+			if(partyToCC===("eventCreator")){
+				console.log($scope.player.player_id);
+				if(!$scope.eventcreatorCC){
+					$scope.eventcreatorCC=true;
+					console.log($scope.eventcreatorCC);
+				}else{
+					$scope.eventcreatorCC=false;
+					console.log($scope.eventcreatorCC);
+				}
 			}else{
-				$scope.eventcreatorCC=false;
-				console.log($scope.eventcreatorCC);
+				//console.log($scope.player.player_id);
+				if(!$scope.eventMiscCC){
+					$scope.eventMiscCC=true;
+					console.log("Misc: " + $scope.eventMiscCC);
+				}else{
+					$scope.eventMiscCC=false;
+					console.log($scope.eventMiscCC);
+				}
 			}
 		}
 
