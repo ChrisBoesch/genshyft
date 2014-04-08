@@ -97,7 +97,7 @@
 						 	<select class="span6" ng-model="selectedPath" ng-init="populatePaths()" ng-change="selectPath(selectedPath)">
 								<option value="" selected>Choose Game Path...</option>
 								<option ng-repeat="gamePath in gamePaths" value="{{gamePath.id}}">{{gamePath.name}}</option>
-							</select>
+							</select> Current Path: {{eventsData.path}}
 							<!--
 						  <label>
 						    <input type="radio" ng-model="eventProgLang" ng-checked="eventsData.path=='Java'" id="optionsRadios1" value="Java"  >
