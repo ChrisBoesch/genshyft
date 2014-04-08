@@ -3843,8 +3843,6 @@ function EventController($scope, $resource, $location, $http, $route){
             	$scope.events = event.events; 
             	console.log(event.events);
             }
-
-            console.log("hiding from fetch");
           	$('#postModal').modal('hide');
           	$('#watchModal').modal('hide');
             
@@ -3946,16 +3944,7 @@ function EventController($scope, $resource, $location, $http, $route){
           var registration = EventRegistration.save({eventId:id}, thedata, function() {
           	$scope.registration = registration;
             $scope.fetch_event();
-           });
-
-          /*if(action=='watch'){
-          	console.log("watching");
-          	$('#watchModal').modal('show');
-          }else{
-          	console.log("posting");
-          	$('#postModal').modal('show');
-          }*/
-          
+           });   
         }
 
         $scope.go_to_eventsRanking = function(eventID){
