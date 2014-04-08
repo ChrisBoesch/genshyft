@@ -274,6 +274,8 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
       }else{
         $('#t111').removeClass('active');
         $('#ta111').removeClass('active');
+        $('#t211').removeClass('active');
+        $('#ta211').removeClass('active');
         $('#t311').addClass('active');
         $('#ta311').addClass('active');
       }
