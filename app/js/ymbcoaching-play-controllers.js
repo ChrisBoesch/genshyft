@@ -34,66 +34,67 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 	
 
 	
-	
-		$scope.getCurrentMastery = function(){
-          $resource('/jsonapi/current_coaching_status').get({},function(response){
-			  $scope.mastery = response;
-			  console.log("Response for current_coaching_stats \n\n" + JSON.stringify($scope.mastery));
-			   
-			   $scope.currentCoach = $scope.mastery.coach;
-			   $scope.currentPathId = $scope.mastery.pathId;
-			   $scope.currentPathName = $scope.mastery.pathName;
-			   $scope.nextProblemID = $scope.mastery.nextProblemID;
-			   $scope.fromProblemSetID = $scope.mastery.fromProblemSetID;
-			   $scope.showUserNewProblem = $scope.mastery.showNewProblems;
-			   $scope.problemsToDo =[];
-			   
-				$scope.problemViaURL = ($location.search()).problemID;
-				if($scope.problemViaURL != null){
-					$scope.problemsToDo.push($scope.problemViaURL);
-					console.log("Take problem from URL : + "+$scope.problemViaURL);
-					$scope.nextProblemID = $scope.problemViaURL;
-				}			   
-			   
-			   $scope.problemsToDo.push($scope.nextProblemID);
-			   $scope.master_next_ten_qn = $scope.mastery.next_ten;
+// Get current status of player	
+	$scope.getCurrentMastery = function(){
+	  $resource('/jsonapi/current_coaching_status').get({},function(response){
+		  $scope.mastery = response;
+		  console.log("Response for current_coaching_stats \n\n" + JSON.stringify($scope.mastery));
+		   
+		   $scope.currentCoach = $scope.mastery.coach;
+		   $scope.currentPathId = $scope.mastery.pathId;
+		   $scope.currentPathName = $scope.mastery.pathName;
+		   $scope.nextProblemID = $scope.mastery.nextProblemID;
+		   $scope.fromProblemSetID = $scope.mastery.fromProblemSetID;
+		   $scope.showUserNewProblem = $scope.mastery.showNewProblems;
+		   $scope.problemsToDo =[];
+		   
+			$scope.problemViaURL = ($location.search()).problemID;
+			if($scope.problemViaURL != null){
+				$scope.problemsToDo.push($scope.problemViaURL);
+				console.log("Take problem from URL : + "+$scope.problemViaURL);
+				$scope.nextProblemID = $scope.problemViaURL;
+			}			   
+		   
+		   $scope.problemsToDo.push($scope.nextProblemID);
+		   $scope.master_next_ten_qn = $scope.mastery.next_ten;
 
-			   
-			   console.log("Array for next ten  :  " + $scope.master_next_ten_qn );
-			   
-			   
-			   
-			   
-			   
-			   try{
-					 console.log("first in list is " + $scope.problemsToDo[0]);
-			   
-				   for(var i = 1;i<$scope.master_next_ten_qn.length;i++){
-						$scope.problemsToDo.push($scope.master_next_ten_qn[i].problemId);
-						console.log("Problems added into list are " + $scope.problemsToDo[i]);
-				   }
+		   
+		   console.log("Array for next ten  :  " + $scope.master_next_ten_qn );
+		   
+		   
+		   
+		   
+		   
+		   try{
+				 console.log("first in list is " + $scope.problemsToDo[0]);
+		   
+			   for(var i = 1;i<$scope.master_next_ten_qn.length;i++){
+					$scope.problemsToDo.push($scope.master_next_ten_qn[i].problemId);
+					console.log("Problems added into list are " + $scope.problemsToDo[i]);
 			   }
-			   catch(err){
-				alert("Please do several questions at Practice and come back later.");
-				location.path("#/practice");
-			   
-			   }
-			   
-			   
-			   $scope.problemsInSequence = 0;
-			   if($scope.problemsToDo>$scope.problemsInSequence){
-				//$scope.nextProblemID = $scope.mastery.next_ten[$scope.problemsInSequence].problemId
-				$scope.nextProblemID = $scope.problemsToDo[$scope.problemsInSequence];
-			   }
-			   
-			   
-			   $scope.goal = $scope.mastery.goal;
-			   console.log("coach name : " + $scope.mastery.coach);
-			   $scope.getCoaches($scope.currentCoach);
-			   console.log("EXECUTING METHOD: $scope.getCoaches($scope.currentCoach); ");
-			   })		
-		}
+		   }
+		   catch(err){
+			alert("Please do several questions at Practice and come back later.");
+			location.path("#/practice");
+		   
+		   }
+		   
+		   
+		   $scope.problemsInSequence = 0;
+		   if($scope.problemsToDo>$scope.problemsInSequence){
+			//$scope.nextProblemID = $scope.mastery.next_ten[$scope.problemsInSequence].problemId
+			$scope.nextProblemID = $scope.problemsToDo[$scope.problemsInSequence];
+		   }
+		   
+		   
+		   $scope.goal = $scope.mastery.goal;
+		   console.log("coach name : " + $scope.mastery.coach);
+		   $scope.getCoaches($scope.currentCoach);
+		   console.log("EXECUTING METHOD: $scope.getCoaches($scope.currentCoach); ");
+		   })		
+	}
 	
+// get all coaches data 	
 	$scope.getCoaches = function(currentCoach){
 	  console.log("EXECUTING METHOD : $scope.getCoaches = function(currentCoach){ ");
 	  $resource('/jsonapi/coach').get({},function(response){
@@ -113,7 +114,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			//WELCOMEBACK 
 			$scope.audio = $scope.audiofile.welcomeback;
 			var audioplayer = document.getElementsByTagName('audio')[0];
-			audioplayer.load();
+			audioplayer.play();
 			$scope.words = $scope.audiotext.welcomeback;
 			//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 			$scope.getGameID();
@@ -141,7 +142,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
           });	
 		  
 		
-	}, 12000);			  
+	}, 10000);			  
 		  
 		  
 	}	
@@ -204,15 +205,16 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		}
 		//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 			 	
-						
+			$scope.runButton = true;
+			$scope.skipButton = true;				
 
 		
-		$timeout(function(){
+		/*$timeout(function(){
 			$scope.solution1 = $scope.solutionToProblem;
 			$scope.runButton = true;
 			$scope.skipButton = true;
 		},10000);
-		
+		*/
     };
 	
 	/*$scope.getGameID = function(){
@@ -239,7 +241,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 						$scope.coachImage =$scope.pictures.lessattempts;						
 					}
 					//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-					audioplayer.load()	;	
+					audioplayer.play()	;	
 							//Execute Game
 							$timeout(function(){ 
 								$scope.create_practice_game($scope.gameID);
@@ -283,7 +285,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 				$scope.audio = $scope.audiofile.areyouthere;
 				$scope.areyouthereWarnings = $scope.areyouthereWarnings +1;
 				var audioplayer = document.getElementsByTagName('audio')[0];
-				audioplayer.load();
+				audioplayer.play();
 				$scope.words = $scope.audiotext.areyouthere;
 				$scope.coachImage =$scope.pictures.areyouthere;
 			}
@@ -404,7 +406,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 						var audioplayer = document.getElementsByTagName('audio')[0];
 						$scope.words = $scope.audiotext.correctanswer;
 						//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
-						audioplayer.load();
+						audioplayer.play();
 						$scope.runButton = false;
 						$scope.skipButton = false;
 						
@@ -436,7 +438,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							var audioplayer = document.getElementsByTagName('audio')[0];
 							$scope.words = $scope.audiotext.tryother;		
 							$scope.coachImage =$scope.pictures.tryother;
-							audioplayer.load();
+							audioplayer.play();
 							
 							$scope.solution1 ="";
 							$scope.nameToProblem ="";
@@ -444,7 +446,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							
 							
 							//remove sample solution
-							$scope.game.problems.problems[current_problem_index].examples ="";
+							$scope.game.problems= "";
 							//remove sample test result
 							$scope.solution_check_result = " 
 							//stop timer from asking "are you there ";
@@ -472,7 +474,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 					$scope.words = $scope.audiotext.dontgiveup;
 					//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 					$timeout(function(){
-						audioplayer.load();
+						audioplayer.play();
 						$scope.coachImage =$scope.pictures.dontgiveup;
 					}, 1000);
 			  }
