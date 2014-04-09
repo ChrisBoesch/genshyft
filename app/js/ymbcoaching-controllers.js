@@ -7,6 +7,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 	$scope.player_progress ="";
 	$scope.currentPathId="";
 	$scope.currentPathName ="";
+	$scope.allCoachesData="";
 	
 	/* $resource('/jsonapi/get_player_progress').get({},function(response){
 		$scope.player_progress = response;
@@ -34,6 +35,22 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			   console.log($scope.allCoachesData.coachesData[0].name);
 			   });	   			   
 		}	
+		
+		
+		$scope.filterGetCoaches = function(name){
+			
+			$scope.filteredCoach;
+			for(var i=0; i< $scope.allCoachesData.coachesData.length;i++){
+					
+					if($scope.allCoachesData.coachesData[i].name === name){
+						$scope.filteredCoach = $scope.allCoachesData.coachesData[i];
+						$scope.currentCoach =  $scope.filteredCoach;
+						console.log($scope.allCoachesData.coachesData[i]);
+						break;
+					}
+					
+			}
+		}
 	
   /*  $scope.get_player_progress = function(){			
 			$scope.player_progress = $resource('/jsonapi/get_player_progress').get();
@@ -57,8 +74,9 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 			
 				   if($scope.mastery.coach == null){
 						console.log(" The value current_coaching_status.coach is null");
-						$scope.currentCoach = "Shannon"
-						console.log("Set default Coach Shannon");
+						$scope.filterGetCoaches($scope.allCoachesData.coachesData[0].name);
+						$scope.currentCoach = $scope.filteredCoach;
+						console.log("Set default Coach #1");
 						if($scope.player_progress.paths.length > 0){		   
 						   console.log("User has at least 1 path.");
 						   
@@ -84,8 +102,9 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 				   }
 				   else{
 						console.log("mastery.coach is not null");
-						$scope.currentCoach = $scope.mastery.coach
-							console.log($scope.currentCoach + " E");
+						$scope.filterGetCoaches($scope.mastery.coach);
+						$scope.currentCoach = $scope.filteredCoach;
+							console.log($scope.currentCoach + " <- current coach in system");
 					    $scope.currentPathId = $scope.mastery.pathID;
 						console.log("currentpathId value is" + $scope.currentPathId);
 					    $scope.currentPathName = $scope.mastery.pathName;	
