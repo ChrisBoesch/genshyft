@@ -1697,6 +1697,7 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
     $scope.permutation = "12345";
+    $scope.codeType = null;
 
     if($cookieStore.get("name")){
       $scope.qid = $cookieStore.get("name").id; //retrieve quest id from Storyboard page
@@ -1710,7 +1711,7 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
     if($cookieStore.get("questPathName")){
       $scope.codeType = $cookieStore.get("questPathName"); //retrieve path type for quest
       $scope.codeType = $scope.codeType.toLowerCase();
-      console.log($scope.codeType);
+      console.log($scope.codeType + " " + $scope.qid + " " + $scope.numProblems);
     }
 
     
@@ -1857,8 +1858,8 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
 		$scope.get_pathName.get({"pName":pName}, function(response){
 			$scope.singlePath = response;
 			$scope.singlePathName = $scope.singlePath.path.name;
-			$scope.codeType = $scope.singlePathName.toLowerCase();
-			console.log("This is " + $scope.codeType);
+			//$scope.codeType = $scope.singlePathName.toLowerCase();
+			//console.log("This is " + $scope.codeType);
 		});
     	 
     },true);
