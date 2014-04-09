@@ -257,7 +257,26 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		console.log("next question");
 		$scope.problemsInSequence = $scope.problemsInSequence + 1;
 		console.log($scope.problemsInSequence + ": ProblemInSequence");
-		console.log($scope.nextProblemID + "current problem Id ");
+		console.log($scope.nextProblemID + "current problem Id 
+		
+		$scope.audio = $scope.audiofile.dontgiveup;
+		var audioplayer = document.getElementsByTagName('audio')[0];
+		$scope.words = $scope.audiotext.dontgiveup;		
+		
+		$scope.solution1 ="Loading new problem ...";
+		$scope.nameToProblem ="";
+		$scope.descriptionToProblem ="Are you ready for the next problem ?";
+		
+		
+		//remove sample solution
+		$scope.game.problems= "";
+		//remove sample test result
+		$scope.solution_check_result = " 
+		//stop timer from asking "are you there ";
+		$scope.stop(); 		
+		
+		
+		
 		if($scope.problemsInSequence < $scope.problemsToDo.length){
 		
 			$scope.nextProblemID = $scope.problemsToDo[$scope.problemsInSequence];
@@ -440,7 +459,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							$scope.coachImage =$scope.pictures.tryother;
 							audioplayer.play();
 							
-							$scope.solution1 ="";
+							$scope.solution1 ="Loading new problem ...";
 							$scope.nameToProblem ="";
 							$scope.descriptionToProblem ="Are you ready for the next problem ?";
 							
