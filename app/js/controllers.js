@@ -2057,15 +2057,16 @@ function PracticeGameController($scope,$resource,$cookieStore){
     
     $scope.fetch = function(gameID){
 		$scope.GameModel = $resource('/jsonapi/game/:gameID');
-      
+      	console.log("Fetching");
 		$scope.GameModel.get({"gameID":gameID}, function(response){
         $scope.game = response;
-        $scope.update_remaining_problems();
+       	
         //Added by GENShYFT - Glen
         $scope.get_mentor($scope.game.heatID, $scope.game.playerID);
         $scope.problems = $scope.game.problems.problems;
         $scope.codeType=$scope.problems[$scope.current_problem_index].interface.codeHighlightKey;
         console.log($scope.codeType);
+        $scope.update_remaining_problems();
 		});
     };
 
@@ -2100,7 +2101,7 @@ function PracticeGameController($scope,$resource,$cookieStore){
         $scope.solution_check_result = null;
         var editor = ace.edit("editorPractice");
         editor.getSession().setMode("ace/mode/" + $scope.game.problems.problems[$scope.current_problem_index].interface.codeHighlightKey);
-        editor.getSession().removeListener('change', callback);
+        //editor.getSession().removeListener('change', callback);
       }else{
         $scope.current_problem=null;
         $scope.current_problem_index = null;
