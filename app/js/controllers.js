@@ -1983,6 +1983,7 @@ function PracticeGameController($scope,$resource,$cookieStore){
     $scope.skip_problem_count = 0;
     $scope.current_problem_index = 0;
     $scope.permutation = "12345"; 
+    $scope.codeType = null;
     
     if($cookieStore.get("name")){
       $scope.LevelID = $cookieStore.get("name"); //retrieve level id from practice page
@@ -2060,6 +2061,10 @@ function PracticeGameController($scope,$resource,$cookieStore){
 		$scope.GameModel.get({"gameID":gameID}, function(response){
         $scope.game = response;
         $scope.update_remaining_problems();
+        //Added by GENShYFT - Glen
+        $scope.get_mentor($scope.game.heatID, $scope.game.playerID);
+        $scope.problems = $scope.game.problems.problems;
+        $scope.codeType=$scope.problems[$scope.current_problem_index].interface.codeHighlightKey;
 		});
     };
 
@@ -2082,10 +2087,19 @@ function PracticeGameController($scope,$resource,$cookieStore){
     $scope.move_to_next_unsolved_problem = function(){
       $scope.sampleAnswers = "yes";
       if ($scope.remaining_problems.length>0){
-        $('#t11').addClass('active');
-        $('#t21').removeClass('active');
-        $('#ta11').addClass('active');
-        $('#ta21').removeClass('active');
+        if ($scope.codeType != 'html'){
+        $('#t11').removeClass('active');
+        $('#ta11').removeClass('active');
+        $('#t21').addClass('active');
+        $('#ta21').addClass('active');
+      }else{
+        $('#t111').removeClass('active');
+        $('#ta111').removeClass('active');
+        $('#t211').removeClass('active');
+        $('#ta211').removeClass('active');
+        $('#t311').addClass('active');
+        $('#ta311').addClass('active');
+      }
         //Todo:If you are already on the problem, you don't need to reload it. 
         $scope.current_problem = $scope.remaining_problems[$scope.skip_problem_count % $scope.remaining_problems.length];
         $scope.current_problem_index = $scope.game.problemIDs.indexOf($scope.current_problem);
@@ -2103,25 +2117,95 @@ function PracticeGameController($scope,$resource,$cookieStore){
 
     }
     $scope.skip_problem = function(){
-      $('#t11').addClass('active');
-      $('#t21').removeClass('active');
-      $('#ta11').addClass('active');
-      $('#ta21').removeClass('active');
+      if ($scope.codeType != 'html'){
+        $('#t11').removeClass('active');
+        $('#ta11').removeClass('active');
+        $('#t21').addClass('active');
+        $('#ta21').addClass('active');
+      }else{
+        $('#t111').removeClass('active');
+        $('#ta111').removeClass('active');
+        $('#t211').removeClass('active');
+        $('#ta211').removeClass('active');
+        $('#t311').addClass('active');
+        $('#ta311').addClass('active');
+      }
       if ($scope.remaining_problems.length>1){
         $scope.skip_problem_count += 1;
         $scope.move_to_next_unsolved_problem();
       }
     }
 
+    $scope.fill_iframe = function() { 
+      console.log("filling solution iFrame");
+      var iFrame = angular.element( document.querySelector( '#anIframe' ) );
+      iFrame.attr("src","/jsonapi/lastsolution.html");
+    };
+
+    $scope.fill_test_iframe = function() { 
+      console.log("filling test iFrame");
+      var iframe = angular.element( document.querySelector( '#testIframe' ) );
+      //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
+      iframe.attr("src", "/jsonapi/runner.html");//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
+      //var scopeToShare = angular.element(document.querySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass;
+      //console.log(scopeToShare + " from fill");
+      //document.getElementById("testIframe").contentWindow.angular.element();
+      //$scope.log_test_iframe();
+
+    };
+
+
+    $scope.render_html = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_iframe();
+            //If solved, update the game.
+            
+      });
+
+    };
+
+    $scope.run_e2e_tests = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_test_iframe();
+            //If solved, update the game.
+            
+      });
+
+    };
+
 
     $scope.check_solution_for_game = function() {
       //$scope.solution
       //$scope.current_problem
       //$scope.game.gameID
-      $('#t11').removeClass('active');
-      $('#t21').addClass('active');
-      $('#ta11').removeClass('active');
-      $('#ta21').addClass('active');
+      
+      if ($scope.codeType != 'html'){
+        $('#t11').removeClass('active');
+        $('#ta11').removeClass('active');
+        $('#t21').addClass('active');
+        $('#ta21').addClass('active');
+      }else{
+        $('#t111').removeClass('active');
+        $('#ta111').removeClass('active');
+        $('#t211').removeClass('active');
+        $('#ta211').removeClass('active');
+        $('#t311').addClass('active');
+        $('#ta311').addClass('active');
+      }
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,
@@ -2131,6 +2215,10 @@ function PracticeGameController($scope,$resource,$cookieStore){
       var item = new $scope.SaveResource($scope.theData);
       item.$save(function(response) { 
               $scope.solution_check_result = response;
+              if($scope.codeType == 'html'){
+              	$scope.fill_iframe();
+              	$scope.fill_test_iframe();
+           	  }
               if($scope.solution_check_result.last_solved){
 				$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
 
