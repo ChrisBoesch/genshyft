@@ -523,7 +523,8 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 			$cookieStore.put("level", lvlnum);		
 			$cookieStore.put("gameDifficulty", $scope.difficulty);			
 			$cookieStore.put("nameOfPath", $scope.path_progress.path.name);
-			$cookieStore.put("path_IDD", $scope.path_progress.path.id);					
+			$cookieStore.put("path_IDD", $scope.path_progress.path.id);	
+			$cookieStore.put("practicePathName", $scope.practice_path_name);				
 			if($scope.difficulty == "Drag-n-Drop"){
 				window.location.href = "practice_play_page.html";
 			}
@@ -2005,7 +2006,12 @@ function PracticeGameController($scope,$resource,$cookieStore){
     }
     if($cookieStore.get("path_IDD")){
       $scope.path_IDD = $cookieStore.get("path_IDD"); //retrieve name of the path
-    }		
+    }
+    if($cookieStore.get("practicePathName")){
+      $scope.codeType = $cookieStore.get("practicePathName"); //retrieve name of the path
+      $scope.codeType = $scope.codeType.toLowerCase();
+      console.log($scope.codeType);
+    }			
 	
 	
 	$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
@@ -2058,13 +2064,9 @@ function PracticeGameController($scope,$resource,$cookieStore){
     $scope.fetch = function(gameID){
 		$scope.GameModel = $resource('/jsonapi/game/:gameID');
       	console.log("Fetching");
+      	console.log($scope.codeType);
 		$scope.GameModel.get({"gameID":gameID}, function(response){
         $scope.game = response;
-       	
-        //Added by GENShYFT - Glen
-        $scope.problems = $scope.game.problems.problems;
-        $scope.codeType=$scope.problems[$scope.current_problem_index].interface.codeHighlightKey;
-        console.log($scope.codeType);
         $scope.update_remaining_problems();
 		});
     };
