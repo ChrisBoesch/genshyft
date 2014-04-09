@@ -284,7 +284,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		console.log("next question");
 		$scope.problemsInSequence = $scope.problemsInSequence + 1;
 		console.log($scope.problemsInSequence + ": ProblemInSequence");
-		console.log($scope.nextProblemID + "current problem Id 
+		console.log($scope.nextProblemID + "current problem Id"); 
 		
 		$scope.audio = $scope.audiofile.dontgiveup;
 		var audioplayer = document.getElementsByTagName('audio')[0];
@@ -298,7 +298,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		//remove sample solution
 		$scope.game.problems= "";
 		//remove sample test result
-		$scope.solution_check_result = " 
+		$scope.solution_check_result = ""; 
 		//stop timer from asking "are you there ";
 		$scope.stop(); 		
 		
@@ -494,7 +494,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							//remove sample solution
 							$scope.game.problems= "";
 							//remove sample test result
-							$scope.solution_check_result = " 
+							$scope.solution_check_result = ""; 
 							//stop timer from asking "are you there ";
 							$scope.stop(); 
 							
