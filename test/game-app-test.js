@@ -1247,7 +1247,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		    "tournamentType": "Normal",
 		    "type": "heat ranking",
 		    "isGroup":true,
-		    "tournamentStatus":"Closed"
+		    "tournamentStatus":"Open"
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);
