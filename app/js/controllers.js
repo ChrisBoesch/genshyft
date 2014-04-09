@@ -1857,6 +1857,8 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
 		$scope.get_pathName.get({"pName":pName}, function(response){
 			$scope.singlePath = response;
 			$scope.singlePathName = $scope.singlePath.path.name;
+			$scope.codeType = $scope.singlePathName.toLowerCase();
+			console.log("This is " + $scope.codeType);
 		});
     	 
     },true);
