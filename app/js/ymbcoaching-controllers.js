@@ -38,9 +38,9 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		
 		
 		$scope.filterGetCoaches = function(name){
-			
+			$scope.getCoaches();
 			$scope.filteredCoach;
-			for(var i=0; i< $scope.allCoachesData.coachesData.length;i++){
+			for(var i=0; i<$scope.allCoachesData.coachesData.length;i++){
 					
 					if($scope.allCoachesData.coachesData[i].name === name){
 						$scope.filteredCoach = $scope.allCoachesData.coachesData[i];
