@@ -311,7 +311,9 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
             $scope.solution_check_result = response;
             $scope.fill_iframe();
             //If solved, update the game.
-            
+            if($scope.solution_check_result.last_solved){
+                $scope.fetch($scope.game.gameID);
+            }
       });
 
     };
@@ -327,7 +329,9 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
             $scope.solution_check_result = response;
             $scope.fill_test_iframe();
             //If solved, update the game.
-            
+            if($scope.solution_check_result.last_solved){
+                $scope.fetch($scope.game.gameID);
+            }
       });
 
     };
