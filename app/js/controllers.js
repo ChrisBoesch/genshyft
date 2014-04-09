@@ -2062,7 +2062,6 @@ function PracticeGameController($scope,$resource,$cookieStore){
         $scope.game = response;
        	
         //Added by GENShYFT - Glen
-        $scope.get_mentor($scope.game.heatID, $scope.game.playerID);
         $scope.problems = $scope.game.problems.problems;
         $scope.codeType=$scope.problems[$scope.current_problem_index].interface.codeHighlightKey;
         console.log($scope.codeType);
