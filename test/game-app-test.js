@@ -4393,8 +4393,19 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	var mailResults = {
     "results": "Mail sent to ['pivotalexpert@gmail.com']"
 	}
-	$httpBackend.whenGET('/jsonapi/send_event_message').respond(mailResults);
-	
+
+	var newMailResponse = {
+    "status": "success",
+    "to": "pivotalexpert@gmail.com",
+    "from": "pivotalexpert@gmail.com",
+    "cc": "wahchun927@gmail.com",
+    "bcc": "wahchun927@gmail.com",
+    "subject": "Welcome to the tournament",
+    "messageBody": "Please rsvp now"
+	}
+
+	$httpBackend.whenPOST('/jsonapi/send_event_message').respond(newMailResponse);
+
   $httpBackend.whenGET('/jsonapi/uninvite_for_event/6095188913029120/5205559720542208').passThrough();
 	$httpBackend.whenGET('/jsonapi/uninvite_for_event/5308925893148672/6525077021523968').respond("eventsTableDataSec");
 

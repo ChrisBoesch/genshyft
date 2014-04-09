@@ -12,6 +12,9 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
     */
 	
 	
+	
+	
+	
 	$scope.currentAttempts = 1;
 	$scope.currentDoneQuestions =[];
 	
@@ -28,6 +31,30 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 	
 	
 	
+    $scope.onTimeout = function(){
+        $scope.counter++;
+        mytimeout = $timeout($scope.onTimeout,1000);
+		if($scope.counter > 50 ){
+			$scope.counter = 0;
+			
+			if( $scope.areyouthereWarnings <3){
+				$scope.audio = $scope.audiofile.areyouthere;
+				$scope.areyouthereWarnings = $scope.areyouthereWarnings +1;
+				var audioplayer = document.getElementsByTagName('audio')[0];
+				audioplayer.play();
+				$scope.words = $scope.audiotext.areyouthere;
+				$scope.coachImage =$scope.pictures.areyouthere;
+			}
+			$scope.counter = 0;
+		}
+		
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+    
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
+
 	
 	
 	
@@ -257,21 +284,25 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		console.log("next question");
 		$scope.problemsInSequence = $scope.problemsInSequence + 1;
 		console.log($scope.problemsInSequence + ": ProblemInSequence");
-		console.log($scope.nextProblemID + "current problem Id ");
+		console.log($scope.nextProblemID + "current problem Id"); 
+		
+		$scope.audio = $scope.audiofile.dontgiveup;
+		var audioplayer = document.getElementsByTagName('audio')[0];
+		$scope.words = $scope.audiotext.dontgiveup;		
+		
+		$scope.solution1 ="Loading new problem ...";
+		$scope.nameToProblem ="";
+		$scope.descriptionToProblem ="Are you ready for the next problem ?";
 		
 		
-							$scope.solution1 ="Loading new problem ...";
-							$scope.nameToProblem ="";
-							$scope.descriptionToProblem ="Are you ready for the next problem ?";
-							
-							
-							//remove sample solution
-							$scope.game.problems= "";
-							//remove sample test result
-							$scope.solution_check_result = " 
-							//stop timer from asking "are you there ";
-							$scope.stop(); 
-							
+		//remove sample solution
+		$scope.game.problems= "";
+		//remove sample test result
+		$scope.solution_check_result = ""; 
+		//stop timer from asking "are you there ";
+		$scope.stop(); 		
+		
+		
 		
 		if($scope.problemsInSequence < $scope.problemsToDo.length){
 		
@@ -463,7 +494,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							//remove sample solution
 							$scope.game.problems= "";
 							//remove sample test result
-							$scope.solution_check_result = " 
+							$scope.solution_check_result = ""; 
 							//stop timer from asking "are you there ";
 							$scope.stop(); 
 							
