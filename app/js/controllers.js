@@ -1708,8 +1708,8 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
     if($cookieStore.get("type")){
       $scope.gameType = $cookieStore.get("type"); //retrieve game type
     }
-    if($cookieStore.get("questPathName")){
-      $scope.codeType = $cookieStore.get("questPathName"); //retrieve path type for quest
+    if($cookieStore.get("practicePathName")){
+      $scope.codeType = $cookieStore.get("practicePathName"); //retrieve path type for quest
       $scope.codeType = $scope.codeType.toLowerCase();
       console.log($scope.codeType + " " + $scope.qid + " " + $scope.numProblems);
     }
@@ -3696,7 +3696,7 @@ function StoryController($scope,$resource,$cookieStore,$location,$http,$filter,$
 		$scope.pathModel = $resource('/jsonapi/get_path_progress/:path_ID');
 		$scope.pathModel.get({"path_ID":path_ID}, function(response){
 	    	$scope.quest_path_name = response.path.name;
-	    	$cookieStore.put("questPathName", $scope.quest_path_name);
+	    	$cookieStore.put("practicePathName", $scope.quest_path_name);
 	    });
     }
 	
