@@ -1707,6 +1707,13 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
     if($cookieStore.get("type")){
       $scope.gameType = $cookieStore.get("type"); //retrieve game type
     }
+    if($cookieStore.get("questPathName")){
+      $scope.codeType = $cookieStore.get("questPathName"); //retrieve path type for quest
+      $scope.codeType = $scope.codeType.toLowerCase();
+      console.log($scope.codeType);
+    }
+
+    
 
     var videos = 0;
 
@@ -1769,7 +1776,61 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
         $scope.game = response;
         $scope.update_remaining_problems();
       });
-    };         
+    };  
+
+    $scope.render_html = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_iframe();
+            //If solved, update the game.
+            if($scope.solution_check_result.last_solved){
+                $scope.fetch($scope.game.gameID);
+            }
+      });
+
+    };
+
+    $scope.run_e2e_tests = function(){
+      $scope.SaveResource = $resource('/jsonapi/verify_for_game');
+      //alert($scope.game.gameID);
+      $scope.theData = {user_code:$scope.solution1,
+                        problem_id:$scope.current_problem,
+                        game_id:$scope.game.gameID};
+      var item = new $scope.SaveResource($scope.theData);
+      item.$save(function(response) { 
+            $scope.solution_check_result = response;
+            $scope.fill_test_iframe();
+            //If solved, update the game.
+            if($scope.solution_check_result.last_solved){
+                $scope.fetch($scope.game.gameID);
+            }
+      });
+
+    };     
+
+    $scope.fill_iframe = function() { 
+      console.log("filling solution iFrame");
+      var iFrame = angular.element( document.querySelector( '#anIframe' ) );
+      iFrame.attr("src","/jsonapi/lastsolution.html");
+    };
+
+     $scope.fill_test_iframe = function() { 
+      console.log("filling test iFrame");
+      var iframe = angular.element( document.querySelector( '#testIframe' ) );
+      //iFrame.attr("src",'data:text/html;charset=utf-8,' +encodeURI($scope.tests));
+      iframe.attr("src", "/jsonapi/runner.html");//'data:text/html;charset=utf-8,' +encodeURI($scope.game.problems.problems[$scope.current_problem_index].examples));
+      //var scopeToShare = angular.element(document.querySelector('[ng-controller="EZWebGameController"]')).scope().urlToPass;
+      //console.log(scopeToShare + " from fill");
+      //document.getElementById("testIframe").contentWindow.angular.element();
+      //$scope.log_test_iframe();
+
+    };  
     /*
     Create Tournament Game.
     
@@ -1873,10 +1934,20 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
       //$scope.solution
       //$scope.current_problem
       //$scope.game.gameID
-      $('#t1').removeClass('active');
-      $('#t2').addClass('active');
-      $('#ta1').removeClass('active');
-      $('#ta2').addClass('active');
+      if ($scope.codeType != 'html'){
+        $('#t1').removeClass('active');
+        $('#ta1').removeClass('active');
+        $('#t2').addClass('active');
+        $('#ta2').addClass('active');
+      }else{
+        $('#t111').removeClass('active');
+        $('#ta111').removeClass('active');
+        $('#t211').removeClass('active');
+        $('#ta211').removeClass('active');
+        $('#t311').addClass('active');
+        $('#ta311').addClass('active');
+      }
+     
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,
@@ -1886,6 +1957,10 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
       var item = new $scope.SaveResource($scope.theData);
       item.$save(function(response) { 
           $scope.solution_check_result = response;
+          if($scope.codeType == 'html'){
+              $scope.fill_iframe();
+              $scope.fill_test_iframe();
+            }
           if($scope.solution_check_result.last_solved){
             //If you hardcode to the game, this will automatically advance the game to the next problem. 
             $scope.fetch($scope.game.gameID);
@@ -3618,6 +3693,7 @@ function StoryController($scope,$resource,$cookieStore,$location,$http,$filter,$
 		$scope.pathModel = $resource('/jsonapi/get_path_progress/:path_ID');
 		$scope.pathModel.get({"path_ID":path_ID}, function(response){
 	    	$scope.quest_path_name = response.path.name;
+	    	$cookieStore.put("questPathName", $scope.quest_path_name);
 	    });
     }
 	
