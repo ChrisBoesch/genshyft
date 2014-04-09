@@ -475,7 +475,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,
-                        problem_id:$scope.current_problem,
+                        problem_id:$scope.nextProblemID,
                         game_id:$scope.game.gameID};
       var item = new $scope.SaveResource($scope.theData);
       item.$save(function(response) { 
@@ -491,7 +491,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,
-                        problem_id:$scope.current_problem,
+                        problem_id:$scope.nextProblemID,
                         game_id:$scope.game.gameID};
       var item = new $scope.SaveResource($scope.theData);
       item.$save(function(response) { 
