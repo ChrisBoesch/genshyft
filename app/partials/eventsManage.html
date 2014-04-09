@@ -268,8 +268,13 @@
 			
 			<div class="controls">
 				<br><br><br><br>
-					<div class="alert alert-warning" ng-show="rsvpResult==''">
-						{{rsvpResult}}
+					<div class="alert alert-warning" ng-show="rsvpResponse">
+						{{rsvpResult.to}}
+						{{rsvpResult.from}}
+						{{rsvpResult.cc}}
+						{{rsvpResult.bcc}}
+						{{rsvpResult.subject}}
+						{{rsvpResult.messageBody}}
 					</div>
 					<strong>Please select ONE only.<br></strong>
 					Select 'All' to send invites to all participants OR<br>
@@ -319,7 +324,7 @@
 				<label class="checkbox">
 					<input type="checkbox" id="includeRSVP" ng-model="includeRSVP"value="true"> Include RSVP
 				</label>
-				<button type="submit" class="btn btn-primary btn-success" data-toggle="modal" data-target="#watchModal" ng-click="send_rsvp(messageDescription, messageTitle, includeRSVP)">
+				<button type="submit" class="btn btn-primary btn-success" data-toggle="modal" data-target="#successModal" ng-click="send_rsvp(messageDescription, messageTitle, includeRSVP)">
 			    <i class="icon-envelope icon-white"></i> Send RSVP</button>
 			</div>
 		</div>
@@ -330,7 +335,5 @@
 				</div>
 			</div>	
 		</div>	
-	</div>
-
-	
+	</div>	
 </div>

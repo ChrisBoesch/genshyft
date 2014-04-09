@@ -4141,6 +4141,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.pathID = 0;
   		$scope.rsvpResult="";
   		$scope.rsvpList = [];
+  		$scope.rsvpResponse=false;
 
   		$scope.selectPath = function(selectedPath){
 			$scope.pathID = selectedPath;
@@ -4326,8 +4327,14 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				else{
 					console.log("rsvp sent");
 					console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
-					console.log(response.results);
-					$scope.rsvpResult = response.results;
+					console.log("RSVP response: " + response);
+					if(response.status==="success"){
+						$scope.rsvpResponse=true;
+						$scope.rsvpResult=response;
+						alert("Email was sent successfully to " + response.to + "\nfrom: " + response.from + "\ncc: " + response.cc + "\nbcc: " + response.bcc + "\nsubject: " + response.subject + "\nmessage body: " + response.messageBody);
+					}else{
+						alert("Email was not sent successfully, please check with site administrator for more information")
+					}
 					$route.reload();
 				}
 			});
