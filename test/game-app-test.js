@@ -4392,7 +4392,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 
 	var mailResults = {
     "results": "Mail sent to ['pivotalexpert@gmail.com']"
-	}
+	};
 
 	var newMailResponse = {
     "status": "success",
@@ -4402,7 +4402,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
     "bcc": "wahchun927@gmail.com",
     "subject": "Welcome to the tournament",
     "messageBody": "Please rsvp now"
-	}
+	};
 
 	$httpBackend.whenPOST('/jsonapi/send_event_message').respond(newMailResponse);
 
