@@ -24,7 +24,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 	
 	$scope.problemsInSequence = 0;
 	$scope.codeType = null;
-	
+	$scope.areyouthereWarnings = 0;
 	
 	
 	
@@ -175,7 +175,8 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			if($scope.game.problems.problems[i].id == $scope.nextProblemID){
 				$scope.current_problem_index = i;
 				console.log("comparing" + $scope.game.problems.problems[i].id + " with " + $scope.nextProblemID);
-				$scope.solutionToProblem = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
+				//$scope.solutionToProblem = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
+				$scope.solution1 = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
 				$scope.descriptionToProblem = $scope.game.problems.problems[$scope.current_problem_index].description;
 				$scope.nameToProblem = $scope.game.problems.problems[$scope.current_problem_index].name;
 				$scope.problems = $scope.game.problems.problems;
@@ -275,14 +276,17 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
     $scope.onTimeout = function(){
         $scope.counter++;
         mytimeout = $timeout($scope.onTimeout,1000);
-		if($scope.counter > 40 ){
+		if($scope.counter > 50 ){
 			$scope.counter = 0;
-			$scope.audio = $scope.audiofile.areyouthere;
-			var audioplayer = document.getElementsByTagName('audio')[0];
-			audioplayer.load();
-			$scope.words = $scope.audiotext.areyouthere;
-			$scope.coachImage =$scope.pictures.areyouthere;
-
+			
+			if( $scope.areyouthereWarnings <3){
+				$scope.audio = $scope.audiofile.areyouthere;
+				$scope.areyouthereWarnings = $scope.areyouthereWarnings +1;
+				var audioplayer = document.getElementsByTagName('audio')[0];
+				audioplayer.load();
+				$scope.words = $scope.audiotext.areyouthere;
+				$scope.coachImage =$scope.pictures.areyouthere;
+			}
 			$scope.counter = 0;
 		}
 		
@@ -425,9 +429,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 
 						
 						
-						$scope.solution1 ="";
-						$scope.nameToProblem ="";
-						$scope.descriptionToProblem ="";
+
 
 						$timeout(function(){
 							$scope.audio = $scope.audiofile.tryother;
@@ -435,6 +437,20 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							$scope.words = $scope.audiotext.tryother;		
 							$scope.coachImage =$scope.pictures.tryother;
 							audioplayer.load();
+							
+							$scope.solution1 ="";
+							$scope.nameToProblem ="";
+							$scope.descriptionToProblem ="Are you ready for the next problem ?";
+							
+							
+							//remove sample solution
+							$scope.game.problems.problems[current_problem_index].examples ="";
+							//remove sample test result
+							$scope.solution_check_result = " 
+							//stop timer from asking "are you there ";
+							$scope.stop(); 
+							
+							
 								$timeout(function(){
 									/*if($scope.showUserNewProblem == false){
 											$scope.showNextQuestion = true;

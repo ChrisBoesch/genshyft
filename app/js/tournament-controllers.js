@@ -13,6 +13,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.countval = 10;
 
   $scope.timeoutVarRanking=null;
+  $scope.tournamentStatus=null;
 
   $scope.heat = null;
   $scope.round = null;
@@ -93,17 +94,19 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.fetch_ranks = function(heatID){
-      $scope.GHeatModel.get({"heatID":heatID}, function(response){
-        var tournamentVar = response;
-        if(tournamentVar.ranking.length!=0){
-          $scope.tournament = tournamentVar;
-          $scope.playerRanks = $scope.tournament.ranking;
-          $scope.tournamentStatus = $scope.tournament.tournamentStatus;
-        }             
-      });
+      if($scope.tournamentStatus != "Closed"){
+        $scope.GHeatModel.get({"heatID":heatID}, function(response){
+          var tournamentVar = response;
+          if(tournamentVar.ranking.length!=0){
+            $scope.tournament = tournamentVar;
+            $scope.playerRanks = $scope.tournament.ranking;
+            $scope.tournamentStatus = $scope.tournament.tournamentStatus;
+            console.log("fetch_ranks");
+          }             
+        });
+      }
       
       if($scope.tournamentStatus != "Closed"){
-        console.log("fetch_ranks");
         $scope.timeoutVarRanking = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
       }else{
         $timeout.cancel($scope.timeoutVarRanking);
@@ -806,14 +809,19 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
       $scope.fetch_player();
     }
 
-    $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
-      $scope.tournament = response;
-      console.log("fetching tournament details = "+ $scope.tournament.tournamentID +" playerID="+$scope.currentPlayerID);
-      $scope.get_indivNoGrpPlayers($scope.tournament);
-      if($scope.tournament.isGroup){
-        $scope.get_grpPlayers($scope.tournament, $scope.currentPlayerID);
-      }       
-    });
+    if($scope.tournamentStatus==null||$scope.tournamentStatus=="Open for registration"){
+      $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
+        $scope.tournament = response;
+        console.log("fetching tournament details = "+ $scope.tournament.tournamentID +" playerID="+$scope.currentPlayerID);
+        $scope.get_indivNoGrpPlayers($scope.tournament);
+        $scope.tournamentStatus = $scope.tournament.status;
+        if($scope.tournament.isGroup){
+          $scope.get_grpPlayers($scope.tournament, $scope.currentPlayerID);
+        }       
+      });
+    }
+
+    
     $scope.timeoutVar = $timeout(function(){$scope.fetch_tournament_details(tournamentID, playerID)}, 10000);
   };
 

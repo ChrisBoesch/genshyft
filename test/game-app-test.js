@@ -1247,7 +1247,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		    "tournamentType": "Normal",
 		    "type": "heat ranking",
 		    "isGroup":true,
-		    "tournamentStatus":"Closed"
+		    "tournamentStatus":"Open"
 		};
 
 	$httpBackend.whenGET('/jsonapi/get_heat_ranking?heatID=4691468476219392').respond(menteeVal);
@@ -4389,6 +4389,12 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 	$httpBackend.whenGET('/jsonapi/eventrsvp/5308925893148672/1').respond("accepted");
 	$httpBackend.whenGET('/jsonapi/eventrsvp/5308925893148672/0').respond("rejected");
 
+
+	var mailResults = {
+    "results": "Mail sent to ['pivotalexpert@gmail.com']"
+	}
+	$httpBackend.whenGET('/jsonapi/send_event_message').respond(mailResults);
+	
   $httpBackend.whenGET('/jsonapi/uninvite_for_event/6095188913029120/5205559720542208').passThrough();
 	$httpBackend.whenGET('/jsonapi/uninvite_for_event/5308925893148672/6525077021523968').respond("eventsTableDataSec");
 
