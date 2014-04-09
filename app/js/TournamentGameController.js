@@ -106,7 +106,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 
     };
 
-  $scope.fill_iframe = function() { 
+    $scope.fill_iframe = function() { 
       console.log("filling solution iFrame");
       var iFrame = angular.element( document.querySelector( '#anIframe' ) );
       iFrame.attr("src","/jsonapi/lastsolution.html");
