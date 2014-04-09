@@ -4060,6 +4060,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.eventcreatorCC = false; //prepare boolean value to include in send_rsvp api
   		$scope.eventMiscCC=false;
   		$scope.pathID = 0;
+  		$scope.rsvpResult="";
   		$scope.rsvpList = [];
 
   		$scope.selectPath = function(selectedPath){
@@ -4246,7 +4247,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				else{
 					console.log("rsvp sent");
 					console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
-					console.log(response);
+					console.log(response.results);
+					$scope.rsvpResult = response.results;
 					$route.reload();
 				}
 			});
