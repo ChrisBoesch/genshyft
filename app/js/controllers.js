@@ -2087,19 +2087,11 @@ function PracticeGameController($scope,$resource,$cookieStore){
     $scope.move_to_next_unsolved_problem = function(){
       $scope.sampleAnswers = "yes";
       if ($scope.remaining_problems.length>0){
-        if ($scope.codeType != 'html'){
         $('#t11').removeClass('active');
         $('#ta11').removeClass('active');
         $('#t21').addClass('active');
         $('#ta21').addClass('active');
-      }else{
-        $('#t111').removeClass('active');
-        $('#ta111').removeClass('active');
-        $('#t211').removeClass('active');
-        $('#ta211').removeClass('active');
-        $('#t311').addClass('active');
-        $('#ta311').addClass('active');
-      }
+     
         //Todo:If you are already on the problem, you don't need to reload it. 
         $scope.current_problem = $scope.remaining_problems[$scope.skip_problem_count % $scope.remaining_problems.length];
         $scope.current_problem_index = $scope.game.problemIDs.indexOf($scope.current_problem);
@@ -2117,19 +2109,11 @@ function PracticeGameController($scope,$resource,$cookieStore){
 
     }
     $scope.skip_problem = function(){
-      if ($scope.codeType != 'html'){
         $('#t11').removeClass('active');
         $('#ta11').removeClass('active');
         $('#t21').addClass('active');
         $('#ta21').addClass('active');
-      }else{
-        $('#t111').removeClass('active');
-        $('#ta111').removeClass('active');
-        $('#t211').removeClass('active');
-        $('#ta211').removeClass('active');
-        $('#t311').addClass('active');
-        $('#ta311').addClass('active');
-      }
+      
       if ($scope.remaining_problems.length>1){
         $scope.skip_problem_count += 1;
         $scope.move_to_next_unsolved_problem();
