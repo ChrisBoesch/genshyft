@@ -140,7 +140,7 @@ float:left;
 			<span class="span11">
 		<table>
 			<tr class = 'span11'ng-repeat ="coaches in allCoachesData.coachesData|filter:currentCoach" >
-				<div ng-show ="coaches.name== currentCoach">
+				<div ng-show ="coaches.name == currentCoach">
 					<td class="span3"> <IMG class ="Span3" ng-src=" {{coaches.image}}" width ='200'> </td> 
 					 <td class="span3">
 
@@ -155,7 +155,7 @@ float:left;
 					<br> <br> Current Mentor :  {{coaches.name}}
 					<br> Current Path :{{currentPathName}}
 					 </td>
-					 <td class = "span4"> 
+					 <td class = "span4">  
 						{{coaches.audiotext.greeting}}
 
 					</td> 
@@ -184,7 +184,7 @@ float:left;
 			
 			<br>
 			<button id="selectCoach" class="btn btn-warning" ng-click ="$parent.currentCoach = coaches.name "> 	
-			Mentor Me
+			Mentor Me!
 			</button> <br>
 			
 			<!-- <input type ="radio" name = "coachSelect" ng-model ="$parent.currentCoach" value ="{{coaches.name}}">
