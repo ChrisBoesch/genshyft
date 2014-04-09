@@ -152,11 +152,11 @@ float:left;
 						  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,currentCoach.coachID)">Start Practising </button> <br>  <br>
 					 <button id="reset" class="btn btn-danger" ng-click ="resetMentor()">  New Mentor </button> 
 					 <button id="reset" class="btn btn-danger" ng-click ="resetPath()">  New Path </button> 
-					<br> <br> Current Mentor :  {{coaches.name}}
+					<br> <br> Current Mentor :  {{currentCoach.name}}
 					<br> Current Path :{{currentPathName}}
 					 </td>
 					 <td class = "span4">  
-						{{coaches.audiotext.greeting}}
+						{{currentCoach.audiotext.greeting}}
 
 					</td> 
 					
