@@ -93,14 +93,16 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.fetch_ranks = function(heatID){
-      $scope.GHeatModel.get({"heatID":heatID}, function(response){
-        var tournamentVar = response;
-        if(tournamentVar.ranking.length!=0){
-          $scope.tournament = tournamentVar;
-          $scope.playerRanks = $scope.tournament.ranking;
-          $scope.tournamentStatus = $scope.tournament.tournamentStatus;
-        }             
-      });
+      if($scope.tournamentStatus != "Closed"){
+        $scope.GHeatModel.get({"heatID":heatID}, function(response){
+          var tournamentVar = response;
+          if(tournamentVar.ranking.length!=0){
+            $scope.tournament = tournamentVar;
+            $scope.playerRanks = $scope.tournament.ranking;
+            $scope.tournamentStatus = $scope.tournament.tournamentStatus;
+          }             
+        });
+      }
       
       if($scope.tournamentStatus != "Closed"){
         console.log("fetch_ranks");
