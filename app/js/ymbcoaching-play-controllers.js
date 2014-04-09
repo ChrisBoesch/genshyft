@@ -12,6 +12,9 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
     */
 	
 	
+	
+	
+	
 	$scope.currentAttempts = 1;
 	$scope.currentDoneQuestions =[];
 	
@@ -28,6 +31,30 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 	
 	
 	
+    $scope.onTimeout = function(){
+        $scope.counter++;
+        mytimeout = $timeout($scope.onTimeout,1000);
+		if($scope.counter > 50 ){
+			$scope.counter = 0;
+			
+			if( $scope.areyouthereWarnings <3){
+				$scope.audio = $scope.audiofile.areyouthere;
+				$scope.areyouthereWarnings = $scope.areyouthereWarnings +1;
+				var audioplayer = document.getElementsByTagName('audio')[0];
+				audioplayer.play();
+				$scope.words = $scope.audiotext.areyouthere;
+				$scope.coachImage =$scope.pictures.areyouthere;
+			}
+			$scope.counter = 0;
+		}
+		
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+    
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
+
 	
 	
 	
