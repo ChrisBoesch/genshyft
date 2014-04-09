@@ -139,26 +139,28 @@ float:left;
 		<h4 class="well well-small bootCamp" align="center" id="well-c" >1. Player Progress</h4>	
 			<span class="span11">
 		<table>
-		<tr class = 'span11'ng-repeat ="coaches in allCoachesData.coachesData|filter:currentCoach" >
-			<td class="span3"> <IMG class ="Span3" ng-src=" {{coaches.image}}" width ='200'> </td> 
-			 <td class="span3">
+			<tr class = 'span11'ng-repeat ="coaches in allCoachesData.coachesData|filter:currentCoach" >
+				<div ng-show ="coaches.name== currentCoach">
+					<td class="span3"> <IMG class ="Span3" ng-src=" {{coaches.image}}" width ='200'> </td> 
+					 <td class="span3">
 
 
-				<div id = "audioDiv">	
-					<audio src="audio/{{coaches.name}}/greeting.mp3" autoplay controls></audio> <br> <br>
-				</div>
-			 
-			 	  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,coaches.coachID)">Start Practising </button> <br>  <br>
-			 <button id="reset" class="btn btn-danger" ng-click ="resetMentor()">  New Mentor </button> 
-			 <button id="reset" class="btn btn-danger" ng-click ="resetPath()">  New Path </button> 
-			<br> <br> Current Mentor :  {{coaches.name}}
-			<br> Current Path :{{currentPathName}}
-			 </td>
-			 <td class = "span4"> 
-				{{coaches.audiotext.greeting}}
+						<div id = "audioDiv">	
+							<audio src="audio/{{coaches.name}}/greeting.mp3" autoplay controls></audio> <br> <br>
+						</div>
+					 
+						  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,coaches.coachID)">Start Practising </button> <br>  <br>
+					 <button id="reset" class="btn btn-danger" ng-click ="resetMentor()">  New Mentor </button> 
+					 <button id="reset" class="btn btn-danger" ng-click ="resetPath()">  New Path </button> 
+					<br> <br> Current Mentor :  {{coaches.name}}
+					<br> Current Path :{{currentPathName}}
+					 </td>
+					 <td class = "span4"> 
+						{{coaches.audiotext.greeting}}
 
-			</td> 
-		</tr>
+					</td> 
+				</div>	
+			</tr>
 		</table>
 		<br>	
 		<br>	
