@@ -94,10 +94,13 @@
 					<div class="span9">
 						 <div class="span8">
 						 	
-						 	<select class="span6" ng-model="selectedPath" ng-init="populatePaths()" ng-change="selectPath(selectedPath)">
-								<option value="" selected>Choose Game Path...</option>
-								<option ng-repeat="gamePath in gamePaths" value="{{gamePath.id}}">{{gamePath.name}}</option>
-							</select> Current Path: {{eventsData.path}}
+						 	<select class="span6" ng-model="selectedPath" ng-change="selectPath(selectedPath)" ng-options="game.id as game.name for game in gamePaths">
+								<option style="display:none" value="">Choose Path</option>
+							</select>  
+							Current Path: 
+							<span ng-show='eventsData.path!=null'>{{eventsData.path}}</span>
+							<span ng-hide='eventsData.path!=null'>You have not selected a path</span>
+
 							<!--
 						  <label>
 						    <input type="radio" ng-model="eventProgLang" ng-checked="eventsData.path=='Java'" id="optionsRadios1" value="Java"  >
@@ -116,6 +119,28 @@
 						    Ruby
 						  </label>
 						-->
+						</div>
+					</div>
+				</div>	
+			</div>
+
+			<!--Event Programming Language selection-->
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span2">
+						Quest:
+					</div>
+					<div class="span9">
+						 <div class="span8" ng-init="populatePaths()">
+
+							<select class="span6" ng-model="selectedQuest" ng-change="selectedQuest(selectedQuest)" ng-options="quest.id as quest.name for quest in questResponse">
+								<option style="display:none" value="">Choose Quest</option>
+							</select> 
+							<span ng-show='eventsData.quest!=null'>
+							Current Story: {{eventsData.quest}}
+						</span>
+						<span ng-hide='eventsData.quest!=null'>You have not selected a quest</span>
+
 						</div>
 					</div>
 				</div>	

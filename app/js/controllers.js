@@ -4142,10 +4142,18 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.rsvpResult="";
   		$scope.rsvpList = [];
   		$scope.rsvpResponse=false;
+  		$scope.questResponse=[];
+  		$scope.quests=[];
+  		$scope.questID = 0;
 
   		$scope.selectPath = function(selectedPath){
 			$scope.pathID = selectedPath;
 			console.log("Selected path: " + $scope.pathID);
+		}
+
+		$scope.selectedQuest = function(selectedQuest){
+			//$scope.questID = selectedQuest;
+			//console.log("Selected quest: " + $scope.questID);
 		}
 
   		  // Loads all the different possible paths into the paths droplist
@@ -4156,6 +4164,17 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				$resource('/jsonapi/get_game_and_my_paths').get({},function(response){
 				console.log("Retrieving game paths from DB");
 				$scope.gamePaths = response.paths;
+				//console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
+				});
+
+				$resource('/jsonapi/story').query({},function(response){
+				console.log("Retrieving quests/stories from DB");
+				$scope.questResponse = response;
+
+				for(var i =0; i < $scope.questResponse.length; i++){
+					$scope.quests.push($scope.questResponse[i].id);
+				}
+				console.log($scope.quests);
 				//console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
 				});  
 			}
