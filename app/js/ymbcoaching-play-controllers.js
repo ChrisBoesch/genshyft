@@ -34,7 +34,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
     $scope.onTimeout = function(){
         $scope.counter++;
         mytimeout = $timeout($scope.onTimeout,1000);
-		if($scope.counter > 50 ){
+		if($scope.counter > 55 ){
 			$scope.counter = 0;
 			
 			if( $scope.areyouthereWarnings <3){
@@ -169,7 +169,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
           });	
 		  
 		
-	}, 10000);			  
+	}, 9000);			  
 		  
 		  
 	}	
@@ -200,11 +200,13 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		$scope.current_problem_index =0;
 		
 		for(var i = 0; i<$scope.game.problems.problems.length-0; i++){
+				$scope.solution1 = "loading...";
 			if($scope.game.problems.problems[i].id == $scope.nextProblemID){
 				$scope.current_problem_index = i;
 				console.log("comparing" + $scope.game.problems.problems[i].id + " with " + $scope.nextProblemID);
 				//$scope.solutionToProblem = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
 				$scope.solution1 = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
+				$scope.solutionExamples = $scope.game.problems.problems[$scope.current_problem_index].examples;
 				$scope.descriptionToProblem = $scope.game.problems.problems[$scope.current_problem_index].description;
 				$scope.nameToProblem = $scope.game.problems.problems[$scope.current_problem_index].name;
 				$scope.problems = $scope.game.problems.problems;
@@ -212,7 +214,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 				
 				//$scope.solution1 = $scope.game.problems.problems[$scope.current_problem_index].skeleton;
 				console.log("CURRENT PROBLEM INDEX IS " + i );
-				console.log("skeleton is " + $scope.game.problems.problems[$scope.current_problem_index].skeleton);
+				console.log("skeleton is ->" + $scope.game.problems.problems[$scope.current_problem_index].skeleton);
 				break;
 			}
 		
@@ -222,13 +224,13 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 			$scope.audio = $scope.audiofile.faster;
 			$scope.words = $scope.audiotext.faster;
 			$scope.coachImage =$scope.pictures.faster;
-			console.log("selecting goal type ");
+			console.log("selecting goal type faster");
 		}
 		else{
 			$scope.audio = $scope.audiofile.lessattempts;
 			$scope.words = $scope.audiotext.lessattempts;
 			$scope.coachImage =$scope.pictures.lessattempts;	
-			console.log("selecting goal type ");
+			console.log("selecting goal type lessattempts ");
 		}
 		//$scope.image = "img\\mbcoach\\"+$scope.nameOfCoach+"\\"+Math.floor((Math.random()*5)+1)+".jpg";
 			 	
@@ -291,12 +293,12 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 		$scope.words = $scope.audiotext.dontgiveup;		
 		
 		$scope.solution1 ="Loading new problem ...";
-		$scope.nameToProblem ="";
+		$scope.nameToProblem ="...";
 		$scope.descriptionToProblem ="Are you ready for the next problem ?";
 		
 		
 		//remove sample solution
-		$scope.game.problems= "";
+		$scope.solutionExamples= "";
 		//remove sample test result
 		$scope.solution_check_result = ""; 
 		//stop timer from asking "are you there ";
@@ -486,13 +488,13 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 							$scope.coachImage =$scope.pictures.tryother;
 							audioplayer.play();
 							
-							$scope.solution1 ="Loading new problem ...";
-							$scope.nameToProblem ="";
+							$scope.solution1 ="Waiting for your response...";
+							$scope.nameToProblem ="...";
 							$scope.descriptionToProblem ="Are you ready for the next problem ?";
 							
 							
 							//remove sample solution
-							$scope.game.problems= "";
+							$scope.solutionExamples = "";
 							//remove sample test result
 							$scope.solution_check_result = ""; 
 							//stop timer from asking "are you there ";
@@ -509,7 +511,7 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
 								   */ $scope.showNewQuestion = true;
 									
 								}, 2000);
-						}, 8000);
+						}, 7000);
 						
 						
 			  }
