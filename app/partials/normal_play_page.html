@@ -282,7 +282,8 @@
                     </div>
                 </div>
             </div>
-            <div class="span6 well">
+            <!--Usual Path Problems-->
+            <div class="span6 well" ng-hide="codeType == 'html'">
                 <!-- Tab for Sample Answer and Outcome-->
                 <div id="tab21"class="tabbable">
                     <ul class="nav nav-tabs">
@@ -325,6 +326,70 @@
                   </div>
                 </div>
             </div>
+
+            <!--HTML Path Problems-->
+            <div class="span6 well" ng-show="codeType == 'html'">
+                        <!-- Tab for Sample Answer and Outcome-->
+                        <div id="tab21" class="tabbable">
+                            <ul class="nav nav-tabs">
+                                <li id = "ta111" class="tabspacing active">
+                                    <a href="practice_game_play/#t111" data-toggle="tab">Your Code</a>
+                                </li>
+                                <li id = "ta211" class="tabspacing">
+                                    <a href="practice_game_play/#t211" data-toggle="tab">Tests</a>
+                                </li>   
+                                <li id = "ta311" class="tabspacing">
+                                    <a href="practice_game_play/#t311" data-toggle="tab">Outcome</a>
+                                </li>  
+                            </ul>
+                            <div class="tab-content">
+                              
+                              <!--render iframe-->
+                              <div class="tab-pane active" id="t111"style="height:317px;">
+                                
+                                <input type="submit" value="Render HTML" ng-click="render_html()"><br>
+                                
+                                <iframe id="anIframe" height="320" width="100%" src=""></iframe><br>
+                                <!-- Example (Put this in a 3rd tab)<br>
+                                <iframe id="exampleIframe" src=""></iframe><br> -->
+
+                              </div>
+
+                              <!--Test iframe-->
+                              <div  class="tab-pane" id="t211" style="height:317px;">
+                                
+                                <input type="submit" value="Run E2E Tests" ng-click="run_e2e_tests()">
+                                <iframe id="testIframe" height="320" width="100%" src=""></iframe>
+                              </div>
+
+                              <!--This is the outcome tab-->
+                              <div  class="tab-pane" id="t311" style="height:317px;" ng-hide="solution_check_result.error">
+                                <table border=1 bgcolor=#FFFFFF width=100%>
+                                    <tr>
+                                        <th height="50">Called</th>
+                                        <th height="50">Expected</th>
+                                        <th height="50">Recieved</th>
+                                        <th height="50">Correct</th>
+                                    </tr>
+                                    <tr ng-repeat="line in solution_check_result.results">
+                                        <td height="40">{{line.call}}</td>
+                                        <td height="40">{{line.expected}}</td>
+                                        <td height="40">{{line.received}}</td>
+                                        <td height="40" ng-show="line.status" bgcolor=#00FF00>{{line.status}}</td>
+                                        <td height="40"ng-show="!line.status" bgcolor=#FF0000>{{line.status}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" ng-hide="!solution_check_result.errors">Errors: <pre style = "color:blue;"><span ng-bind="solution_check_result.errors"></span></pre></td>
+                                    </tr>
+                                </table><br>
+                                    Private Test Results: {{solution_check_result.other_tests_result}}
+                              </div>
+
+                          </div>
+                        </div>
+                    </div>
+
+
         </div>  
 
         <div class="modal fade" id="finish_all_info" style="display:none">
