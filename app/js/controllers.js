@@ -3697,6 +3697,7 @@ function StoryController($scope,$resource,$cookieStore,$location,$http,$filter,$
 		$scope.pathModel.get({"path_ID":path_ID}, function(response){
 	    	$scope.quest_path_name = response.path.name;
 	    	$cookieStore.put("practicePathName", $scope.quest_path_name);
+	    	console.log("Path is currently:" + $scope.quest_path_name);
 	    });
     }
 	
