@@ -3581,6 +3581,8 @@ function StoryController($scope,$resource,$cookieStore,$location,$http,$filter,$
 	$scope.update_quest_path = function(pathID, pathName){
 		$scope.quest_pathid = pathID;
 	    $scope.quest_path_name = pathName;
+	    $cookieStore.put("practicePathName", $scope.quest_path_name);
+	    console.log("Path is currently:" + $scope.quest_path_name);
 	    $scope.updateURL($scope.storyid,$scope.quest_difficulty, $scope.quest_pathid);
 	    //Clear story if not supported. 
 	    //Filter stories based on selected language. Show others as not supported for langauge or just filter out.   
