@@ -213,14 +213,21 @@ function SchoolController($scope,$resource,$location){
 
         $scope.get_marker_events = function(eventID){
           $scope.schoolMarkers.length = 0;
+          $scope.eventRetrievedRanking = null;
           $scope.allEventsCall = $resource('/jsonapi/event/:eventID');
           //$scope.eventId = null;
+
           if(eventID!=null){
-          $scope.allEventsCall.get({"eventID":eventID}, function(response){
-            $scope.eventRetrieved = response;
-            $scope.eventRetrievedRanking = $scope.eventRetrieved.ranking;
-            console.log($scope.eventRetrievedRanking);
-          });
+
+           
+            $scope.allEventsCall.get({"eventID":eventID}, function(response){
+              $scope.eventRetrieved = response;
+              console.log($scope.eventRetrieved);
+              $scope.eventRetrievedRanking = $scope.eventRetrieved.ranking;
+              console.log($scope.eventRetrievedRanking);
+            });
+            
+            
 
           $resource('/jsonapi/schools/SG').get({}, function(response){
             console.log("testout");
@@ -250,6 +257,7 @@ function SchoolController($scope,$resource,$location){
             };
 
           });
+
           }
         };
         //function to add markers from schools
