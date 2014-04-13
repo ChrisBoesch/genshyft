@@ -5253,7 +5253,8 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
         $scope.resetTestRun();
         $http.post('/jsonapi/check_code_with_interface', publicData, postConfig).then(function(resp) {
             $scope.testRun = resp.data;
-            
+            $scope.testRun.testType = "public";
+
             if (!resp.data.solved) {
                 return $q.reject(resp);
             }
@@ -5261,6 +5262,9 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
             return $http.post('/jsonapi/check_code_with_interface', privateData, postConfig);
         }).then(function(resp) {
             $scope.testRun = resp.data;
+            if(!$scope.testRun.testType) {
+                $scope.testRun.testType = "private"
+            }
 
             if (resp.data.error) {
                 return $q.reject(resp);
