@@ -32,7 +32,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		  $resource('/jsonapi/coach').get({},function(response){
 			  $scope.allCoachesData = response;
 			  
-			   console.log($scope.allCoachesData.coachesData[0].name);
+			   console.log( "The first value of allCoachesData : " +$scope.allCoachesData.coachesData[0].name);
 			   });	   			   
 		}	
 		
@@ -40,16 +40,23 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
 		$scope.filterGetCoaches = function(name){
 			$scope.getCoaches();
 			$scope.filteredCoach;
-			for(var i=0; i<$scope.allCoachesData.coachesData.length;i++){
-					
-					if($scope.allCoachesData.coachesData[i].name === name){
-						$scope.filteredCoach = $scope.allCoachesData.coachesData[i];
-						$scope.currentCoach =  $scope.filteredCoach;
-						console.log($scope.allCoachesData.coachesData[i]);
-						break;
+			
+			try{
+					for(var i=0; i<$scope.allCoachesData.coachesData.length;i++){
+							
+							if($scope.allCoachesData.coachesData[i].name === name){
+								$scope.filteredCoach = $scope.allCoachesData.coachesData[i];
+								$scope.currentCoach =  $scope.filteredCoach;
+								console.log($scope.allCoachesData.coachesData[i]);
+								break;
+							}
+							
 					}
-					
-			}
+				}
+		   catch(err){
+				console.log("We are attempting to retrieve your data. Refreshing.");
+				$route.reload();
+		   }				
 		}
 	
   /*  $scope.get_player_progress = function(){			
