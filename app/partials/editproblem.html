@@ -201,20 +201,24 @@
                             <p ng-if="testRun.solved && build.required()" class="alert alert-info">
                                 Mobile results need to be rebuilt.
                             </p>
-                            <table class="table" ng-if="testRun.verification_message && !testRun.solved">
-                                <tr>
-                                    <th>call</th>
-                                    <th>expected</th>
-                                    <th>received</th>
-                                    <th>status</th>
-                                </tr>
-                                <tr ng-repeat="test in testRun.results" ng-class="{'alert': true, 'alert-success': test.status, 'alert-error': !test.status}">
-                                    <td>{{test.call}}</td>
-                                    <td>{{test.expected}}</td>
-                                    <td>{{test.received}}</td>
-                                    <td>{{test.status}}</td>
-                                </tr>
-                            </table>
+                            
+                            <div ng-if="testRun.verification_message && !testRun.solved">
+                                <p class="alert alert-error">{{testRun.testType}} tests failed</p>
+                                <table class="table">
+                                    <tr>
+                                        <th>call</th>
+                                        <th>expected</th>
+                                        <th>received</th>
+                                        <th>status</th>
+                                    </tr>
+                                    <tr ng-repeat="test in testRun.results" ng-class="{'alert': true, 'alert-success': test.status, 'alert-error': !test.status}">
+                                        <td>{{test.call}}</td>
+                                        <td>{{test.expected}}</td>
+                                        <td>{{test.received}}</td>
+                                        <td>{{test.status}}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
