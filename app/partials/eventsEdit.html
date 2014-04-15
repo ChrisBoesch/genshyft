@@ -97,34 +97,15 @@
 						 	<select class="span6" ng-model="selectedPath" ng-change="selectPath(selectedPath)" ng-options="game.id as game.name for game in gamePaths">
 								<option style="display:none" value="">Choose Path</option>
 							</select>  
-							Current Path: 
+							Existing Path: 
 							<span ng-show='eventsData.path!=null'>{{eventsData.path}}</span>
-							<span ng-hide='eventsData.path!=null'>You have not selected a path</span>
-
-							<!--
-						  <label>
-						    <input type="radio" ng-model="eventProgLang" ng-checked="eventsData.path=='Java'" id="optionsRadios1" value="Java"  >
-						    Java
-						  </label>
-						  <label>
-						    <input type="radio" ng-model="eventProgLang" id="optionsRadios2" ng-checked="eventsData.path=='Python'" value="Python">
-						    Python
-						  </label>
-						  <label>
-						    <input type="radio" ng-model="eventProgLang" id="optionsRadios3" ng-checked="eventsData.path=='Javascript'" value="Javascript">
-						    Javascript
-						  </label>
-						  <label>
-						    <input type="radio" ng-model="eventProgLang" id="optionsRadios4" ng-checked="eventsData.path=='Ruby'" value="Ruby">
-						    Ruby
-						  </label>
-						-->
+							<span ng-hide='eventsData.path!=null'>None saved yet</span>
 						</div>
 					</div>
 				</div>	
 			</div>
 
-			<!--Event Programming Language selection-->
+			<!--Quest selection-->
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
@@ -133,13 +114,14 @@
 					<div class="span9">
 						 <div class="span8" ng-init="populatePaths()">
 
-							<select class="span6" ng-model="selectedQuest" ng-change="selectedQuest(selectedQuest)" ng-options="quest.id as quest.name for quest in questResponse">
+							<select class="span6" ng-model="selectedQuest" ng-change="selectQuest(selectedQuest)" ng-options="quest.id as quest.name for quest in questResponse | filter:{published:true}">
 								<option style="display:none" value="">Choose Quest</option>
-							</select> 
-							<span ng-show='eventsData.quest!=null'>
-							Current Story: {{eventsData.quest}}
+							</select> 							
+						Existing Story:
+						<span ng-show='eventsData.quest!=null'>
+							{{eventsData.quest}}
 						</span>
-						<span ng-hide='eventsData.quest!=null'>You have not selected a quest</span>
+						<span ng-hide='eventsData.quest!=null'>None saved yet</span>
 
 						</div>
 					</div>

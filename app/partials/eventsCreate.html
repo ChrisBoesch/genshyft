@@ -11,7 +11,7 @@
 	}
 </style>
 </br>
-<div ng-controller="EventController" ng-init="loading()" class="container" id="eventCreate"style="position:relative;" >
+<div ng-controller="EventController" ng-init="loading(); isNumberInteger(9); populatePaths();" class="container" id="eventCreate"style="position:relative;" >
 	<button class="btn btn-primary" ng-click="returnToPreviousPage()"><i class="icon-arrow-left icon-white"></i> Return to Last Visited Page</button>
 	<br>
 	<br>
@@ -26,8 +26,8 @@
 		<br>
 		<div class="alert alert-info">
 			<h4>Welcome to Create Event!</h4>
-			To begin, enter your Event details below - required details are highlighted with a (*). Once you are ready, hit submit to create your event!<br><br>
-			You can add more details later!
+			Edit any field or just click 'Create' to accept the defaults to Create an Event immediately!<br><br>
+			P.S. You can edit the fields anytime under 'Edit Events'!
 		</div>
 	</div>
 		<h4>Event Details</h4>
@@ -36,12 +36,10 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Event Title*:
+						Event Title:
 					</div>
 					<div class="span9">
-						 <input class="span8" type="text" required ng-model="eventTitle" placeholder="Enter event title here" ></input>
-						 <span class="alert-error" ng-show="eventTitle==''">Required!
-						 </span>
+						 <input class="span8" type="text" required ng-model="defaultName" ></input>
 					</div>
 				</div>	
 			</div>
@@ -53,74 +51,88 @@
 						Event Description:
 					</div>
 					<div class="span9">
-						 <textarea class="span8" rows="3" ng-model="eventDescription" placeholder = "Please enter a description for your event" >
+						 <textarea class="span8" rows="3" required ng-model="defaultDescription"  >
 						</textarea>
 					</div>
 				</div>	
 			</div>
 
 			<!--Venue input field-->
-			<!--
+			
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Event Venue*:
+						Event Venue:
 					</div>
 					<div class="span9">
-						 <input class="span8" type="text" required ng-model="eventVenue" placeholder="Enter event venue here" ></input>
-						 <span class="alert-error" ng-show="eventVenue==''">Required!
-						 </span>
+						 <input class="span8" type="text" required ng-model="defaultVenue"></input>
 					</div>
 				</div>	
 			</div>
-		-->
 
 			<!--Cutoff number input field-->
-			<!--
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Cutoff*:
+						Cutoff:
 					</div>
 					<div class="span7">
-						 <input class="span6" type="number" required ng-model="cutoff" placeholder="Enter event cutoff number here" ></input>
-						 <span class="alert-error" ng-show="cutoff==''">Required!
-						 </span>
+						 <input class="span6" type="number" required ng-model="defaultCutoff"></input>
 					</div>
 				</div>	
 			</div>
-		-->
-			
-			<!--Event Programming Language selection-->
-			<!--
+
+			<!--School Type selection-->
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Programming Language:
+						School Type:
 					</div>
 					<div class="span9">
 						 <div class="span8">
-						  <label>
-						    <input type="radio" ng-model="eventProgLang" id="optionsRadios1" ng-checked="true" value="Java">
-						    Java
-						  </label>
-						  <label>
-						    <input type="radio" ng-model="eventProgLang" id="optionsRadios2" value="Python">
-						    Python
-						  </label>
-						  <label>
-						    <input type="radio" ng-model="eventProgLang" id="optionsRadios3" value="Javascript">
-						    Javascript
-						  </label>
-						  <label>
-						    <input type="radio" ng-model="eventProgLang" id="optionsRadios4" value="Ruby">
-						    Ruby
-						  </label>
+						 	
+						 	<select class="span6" ng-model="defaultSchooltypes" ng-change="selectSchoolType(defaultSchoolTypes)" ng-options="school.name for school in allSchoolTypes">
+								<option style="display:none" value="">University</option>
+							</select>  
 						</div>
 					</div>
 				</div>	
 			</div>
-		-->
+
+			<!--Path selection-->
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span2">
+						Path Type:
+					</div>
+					<div class="span9">
+						 <div class="span8">
+						 	
+						 	<select class="span6" ng-model="selectedPath" ng-change="selectPath(selectedPath)" ng-options="game.id as game.name for game in gamePaths">
+								<option style="display:none" value="">Python</option>
+							</select>  
+						</div>
+					</div>
+				</div>	
+			</div>
+
+			<!--Quest selection-->
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span2">
+						Quest:
+					</div>
+					<div class="span9">
+						 <div class="span8">
+
+							<select class="span6" ng-model="selectedQuest" ng-change="selectQuest(selectedQuest)" ng-options="quest.id as quest.name for quest in questResponse | filter:{published:true}">
+								<option style="display:none" value="">The Spy Who Coded</option>
+							</select> 							
+						</div>
+					</div>
+				</div>	
+			</div>
+			
 
 			<div class="row-fluid">
 				<div class="span12">
