@@ -978,7 +978,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 		            "flagUrl": "/static/flags/sg_on.png",
 		            "finished": "0:13:27.311930",
 		            "gravatar": "http://www.gravatar.com/avatar/3f0dd6b43fe16552168c919acfbf140d/?default=&amp;s=30",
-		            "mentor": "Glen",
+		            "mentor": "Bradley",
 		            "mentorID": 1111,
 		            "professional": null,
 		            "total_problems": 10,
