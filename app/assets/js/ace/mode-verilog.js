@@ -38,7 +38,7 @@ var VerilogHighlightRules = require("./verilog_highlight_rules").VerilogHighligh
 var Range = require("../range").Range;
 
 var Mode = function() {
-    this.HighlightRules = VerilogHighlightRules;
+    this.$tokenizer = new Tokenizer(new VerilogHighlightRules().getRules());
 };
 oop.inherits(Mode, TextMode);
 
@@ -47,7 +47,6 @@ oop.inherits(Mode, TextMode);
     this.lineCommentStart = "//";
     this.blockComment = {start: "/*", end: "*/"};
 
-    this.$id = "ace/mode/verilog";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

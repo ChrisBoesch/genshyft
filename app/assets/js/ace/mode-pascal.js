@@ -43,8 +43,9 @@ var PascalHighlightRules = require("./pascal_highlight_rules").PascalHighlightRu
 var FoldMode = require("./folding/coffee").FoldMode;
 
 var Mode = function() {
-    this.HighlightRules = PascalHighlightRules;
+    var highlighter = new PascalHighlightRules();
     this.foldingRules = new FoldMode();
+    this.$tokenizer = new Tokenizer(highlighter.getRules());
 };
 oop.inherits(Mode, TextMode);
 
@@ -56,7 +57,6 @@ oop.inherits(Mode, TextMode);
         {start: "{", end: "}"}
     ];
     
-    this.$id = "ace/mode/pascal";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

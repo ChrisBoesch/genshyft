@@ -3991,8 +3991,14 @@ function EventController($scope, $resource, $location, $http, $route){
 				$scope.defaultName = eventTitle;
 				console.log("Event Title is " + $scope.defaultName);
 			}else{
-				$scope.defaultAlertMsg += 'event title ';
+				$scope.defaultAlertMsg += '\nevent title ';
 				alert($scope.defaultAlertMsg);
+			}
+			if(eventDescription!=''){
+				$scope.defaultDescription = eventDescription;
+				console.log("Event Description is " + $scope.defaultDescription);
+			}else{
+				$scope.defaultAlertMsg += '\nevent description ';
 			}
 			var data = {"name":$scope.defaultName,
 				"description":$scope.defaultDescription,
