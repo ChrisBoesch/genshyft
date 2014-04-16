@@ -42,7 +42,9 @@ var Tokenizer = require("../tokenizer").Tokenizer;
 var SchemeHighlightRules = require("./scheme_highlight_rules").SchemeHighlightRules;
 
 var Mode = function() {
-    this.HighlightRules = SchemeHighlightRules;
+    var highlighter = new SchemeHighlightRules();
+    
+    this.$tokenizer = new Tokenizer(highlighter.getRules());
 };
 oop.inherits(Mode, TextMode);
 
@@ -50,7 +52,6 @@ oop.inherits(Mode, TextMode);
        
     this.lineCommentStart = ";";
     
-    this.$id = "ace/mode/scheme";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

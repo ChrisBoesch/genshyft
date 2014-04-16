@@ -84,7 +84,7 @@ var SnippetGroupHighlightRules = function() {
 		{onMatch: function(value, state, stack) {
 			stack.splice(stack.length);
 			return this.tokenName;
-		}, tokenName: "text", regex: "^(?!\t)", next: "start"}
+		}, tokenName: "text", regex: "^(?!\t)", next: "start"},
 	])
 	
 };
@@ -96,14 +96,16 @@ exports.SnippetGroupHighlightRules = SnippetGroupHighlightRules;
 var FoldMode = require("./folding/coffee").FoldMode;
 
 var Mode = function() {
-    this.HighlightRules = SnippetGroupHighlightRules;
+    var highlighter = new SnippetGroupHighlightRules();
     this.foldingRules = new FoldMode();
+    this.$tokenizer = new Tokenizer(highlighter.getRules());
 };
 oop.inherits(Mode, TextMode);
 
 (function() {
-    this.$indentWithTabs = true;
-    this.$id = "ace/mode/snippets";
+    this.getNextLineIndent = function(state, line, tab) {
+        return this.$getIndent(line);
+    };
 }).call(Mode.prototype);
 exports.Mode = Mode;
 

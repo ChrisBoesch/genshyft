@@ -39,8 +39,7 @@ var MatchingBraceOutdent = require("./matching_brace_outdent").MatchingBraceOutd
 var Range = require("../range").Range;
 
 var Mode = function() {
-    this.HighlightRules = OcamlHighlightRules;
-    
+    this.$tokenizer = new Tokenizer(new OcamlHighlightRules().getRules());
     this.$outdent   = new MatchingBraceOutdent();
 };
 oop.inherits(Mode, TextMode);
@@ -74,7 +73,7 @@ var indenter = /(?:[({[=:]|[-=]>|\b(?:else|try|with))\s*$/;
 
     this.getNextLineIndent = function(state, line, tab) {
         var indent = this.$getIndent(line);
-        var tokens = this.getTokenizer().getLineTokens(line, state).tokens;
+        var tokens = this.$tokenizer.getLineTokens(line, state).tokens;
 
         if (!(tokens.length && tokens[tokens.length - 1].type === 'comment') &&
             state === 'start' && indenter.test(line))
@@ -90,7 +89,6 @@ var indenter = /(?:[({[=:]|[-=]>|\b(?:else|try|with))\s*$/;
         this.$outdent.autoOutdent(doc, row);
     };
 
-    this.$id = "ace/mode/ocaml";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;
