@@ -3959,9 +3959,12 @@ function EventController($scope, $resource, $location, $http, $route){
 		$scope.noEventID = false;
 		$scope.player = $resource('/jsonapi/player').get();
 		$scope.allSchoolTypes = [{name:'University'},{name:'Secondary'},{name:'Tertiary'}];
+		$scope.allSubTypes = [{name:'JC'},{name:'Poly'},{name:'Highschool'}];
 		$scope.gamePaths = [];
 		$scope.quests = [];
 		$scope.questID = 0;
+		$scope.pathID = [];
+		$scope.needSubType = false;
 
   		//default variables for event creation
   		$scope.defaultName = 'SMU Coding Tournament';
@@ -4036,9 +4039,27 @@ function EventController($scope, $resource, $location, $http, $route){
 			console.log("Default school: " + $scope.defaultSchooltypes.name);
   			if(selectedSchoolType!=null){
 				$scope.defaultSchooltypes=[];
+				//debug
+				if(selectedSchoolType==="Tertiary"){
+					$scope.needSubType = true;
+				}else{
+					$scope.needSubType = false;
+				}
 				$scope.defaultSchooltypes.push(selectedSchoolType.name);
 			}
 			console.log("Selected school: " + $scope.defaultSchooltypes.name);
+			console.log($scope.needSubType);
+		}
+
+		$scope.selectSubType = function(selectedSubType){
+			if(selectedSubType!=null && $scope.needSubType){
+				console.log("Default school: " + $scope.defaultSubtypes.name);
+  			
+				$scope.defaultSubtypes=[];
+				$scope.defaultSubtypes.push(selectedSubType.name);
+			
+				console.log("Selected subtype: " + $scope.defaultSubtypes.name);
+			}
 		}
 
 		$scope.selectQuest = function(selectedQuest){
