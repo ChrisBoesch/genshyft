@@ -4198,7 +4198,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.questResponse=[];
   		$scope.quests=[];
   		$scope.questID = 0;
-
+		$scope.allSchoolTypes = [{name:'University'},{name:'Secondary'},{name:'Tertiary'}];
+		
   		$scope.selectPath = function(selectedPath){
   			if($scope.pathID.length===0){
 				$scope.pathID.push(selectedPath);

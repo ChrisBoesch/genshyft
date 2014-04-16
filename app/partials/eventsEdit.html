@@ -61,7 +61,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Venue:
+						Event Venue:
 					</div>
 					<div class="span7">
 
@@ -84,18 +84,38 @@
 					</div>
 				</div>	
 			</div>
+
+			<!--School Type selection-->
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="span2">
+						School Type:
+					</div>
+					<div class="span9">
+						 <div class="span8">
+						 	
+						 	<select class="span6" ng-model="selectSchooltypes" ng-change="selectSchoolType(selectSchooltypes)" ng-options="school.name for school in allSchoolTypes">
+								<option style="display:none" value="">Choose School Type</option>
+							</select>
+							Existing School Type: 
+							<span ng-show='eventsData.schooltypes!=null'>{{eventsData.schooltypes}}</span>
+							<span ng-hide='eventsData.schooltypes!=null'>None saved yet</span>  
+						</div>
+					</div>
+				</div>	
+			</div>
 			
 			<!--Event Programming Language selection-->
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="span2">
-						Path:
+						Path Type:
 					</div>
 					<div class="span9">
 						 <div class="span8">
 						 	
 						 	<select class="span6" ng-model="selectedPath" ng-change="selectPath(selectedPath)" ng-options="game.id as game.name for game in gamePaths">
-								<option style="display:none" value="">Choose Path</option>
+								<option style="display:none" value="">Choose Path Type</option>
 							</select>  
 							Existing Path: 
 							<span ng-show='eventsData.path!=null'>{{eventsData.path}}</span>
