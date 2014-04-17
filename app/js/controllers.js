@@ -4340,7 +4340,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 		
 
 		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, schoolTypes, subTypes, selectedPath, selectedQuest){
-			console.log("New param" + schoolTypes.name + subTypes.name + selectedQuest + selectedPath);
+			//console.log("New param" + schoolTypes.name + subTypes.name + selectedQuest + selectedPath);
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 		        $scope.current_event = response;
 
