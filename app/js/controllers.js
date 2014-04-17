@@ -4024,6 +4024,7 @@ function EventController($scope, $resource, $location, $http, $route){
 			}
 			if(eventSchoolType==null){
 					$scope.defaultSchooltypes = ["University"];
+					$scope.defaultSubtypes = ["None"];
 			}else{
 					$scope.defaultSchooltypes = [];
 					$scope.defaultSchooltypes.push(eventSchoolType.name);
@@ -4047,7 +4048,7 @@ function EventController($scope, $resource, $location, $http, $route){
 			var new_event = new $scope.newEvent(data);
 			new_event.$save(function(response){
 				if(response.error) {
-					//console.log(response.error);
+					console.log(response.error);
 				}
 				else{
 					//console.log("Save New event into DB")
