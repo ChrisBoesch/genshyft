@@ -3971,7 +3971,7 @@ function EventController($scope, $resource, $location, $http, $route){
   		$scope.defaultDescription = 'For all SMU Coders';
   		$scope.defaultCutoff = 40;
   		$scope.defaultPathID = [10030]; //Python Path ID
-  		$scope.defaultSchooltypes = "University";
+  		$scope.defaultSchooltypes = ["University"];
   		$scope.defaultSubtypes = [];
   		$scope.defaultVenue = 'SMU';
   		$scope.defaultStoryID = 14611860; //The Spy Who Coded Story ID
@@ -3988,7 +3988,7 @@ function EventController($scope, $resource, $location, $http, $route){
 
         }
 
-        $scope.create_new_event = function(eventTitle, eventDescription, eventVenue, cutoff){
+        $scope.create_new_event = function(eventTitle, eventDescription, eventVenue, cutoff, eventSubType, eventSchoolType){
 			console.log("Create_new_event executing..")
 			if(eventTitle!=''){
 				$scope.defaultName = eventTitle;
@@ -4002,6 +4002,32 @@ function EventController($scope, $resource, $location, $http, $route){
 				console.log("Event Description is " + $scope.defaultDescription);
 			}else{
 				$scope.defaultAlertMsg += '\nevent description ';
+			}
+			if(eventVenue!=''){
+				$scope.eventVenue = eventVenue;
+				console.log("Event Venue is " + $scope.eventVenue);
+			}else{
+				$scope.defaultAlertMsg += '\nevent venue ';
+			}
+			if(isNumberInteger(cutoff)){
+				$scope.cutoff = cutoff;
+				console.log("Event Cutoff is " + $scope.cutoff);
+			}else{
+				$scope.defaultAlertMsg += '\nevent cutoff ';
+			}
+			if(eventSubType==null){
+					$scope.subType = eventSubType;
+			}else{
+					$scope.subType.push(subTypes.name);
+			}
+			if(eventSchoolType==null){
+					$scope.defaultSchooltypes = ["University"];
+			}else{
+					$scope.defaultSchooltypes = [];
+					$scope.defaultSchooltypes.push(eventSchoolType.name);
+					if(eventSchoolType.name!='Tertiary'){
+						$scope.subType = [];
+					}
 			}
 			var data = {"name":$scope.defaultName,
 				"description":$scope.defaultDescription,
