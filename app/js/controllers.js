@@ -3971,7 +3971,7 @@ function EventController($scope, $resource, $location, $http, $route){
   		$scope.defaultDescription = 'For all SMU Coders';
   		$scope.defaultCutoff = 40;
   		$scope.defaultPathID = [10030]; //Python Path ID
-  		$scope.defaultSchooltypes = "University";
+  		$scope.defaultSchooltypes = ["University"];
   		$scope.defaultSubtypes = [];
   		$scope.defaultVenue = 'SMU';
   		$scope.defaultStoryID = 14611860; //The Spy Who Coded Story ID
@@ -3988,7 +3988,7 @@ function EventController($scope, $resource, $location, $http, $route){
 
         }
 
-        $scope.create_new_event = function(eventTitle, eventDescription, eventVenue, cutoff){
+        $scope.create_new_event = function(eventTitle, eventDescription, eventVenue, cutoff, eventSubType, eventSchoolType){
 			console.log("Create_new_event executing..")
 			if(eventTitle!=''){
 				$scope.defaultName = eventTitle;
@@ -4003,12 +4003,38 @@ function EventController($scope, $resource, $location, $http, $route){
 			}else{
 				$scope.defaultAlertMsg += '\nevent description ';
 			}
+			if(eventVenue!=''){
+				$scope.eventVenue = eventVenue;
+				console.log("Event Venue is " + $scope.eventVenue);
+			}else{
+				$scope.defaultAlertMsg += '\nevent venue ';
+			}
+			if(isNumberInteger(cutoff)){
+				$scope.cutoff = cutoff;
+				console.log("Event Cutoff is " + $scope.cutoff);
+			}else{
+				$scope.defaultAlertMsg += '\nevent cutoff ';
+			}
+			if(eventSubType==null){
+					$scope.defaultSubtypes = [];
+			}else{
+					$scope.defaultSubtypes.push(eventSubType.name);
+			}
+			if(eventSchoolType==null){
+					$scope.defaultSchooltypes = ["University"];
+			}else{
+					$scope.defaultSchooltypes = [];
+					$scope.defaultSchooltypes.push(eventSchoolType.name);
+					if(eventSchoolType.name!='Tertiary'){
+						$scope.defaultSubtypes = [];
+					}
+			}
 			var data = {"name":$scope.defaultName,
 				"description":$scope.defaultDescription,
 				"venue":$scope.defaultVenue,
 				"cutoff":$scope.defaultCutoff,
-				"pathID":$scope.defaultPathID,
-				"schooltypes":$scope.defaultSchooltypes
+				"schooltypes":$scope.defaultSchooltypes,
+				"subtypes":$scope.defaultSubtypes
 			}
 			$scope.newEvent = $resource('/jsonapi/event');
 			var new_event = new $scope.newEvent(data);
@@ -4340,7 +4366,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 		
 
 		$scope.edit_event = function(id, eventTitle, eventDescription, eventVenue, cutoff, schoolTypes, subTypes, selectedPath, selectedQuest){
-			console.log("New param" + schoolTypes.name + subTypes.name + selectedQuest + selectedPath);
+			//console.log("New param" + schoolTypes.name + subTypes.name + selectedQuest + selectedPath);
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 		        $scope.current_event = response;
 
