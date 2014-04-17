@@ -91,8 +91,25 @@
 					<div class="span9">
 						 <div class="span8">
 						 	
-						 	<select class="span6" ng-model="defaultSchooltypes" ng-change="selectSchoolType(defaultSchoolTypes)" ng-options="school.name for school in allSchoolTypes">
+						 	<select class="span6" ng-model="defaultSchoolTypes" ng-change="selectSchoolType(defaultSchoolTypes)" ng-options="school.name for school in allSchoolTypes">
 								<option style="display:none" value="">University</option>
+							</select>  
+						</div>
+					</div>
+				</div>	
+			</div>
+
+			<!--School Sub Type selection-->
+			<div class="row-fluid" ng-show="needSubType">
+				<div class="span12">
+					<div class="span2">
+						School Sub Type :
+					</div>
+					<div class="span9">
+						 <div class="span8">
+						 	
+						 	<select class="span6" ng-model="defaultSubtypes" ng-change="selectSubType(defaultSubTypes)" ng-options="school.name for school in allSubTypes">
+								<option style="display:none" value="">Poly</option>
 							</select>  
 						</div>
 					</div>
@@ -137,7 +154,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<center>
-						<button class="btn btn-primary" type="button" ng-click="create_new_event(eventTitle,eventDescription,eventVenue,cutoff,eventProgLang)" ><i class="icon-check icon-white"></i> Create</button> 
+						<button class="btn btn-primary" type="button" ng-click="create_new_event(defaultName,defaultDescription,defaultVenue,defaultCutoff)" ><i class="icon-check icon-white"></i> Create</button> 
 					</center>
 				</div>	
 			</div>
