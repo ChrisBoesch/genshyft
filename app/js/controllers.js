@@ -4236,6 +4236,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
   		$scope.questID = 0;
 		$scope.allSchoolTypes = [{name:'University'},{name:'Secondary'},{name:'Tertiary'}];
 		$scope.allSubTypes = [{name:'JC'},{name:'Poly'},{name:'Highschool'}];
+		$scope.schoolType = [];
+		$scope.subType = [];
 		
   		$scope.selectPath = function(selectedPath){
   			if($scope.pathID.length===0){
