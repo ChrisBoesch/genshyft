@@ -4009,7 +4009,7 @@ function EventController($scope, $resource, $location, $http, $route){
 			}else{
 				$scope.defaultAlertMsg += '\nevent venue ';
 			}
-			if(isNumberInteger(cutoff)){
+			if($scope.isNumberInteger(cutoff)){
 				$scope.cutoff = cutoff;
 				console.log("Event Cutoff is " + $scope.cutoff);
 			}else{
