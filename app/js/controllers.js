@@ -3982,8 +3982,8 @@ function EventController($scope, $resource, $location, $http, $route){
         
         $scope.isNumberInteger = function(int){
         	var n = Number(int);
-        	console.log('Integer Test');
-        	console.log(/^\+?(0|[1-9]\d*)$/.test(int));
+        	//console.log('Integer Test');
+        	//console.log(/^\+?(0|[1-9]\d*)$/.test(int));
         	return /^\+?(0|[1-9]\d*)$/.test(int);
 
         }
@@ -3992,26 +3992,26 @@ function EventController($scope, $resource, $location, $http, $route){
 			console.log("Create_new_event executing..")
 			if(eventTitle!=''){
 				$scope.defaultName = eventTitle;
-				console.log("Event Title is " + $scope.defaultName);
+				//console.log("Event Title is " + $scope.defaultName);
 			}else{
 				$scope.defaultAlertMsg += '\nevent title ';
 				alert($scope.defaultAlertMsg);
 			}
 			if(eventDescription!=''){
 				$scope.defaultDescription = eventDescription;
-				console.log("Event Description is " + $scope.defaultDescription);
+				//console.log("Event Description is " + $scope.defaultDescription);
 			}else{
 				$scope.defaultAlertMsg += '\nevent description ';
 			}
 			if(eventVenue!=''){
 				$scope.eventVenue = eventVenue;
-				console.log("Event Venue is " + $scope.eventVenue);
+				//console.log("Event Venue is " + $scope.eventVenue);
 			}else{
 				$scope.defaultAlertMsg += '\nevent venue ';
 			}
 			if($scope.isNumberInteger(cutoff)){
 				$scope.cutoff = cutoff;
-				console.log("Event Cutoff is " + $scope.cutoff);
+				//console.log("Event Cutoff is " + $scope.cutoff);
 			}else{
 				$scope.defaultAlertMsg += '\nevent cutoff ';
 			}
@@ -4040,11 +4040,11 @@ function EventController($scope, $resource, $location, $http, $route){
 			var new_event = new $scope.newEvent(data);
 			new_event.$save(function(response){
 				if(response.error) {
-					console.log(response.error);
+					//console.log(response.error);
 				}
 				else{
-					console.log("Save New event into DB")
-					console.log(response);
+					//console.log("Save New event into DB")
+					//console.log(response);
 					$location.path("eventsManage");
 				}
 			});
@@ -4058,12 +4058,12 @@ function EventController($scope, $resource, $location, $http, $route){
 				$scope.pathID=[];
 				$scope.pathID.push(selectedPath);
 			}
-			console.log("Selected path: " + $scope.pathID);
+			//console.log("Selected path: " + $scope.pathID);
 		}
 
 		$scope.selectSchoolType = function(selectedSchoolType){
-			console.log(selectedSchoolType.name);
-			console.log("Default school: " + $scope.defaultSchooltypes.name);
+			//console.log(selectedSchoolType.name);
+			//console.log("Default school: " + $scope.defaultSchooltypes.name);
   			if(selectedSchoolType!=null){
 				$scope.defaultSchooltypes=[];
 				if(selectedSchoolType.name==="Tertiary"){
@@ -4073,24 +4073,24 @@ function EventController($scope, $resource, $location, $http, $route){
 				}
 				$scope.defaultSchooltypes.push(selectedSchoolType.name);
 			}
-			console.log("Selected school: " + $scope.defaultSchooltypes.name);
-			console.log($scope.needSubType);
+			//console.log("Selected school: " + $scope.defaultSchooltypes.name);
+			//console.log($scope.needSubType);
 		}
 
 		$scope.selectSubType = function(selectedSubType){
 			if(selectedSubType!=null && $scope.needSubType){
-				console.log("Default school: " + $scope.defaultSubtypes.name);
+				//console.log("Default school: " + $scope.defaultSubtypes.name);
   			
 				$scope.defaultSubtypes=[];
 				$scope.defaultSubtypes.push(selectedSubType.name);
 			
-				console.log("Selected subtype: " + $scope.defaultSubtypes.name);
+				//console.log("Selected subtype: " + $scope.defaultSubtypes.name);
 			}
 		}
 
 		$scope.selectQuest = function(selectedQuest){
 			$scope.questID = selectedQuest;
-			console.log("Selected quest: " + $scope.questID);
+			//console.log("Selected quest: " + $scope.questID);
 		}
 
 		$scope.getPathNameFromPathID = function(pathID){
@@ -4114,19 +4114,19 @@ function EventController($scope, $resource, $location, $http, $route){
 
 			}else{
 				$resource('/jsonapi/get_game_and_my_paths').get({},function(response){
-				console.log("Retrieving game paths from DB");
+				//console.log("Retrieving game paths from DB");
 				$scope.gamePaths = response.paths;
 				//console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
 				});
 
 				$resource('/jsonapi/story').query({},function(response){
-				console.log("Retrieving quests/stories from DB");
+				//console.log("Retrieving quests/stories from DB");
 				$scope.questResponse = response;
 
 				for(var i =0; i < $scope.questResponse.length; i++){
 					$scope.quests.push($scope.questResponse[i].id);
 				}
-				console.log($scope.quests);
+				//console.log($scope.quests);
 				//console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
 				});  
 			}
@@ -4134,13 +4134,13 @@ function EventController($scope, $resource, $location, $http, $route){
 
         $scope.lock_ranking = function(id){
         	var response = $http.get('/jsonapi/lock_event_ranking/' + id);
-        	console.log("Lock Ranking - " + id + " " + response);
+        	//console.log("Lock Ranking - " + id + " " + response);
         	$route.reload();
         }
 
         $scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
-    		console.log($scope.eventID + "here3");
+    		//console.log($scope.eventID + "here3");
     		if($scope.eventID==null){
     			$scope.noEventID=true;
     		}
@@ -4148,7 +4148,7 @@ function EventController($scope, $resource, $location, $http, $route){
 
     	$scope.get_currentUrl = function(){
     		$scope.currentUrl =$location.absUrl();
-    		console.log($scope.currentUrl);
+    		//console.log($scope.currentUrl);
     	},
 
         // posting without and id should result in creating an object.
@@ -4159,11 +4159,11 @@ function EventController($scope, $resource, $location, $http, $route){
            
             if(id){
                 $scope.event = event;
-                console.log(event);
+                //console.log(event);
                 
             }else{
             	$scope.events = event.events; 
-            	console.log(event.events);
+            	//console.log(event.events);
             }
           	$('#postModal').modal('hide');
           	$('#watchModal').modal('hide');
@@ -4181,15 +4181,15 @@ function EventController($scope, $resource, $location, $http, $route){
 			$resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 				$scope.current_event = response;
 				var eventDetails = $scope.current_event;
-				console.log("delete_event executed here");
+				//console.log("delete_event executed here");
 
 				var data = {"archived":true
 							}
-				console.log(eventDetails.name);
-				console.log(eventDetails.description);
-				console.log(eventDetails.venue);
-				console.log(eventDetails.cutoff);
-				console.log(eventDetails.path);
+				//console.log(eventDetails.name);
+				//console.log(eventDetails.description);
+				//console.log(eventDetails.venue);
+				//console.log(eventDetails.cutoff);
+				//console.log(eventDetails.path);
 
 				$scope.deleteEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
 				var delete_event = new $scope.deleteEvent(data);
@@ -4198,8 +4198,8 @@ function EventController($scope, $resource, $location, $http, $route){
 						console.log(response.error);
 					}
 					else{
-						console.log("Delete event in DB")
-						console.log(response);
+						//console.log("Delete event in DB")
+						//console.log(response);
 						$route.reload();
 					}
 				});
@@ -4218,17 +4218,17 @@ function EventController($scope, $resource, $location, $http, $route){
 
         $scope.go_to_eventsRanking = function(eventID){
           $location.search({"eventID":eventID}).path("eventsTable");
-          console.log(eventID);
+          //console.log(eventID);
         }
 
         $scope.go_to_eventsEdit = function(eventID){
           $location.search({"eventID":eventID}).path("eventsEdit");
-          console.log(eventID);
+          //console.log(eventID);
         }
 
         $scope.reload_eventsManage = function(eventID){
           $location.search({"eventID":eventID}).path("eventsManage");
-          console.log(eventID);
+          //console.log(eventID);
         }
 
         $scope.returnToPreviousPage = function() {
@@ -4273,12 +4273,12 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				$scope.pathID=[];
 				$scope.pathID.push(selectedPath);
 			}
-			console.log("Selected path: " + $scope.pathID);
+			//console.log("Selected path: " + $scope.pathID);
 		}
 
 		$scope.selectQuest = function(selectedQuest){
 			$scope.questID = selectedQuest;
-			console.log("Selected quest: " + $scope.questID);
+			//console.log("Selected quest: " + $scope.questID);
 		}
 
   		  // Loads all the different possible paths into the paths droplist
@@ -4287,19 +4287,19 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
 			}else{
 				$resource('/jsonapi/get_game_and_my_paths').get({},function(response){
-				console.log("Retrieving game paths from DB");
+				//console.log("Retrieving game paths from DB");
 				$scope.gamePaths = response.paths;
 				//console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
 				});
 
 				$resource('/jsonapi/story').query({},function(response){
-				console.log("Retrieving quests/stories from DB");
+				//console.log("Retrieving quests/stories from DB");
 				$scope.questResponse = response;
 
 				for(var i =0; i < $scope.questResponse.length; i++){
 					$scope.quests.push($scope.questResponse[i].id);
 				}
-				console.log($scope.quests);
+				//console.log($scope.quests);
 				//console.log("Printing response for game paths: \n\n" + JSON.stringify($scope.gamePaths));
 				});  
 			}
@@ -4322,7 +4322,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
   		$scope.get_eventIDs = function(){
     		$scope.eventIDs = ($location.search()).eventIDs;
-    		console.log("EventIDs: " + $scope.eventIDs);
+    		//console.log("EventIDs: " + $scope.eventIDs);
     		if($scope.eventIDs!=null){
     			$scope.isEventIDs=true;
     		}
@@ -4337,7 +4337,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
   		$scope.uninvite = function(eventid, playerid){
         	var response = $http.get('/jsonapi/uninvite_for_event/' + eventid + '/' + playerid);
-        	console.log("Uninvite - " + eventid + " " + playerid + " " + response);
+        	//console.log("Uninvite - " + eventid + " " + playerid + " " + response);
         }
 
 	    //Countdown til cutoff
@@ -4373,10 +4373,10 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				console.log("edit_event executed here");
 				if(eventTitle==""){
 					$scope.eventTitle = $scope.current_event.name;
-					console.log($scope.eventTitle);
+					//console.log($scope.eventTitle);
 				}else{
 					$scope.eventTitle = eventTitle;
-					console.log(eventTitle);
+					//console.log(eventTitle);
 				}
 				if(eventVenue==""){
 					$scope.eventVenue = $scope.current_event.venue;
@@ -4438,8 +4438,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 						console.log(response.error);
 					}
 					else{
-						console.log("Edit event in DB")
-						console.log(response);
+						//console.log("Edit event in DB")
+						//console.log(response);
 						$location.path("eventsManage");
 					}
 				});
@@ -4450,13 +4450,13 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
 		$scope.send_rsvp = function(messageDescription, messageTitle, includeRSVP){
 			console.log("rsvp executed here")
-			console.log("RSVP List= " + $scope.rsvpList);
+			//console.log("RSVP List= " + $scope.rsvpList);
 			if(includeRSVP==null){
 				includeRSVP = false;
 			}else{
 				includeRSVP = true;
 			}
-			console.log("rsvp value" + " " + includeRSVP);
+			//console.log("rsvp value" + " " + includeRSVP);
 			if(messageDescription==null){
 				messageDescription = "Default Message";
 			}
@@ -4488,9 +4488,10 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					console.log(response.error);
 				}
 				else{
-					console.log("rsvp sent");
-					console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
-					console.log("RSVP response: " + response);
+					//console.log("rsvp sent");
+					//console.log($scope.rsvpList + " " + messageDescription + " " + includeRSVP);
+					//console.log("RSVP response: " + response);
+					/** When response is ready, then uncomment
 					if(response.status==="success"){
 						$scope.rsvpResponse=true;
 						$scope.rsvpResult=response;
@@ -4498,6 +4499,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					}else{
 						alert("Email was not sent successfully, please check with site administrator for more information")
 					}
+					**/
 					$route.reload();
 				}
 			});
@@ -4512,9 +4514,9 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
          	else {
             	$scope.rsvpList.splice($scope.rsvpList.indexOf(participantID), 1);
          	}
-		    console.log("pushed" + participantID);
-		    console.log($scope.rsvpList);
-		    console.log($scope.rsvpList.length);
+		    //console.log("pushed" + participantID);
+		    //console.log($scope.rsvpList);
+		    //console.log($scope.rsvpList.length);
 		}
 
 		//check if rsvpList contains everyone within cutoff, if it doesn't, fill it with those within
@@ -4555,8 +4557,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 	          		}
 	        	}
 	        	**/
-	        	console.log($scope.rsvpList);
-	        	console.log($scope.rsvpList.length);
+	        	//console.log($scope.rsvpList);
+	        	//console.log($scope.rsvpList.length);
 			});
 
 
@@ -4579,8 +4581,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 		        }else{
 		        	$scope.rsvpList = [];
 		        }
-	        	console.log($scope.rsvpList);
-	        	console.log($scope.rsvpList.length);
+	        	//console.log($scope.rsvpList);
+	        	//console.log($scope.rsvpList.length);
 			});
 
 		}
@@ -4616,8 +4618,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 	        	}else{
 	        		$scope.rsvpList = [];
 	        	}
-	        	console.log($scope.rsvpList);
-	        	console.log($scope.rsvpList.length);
+	        	//console.log($scope.rsvpList);
+	        	//console.log($scope.rsvpList.length);
 			});
 
 
@@ -4625,22 +4627,22 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
 		$scope.addToCCList = function(partyToCC){
 			if(partyToCC===("eventCreator")){
-				console.log($scope.player.player_id);
+				//console.log($scope.player.player_id);
 				if(!$scope.eventcreatorCC){
 					$scope.eventcreatorCC=true;
-					console.log($scope.eventcreatorCC);
+					//console.log($scope.eventcreatorCC);
 				}else{
 					$scope.eventcreatorCC=false;
-					console.log($scope.eventcreatorCC);
+					//console.log($scope.eventcreatorCC);
 				}
 			}else{
 				//console.log($scope.player.player_id);
 				if(!$scope.eventMiscCC){
 					$scope.eventMiscCC=true;
-					console.log("Misc: " + $scope.eventMiscCC);
+					//console.log("Misc: " + $scope.eventMiscCC);
 				}else{
 					$scope.eventMiscCC=false;
-					console.log($scope.eventMiscCC);
+					//console.log($scope.eventMiscCC);
 				}
 			}
 		}
@@ -4649,27 +4651,27 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 
     	$scope.get_eventID = function(){
     		$scope.eventID = ($location.search()).eventID;
-    		console.log($scope.eventID + "-> eventID");
+    		//console.log($scope.eventID + "-> eventID");
     		if($scope.eventID==null){
     			$scope.noEventID=true;
-    			console.log($scope.noEventID + "-> noEventID");
+    			//console.log($scope.noEventID + "-> noEventID");
     		}
     	}
 
     	$scope.get_currentUrl = function(){
     		$scope.currentUrl =$location.absUrl();
-    		console.log($scope.currentUrl);
+    		//console.log($scope.currentUrl);
     	}
 
 		$scope.get_participants = function(){
-	    console.log("get_mytournaments");
+	    //console.log("get_mytournaments");
 	    	if($scope.eventID!=null){
 		    	$resource("/jsonapi/event/" + $scope.eventID).get({},function(response){
 	            	$scope.eventsData = response;
 	 
 	            	//$scope.predicate = '-solvedproblems';
 
-	            	console.log($scope.eventsData);
+	            	//console.log($scope.eventsData);
         	 	})
 			}
 
@@ -4678,8 +4680,8 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 	    $scope.get_currentPlayerRanking = function(){
 	      $resource("/jsonapi/event/" + $scope.eventID).get({}, function(response){
 	        $scope.current_event = response;
-	        console.log("refer here");
-	        console.log($scope.current_event);
+	        //console.log("refer here");
+	        //console.log($scope.current_event);
 	        $scope.total_registered = $scope.current_event.ranking.length;
           
           if($scope.current_event.time_to_cutoff && $scope.current_event.time_to_cutoff.days>=0){
@@ -4690,7 +4692,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 	          if($scope.current_event.ranking[i].isCurrentPlayer){
 	            $scope.currentPlayerRanking = i+1;
 	            $scope.currentPlayerSolvedProblems = $scope.current_event.ranking[i].solvedproblems;
-	            console.log($scope.currentPlayerRanking);
+	            //console.log($scope.currentPlayerRanking);
 	            break;
 	          }
 	        }
@@ -4699,21 +4701,21 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 	          if($scope.current_event.cutoff === i){
 	            $scope.cutOffPlayer = $scope.current_event.ranking[i-1].nickname;
 	            $scope.cutOffPlayerProblems = $scope.current_event.ranking[i-1].solvedproblems;
-	            console.log($scope.cutOffPlayer);
-	            console.log($scope.cutOffPlayerProblems);
+	            //console.log($scope.cutOffPlayer);
+	            //console.log($scope.cutOffPlayerProblems);
 	            
 	            break;
 	          }
 	        }
 	        $scope.isPlayerBelowCutoff = $scope.currentPlayerRanking > $scope.current_event.cutoff;
-	        console.log($scope.isPlayerBelowCutoff);
+	        //console.log($scope.isPlayerBelowCutoff);
 	        $scope.hasRegisteredSchool = false;
 	        if($scope.currentPlayerSolvedProblems>=0){
 	        	$scope.hasRegisteredSchool = true;
 	        }
 	        $scope.timeToQualify = 2 * ($scope.cutOffPlayerProblems - $scope.currentPlayerSolvedProblems);
 	      }); 
-	      console.log("getCurrentPlayerRanking" + "");
+	      //console.log("getCurrentPlayerRanking" + "");
 	    };
         
         $scope.returnToPreviousPage = function() {
