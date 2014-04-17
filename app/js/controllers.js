@@ -4238,6 +4238,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 		$scope.allSubTypes = [{name:'JC'},{name:'Poly'},{name:'Highschool'}];
 		$scope.schoolType = [];
 		$scope.subType = [];
+		$scope.selectedPathArray = [];
 		
   		$scope.selectPath = function(selectedPath){
   			if($scope.pathID.length===0){
@@ -4390,13 +4391,14 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					"subtypes": $scope.subtypes
 				}
 				if(selectedPath!=null){
+					$scope.selectedPathArray.push(selectedPath);
 					var data = {"name":$scope.eventTitle,
 								"description":$scope.eventDescription,
 								"venue":$scope.eventVenue,
 								"cutoff": $scope.cutoff,
 								"schooltypes": $scope.schoolType,
 								"subtypes": $scope.subtypes,
-								"pathID": selectedPath
+								"pathID": selectedPathArray
 								}
 					
 				}
