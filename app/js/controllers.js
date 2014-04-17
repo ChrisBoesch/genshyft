@@ -4017,7 +4017,9 @@ function EventController($scope, $resource, $location, $http, $route){
 			}
 			if(eventSubType==null){
 					$scope.defaultSubtypes = [];
+					//console.log("subtype null");
 			}else{
+					$scope.defaultSubtypes = [];
 					$scope.defaultSubtypes.push(eventSubType.name);
 			}
 			if(eventSchoolType==null){
@@ -4025,10 +4027,15 @@ function EventController($scope, $resource, $location, $http, $route){
 			}else{
 					$scope.defaultSchooltypes = [];
 					$scope.defaultSchooltypes.push(eventSchoolType.name);
+					//console.log($scope.defaultSchooltypes[0]==='Tertiary');
 					if(eventSchoolType.name!='Tertiary'){
+						$scope.defaultSubtypes = ["None"];
+					}else if($scope.defaultSchooltypes[0]==='Tertiary' && $scope.defaultSubtypes[0]==null){
 						$scope.defaultSubtypes = [];
+						$scope.defaultSubtypes.push("Poly");
 					}
 			}
+			console.log($scope.defaultSubtypes);
 			var data = {"name":$scope.defaultName,
 				"description":$scope.defaultDescription,
 				"venue":$scope.defaultVenue,
