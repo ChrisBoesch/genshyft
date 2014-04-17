@@ -4016,9 +4016,9 @@ function EventController($scope, $resource, $location, $http, $route){
 				$scope.defaultAlertMsg += '\nevent cutoff ';
 			}
 			if(eventSubType==null){
-					$scope.subType = eventSubType;
+					$scope.defaultSubtypes = [];
 			}else{
-					$scope.subType.push(subTypes.name);
+					$scope.defaultSubtypes.push(eventSubType.name);
 			}
 			if(eventSchoolType==null){
 					$scope.defaultSchooltypes = ["University"];
@@ -4026,15 +4026,15 @@ function EventController($scope, $resource, $location, $http, $route){
 					$scope.defaultSchooltypes = [];
 					$scope.defaultSchooltypes.push(eventSchoolType.name);
 					if(eventSchoolType.name!='Tertiary'){
-						$scope.subType = [];
+						$scope.defaultSubtypes = [];
 					}
 			}
 			var data = {"name":$scope.defaultName,
 				"description":$scope.defaultDescription,
 				"venue":$scope.defaultVenue,
 				"cutoff":$scope.defaultCutoff,
-				"pathID":$scope.defaultPathID,
-				"schooltypes":$scope.defaultSchooltypes
+				"schooltypes":$scope.defaultSchooltypes,
+				"subtypes":$scope.defaultSubtypes
 			}
 			$scope.newEvent = $resource('/jsonapi/event');
 			var new_event = new $scope.newEvent(data);

@@ -84,6 +84,13 @@ function SchoolController($scope,$resource,$location){
           console.log("get_schools");
           $resource('/jsonapi/schools/SG').get({},function(response){
               $scope.schools = response;
+              $scope.noSchool = {"name":" -- Never went to school in Singapore -- ","schooltype":"none","created":"2013-10-18T06:52:15.473820","longitude":103.819836,"subtype":"Local","latitude":1.352083,"id":4838709618802688};
+              $scope.secondaryToAdd = $scope.schools.Secondary;
+              $scope.secondaryToAdd.push($scope.noSchool);
+              $scope.tertiary = $scope.schools.Tertiary;
+              $scope.tertiary.push($scope.noSchool);
+              $scope.university = $scope.schools.University;
+              $scope.university.push($scope.noSchool);
 
               $scope.supported_schools = $scope.schools.Secondary.concat($scope.schools.Tertiary).concat($scope.schools.University);
               $scope.supported_schools.push({"id":"ALL","name":"ALL"});
