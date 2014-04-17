@@ -105,8 +105,11 @@
 							
 				              <h4>{{event.name | limitTo:60}}</h4><br>
 				              {{event.description}}<br>
-				              Tournament Type: {{event.path}}
+				              <span ng-hide="event.path==null">
+				              Tournament Types: {{event.path}}
+
 				              <br>
+				          </span>
 				              Cutoff Ranking: {{event.cutoff}}
 				              <br>
 				              Ranking Status: 
@@ -145,9 +148,11 @@
 				              <h4>{{event.name | limitTo:60}}</h4><br>
 				              {{event.description}}
 				              <br>
+				              <span ng-hide="event.path==null">
 				              Tournament Path Type: 
 				              {{getPathNameFromPathID(event.path)}}
 				              <br>
+				          </span>
 				              Cutoff Ranking: {{event.cutoff}}
 				              <br>
 				              Ranking Status: 
@@ -295,6 +300,7 @@
 						ng-disabled="firstButton"
 						ng-click="addSelectedFewToRSVPList()"><br/>
 					<br>
+					<!-- Uncomment when api ready to take in new boolean variables
 					CC yourself
 					<input 
 						type="checkbox"
@@ -308,6 +314,7 @@
 					<br>
 					(Keep me posted registrants and watchers)
 					<br><br>
+				-->
 				
 				Message Title
 				<br>

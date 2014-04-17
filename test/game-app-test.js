@@ -516,7 +516,7 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 			"Highschool"
 			],
 			"latitude": null,
-			"path": 10030,
+			"path": null,
 			"watching": 5,
 			"schooltypes": [
 			"Tertiary"
