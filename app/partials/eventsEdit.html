@@ -94,12 +94,32 @@
 					<div class="span9">
 						 <div class="span8">
 						 	
-						 	<select class="span6" ng-model="selectSchooltypes" ng-change="selectSchoolType(selectSchooltypes)" ng-options="school.name for school in allSchoolTypes">
+						 	<select class="span6" ng-model="schoolTypes" ng-change="selectSchoolType(schoolTypes)" ng-options="school.name for school in allSchoolTypes">
 								<option style="display:none" value="">Choose School Type</option>
 							</select>
 							Existing School Type: 
-							<span ng-show='eventsData.schooltypes!=null'>{{eventsData.schooltypes}}</span>
-							<span ng-hide='eventsData.schooltypes!=null'>None saved yet</span>  
+							<span ng-show='eventsData.schooltypes.length!=0'>{{eventsData.schooltypes[0]}}</span>
+							<span ng-hide='eventsData.schooltypes.length!=0'>None saved yet</span>  
+						</div>
+					</div>
+				</div>	
+			</div>
+
+			<!--School sub Type selection-->
+			<div class="row-fluid" ng-show="schoolTypes.name==='Tertiary'||eventsData.schooltypes[0]==='Tertiary'">
+				<div class="span12">
+					<div class="span2">
+						Sub Type:
+					</div>
+					<div class="span9">
+						 <div class="span8">
+						 	
+						 	<select class="span6" ng-model="subTypes" ng-change="selectSubType(subTypes)" ng-options="school.name for school in allSubTypes">
+								<option style="display:none" value="">Choose Sub Type</option>
+							</select>
+							Existing Sub Type: 
+							<span ng-show='eventsData.subtypes.length!=0'>{{eventsData.subtypes[0]}}</span>
+							<span ng-hide='eventsData.subtypes.length!=0'>None saved yet</span>  
 						</div>
 					</div>
 				</div>	
@@ -151,7 +171,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<center>
-						<button class="btn btn-primary" type="button" ng-click="edit_event(eventsData.id,eventsData.name,eventsData.description,eventsData.venue,eventsData.cutoff)" ><i class="icon-check icon-white"></i> Edit</button> 
+						<button class="btn btn-primary" type="button" ng-click="edit_event(eventsData.id,eventsData.name,eventsData.description,eventsData.venue,eventsData.cutoff, schoolTypes, subTypes, selectedPath, selectedQuest)" ><i class="icon-check icon-white"></i> Edit</button> 
 					</center>
 				</div>	
 			</div>
