@@ -10,7 +10,9 @@
 	<div class="row-fluid">
 
         Secondary: <br> 
-        <select ng-model="secondaryID" ng-options="secondary.id as secondary.name for secondary in schools.Secondary | orderBy:'name'"></select>
+        <select ng-model="secondaryID" ng-options="secondary.id as secondary.name for secondary in secondaryToAdd | orderBy:'name'">
+            <option value="Never went to school in Singapore">Never went to school in Singapore</option>
+        </select>
 
         <select ng-model="secondary_start_year" ng-options="year for year in [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015]"></select>
 
@@ -22,7 +24,7 @@
         <br>
 
         Pre-University: <br> 
-        <select ng-model="tertiaryID" ng-options="tertiary.id as tertiary.name for tertiary in schools.Tertiary | orderBy:'name'"></select>
+        <select ng-model="tertiaryID" ng-options="tertiary.id as tertiary.name for tertiary in tertiary | orderBy:'name'"></select>
 
         <select ng-model="tertiary_start_year" ng-options="year for year in [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015]"></select>
 
@@ -34,7 +36,7 @@
         <br>
 
         University: <br> 
-        <select ng-model="universityID" ng-options="university.id as university.name for university in schools.University | orderBy:'name'"></select>
+        <select ng-model="universityID" ng-options="university.id as university.name for university in university | orderBy:'name'"></select>
 
         <select ng-model="university_start_year" ng-options="year for year in [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015]"></select>
 
