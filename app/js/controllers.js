@@ -4367,15 +4367,18 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 				}else{
 					$scope.cutoff = cutoff;
 				}
-				if(schoolTypes==null){
-					$scope.schoolType = $scope.current_event.schooltypes;
-				}else{
-					$scope.schoolType.push(schoolTypes.name);
-				}
 				if(subTypes==null){
 					$scope.subType = $scope.current_event.subtypes;
 				}else{
 					$scope.subType.push(subTypes.name);
+				}
+				if(schoolTypes==null){
+					$scope.schoolType = $scope.current_event.schooltypes;
+				}else{
+					$scope.schoolType.push(schoolTypes.name);
+					if(schoolTypes.name!='Tertiary'){
+						$scope.subType = [];
+					}
 				}
 				/**
 				if(selectedQuest==null){
@@ -4388,7 +4391,7 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 					"venue":$scope.eventVenue,
 					"cutoff": $scope.cutoff,
 					"schooltypes": $scope.schoolType,
-					"subtypes": $scope.subtypes
+					"subtypes": $scope.subType
 				}
 				if(selectedPath!=null){
 					$scope.selectedPathArray.push(selectedPath);
@@ -4397,12 +4400,11 @@ function EventTableController($scope, $resource, $route, $location, $filter, $ht
 								"venue":$scope.eventVenue,
 								"cutoff": $scope.cutoff,
 								"schooltypes": $scope.schoolType,
-								"subtypes": $scope.subtypes,
+								"subtypes": $scope.subType,
 								"pathID": selectedPathArray
 								}
 					
 				}
-				console.log("data = " + data);
 				$scope.editEvent = $resource('/jsonapi/event/:eventId', {eventId:'@id'});
 				var edit_event = new $scope.editEvent(data);
 				edit_event.$save({eventId:id}, function(response){
