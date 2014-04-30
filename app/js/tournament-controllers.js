@@ -371,7 +371,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   //Save each created round into an array 
   $scope.save_round = function(){      
     var tournamentID = $cookieStore.get("createdTournamentID");
-    if($scope.newTournamentRounds.length == 5){
+    if($scope.newTournamentRounds.length == 10){
       //alert("The maximum number of rounds per tournament is 5!");
       $scope.grpTourRoundName = "";
       $scope.grpTourRoundMins = "";
