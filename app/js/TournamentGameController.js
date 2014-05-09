@@ -154,9 +154,10 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     //By GENShYFT - Getting Mentor
     $scope.get_mentor = function(heatID, playerID){
 
-      if($scope.tournamentGameStatus==null||$scope.tournamentGameStatus=="Open for registration"){
+      if($scope.tournamentGameStatus != "Closed"){
         $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
           $scope.current_heat = response;
+          $scope.tournamentGameStatus = $scope.current_heat.tournamentStatus;
           for(var i =0;i< $scope.current_heat.ranking.length;i++){
             if($scope.current_heat.ranking[i].playerid === playerID){
               $scope.mentor_id = $scope.current_heat.ranking[i].mentorID;
