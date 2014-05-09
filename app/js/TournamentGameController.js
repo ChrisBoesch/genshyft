@@ -166,9 +166,15 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
             }
           }
         });
-        console.log("get_mentor()");
       }
-      $scope.timeoutVar = $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 10000);
+
+     if($scope.tournamentGameStatus != "Closed"){
+        console.log("get_mentor()");
+        $scope.timeoutVar = $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 10000); 
+     }else{
+        $timeout.cancel($scope.timeoutVar);
+      } 
+      
     };
 
     $scope.get_mentor_once = function(heatID, playerID){
