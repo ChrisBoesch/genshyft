@@ -266,7 +266,7 @@ function yMBCoachingController($scope,$resource,$cookieStore,$location,$filter){
     $scope.update_path_details = function(){
         $scope.player_paths = $resource('/jsonapi/get_my_paths').get();
         $scope.current_paths = $resource('/jsonapi/get_current_paths').get();
-        $scope.other_paths = $resource('/jsonapi/get_other_paths').get();
+        //$scope.other_paths = $resource('/jsonapi/get_other_paths').get();
         $scope.get_mobile_paths();
     };
 
