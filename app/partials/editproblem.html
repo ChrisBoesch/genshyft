@@ -5,7 +5,7 @@
     <div class="row-fluid">
         <div class="span6 well">
             <form name="SelectProblem" class="form-horizontal" role="form">
-                
+
                 <fieldset>
 
                 <div class="control-group">
@@ -23,7 +23,7 @@
                         <span ng-hide="loadingPaths">
                             <select id="path" name="path" ng-model="path" ng-options="p.name for p in paths" ng-change="getLevels(path)">
                                 <option value="">new path...</option>
-                            </select> 
+                            </select>
                             <button class="btn" ng-click="createNewPath(interface)" ng-if="!path && !newPath">new path</button>
                         </span>
                     </div>
@@ -36,7 +36,7 @@
                         <span ng-hide="loadingLevels">
                             <select id="problemSet" name="problemSet" ng-model="problemSet" ng-options="l.name for l in problemSets" ng-change="getProblems(problemSet)">
                                 <option value="">new level...</option>
-                            </select> 
+                            </select>
                             <button class="btn" ng-click="createNewLevel(path)" ng-if="!problemSet && !newLevel">new level</button>
                         </span>
                     </div>
@@ -49,16 +49,25 @@
                         <span ng-hide="loadingProblems">
                             <select id="problem" name="problem" ng-model="problem" ng-options="p.name for p in problems" ng-change="getProblemDetails(problem)">
                                 <option value="">new problem...</option>
-                            </select> 
+                            </select>
+
                             <button class="btn" ng-click="createNewProblem(problemSet)" ng-if="!problem && !newProblem">new problem</button>
                             <span ng-if="problem">
-                                #: {{problem.problemsetorder}} 
-                                <button class="btn btn-mini" ng-disabled="(problem.problemsetorder >= problems.length) || movingProblem" ng-click="moveDown(problem)"><i class="icon-arrow-down"></i></button>
-                                <button class="btn btn-mini" ng-disabled="(problem.problemsetorder <= 1) || movingProblem" ng-click="moveUp(problem)"><i class="icon-arrow-up"></i></button>
+                                #: {{problem.problemsetorder}}
+                                <button class="btn btn-mini" ng-disabled="(problem.problemsetorder >= problems.length) || movingProblem" ng-click="moveDown(problem)">
+                                    <i class="icon-arrow-down"></i>
+                                </button>
+                                <button class="btn btn-mini" ng-disabled="(problem.problemsetorder <= 1) || movingProblem" ng-click="moveUp(problem)">
+                                    <i class="icon-arrow-up"></i>
+                                </button>
+                                <button class="btn btn-mini btn-danger" ng-click="deleteProblem(problem)">
+                                    <i class="icon-remove-sign"></i>
+                                </button>
                             </span>
                         </span>
                     </div>
                 </div>
+
                 </fieldset>
             </form>
         </div>
@@ -82,9 +91,9 @@
                 </div>
 
                 <div class="form-actions">
-                    <button class="btn btn-primary" ng-disabled="!newPathForm.$valid || creatingPath" ng-click="saveNewPath(newPath)">Create</button> 
+                    <button class="btn btn-primary" ng-disabled="!newPathForm.$valid || creatingPath" ng-click="saveNewPath(newPath)">Create</button>
                     <button class="btn" ng-click="cancelNewPath()">Cancel</button>
-                </div>                
+                </div>
 
                 </fieldset>
             </form>
@@ -110,8 +119,8 @@
                 </fieldset>
 
                 <div class="form-actions">
-                    <button class="btn btn-primary" ng-disabled="!newLevelForm.$valid || creatingLevel" ng-click="saveNewLevel(newLevel)">Create</button> 
-                    <button class="btn" ng-click="cancelNewLevel()">Cancel</button> 
+                    <button class="btn btn-primary" ng-disabled="!newLevelForm.$valid || creatingLevel" ng-click="saveNewLevel(newLevel)">Create</button>
+                    <button class="btn" ng-click="cancelNewLevel()">Cancel</button>
                 </div>
             </form>
 
@@ -127,8 +136,8 @@
                 </div>
 
                 <div class="form-actions">
-                    <button class="btn btn-primary" ng-disabled="!newProblemForm.$valid" ng-click="StartNewProblem(newProblem)">Create</button> 
-                    <button class="btn" ng-click="cancelNewProblem()">Cancel</button> 
+                    <button class="btn btn-primary" ng-disabled="!newProblemForm.$valid" ng-click="StartNewProblem(newProblem)">Create</button>
+                    <button class="btn" ng-click="cancelNewProblem()">Cancel</button>
                 </div>
 
                 </fieldset>
@@ -136,23 +145,39 @@
 
         </div>
     </div>
-    
+
     <form name="editProblem" role="form" ng-show="problem">
         <div class="row-fluid">
             <div class="span6 well">
                 <div class="tabbable">
-                
+
                     <ul class="nav nav-tabs" gen-init-tab="true">
-                        <li ng-class="{'error': !editProblem.desc.$valid, 'tabspacing': true}"><a data-target="#t1" data-toggle="tab">Decription</a></li>
+                        <li ng-class="{'error': !editProblem.desc.$valid || !editProblem.problemName.$valid, 'tabspacing': true}"><a data-target="#t1" data-toggle="tab">Details</a></li>
                         <li ng-class="{'error': !editProblem.solution.$valid, 'tabspacing': true}"><a data-target="#t2" data-toggle="tab">Solution</a></li>
                         <li ng-class="{'error': !editProblem.skeleton.$valid, 'tabspacing': true}"><a data-target="#t3" data-toggle="tab">Skeleton</a></li>
                         <li ng-class="{'error': !editProblem.examples.$valid, 'tabspacing': true}"><a data-target="#t4" data-toggle="tab">Example</a></li>
                     </ul>
-                    
+
                     <div class="tab-content">
                         <div class="tab-pane active" id="t1">
-                            <p class="alert alert-error" ng-show="editProblem.desc.$error.required">A problem needs a description.</p>
-                            <textarea id="desc" name="desc" rows="10" ng-model="problemDetails.description" class="input-block-level" required="true"></textarea>
+                            <p class="alert alert-error" ng-show="editProblem.desc.$error.required || editProblem.problemName.$error.required">
+                                A problem needs a name and description.
+                            </p>
+
+                            <div class="control-group">
+                                <label class="control-label" for="problemName">Name: </label>
+                                <div class="controls">
+                                    <input type="text" id="problemName" name="problemName" ng-model="problemDetails.name" required="true"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="problem">Description: </label>
+                                <div class="controls">
+                                    <textarea id="desc" name="desc" rows="8" ng-model="problemDetails.description" class="input-block-level" required="true"></textarea>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="tab-pane" id="t2">
@@ -181,7 +206,7 @@
                     </ul>
 
                     <div class="tab-content">
-                        
+
                         <div class="tab-pane active" id="t5">
                             <p class="alert alert-error" ng-show="editProblem.tests.$error.required">A problem needs a test.</p>
                             <div id="tests" name="tests" ng-model="problemDetails.tests" required="true" gen-ace="interface.codeHighlightKey"></div>
@@ -201,7 +226,7 @@
                             <p ng-if="testRun.solved && build.required()" class="alert alert-info">
                                 Mobile results need to be rebuilt.
                             </p>
-                            
+
                             <div ng-if="testRun.verification_message && !testRun.solved">
                                 <p class="alert alert-error">{{testRun.testType}} tests failed</p>
                                 <table class="table">
@@ -223,7 +248,7 @@
                     </div>
 
                     <div class="form-actions controls controls-row">
-                        <button class="btn btn-primary span4" ng-click="runTests()" ng-disabled="savingProblem" gen-switch-tab="#result-tab">Run</button> 
+                        <button class="btn btn-primary span4" ng-click="runTests()" ng-disabled="savingProblem" gen-switch-tab="#result-tab">Run</button>
                         <button ng-class="{'btn': true, 'btn-success': testRun.solved, 'span4': true}" ng-click="save()" ng-disabled="!testRun.solved || savingProblem || build.required()">Save</button>
                     </div>
 
@@ -238,11 +263,11 @@
 
             <form name="buildPermutationResults" role="form" class="form">
                 <div class="controls controls-row" ng-repeat="url in build.verificationUrls">
-                    <input type="url" class="span8" ng-model="url" placeholder="Verification URL" readonly="true"/> 
+                    <input type="url" class="span8" ng-model="url" placeholder="Verification URL" readonly="true"/>
                     <input type="submit" class="btn btn-danger span4" value="remove" ng-click="build.verificationUrls.splice($index, 1)"/>
                 </div>
                 <div class="controls controls-row">
-                    <input type="url" class="span8" ng-model="newVerificationUrl" placeholder="Verification URL"/> 
+                    <input type="url" class="span8" ng-model="newVerificationUrl" placeholder="Verification URL"/>
                     <input type="submit" class="btn span4" value="add" ng-click="build.verificationUrls.push(newVerificationUrl); newVerificationUrl = ''"/>
                 </div>
                 <div class="controls controls-row">
@@ -252,7 +277,7 @@
                     <input type="submit" class="btn span4" ng-disabled="!build.running()" value="Stop build" ng-click="build.stop()"/>
                 </div>
             </form>
-            
+
             <div ng-if="build.started">
                 <h4>Progress</h4>
 
@@ -275,7 +300,7 @@
                     </tr>
                 </table>
             </div>
-            
+
             <div ng-if="build.started">
                 <h4>Build Details</h4>
                 <table class="table table-build">
@@ -307,9 +332,9 @@
                         <th>Total permutation</th>
                         <td>{{build.permutations.total}}</td>
                     </tr>
-                </table>    
+                </table>
             </div>
-            
+
         </div>
     </div>
 
@@ -318,10 +343,10 @@
             <h3>Drag-n-Drop permutations</h3>
 
             <div ng-repeat="(permutation, result) in problemMobile.nonErrorResults">
-                
+
                 <h4>Permutation {{permutation}}</h4>
                 <pre><code>{{problemMobile.lines|renderPermutation:permutation}}</code></pre>
-                
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>

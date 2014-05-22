@@ -1458,7 +1458,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 
 	$httpBackend.whenPOST('/jsonapi/move_problem_up').respond({'success': true});
 	$httpBackend.whenPOST('/jsonapi/move_problem_down').respond({'success': true});
-      
+  $httpBackend.whenGET(/jsonapi\/delete_problem\?problem_id=\d+$/).respond({'success': true});
+
       //eventTables data
       var eventsTableDataJC = {
     "rankinglocked": false,

@@ -709,19 +709,19 @@
             scope.path = scope.paths[0];
             scope.problemSet = levels.problemsets[0];
             scope.problem = {
-                problemset_id: scope.problemSet.id,
-                name: 'foo'
+                problemset_id: scope.problemSet.id
             };
             scope.problemDetails = {
+                name: 'foo',
                 description: 'bar',
                 solution: 'a=1',
                 tests: '>>> a\r\n1'
             };
-            
+
             scope.save();
             httpBackend.expectPOST('/jsonapi/new_problem').respond(function(method, url, strData) {
                 data = parseParam(strData);
-                
+
                 return [200, {problem_id: 1234}];
             });
             httpBackend.flush();
