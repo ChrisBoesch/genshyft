@@ -5232,6 +5232,21 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
         });
     };
 
+    $scope.deleteProblem = function(problem) {
+      if ($window.confirm("Are you sure you want to delete that problem?")) {
+        $http.get('/jsonapi/delete_problem?problem_id=' + problem.id).then(function() {
+          for (var i = 0; i < $scope.problems.length; i++) {
+            if ($scope.problems[i].id == problem.id) {
+              $scope.problems.splice(i, 1);
+              $scope.problem = null;
+              $scope.resetProblemDetails();
+              return;
+            }
+          }
+        });
+      }
+    };
+
     /**
      * Test problem solution against its public and private tests.
      *

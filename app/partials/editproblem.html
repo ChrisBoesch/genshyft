@@ -60,6 +60,9 @@
                                 <button class="btn btn-mini" ng-disabled="(problem.problemsetorder <= 1) || movingProblem" ng-click="moveUp(problem)">
                                     <i class="icon-arrow-up"></i>
                                 </button>
+                                <button class="btn btn-mini btn-danger" ng-click="deleteProblem(problem)">
+                                    <i class="icon-remove-sign"></i>
+                                </button>
                             </span>
                         </span>
                     </div>
@@ -203,7 +206,7 @@
                     </ul>
 
                     <div class="tab-content">
-                        
+
                         <div class="tab-pane active" id="t5">
                             <p class="alert alert-error" ng-show="editProblem.tests.$error.required">A problem needs a test.</p>
                             <div id="tests" name="tests" ng-model="problemDetails.tests" required="true" gen-ace="interface.codeHighlightKey"></div>
