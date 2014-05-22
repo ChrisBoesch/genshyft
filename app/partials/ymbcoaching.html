@@ -150,9 +150,9 @@ float:left;
 						</div>
 					 
 						  <button id="resume" class="btn btn-info" ng-click = "resumePracticeGame(currentPathId,currentPathName,5,currentCoach.coachID)">Start Practising </button> <br>  <br>
-					 <button id="reset" class="btn btn-danger" ng-click ="resetMentor()">  New Mentor </button> 
+					 <button id="reset" class="btn btn-danger" ng-click ="resetMentor()">  New Coach </button> 
 					 <button id="reset" class="btn btn-danger" ng-click ="resetPath()">  New Path </button> 
-					<br> <br> Current Mentor :  {{currentCoach.name}}
+					<br> <br> Current Coach :  {{currentCoach.name}}
 					<br> Current Path :{{currentPathName}}
 					 </td>
 					 <td class = "span4">  
@@ -163,6 +163,7 @@ float:left;
 			</tr>
 		</table>
 		<br>	
+		* Please refresh the page if you have problems.
 		<br>	
 			
 			
@@ -184,7 +185,7 @@ float:left;
 			
 			<br>
 			<button id="selectCoach" class="btn btn-warning" ng-click ="filterGetCoaches(coaches.name)"> 	
-			Mentor Me!
+			Coach Me!
 			</button> <br>
 			
 			<!-- <input type ="radio" name = "coachSelect" ng-model ="$parent.currentCoach" value ="{{coaches.name}}">

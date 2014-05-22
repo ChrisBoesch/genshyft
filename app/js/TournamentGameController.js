@@ -18,6 +18,7 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
     $scope.codeType = null;
 
     $scope.timeoutVarMentor = null;
+    $scope.tournamentGameStatus=null;
 
     if($cookieStore.get("type")){
       $scope.gameType = $cookieStore.get("type"); //retrieve game type
@@ -152,20 +153,29 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
 
     //By GENShYFT - Getting Mentor
     $scope.get_mentor = function(heatID, playerID){
-      $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
-        $scope.current_heat = response;
-        for(var i =0;i< $scope.current_heat.ranking.length;i++){
-          if($scope.current_heat.ranking[i].playerid === playerID){
-            $scope.mentor_id = $scope.current_heat.ranking[i].mentorID;
-            $scope.mentor_name= $scope.current_heat.ranking[i].mentor;
-            $scope.mentor_hasArrived = $scope.current_heat.ranking[i].mentorHasArrived;
-            break;
+
+      if($scope.tournamentGameStatus != "Closed"){
+        $resource('/jsonapi/get_heat_ranking').get({"heatID":heatID}, function(response){
+          $scope.current_heat = response;
+          $scope.tournamentGameStatus = $scope.current_heat.tournamentStatus;
+          for(var i =0;i< $scope.current_heat.ranking.length;i++){
+            if($scope.current_heat.ranking[i].playerid === playerID){
+              $scope.mentor_id = $scope.current_heat.ranking[i].mentorID;
+              $scope.mentor_name= $scope.current_heat.ranking[i].mentor;
+              $scope.mentor_hasArrived = $scope.current_heat.ranking[i].mentorHasArrived;
+              break;
+            }
           }
-        }
-      });
-      console.log("get_mentor()");
+        });
+      }
+
+     if($scope.tournamentGameStatus != "Closed"){
+        console.log("get_mentor()");
+        $scope.timeoutVar = $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 10000); 
+     }else{
+        $timeout.cancel($scope.timeoutVar);
+      } 
       
-      $scope.timeoutVar = $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 10000);
     };
 
     $scope.get_mentor_once = function(heatID, playerID){
