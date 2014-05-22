@@ -5182,22 +5182,26 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
 
 
     /**
-     * Reset the problem details 
+     * Reset the problem details
      * (`$scope.problemDetails` and `$scope.problemMobile`)
-     * 
+     *
      */
     $scope.resetProblemDetails = function() {
         $scope.problemDetails = {};
         $scope.problemMobile = null;
+
+        if ($scope.problem && $scope.problem.name) {
+          $scope.problemDetails.name = $scope.problem.name;
+        }
     };
 
     /**
      * Fetch the details of a problem
-     * 
+     *
      */
     $scope.getProblemDetails = function(problem) {
         var details, mobile;
-        
+
         $scope.resetProblemDetails();
 
         if (!problem || !problem.id) {
@@ -5542,8 +5546,8 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
                 path_id: $scope.path.id,
                 interface_id: $scope.interface.id,
                 level_id: $scope.problemSet.id,
-                name: $scope.problem.name, 
-                details: $scope.problemDetails.description,             
+                name: $scope.problemDetails.name,
+                details: $scope.problemDetails.description,
                 solution_code: $scope.problemDetails.solution,
                 skeleton_code: $scope.problemDetails.skeleton,
                 examples: $scope.problemDetails.examples,
