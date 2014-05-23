@@ -553,13 +553,15 @@
                                 <li class="tabspacing active">
                                   <a href="ymbcoaching-play/#t3" data-toggle="tab">Solution</a>
                                 </li>
-                                <button class="btn btn-primary pull-right" ng-show ="runButton" ng-click="check_solution_for_game();" >&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                                <button class="btn btn-primary pull-right" ng-show ="runButton" ng-click="check_solution_for_game();" gen-switch-tab=".result-tab">
+                                    &nbsp;&nbsp;Run&nbsp;&nbsp;
+                                </button>
 								
                                <!--  <button class="btn btn-primary pull-right" ng-click="check_solution_for_game_html();" ng-show="codeType == 'html'">&nbsp;&nbsp;RunHTML&nbsp;&nbsp;</button> -->
 
-                                <button class="btn btn-warning pull-right" ng-show ="skipButton" ng-click="nextQuestion();" >&nbsp;&nbsp;Skip&nbsp;&nbsp;</button>
+                                <button class="btn btn-warning pull-right" ng-show ="skipButton" ng-click="nextQuestion();" gen-switch-tab=".sample-tab">&nbsp;&nbsp;Skip&nbsp;&nbsp;</button>
 								
-								<button class="btn btn-warning pull-right" ng-show="showNewQuestion" ng-click="nextQuestion();">&nbsp;Next Problem &nbsp;
+								<button class="btn btn-warning pull-right" ng-show="showNewQuestion" ng-click="nextQuestion();" gen-switch-tab=".sample-tab">&nbsp;Next Problem &nbsp;
 								</button>								
 								
                             </ul>
@@ -583,10 +585,10 @@
                         <div id="tab21"class="tabbable">
                             <ul class="nav nav-tabs">
                                 <li id = "ta11" class="tabspacing active">
-                                  <a href="ymbcoaching-play/#t11" data-toggle="tab">Sample Answer</a>
+                                  <a href="ymbcoaching-play/#t11" class="sample-code" data-toggle="tab">Sample Answer</a>
                                 </li>
                                 <li id = "ta21" class="tabspacing">
-                                  <a href="ymbcoaching-play/#t21" data-toggle="tab">Outcome</a>
+                                  <a href="ymbcoaching-play/#t21" class="result-tab" data-toggle="tab">Outcome</a>
                                 </li>  
                             </ul>
 							
@@ -639,7 +641,7 @@
                                     <a href="ymbcoaching-play/#t211" data-toggle="tab">Tests</a>
                                 </li>   
                                 <li id = "ta311" class="tabspacing">
-                                    <a href="ymbcoaching-play/#t311" data-toggle="tab">Outcome</a>
+                                    <a href="ymbcoaching-play/#t311" class="result-tab" data-toggle="tab">Outcome</a>
                                 </li>  
                             </ul>
                             <div class="tab-content">

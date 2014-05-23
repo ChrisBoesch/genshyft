@@ -54,7 +54,9 @@
                             <div class="span12" align="center" style="padding-top: 10px">
                                 <font>
                                     <p> 
-                                    <button class="btn btn-primary" ng-click="skip_problem()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>&nbsp;&nbsp;
+                                    <button class="btn btn-primary" ng-click="skip_problem()" gen-switch-tab="#sample-tab">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skip&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </button>&nbsp;&nbsp;
                                     <button class="btn btn-primary" ng-click="goStoryBoard()">StoryBoard</button>
                                     </p>
                                 </font>
@@ -72,7 +74,9 @@
                                 <li class="tabspacing active">
                                   <a href="normal_play_page.html/#t3" data-toggle="tab">Solution</a>
                                 </li>
-                                <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();">&nbsp;&nbsp;Run&nbsp;&nbsp;</button>
+                                <button class="btn btn-primary pull-right" ng-click="check_solution_for_game();" gen-switch-tab=".result-tab">
+                                    &nbsp;&nbsp;Run&nbsp;&nbsp;
+                                </button>
                               </ul>
                               <div  class="tab-content">
                                 <div class="tab-pane fade in active" id="t3" style="height:300px;">
@@ -89,10 +93,10 @@
                             <div id="tab2"class="tabbable">
                               <ul class="nav nav-tabs">
                                 <li id = "ta1" class="tabspacing active">
-                                  <a href="normal_play_page.html/#t1" data-toggle="tab">Sample Answer</a>
+                                  <a id="sample-tab" href="normal_play_page.html/#t1" data-toggle="tab">Sample Answer</a>
                                 </li>
                                 <li id = "ta2" class="tabspacing">
-                                  <a href="normal_play_page.html/#t2" data-toggle="tab">Outcome</a>
+                                  <a class="result-tab" href="normal_play_page.html/#t2" data-toggle="tab">Outcome</a>
                                 </li>  
                               </ul>
                               <div class="tab-content">
@@ -141,7 +145,7 @@
                                     <a href="normal_play_page/#t211" data-toggle="tab">Tests</a>
                                 </li>   
                                 <li id = "ta311" class="tabspacing">
-                                    <a href="normal_play_page/#t311" data-toggle="tab">Outcome</a>
+                                    <a class="result-tab" href="normal_play_page/#t311" data-toggle="tab">Outcome</a>
                                 </li>  
                             </ul>
                             <div class="tab-content">
@@ -178,7 +182,7 @@
                                         <td height="40">{{line.expected}}</td>
                                         <td height="40">{{line.received}}</td>
                                         <td height="40" ng-show="line.status" bgcolor=#00FF00>{{line.status}}</td>
-                                        <td height="40"ng-show="!line.status" bgcolor=#FF0000>{{line.status}}</td>
+                                        <td height="40" ng-show="!line.status" bgcolor=#FF0000>{{line.status}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4" ng-hide="!solution_check_result.errors">Errors: <pre style = "color:blue;"><span ng-bind="solution_check_result.errors"></span></pre></td>
