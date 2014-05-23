@@ -1897,10 +1897,6 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
     $scope.move_to_next_unsolved_problem = function(){
       $scope.sampleAnswers = "yes";
       if ($scope.remaining_problems.length>0){
-        $('#t1').addClass('active');
-        $('#t2').removeClass('active');
-        $('#ta1').addClass('active');
-        $('#ta2').removeClass('active');
         //Todo:If you are already on the problem, you don't need to reload it. 
         $scope.current_problem = $scope.remaining_problems[$scope.skip_problem_count % $scope.remaining_problems.length];
         $scope.current_problem_index = $scope.game.problemIDs.indexOf($scope.current_problem);
@@ -1917,10 +1913,6 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
 
     }
     $scope.skip_problem = function(){
-      $('#t1').addClass('active');
-      $('#t2').removeClass('active');
-      $('#ta1').addClass('active');
-      $('#ta2').removeClass('active');
       if ($scope.remaining_problems.length>1){
         $scope.skip_problem_count += 1;
         $scope.move_to_next_unsolved_problem();
@@ -1937,19 +1929,6 @@ function NormalGameController($scope,$resource,$cookieStore,$location){
       //$scope.solution
       //$scope.current_problem
       //$scope.game.gameID
-      if ($scope.codeType != 'html'){
-        $('#t1').removeClass('active');
-        $('#ta1').removeClass('active');
-        $('#t2').addClass('active');
-        $('#ta2').addClass('active');
-      }else{
-        $('#t111').removeClass('active');
-        $('#ta111').removeClass('active');
-        $('#t211').removeClass('active');
-        $('#ta211').removeClass('active');
-        $('#t311').addClass('active');
-        $('#ta311').addClass('active');
-      }
      
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
@@ -2258,19 +2237,6 @@ function PracticeGameController($scope,$resource,$cookieStore){
       //$scope.current_problem
       //$scope.game.gameID
       
-      if ($scope.codeType != 'html'){
-        $('#t11').removeClass('active');
-        $('#ta11').removeClass('active');
-        $('#t21').addClass('active');
-        $('#ta21').addClass('active');
-      }else{
-        $('#t111').removeClass('active');
-        $('#ta111').removeClass('active');
-        $('#t211').removeClass('active');
-        $('#ta211').removeClass('active');
-        $('#t311').addClass('active');
-        $('#ta311').addClass('active');
-      }
       $scope.SaveResource = $resource('/jsonapi/verify_for_game');
       //alert($scope.game.gameID);
       $scope.theData = {user_code:$scope.solution1,

@@ -419,20 +419,6 @@ function yMBcoachingPlayController($scope,$resource,$cookieStore,$timeout,$http,
       //$scope.current_problem
 	  //$scope.game.gameID
 		$scope.counter = 0; //reset timer
-		
-		if ($scope.codeType != 'html'){
-	        $('#t11').removeClass('active');
-	        $('#ta11').removeClass('active');
-	        $('#t21').addClass('active');
-	        $('#ta21').addClass('active');
-	      }else{
-	        $('#t111').removeClass('active');
-	        $('#ta111').removeClass('active');
-	        $('#t211').removeClass('active');
-	        $('#ta211').removeClass('active');
-	        $('#t311').addClass('active');
-	        $('#ta311').addClass('active');
-	      }
 
 		  $scope.SaveResource = $resource('/jsonapi/verify_for_game');
 		  //alert($scope.game.gameID);
