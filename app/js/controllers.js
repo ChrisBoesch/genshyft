@@ -5083,6 +5083,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
     $scope.resetLevels = function() {
         $scope.problemSets = [];
         $scope.problemSet = null;
+        $scope.problemSetEdit = null;
         $scope.resetProblems();
     };
 
@@ -5136,7 +5137,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
     $scope.saveNewLevel = function(newLevel) {
 
         $scope.creatingLevel = true;
-        $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp){
+        $http.post('/jsonapi/new_problemset', newLevel, postConfig).then(function(resp) {
             if (!resp.data.problemset_id) {
                 $window.alert('error: could not save the new level.');
                 return $q.reject(resp.data);
@@ -5145,7 +5146,7 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
             newLevel.id = resp.data.problemset_id;
             $scope.problemSets.push(newLevel);
             $scope.problemSet = newLevel;
-            $scope.cancelNewLevel();
+            $scope.cancelLevelEdit();
             $scope.resetProblems();
         }).always(function(){
             $scope.creatingLevel = false;
@@ -5155,8 +5156,36 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
     /**
      * Reset `$scope.newLevel`.
      */
-    $scope.cancelNewLevel = function() {
+    $scope.cancelLevelEdit = function() {
         $scope.newLevel = null;
+        $scope.problemSetEdit = null;
+    };
+
+    /**
+     * Start renaming the selected level
+     */
+    $scope.editLevel = function(problemSet) {
+      $scope.problemSetEdit = {
+        name: problemSet.name,
+        description: problemSet.description
+      };
+    };
+
+    /**
+     * Save new name for problem set
+     */
+    $scope.saveLevel = function(problemSetEdit) {
+      $http.post('/jsonapi/edit_problemset', problemSetEdit, postConfig).then(function(resp) {
+        if (resp.data.successful || resp.data.success) {
+          $scope.problemSet.name = problemSetEdit.name;
+          $scope.problemSet.description = problemSetEdit.description; 
+          $scope.cancelLevelEdit();
+        } else {
+          $window.alert('Failed to rename the problem set.');
+        }
+
+        return resp;
+      });
     };
 
 
@@ -5180,7 +5209,6 @@ function EditProblemController($scope, $http, $q, $routeParams, $window, permuta
      * 
      */
     $scope.getProblems = function(problemSet) {
-
         $scope.resetProblems();
 
         if (!problemSet || !problemSet.id) {

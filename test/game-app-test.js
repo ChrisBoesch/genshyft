@@ -1455,6 +1455,8 @@ $httpBackend.whenGET('/jsonapi/game/101010').respond({"game_end": "2010-06-01 15
 			return [200, {'problemset_id': 1234567890}];
 		}
 	});
+  // Edit level
+  $httpBackend.whenPOST('/jsonapi/edit_problemset').respond({'successful': true});
 
 	$httpBackend.whenPOST('/jsonapi/move_problem_up').respond({'success': true});
 	$httpBackend.whenPOST('/jsonapi/move_problem_down').respond({'success': true});

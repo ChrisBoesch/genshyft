@@ -38,6 +38,7 @@
                                 <option value="">new level...</option>
                             </select>
                             <button class="btn" ng-click="createNewLevel(path)" ng-if="!problemSet && !newLevel">new level</button>
+                            <button class="btn" ng-click="editLevel(problemSet)" ng-if="problemSet && !newLevel">edit level</button>
                         </span>
                     </div>
                 </div>
@@ -71,7 +72,7 @@
                 </fieldset>
             </form>
         </div>
-        <div class="span6 well" ng-show="newPath || newLevel || newProblem">
+        <div class="span6 well" ng-show="newPath || newLevel || newProblem || problemSetEdit">
             <form name="newPathForm" class="form-horizontal" role="form" ng-if="newPath">
                 <fieldset>
                 <legend>New Path</legend>
@@ -103,16 +104,16 @@
                 <legend>New Level</legend>
 
                 <div class="control-group">
-                    <label for="level-name" class="control-label">Name: </label>
+                    <label for="new-level-name" class="control-label">Name: </label>
                     <div class="controls">
-                        <input type="text" id="level-name" ng-model="newLevel.name" required="true"/>
+                        <input type="text" id="new-level-name" ng-model="newLevel.name" required="true"/>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label for="level-desc" class="control-label">Description: </label>
+                    <label for="new-level-desc" class="control-label">Description: </label>
                     <div class="controls">
-                        <textarea id="level-desc" ng-model="newLevel.description" class="input-block-level" rows="4" required="true"></textarea>
+                        <textarea id="new-level-desc" ng-model="newLevel.description" class="input-block-level" rows="4" required="true"></textarea>
                     </div>
                 </div>
 
@@ -120,7 +121,33 @@
 
                 <div class="form-actions">
                     <button class="btn btn-primary" ng-disabled="!newLevelForm.$valid || creatingLevel" ng-click="saveNewLevel(newLevel)">Create</button>
-                    <button class="btn" ng-click="cancelNewLevel()">Cancel</button>
+                    <button class="btn" ng-click="cancelLevelEdit()">Cancel</button>
+                </div>
+            </form>
+
+            <form name="editLevelForm" class="form-horizontal" role="form" ng-if="problemSetEdit">
+                <fieldset>
+                <legend>Edit Level</legend>
+
+                <div class="control-group">
+                    <label for="level-name" class="control-label">Name: </label>
+                    <div class="controls">
+                        <input type="text" id="level-name" ng-model="problemSetEdit.name" required="true"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="level-desc" class="control-label">Description: </label>
+                    <div class="controls">
+                        <textarea id="level-desc" ng-model="problemSetEdit.description" class="input-block-level" rows="4" required="true"></textarea>
+                    </div>
+                </div>
+
+                </fieldset>
+
+                <div class="form-actions">
+                    <button class="btn btn-primary" ng-disabled="!editLevelForm.$valid" ng-click="saveLevel(problemSetEdit)">Save</button>
+                    <button class="btn" ng-click="cancelLevelEdit()">Cancel</button>
                 </div>
             </form>
 
