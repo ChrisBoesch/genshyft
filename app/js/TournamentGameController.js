@@ -169,11 +169,13 @@ function TournamentGameController($scope,$resource,$cookieStore,$timeout,$locati
         });
       }
 
-     if($scope.tournamentGameStatus != "Closed"){
+     if($scope.tournamentGameStatus != "Closed" && $scope.current_heat.heatIsFinished !== true){
         console.log("get_mentor()");
         $scope.timeoutVar = $timeout(function(){ $scope.get_mentor(heatID, playerID); }, 10000); 
      }else{
-        $timeout.cancel($scope.timeoutVar);
+       console.log("cancelling get mentor loop since heat has finished or tournament has been closed.");  
+       $timeout.cancel($scope.timeoutVar);
+        
       } 
       
     };

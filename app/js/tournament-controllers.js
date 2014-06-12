@@ -106,7 +106,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
           }             
         });
       }
-      
+      //This will through errors untile there is at least one player in the ranking to cause an update to occur, but it will stop the ranking update fetches as a round times out. 
       if(!$scope.tournament || ($scope.tournament && $scope.tournament.heatIsFinished === false)){
         $scope.timeoutVarRanking = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
         console.log("setting timeout since heatIsFinished "+$scope.tournament.heatIsFinished);
