@@ -102,14 +102,17 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
             $scope.playerRanks = $scope.tournament.ranking;
             $scope.tournamentStatus = $scope.tournament.tournamentStatus;
             console.log("fetch_ranks");
+            
           }             
         });
       }
       
-      if($scope.tournamentStatus != "Closed"){
+      if(!$scope.tournament || ($scope.tournament && $scope.tournament.heatIsFinished === false)){
         $scope.timeoutVarRanking = $timeout(function(){$scope.fetch_ranks(heatID)}, 10000);
+        console.log("setting timeout since heatIsFinished "+$scope.tournament.heatIsFinished);
       }else{
         $timeout.cancel($scope.timeoutVarRanking);
+        console.log("cancelling timeout since heatIsFinished "+$scope.tournament.heatIsFinished);
       }
   };
 
