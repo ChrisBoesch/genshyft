@@ -511,7 +511,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   };
 
   $scope.fetch_tournament = function(tournamentID){
-    $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
+    $resource('/jsonapi/tournament').get({"tournamentID":tournamentID}, function(response){
         $scope.tournament = response;
         console.log("fetch edited tournament = " + $scope.tournament.tournamentID);
     });
@@ -895,7 +895,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
     }
 
     if($scope.tournamentStatus==null||$scope.tournamentStatus=="Open for registration"){
-      $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
+      $resource('/jsonapi/tournament').get({"tournamentID":tournamentID}, function(response){
         $scope.tournament = response;
         console.log("fetching tournament details = "+ $scope.tournament.tournamentID +" playerID="+$scope.currentPlayerID);
         $scope.get_indivNoGrpPlayers($scope.tournament);
@@ -1017,7 +1017,7 @@ function GenshyftTournamentController($scope,$resource,$timeout,$location,$cooki
   $scope.manageSelectedTournament = function(){
     var tID = $cookieStore.get("tournamentID");
     console.log("TournamentID of tournament to be managed: " + tID);
-    $resource('/jsonapi/tournament/' + tID).get({},function(response){
+    $resource('/jsonapi/tournament').get({"tournamentID":tID},function(response){
       if(response.error){
         console.log("Error from retrieving tournament: " + JSON.stringify(response.error));
       }
@@ -1332,7 +1332,7 @@ function TournamentController($scope,$resource,$http,$cookieStore,$location,$tim
       });
     };
   $scope.fetch_tournament = function(tournamentID){
-    $resource('/jsonapi/tournament/:tournamentID').get({"tournamentID":tournamentID}, function(response){
+    $resource('/jsonapi/tournament').get({"tournamentID":tournamentID}, function(response){
         $scope.tournament = response;
         console.log("fetch_tournament = " + $scope.tournament);
         //$scope.startTime = new Date("2013-09-29 08:24:46.840830");
