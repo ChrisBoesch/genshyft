@@ -6,4 +6,4 @@ before_script:
   - 'grunt install'
 
 after_success:
-- curl http://django-box-19263.apse1.nitrousbox.com:8888/
+- curl http://django-box-19263.apse1.nitrousbox.com:8887/
