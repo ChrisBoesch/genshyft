@@ -112,8 +112,7 @@ module.exports = function (grunt) {
           'app/js/controllers.js': ['coverage']
         },
         coverageReporter: {
-          type: 'html',
-          dir: 'coverage/'
+          type: 'text-summary', // 'text', 'text-summary','html'
         }
       }
     },
@@ -422,7 +421,10 @@ module.exports = function (grunt) {
 
   });
 
+  grunt.registerTask('travis_test', ['verbosity', 'develop:server', 'karma:unit_coverage']);
+  
   grunt.registerTask('test', ['verbosity', 'develop:server', 'karma:unit', 'karma:midway', 'karma:e2e']);
+  
   grunt.registerTask('test:unit', ['karma:unit']);
   grunt.registerTask('test:midway', ['verbosity', 'develop:server', 'karma:midway']);
   grunt.registerTask('test:e2e', ['verbosity', 'develop:server', 'karma:e2e']);

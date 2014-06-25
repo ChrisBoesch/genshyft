@@ -7,7 +7,7 @@
   },
   "scripts": {
     "postinstall": "./node_modules/.bin/bower install",
-    "test": "grunt test"
+    "test": "grunt travis_test"
   },
   "homepage": "http://singpath.com/",
   "devDependencies": {
