@@ -52726,7 +52726,7 @@ L.Map.include({
 });
 
 
-}(window, document));;// Source: bower_components/unstable-angular-complete/angular.js
+}(window, document));;// Source: bower_components/angularjs-unstable/angular.js
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
@@ -69602,7 +69602,7 @@ var styleDirective = valueFn({
   });
 
 })(window, document);
-angular.element(document).find('head').append('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\\:form{display:block;}</style>');;// Source: bower_components/unstable-angular-complete/angular-cookies.js
+angular.element(document).find('head').append('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\\:form{display:block;}</style>');;// Source: bower_components/angularjs-unstable/angular-cookies.js
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
@@ -69788,7 +69788,7 @@ angular.module('ngCookies', ['ng']).
 
 
 })(window, window.angular);
-;// Source: bower_components/unstable-angular-complete/angular-resource.js
+;// Source: bower_components/angularjs-unstable/angular-resource.js
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org

@@ -10,7 +10,7 @@
     "angular-ui-ace": "~0.1.0",
     "ace-builds": "~1.1.1",
     "underscore": "~1.5.2",
-    "unstable-angular-complete": "1.1.5",
+    "angularjs-unstable": "1.1.5",
     "bootstrap-css": "2.3.2",
     "bootstrap-datepicker": "~1.2.0",
     "angular-leaflet-directive": "0.6.1",
