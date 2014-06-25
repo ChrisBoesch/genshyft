@@ -208,9 +208,9 @@ module.exports = function (grunt) {
           'bower_components/jquery-ui-touch-punch/jquery.ui.touch-punch.js',
           'bower_components/ace-builds/src/ace.js',
           'bower_components/leaflet-dist/leaflet-src.js',
-          'bower_components/unstable-angular-complete/angular.js',
-          'bower_components/unstable-angular-complete/angular-cookies.js',
-          'bower_components/unstable-angular-complete/angular-resource.js',
+          'bower_components/angularjs-unstable/angular.js',
+          'bower_components/angularjs-unstable/angular-cookies.js',
+          'bower_components/angularjs-unstable/angular-resource.js',
           'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
           'bower_components/angular-ui-ace/ui-ace.js',
           'bower_components/angular-leaflet-directive/src/angular-leaflet-directive.js',
@@ -406,7 +406,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    
+
     compress: {
       screenshots: {
         options: {
@@ -442,7 +442,7 @@ module.exports = function (grunt) {
 
   // development
   grunt.registerTask('dev', ['install', 'build', 'connect:devserver', 'watch']);
-  
+
   //screenshots
   grunt.registerTask('screenshots', ['connect:devserver', 'autoshot',
     'compress:screenshots', 'connect:screenshots', 'open:screenshots']);

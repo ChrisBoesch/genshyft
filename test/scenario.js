@@ -23,7 +23,7 @@
 
             search.split('&').forEach(function(item){
                 var kv = item.split('=');
-            
+
                 if (kv.length !== 2) {
                     return;
                 }
@@ -42,8 +42,8 @@
             return scenario['default'];
         },
         urls = getScenario();
-    
-    document.write('<script src="../bower_components/unstable-angular-complete/angular-mocks.js"> </script>');
+
+    document.write('<script src="../bower_components/angularjs-unstable/angular-mocks.js"> </script>');
     urls.forEach(function(url) {
         console.log('loading "'+url+'"');
         document.write('<script src="'+ url + '"> </script> ');
