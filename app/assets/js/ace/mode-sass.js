@@ -38,14 +38,13 @@ var SassHighlightRules = require("./sass_highlight_rules").SassHighlightRules;
 var FoldMode = require("./folding/coffee").FoldMode;
 
 var Mode = function() {
-    this.HighlightRules = SassHighlightRules;
+    this.$tokenizer = new Tokenizer(new SassHighlightRules().getRules());
     this.foldingRules = new FoldMode();
 };
 oop.inherits(Mode, TextMode);
 
 (function() {   
     this.lineCommentStart = "//";
-    this.$id = "ace/mode/sass";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

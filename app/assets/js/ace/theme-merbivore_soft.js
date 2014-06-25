@@ -45,7 +45,11 @@ background-color: #1C1C1C;\
 color: #E6E1DC\
 }\
 .ace-merbivore-soft .ace_cursor {\
-color: #FFFFFF\
+border-left: 2px solid #FFFFFF\
+}\
+.ace-merbivore-soft .ace_overwrite-cursors .ace_cursor {\
+border-left: 0px;\
+border-bottom: 1px solid #FFFFFF\
 }\
 .ace-merbivore-soft .ace_marker-layer .ace_selection {\
 background: #494949\
@@ -118,8 +122,11 @@ color: #AC4BB8\
 .ace-merbivore-soft .ace_entity.ace_other.ace_attribute-name {\
 color: #EAF1A3\
 }\
+.ace-merbivore-soft .ace_markup.ace_underline {\
+text-decoration: underline\
+}\
 .ace-merbivore-soft .ace_indent-guide {\
-background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWOQkpLyZfD09PwPAAfYAnaStpHRAAAAAElFTkSuQmCC) right repeat-y\
+background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAEklEQVQImWOQkpLyZfD09PwPAAfYAnaStpHRAAAAAElFTkSuQmCC) right repeat-y;\
 }";
 
 var dom = require("../lib/dom");

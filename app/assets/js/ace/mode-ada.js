@@ -38,7 +38,7 @@ var AdaHighlightRules = require("./ada_highlight_rules").AdaHighlightRules;
 var Range = require("../range").Range;
 
 var Mode = function() {
-    this.HighlightRules = AdaHighlightRules;
+    this.$tokenizer = new Tokenizer(new AdaHighlightRules().getRules());
 };
 oop.inherits(Mode, TextMode);
 
@@ -46,7 +46,6 @@ oop.inherits(Mode, TextMode);
 
     this.lineCommentStart = "--";
 
-    this.$id = "ace/mode/ada";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

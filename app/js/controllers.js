@@ -473,7 +473,7 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 
 	//change the difficulty level as well as the path level detail table
 	$scope.changeDifficulty = function(difficulty,pathName){
-		if(difficulty == "Drag-n-Drop" && pathName.indexOf("Beginner") == -1){
+    if(difficulty == "Drag-n-Drop" && pathName.indexOf("Beginner") == -1){
 			$scope.path_ID = undefined;
 			$scope.practice_path_name = undefined;
 			$('#myCarousel input:image').removeClass('selected');
@@ -486,6 +486,8 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 			$scope.practice_path_name = undefined;
 		}
 		$scope.difficulty = difficulty;
+    $resource('/jsonapi/set_difficulty_setting').get({"difficulty":difficulty});
+    //Refresh player details after setting have been changed to confirm. 
 		if(difficulty != "" && $scope.path_ID != ""){
 			//$location.search({path_ID: $scope.path_ID, difficulty: difficulty});
 		}

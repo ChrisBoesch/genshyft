@@ -84,7 +84,11 @@ color: teal;\
 font-weight: bold;\
 }\
 .ace-github .ace_cursor {\
-color: black;\
+border-left: 2px solid black;\
+}\
+.ace-github .ace_overwrite-cursors .ace_cursor {\
+border-left: 0px;\
+border-bottom: 1px solid black;\
 }\
 .ace-github .ace_marker-layer .ace_active-line {\
 background: rgb(255, 255, 204);\

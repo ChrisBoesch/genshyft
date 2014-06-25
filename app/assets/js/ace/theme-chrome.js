@@ -43,10 +43,13 @@ background: #e8e8e8;\
 }\
 .ace-chrome {\
 background-color: #FFFFFF;\
-color: black;\
 }\
 .ace-chrome .ace_cursor {\
-color: black;\
+border-left: 2px solid black;\
+}\
+.ace-chrome .ace_overwrite-cursors .ace_cursor {\
+border-left: 0px;\
+border-bottom: 1px solid black;\
 }\
 .ace-chrome .ace_invisible {\
 color: rgb(191, 191, 191);\
@@ -105,10 +108,10 @@ color: rgb(104, 104, 91);\
 .ace-chrome .ace_entity.ace_name.ace_function {\
 color: #0000A2;\
 }\
-.ace-chrome .ace_heading {\
+.ace-chrome .ace_markup.ace_heading {\
 color: rgb(12, 7, 255);\
 }\
-.ace-chrome .ace_list {\
+.ace-chrome .ace_markup.ace_list {\
 color:rgb(185, 6, 144);\
 }\
 .ace-chrome .ace_marker-layer .ace_selection {\

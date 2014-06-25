@@ -56,12 +56,9 @@ exports.$detectIndentation = function(lines, fallback) {
             stats[spaces] = (stats[spaces] || 0) + 1;
         }
         prevSpaces = spaces;
-        while (i < max && line[line.length - 1] == "\\")
+        while (line[line.length - 1] == "\\")
             line = lines[i++];
-    }
-    
-    if (!stats.length)
-        return;
+    };
 
     function getScore(indent) {
         var score = 0;
@@ -111,17 +108,15 @@ exports.detectIndentation = function(session) {
     return indent;
 };
 
-exports.trimTrailingSpace = function(session, trimEmpty) {
+exports.trimTrailingSpace = function(session) {
     var doc = session.getDocument();
     var lines = doc.getAllLines();
-    
-    var min = trimEmpty ? -1 : 0;
 
     for (var i = 0, l=lines.length; i < l; i++) {
         var line = lines[i];
         var index = line.search(/\s+$/);
 
-        if (index > min)
+        if (index !== -1)
             doc.removeInLine(i, index, line.length);
     }
 };
@@ -160,14 +155,14 @@ exports.convertIndentation = function(session, ch, len) {
 };
 
 exports.$parseStringArg = function(text) {
-    var indent = {};
+    var indent = {}
     if (/t/.test(text))
         indent.ch = "\t";
     else if (/s/.test(text))
         indent.ch = " ";
     var m = text.match(/\d+/);
     if (m)
-        indent.length = parseInt(m[0], 10);
+        indent.length = parseInt(m[0]);
     return indent;
 };
 
@@ -179,7 +174,7 @@ exports.$parseArg = function(arg) {
     if (typeof arg.text == "string")
         return exports.$parseStringArg(arg.text);
     return arg;
-};
+}
 
 exports.commands = [{
     name: "detectIndentation",
@@ -195,7 +190,7 @@ exports.commands = [{
     name: "convertIndentation",
     exec: function(editor, arg) {
         var indent = exports.$parseArg(arg);
-        exports.convertIndentation(editor.session, indent.ch, indent.length);
+        exports.convertIndentation(editor.session, arg.ch, arg.length);
     }
 }, {
     name: "setIndentation",
@@ -204,11 +199,6 @@ exports.commands = [{
         indent.length && editor.session.setTabSize(indent.length);
         indent.ch && editor.session.setUseSoftTabs(indent.ch == " ");
     }
-}];
+}]
 
 });
-;
-                (function() {
-                    window.require(["ace/ext/whitespace"], function() {});
-                })();
-            

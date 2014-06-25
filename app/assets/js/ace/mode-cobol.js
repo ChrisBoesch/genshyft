@@ -38,7 +38,7 @@ var CobolHighlightRules = require("./cobol_highlight_rules").CobolHighlightRules
 var Range = require("../range").Range;
 
 var Mode = function() {
-    this.HighlightRules = CobolHighlightRules;
+    this.$tokenizer = new Tokenizer(new CobolHighlightRules().getRules());
 };
 oop.inherits(Mode, TextMode);
 
@@ -46,7 +46,6 @@ oop.inherits(Mode, TextMode);
 
     this.lineCommentStart = "*";
 
-    this.$id = "ace/mode/cobol";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;

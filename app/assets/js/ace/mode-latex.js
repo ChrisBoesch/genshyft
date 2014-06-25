@@ -9,7 +9,7 @@ var LatexFoldMode = require("./folding/latex").FoldMode;
 var Range = require("../range").Range;
 
 var Mode = function() {
-    this.HighlightRules = LatexHighlightRules;
+    this.$tokenizer = new Tokenizer(new LatexHighlightRules().getRules());
     this.foldingRules = new LatexFoldMode();
 };
 oop.inherits(Mode, TextMode);
@@ -17,7 +17,6 @@ oop.inherits(Mode, TextMode);
 (function() {
     this.lineCommentStart = "%";
 
-    this.$id = "ace/mode/latex";
 }).call(Mode.prototype);
 
 exports.Mode = Mode;
