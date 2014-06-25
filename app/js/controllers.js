@@ -485,12 +485,10 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 			$scope.path_ID = undefined;
 			$scope.practice_path_name = undefined;
 		}
-		$scope.difficulty = difficulty;
-    $resource('/jsonapi/set_difficulty_setting').get({"difficulty":difficulty});
-    //Refresh player details after setting have been changed to confirm. 
-		if(difficulty != "" && $scope.path_ID != ""){
-			//$location.search({path_ID: $scope.path_ID, difficulty: difficulty});
-		}
+    $resource('/jsonapi/set_difficulty_setting').get({"difficulty":difficulty}, function(response){
+      //update difficulty based on returned value from API setting. 
+      $scope.difficulty = difficulty;
+    });
 	};
 
 	$scope.continuePath = function(num){
