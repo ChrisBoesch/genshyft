@@ -288,15 +288,13 @@
 									Path: {{practice_path_name}}
 									</br>
 									Diffculty: {{difficulty}}
-                  <span ng-show="difficulty=='Drag-n-Drop'"><br>beginner path </span>
-								</span>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							</br>
 							<div ng-show="difficulty && path_ID" align="center">
-								<button class="btn btn-primary btn-lvl" ng-click="create_prac(lvl,5,lvlName)"><h5>Continue
+								<button class="btn btn-primary btn-lvl" ng-click="create_prac(lvl,5,lvlName,false)"><h5>Continue
 									Level {{lvlName}}</h5></button>
 							</div>
 						</td>
@@ -305,7 +303,7 @@
 						<td>
 							</br>
 							<div ng-show="difficulty && path_ID" align="center">
-								<button class="btn btn-primary" ng-click="continuePath(5);"><h5>Resolve Level
+								<button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName,true);"><h5>Resolve Level
 									{{lvlName}}</h5></button>
 							</div>
 						</td>
@@ -512,7 +510,7 @@
 						<td>
 							</br>
 							<div align="center">
-								<button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName)"><H5>Continue
+								<button class="btn btn-primary" ng-click="create_prac(lvl,5,lvlName,false)"><H5>Continue
 									Level {{lvlName}}</H5></button>
 							</div>
 						</td>
@@ -521,7 +519,7 @@
 						<td>
 							</br>
 							<div align="center">
-								<button class="btn btn-primary" ng-click="continuePath(5);"><H5>Resolve Level
+                <button class="btn btn-primary" ng-click="create_prac(lvl,4,lvlName,true)"><H5>Resolve Level
 									{{lvlName}}</H5></button>
 							</div>
 						</td>

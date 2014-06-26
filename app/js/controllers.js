@@ -447,7 +447,7 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 			{
 				if($scope.path_progress.details[i].problemsInProblemset>$scope.path_progress.details[i].currentPlayerProgress){
 					console.log("level "+$scope.path_progress.details[i].pathorder);
-					$scope.create_prac($scope.path_progress.details[i].id,num,$scope.path_progress.details[i].pathorder);
+					$scope.create_prac($scope.path_progress.details[i].id,num,$scope.path_progress.details[i].pathorder,false);
 					break;
 				}
 			}
@@ -461,7 +461,6 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
     for (var i=0; i<$scope.paths.paths.length;i++){
         //Check if hasMobile
         if ($scope.paths.paths[i].id==pathid){
-          console.log("Found it");
           beginner_path_id = $scope.paths.paths[i].mobilePathID;
         }  
     }
@@ -538,13 +537,15 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 		{
 			if($scope.path_progress.details[i].problemsInProblemset>$scope.path_progress.details[i].currentPlayerProgress){
 				console.log("level "+$scope.path_progress.details[i].pathorder);
-				$scope.create_prac($scope.path_progress.details[i].id,num,$scope.path_progress.details[i].pathorder);
+				$scope.create_prac($scope.path_progress.details[i].id,num,$scope.path_progress.details[i].pathorder,false);
 				break;
 			}
 		}
 	};
 
-	$scope.create_prac = function(level,numProblems,lvlnum){
+  //This needs to be extended to support resolving of the level.
+	$scope.create_prac = function(level,numProblems,lvlnum, re_solve){
+    console.log("In create prac level "+ level + " numProblems " +numProblems + " Level " + lvlnum + " resolve "+re_solve);
 		for (var i=0;i<$scope.path_progress.details.length;i++)
 		{
 			if($scope.path_progress.details[i].problemsInProblemset>$scope.path_progress.details[i].currentPlayerProgress){
@@ -560,6 +561,7 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 		if(lvlnum<=$scope.nextLvlNum)
 		{
 			$cookieStore.put("name", level);
+      $cookieStore.put("re_solve", re_solve); 
 			$cookieStore.put("num", numProblems);
 			$cookieStore.put("type", "practiceGame");
 			$cookieStore.put("level", lvlnum);
@@ -2088,6 +2090,9 @@ function PracticeGameController($scope,$resource,$cookieStore){
     if($cookieStore.get("name")){
       $scope.LevelID = $cookieStore.get("name"); //retrieve level id from practice page
     }
+    if($cookieStore.get("re_solve")){
+      $scope.re_solve = $cookieStore.get("re_solve");
+    }
     if($cookieStore.get("num")){
       $scope.numProblems = $cookieStore.get("num"); //retrieve the number of problems per game from practice page
     }
@@ -2112,27 +2117,25 @@ function PracticeGameController($scope,$resource,$cookieStore){
       console.log($scope.codeType);
     }
 
-
-	$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
-		$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
+  $scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
+	$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
 		$scope.problems_progress = response;
 		$scope.current_level_progress = $scope.problems_progress.currentPlayerProgress;
 		$scope.total_level_progress = $scope.problems_progress.problemsInProblemset;
 	});
 
-    $scope.create_practice_game = function(){
+  $scope.create_practice_game = function(){
     	$scope.problemsModel = $resource('/jsonapi/get_problemset_progress/:problemsetID');
-
-		$scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
-			$scope.problems_progress = response;
+		  $scope.problemsModel.get({"problemsetID":$scope.LevelID}, function(response){
+			  $scope.problems_progress = response;
 		});
     }
 
-    //alert($scope.qid);
+    
     $scope.create_practice_game = function(LevelID,numProblems){
-      console.log("Creating practice game in PracticeGameController");
       $scope.CreateGameModel = $resource('/jsonapi/create_game/problemsetID/:problemsetID/numProblems/:numProblems');
 
+      // This may only be loading the first time. 
       $scope.CreateGameModel.get({"problemsetID":LevelID,"numProblems":numProblems}, function(response){
         console.log("**Creating practice game in PracticeGameController");
         //Add error checking here.
@@ -2146,28 +2149,33 @@ function PracticeGameController($scope,$resource,$cookieStore){
 		});
     };
 
-
     $scope.create_resolve_problemset_game = function(problemsetID){
       $scope.CreateGameModel = $resource('/jsonapi/create_game/problemsetID/:problemsetID/resolve');
 
       $scope.CreateGameModel.get({"problemsetID":problemsetID}, function(response){
         $scope.game = response;
         $scope.update_remaining_problems();
-		});
+		  });
     };
-    /*
-    Create Tournament Game.
-
-    */
+  
+    // This needs to be modified to consider resolve
+    console.log("In PracticeGameController difficulty "+$scope.gameDifficulty+" resolve "+$scope.re_solve);
+	  if ($scope.re_solve==true){
+      //Create a resolve game for the level
+      $scope.create_resolve_problemset_game($scope.LevelID)
+    }else{
+      //Create a normal practice game for the level.
+      $scope.create_practice_game($scope.LevelID,$scope.numProblems);
+    }
 
     $scope.fetch = function(gameID){
-		$scope.GameModel = $resource('/jsonapi/game/:gameID');
-      	console.log("Fetching");
-      	console.log($scope.codeType);
-		$scope.GameModel.get({"gameID":gameID}, function(response){
-        $scope.game = response;
+		  $scope.GameModel = $resource('/jsonapi/game/:gameID');
+      console.log("Fetching");
+      console.log($scope.codeType);
+		  $scope.GameModel.get({"gameID":gameID}, function(response){
+         $scope.game = response;
         $scope.update_remaining_problems();
-		});
+		  });
     };
 
     $scope.update_remaining_problems = function(){
@@ -2348,32 +2356,7 @@ function PracticeGameController($scope,$resource,$cookieStore){
         }
       }
     };
-
-$scope.create_practice_game($scope.LevelID,$scope.numProblems);
-
-	//to retrieve path info to display on path play page
-/* 		$scope.$watch('game.problems.problems[current_problem_index].name', function() {
-        var path_id = $scope.path_IDD;
-		$scope.retrieved_path = $resource('/jsonapi/get_path_progress/:path_id?details=1');
-        //Including details=1 returns the nested problemset progress.
-        $scope.retrieved_path.get({"path_id":path_id}, function(response){
-        	$scope.single_path_info = response;
-
-        	$scope.p_S_order = $scope.single_path_info.currentProblemsetID;
-
-
-        	for( var i=0; i<$scope.single_path_info.details.length;i++){
-        		if($scope.single_path_info.details[i].id == $scope.p_S_order){
-        			$scope.current_level_progress = $scope.single_path_info.details[i].currentPlayerProgress;
-        			$scope.total_level_progress = $scope.single_path_info.details[i].problemsInProblemset;
-        		}
-
-        	}
-        });
- 	},true); */
-
 }
-
 function GameController($scope,$resource,$cookieStore,$location){
     //initialization:
     $scope.autoCheck="yes"; //make autocheck available when page load
