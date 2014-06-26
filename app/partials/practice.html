@@ -112,7 +112,7 @@
 	<h4 class="well well-small bootCamp" align="center" id="well-c" ng-show="currentURL.indexOf('path_ID') == -1">
 		#1. Pick a Path!</h4>
 </div>
-<div id="myCarousel" class="carousel slide" ng-hide="difficulty=='Drag-n-Drop'">
+<div id="myCarousel" class="carousel slide"><!-- ng-hide="difficulty=='Drag-n-Drop'">-->
 	<div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
 		<div class="item" ng-repeat="paths in paths_grouped" ng-class="{active : $first}">
 			<!-- Three columns of text below the carousel -->
@@ -135,7 +135,8 @@
 	<a class="left carousel-control" data-target="#myCarousel" data-slide="prev">&lsaquo;</a>
 	<a class="right carousel-control" data-target="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
-<div id="myCarouselB" class="carousel slide" ng-show="difficulty=='Drag-n-Drop'">
+<!-- This carousel can be removed once no longer needed. Currently just being hidden. -->
+<div id="myCarouselB" class="carousel slide" ng-show="false"><!--difficulty=='Drag-n-Drop'">-->
 	<div class="carousel-inner" style="position:relative;left:0px" class="ng-scope">
 		<div class="item" ng-repeat="mobile_path in mobile_paths_grouped" ng-class="{active : $first}">
 			<!-- Three columns of text below the carousel -->
@@ -287,6 +288,7 @@
 									Path: {{practice_path_name}}
 									</br>
 									Diffculty: {{difficulty}}
+                  <span ng-show="difficulty=='Drag-n-Drop'"><br>beginner path </span>
 								</span>
 						</td>
 					</tr>

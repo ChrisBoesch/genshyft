@@ -455,35 +455,77 @@ function PathController($scope,$resource,$cookieStore,$location,$filter,gameServ
 
 	};
 
+  $scope.get_beginner_path_id = function(pathid){
+    //Need to lookup the mobile path at this point. 
+    var beginner_path_id = null;
+    for (var i=0; i<$scope.paths.paths.length;i++){
+        //Check if hasMobile
+        if ($scope.paths.paths[i].id==pathid){
+          console.log("Found it");
+          beginner_path_id = $scope.paths.paths[i].mobilePathID;
+        }  
+    }
+    return beginner_path_id;
+  };
+  
+
 	$scope.changePath = function (pathid){
 		$scope.path_ID = pathid;
-		console.log("The path id is "+pathid);
-		//Set the current path.
-		$scope.update_path_progress(pathid);
-		if(pathid != "" && $scope.difficulty != ""){
-			//$location.search({path_ID: pathid, difficulty: $scope.difficulty});
-		}
-		$scope.practice_path_name = "Updating";
+    $scope.beginner_path_ID = $scope.get_beginner_path_id(pathid);
+    if($scope.difficulty== "Drag-n-Drop" && $scope.beginner_path_ID===null){
+      alert("Selected path has no beginner problems. Change your difficulty to Easy to play this path.");
+      return;
+    }
 
+    //need to change both the main path and the mobile path which will be used when difficulty == Drag-n-Drop
+		console.log("The path id is "+pathid+ "diffculty "+$scope.difficulty+ " beginner path id "+$scope.beginner_path_ID);
+		//Set the current path.
+		$scope.practice_path_name = "Updating";
 		$scope.pathModel = $resource('/jsonapi/get_path_progress/:path_ID');
-		$scope.pathModel.get({"path_ID":pathid}, function(response){
+        
+    if ($scope.difficulty == "Drag-n-Drop"){
+      $scope.pathModel.get({"path_ID":$scope.beginner_path_ID,"details":1}, function(response){
 	    	$scope.practice_path_name = response.path.name;
+        $scope.path_progress = response;
+        console.log("Fetching for path_ID "+$scope.beginner_path_ID);
 	    });
+            
+    } else {
+		$scope.pathModel.get({"path_ID":pathid,"details":1}, function(response){
+	    	$scope.practice_path_name = response.path.name;
+        $scope.path_progress = response;
+        console.log("Fetching for path_ID "+pathid);
+	    });
+    }
 	};
 
 	//change the difficulty level as well as the path level detail table
 	$scope.changeDifficulty = function(difficulty,pathName){
-    if(difficulty == "Drag-n-Drop" && pathName.indexOf("Beginner") == -1){
-			$scope.path_ID = undefined;
-			$scope.practice_path_name = undefined;
-			$('#myCarousel input:image').removeClass('selected');
-			$('#myCarouselSmall input:image').removeClass('selected');
+    //Need to update path on difficulty changes. 
+    
+    console.log("difficulty changes here. pathID "+$scope.path_ID);
+    if($scope.path_ID === ""){
+        alert("Please select a path first.");
+        return;
+    }
+    if(difficulty== "Drag-n-Drop" && $scope.beginner_path_ID===null){
+      alert("Selected path has no beginner problems. Change your difficulty to Easy to play this path.");
+      return;
+    }
+
+    if(difficulty == "Drag-n-Drop"){
+       $scope.pathModel.get({"path_ID":$scope.beginner_path_ID,"details":1}, function(response){
+	    	$scope.practice_path_name = response.path.name;
+         $scope.path_progress = response;
+        console.log("Fetching for path_ID "+$scope.beginner_path_ID);
+	    });
 		}
-		if(difficulty != "Drag-n-Drop" && pathName.indexOf("Beginner") > -1){
-			$('#myCarouselB input:image').removeClass('selected');
-			$('#myCarouselSmallB input:image').removeClass('selected');
-			$scope.path_ID = undefined;
-			$scope.practice_path_name = undefined;
+		if(difficulty != "Drag-n-Drop"){
+			$scope.pathModel.get({"path_ID":$scope.path_ID,"details":1}, function(response){
+	    	$scope.practice_path_name = response.path.name;
+        $scope.path_progress = response;
+        console.log("Fetching for path_ID "+$scope.path_ID);
+	    });
 		}
     $resource('/jsonapi/set_difficulty_setting').get({"difficulty":difficulty}, function(response){
       //update difficulty based on returned value from API setting. 
